@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Projects{% endblock %}
+{% block content %}
+  <h1>Projects</h1>
+  {% if not projects %}
+    <p class="empty">No projects found under <code>projects/</code> yet. Copy
+    <code>shared/templates/project-template/</code> to get started.</p>
+  {% endif %}
+  <ul class="project-list">
+    {% for project in projects %}
+      <li class="project-card">
+        <a class="project-link" href="/projects/{{ project.slug }}">
+          <div class="project-title">
+            {{ project.titles.get(project.languages[0], project.slug) if project.languages else project.slug }}
+          </div>
+          <div class="project-slug">{{ project.slug }}</div>
+          <div class="project-langs">
+            {% for lang in project.languages %}
+              <span class="lang-pill">{{ lang }}</span>
+            {% endfor %}
+          </div>
+          <div class="project-status">
+            {% for lang, status in project.statuses.items() %}
+              <span class="status-pill status-{{ status }}">{{ lang }}: {{ status }}</span>
+            {% endfor %}
+          </div>
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

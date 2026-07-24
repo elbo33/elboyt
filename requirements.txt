@@ -1,0 +1,5 @@
+manim
+fastapi
+uvicorn
+jinja2
+pyyaml
