@@ -116,6 +116,56 @@ code {
 
 .empty { color: var(--text-muted); }
 
+/* --- new project (Milestone 7) --- */
+
+.new-project { margin-bottom: 1.5rem; }
+
+#new-project-form {
+  margin-top: 0.75rem;
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  display: grid;
+  gap: 0.75rem;
+}
+#new-project-form[hidden] { display: none; }
+
+#new-project-form textarea,
+#new-project-form input {
+  width: 100%;
+  font-family: inherit;
+  font-size: 0.9rem;
+  padding: 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.new-project-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.new-project-row label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.new-project-row input { width: 10rem; }
+
+.new-project-status {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+.new-project-status[hidden] { display: none; }
+
 /* --- project header / lang switcher --- */
 
 .project-header {
@@ -202,6 +252,115 @@ code {
 .narration { color: var(--text); }
 .narration p { margin: 0.35rem 0; }
 .narration.missing { color: var(--text-muted); font-style: italic; }
+
+/* --- AI-assisted revision --- */
+
+.ai-revise { margin-top: 0.6rem; }
+
+.ai-panel {
+  margin-top: 0.6rem;
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg);
+  display: grid;
+  gap: 0.6rem;
+}
+.ai-panel[hidden] { display: none; }
+
+.ai-feedback {
+  width: 100%;
+  resize: vertical;
+  font-family: inherit;
+  font-size: 0.85rem;
+  padding: 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--text);
+}
+
+.ai-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.ai-status { color: var(--text-muted); font-size: 0.8rem; }
+
+.ai-diff {
+  display: grid;
+  /* auto-fit responds to the *container's* width, not the viewport's — the
+     scenario section cards are wide enough for two columns, but the scene
+     render-cards are much narrower, so a fixed "1fr 1fr" made the second
+     column overflow invisibly instead of wrapping. */
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.75rem;
+}
+.ai-diff[hidden] { display: none; }
+
+.ai-diff-col {
+  /* Grid items default to min-width: auto, which refuses to shrink below
+     the content's intrinsic width — a long unbroken code token would
+     otherwise force this column past its track and overflow the card. */
+  min-width: 0;
+}
+
+.ai-diff-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  margin-bottom: 0.3rem;
+}
+
+.ai-diff-current {
+  padding: 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.ai-diff-proposed {
+  width: 100%;
+  resize: vertical;
+  font-family: inherit;
+  font-size: 0.85rem;
+  padding: 0.5rem;
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--text);
+}
+
+.ai-errors {
+  color: var(--danger);
+  font-size: 0.8rem;
+}
+
+.ai-accept-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+.ai-accept-actions[hidden] { display: none; }
+
+.ai-code {
+  font-family: ui-monospace, monospace;
+  font-size: 0.78rem;
+  margin: 0;
+}
+
+.ai-preview-video video {
+  width: 100%;
+  border-radius: 6px;
+  background: #000;
+  display: block;
+}
+.ai-preview-video[hidden] { display: none; }
 
 /* --- renders --- */
 

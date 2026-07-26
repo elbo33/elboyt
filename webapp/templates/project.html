@@ -38,6 +38,36 @@
           </div>
           {% if section.narration_html %}
             <div class="narration">{{ section.narration_html | safe }}</div>
+            <div class="ai-revise">
+              <button class="btn btn-secondary" data-ai-toggle
+                      data-slug="{{ project.slug }}" data-lang="{{ lang }}"
+                      data-section-id="{{ section.section_id }}">
+                Improve with AI
+              </button>
+              <div class="ai-panel" hidden>
+                <textarea class="ai-feedback" rows="2"
+                  placeholder="What's wrong with this section? e.g. &quot;too slow, cut it in half&quot; or &quot;make the analogy more concrete&quot;"></textarea>
+                <div class="ai-actions">
+                  <button class="btn btn-primary" data-ai-propose>Propose revision</button>
+                  <span class="ai-status"></span>
+                </div>
+                <div class="ai-diff" hidden>
+                  <div class="ai-diff-col">
+                    <div class="ai-diff-label">Current</div>
+                    <div class="ai-diff-current"></div>
+                  </div>
+                  <div class="ai-diff-col">
+                    <div class="ai-diff-label">Proposed (editable)</div>
+                    <textarea class="ai-diff-proposed" rows="6"></textarea>
+                  </div>
+                </div>
+                <div class="ai-errors" hidden></div>
+                <div class="ai-accept-actions" hidden>
+                  <button class="btn btn-primary" data-ai-accept>Accept</button>
+                  <button class="btn btn-secondary" data-ai-discard>Discard</button>
+                </div>
+              </div>
+            </div>
           {% else %}
             <div class="narration missing">No narration written for “{{ lang }}” yet.</div>
           {% endif %}
@@ -74,6 +104,40 @@
           {% else %}
             <div class="render-placeholder">Not rendered yet</div>
           {% endif %}
+          <div class="ai-revise">
+            <button class="btn btn-secondary" data-scene-ai-toggle
+                    data-slug="{{ project.slug }}" data-lang="{{ lang }}" data-scene="{{ scene }}">
+              Improve with AI
+            </button>
+            <div class="ai-panel" hidden>
+              <textarea class="ai-feedback" rows="2"
+                placeholder="What should change in this animation? e.g. &quot;add a highlight when the score updates&quot;"></textarea>
+              <div class="ai-actions">
+                <button class="btn btn-primary" data-scene-ai-propose>Propose revision</button>
+                <span class="ai-status"></span>
+              </div>
+              <div class="ai-diff" hidden>
+                <div class="ai-diff-col">
+                  <div class="ai-diff-label">Current source</div>
+                  <pre class="ai-diff-current ai-code"></pre>
+                </div>
+                <div class="ai-diff-col">
+                  <div class="ai-diff-label">Proposed source (editable)</div>
+                  <textarea class="ai-diff-proposed ai-code" rows="14" spellcheck="false"></textarea>
+                </div>
+              </div>
+              <div class="ai-errors" hidden></div>
+              <div class="ai-accept-actions" hidden>
+                <button class="btn btn-secondary" data-scene-ai-render-preview>Render preview</button>
+                <button class="btn btn-primary" data-scene-ai-accept>Accept &amp; re-render</button>
+                <button class="btn btn-secondary" data-scene-ai-discard>Discard</button>
+              </div>
+              <div class="ai-preview-video" hidden>
+                <div class="ai-diff-label">Preview</div>
+                <video controls preload="metadata"></video>
+              </div>
+            </div>
+          </div>
         </div>
       {% endfor %}
     </div>

@@ -55,18 +55,20 @@ def _scene_file(project_dir: Path, scene: str) -> Path:
     return path
 
 
-def _scene_class_name(scene_file: Path) -> str:
-    """Find the single Manim Scene subclass defined in a scene file.
+def _class_name_from_source(source: str, filename: str) -> str:
+    """Find the single Manim Scene subclass defined in scene source text.
 
     Scene files are plain Python source that the `manim` CLI imports; we
     only need the class *name* here (to pass to the manim CLI), so we do a
     lightweight source scan rather than importing the module ourselves
     (importing would require Manim + the project's labels to already be
-    resolvable in this process).
+    resolvable in this process). Takes source text rather than a path so
+    it also works on an AI-proposed scene (Milestone 6) that isn't
+    necessarily written to `manim/scenes/` yet.
     """
     import ast
 
-    tree = ast.parse(scene_file.read_text(), filename=str(scene_file))
+    tree = ast.parse(source, filename=filename)
     candidates = [
         node.name
         for node in ast.walk(tree)
@@ -78,12 +80,14 @@ def _scene_class_name(scene_file: Path) -> str:
         )
     ]
     if not candidates:
-        raise RenderError(f"no Scene subclass found in {scene_file}")
+        raise RenderError(f"no Scene subclass found in {filename}")
     if len(candidates) > 1:
-        raise RenderError(
-            f"expected exactly one Scene subclass in {scene_file}, found {candidates}"
-        )
+        raise RenderError(f"expected exactly one Scene subclass in {filename}, found {candidates}")
     return candidates[0]
+
+
+def _scene_class_name(scene_file: Path) -> str:
+    return _class_name_from_source(scene_file.read_text(), filename=str(scene_file))
 
 
 def final_render_path(project_dir: Path, scene: str, lang: str) -> Path:
@@ -108,6 +112,74 @@ def delete_existing_render(project_dir: Path, scene: str, lang: str) -> bool:
 
 def _cache_dir(project_dir: Path, scene: str, lang: str) -> Path:
     return project_dir / "manim" / ".render-cache" / f"{scene}__{lang}"
+
+
+def _invoke_manim(
+    scene_file: Path,
+    class_name: str,
+    lang: str,
+    media_dir: Path,
+    output_name: str,
+    quality: str,
+    cwd: Path,
+) -> Iterator[str]:
+    """Runs `manim render` for one scene file, streaming its log lines.
+
+    Pure subprocess plumbing shared by every render path (a project's real
+    scene, or an AI-proposed one that isn't written to disk under
+    `manim/scenes/` yet) — this function never decides what "success"
+    means or touches `assets/renders/`; it just runs manim and reports the
+    exit code back to its caller.
+
+    A generator, like the functions built on it: consume it fully to run
+    manim to completion. Its exit code is its *return* value, retrievable
+    via `returncode = yield from _invoke_manim(...)` (PEP 380) at the call
+    site — not another yielded line, so it can never collide with real
+    manim output.
+    """
+    quality_flag = {"l": "-ql", "m": "-qm", "h": "-qh"}.get(quality, "-ql")
+
+    env = {
+        **os.environ,
+        "SCENE_LANG": lang,
+        "PYTHONPATH": str(cwd) + ":" + str(SHARED_MANIM_LIB),
+        # Rich (Manim's console logger) wraps to a detected terminal width;
+        # with no real tty attached (subprocess pipe) that can default to a
+        # narrow width and garble log lines with mid-word wraps. Force wide.
+        "COLUMNS": "200",
+    }
+
+    cmd = [
+        sys.executable,
+        "-m",
+        "manim",
+        "render",
+        quality_flag,
+        "--progress_bar",
+        "none",
+        "--media_dir",
+        str(media_dir),
+        "-o",
+        output_name,
+        str(scene_file),
+        class_name,
+    ]
+
+    yield f"$ SCENE_LANG={lang} {' '.join(cmd)}"
+
+    proc = subprocess.Popen(
+        cmd,
+        cwd=str(cwd),
+        env=env,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        text=True,
+        bufsize=1,
+    )
+    assert proc.stdout is not None
+    for line in proc.stdout:
+        yield line.rstrip("\n")
+    return proc.wait()
 
 
 def render_scene_for_language(
@@ -137,49 +209,15 @@ def render_scene_for_language(
     cache_dir = _cache_dir(project_dir, scene, lang)
     cache_dir.mkdir(parents=True, exist_ok=True)
 
-    quality_flag = {"l": "-ql", "m": "-qm", "h": "-qh"}.get(quality, "-ql")
-
-    env = {
-        **os.environ,
-        "SCENE_LANG": lang,
-        "PYTHONPATH": str(project_dir / "manim") + ":" + str(SHARED_MANIM_LIB),
-        # Rich (Manim's console logger) wraps to a detected terminal width;
-        # with no real tty attached (subprocess pipe) that can default to a
-        # narrow width and garble log lines with mid-word wraps. Force wide.
-        "COLUMNS": "200",
-    }
-
-    cmd = [
-        sys.executable,
-        "-m",
-        "manim",
-        "render",
-        quality_flag,
-        "--progress_bar",
-        "none",
-        "--media_dir",
-        str(cache_dir),
-        "-o",
-        f"{scene}.mp4",
-        str(scene_file),
+    returncode = yield from _invoke_manim(
+        scene_file,
         class_name,
-    ]
-
-    yield f"$ SCENE_LANG={lang} {' '.join(cmd)}"
-
-    proc = subprocess.Popen(
-        cmd,
-        cwd=str(project_dir / "manim"),
-        env=env,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.STDOUT,
-        text=True,
-        bufsize=1,
+        lang,
+        cache_dir,
+        f"{scene}.mp4",
+        quality,
+        cwd=project_dir / "manim",
     )
-    assert proc.stdout is not None
-    for line in proc.stdout:
-        yield line.rstrip("\n")
-    returncode = proc.wait()
 
     if returncode != 0:
         shutil.rmtree(cache_dir, ignore_errors=True)
@@ -201,6 +239,75 @@ def render_scene_for_language(
 
     if deleted:
         yield f"Removed previous render for {scene}/{lang}"
+    yield f"OK: {target.relative_to(project_dir)}"
+
+
+def preview_render_path(project_dir: Path, scene: str, lang: str) -> Path:
+    """Where a not-yet-accepted AI scene proposal's preview render lands.
+
+    Deliberately outside `assets/renders/` — nothing here is ever a
+    project's real output. Accepting a proposal (Milestone 6) is a
+    separate, explicit step that writes to `manim/scenes/` and re-renders
+    normally through `render_scene_for_language`.
+    """
+    return project_dir / "manim" / ".preview-cache" / lang / f"{scene}.mp4"
+
+
+def render_scene_preview(
+    project_dir: Path,
+    scene: str,
+    lang: str,
+    source: str,
+    quality: str = "l",
+) -> Iterator[str]:
+    """Renders `source` — full scene file text, not necessarily what's
+    currently on disk under `manim/scenes/<scene>.py` — into this scene's
+    preview slot, so an AI-proposed scene edit can be watched before a
+    human decides whether to accept it.
+
+    Same disk-usage contract as `render_scene_for_language`: exactly one
+    preview file survives per scene+language (the previous preview, if
+    any, is replaced), and every intermediate artifact — the scratch scene
+    file, manim's cache — is deleted afterwards, success or failure.
+    Never touches `manim/scenes/` or `assets/renders/`.
+    """
+    class_name = _class_name_from_source(source, filename=f"{scene} (proposed)")
+
+    work_dir = project_dir / "manim" / ".preview-work" / f"{scene}__{lang}"
+    shutil.rmtree(work_dir, ignore_errors=True)
+    work_dir.mkdir(parents=True, exist_ok=True)
+    scratch_scene_file = work_dir / f"{scene}.py"
+    scratch_scene_file.write_text(source)
+    cache_dir = work_dir / "cache"
+    cache_dir.mkdir(parents=True, exist_ok=True)
+
+    returncode = yield from _invoke_manim(
+        scratch_scene_file,
+        class_name,
+        lang,
+        cache_dir,
+        f"{scene}.mp4",
+        quality,
+        cwd=project_dir / "manim",
+    )
+
+    if returncode != 0:
+        shutil.rmtree(work_dir, ignore_errors=True)
+        yield f"FAILED: manim exited with code {returncode}"
+        return
+
+    produced = list(cache_dir.rglob(f"{scene}.mp4"))
+    if not produced:
+        shutil.rmtree(work_dir, ignore_errors=True)
+        yield "FAILED: manim reported success but no output file was found"
+        return
+
+    target = preview_render_path(project_dir, scene, lang)
+    target.parent.mkdir(parents=True, exist_ok=True)
+    if target.exists():
+        target.unlink()
+    shutil.move(str(produced[0]), str(target))
+    shutil.rmtree(work_dir, ignore_errors=True)
     yield f"OK: {target.relative_to(project_dir)}"
 
 
