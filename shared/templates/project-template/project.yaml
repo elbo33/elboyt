@@ -1,9 +1,0 @@
-slug: NNN-project-slug
-title:
-  en: "TODO: English title"
-status:
-  en: draft
-# Add one title/status entry per language you're producing this video in,
-# e.g. fr: "TODO: French title", pl: "TODO: Polish title". The platform
-# reads whichever languages are present here — nothing to configure
-# elsewhere.
