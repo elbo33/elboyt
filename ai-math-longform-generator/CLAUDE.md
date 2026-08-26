@@ -47,11 +47,13 @@ Full brief in `prompts/director.md`.
 
 ## Publish (then wipe)
 
-Only `generated/video.mp4` is kept, in the repo-root library:
+Only `generated/video.mp4` is kept, in the repo-root library, together with a
+narration script:
 
 ```
 library/videos/<title-slug>/
   <title-slug>.mp4              # the final render (git-ignored — lives on disk only)
+  script.md                     # word-for-word narration, one section per chapter
   storyboard.json
   render/
     <name>Planner.ts
@@ -59,6 +61,12 @@ library/videos/<title-slug>/
     scenes/                     # generated Manim, one file per chapter, + support/
     COMMAND.md                  # exact reproduce command
 ```
+
+`script.md` — the exact words a narrator would say to walk a viewer through the
+whole video. One `## <n> · <Chapter> — m:ss` section per chapter, in order, timed
+to the **final** `storyboard.json` (durations are re-synced from the renders, so
+write this last). The video is silent; the script is its spoken counterpart and
+must say only what is on screen. Template: see the recorded example's `script.md`.
 
 Then: `rm -rf generated public`.
 

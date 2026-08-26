@@ -74,6 +74,7 @@ Once `generated/video.mp4` is final, publish it to the repo-root `library/`:
 ```
 library/videos/<title-slug>/
   <title-slug>.mp4          <- the final render, and nothing else
+  script.md                 <- word-for-word narration (see below)
   render/
     <planner>.ts            <- the planner that produced it
     storyboard.json         <- the resolved chapter list (titles, order, durations)
@@ -89,4 +90,46 @@ Rules:
   listed first; the code that renders it lives under `render/`.
 - After publishing, delete `generated/` and `public/` entirely.
 - To revise a piece: edit its planner, re-run, copy the new `video.mp4` over the
-  old one in the library, wipe `generated/` again.
+  old one in the library, wipe `generated/` again, and update `script.md`.
+
+## Narration script (`script.md`) — required for every video
+
+Every published video ships a `script.md`: the exact words a narrator would say
+to explain the whole thing, start to finish. The video itself stays silent — this
+is its spoken counterpart, useful for a voiced cut, captions, show notes, and as
+a check that the visuals actually carry the argument.
+
+Write it **last**, against the final `storyboard.json` (chapter durations are
+re-synced from the renders).
+
+Format:
+
+```
+# Narration — <video title>
+
+<one-line note: what this is, target pace ~150 wpm>
+
+## 1 · <Chapter title> — 0:00
+<word-for-word narration for chapter 1>
+
+## 2 · <Chapter title> — 0:19
+<word-for-word narration for chapter 2>
+...
+```
+
+Constraints:
+
+- One `##` section per chapter, in order, with the chapter's approximate start
+  time (`m:ss`) taken from the final storyboard.
+- Say **only what is on screen**. The script explains the visuals; it never adds
+  facts, numbers, or steps the viewer can't see.
+- Length per section ≈ chapter duration at ~150 words/minute. A ~8:15 video is
+  roughly 1,100–1,300 spoken words total.
+- Plain spoken prose. Spell numbers and symbols the way they'd be read aloud
+  ("two n plus one", "n squared"), not as glyphs.
+- Calm and declarative, matching the house style. No "welcome back", no
+  "don't forget to subscribe", no narrator persona.
+
+Use the recorded example at
+`library/videos/why-is-the-sum-of-the-first-n-odd-numbers-a-perfect-square/script.md`
+as the template.

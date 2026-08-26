@@ -62,6 +62,7 @@ Once `generated/video.mp4` is final, publish it to the repo-root `library/`:
 ```
 library/shorts/<title-slug>/
   <title-slug>.mp4          <- the final render, and nothing else
+  script.md                 <- word-for-word narration (see below)
   render/
     <planner>.ts            <- the planner that produced it
     storyboard.json         <- the resolved scene list (titles, order, durations)
@@ -77,4 +78,38 @@ Rules:
   listed first; the code that renders it lives under `render/`.
 - After publishing, delete `generated/` and `public/` entirely.
 - To revise a short: edit its planner, re-run, copy the new `video.mp4` over the
-  old one in the library, wipe `generated/` again.
+  old one in the library, wipe `generated/` again, and update `script.md`.
+
+## Narration script (`script.md`) — required for every short
+
+Every published short ships a `script.md`: the exact words a narrator would say
+to explain it, start to finish. The short itself stays silent — this is its
+spoken counterpart (voiced cut, captions, show notes) and a check that the
+visuals carry the idea on their own.
+
+Write it **last**, against the final `storyboard.json`.
+
+Format:
+
+```
+# Narration — <short title>
+
+## 1 · <Scene title> — 0:00
+<word-for-word narration for scene 1>
+
+## 2 · <Scene title> — 0:08
+<word-for-word narration for scene 2>
+...
+```
+
+Constraints:
+
+- One `##` section per scene, in order, with the scene's start time from the
+  final storyboard.
+- Say **only what is on screen** — no added facts, numbers, or steps.
+- A 45–60 s short is ~110–150 spoken words in total. Keep it tight.
+- Plain spoken prose; read numbers and symbols aloud ("two n plus one"), not as
+  glyphs. Calm and declarative. No intro/outro patter, no persona.
+
+Shape reference (longer): any long-form video's `script.md` under
+`library/videos/`.

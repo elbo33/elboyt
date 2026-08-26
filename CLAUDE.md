@@ -8,7 +8,7 @@ FFmpeg), plus a `library/` of finished work.
 |---|---|
 | `ai-math-shorts-generator/` | Vertical 1080×1920 Shorts, 45–60 s, 5–6 free-form scenes |
 | `ai-math-longform-generator/` | Horizontal 1920×1080 videos, 8+ min, fixed repetitive chapter skeleton |
-| `library/` | Finished renders: one folder per piece, `<slug>.mp4` + the code that made it |
+| `library/` | Finished pieces: one folder per piece — `<slug>.mp4` + `script.md` (word-for-word narration) + the code that made it |
 
 ## Golden rules
 
@@ -20,7 +20,11 @@ FFmpeg), plus a `library/` of finished work.
 3. **Only the final render is kept**, and only in
    `library/<shorts|videos>/<title-slug>/<title-slug>.mp4`. No per-scene clips,
    Manim `media/` caches, or preview frames — ever.
-4. Each generator has a `prompts/director.md` (the creative brief) and its own
+4. **Every piece ships a `script.md`** next to its `.mp4`: the exact words a
+   narrator would say to explain the whole video, one section per scene/chapter
+   with an approximate start time. The videos are silent; the script is their
+   spoken counterpart and must never state anything not shown on screen.
+5. Each generator has a `prompts/director.md` (the creative brief) and its own
    `CLAUDE.md` (how the code fits together). Read those before working in it.
 
 ## To make a new video
@@ -29,7 +33,10 @@ FFmpeg), plus a `library/` of finished work.
 2. Pick the next item from `<folder>/matura-backlog.json` (anything without
    `recorded: true`), or take the topic the user gave you.
 3. Add / adjust a planner, run the generate command, review frames, iterate.
-4. Publish per that folder's "Output & library" section, then `rm -rf generated public`.
+4. Write `script.md` — the word-for-word narration, one section per scene, timed
+   to the final `storyboard.json`. Say only what is on screen.
+5. Publish per that folder's "Output & library" section (`.mp4` + `script.md` +
+   `render/`), then `rm -rf generated public`.
 
 ## Requirements
 

@@ -33,17 +33,25 @@ Writes `generated/video.mp4` (audio stripped) plus `storyboard.json`,
 
 ## Publish (then wipe)
 
-Only `generated/video.mp4` is kept, in the repo-root library:
+Only `generated/video.mp4` is kept, in the repo-root library, together with a
+narration script:
 
 ```
 library/shorts/<title-slug>/
   <title-slug>.mp4              # final render (git-ignored — on disk only)
+  script.md                     # word-for-word narration, one section per scene
   render/
     <name>Planner.ts
     storyboard.json
     scenes/                     # generated Manim + support/
     COMMAND.md
 ```
+
+`script.md` — the exact words a narrator would say to explain the short. One
+`## <n> · <Scene> — 0:ss` section per scene, timed to the final `storyboard.json`
+(write it last). The short is silent; the script is its spoken counterpart and
+must say only what is on screen. See a long-form example's `script.md` for the
+shape, kept short here (a 45–60 s short is ~110–150 spoken words total).
 
 Then: `rm -rf generated public`.
 
