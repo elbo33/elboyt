@@ -1,0 +1,8 @@
+node_modules/
+dist/
+generated/
+public/generated/
+renders/
+.venv/
+.env
+.DS_Store

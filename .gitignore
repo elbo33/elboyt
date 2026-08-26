@@ -1,0 +1,40 @@
+# === Dependencies & build output ===
+node_modules/
+dist/
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# === Secrets & OS cruft ===
+.env
+.env.*
+!.env.example
+.DS_Store
+
+# === Render scratch — never committed ===
+generated/
+public/
+renders/
+media/
+.remotion/
+out/
+
+# === Rendered media ===
+# The library keeps the CODE that reproduces a video (planner, Manim sources,
+# storyboard) — never the video file itself. Force-add only if you really mean to.
+*.mp4
+*.mov
+*.mkv
+*.webm
+*.gif
+*.mp3
+*.wav
+*.aac
+*.m4a
+*.png
+*.jpg
+*.jpeg
+# ...but keep small repo docs/diagrams if ever added under docs/
+!docs/**/*.png
+!docs/**/*.svg

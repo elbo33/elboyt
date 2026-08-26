@@ -1,0 +1,506 @@
+{
+  "description": "Polish Matura math syllabus (podstawa programowa) mapped to long-form (8+ minute) chaptered videos in the AI Math Long-Form style. One video per syllabus chapter, in textbook order.",
+  "format": "longform-16x9",
+  "legend": {
+    "pp": "poziom podstawowy (basic level)",
+    "pr": "poziom rozszerzony (extended level only)",
+    "bonus": "poza programem (enrichment, outside the strict syllabus)"
+  },
+  "video_skeleton": [
+    "intro — the central question + the raw pattern",
+    "roadmap — list the chapters that follow",
+    "setup — define every term",
+    "master build — the whole idea once, slow, uninterrupted",
+    "worked examples — the SAME template, 5-9 times, numbers only change",
+    "pattern check — read the pattern back off the results",
+    "big case — one deliberately large / awkward example",
+    "the reason — why the key step can never fail",
+    "the algebra — the symbolic confirmation",
+    "recap — restate every example + the one-line reason",
+    "outro — final statement, end card"
+  ],
+  "topics": [
+    {
+      "n": "I",
+      "pl": "Liczby rzeczywiste",
+      "en": "Real numbers",
+      "chapters": [
+        {
+          "name": "Potęgi i pierwiastki",
+          "level": "pp",
+          "video": {
+            "title": "Every exponent rule from one idea",
+            "angle": "aᵐ·aⁿ, (aᵐ)ⁿ, a⁻ⁿ, a^(1/n) are all forced once you decide exponents must keep adding when you multiply.",
+            "covers": ["an exponent as a repeated-multiplication count", "aᵐ·aⁿ = aᵐ⁺ⁿ worked for several m, n", "(aᵐ)ⁿ = aᵐⁿ worked", "why a⁰ must be 1", "why a⁻ⁿ must be 1/aⁿ", "why a^(1/n) must be the n-th root", "the single 'add the exponents' law underneath all of it"]
+          }
+        },
+        {
+          "name": "Logarytmy",
+          "level": "pr",
+          "video": {
+            "title": "Logarithms are just exponents, read backwards",
+            "angle": "log turns multiplication into addition because exponents already do; every log law is an exponent law in disguise.",
+            "covers": ["log b x defined as 'the exponent'", "log(ab) = log a + log b worked on numbers", "log(a/b) and log(aⁿ) worked", "change of base worked", "why a slide rule / decibels / Richter work", "the one exponent law behind every line"]
+          }
+        },
+        {
+          "name": "Wartość bezwzględna",
+          "level": "pp",
+          "video": {
+            "title": "The triangle inequality, everywhere",
+            "angle": "|a + b| ≤ |a| + |b| is just 'a detour is never shorter', seen on the number line and in the plane.",
+            "covers": ["|x| as distance from 0", "|a+b| vs |a|+|b| on the number line for several sign patterns", "when equality happens", "the same statement as vectors / a triangle", "|a−b| as distance between points", "recap: no detour beats the direct step"]
+          }
+        },
+        {
+          "name": "Procenty i przybliżenia",
+          "level": "pp",
+          "video": {
+            "title": "Why compound interest runs away from simple interest",
+            "angle": "adding a percentage of a growing amount beats adding a percentage of a fixed amount — and the gap itself grows.",
+            "covers": ["1% of what, exactly", "year-by-year table: simple vs compound", "the gap after 5, 10, 20 years", "multiplying by (1+r) each step", "the (1+r)ⁿ pattern", "rule of 72 as a shortcut", "recap"]
+          }
+        },
+        {
+          "name": "Podzielność liczb",
+          "level": "bonus",
+          "video": {
+            "title": "Why the digit-sum tricks work (3, 9, 11)",
+            "angle": "10 leaves remainder 1 mod 9 and remainder −1 mod 11, so a number and a signed digit-sum share a remainder.",
+            "covers": ["remainder of 10, 100, 1000 mod 9", "digit-sum test for 3 and 9 on several numbers", "10 ≡ −1 mod 11 → alternating digit sum", "worked checks for 11", "why 2 and 5 only need the last digit", "the place-value reason behind all of them"]
+          }
+        }
+      ]
+    },
+    {
+      "n": "II",
+      "pl": "Wyrażenia algebraiczne",
+      "en": "Algebraic expressions",
+      "chapters": [
+        {
+          "name": "Wzory skróconego mnożenia",
+          "level": "pp",
+          "video": {
+            "title": "The short-multiplication formulas are pictures",
+            "angle": "(a+b)², (a−b)², a²−b² are areas of a cut-up square; the algebra just records the pieces.",
+            "covers": ["(a+b)² as a square cut four ways", "(a−b)² as a square with a corner removed", "a²−b² as an L-shape rearranged into a rectangle", "(a+b)³ as a cut cube", "each formula checked with numbers", "recap: every identity is a rearrangement"]
+          }
+        },
+        {
+          "name": "Wielomiany — działania",
+          "level": "pp",
+          "video": {
+            "title": "Polynomial arithmetic is base-x arithmetic",
+            "angle": "adding, multiplying and long-dividing polynomials is column arithmetic with no carrying, in base x.",
+            "covers": ["a number written in base 10 vs a polynomial in x", "addition lined up by degree", "multiplication as a grid", "long division of numbers next to long division of polynomials", "remainder and quotient", "recap"]
+          }
+        },
+        {
+          "name": "Wyrażenia wymierne",
+          "level": "pp",
+          "video": {
+            "title": "Why fractions need a common denominator",
+            "angle": "you can only add things that are the same size; a common denominator makes the pieces the same size.",
+            "covers": ["1/2 + 1/3 with a bar model", "cutting both bars into sixths", "the general a/b + c/d = (ad+bc)/bd", "several worked sums", "why bd always works (and lcm is just tidier)", "the same idea for rational expressions", "recap"]
+          }
+        }
+      ]
+    },
+    {
+      "n": "III",
+      "pl": "Równania i nierówności",
+      "en": "Equations & inequalities",
+      "chapters": [
+        {
+          "name": "Równania i nierówności liniowe",
+          "level": "pp",
+          "video": {
+            "title": "Why a negative multiplier flips an inequality",
+            "angle": "multiplying by −1 reflects the number line; order reverses under a reflection.",
+            "covers": ["a < b shown on the number line", "multiply both sides by 2, by 1/2 — order kept", "multiply by −1 — the reflection", "multiply by −3 — worked", "several inequalities solved", "the reflection reason stated once", "recap"]
+          }
+        },
+        {
+          "name": "Równania kwadratowe",
+          "level": "pp",
+          "recorded": false,
+          "planner": null,
+          "video": {
+            "title": "Where the quadratic formula actually comes from",
+            "angle": "completing the square turns every quadratic into (x + p)² = q; doing it with letters IS the formula.",
+            "covers": ["completing the square on x²+6x+5", "on 2x²−4x−6", "on a general ax²+bx+c", "the (x + b/2a)² = ... line", "reading off the ± √ and the −b/2a", "the discriminant as 'what's under the root'", "recap: one move, done symbolically"]
+          }
+        },
+        {
+          "name": "Równania z wartością bezwzględną",
+          "level": "pp",
+          "video": {
+            "title": "Why |x| = a always splits into two cases",
+            "angle": "two points sit at distance a from 0; an absolute-value equation is a distance statement.",
+            "covers": ["|x| = 3 as two points", "|x − 2| = 5 worked", "|2x + 1| = 7 worked", "|x| = −1 has no solution — why", "|x − a| ≤ b as an interval", "the distance reason", "recap"]
+          }
+        },
+        {
+          "name": "Równania wielomianowe wyższych stopni",
+          "level": "pr",
+          "video": {
+            "title": "Why P(a) = 0 means (x − a) divides P(x)",
+            "angle": "divide P(x) by (x − a); the remainder is a constant, and that constant is P(a).",
+            "covers": ["remainder theorem stated", "divide x³−2x²−x+2 by (x−1) — remainder 0", "by (x−2) — remainder 0", "by (x+1) — remainder 0", "a case where the remainder isn't 0", "factoring fully from the roots", "recap: roots and factors are the same information"]
+          }
+        },
+        {
+          "name": "Równania wymierne",
+          "level": "pr",
+          "video": {
+            "title": "Why solving a rational equation can invent fake answers",
+            "angle": "multiplying through by a variable expression can multiply by zero, which is not a reversible move.",
+            "covers": ["a simple rational equation solved cleanly", "one where x = 2 makes a denominator 0", "checking every candidate back in the original", "why 'clearing denominators' isn't always reversible", "the domain as a filter", "recap: always test against the original"]
+          }
+        }
+      ]
+    },
+    {
+      "n": "IV",
+      "pl": "Funkcje",
+      "en": "Functions",
+      "chapters": [
+        {
+          "name": "Dziedzina, monotoniczność, funkcja odwrotna",
+          "level": "pp",
+          "video": {
+            "title": "Why an inverse is a reflection across y = x",
+            "angle": "the inverse swaps input and output; swapping coordinates reflects the graph across y = x.",
+            "covers": ["a function as an input→output machine", "swapping the columns of a table", "plotting (a,b) and (b,a)", "y = 2x+1 and its inverse", "y = x² needing a restricted domain", "the reflection reason", "recap"]
+          }
+        },
+        {
+          "name": "Przekształcenia wykresów",
+          "level": "pp",
+          "video": {
+            "title": "Why f(x − a) shifts a graph right, not left",
+            "angle": "to get the same output, x must be larger by a — so every point moves right by a.",
+            "covers": ["f(x) vs f(x−2) point by point", "f(x)+c as a vertical shift", "f(−x) as a horizontal flip", "−f(x) as a vertical flip", "a f(x) and f(bx) as stretches", "the 'what x makes this input' reason", "recap chart of all six moves"]
+          }
+        }
+      ]
+    },
+    {
+      "n": "V",
+      "pl": "Funkcja liniowa",
+      "en": "Linear function",
+      "chapters": [
+        {
+          "name": "Funkcja liniowa",
+          "level": "pp",
+          "video": {
+            "title": "Why a line's slope is the same everywhere on it",
+            "angle": "similar triangles under any two points on a line have equal rise-over-run.",
+            "covers": ["rise/run between two points", "a different pair of points, same ratio", "the similar-triangles picture", "y = mx + b read off a graph", "perpendicular slopes multiplying to −1 (a rotated triangle)", "recap"]
+          }
+        }
+      ]
+    },
+    {
+      "n": "VI",
+      "pl": "Funkcja kwadratowa",
+      "en": "Quadratic function",
+      "chapters": [
+        {
+          "name": "Funkcja kwadratowa",
+          "level": "pp",
+          "video": {
+            "title": "Why every parabola is symmetric about x = −b/2a",
+            "angle": "completing the square rewrites y as a(x − h)² + k; squaring is symmetric about h.",
+            "covers": ["y = x² symmetric about 0", "y = x²+6x+5 completed to (x+3)²−4", "the axis at x = −3 confirmed by a table", "vertex form in general", "Vieta: roots average to −b/2a", "roots multiply to c/a — worked", "recap"]
+          }
+        }
+      ]
+    },
+    {
+      "n": "VII",
+      "pl": "Wielomiany",
+      "en": "Polynomials",
+      "chapters": [
+        {
+          "name": "Wielomiany wyższych stopni",
+          "level": "pr",
+          "video": {
+            "title": "Why a degree-n polynomial has at most n roots",
+            "angle": "each root peels off a factor (x − a) and drops the degree by one; you can only do that n times.",
+            "covers": ["one root → one linear factor", "factoring a cubic step by step", "why you run out after n peels", "complex roots of a real polynomial coming in conjugate pairs", "a degree-4 example with 2 real + 2 complex", "recap"]
+          }
+        }
+      ]
+    },
+    {
+      "n": "VIII",
+      "pl": "Funkcja wymierna",
+      "en": "Rational function",
+      "chapters": [
+        {
+          "name": "Funkcja wymierna",
+          "level": "pr",
+          "video": {
+            "title": "Why a graph hugs an asymptote but never touches it",
+            "angle": "the gap to the asymptote is a fraction whose denominator blows up; a nonzero-over-huge is never zero.",
+            "covers": ["y = 1/x near 0 and near ∞", "the gap written as an explicit expression", "evaluating the gap at x = 10, 100, 1000", "a slant asymptote by polynomial division", "a case where the curve DOES cross (and why that's allowed away from ∞)", "recap"]
+          }
+        }
+      ]
+    },
+    {
+      "n": "IX",
+      "pl": "Funkcja wykładnicza i logarytmiczna",
+      "en": "Exponential & log functions",
+      "chapters": [
+        {
+          "name": "Funkcja wykładnicza i logarytmiczna",
+          "level": "pr",
+          "video": {
+            "title": "Why exponentials outrun every polynomial",
+            "angle": "each step multiplies by a fixed factor; multiplicative growth eventually beats any fixed power.",
+            "covers": ["2ˣ vs x², x³, x⁵ in a table", "the ratio 2ˣ / xⁿ over successive steps", "why the ratio keeps growing", "e as the base where the rate equals the value", "(1 + 1/n)ⁿ approaching e", "recap"]
+          }
+        }
+      ]
+    },
+    {
+      "n": "X",
+      "pl": "Ciągi liczbowe",
+      "en": "Sequences",
+      "chapters": [
+        {
+          "name": "Ciąg arytmetyczny",
+          "level": "pp",
+          "video": {
+            "title": "Gauss's trick, and why it always works",
+            "angle": "pair the ends: first + last = second + second-last = ... ; n/2 pairs of the same total.",
+            "covers": ["1+2+...+10 by pairing", "1+2+...+100 (the schoolboy Gauss story)", "5+8+11+...+ worked", "the pairing picture for odd n", "n(a₁+aₙ)/2 in general", "recap"]
+          }
+        },
+        {
+          "name": "Ciąg geometryczny",
+          "level": "pp",
+          "video": {
+            "title": "Why 1/2 + 1/4 + 1/8 + ... = 1",
+            "angle": "each term is half the remaining gap to 1; the leftover halves every step and vanishes.",
+            "covers": ["the shrinking-square picture", "partial sums 1/2, 3/4, 7/8, 15/16", "the leftover = 1 − Sₙ", "the S − rS trick on numbers", "the general a/(1−r) and why |r|<1 matters", "recap"]
+          }
+        },
+        {
+          "name": "Granice ciągów",
+          "level": "pr",
+          "video": {
+            "title": "Why 1/n gets as close to 0 as you like, but never arrives",
+            "angle": "for any target gap ε, pick n past 1/ε; the tail is trapped, yet every term is still positive.",
+            "covers": ["1/n as a table and on the line", "'within 0.1' → n > 10", "'within 0.001' → n > 1000", "the ε–N game played twice", "why the limit is 0 though no term equals 0", "recap"]
+          }
+        },
+        {
+          "name": "Ciągi rekurencyjne i złoty podział",
+          "level": "bonus",
+          "recorded": true,
+          "planner": "oddSquaresLongPlanner",
+          "library": "library/videos/why-is-the-sum-of-the-first-n-odd-numbers-a-perfect-square",
+          "video": {
+            "title": "Why the sum of the first n odd numbers is always a perfect square",
+            "angle": "each odd number is the L-shaped layer (gnomon) that grows an n×n square into an (n+1)×(n+1) square.",
+            "covers": ["setup: odd numbers and partial sums", "master build 1 → 6²", "worked examples 2² through 10², one template", "pattern check: the gaps are 3,5,7,9,...", "big jump n = 12", "the reason: n² + (2n+1) = (n+1)²", "the algebra: telescoping to n²", "recap"]
+          }
+        }
+      ]
+    },
+    {
+      "n": "XI",
+      "pl": "Trygonometria",
+      "en": "Trigonometry",
+      "chapters": [
+        {
+          "name": "Funkcje trygonometryczne i tożsamości",
+          "level": "pp",
+          "video": {
+            "title": "Why sin²θ + cos²θ = 1, and where the sine wave comes from",
+            "angle": "a point on the unit circle has coordinates (cos θ, sin θ); Pythagoras on that point is the identity.",
+            "covers": ["the unit circle and the point (cos θ, sin θ)", "the right triangle inside it", "the identity checked at 30°, 45°, 60°", "sweeping θ and tracing sin θ into a wave", "cos as the same wave shifted", "recap"]
+          }
+        },
+        {
+          "name": "Wykresy i równania trygonometryczne",
+          "level": "pr",
+          "video": {
+            "title": "Why the sine addition formula works",
+            "angle": "rotating the plane by α then β is the same as rotating by α+β; comparing coordinates gives the formula.",
+            "covers": ["rotation of a point by an angle", "rotate by α, then by β", "rotate once by α+β", "matching x-coordinates → cos(α+β)", "matching y-coordinates → sin(α+β)", "why trig equations then repeat every 2π", "recap"]
+          }
+        }
+      ]
+    },
+    {
+      "n": "XII",
+      "pl": "Planimetria",
+      "en": "Plane geometry",
+      "chapters": [
+        {
+          "name": "Trójkąty",
+          "level": "pp",
+          "video": {
+            "title": "Why a triangle's angles always add to 180°",
+            "angle": "a line through one vertex parallel to the opposite side turns the three angles into a straight angle.",
+            "covers": ["tear-the-corners demo", "the parallel-line proof on an acute triangle", "same proof on a right triangle", "same proof on an obtuse triangle", "the alternate-angles fact it rests on", "extension: exterior angle = sum of the other two", "recap"]
+          }
+        },
+        {
+          "name": "Czworokąty",
+          "level": "pp",
+          "video": {
+            "title": "Why a quadrilateral's midpoints always form a parallelogram (Varignon)",
+            "angle": "each midpoint segment is a midline of a triangle, so it's parallel to a diagonal and half its length.",
+            "covers": ["the midpoint quadrilateral drawn for a convex case", "the midline theorem recalled", "two opposite sides both parallel to diagonal 1", "the other two parallel to diagonal 2", "a non-convex quadrilateral — still works", "a crossed one — still works", "recap"]
+          }
+        },
+        {
+          "name": "Okrąg i koło",
+          "level": "pp",
+          "video": {
+            "title": "Why an inscribed angle is half the central angle",
+            "angle": "split into isosceles triangles with radii; the exterior-angle step doubles the inscribed angle.",
+            "covers": ["central vs inscribed angle on the same arc", "the radius-isosceles-triangle picture", "the one-radius-inside case", "the radius-outside case", "Thales: angle in a semicircle is 90°", "recap"]
+          }
+        },
+        {
+          "name": "Pola figur płaskich",
+          "level": "pp",
+          "video": {
+            "title": "Why a circle's area is π r²",
+            "angle": "slice the disk into thin wedges and re-lay them as a strip that becomes a rectangle π r by r.",
+            "covers": ["8 wedges rearranged — bumpy", "16 wedges — flatter", "32, 64 wedges — nearly a rectangle", "the strip's dimensions: half the circumference by r", "the limit argument", "recap"]
+          }
+        }
+      ]
+    },
+    {
+      "n": "XIII",
+      "pl": "Geometria analityczna",
+      "en": "Analytic geometry",
+      "chapters": [
+        {
+          "name": "Geometria analityczna",
+          "level": "pp",
+          "video": {
+            "title": "Why every analytic-geometry formula is Pythagoras in disguise",
+            "angle": "the distance formula is the hypotenuse of a right triangle; the circle equation is 'distance = r'.",
+            "covers": ["distance between two points as a right triangle", "several worked distances", "the circle (x−a)²+(y−b)²=r² as a locus", "midpoint as the average", "line through two points from equal slopes", "recap"]
+          }
+        }
+      ]
+    },
+    {
+      "n": "XIV",
+      "pl": "Stereometria",
+      "en": "Solid geometry",
+      "chapters": [
+        {
+          "name": "Bryły obrotowe i wielościany",
+          "level": "pp",
+          "video": {
+            "title": "Why a cone (and a pyramid) is exactly one third of its box",
+            "angle": "three congruent pyramids tile a cube; scaling and slicing (Cavalieri) carry it to cones and prisms.",
+            "covers": ["a cube cut into 3 equal square pyramids", "the same 1/3 for any prism → pyramid", "Cavalieri's equal-slices principle", "cylinder → cone as stacked disks", "sphere = 4/3 π r³ by Archimedes' cylinder-minus-cone", "recap"]
+          }
+        }
+      ]
+    },
+    {
+      "n": "XV",
+      "pl": "Kombinatoryka",
+      "en": "Combinatorics",
+      "chapters": [
+        {
+          "name": "Reguły liczenia",
+          "level": "pp",
+          "video": {
+            "title": "Why n! counts arrangements and why C(n,k) = C(n,n−k)",
+            "angle": "fill slots one at a time (multiplication rule); choosing who's in is the same as choosing who's out.",
+            "covers": ["arranging 3 books, then 4, then n", "the slot-by-slot multiplication", "permutations with a repeated item", "choosing a committee vs choosing the leftovers", "Pascal's rule as a picture", "recap"]
+          }
+        }
+      ]
+    },
+    {
+      "n": "XVI",
+      "pl": "Rachunek prawdopodobieństwa",
+      "en": "Probability",
+      "chapters": [
+        {
+          "name": "Prawdopodobieństwo klasyczne",
+          "level": "pp",
+          "recorded": false,
+          "planner": null,
+          "video": {
+            "title": "Why switching doors wins 2/3 of the time (Monty Hall)",
+            "angle": "your first pick is right 1/3 of the time; the host's forced reveal dumps the other 2/3 onto the last door.",
+            "covers": ["the rules stated carefully", "all three cases enumerated", "the 1/3 vs 2/3 tree", "a 100-door version to build intuition", "a quick simulation tally", "'at least one' = 1 − P(none) as a companion idea", "recap"]
+          }
+        },
+        {
+          "name": "Prawdopodobieństwo warunkowe",
+          "level": "pr",
+          "video": {
+            "title": "Why conditioning shrinks the sample space",
+            "angle": "P(A | B) just re-normalises: throw away everything outside B, then measure A inside what's left.",
+            "covers": ["a 2-way table of outcomes", "restricting to the B row", "P(A|B) = P(A∩B)/P(B) read off the table", "three worked conditionals", "the base-rate trap (a medical-test example)", "recap"]
+          }
+        }
+      ]
+    },
+    {
+      "n": "XVII",
+      "pl": "Statystyka opisowa",
+      "en": "Descriptive statistics",
+      "chapters": [
+        {
+          "name": "Statystyka opisowa",
+          "level": "pp",
+          "video": {
+            "title": "Why the mean chases an outlier and the median barely moves",
+            "angle": "the mean is a balance point, so distance matters; the median is a count, so only order matters.",
+            "covers": ["a small data set: mean vs median", "drag one point far right — watch both", "the mean as a see-saw balance", "the median as 'the middle count'", "why variance squares the gaps (a signed-sum would cancel)", "recap"]
+          }
+        }
+      ]
+    },
+    {
+      "n": "XVIII",
+      "pl": "Rachunek różniczkowy",
+      "en": "Limits & derivatives",
+      "chapters": [
+        {
+          "name": "Pochodna i jej zastosowania",
+          "level": "pr",
+          "video": {
+            "title": "Why the derivative is the slope of a vanishing secant, and why (xⁿ)′ = n xⁿ⁻¹",
+            "angle": "shrink the gap h to 0: the secant slope settles on the tangent slope; expand (x+h)ⁿ and the n xⁿ⁻¹ term survives.",
+            "covers": ["secant slopes as h shrinks", "the tangent as the limit", "(x²)′ from first principles", "(x³)′ from first principles", "(xⁿ)′ via the binomial expansion", "why f′ = 0 marks a peak or valley", "recap"]
+          }
+        }
+      ]
+    },
+    {
+      "n": "XIX",
+      "pl": "Elementy logiki i teorii zbiorów",
+      "en": "Logic & set theory",
+      "chapters": [
+        {
+          "name": "Elementy logiki i teorii zbiorów",
+          "level": "pp",
+          "video": {
+            "title": "Why the contrapositive says the same thing, and De Morgan's laws",
+            "angle": "'if P then Q' and 'if not Q then not P' rule out exactly the same row of the truth table.",
+            "covers": ["a truth table for P ⇒ Q", "the one false row", "the contrapositive's truth table — identical", "the converse — different (a counterexample)", "¬(A∧B) = ¬A ∨ ¬B on a Venn diagram", "¬(A∨B) = ¬A ∧ ¬B on a Venn diagram", "recap"]
+          }
+        }
+      ]
+    }
+  ]
+}

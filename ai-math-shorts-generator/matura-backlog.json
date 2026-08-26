@@ -1,0 +1,472 @@
+{
+  "description": "Polish Matura math syllabus (podstawa programowa), organized by topic and chapter, mapped to short-form 'why is this true?' video ideas in the AI Math Shorts style.",
+  "legend": {
+    "pp": "poziom podstawowy (basic level)",
+    "pr": "poziom rozszerzony (extended level only)",
+    "bonus": "poza programem (enrichment, outside the strict syllabus)"
+  },
+  "topics": [
+    {
+      "n": "I",
+      "pl": "Liczby rzeczywiste",
+      "en": "Real numbers",
+      "chapters": [
+        {
+          "name": "Potęgi i pierwiastki",
+          "level": "pp",
+          "ideas": [
+            { "idea": "Why is √2 irrational?", "recorded": true, "planner": "irrationalSqrt2Planner" },
+            { "idea": "Why can't you take an even root of a negative number?" },
+            { "idea": "Why does a⁰ always equal 1?" }
+          ]
+        },
+        {
+          "name": "Logarytmy",
+          "level": "pr",
+          "ideas": [
+            { "idea": "Why does log(ab) = log(a) + log(b)?" },
+            { "idea": "Why does +1 on the Richter scale mean ×10 in energy?" }
+          ]
+        },
+        {
+          "name": "Wartość bezwzględna",
+          "level": "pp",
+          "ideas": [
+            { "idea": "Why is |a + b| ≤ |a| + |b|, always?" }
+          ]
+        },
+        {
+          "name": "Procenty i przybliżenia",
+          "level": "pp",
+          "ideas": [
+            { "idea": "Why does compound interest beat simple interest?" }
+          ]
+        },
+        {
+          "name": "Podzielność liczb",
+          "level": "bonus",
+          "ideas": [
+            { "idea": "Why does a digit sum divisible by 3 mean the number is too?", "recorded": true, "planner": "divisibilityByThreePlanner" }
+          ]
+        }
+      ]
+    },
+    {
+      "n": "II",
+      "pl": "Wyrażenia algebraiczne",
+      "en": "Algebraic expressions",
+      "chapters": [
+        {
+          "name": "Wzory skróconego mnożenia",
+          "level": "pp",
+          "ideas": [
+            { "idea": "Why does (a+b)² = a² + 2ab + b²? (a square cut four ways)" },
+            { "idea": "Why does a² − b² factor into (a−b)(a+b)?" }
+          ]
+        },
+        {
+          "name": "Wielomiany — działania",
+          "level": "pp",
+          "ideas": [
+            { "idea": "Why does polynomial long division mirror number long division?" }
+          ]
+        },
+        {
+          "name": "Wyrażenia wymierne",
+          "level": "pp",
+          "ideas": [
+            { "idea": "Why do you need a common denominator to add fractions?" }
+          ]
+        }
+      ]
+    },
+    {
+      "n": "III",
+      "pl": "Równania i nierówności",
+      "en": "Equations & inequalities",
+      "chapters": [
+        {
+          "name": "Równania i nierówności liniowe",
+          "level": "pp",
+          "ideas": [
+            { "idea": "Why does multiplying by a negative flip an inequality?" }
+          ]
+        },
+        {
+          "name": "Równania kwadratowe",
+          "level": "pp",
+          "ideas": [
+            { "idea": "Why does completing the square always work?" },
+            { "idea": "Where does the quadratic formula actually come from?" },
+            { "idea": "Why does the discriminant's sign predict the number of roots?" }
+          ]
+        },
+        {
+          "name": "Równania z wartością bezwzględną",
+          "level": "pp",
+          "ideas": [
+            { "idea": "Why does |x| = a split into exactly two cases?" }
+          ]
+        },
+        {
+          "name": "Równania wielomianowe wyższych stopni",
+          "level": "pr",
+          "ideas": [
+            { "idea": "Why does P(a) = 0 mean (x−a) divides P(x)? (Bézout)" }
+          ]
+        },
+        {
+          "name": "Równania wymierne",
+          "level": "pr",
+          "ideas": [
+            { "idea": "Why can solving a rational equation invent fake solutions?" }
+          ]
+        }
+      ]
+    },
+    {
+      "n": "IV",
+      "pl": "Funkcje",
+      "en": "Functions",
+      "chapters": [
+        {
+          "name": "Dziedzina, monotoniczność, funkcja odwrotna",
+          "level": "pp",
+          "ideas": [
+            { "idea": "Why does a function's inverse mirror it across y = x?" }
+          ]
+        },
+        {
+          "name": "Przekształcenia wykresów",
+          "level": "pp",
+          "ideas": [
+            { "idea": "Why does f(x−a) shift a graph right, not left?" },
+            { "idea": "Why does f(−x) flip a graph across the y-axis?" }
+          ]
+        }
+      ]
+    },
+    {
+      "n": "V",
+      "pl": "Funkcja liniowa",
+      "en": "Linear function",
+      "chapters": [
+        {
+          "name": "Funkcja liniowa",
+          "level": "pp",
+          "ideas": [
+            { "idea": "Why is the slope the same between any two points on a line?" },
+            { "idea": "Why do perpendicular lines multiply to slope −1?" }
+          ]
+        }
+      ]
+    },
+    {
+      "n": "VI",
+      "pl": "Funkcja kwadratowa",
+      "en": "Quadratic function",
+      "chapters": [
+        {
+          "name": "Funkcja kwadratowa",
+          "level": "pp",
+          "ideas": [
+            { "idea": "Why is a parabola always symmetric about x = −b/2a?" },
+            { "idea": "Why do a quadratic's roots multiply to c/a? (Vieta)" }
+          ]
+        }
+      ]
+    },
+    {
+      "n": "VII",
+      "pl": "Wielomiany",
+      "en": "Polynomials",
+      "chapters": [
+        {
+          "name": "Wielomiany wyższych stopni",
+          "level": "pr",
+          "ideas": [
+            { "idea": "Why does a degree-n polynomial have at most n roots?" },
+            { "idea": "Why must a real polynomial's complex roots come in pairs?" }
+          ]
+        }
+      ]
+    },
+    {
+      "n": "VIII",
+      "pl": "Funkcja wymierna",
+      "en": "Rational function",
+      "chapters": [
+        {
+          "name": "Funkcja wymierna",
+          "level": "pr",
+          "ideas": [
+            { "idea": "Why does a rational function approach an asymptote but never cross it?" }
+          ]
+        }
+      ]
+    },
+    {
+      "n": "IX",
+      "pl": "Funkcja wykładnicza i logarytmiczna",
+      "en": "Exponential & log functions",
+      "chapters": [
+        {
+          "name": "Funkcja wykładnicza i logarytmiczna",
+          "level": "pr",
+          "ideas": [
+            { "idea": "Why do exponentials eventually beat every polynomial?" },
+            { "idea": "Why is e the natural base for continuous growth?" }
+          ]
+        }
+      ]
+    },
+    {
+      "n": "X",
+      "pl": "Ciągi liczbowe",
+      "en": "Sequences",
+      "chapters": [
+        {
+          "name": "Ciąg arytmetyczny",
+          "level": "pp",
+          "ideas": [
+            { "idea": "Why is the sum of an arithmetic sequence n × the average of its ends? (Gauss)" }
+          ]
+        },
+        {
+          "name": "Ciąg geometryczny",
+          "level": "pp",
+          "ideas": [
+            { "idea": "Why does 1/2 + 1/4 + 1/8 + ... = 1?", "recorded": true, "planner": "geometricSeriesPlanner" },
+            { "idea": "Why does the geometric series formula work for any ratio?" }
+          ]
+        },
+        {
+          "name": "Granice ciągów",
+          "level": "pr",
+          "ideas": [
+            { "idea": "Why does 1/n get arbitrarily close to 0 but never reach it?" },
+            { "idea": "Why does (1 + 1/n)ⁿ approach e?" }
+          ]
+        },
+        {
+          "name": "Ciągi rekurencyjne i złoty podział",
+          "level": "bonus",
+          "ideas": [
+            { "idea": "Why do the first n odd numbers always sum to n²?", "recorded": true, "planner": "oddSquaresPlanner" },
+            { "idea": "Why does the golden ratio hide inside the Fibonacci sequence?", "recorded": true, "planner": "fibonacciSpiralPlanner" }
+          ]
+        }
+      ]
+    },
+    {
+      "n": "XI",
+      "pl": "Trygonometria",
+      "en": "Trigonometry",
+      "chapters": [
+        {
+          "name": "Funkcje trygonometryczne i tożsamości",
+          "level": "pp",
+          "ideas": [
+            { "idea": "Why is sin²θ + cos²θ = 1, always?" },
+            { "idea": "Why does the sine wave come from a rotating circle?" }
+          ]
+        },
+        {
+          "name": "Wykresy i równania trygonometryczne",
+          "level": "pr",
+          "ideas": [
+            { "idea": "Why does the sine addition formula work? (a rotation proof)" },
+            { "idea": "Why do trig equations have infinitely many solutions?" }
+          ]
+        }
+      ]
+    },
+    {
+      "n": "XII",
+      "pl": "Planimetria",
+      "en": "Plane geometry",
+      "chapters": [
+        {
+          "name": "Intuicje geometryczne",
+          "level": "bonus",
+          "ideas": [
+            { "idea": "Why is a straight line the shortest path between two points?", "recorded": true, "planner": "shortestPathPlanner" }
+          ]
+        },
+        {
+          "name": "Trójkąty",
+          "level": "pp",
+          "ideas": [
+            { "idea": "Why do a triangle's angles always add to 180°?", "recorded": true, "planner": "triangleAnglesPlanner" },
+            { "idea": "Why does the law of cosines generalize Pythagoras?" },
+            { "idea": "Why does the law of sines hold for every triangle?" }
+          ]
+        },
+        {
+          "name": "Czworokąty",
+          "level": "pp",
+          "ideas": [
+            { "idea": "Why do a quadrilateral's midpoints always form a parallelogram?", "recorded": true, "planner": "varignonPlanner" }
+          ]
+        },
+        {
+          "name": "Okrąg i koło",
+          "level": "pp",
+          "ideas": [
+            { "idea": "Why is an inscribed angle always half the central angle?" },
+            { "idea": "Why is a triangle in a semicircle always a right triangle? (Thales)" }
+          ]
+        },
+        {
+          "name": "Pola figur płaskich",
+          "level": "pp",
+          "ideas": [
+            { "idea": "Why is a circle's area π × r²?", "recorded": true, "planner": "circleAreaPlanner" },
+            { "idea": "Why does Heron's formula need only the three side lengths?" }
+          ]
+        }
+      ]
+    },
+    {
+      "n": "XIII",
+      "pl": "Geometria analityczna",
+      "en": "Analytic geometry",
+      "chapters": [
+        {
+          "name": "Geometria analityczna",
+          "level": "pp",
+          "ideas": [
+            { "idea": "Why does the distance formula come straight from Pythagoras?" },
+            { "idea": "Why does a circle's equation look like (x−a)² + (y−b)² = r²?" }
+          ]
+        },
+        {
+          "name": "Zastosowania (bonus)",
+          "level": "bonus",
+          "ideas": [
+            { "idea": "Why does a sliding ladder's midpoint trace a perfect quarter circle?", "recorded": true, "planner": "ladderCurvePlanner" }
+          ]
+        }
+      ]
+    },
+    {
+      "n": "XIV",
+      "pl": "Stereometria",
+      "en": "Solid geometry",
+      "chapters": [
+        {
+          "name": "Wielościany",
+          "level": "pp",
+          "ideas": [
+            { "idea": "Why is a pyramid's volume exactly ⅓ of its matching prism?" }
+          ]
+        },
+        {
+          "name": "Bryły obrotowe",
+          "level": "pp",
+          "ideas": [
+            { "idea": "Why is a cone's volume ⅓ of its matching cylinder?" },
+            { "idea": "Why is a sphere's volume 4/3 π r³? (Archimedes)" }
+          ]
+        }
+      ]
+    },
+    {
+      "n": "XV",
+      "pl": "Kombinatoryka",
+      "en": "Combinatorics",
+      "chapters": [
+        {
+          "name": "Reguły liczenia",
+          "level": "pp",
+          "ideas": [
+            { "idea": "Why does n! count every arrangement of n objects?" },
+            { "idea": "Why is \"n choose k\" the same as \"n choose n−k\"?" }
+          ]
+        },
+        {
+          "name": "Łamigłówki kombinatoryczne (bonus)",
+          "level": "bonus",
+          "ideas": [
+            { "idea": "Why can't 8 dominoes cover a chessboard missing two opposite corners?", "recorded": true, "planner": "chessboardDominoPlanner" }
+          ]
+        }
+      ]
+    },
+    {
+      "n": "XVI",
+      "pl": "Rachunek prawdopodobieństwa",
+      "en": "Probability",
+      "chapters": [
+        {
+          "name": "Prawdopodobieństwo klasyczne",
+          "level": "pp",
+          "ideas": [
+            { "idea": "Why does switching doors win 2/3 of the time? (Monty Hall)", "recorded": true, "planner": "montyHallPlanner" },
+            { "idea": "Why does \"at least one\" mean 1 − P(none)?" }
+          ]
+        },
+        {
+          "name": "Prawdopodobieństwo warunkowe",
+          "level": "pr",
+          "ideas": [
+            { "idea": "Why does conditional probability shrink the sample space?" }
+          ]
+        }
+      ]
+    },
+    {
+      "n": "XVII",
+      "pl": "Statystyka opisowa",
+      "en": "Descriptive statistics",
+      "chapters": [
+        {
+          "name": "Statystyka opisowa",
+          "level": "pp",
+          "ideas": [
+            { "idea": "Why can one outlier drag the mean but barely touch the median?" },
+            { "idea": "Why is variance built from squared differences, not plain ones?" }
+          ]
+        }
+      ]
+    },
+    {
+      "n": "XVIII",
+      "pl": "Rachunek różniczkowy",
+      "en": "Limits & derivatives",
+      "chapters": [
+        {
+          "name": "Granica funkcji",
+          "level": "pr",
+          "ideas": [
+            { "idea": "Why does a limit exist even where a function isn't defined?" }
+          ]
+        },
+        {
+          "name": "Pochodna i jej zastosowania",
+          "level": "pr",
+          "ideas": [
+            { "idea": "Why is a derivative just the limit of a secant line's slope?" },
+            { "idea": "Why does (xⁿ)′ = n·xⁿ⁻¹?" },
+            { "idea": "Why does a derivative of zero mark a peak or a valley?" }
+          ]
+        }
+      ]
+    },
+    {
+      "n": "XIX",
+      "pl": "Elementy logiki i teorii zbiorów",
+      "en": "Logic & set theory",
+      "chapters": [
+        {
+          "name": "Elementy logiki i teorii zbiorów",
+          "level": "pp",
+          "ideas": [
+            { "idea": "Why is \"if P then Q\" the same statement as \"if not Q then not P\"?" },
+            { "idea": "Why does negating \"A and B\" flip it into \"not A or not B\"? (De Morgan)" }
+          ]
+        }
+      ]
+    }
+  ]
+}

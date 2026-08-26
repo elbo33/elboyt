@@ -1,0 +1,23 @@
+{
+  "name": "ai-math-shorts-generator",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Local AI-directed mathematical YouTube Shorts generator using Manim and Remotion.",
+  "scripts": {
+    "generate": "tsc -p tsconfig.cli.json && node dist/cli/generate.js",
+    "render:remotion": "remotion render src/remotion/index.ts MathShort generated/video.mp4",
+    "studio": "remotion studio src/remotion/index.ts",
+    "typecheck": "tsc --noEmit -p tsconfig.cli.json"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.516",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "remotion": "4.0.516"
+  },
+  "devDependencies": {
+    "@types/node": "22.10.2",
+    "@types/react": "18.3.12",
+    "typescript": "5.7.2"
+  }
+}
