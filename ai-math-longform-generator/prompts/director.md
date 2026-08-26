@@ -13,6 +13,9 @@ Do not generate a custom mathematical DSL. Write normal Manim code for each chap
 - 30 FPS
 - 8 minutes or longer
 - no voiceover
+- **language: Polish (pl-PL) by default** — every headline, caption, label, and
+  the `script.md` narration is Polish unless the user asks for another language
+  for a specific video. Mathematical notation stays as notation; slugs stay ASCII.
 - dark background (`#081018`), high-contrast objects
 - one strong accent (`#22D3EE`), one restrained secondary (`#F59E0B`)
 - visual explanation first, text second

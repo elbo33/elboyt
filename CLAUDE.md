@@ -24,7 +24,12 @@ FFmpeg), plus a `library/` of finished work.
    narrator would say to explain the whole video, one section per scene/chapter
    with an approximate start time. The videos are silent; the script is their
    spoken counterpart and must never state anything not shown on screen.
-5. Each generator has a `prompts/director.md` (the creative brief) and its own
+5. **Language: Polish (pl-PL) by default.** Every new video — all on-screen text
+   *and* its `script.md` — is authored in Polish unless the user asks for a
+   specific video in another language. Keep file/folder slugs ASCII. The one
+   existing English video in `library/videos/` predates this rule; leave it as-is,
+   do not translate or re-render it.
+6. Each generator has a `prompts/director.md` (the creative brief) and its own
    `CLAUDE.md` (how the code fits together). Read those before working in it.
 
 ## To make a new video

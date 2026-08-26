@@ -3,6 +3,11 @@
 Long-form (8+ min) horizontal math videos. Same visual language as the Shorts
 generator; landscape; a **fixed, deliberately repetitive** chapter structure.
 
+**Language: Polish (pl-PL) by default** — all on-screen Manim text and the
+`script.md` narration, unless the user asks for a specific video in another
+language. Slugs stay ASCII. The existing English `why-is-the-sum-...` video in
+`library/videos/` predates this and is not to be changed.
+
 ## One command
 
 ```bash

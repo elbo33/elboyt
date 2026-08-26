@@ -28,6 +28,9 @@ library/
   explain the whole video, one section per scene/chapter with an approximate
   start time. The videos are silent — the script is the spoken counterpart, and
   it must not state anything that isn't shown on screen.
+- **New videos are in Polish (pl-PL)** — on-screen text and `script.md` both.
+  The English `why-is-the-sum-of-the-first-n-odd-numbers-a-perfect-square` below
+  predates that rule and is kept as-is.
 - The generators' own `generated/` and `public/` working directories are
   disposable and are wiped once the final lands in this library.
 - To reproduce or revise a piece, run its `render/COMMAND.md` in the matching
@@ -38,9 +41,9 @@ library/
 
 ### videos/
 
-| Title | Slug | Length | Script |
-|---|---|---|---|
-| Why is the sum of the first n odd numbers a perfect square? | `why-is-the-sum-of-the-first-n-odd-numbers-a-perfect-square` | 8:15 | ✓ |
+| Title | Slug | Length | Lang | Script |
+|---|---|---|---|---|
+| Why is the sum of the first n odd numbers a perfect square? | `why-is-the-sum-of-the-first-n-odd-numbers-a-perfect-square` | 8:15 | en (pre-policy) | ✓ |
 
 ### shorts/
 

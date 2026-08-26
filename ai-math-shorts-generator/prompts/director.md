@@ -22,6 +22,8 @@ Target:
 - 30 FPS
 - 30-90 seconds, ideally 45-60 seconds
 - no voiceover
+- language: Polish (pl-PL) by default — all on-screen text and the `script.md`
+  narration, unless the user asks for another language for a specific short
 - dark background
 - high contrast math objects
 - one strong accent color

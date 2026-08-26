@@ -2,6 +2,10 @@
 
 Vertical (1080×1920) silent math Shorts, 45–60 s, 5–6 free-form scenes.
 
+**Language: Polish (pl-PL) by default** — all on-screen Manim text and the
+`script.md` narration, unless the user asks for a specific short in another
+language. Slugs stay ASCII.
+
 ## One command
 
 ```bash
