@@ -115,7 +115,13 @@ function buildScenePlans(section: SectionAuthoring): ScenePlan[] {
       }
       continue;
     }
-    if (band.type === "matura_connection") continue; // authored in a later pass
+    if (band.type === "matura_connection") {
+      if (section.maturaExample) {
+        const m = section.maturaExample;
+        for (let bi = 0; bi < m.ex.beats.length; bi++) plans.push(exampleBeatPlan(m, bi));
+      }
+      continue;
+    }
     const inBand = section.authored
       .filter((a) => a.band === band.type)
       .sort((a, b) => a.index - b.index);

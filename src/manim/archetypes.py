@@ -23,10 +23,17 @@ def _t(pace, base):
     return base * (0.45 if pace == "fast" else 1.0)
 
 
-def _fit(mob, max_w, max_h):
+def _fit(mob, max_w, max_h, min_fill=0.0):
+    """Scale `mob` to fit within (max_w, max_h). If `min_fill` > 0 and the mob
+    would otherwise sit well under that fraction of the box, scale it up so it
+    reads at summary/hero weight instead of floating small."""
     s = min(max_w / max(mob.width, 1e-6), max_h / max(mob.height, 1e-6), 1.0)
     if s < 1.0:
         mob.scale(s)
+    if min_fill > 0.0:
+        grow = min(max_w / max(mob.width, 1e-6), max_h / max(mob.height, 1e-6))
+        if grow > 1.05:
+            mob.scale(1.0 + (grow - 1.0) * min_fill)
     return mob
 
 
@@ -49,7 +56,7 @@ def stage_figure(scene, figure, *, question=None, caption=None, reveal=None, pac
 
     top = (q.get_bottom()[1] - 0.5) if q is not None else (FRAME_H / 2 - 0.8)
     bottom = (SAFE_BOTTOM_Y + (1.0 if not IS_VERTICAL else 1.3))
-    _fit(figure, FRAME_W - (1.4 if not IS_VERTICAL else 0.8), top - bottom)
+    _fit(figure, FRAME_W - (1.4 if not IS_VERTICAL else 0.8), top - bottom, min_fill=0.5)
     figure.move_to([0, 0.58 * top + 0.42 * bottom, 0])  # bias toward the top of the band
 
     if q is not None:
@@ -194,7 +201,7 @@ def stage_model(scene, *, cards, tagline=None, pace="slow"):
         group = two_col(boxed[0], boxed[1], gap=1.2)
     else:
         group = VGroup(*boxed).arrange(RIGHT, buff=0.9)
-    _fit(group, FRAME_W - 1.2, FRAME_H - 2.8)
+    _fit(group, FRAME_W - 1.2, FRAME_H - 2.8, min_fill=0.62)
     group.move_to([0, 0.3, 0])
 
     for b in boxed:
