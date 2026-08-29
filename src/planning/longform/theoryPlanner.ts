@@ -28,7 +28,9 @@ type ScenePlan = Omit<
   "sourcePath" | "renderPath" | "publicPath" | "sceneIndex"
 > & {code: string};
 
-const WORKED_HEADER = `from manim import *
+const WORKED_HEADER = `import json
+
+from manim import *
 from support.style import LessonScene
 from support.templates.theory_example import worked_beat
 `;
@@ -77,9 +79,13 @@ function exampleBeatPlan(ex: ExampleAuthoring, beatIndex: number): ScenePlan {
   const nn = String(beatIndex).padStart(2, "0");
   const className = `${ex.className}_${nn}_${beat.replace(/-/g, "_")}`;
   const id = `example-${ex.sourceId}-${nn}-${beat}`;
+  // Double-stringify: inner builds the JSON text, outer wraps it in a string
+  // literal valid in both JSON and Python (handles backslashes, quotes,
+  // unicode). json.loads then parses it back to a dict with True/False/None.
+  const exLiteral = JSON.stringify(JSON.stringify(ex.ex));
   const code =
     WORKED_HEADER +
-    `\nEX = ${JSON.stringify(ex.ex, null, 2)}\n\n` +
+    `\nEX = json.loads(${exLiteral})\n\n` +
     `class ${className}(LessonScene):\n` +
     `    def construct(self):\n` +
     `        worked_beat(self, EX, beat=${beatIndex})\n`;
