@@ -1,5 +1,6 @@
+import numpy as np
 from manim import *
-from .colors import BACKGROUND, FOREGROUND, MUTED, ACCENT, SECONDARY, SOFT
+from .colors import BACKGROUND, FOREGROUND, MUTED, ACCENT, SECONDARY, SOFT, GREEN, RED
 
 # Long-form YouTube: horizontal 16:9 at 1080p30.
 config.pixel_width = 1920
@@ -152,6 +153,81 @@ def odd_square_grid(n, cell=0.62, origin=None, colors=None):
             grid.add(sq)
             layers[k].add(sq)
     return grid, layers
+
+
+def sought_chip(labels, scale=0.34):
+    """A small boxed 'SZUKANE' marker listing what the problem asks for.
+    `labels` are short strings (answer-part names) or a single fallback phrase.
+    Reliable: it is built from structured answer data, never parsed prose."""
+    head = small_label("SZUKANE", 0.28, MUTED)
+    rows = VGroup(*[subhead(str(t), scale, SECONDARY) for t in labels])
+    rows.arrange(DOWN, aligned_edge=LEFT, buff=0.18)
+    inner = VGroup(head, rows).arrange(DOWN, aligned_edge=LEFT, buff=0.2)
+    box = SurroundingRectangle(inner, color=MUTED, buff=0.28, corner_radius=0.1)
+    box.set_stroke(opacity=0.6)
+    return VGroup(box, inner)
+
+
+def answer_box(text_mob, color=SECONDARY, buff=0.3):
+    """A final-answer box: the pass we run at the end of every worked scene."""
+    box = SurroundingRectangle(text_mob, color=color, buff=buff, corner_radius=0.12)
+    return VGroup(box, text_mob)
+
+
+def numbered_steps(lines, scale=0.4, color=FOREGROUND, buff=0.34, number_color=ACCENT):
+    """A left-aligned, numbered stack of solution steps. One line per entry;
+    entries are already display-ready strings (LaTeX prettified upstream)."""
+    rows = VGroup()
+    for i, line in enumerate(lines, start=1):
+        num = subhead(f"{i}", scale, number_color)
+        txt = body(line, scale, color)
+        rows.add(VGroup(num, txt).arrange(RIGHT, buff=0.28, aligned_edge=UP))
+    rows.arrange(DOWN, aligned_edge=LEFT, buff=buff)
+    return rows
+
+
+def pause_cue(scene, statement, kind="exercise"):
+    """The one 'now you try' signal for the whole course. Identical everywhere:
+    the problem statement stays fully lit, everything else is already cleared, a
+    glyph and a verb appear bottom-centre, and a ring sweeps once around the
+    glyph like a silent countdown. Then the statement dims and the solution
+    begins.
+
+    kind:
+      "exercise"   - ACCENT ring, ~6.5 s, verb "SPRÓBUJ SAM"
+      "challenge"  - SECONDARY ring, ~10 s, verb "SPRÓBUJ SAM" (meant to be hard)
+      "find_error" - ACCENT ring, ~4 s,  verb "ZNAJDŹ BŁĄD"  (spot the wrong step)
+    """
+    color, hold, verb, glyph_kind = {
+        "exercise": (ACCENT, 6.5, "SPRÓBUJ SAM", "pause"),
+        "challenge": (SECONDARY, 10.0, "SPRÓBUJ SAM", "pause"),
+        "find_error": (ACCENT, 4.0, "ZNAJDŹ BŁĄD", "lens"),
+    }[kind]
+
+    center = np.array([0.0, -2.15, 0.0])
+
+    if glyph_kind == "pause":
+        bar = RoundedRectangle(
+            corner_radius=0.05, width=0.16, height=0.52,
+            stroke_width=0, fill_color=color, fill_opacity=1.0,
+        )
+        glyph = VGroup(bar, bar.copy()).arrange(RIGHT, buff=0.16).move_to(center)
+    else:
+        lens = Circle(radius=0.24, color=color, stroke_width=6)
+        handle = Line([0.15, -0.15, 0], [0.36, -0.36, 0], color=color, stroke_width=6)
+        glyph = VGroup(lens, handle).move_to(center)
+
+    ring = Arc(radius=0.62, start_angle=PI / 2, angle=-TAU, color=color, stroke_width=4)
+    ring.move_to(center)
+    label = small_label(verb, 0.34, color).next_to(ring, DOWN, buff=0.26)
+
+    scene.play(FadeIn(glyph, scale=0.7), FadeIn(label), run_time=0.5)
+    scene.play(Create(ring), run_time=hold, rate_func=linear)
+    scene.play(
+        statement.animate.set_opacity(0.55),
+        FadeOut(glyph), FadeOut(ring), FadeOut(label),
+        run_time=0.6,
+    )
 
 
 def running_total_panel(pairs, scale=0.42):

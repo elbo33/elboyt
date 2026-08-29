@@ -15,6 +15,7 @@ import {FPS} from "../core/config";
 import {ensureDir, resetDir, writeJson} from "../core/fs";
 import {logStep} from "../core/logger";
 import type {RenderManifest, Storyboard} from "../core/types";
+import * as ciagArytmetycznyTheoryPlanner from "../planning/ciagArytmetycznyTheoryPlanner";
 import * as oddSquaresLongPlanner from "../planning/oddSquaresLongPlanner";
 import * as powersRootsLongPlanner from "../planning/powersRootsLongPlanner";
 import {stripAudioTrack} from "../rendering/finalize";
@@ -30,7 +31,8 @@ type Planner = {
 
 const PLANNERS: Record<string, Planner> = {
   "odd-squares-long": oddSquaresLongPlanner,
-  "powers-roots-long": powersRootsLongPlanner
+  "powers-roots-long": powersRootsLongPlanner,
+  "ciag-arytmetyczny-theory": ciagArytmetycznyTheoryPlanner
 };
 
 const DEFAULT_PLANNER = "odd-squares-long";
@@ -89,7 +91,7 @@ async function main(): Promise<void> {
   await writeSceneSources(planner, storyboard);
 
   for (const scene of storyboard.scenes) {
-    logStep(`Rendering ${scene.id} [${scene.chapterLabel}] with Manim`);
+    logStep(`Rendering ${scene.id} [${scene.sceneLabel}] with Manim`);
     await renderManimScene(scene);
   }
 

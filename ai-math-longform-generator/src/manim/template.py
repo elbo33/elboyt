@@ -6,15 +6,20 @@ example in every video is one call to this function.
 """
 
 from manim import *
-from .colors import FOREGROUND, MUTED, ACCENT, SECONDARY
+from .colors import FOREGROUND, MUTED, ACCENT, SECONDARY, GREEN
 from .style import (
+    FONT,
     odd_square_grid,
     running_total_panel,
     subhead,
     small_label,
+    body,
     caption,
     mtex,
     factor_strip,
+    sought_chip,
+    answer_box,
+    numbered_steps,
 )
 
 GRID_CENTER = [-3.5, -0.4, 0]
@@ -36,6 +41,77 @@ def cumulative_ledger(upto_n, max_rows=3):
         dots = small_label("⋮", 0.4, MUTED)
         panel = VGroup(dots, *panel).arrange(DOWN, aligned_edge=LEFT, buff=0.34)
     return panel
+
+
+def _wrap(text, width=54):
+    """Greedy word wrap for a prose statement rendered as plain Text."""
+    words = text.split()
+    lines, cur = [], ""
+    for w in words:
+        trial = w if not cur else f"{cur} {w}"
+        if len(trial) > width and cur:
+            lines.append(cur)
+            cur = w
+        else:
+            cur = trial
+    if cur:
+        lines.append(cur)
+    return "\n".join(lines)
+
+
+def build_theory_example(scene, *, index, total, statement, steps, sought,
+                         answer_tex, insight, highlights=None, verify=None):
+    """One THEORY worked example. Identical beats for all three in an episode;
+    only the strings change. Nothing here is parsed from prose: `steps` is the
+    approved `solution_steps` (LaTeX prettified upstream), `sought` the answer
+    part names, `answer_tex` the approved final answer. `highlights` are exact
+    substrings of `statement` to tint as the given data — a missing one is
+    silently skipped, never a wrong claim.
+    """
+    highlights = highlights or []
+
+    wrapped = _wrap(statement, 58)
+    t2c = {h: ACCENT for h in highlights}
+    stmt = Text(wrapped, font=FONT, weight=MEDIUM, color=FOREGROUND,
+                line_spacing=1.0, t2c=t2c).scale(0.42)
+    stmt.to_edge(UP, buff=0.95).to_edge(LEFT, buff=1.1)
+
+    chip = sought_chip(sought).scale(0.9)
+    chip.to_edge(RIGHT, buff=0.9).set_y(1.4)
+
+    step_lines = numbered_steps(steps, 0.36)
+    step_lines.next_to(stmt, DOWN, buff=0.6).to_edge(LEFT, buff=1.1)
+
+    tail = [step_lines]
+    if verify:
+        vline = body(f"Sprawdzenie:  {verify}", 0.34, GREEN)
+        vline.next_to(step_lines, DOWN, buff=0.45).to_edge(LEFT, buff=1.1)
+        tail.append(vline)
+
+    ans = subhead(answer_tex, 0.56, SECONDARY)
+    boxed = answer_box(ans)
+    boxed.next_to(tail[-1], DOWN, buff=0.7).set_x(0)
+
+    note = caption(insight)
+
+    scene.play(FadeIn(stmt, shift=0.15 * UP), run_time=1.0)
+    scene.wait(2.4)
+    scene.play(Circumscribe(stmt, color=ACCENT, buff=0.15), run_time=1.4)
+    scene.wait(1.0)
+    scene.play(FadeIn(chip, shift=0.2 * LEFT), run_time=0.8)
+    scene.wait(1.4)
+    for row in step_lines:
+        scene.play(FadeIn(row, shift=0.2 * RIGHT), run_time=0.8)
+        scene.wait(3.0)
+    scene.wait(0.8)
+    if verify:
+        scene.play(FadeIn(vline, shift=0.15 * UP), run_time=0.8)
+        scene.wait(2.2)
+    scene.play(FadeIn(boxed, shift=0.2 * UP), run_time=0.9)
+    scene.play(Circumscribe(boxed, color=SECONDARY), run_time=1.3)
+    scene.wait(1.6)
+    scene.play(FadeIn(note, shift=0.2 * UP), run_time=0.9)
+    scene.wait(3.6)
 
 
 def build_example(scene, k, cell, step_words):

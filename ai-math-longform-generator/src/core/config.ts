@@ -41,3 +41,32 @@ export function resolveManimPython(): string {
 
   return "python3";
 }
+
+/**
+ * Locate the ZasPro checkout that holds the verified curriculum (knowledge
+ * specs + approved exercises). Set ZASPRO_DIR to override; otherwise we look
+ * for a sibling `ZasPro/` next to the repo root, then next to this generator.
+ * Fails loudly rather than falling back to invented content.
+ */
+export function resolveZasproDir(): string {
+  const candidates = process.env.ZASPRO_DIR
+    ? [path.resolve(process.env.ZASPRO_DIR)]
+    : [
+        path.resolve(PROJECT_ROOT, "..", "..", "ZasPro"),
+        path.resolve(PROJECT_ROOT, "..", "ZasPro")
+      ];
+
+  for (const dir of candidates) {
+    const hasKnowledge = fs.existsSync(path.join(dir, "knowledge", "sections"));
+    const hasExercises = fs.existsSync(path.join(dir, "exercises"));
+    if (hasKnowledge && hasExercises) {
+      return dir;
+    }
+  }
+
+  throw new Error(
+    "ZasPro checkout not found. Looked in:\n  " +
+      candidates.join("\n  ") +
+      "\nSet ZASPRO_DIR to the ZasPro repo root (must contain knowledge/sections/ and exercises/)."
+  );
+}
