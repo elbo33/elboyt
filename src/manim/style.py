@@ -1,27 +1,20 @@
+import re
+
 import numpy as np
 from manim import *
+from .config import FRAME_W, FRAME_H, IS_VERTICAL, SAFE_BOTTOM_Y, FORMAT_ID
 from .colors import BACKGROUND, FOREGROUND, MUTED, ACCENT, SECONDARY, SOFT, GREEN, RED
-
-# Long-form YouTube: horizontal 16:9 at 1080p30.
-config.pixel_width = 1920
-config.pixel_height = 1080
-config.frame_width = 14.222222
-config.frame_height = 8
-config.frame_rate = 30
-config.background_color = BACKGROUND
 
 FONT = "Avenir Next"
 
 
-class LongScene(Scene):
-    """Base scene for every chapter of a long-form video.
+class LessonScene(Scene):
+    """Base scene for every scene of every episode, in any format.
 
-    Keeps one consistent visual language:
-      - dark textured background
-      - a small chapter tag pinned to the top-left of every scene
-      - a thin baseline rule near the bottom for visual anchoring
-    The chapter tag is what makes the repetitive structure legible: the same
-    marker, in the same place, in every single chapter.
+    One consistent visual language:
+      - dark textured background sized to the current frame
+      - a small scene tag pinned to the top-left, same place every time
+    The tag is what makes the repetitive structure legible.
     """
 
     chapter_tag_text = ""
@@ -31,14 +24,17 @@ class LongScene(Scene):
 
     def add_texture(self):
         lines = VGroup()
-        for y in [i * 0.8 - 8 for i in range(21)]:
-            line = Line([-8, y, 0], [8, y, 0], color=SOFT, stroke_width=1)
-            line.set_opacity(0.16)
-            lines.add(line)
-        for x in [i * 0.8 - 8 for i in range(21)]:
-            line = Line([x, -5, 0], [x, 5, 0], color=SOFT, stroke_width=1)
-            line.set_opacity(0.10)
-            lines.add(line)
+        step = 0.8
+        half_w = FRAME_W / 2 + step
+        half_h = FRAME_H / 2 + step
+        y = -half_h
+        while y <= half_h:
+            lines.add(Line([-half_w, y, 0], [half_w, y, 0], color=SOFT, stroke_width=1).set_opacity(0.16))
+            y += step
+        x = -half_w
+        while x <= half_w:
+            lines.add(Line([x, -half_h, 0], [x, half_h, 0], color=SOFT, stroke_width=1).set_opacity(0.10))
+            x += step
         self.add(lines)
 
     def add_chapter_tag(self, text=None):
@@ -56,6 +52,14 @@ class LongScene(Scene):
         group = VGroup(tag, accent_bar)
         self.add(group)
         return group
+
+    # New name; same top-left marker in the same place every scene.
+    def add_scene_tag(self, text=None):
+        return self.add_chapter_tag(text)
+
+
+# Back-compat: legacy planners import LongScene.
+LongScene = LessonScene
 
 
 def headline(text, scale=0.9):
@@ -158,9 +162,20 @@ def odd_square_grid(n, cell=0.62, origin=None, colors=None):
 def sought_chip(labels, scale=0.34):
     """A small boxed 'SZUKANE' marker listing what the problem asks for.
     `labels` are short strings (answer-part names) or a single fallback phrase.
-    Reliable: it is built from structured answer data, never parsed prose."""
+    Reliable: it is built from structured answer data, never parsed prose.
+    A label that looks like notation is rendered as MathTex."""
     head = small_label("SZUKANE", 0.28, MUTED)
-    rows = VGroup(*[subhead(str(t), scale, SECONDARY) for t in labels])
+
+    def one(t):
+        t = str(t)
+        if any(ch in t for ch in "_^\\{}") or t.startswith("$"):
+            try:
+                return MathTex(t.strip("$"), color=SECONDARY).scale(scale + 0.1)
+            except Exception:
+                pass
+        return subhead(t, scale, SECONDARY)
+
+    rows = VGroup(*[one(t) for t in labels])
     rows.arrange(DOWN, aligned_edge=LEFT, buff=0.18)
     inner = VGroup(head, rows).arrange(DOWN, aligned_edge=LEFT, buff=0.2)
     box = SurroundingRectangle(inner, color=MUTED, buff=0.28, corner_radius=0.1)
@@ -172,6 +187,61 @@ def answer_box(text_mob, color=SECONDARY, buff=0.3):
     """A final-answer box: the pass we run at the end of every worked scene."""
     box = SurroundingRectangle(text_mob, color=color, buff=buff, corner_radius=0.12)
     return VGroup(box, text_mob)
+
+
+# --- shared polish layer (every episode inherits these) --------------------
+
+_MATH_HINT = re.compile(r"[=+\-·/^_√πΔ≤≥≠]|\\[a-zA-Z]+|\d\s*[a-z]")
+
+
+def notation(s, scale=0.5, color=FOREGROUND):
+    """A one-line step. If it is mostly mathematics, render it as MathTex so the
+    kerning of things like a_{10} or S_{15} is right; otherwise plain Text. The
+    caller passes a display-ready string (LaTeX or prettified prose)."""
+    looks_mathy = bool(_MATH_HINT.search(s)) and len(re.findall(r"[a-zA-Z]{4,}", s)) <= 1
+    if looks_mathy:
+        try:
+            return MathTex(s, color=color).scale(scale * 1.15)
+        except Exception:
+            pass
+    return body(s, scale, color)
+
+
+def tight_box(mob, color=SECONDARY, pad=0.18):
+    """SurroundingRectangle with the house corner radius. If `mob` is an empty
+    slice (a MathTex sub-range that did not resolve), there is nothing to box —
+    return an empty VGroup rather than raising."""
+    if mob is None or (hasattr(mob, "submobjects") and len(mob.submobjects) == 0
+                       and getattr(mob, "has_points", lambda: False)() is False):
+        return VGroup()
+    return SurroundingRectangle(mob, color=color, buff=pad, corner_radius=0.1)
+
+
+def two_col(left, right, gap=1.2, at=ORIGIN):
+    """Place two blocks side by side (16:9) or stacked (9:16), the shorter one
+    centred against the taller. Returns the VGroup, positioned at `at`."""
+    if IS_VERTICAL:
+        group = VGroup(left, right).arrange(DOWN, buff=gap)
+    else:
+        left.move_to(ORIGIN)
+        right.move_to(ORIGIN)
+        h = max(left.height, right.height)
+        left.align_to(np.array([0, h / 2, 0]), UP).shift(LEFT * (gap / 2 + left.width / 2))
+        right.align_to(np.array([0, h / 2, 0]), UP).shift(RIGHT * (gap / 2 + right.width / 2))
+        left.set_y(0)
+        right.set_y(0)
+        group = VGroup(left, right)
+    return group.move_to(at)
+
+
+# Worked-problem regions, in Manim units, format-aware. The statement lives in
+# a strip at the top across every beat of a worked example; the running
+# expression builds down the middle; the answer sits on a fixed baseline just
+# above the caption line, never floating with the step count.
+STMT_STRIP_Y = FRAME_H / 2 - (1.7 if not IS_VERTICAL else 2.6)
+WORK_TOP_Y = STMT_STRIP_Y - (1.4 if not IS_VERTICAL else 1.8)
+ANSWER_Y = SAFE_BOTTOM_Y + (1.5 if not IS_VERTICAL else 2.4)
+CAPTION_Y = SAFE_BOTTOM_Y + (0.55 if not IS_VERTICAL else 1.1)
 
 
 def numbered_steps(lines, scale=0.4, color=FOREGROUND, buff=0.34, number_color=ACCENT):

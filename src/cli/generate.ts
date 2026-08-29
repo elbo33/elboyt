@@ -15,6 +15,7 @@ import {FPS} from "../core/config";
 import {ensureDir, resetDir, writeJson} from "../core/fs";
 import {logStep} from "../core/logger";
 import type {RenderManifest, Storyboard} from "../core/types";
+import * as theoryPlanner from "../planning/longform/theoryPlanner";
 import {stripAudioTrack} from "../rendering/finalize";
 import {copyManimSupport, renderManimScene} from "../rendering/manim";
 import {probeDurationSeconds} from "../rendering/measure";
@@ -26,12 +27,13 @@ type Planner = {
   getSceneCode: (sceneId: string) => string;
 };
 
-// Planners are registered here as the merged pipeline's generic longform
-// planners land (step 4). Legacy per-video planners live in src/planning/legacy/
-// and are not wired into the CLI.
-const PLANNERS: Record<string, Planner> = {};
+// Generic longform planners. `theory` reads the section slug from
+// process.env.SECTION (default: ciag-arytmetyczny).
+const PLANNERS: Record<string, Planner> = {
+  theory: theoryPlanner
+};
 
-const DEFAULT_PLANNER = "";
+const DEFAULT_PLANNER = "theory";
 
 function parseArgs(argv: string[]): {topic: string; plannerKey: string} {
   const plannerFlag = argv.indexOf("--planner");

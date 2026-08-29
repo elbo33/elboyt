@@ -34,10 +34,26 @@ async function findRenderedMovie(scene: VideoScene): Promise<string> {
 }
 
 export async function copyManimSupport(): Promise<void> {
+  const manimSrc = path.join(PROJECT_ROOT, "src", "manim");
   const supportDir = path.join(GENERATED_DIR, "scenes", "manim", "support");
   await ensureDir(supportDir);
-  for (const file of ["colors.py", "style.py", "helpers.py", "template.py"]) {
-    await copyFileEnsured(path.join(PROJECT_ROOT, "src", "manim", file), path.join(supportDir, file));
+  await ensureDir(path.join(supportDir, "templates"));
+  for (const file of [
+    "config.py",
+    "colors.py",
+    "style.py",
+    "helpers.py",
+    "compute.py",
+    "archetypes.py",
+    "template.py"
+  ]) {
+    await copyFileEnsured(path.join(manimSrc, file), path.join(supportDir, file));
+  }
+  for (const file of ["__init__.py", "theory_example.py"]) {
+    await copyFileEnsured(
+      path.join(manimSrc, "templates", file),
+      path.join(supportDir, "templates", file)
+    );
   }
   await fs.writeFile(path.join(supportDir, "__init__.py"), "", "utf8");
 }
