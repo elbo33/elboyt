@@ -15,9 +15,6 @@ import {FPS} from "../core/config";
 import {ensureDir, resetDir, writeJson} from "../core/fs";
 import {logStep} from "../core/logger";
 import type {RenderManifest, Storyboard} from "../core/types";
-import * as ciagArytmetycznyTheoryPlanner from "../planning/ciagArytmetycznyTheoryPlanner";
-import * as oddSquaresLongPlanner from "../planning/oddSquaresLongPlanner";
-import * as powersRootsLongPlanner from "../planning/powersRootsLongPlanner";
 import {stripAudioTrack} from "../rendering/finalize";
 import {copyManimSupport, renderManimScene} from "../rendering/manim";
 import {probeDurationSeconds} from "../rendering/measure";
@@ -29,13 +26,12 @@ type Planner = {
   getSceneCode: (sceneId: string) => string;
 };
 
-const PLANNERS: Record<string, Planner> = {
-  "odd-squares-long": oddSquaresLongPlanner,
-  "powers-roots-long": powersRootsLongPlanner,
-  "ciag-arytmetyczny-theory": ciagArytmetycznyTheoryPlanner
-};
+// Planners are registered here as the merged pipeline's generic longform
+// planners land (step 4). Legacy per-video planners live in src/planning/legacy/
+// and are not wired into the CLI.
+const PLANNERS: Record<string, Planner> = {};
 
-const DEFAULT_PLANNER = "odd-squares-long";
+const DEFAULT_PLANNER = "";
 
 function parseArgs(argv: string[]): {topic: string; plannerKey: string} {
   const plannerFlag = argv.indexOf("--planner");
