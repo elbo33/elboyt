@@ -28,6 +28,9 @@
         {
           "name": "Potęgi i pierwiastki",
           "level": "pp",
+          "recorded": true,
+          "planner": "powersRootsLongPlanner",
+          "library": "library/videos/every-exponent-rule-from-one-idea",
           "video": {
             "title": "Every exponent rule from one idea",
             "angle": "aᵐ·aⁿ, (aᵐ)ⁿ, a⁻ⁿ, a^(1/n) are all forced once you decide exponents must keep adding when you multiply.",

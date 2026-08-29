@@ -16,6 +16,7 @@ import {ensureDir, resetDir, writeJson} from "../core/fs";
 import {logStep} from "../core/logger";
 import type {RenderManifest, Storyboard} from "../core/types";
 import * as oddSquaresLongPlanner from "../planning/oddSquaresLongPlanner";
+import * as powersRootsLongPlanner from "../planning/powersRootsLongPlanner";
 import {stripAudioTrack} from "../rendering/finalize";
 import {copyManimSupport, renderManimScene} from "../rendering/manim";
 import {probeDurationSeconds} from "../rendering/measure";
@@ -28,7 +29,8 @@ type Planner = {
 };
 
 const PLANNERS: Record<string, Planner> = {
-  "odd-squares-long": oddSquaresLongPlanner
+  "odd-squares-long": oddSquaresLongPlanner,
+  "powers-roots-long": powersRootsLongPlanner
 };
 
 const DEFAULT_PLANNER = "odd-squares-long";
