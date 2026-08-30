@@ -45,6 +45,7 @@ export async function copyManimSupport(): Promise<void> {
     "helpers.py",
     "compute.py",
     "archetypes.py",
+    "shorts.py",
     "template.py"
   ]) {
     await copyFileEnsured(path.join(manimSrc, file), path.join(supportDir, file));
@@ -58,7 +59,12 @@ export async function copyManimSupport(): Promise<void> {
   await fs.writeFile(path.join(supportDir, "__init__.py"), "", "utf8");
 }
 
-export async function renderManimScene(scene: VideoScene): Promise<void> {
+type RenderFormat = {width: number; height: number; formatId: string};
+
+export async function renderManimScene(
+  scene: VideoScene,
+  fmt: RenderFormat = {width: 1920, height: 1080, formatId: "longform-16x9"}
+): Promise<void> {
   const python = resolveManimPython();
   await run(
     python,
@@ -70,7 +76,7 @@ export async function renderManimScene(scene: VideoScene): Promise<void> {
       "--quality",
       "m",
       "--resolution",
-      "1920,1080",
+      `${fmt.width},${fmt.height}`,
       "--fps",
       "30",
       "--format",
@@ -83,7 +89,8 @@ export async function renderManimScene(scene: VideoScene): Promise<void> {
       "--verbosity",
       "warning"
     ],
-    PROJECT_ROOT
+    PROJECT_ROOT,
+    {MANIM_FORMAT: fmt.formatId}
   );
 
   const movie = await findRenderedMovie(scene);

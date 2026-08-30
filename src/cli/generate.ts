@@ -16,11 +16,13 @@ import {ensureDir, resetDir, writeJson} from "../core/fs";
 import {logStep} from "../core/logger";
 import type {RenderManifest, Storyboard} from "../core/types";
 import * as theoryPlanner from "../planning/longform/theoryPlanner";
+import * as shortsPlanner from "../planning/shorts/shortsPlanner";
 import {stripAudioTrack} from "../rendering/finalize";
 import {copyManimSupport, renderManimScene} from "../rendering/manim";
 import {probeDurationSeconds} from "../rendering/measure";
 import {extractPreviewFrames} from "../rendering/preview";
 import {renderRemotion} from "../rendering/remotion";
+import {writeScriptFromStoryboard} from "../script/fromStoryboard";
 
 type Planner = {
   createStoryboard: (topic: string) => Storyboard;
@@ -30,7 +32,8 @@ type Planner = {
 // Generic longform planners. `theory` reads the section slug from
 // process.env.SECTION (default: ciag-arytmetyczny).
 const PLANNERS: Record<string, Planner> = {
-  theory: theoryPlanner
+  theory: theoryPlanner,
+  shorts: shortsPlanner // reads process.env.SHORT (default: ciag-arytmetyczny-n1)
 };
 
 const DEFAULT_PLANNER = "theory";
@@ -88,9 +91,14 @@ async function main(): Promise<void> {
   await writeJson(path.join(PUBLIC_GENERATED_DIR, "storyboard.json"), storyboard);
   await writeSceneSources(planner, storyboard);
 
+  const renderFmt = {
+    width: storyboard.width,
+    height: storyboard.height,
+    formatId: storyboard.format
+  };
   for (const scene of storyboard.scenes) {
     logStep(`Rendering ${scene.id} [${scene.sceneLabel}] with Manim`);
-    await renderManimScene(scene);
+    await renderManimScene(scene, renderFmt);
   }
 
   logStep("Re-syncing chapter durations to the rendered Manim timelines");
@@ -107,6 +115,9 @@ async function main(): Promise<void> {
   logStep(`Final runtime: ${storyboard.durationSeconds.toFixed(1)}s (~${syncedMinutes} min)`);
   await writeJson(STORYBOARD_PATH, storyboard);
   await writeJson(path.join(PUBLIC_GENERATED_DIR, "storyboard.json"), storyboard);
+
+  logStep("Generating script.md from scene narration + measured timings");
+  await writeScriptFromStoryboard(storyboard, path.join(GENERATED_DIR, "script.md"));
 
   logStep("Composing final 16:9 long-form video with Remotion");
   await renderRemotion();

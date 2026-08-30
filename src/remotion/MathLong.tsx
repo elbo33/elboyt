@@ -13,11 +13,9 @@ type Props = {
   storyboard: Storyboard;
 };
 
-// Frames of overlap between consecutive chapters. Each chapter opens and closes
-// on a near-static hold, so the incoming chapter starts CROSSFADE frames early
-// and dissolves in over the outgoing chapter's tail — a true cross-dissolve,
-// no dip to black, and the total runtime is unchanged.
-const CROSSFADE = 15;
+// Frames of overlap between consecutive chapters. Long form cross-dissolves
+// (default 15); shorts set crossfadeFrames: 0 for hard cuts.
+const DEFAULT_CROSSFADE = 15;
 
 function chapterStarts(storyboard: Storyboard): number[] {
   const starts: number[] = [];
@@ -32,6 +30,7 @@ function chapterStarts(storyboard: Storyboard): number[] {
 export const MathLong: React.FC<Props> = ({storyboard}) => {
   const frame = useCurrentFrame();
   const starts = chapterStarts(storyboard);
+  const CROSSFADE = storyboard.crossfadeFrames ?? DEFAULT_CROSSFADE;
 
   return (
     <AbsoluteFill style={{backgroundColor: storyboard.visualIdentity.background}}>
@@ -39,6 +38,21 @@ export const MathLong: React.FC<Props> = ({storyboard}) => {
         const isFirst = index === 0;
         const isLast = index === storyboard.scenes.length - 1;
         const nominal = Math.round(scene.durationSeconds * storyboard.fps);
+
+        // Hard cut: no overlap, no fade.
+        if (CROSSFADE <= 0) {
+          return (
+            <Sequence key={scene.id} from={starts[index]} durationInFrames={nominal}>
+              <AbsoluteFill>
+                <OffthreadVideo
+                  src={staticFile(scene.publicPath)}
+                  muted
+                  style={{width: "100%", height: "100%", objectFit: "cover"}}
+                />
+              </AbsoluteFill>
+            </Sequence>
+          );
+        }
 
         // Every non-first chapter starts CROSSFADE frames early and lingers
         // CROSSFADE frames past its clip; the neighbours' fades cover the seam.

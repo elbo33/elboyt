@@ -1,5 +1,5 @@
 {
   "extends": "./tsconfig.json",
-  "include": ["src/cli", "src/core", "src/zaspro", "src/planning", "src/render", "src/rendering"],
+  "include": ["src/cli", "src/core", "src/zaspro", "src/planning", "src/script", "src/render", "src/rendering"],
   "exclude": ["src/remotion", "src/planning/legacy"]
 }

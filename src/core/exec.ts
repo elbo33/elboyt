@@ -5,12 +5,17 @@ export type ExecResult = {
   stderr: string;
 };
 
-export function run(command: string, args: string[], cwd: string): Promise<ExecResult> {
+export function run(
+  command: string,
+  args: string[],
+  cwd: string,
+  extraEnv?: Record<string, string>
+): Promise<ExecResult> {
   return new Promise((resolve, reject) => {
     const child = spawn(command, args, {
       cwd,
       stdio: ["ignore", "pipe", "pipe"],
-      env: process.env
+      env: extraEnv ? {...process.env, ...extraEnv} : process.env
     });
 
     let stdout = "";

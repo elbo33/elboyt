@@ -31,6 +31,23 @@ FFmpeg), plus a `library/` of finished work.
    do not translate or re-render it.
 6. Each generator has a `prompts/director.md` (the creative brief) and its own
    `CLAUDE.md` (how the code fits together). Read those before working in it.
+7. **No em dashes.** The em dash (`—`) and en dash (`–`) are strictly banned in
+   every piece of user-facing text: on-screen Manim strings, `script.md`
+   narration, titles, captions, notes. Use a comma, a colon, the word "to",
+   parentheses, or rewrite. Mathematical minus (`−` or `-`) is fine; it is not a
+   dash.
+8. **Numbers as words in `script.md`.** In every narration script, short and
+   long, write numbers as Polish words, never digits. Say "dziesiąty wyraz",
+   "równa się siedem", "minus dwadzieścia dziewięć"; never "10", "= 7", "-29".
+   This is the narration only; on-screen math stays in digits.
+   `src/script/fromStoryboard.ts` warns loudly if a generated script breaks
+   rule 7 or 8.
+9. **Shorts staging.** The retention-hook title is centred (horizontally and as
+   a block, every line centred under the last) via `hook_title()` in
+   `src/manim/shorts.py`, not free-placed `Text`. The background is the same
+   `add_texture()` grid as the long-form videos, nothing else. Content lives in
+   the vertical middle; the bottom 25% stays clear (rule from
+   `ai_math_shorts_bottom_safe_zone` memory).
 
 ## To make a new video
 

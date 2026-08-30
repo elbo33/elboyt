@@ -67,6 +67,13 @@ export type VideoScene = {
   standalone?: boolean; // works with no prior context
   shortHook?: string; // its own opening beat, for an extractable scene
   stillMoment?: string; // short label for the frame that carries the idea alone
+  // Word-for-word spoken narration for this scene — the source of truth for
+  // script.md, which is generated (not hand-written) from the storyboard once
+  // ffprobe has re-measured durations. Describes only what is on screen.
+  narration?: string;
+  // For a short scene derived from a long-form episode: the long-form scene id
+  // it compresses (empty for a short's own hook scene).
+  derivedFromScene?: string;
   purpose: string;
   mathematicalConcept: string;
   objects: string[];
@@ -86,11 +93,16 @@ export type Storyboard = {
   // videos this is.
   sectionSlug: string;
   episodeType: EpisodeType;
-  format: "longform-16x9";
+  format: "longform-16x9" | "short-9x16";
   fps: number;
   width: number;
   height: number;
   durationSeconds: number;
+  // 0 = hard cuts (shorts). Omitted / >0 = cross-dissolve of that many frames
+  // between scenes (long form defaults to 15).
+  crossfadeFrames?: number;
+  // Set on shorts: which long-form episode and scenes this was re-cut from.
+  derivedFrom?: {episode: string; scenes: string[]};
   visualIdentity: {
     background: string;
     foreground: string;

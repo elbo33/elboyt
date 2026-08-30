@@ -1,7 +1,7 @@
 import type {AuthoredScene, ExampleAuthoring, SectionAuthoring} from "./types";
 import type {BandType} from "../skeletons";
 
-// THEORY authoring for `ciag-arytmetyczny` — full episode.
+// THEORY authoring for `ciag-arytmetyczny`, full episode.
 // Every authored scene is one archetype call plus its content; no custom staging.
 
 const HDR = `from manim import *
@@ -61,8 +61,8 @@ const hook: AuthoredScene[] = [
             arcs.add(VGroup(a, small_label("+4", 0.32, SECONDARY).next_to(a, UP, buff=0.03)))
         stage_figure(self, VGroup(tiles, dots, arcs),
             question="Ten ciąg rośnie o 4. Którym z kolei wyrazem jest liczba 403?",
-            caption="Bez wzoru trzeba by wypisać setki wyrazów. Ze wzorem — jedno działanie.")`,
-    {title: "Hook — the ladder", still: "tile ladder 3·7·11·15 with +4 arcs", standalone: true,
+            caption="Bez wzoru trzeba by wypisać setki wyrazów. Ze wzorem, jedno działanie.")`,
+    {title: "Hook, the ladder", still: "tile ladder 3·7·11·15 with +4 arcs", standalone: true,
      short: "To zadanie z ciągów wraca na maturze co roku."}),
 
   scene("hook", 2, 2, "Hook2", "WPROWADZENIE", "stage_figure",
@@ -70,8 +70,8 @@ const hook: AuthoredScene[] = [
         stage_figure(self, s,
             question="Ile to jest 1 + 2 + 3 + ... + 100?",
             caption="Gauss policzył to w pamięci jako dziecko. Za chwilę Ty też.")`,
-    {title: "Hook — the long sum", still: "1 + 2 + ... + 100 written out", standalone: true,
-     short: "Dodasz sto liczb w pięć sekund — bez kalkulatora."})
+    {title: "Hook, the long sum", still: "1 + 2 + ... + 100 written out", standalone: true,
+     short: "Dodasz sto liczb w pięć sekund, bez kalkulatora."})
 ];
 
 // ---------------------------------------------------------------------------
@@ -91,7 +91,7 @@ const intuition: AuthoredScene[] = [
         stage_figure(self, VGroup(axis, d1, d2, l1, l2, arc, rl),
             question="Każdy następny wyraz to poprzedni plus ta sama liczba r.",
             caption="Tę stałą liczbę r nazywamy różnicą ciągu.")`,
-    {title: "Intuition — one step of r", still: "number line, one +r hop a_1 to a_2", standalone: true}),
+    {title: "Intuition, one step of r", still: "number line, one +r hop a_1 to a_2", standalone: true}),
 
   scene("intuition", 2, 4, "Intuition2", "INTUICJA", "stage_figure",
     `        axis = NumberLine(x_range=[0, 20, 4], length=9.5, include_numbers=False,
@@ -107,8 +107,8 @@ const intuition: AuthoredScene[] = [
             hops.add(VGroup(a, small_label("+ r", 0.34, SECONDARY).next_to(a, UP, buff=0.04)))
         stage_figure(self, VGroup(axis, dots, labs, hops),
             question="Ten sam krok r powtarza się, wyraz po wyrazie.",
-            caption="Kroki są równe — to właśnie znaczy 'arytmetyczny'.")`,
-    {title: "Intuition — equal steps", still: "number line, four equal +r hops"}),
+            caption="Kroki są równe, to właśnie znaczy 'arytmetyczny'.")`,
+    {title: "Intuition, equal steps", still: "number line, four equal +r hops"}),
 
   scene("intuition", 3, 4, "Intuition3", "INTUICJA", "stage_figure",
     `        axis = NumberLine(x_range=[0, 20, 4], length=9.5, include_numbers=False,
@@ -126,8 +126,8 @@ const intuition: AuthoredScene[] = [
         blab = small_label("n - 1 skoków  (tu 4)", 0.36, MUTED).next_to(brace, UP, buff=0.12)
         stage_figure(self, VGroup(axis, dots, labs, hops, brace, blab),
             question="Od pierwszego wyrazu do n-tego robimy n - 1 skoków.",
-            caption="O jeden mniej niż numer wyrazu — stąd nawias (n - 1) we wzorze.")`,
-    {title: "Intuition — n minus 1 steps", still: "brace over the hops: n - 1 skoków", standalone: true}),
+            caption="O jeden mniej niż numer wyrazu, stąd nawias (n - 1) we wzorze.")`,
+    {title: "Intuition, n minus 1 steps", still: "brace over the hops: n - 1 skoków", standalone: true}),
 
   scene("intuition", 4, 4, "Intuition4", "INTUICJA", "stage_figure",
     `        def mini(vals, col, label):
@@ -140,8 +140,8 @@ const intuition: AuthoredScene[] = [
         m3 = mini([4, 4, 4, 4], MUTED, "r = 0 : stały")
         stage_figure(self, VGroup(m1, m2, m3).arrange(RIGHT, buff=0.9),
             question="Znak różnicy r od razu mówi, jak zachowuje się ciąg.",
-            caption="Nie trzeba nic liczyć — wystarczy spojrzeć na r.")`,
-    {title: "Intuition — monotonicity from r", still: "three mini number lines: up / down / flat"})
+            caption="Nie trzeba nic liczyć, wystarczy spojrzeć na r.")`,
+    {title: "Intuition, monotonicity from r", still: "three mini number lines: up / down / flat"})
 ];
 
 // ---------------------------------------------------------------------------
@@ -158,23 +158,23 @@ const definition: AuthoredScene[] = [
         stage_figure(self, VGroup(slots, dots),
             question="Ciąg to ponumerowana lista: na miejscu numer n stoi n-ty wyraz.",
             caption="Wzór ogólny to przepis: podajesz numer, dostajesz wyraz.")`,
-    {title: "Definition — a sequence is a numbered list", still: "row of indexed slots a_1..a_5"}),
+    {title: "Definition, a sequence is a numbered list", still: "row of indexed slots a_1..a_5"}),
 
   scene("definition", 2, 5, "Definition2", "DEFINICJA", "stage_card",
     `        stage_card(self,
             centerpiece=r"r = a_{n+1} - a_{n}",
             annotations=[("a_{n+1}", "wyraz następny")],
             strip=r"13,\\ 9,\\ 5,\\ 1 : \\quad r = 9 - 13 = -4",
-            caption="Zawsze następny minus poprzedni — nie odwrotnie.")`,
-    {title: "Definition — the difference r", still: "r = a_(n+1) - a_n with a numeric strip"}),
+            caption="Zawsze następny minus poprzedni, nie odwrotnie.")`,
+    {title: "Definition, the difference r", still: "r = a_(n+1) - a_n with a numeric strip"}),
 
   scene("definition", 3, 5, "Definition3", "DEFINICJA", "stage_card",
     `        stage_card(self,
             centerpiece=r"a_n = a_1 + (n-1)\\cdot r",
             annotations=[("(n-1)", "liczba skoków po r")],
             strip=r"a_1=4,\\ r=4 : \\quad a_{10} = 4 + 9\\cdot 4 = 40",
-            caption="Znasz a_1 i r — policzysz dowolny wyraz bez wypisywania poprzednich.")`,
-    {title: "Definition — the nth-term formula", still: "a_n = a_1 + (n-1) r with (n-1) called out",
+            caption="Znasz a_1 i r, policzysz dowolny wyraz bez wypisywania poprzednich.")`,
+    {title: "Definition, the nth-term formula", still: "a_n = a_1 + (n-1) r with (n-1) called out",
      standalone: true}),
 
   scene("definition", 4, 5, "Definition4", "DEFINICJA", "stage_derivation",
@@ -183,7 +183,7 @@ const definition: AuthoredScene[] = [
             r"a_n = a_1 + rn - r",
             r"a_n = rn + (a_1 - r)",
         ], caption="To funkcja liniowa zmiennej n: współczynnik przy n to różnica r.")`,
-    {title: "Definition — a_n is linear in n", still: "a_n = rn + (a_1 - r)"}),
+    {title: "Definition, a_n is linear in n", still: "a_n = rn + (a_1 - r)"}),
 
   scene("definition", 5, 5, "Definition5", "DEFINICJA", "stage_card",
     `        stage_card(self,
@@ -191,7 +191,7 @@ const definition: AuthoredScene[] = [
             annotations=[("a_n", "wyraz środkowy")],
             strip=r"2\\cdot 8 = 5 + 11 \\quad (\\text{dla } 5,\\ 8,\\ 11)",
             caption="Środkowy z trzech kolejnych wyrazów to średnia sąsiadów.")`,
-    {title: "Definition — the middle-term condition", still: "2 a_n = a_(n-1) + a_(n+1)"})
+    {title: "Definition, the middle-term condition", still: "2 a_n = a_(n-1) + a_(n+1)"})
 ];
 
 // ---------------------------------------------------------------------------
@@ -216,7 +216,7 @@ function whyScene(index: number, body: string): string {
 
 const why: AuthoredScene[] = [
   {
-    band: "why_it_works", index: 1, title: "Why — the concrete sum",
+    band: "why_it_works", index: 1, title: "Why, the concrete sum",
     sceneLabel: "DLACZEGO DZIAŁA WZÓR NA SUMĘ  ·  1 / 6", standalone: true,
     stillMoment: "S_5 = 2 + 5 + 8 + 11 + 14 as a row",
     shortHook: "Dodaj 2 + 5 + 8 + 11 + 14 w pięć sekund.",
@@ -227,17 +227,17 @@ const why: AuthoredScene[] = [
         }, caption="Bierzemy sumę pięciu wyrazów: 2, 5, 8, 11, 14.")`)
   },
   {
-    band: "why_it_works", index: 2, title: "Why — write it backwards",
+    band: "why_it_works", index: 2, title: "Why, write it backwards",
     sceneLabel: "DLACZEGO DZIAŁA WZÓR NA SUMĘ  ·  2 / 6", standalone: false,
     stillMoment: "forwards row over backwards row",
     py: whyScene(2,
       `        stage_derivation(self, columns={
             "rows": [("od przodu", ${FWD}), ("od tyłu", ${REV})],
             "static_rows": 1,
-        }, caption="Zapisujemy tę samą sumę jeszcze raz — od końca.")`)
+        }, caption="Zapisujemy tę samą sumę jeszcze raz, od końca.")`)
   },
   {
-    band: "why_it_works", index: 3, title: "Why — columns collapse",
+    band: "why_it_works", index: 3, title: "Why, columns collapse",
     sceneLabel: "DLACZEGO DZIAŁA WZÓR NA SUMĘ  ·  3 / 6", standalone: false,
     stillMoment: "every column sums to 16",
     py: whyScene(3,
@@ -247,7 +247,7 @@ const why: AuthoredScene[] = [
         }, caption="Dodajemy kolumnami: każda para daje 16.")`)
   },
   {
-    band: "why_it_works", index: 4, title: "Why — the identity",
+    band: "why_it_works", index: 4, title: "Why, the identity",
     sceneLabel: "DLACZEGO DZIAŁA WZÓR NA SUMĘ  ·  4 / 6", standalone: true,
     stillMoment: "boxed 2 S_n = n (a_1 + a_n)",
     shortHook: "Cała suma z jednego triku: dodaj ją od przodu i od tyłu.",
@@ -259,17 +259,17 @@ const why: AuthoredScene[] = [
         }, caption="n par, każda równa: pierwszy + ostatni wyraz. Tutaj: 2·S₅ = 5·16 = 80.")`)
   },
   {
-    band: "why_it_works", index: 5, title: "Why — divide by two",
+    band: "why_it_works", index: 5, title: "Why, divide by two",
     sceneLabel: "DLACZEGO DZIAŁA WZÓR NA SUMĘ  ·  5 / 6", standalone: false,
     stillMoment: "S_n = n (a_1 + a_n) / 2",
     py: whyScene(5,
       `        stage_derivation(self, symbolic=[
             r"2\\,S_n = n\\,(a_1 + a_n)",
             r"S_n = \\dfrac{n\\,(a_1 + a_n)}{2}",
-        ], caption="Dzielimy obie strony przez 2 — gotowy wzór na sumę.")`)
+        ], caption="Dzielimy obie strony przez 2, gotowy wzór na sumę.")`)
   },
   {
-    band: "why_it_works", index: 6, title: "Why — the a_1, r form",
+    band: "why_it_works", index: 6, title: "Why, the a_1, r form",
     sceneLabel: "DLACZEGO DZIAŁA WZÓR NA SUMĘ  ·  6 / 6", standalone: false,
     stillMoment: "S_n = (2 a_1 + (n-1) r) / 2 · n",
     py: whyScene(6,
@@ -301,7 +301,7 @@ const summary: AuthoredScene[] = [
                     VGroup(t, b, pl, ss)).arrange(DOWN, buff=0.35)
         stage_model(self, cards=[c1, c2],
             tagline="Dwie idee: równe skoki po r, i suma złożona z jednakowych par.")`,
-    {title: "Summary — the mental model", still: "hop line + folded pair, two cards", standalone: true}),
+    {title: "Summary, the mental model", still: "hop line + folded pair, two cards", standalone: true}),
 
   scene("summary", 2, 3, "Summary2", "PODSUMOWANIE", "stage_model",
     `        c1 = VGroup(small_label("n-ty wyraz", 0.34, MUTED),
@@ -310,15 +310,15 @@ const summary: AuthoredScene[] = [
                     mtex(r"S_n = \\dfrac{a_1 + a_n}{2}\\cdot n", 0.58, SECONDARY)).arrange(DOWN, buff=0.3)
         stage_model(self, cards=[c1, c2],
             tagline="Dwa wzory, które wystarczą na każde zadanie z tego działu.")`,
-    {title: "Summary — the two formulas", still: "a_n and S_n formulas on cards", standalone: true}),
+    {title: "Summary, the two formulas", still: "a_n and S_n formulas on cards", standalone: true}),
 
   scene("summary", 3, 3, "Summary3", "PODSUMOWANIE", "stage_figure",
     `        l1 = statement("Wyraz: start plus n - 1 skoków po r.", 0.5, FOREGROUND)
         l2 = statement("Suma: n par (pierwszy + ostatni), przez 2.", 0.5, FOREGROUND)
         stage_figure(self, VGroup(l1, l2).arrange(DOWN, buff=0.6),
             question="Jeśli masz zapamiętać jedno:",
-            caption="Ciąg arytmetyczny to jeden stały krok r — cała reszta z niego wynika.")`,
-    {title: "Summary — the one takeaway", still: "the two one-line rules", standalone: true,
+            caption="Ciąg arytmetyczny to jeden stały krok r, cała reszta z niego wynika.")`,
+    {title: "Summary, the one takeaway", still: "the two one-line rules", standalone: true,
      short: "Cały dział z jednego zdania."})
 ];
 
@@ -336,7 +336,7 @@ const exGth00: ExampleAuthoring = {
     highlights: ["a₁ = 7", "r = −4", "dziesiąty wyraz"],
     sought: ["a_{10}"],
     plan_formula: "a_{n} = a_{1} + (n-1)\\cdot r",
-    plan_note: "Znamy pierwszy wyraz i różnicę — wystarczy wzór na n-ty wyraz.",
+    plan_note: "Znamy pierwszy wyraz i różnicę, wystarczy wzór na n-ty wyraz.",
     sub_filled: "a_{10} = 7 + (10-1)\\cdot(-4)",
     sub_note: "Wstawiamy a₁ = 7, r = −4 oraz n = 10 w miejsce liter.",
     computes: [
@@ -346,8 +346,8 @@ const exGth00: ExampleAuthoring = {
     ],
     answer_tex: "a_{10} = -29",
     answer_sentence: "Dziesiąty wyraz ciągu jest równy −29.",
-    check: {kind: "list", terms: [7, 3, -1, -5, -9, -13, -17, -21, -25, -29], note: "Dziesiąty wypisany wyraz to −29 — zgadza się."},
-    insight: "Do n-tego wyrazu dochodzimy w n − 1 krokach po r — stąd nawias (n − 1), nie n.",
+    check: {kind: "list", terms: [7, 3, -1, -5, -9, -13, -17, -21, -25, -29], note: "Dziesiąty wypisany wyraz to −29, zgadza się."},
+    insight: "Do n-tego wyrazu dochodzimy w n − 1 krokach po r, stąd nawias (n − 1), nie n.",
     include_insight: true
   }
 };
@@ -366,9 +366,9 @@ const exGth01: ExampleAuthoring = {
     plan_note: "Różnica to następny wyraz minus poprzedni.",
     computes: [
       {kind: "add_signed", args: [9, -13], line: "r = 9 - 13 = -4", note: "9 − 13: dwie liczby, wynik ujemny."},
-      {kind: "arith", line: "5-9 = -4,\\quad 1-5 = -4,\\quad -3-1 = -4", note: "Sprawdzamy pozostałe pary — wszystkie dają −4."}
+      {kind: "arith", line: "5-9 = -4,\\quad 1-5 = -4,\\quad -3-1 = -4", note: "Sprawdzamy pozostałe pary, wszystkie dają −4."}
     ],
-    answer_tex: "r = -4,\\ \\text{ciąg malejący}",
+    answer_tex: "r = -4",
     answer_sentence: "Różnica wynosi −4; ponieważ r < 0, ciąg jest malejący.",
     insight: "Znak różnicy rozstrzyga monotoniczność: r < 0 znaczy malejący, bez liczenia wyrazów.",
     include_insight: true
@@ -386,16 +386,16 @@ const exGth02: ExampleAuthoring = {
     highlights: ["a₁ = 3", "a₁₂ = 36", "sumę dwunastu"],
     sought: ["S_{12}"],
     plan_formula: "S_{n} = \\dfrac{a_{1} + a_{n}}{2}\\cdot n",
-    plan_note: "Znamy pierwszy i ostatni wyraz — używamy wzoru ze średnią.",
+    plan_note: "Znamy pierwszy i ostatni wyraz, używamy wzoru ze średnią.",
     sub_filled: "S_{12} = \\dfrac{3 + 36}{2}\\cdot 12",
     sub_note: "Wstawiamy a₁ = 3, a₁₂ = 36 oraz n = 12.",
     computes: [
       {kind: "arith", line: "S_{12} = \\dfrac{39}{2}\\cdot 12", note: "Licznik ułamka: 3 + 36 = 39."},
-      {kind: "frac_cancel", args: [39, 2, 12], line: "S_{12} = 234", note: "12 = 6 · 2 — dwójka skraca się z mianownikiem."}
+      {kind: "frac_cancel", args: [39, 2, 12], line: "S_{12} = 234", note: "12 = 6 · 2, dwójka skraca się z mianownikiem."}
     ],
     answer_tex: "S_{12} = 234",
     answer_sentence: "Suma dwunastu początkowych wyrazów wynosi 234.",
-    check: {kind: "line", line: "234 : 12 = 19{,}5 = \\dfrac{3 + 36}{2}", note: "Średnia wyrazów skrajnych to 19,5 — zgadza się."},
+    check: {kind: "line", line: "234 : 12 = 19{,}5 = \\dfrac{3 + 36}{2}", note: "Średnia wyrazów skrajnych to 19,5, zgadza się."},
     insight: "Gdy znasz a₁ i aₙ, suma to średnia wyrazów skrajnych razy ich liczba.",
     include_insight: true
   }
@@ -420,7 +420,7 @@ const exMatura: ExampleAuthoring = {
     ],
     answer_tex: "r = 3,\\ a_1 = 1,\\ S_{15} = 330",
     answer_sentence: "Różnica wynosi 3, pierwszy wyraz 1, a suma piętnastu wyrazów to 330.",
-    insight: "Te same dwa wzory — na wyraz i na sumę — wracają w niemal każdym arkuszu.",
+    insight: "Te same dwa wzory, na wyraz i na sumę, wracają w niemal każdym arkuszu.",
     include_insight: true
   }
 };
