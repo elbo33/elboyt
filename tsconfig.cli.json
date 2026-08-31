@@ -8,7 +8,8 @@
     "src/planning",
     "src/script",
     "src/render",
-    "src/rendering"
+    "src/rendering",
+    "src/voiceover"
   ],
   "exclude": ["src/remotion", "src/planning/legacy"]
 }

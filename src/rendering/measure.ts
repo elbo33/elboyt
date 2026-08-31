@@ -6,21 +6,23 @@ import {spawn} from "node:child_process";
  * planned `durationSeconds`; we re-sync the storyboard to the truth after
  * rendering so the Remotion cut has no freezes or drift.
  */
-export function probeDurationSeconds(file: string): Promise<number> {
+function probeDuration(file: string, selectStream: string | null): Promise<number> {
   return new Promise((resolve, reject) => {
+    const args = ["-v", "error"];
+    if (selectStream) {
+      args.push("-select_streams", selectStream);
+    }
+    args.push(
+      "-show_entries",
+      "format=duration",
+      "-of",
+      "default=noprint_wrappers=1:nokey=1",
+      file
+    );
+
     const child = spawn(
       "ffprobe",
-      [
-        "-v",
-        "error",
-        "-select_streams",
-        "v:0",
-        "-show_entries",
-        "format=duration",
-        "-of",
-        "default=noprint_wrappers=1:nokey=1",
-        file
-      ],
+      args,
       {stdio: ["ignore", "pipe", "pipe"]}
     );
 
@@ -38,4 +40,12 @@ export function probeDurationSeconds(file: string): Promise<number> {
       reject(new Error(`ffprobe failed for ${file} (code ${code}): ${stderr.trim()}`));
     });
   });
+}
+
+export function probeDurationSeconds(file: string): Promise<number> {
+  return probeDuration(file, "v:0");
+}
+
+export function probeMediaDurationSeconds(file: string): Promise<number> {
+  return probeDuration(file, null);
 }

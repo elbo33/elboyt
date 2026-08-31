@@ -12,3 +12,29 @@ export async function stripAudioTrack(): Promise<void> {
   );
   await fs.rename(tempPath, FINAL_VIDEO_PATH);
 }
+
+export async function addAudioTrack(videoPath: string, audioPath: string, outPath: string): Promise<void> {
+  await run(
+    "ffmpeg",
+    [
+      "-y",
+      "-i",
+      videoPath,
+      "-i",
+      audioPath,
+      "-map",
+      "0:v:0",
+      "-map",
+      "1:a:0",
+      "-c:v",
+      "copy",
+      "-c:a",
+      "aac",
+      "-b:a",
+      "192k",
+      "-shortest",
+      outPath
+    ],
+    PROJECT_ROOT
+  );
+}

@@ -46,20 +46,30 @@ storyboard, COMMAND.md). The `.mp4` / `.png` renders live on disk only
 ```
 npm run next
 npm run generate:next
+npm run voiceover:ready
 npm run publish:ready
 
 npm run generate -- <section> <type> [stage]     stage = longform (default) | shorts | stills
 npm run publish  -- <section> <type> [stage]
+npm run voiceover:test
 ```
 
 - `next` reads `topics/teaching_sections.yaml`, scans the fixed order
   `theory → exercises → mistakes → challenge` and `longform → shorts → stills`,
   and reports the first missing approved artifact in `library/`.
 - `generate:next` runs that target and stops at the review gate.
+- `voiceover:ready` is run only after the visual render is accepted. It sends
+  the generated storyboard narration to ElevenLabs, adds the returned audio to
+  generated long-form videos or shorts, and stops for a second review.
 - `publish:ready` reads `generated/.ready.json` and publishes exactly that
   staged target.
-- `generate` renders into `generated/` and **stops**. It never writes to
-  `library/`. The long-form stage renders the thumbnail as its last step.
+- `voiceover:test` makes a short Polish calibration MP3 and root Markdown report
+  with duration, word count, and WPM for the configured ElevenLabs voice.
+- Polish narration budget is 128.2 WPM for the configured Koras voice, measured
+  in `voiceover-speed-test.md` on 2026-08-31. Use
+  `src/voiceover/timing.ts` as the code source for timing calculations.
+- `generate` renders silent video into `generated/` and **stops**. It never
+  writes to `library/`. The long-form stage renders the thumbnail as its last step.
 - `publish` copies the approved render from `generated/` into `library/`, writes
   `render/COMMAND.md`, then wipes `generated/` and `public/`.
 - `generate -- <section> <type> shorts` renders every short registered for that

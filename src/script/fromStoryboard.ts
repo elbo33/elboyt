@@ -2,6 +2,11 @@ import fs from "node:fs/promises";
 import path from "node:path";
 
 import type {Storyboard} from "../core/types";
+import {
+  POLISH_VOICEOVER_WPM,
+  countVoiceoverWords,
+  targetWordsForSeconds
+} from "../voiceover/timing";
 
 function mmss(seconds: number): string {
   const m = Math.floor(seconds / 60);
@@ -25,6 +30,7 @@ export function buildScriptMarkdown(storyboard: Storyboard): string {
     `# Narracja: ${storyboard.topic}`,
     "",
     `Wygenerowana z \`storyboard.json\` po pomiarze ffprobe (${storyboard.scenes.length} scen, ${kind}).`,
+    `Budżet narracji: ${POLISH_VOICEOVER_WPM} WPM, zgodnie z \`voiceover-speed-test.md\`.`,
     "Każda scena niesie własny tekst narracji; ten plik składa je w kolejności,",
     "z czasami startu z gotowego montażu. Opisuje wyłącznie to, co widać na ekranie.",
     ""
@@ -41,8 +47,16 @@ export function buildScriptMarkdown(storyboard: Storyboard): string {
   let acc = 0;
   storyboard.scenes.forEach((scene, i) => {
     const title = scene.title || scene.sceneLabel || scene.id;
+    const narration = (scene.narration ?? "_(brak narracji w storyboardzie)_").trim();
+    const actualWords = scene.narration ? countVoiceoverWords(scene.narration) : 0;
+    const targetWords = targetWordsForSeconds(scene.durationSeconds);
     lines.push(`## ${i + 1} · ${title}  ·  ${mmss(acc)}`, "");
-    lines.push((scene.narration ?? "_(brak narracji w storyboardzie)_").trim(), "");
+    lines.push(
+      `Czas sceny: ${scene.durationSeconds.toFixed(1)} s. ` +
+        `Budżet: około ${targetWords} słów. Tekst: ${actualWords} słów.`,
+      ""
+    );
+    lines.push(narration, "");
     acc += scene.durationSeconds;
   });
 

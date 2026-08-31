@@ -18,10 +18,12 @@ external checkout for comparison or temporary overrides.
 ```sh
 npm run next
 npm run generate:next
+npm run voiceover:ready
 npm run publish:ready
 
 npm run generate -- <section> <type> [stage]
 npm run publish  -- <section> <type> [stage]
+npm run voiceover:test
 ```
 
 `type` is one of:
@@ -37,13 +39,23 @@ npm run publish  -- <section> <type> [stage]
 - `shorts`
 - `stills`
 
-Generation writes scratch output to `generated/` and stops for review. Publish
-copies the approved output into `library/videos/<section>/<type>/`, writes the
-reproducer files, then wipes scratch output.
+Generation writes silent scratch output to `generated/` and stops for visual
+review. After the render is accepted, `npm run voiceover:ready` sends the
+generated narration to ElevenLabs, muxes it onto the approved longform/shorts
+MP4, and stops for one more review. Publish copies the approved output into
+`library/videos/<section>/<type>/`, writes the reproducer files, then wipes
+scratch output.
 
 `npm run next` reads the local teaching-section order and reports the next
 missing section/type/stage. If `generated/.ready.json` exists, it stops on that
 review gate instead of advancing.
+
+`npm run voiceover:test` creates `voiceover-speed-test.mp3` and
+`voiceover-speed-test.md` at the repo root so the ElevenLabs voice settings can
+be checked before spending tokens on a full episode. The current accepted
+Polish calibration is 53 words in 24.80 seconds, which is 128.2 WPM. Future
+scripts should use that as the narration budget unless a new calibration report
+replaces it.
 
 ## Current State
 
