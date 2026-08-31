@@ -1,0 +1,938 @@
+section: wlasnosci-czworokatow
+name: Kąty i przekątne w czworokątach
+scope: Angles, sides and diagonals in rectangles, parallelograms, rhombi and trapezia, and the relationships
+  among them.
+requirements:
+- VIII.4
+counts:
+  total: 16
+  DETERMINISTIC: 13
+  NOT_MACHINE_CHECKABLE: 2
+  REFERENCE_CALL: 1
+exercises:
+- id: g-th-00
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: rachunek kątów
+  statement: 'W czworokącie wypukłym ABCD miary trzech kątów wewnętrznych są równe: |∡DAB| = 95°, |∡ABC|
+    = 118°, |∡BCD| = 63°. Oblicz miarę kąta ∡CDA. Zapisz obliczenia.'
+  statement_latex: \left|\measuredangle CDA\right| = 360^\circ - 95^\circ - 118^\circ - 63^\circ
+  solution: |-
+    Suma miar kątów wewnętrznych dowolnego czworokąta wynosi 360° (przekątna dzieli czworokąt na dwa trójkąty, a w każdym suma kątów to 180°).
+    Zatem |∡CDA| = 360° − (95° + 118° + 63°) = 360° − 276° = 84°.
+    Kontrola: 95° + 118° + 63° + 84° = 360°. ✓
+    Odpowiedź: |∡CDA| = 84°.
+  solution_steps:
+  - 'Zapisz zależność: suma kątów czworokąta wynosi 360°.'
+  - 'Dodaj dane kąty: 95° + 118° + 63° = 276°.'
+  - 'Odejmij od 360°: 360° − 276° = 84°.'
+  - Sprawdź, że suma czterech kątów daje 360°.
+  answer:
+    kind: NUMERIC
+    value: 84.0
+  checks:
+  - kind: evaluate
+    expr: 360 - 95 - 118 - 63
+  skills:
+  - suma kątów czworokąta
+  - obliczanie brakującego kąta
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 84.0 vs 84.0 (tol 1e-09)'
+- id: g-th-01
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: kąty równoległoboku
+  statement: 'W równoległoboku ABCD kąt przy wierzchołku B ma miarę |∡ABC| = 47°. Oblicz miary pozostałych
+    trzech kątów wewnętrznych tego równoległoboku: ∡BCD, ∡CDA oraz ∡DAB.'
+  statement_latex: \left|\measuredangle CDA\right| = 47^\circ,\qquad \left|\measuredangle BCD\right| =
+    180^\circ - 47^\circ
+  solution: |-
+    W równoległoboku kąty przeciwległe są równe, a kąty leżące przy tym samym boku sumują się do 180°.
+    Kąt ∡CDA jest przeciwległy do ∡ABC, więc |∡CDA| = 47°.
+    Kąty ∡ABC i ∡BCD leżą przy boku BC, więc |∡BCD| = 180° − 47° = 133°.
+    Kąt ∡DAB jest przeciwległy do ∡BCD, więc |∡DAB| = 133°.
+    Kontrola: 47° + 133° + 47° + 133° = 360°. ✓
+  solution_steps:
+  - 'Skorzystaj z równości kątów przeciwległych: |∡CDA| = |∡ABC| = 47°.'
+  - 'Skorzystaj z zależności dla kątów przy jednym boku: |∡BCD| = 180° − 47° = 133°.'
+  - 'Kąt przeciwległy do ∡BCD: |∡DAB| = 133°.'
+  - 'Sprawdź sumę: 47° + 133° + 47° + 133° = 360°.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: kat BCD
+      answer:
+        kind: NUMERIC
+        value: 133.0
+    - name: kat CDA
+      answer:
+        kind: NUMERIC
+        value: 47.0
+    - name: kat DAB
+      answer:
+        kind: NUMERIC
+        value: 133.0
+  checks:
+  - kind: evaluate
+    expr: 180 - 47
+    part: kat BCD
+  - kind: evaluate
+    expr: '47'
+    part: kat CDA
+  - kind: evaluate
+    expr: 180 - 47
+    part: kat DAB
+  skills:
+  - kąty przeciwległe równoległoboku
+  - kąty przy tym samym boku sumują się do 180°
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [kat BCD] SymPy solved it fresh: 133.0 vs 133.0 (tol 1e-09)
+      ; [kat CDA] SymPy solved it fresh: 47.0 vs 47.0 (tol 1e-09) ; [kat DAB] SymPy solved it fresh: 133.0
+      vs 133.0 (tol 1e-09)'
+- id: g-th-02
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: przekątne rombu
+  statement: Przekątne rombu ABCD mają długości |AC| = 30 oraz |BD| = 16. Oblicz długość boku tego rombu
+    oraz jego pole.
+  statement_latex: a = \sqrt{\left(\frac{30}{2}\right)^{2}+\left(\frac{16}{2}\right)^{2}},\qquad P = \frac{1}{2}\cdot
+    30\cdot 16
+  solution: |-
+    Przekątne rombu są prostopadłe i dzielą się na połowy, więc powstają cztery trójkąty prostokątne o przyprostokątnych 30/2 = 15 i 16/2 = 8 oraz przeciwprostokątnej równej bokowi a.
+    Z twierdzenia Pitagorasa: a² = 15² + 8² = 225 + 64 = 289, więc a = 17.
+    Pole rombu (przekątne są prostopadłe): P = ½·30·16 = 240.
+    Odpowiedź: bok ma długość 17, pole wynosi 240.
+  solution_steps:
+  - 'Podziel każdą przekątną na połowy: 15 i 8.'
+  - 'Zapisz twierdzenie Pitagorasa: a² = 15² + 8² = 289.'
+  - Wyznacz a = 17.
+  - Oblicz pole ze wzoru P = ½·e·f = ½·30·16 = 240.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: bok rombu
+      answer:
+        kind: NUMERIC
+        value: 17.0
+    - name: pole
+      answer:
+        kind: NUMERIC
+        value: 240.0
+  checks:
+  - kind: evaluate
+    expr: \sqrt{\left(\frac{30}{2}\right)^{2}+\left(\frac{16}{2}\right)^{2}}
+    part: bok rombu
+  - kind: evaluate
+    expr: \frac{1}{2}\cdot 30\cdot 16
+    part: pole
+  skills:
+  - związek boku i przekątnych rombu
+  - pole rombu z przekątnych
+  - twierdzenie Pitagorasa
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [bok rombu] SymPy solved it fresh: 17.0 vs 17.0 (tol 1e-09)
+      ; [pole] SymPy solved it fresh: 240.0 vs 240.0 (tol 1e-09)'
+- id: g-ex-03
+  slot: EXERCISE
+  ramp_index: 1
+  difficulty: 2
+  exercise_type: przekątna prostokąta i kąt z bokiem
+  statement: Dany jest prostokąt ABCD, w którym |AB| = 12 oraz |BC| = 5. Przekątne AC i BD przecinają
+    się w punkcie S. Oblicz długość przekątnej AC, promień okręgu opisanego na tym prostokącie oraz sinus
+    kąta ostrego, jaki przekątna AC tworzy z bokiem AB. Zapisz obliczenia.
+  statement_latex: \left|AC\right| = \sqrt{12^{2}+5^{2}},\qquad R = \frac{\left|AC\right|}{2},\qquad \sin\alpha
+    = \frac{5}{\left|AC\right|}
+  solution: |-
+    Trójkąt ABC jest prostokątny (kąt przy B jest prosty), więc z twierdzenia Pitagorasa:
+    |AC|² = 12² + 5² = 144 + 25 = 169, czyli |AC| = 13.
+    W prostokącie przekątne są równe i dzielą się na połowy, więc |AS| = |BS| = |CS| = |DS| = 13/2. Punkt S jest środkiem okręgu opisanego na prostokącie, a jego promień to R = 13/2 = 6,5.
+    Kąt α = |∡CAB| leży w trójkącie prostokątnym ABC naprzeciw przyprostokątnej BC, zatem
+    sin α = |BC| / |AC| = 5/13.
+    Odpowiedź: |AC| = 13, R = 6,5, sin α = 5/13.
+  solution_steps:
+  - Zauważ, że trójkąt ABC jest prostokątny o przyprostokątnych 12 i 5.
+  - 'Z twierdzenia Pitagorasa: |AC| = √(144 + 25) = 13.'
+  - 'Promień okręgu opisanego: R = d/2 = 13/2 = 6,5.'
+  - 'Sinus kąta między AC a AB: sin α = |BC|/|AC| = 5/13.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: dlugosc AC
+      answer:
+        kind: NUMERIC
+        value: 13.0
+    - name: promien R
+      answer:
+        kind: NUMERIC
+        value: 6.5
+    - name: sinus kata
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{5}{13}
+  checks:
+  - kind: evaluate
+    expr: \sqrt{12^{2}+5^{2}}
+    part: dlugosc AC
+  - kind: evaluate
+    expr: \frac{\sqrt{12^{2}+5^{2}}}{2}
+    part: promien R
+  - kind: evaluate
+    expr: \frac{5}{\sqrt{12^{2}+5^{2}}}
+    part: sinus kata
+  skills:
+  - przekątna prostokąta
+  - promień okręgu opisanego na prostokącie
+  - funkcje trygonometryczne kąta ostrego
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [dlugosc AC] SymPy solved it fresh: 13.0 vs 13.0 (tol 1e-09)
+      ; [promien R] SymPy solved it fresh: 6.5 vs 6.5 (tol 1e-09) ; [sinus kata] SymPy solved it fresh:
+      0.38461538461538464 vs 0.38461538461538464 (tol 1e-09)'
+- id: g-ex-04
+  slot: EXERCISE
+  ramp_index: 2
+  difficulty: 3
+  exercise_type: rozwiązywanie trapezu równoramiennego
+  statement: W trapezie równoramiennym ABCD podstawy mają długości |AB| = 14 i |CD| = 6 (AB ∥ CD), a ramiona
+    |AD| = |BC| = 5. Oblicz wysokość tego trapezu, długość jego linii środkowej, cosinus kąta ostrego
+    przy podstawie AB oraz długość przekątnej AC. Zapisz obliczenia.
+  statement_latex: h=\sqrt{5^{2}-\left(\frac{14-6}{2}\right)^{2}},\qquad m=\frac{14+6}{2},\qquad \cos\alpha=\frac{\frac{14-6}{2}}{5},\qquad
+    \left|AC\right|=\sqrt{10^{2}+3^{2}}
+  solution: |-
+    Spuszczamy wysokości z wierzchołków D i C na podstawę AB; ich spodki oznaczmy E i F. Ponieważ trapez jest równoramienny, dłuższa podstawa dzieli się na odcinki (14 − 6)/2 = 4, 6 oraz 4.
+    Wysokość: w trójkącie prostokątnym ADE mamy przeciwprostokątną 5 i przyprostokątną 4, więc h² = 25 − 16 = 9, czyli h = 3.
+    Linia środkowa: m = (14 + 6)/2 = 10.
+    Kąt ostry α = |∡DAB|: cos α = |AE| / |AD| = 4/5.
+    Przekątna AC: spodek wysokości z C leży w odległości 4 + 6 = 10 od punktu A, a wysokość ma długość 3, więc |AC| = √(10² + 3²) = √109 ≈ 10,44.
+    Kontrola: |AC| > 10 oraz |AC| > 3 — przeciwprostokątna jest najdłuższym bokiem. ✓ (Z równoramienności także |BD| = √109.)
+    Odpowiedź: h = 3, m = 10, cos α = 4/5, |AC| = √109.
+  solution_steps:
+  - Poprowadź wysokości z C i D na AB; skrajne odcinki mają długość (14 − 6)/2 = 4.
+  - 'Z twierdzenia Pitagorasa: h = √(5² − 4²) = 3.'
+  - 'Linia środkowa: m = (14 + 6)/2 = 10.'
+  - 'Cosinus kąta ostrego: cos α = 4/5.'
+  - 'Przekątna AC jako przeciwprostokątna trójkąta o przyprostokątnych 10 i 3: |AC| = √109.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wysokosc
+      answer:
+        kind: NUMERIC
+        value: 3.0
+    - name: linia srodkowa
+      answer:
+        kind: NUMERIC
+        value: 10.0
+    - name: cosinus kata
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{4}{5}
+    - name: przekatna AC
+      answer:
+        kind: SYMBOLIC
+        latex: \sqrt{109}
+  checks:
+  - kind: evaluate
+    expr: \sqrt{5^{2}-\left(\frac{14-6}{2}\right)^{2}}
+    part: wysokosc
+  - kind: evaluate
+    expr: \frac{14+6}{2}
+    part: linia srodkowa
+  - kind: evaluate
+    expr: \frac{\frac{14-6}{2}}{5}
+    part: cosinus kata
+  - kind: evaluate
+    expr: \sqrt{\left(6+\frac{14-6}{2}\right)^{2}+\left(\sqrt{5^{2}-4^{2}}\right)^{2}}
+    part: przekatna AC
+  skills:
+  - wysokość trapezu równoramiennego
+  - linia środkowa trapezu
+  - przekątna trapezu
+  - trygonometria kąta ostrego
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 4 parts solved fresh · det: [wysokosc] SymPy solved it fresh: 3.0 vs 3.0 (tol 1e-09) ;
+      [linia srodkowa] SymPy solved it fresh: 10.0 vs 10.0 (tol 1e-09) ; [cosinus kata] SymPy solved it
+      fresh: 0.8 vs 0.8 (tol 1e-09) ; [przekatna AC] SymPy solved it fresh: 10.44030650891055 vs 10.44030650891055
+      (tol 1e-09)'
+- id: g-ex-05
+  slot: EXERCISE
+  ramp_index: 3
+  difficulty: 4
+  exercise_type: angle chasing w trapezie z przekątną
+  statement: W trapezie ABCD (AB ∥ CD, AB jest dłuższą podstawą) przekątna BD dzieli kąt przy wierzchołku
+    B na dwa kąty równe. Wiadomo, że |∡DAB| = 100° oraz |∡ABC| = 76°. Oblicz miary kątów ∡ADC i ∡BCD,
+    wyznacz miary kątów trójkąta ABD oraz trójkąta BCD, a następnie uzasadnij, że |CB| = |CD|.
+  statement_latex: \left|\measuredangle ADC\right| = 180^\circ - 100^\circ,\qquad \left|\measuredangle
+    DBC\right| = \frac{76^\circ}{2}
+  solution: |-
+    Krok 1. Kąty przy ramieniu AD sumują się do 180°: |∡ADC| = 180° − 100° = 80°.
+    Kąty przy ramieniu BC: |∡BCD| = 180° − 76° = 104°.
+    Kontrola: 100° + 76° + 104° + 80° = 360°. ✓
+    Krok 2. BD jest dwusieczną kąta B, więc |∡ABD| = |∡DBC| = 76°/2 = 38°.
+    Krok 3. W trójkącie ABD: |∡ADB| = 180° − 100° − 38° = 42°. Kąty trójkąta ABD to 100°, 38°, 42°.
+    Krok 4. AB ∥ CD, a BD jest sieczną, więc kąty ∡ABD i ∡BDC są naprzemianległe wewnętrzne: |∡BDC| = 38°.
+    Kąty trójkąta BCD: |∡DBC| = 38°, |∡BDC| = 38°, |∡BCD| = 104°; suma 180°. ✓
+    Kontrola: |∡ADC| = |∡ADB| + |∡BDC| = 42° + 38° = 80°. ✓
+    Krok 5. W trójkącie BCD dwa kąty są równe (po 38°), więc trójkąt ten jest równoramienny; naprzeciw kąta ∡DBC leży bok CD, a naprzeciw kąta ∡BDC leży bok CB, zatem |CB| = |CD|.
+  solution_steps:
+  - 'Z warunku dla kątów przy ramieniu AD: |∡ADC| = 180° − 100° = 80°.'
+  - 'Z warunku dla kątów przy ramieniu BC: |∡BCD| = 180° − 76° = 104°.'
+  - 'Z dwusiecznej: |∡ABD| = |∡DBC| = 38°.'
+  - 'W trójkącie ABD: |∡ADB| = 180° − 100° − 38° = 42°.'
+  - 'Z kątów naprzemianległych przy AB ∥ CD: |∡BDC| = |∡ABD| = 38°; kąty trójkąta BCD to 38°, 38°, 104°.'
+  - Trójkąt BCD ma dwa kąty równe, więc jest równoramienny, skąd |CB| = |CD|.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: kat ADC
+      answer:
+        kind: NUMERIC
+        value: 80.0
+    - name: kat BCD
+      answer:
+        kind: NUMERIC
+        value: 104.0
+    - name: kat ADB
+      answer:
+        kind: NUMERIC
+        value: 42.0
+    - name: katy trojkata ABD
+      answer:
+        kind: TUPLE
+        items:
+        - '100'
+        - '38'
+        - '42'
+    - name: katy trojkata BCD
+      answer:
+        kind: TUPLE
+        items:
+        - '38'
+        - '38'
+        - '104'
+    - name: uzasadnienie CB = CD
+      answer:
+        kind: NOT_MACHINE_CHECKABLE
+        reason: 'Należy wykazać, że |∡BDC| = |∡ABD| = 38° (kąty naprzemianległe przy AB ∥ CD), zatem trójkąt
+          BCD ma dwa kąty po 38°, jest równoramienny i boki leżące naprzeciw tych kątów są równe: |CB|
+          = |CD|.'
+  checks:
+  - kind: evaluate
+    expr: 180 - 100
+    part: kat ADC
+  - kind: evaluate
+    expr: 180 - 76
+    part: kat BCD
+  - kind: evaluate
+    expr: 180 - 100 - \frac{76}{2}
+    part: kat ADB
+  skills:
+  - kąty przy ramieniu trapezu
+  - kąty naprzemianległe przy przekątnej
+  - suma kątów trójkąta
+  - rozpoznawanie trójkąta równoramiennego
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'part(s) need a human: uzasadnienie CB = CD · 3/5 other parts solved fresh'
+- id: g-ex-t00
+  slot: EXERCISE
+  ramp_index: 6
+  difficulty: 4
+  exercise_type: obliczeniowe (rozwiązywanie trapezu przez dorysowanie wysokości)
+  statement: W trapezie równoramiennym ABCD podstawy AB i CD są równoległe, przy czym |AB| = 14, |CD|
+    = 4, a ramiona mają długości |AD| = |BC| = 13. Oblicz wysokość tego trapezu, długość przekątnej AC
+    oraz sinus kąta ostrego przy podstawie AB. Zapisz obliczenia.
+  statement_latex: '|AB|=14,\quad |CD|=4,\quad |AD|=|BC|=13,\quad h^{2}+\left(\frac{14-4}{2}\right)^{2}=13^{2}'
+  solution: |-
+    Prowadzimy wysokości z wierzchołków D i C na podstawę AB; ich spodki oznaczmy odpowiednio E i F. Ponieważ trapez jest równoramienny, odcinki skrajne mają równe długości:
+    |AE| = |FB| = \frac{|AB|-|CD|}{2} = \frac{14-4}{2} = 5, a odcinek środkowy |EF| = |CD| = 4.
+
+    Wysokość. W trójkącie prostokątnym AED o przeciwprostokątnej |AD| = 13 i przyprostokątnej |AE| = 5 mamy
+    h^{2} = 13^{2} - 5^{2} = 169 - 25 = 144, więc h = 12.
+
+    Przekątna AC. Spodek F wysokości poprowadzonej z C leży w odległości |AF| = |AE| + |EF| = 5 + 4 = 9 od punktu A. W trójkącie prostokątnym AFC o przyprostokątnych 9 i 12 otrzymujemy
+    |AC| = \sqrt{9^{2}+12^{2}} = \sqrt{81+144} = \sqrt{225} = 15.
+    (Ponieważ trapez jest równoramienny, także |BD| = 15.)
+
+    Sinus kąta ostrego. Kąt ostry przy podstawie AB to kąt DAE w trójkącie prostokątnym AED, więc
+    \sin\alpha = \frac{h}{|AD|} = \frac{12}{13}.
+
+    Kontrola: 12 < 13 oraz 15 > 12 i 15 > 9 — przekątna jest dłuższa od każdej z przyprostokątnych. ✓
+
+    Odpowiedź: h = 12, |AC| = 15, \sin\alpha = \frac{12}{13} (czyli \alpha \approx 67^{\circ}).
+  solution_steps:
+  - 'Poprowadź wysokości z D i C na AB i oblicz odcinki skrajne: (14 − 4)/2 = 5.'
+  - 'Z twierdzenia Pitagorasa: h² = 13² − 5² = 144, więc h = 12.'
+  - Zauważ, że spodek wysokości z C leży w odległości 5 + 4 = 9 od A.
+  - 'Oblicz przekątną: |AC| = √(9² + 12²) = 15.'
+  - 'Oblicz sin kąta ostrego przy AB: sin α = 12/13.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wysokosc
+      answer:
+        kind: NUMERIC
+        value: 12.0
+    - name: AC
+      answer:
+        kind: NUMERIC
+        value: 15.0
+    - name: sin_alfa
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{12}{13}
+  checks:
+  - kind: evaluate
+    expr: \sqrt{13^{2}-\left(\frac{14-4}{2}\right)^{2}}
+    part: wysokosc
+  - kind: evaluate
+    expr: \sqrt{\left(4+\frac{14-4}{2}\right)^{2}+\left(\sqrt{13^{2}-5^{2}}\right)^{2}}
+    part: AC
+  - kind: evaluate
+    expr: \frac{\sqrt{13^{2}-5^{2}}}{13}
+    part: sin_alfa
+  skills:
+  - rzuty ramion na dłuższą podstawę trapezu równoramiennego
+  - twierdzenie Pitagorasa
+  - długość przekątnej trapezu
+  - funkcje trygonometryczne kąta ostrego
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [wysokosc] SymPy solved it fresh: 12.0 vs 12.0 (tol 1e-09)
+      ; [AC] SymPy solved it fresh: 15.0 vs 15.0 (tol 1e-09) ; [sin_alfa] SymPy solved it fresh: 0.9230769230769231
+      vs 0.9230769230769231 (tol 1e-09)'
+- id: g-ex-t01
+  slot: EXERCISE
+  ramp_index: 7
+  difficulty: 4
+  exercise_type: obliczeniowe (przekątne rombu)
+  statement: W rombie ABCD przekątne AC i BD przecinają się w punkcie S, przy czym |AC| = 24 oraz |BD|
+    = 10. Oblicz długość boku rombu, jego pole, tangens kąta SAB (czyli kąta między przekątną AC a bokiem
+    AB) oraz wysokość tego rombu. Zapisz obliczenia.
+  statement_latex: \left(\frac{24}{2}\right)^{2}+\left(\frac{10}{2}\right)^{2}=a^{2},\qquad P=\frac{1}{2}\cdot
+    24\cdot 10,\qquad \operatorname{tg}\left|\measuredangle SAB\right|=\frac{\frac{10}{2}}{\frac{24}{2}}
+  solution: |-
+    Przekątne rombu są prostopadłe i dzielą się na połowy, więc |AS| = \frac{24}{2} = 12 oraz |BS| = \frac{10}{2} = 5, a trójkąt ABS jest prostokątny o kącie prostym przy S.
+
+    Bok rombu. Z twierdzenia Pitagorasa:
+    a^{2} = 12^{2}+5^{2} = 144+25 = 169, więc a = |AB| = 13.
+
+    Pole. Przekątne są prostopadłe, więc wolno użyć wzoru
+    P = \frac{1}{2}\cdot 24\cdot 10 = 120.
+
+    Tangens kąta SAB. W trójkącie prostokątnym ABS naprzeciw kąta SAB leży przyprostokątna |BS| = 5, a przy nim leży |AS| = 12, zatem
+    \operatorname{tg}\left|\measuredangle SAB\right| = \frac{5}{12}.
+    (Zauważ, że kąt ten jest połową kąta BAD rombu, bo przekątna AC jest dwusieczną kąta A.)
+
+    Wysokość rombu. Romb jest równoległobokiem, więc P = a\cdot h, skąd
+    h = \frac{120}{13} \approx 9{,}23.
+
+    Kontrola: h < a = 13 ✓ oraz \frac{5}{12} < 1, czyli kąt SAB < 45^{\circ} — zgodnie z tym, że AC jest dłuższą przekątną. ✓
+
+    Odpowiedź: a = 13, P = 120, \operatorname{tg}\left|\measuredangle SAB\right| = \frac{5}{12}, h = \frac{120}{13}.
+  solution_steps:
+  - 'Zapisz połówki przekątnych: |AS| = 12, |BS| = 5, kąt ASB prosty.'
+  - 'Z twierdzenia Pitagorasa: a² = 12² + 5² = 169, więc a = 13.'
+  - 'Oblicz pole: P = ½·24·10 = 120.'
+  - 'W trójkącie ABS: tg |∡SAB| = 5/12.'
+  - 'Z P = a·h wyznacz wysokość: h = 120/13.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: bok
+      answer:
+        kind: NUMERIC
+        value: 13.0
+    - name: pole
+      answer:
+        kind: NUMERIC
+        value: 120.0
+    - name: tg_SAB
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{5}{12}
+    - name: wysokosc
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{120}{13}
+  checks:
+  - kind: evaluate
+    expr: \sqrt{\left(\frac{24}{2}\right)^{2}+\left(\frac{10}{2}\right)^{2}}
+    part: bok
+  - kind: evaluate
+    expr: \frac{1}{2}\cdot 24\cdot 10
+    part: pole
+  - kind: evaluate
+    expr: \frac{\frac{10}{2}}{\frac{24}{2}}
+    part: tg_SAB
+  - kind: evaluate
+    expr: \frac{\frac{1}{2}\cdot 24\cdot 10}{\sqrt{\left(\frac{24}{2}\right)^{2}+\left(\frac{10}{2}\right)^{2}}}
+    part: wysokosc
+  skills:
+  - związek boku i przekątnych rombu
+  - pole rombu z przekątnych
+  - kąt między przekątną a bokiem
+  - wysokość równoległoboku z pola
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 4 parts solved fresh · det: [bok] SymPy solved it fresh: 13.0 vs 13.0 (tol 1e-09) ; [pole]
+      SymPy solved it fresh: 120.0 vs 120.0 (tol 1e-09) ; [tg_SAB] SymPy solved it fresh: 0.4166666666666667
+      vs 0.4166666666666667 (tol 1e-09) ; [wysokosc] SymPy solved it fresh: 9.23076923076923 vs 9.23076923076923
+      (tol 1e-09)'
+- id: g-cm-06
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: demonstracja błędu — przekątne równoległoboku
+  statement: 'W równoległoboku ABCD boki mają długości |AB| = 8 i |AD| = 6, a przekątna AC ma długość
+    12. Uczeń stwierdził: „przekątne równoległoboku są równe, więc |BD| = |AC| = 12”. Wyjaśnij, dlaczego
+    to rozumowanie jest błędne, i oblicz rzeczywistą długość przekątnej BD.'
+  statement_latex: \left|BD\right| = \sqrt{2\cdot\left(8^{2}+6^{2}\right)-12^{2}}
+  solution: |-
+    Błędne rozumowanie: „przekątne dzielą się na połowy i figura wygląda symetrycznie, więc |BD| = |AC| = 12” — odpowiedź błędna: 12.
+    Gdzie tkwi błąd: w równoległoboku przekątne jedynie dzielą się na połowy. Równość przekątnych charakteryzuje prostokąt (i kwadrat) oraz trapez równoramienny — w „skośnym” równoległoboku przekątna leżąca naprzeciw kąta rozwartego jest dłuższa od drugiej.
+    Poprawne rozwiązanie: korzystamy z reguły równoległoboku d₁² + d₂² = 2(a² + b²):
+    12² + |BD|² = 2·(8² + 6²) = 2·100 = 200,
+    |BD|² = 200 − 144 = 56,
+    |BD| = √56 = 2√14 ≈ 7,48.
+    Kontrola sensowności: 2√14 ≈ 7,5 < 12, czyli przekątne są różne — 12 leży naprzeciw kąta rozwartego, a krótsza naprzeciw ostrego. ✓
+    Odpowiedź: |BD| = 2√14.
+  solution_steps:
+  - Zauważ, że z podziału przekątnych na połowy NIE wynika ich równość — to własność prostokąta.
+  - 'Zastosuj regułę równoległoboku: d₁² + d₂² = 2(a² + b²).'
+  - 'Podstaw dane: 144 + |BD|² = 2·(64 + 36) = 200.'
+  - Oblicz |BD|² = 56, czyli |BD| = 2√14 ≈ 7,48.
+  - 'Sprawdź: przekątne są różne, dłuższa leży naprzeciw kąta rozwartego.'
+  answer:
+    kind: SYMBOLIC
+    latex: 2\sqrt{14}
+  checks:
+  - kind: evaluate
+    expr: \sqrt{2\cdot\left(8^{2}+6^{2}\right)-12^{2}}
+  skills:
+  - reguła równoległoboku
+  - odróżnianie równoległoboku od prostokąta
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 7.483314773547883 vs 7.483314773547883 (tol 1e-09)'
+- id: g-cm-07
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: demonstracja błędu — prostopadłość przekątnych
+  statement: Przekątne równoległoboku ABCD mają długości 10 i 8, a kąt między nimi ma miarę 60°. Uczeń
+    obliczył pole tego równoległoboku ze wzoru P = ½·e·f i otrzymał 40. Wyjaśnij, dlaczego jego rachunek
+    jest błędny, i oblicz poprawnie pole tego równoległoboku.
+  statement_latex: P = 4\cdot\frac{1}{2}\cdot 5\cdot 4\cdot\sin 60^\circ = \frac{1}{2}\cdot 10\cdot 8\cdot\frac{\sqrt{3}}{2}
+  solution: |-
+    Błędne rozumowanie: „przekątne równoległoboku są prostopadłe, więc P = ½·e·f = ½·10·8 = 40” — odpowiedź błędna: 40.
+    Gdzie tkwi błąd: wzór P = ½·e·f wolno stosować tylko wtedy, gdy przekątne są PROSTOPADŁE (romb, kwadrat, deltoid). W treści podano, że kąt między przekątnymi ma 60°, więc prostopadłości nie ma — ten równoległobok nie jest rombem.
+    Poprawne rozwiązanie: przekątne dzielą się na połowy, więc powstają cztery trójkąty o bokach 10/2 = 5 i 8/2 = 4 oraz kącie między nimi 60° lub 120° (sin 60° = sin 120° = √3/2). Pole każdego z nich:
+    P₁ = ½·5·4·sin 60° = 10·(√3/2) = 5√3.
+    Całe pole: P = 4·5√3 = 20√3 ≈ 34,64.
+    Równoważnie: P = ½·e·f·sin 60° = ½·10·8·(√3/2) = 20√3.
+    Kontrola: 20√3 ≈ 34,6 < 40 — pole jest mniejsze niż przy prostopadłych przekątnych, bo sin 60° < 1. ✓
+    Odpowiedź: P = 20√3.
+  solution_steps:
+  - Zauważ, że wzór P = ½·e·f wymaga prostopadłości przekątnych — tu kąt między nimi ma 60°.
+  - 'Przekątne dzielą się na połowy: powstają cztery trójkąty o bokach 5 i 4.'
+  - 'Pole jednego trójkąta: ½·5·4·sin 60° = 5√3.'
+  - 'Pole równoległoboku: P = 4·5√3 = 20√3 ≈ 34,64.'
+  answer:
+    kind: SYMBOLIC
+    latex: 20\sqrt{3}
+  checks:
+  - kind: evaluate
+    expr: \frac{1}{2}\cdot 10\cdot 8\cdot\frac{\sqrt{3}}{2}
+  skills:
+  - pole przez przekątne tylko przy prostopadłości
+  - pole trójkąta P = ½ab sin γ
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 34.64101615137755 vs 34.64101615137755 (tol 1e-09)'
+- id: g-cm-08
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: demonstracja błędu — przekątna prostokąta a kąt prosty
+  statement: 'Dany jest prostokąt ABCD, w którym |AB| = 12 oraz |BC| = 12\sqrt{3}. Uczeń napisał: „przekątna
+    AC dzieli kąt prosty przy wierzchołku A na dwa kąty po 45°”. Wyjaśnij, dlaczego jest to błędne, a
+    następnie oblicz miary kątów ∡CAB i ∡CAD oraz długość przekątnej AC.'
+  statement_latex: \operatorname{tg}\left|\measuredangle CAB\right| = \frac{12\sqrt{3}}{12} = \sqrt{3},\qquad
+    \left|AC\right| = \sqrt{12^{2}+\left(12\sqrt{3}\right)^{2}}
+  solution: |-
+    Błędne rozumowanie: „kąt przy A ma 90°, a przekątna przechodzi przez środek prostokąta, więc dzieli ten kąt na połowy: |∡CAB| = |∡CAD| = 45°” — odpowiedź błędna: 45° i 45°.
+    Gdzie tkwi błąd: przekątna jest dwusieczną kąta prostego TYLKO w kwadracie, bo tylko wtedy sąsiednie boki są równe. Tutaj 12 ≠ 12√3, więc kąty są różne.
+    Poprawne rozwiązanie: w trójkącie prostokątnym ABC (kąt prosty przy B):
+    tg |∡CAB| = |BC| / |AB| = 12√3 / 12 = √3, więc |∡CAB| = 60°.
+    Stąd |∡CAD| = 90° − 60° = 30°.
+    Długość przekątnej: |AC| = √(12² + (12√3)²) = √(144 + 432) = √576 = 24.
+    Kontrola: 60° + 30° = 90° ✓, a mniejszy kąt (30°) przekątna tworzy z bokiem dłuższym BC — zgodnie z regułą. ✓
+    Odpowiedź: |∡CAB| = 60°, |∡CAD| = 30°, |AC| = 24.
+  solution_steps:
+  - Zauważ, że dwusieczna kąta prostego to przekątna tylko w kwadracie (a = b); tu 12 ≠ 12√3.
+  - Oblicz tg |∡CAB| = 12√3/12 = √3, więc |∡CAB| = 60°.
+  - Wyznacz |∡CAD| = 90° − 60° = 30°.
+  - Oblicz |AC| = √(144 + 432) = 24.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: kat CAB
+      answer:
+        kind: NUMERIC
+        value: 60.0
+    - name: kat CAD
+      answer:
+        kind: NUMERIC
+        value: 30.0
+    - name: dlugosc AC
+      answer:
+        kind: NUMERIC
+        value: 24.0
+  checks:
+  - kind: evaluate
+    expr: \sqrt{12^{2}+\left(12\sqrt{3}\right)^{2}}
+    part: dlugosc AC
+  skills:
+  - kąt między przekątną a bokiem prostokąta
+  - tangens kąta ostrego
+  - przekątna prostokąta
+  verification:
+    checkability: REFERENCE_CALL
+    note: '3 parts matched · det: [dlugosc AC] SymPy solved it fresh: 24.0 vs 24.0 (tol 1e-09)'
+- id: g-cm-09
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: demonstracja błędu — kąty w trapezie
+  statement: W trapezie ABCD, w którym AB ∥ CD, dane są |∡DAB| = 65° oraz |∡BCD| = 100°. Uczeń stwierdził,
+    że skoro kąty A i B leżą przy tej samej podstawie AB, to |∡ABC| = |∡DAB| = 65°. Wyjaśnij, dlaczego
+    to rozumowanie jest błędne, i oblicz poprawnie miary kątów ∡ABC oraz ∡ADC.
+  statement_latex: \left|\measuredangle ABC\right| = 180^\circ - 100^\circ,\qquad \left|\measuredangle
+    ADC\right| = 180^\circ - 65^\circ
+  solution: |-
+    Błędne rozumowanie: „kąty przy podstawie trapezu są równe, więc |∡ABC| = 65°, a wtedy |∡ADC| = 360° − 65° − 65° − 100° = 130°” — odpowiedzi błędne: 65° i 130°.
+    Gdzie tkwi błąd: równość kątów przy każdej podstawie zachodzi TYLKO w trapezie równoramiennym, a w treści nie ma informacji o równych ramionach. W dowolnym trapezie pewna jest jedynie zależność: kąty przy tym samym ramieniu sumują się do 180°. Sprawdzenie ujawnia sprzeczność: przy ramieniu BC otrzymalibyśmy 65° + 100° = 165° ≠ 180°.
+    Poprawne rozwiązanie: kąty ∡ABC i ∡BCD leżą przy ramieniu BC, więc |∡ABC| = 180° − 100° = 80°.
+    Kąty ∡DAB i ∡ADC leżą przy ramieniu AD, więc |∡ADC| = 180° − 65° = 115°.
+    Kontrola: 65° + 80° + 100° + 115° = 360°. ✓
+    Odpowiedź: |∡ABC| = 80°, |∡ADC| = 115°.
+  solution_steps:
+  - Zauważ, że równość kątów przy podstawie zachodzi tylko w trapezie równoramiennym.
+  - 'Zastosuj poprawną zależność dla ramienia BC: |∡ABC| = 180° − 100° = 80°.'
+  - 'Zastosuj zależność dla ramienia AD: |∡ADC| = 180° − 65° = 115°.'
+  - 'Sprawdź sumę kątów czworokąta: 65° + 80° + 100° + 115° = 360°.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: kat ABC
+      answer:
+        kind: NUMERIC
+        value: 80.0
+    - name: kat ADC
+      answer:
+        kind: NUMERIC
+        value: 115.0
+  checks:
+  - kind: evaluate
+    expr: 180 - 100
+    part: kat ABC
+  - kind: evaluate
+    expr: 180 - 65
+    part: kat ADC
+  skills:
+  - kąty przy ramieniu trapezu
+  - odróżnianie trapezu równoramiennego od dowolnego
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [kat ABC] SymPy solved it fresh: 80.0 vs 80.0 (tol 1e-09) ;
+      [kat ADC] SymPy solved it fresh: 115.0 vs 115.0 (tol 1e-09)'
+- id: g-cm-10
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: demonstracja błędu — kąty przy ramieniu a kąty przy podstawie
+  statement: 'W trapezie ABCD (AB ∥ CD) miary kątów wewnętrznych wyrażają się wzorami: |∡DAB| = 2x + 10°,
+    |∡ABC| = x + 20°, |∡BCD| = 3x. Uczeń ułożył równanie (2x + 10°) + (x + 20°) = 180°, bo „kąty A i B
+    leżą przy podstawie AB”. Wyjaśnij, dlaczego to równanie jest błędne, i wyznacz poprawnie x oraz miary
+    wszystkich czterech kątów trapezu.'
+  statement_latex: \left(x+20\right)+3x = 180
+  solution: |-
+    Błędne rozumowanie: uczeń pisze (2x + 10) + (x + 20) = 180, czyli 3x + 30 = 180, x = 50°, i otrzymuje |∡DAB| = 110°, |∡ABC| = 70°, |∡BCD| = 150°. Wtedy jednak przy ramieniu BC mamy 70° + 150° = 220° ≠ 180° — sprzeczność, więc wynik jest błędny.
+    Gdzie tkwi błąd: do 180° sumują się kąty leżące przy tym samym RAMIENIU, a nie przy tej samej podstawie. Dla AB ∥ CD są to pary: |∡DAB| + |∡ADC| = 180° (ramię AD) oraz |∡ABC| + |∡BCD| = 180° (ramię BC).
+    Poprawne rozwiązanie: (x + 20) + 3x = 180, czyli 4x = 160, x = 40°.
+    Stąd |∡DAB| = 2·40° + 10° = 90°, |∡ABC| = 40° + 20° = 60°, |∡BCD| = 3·40° = 120°, a |∡ADC| = 180° − 90° = 90°.
+    Kontrola: 90° + 60° + 120° + 90° = 360° ✓ oraz 60° + 120° = 180° przy ramieniu BC ✓ (trapez jest prostokątny).
+    Odpowiedź: x = 40°, kąty: 90°, 60°, 120°, 90°.
+  solution_steps:
+  - 'Wskaż pary kątów przy ramionach: A i D (ramię AD) oraz B i C (ramię BC).'
+  - 'Ułóż poprawne równanie: (x + 20) + 3x = 180.'
+  - 'Rozwiąż: 4x = 160, x = 40°.'
+  - 'Oblicz kąty: |∡DAB| = 90°, |∡ABC| = 60°, |∡BCD| = 120°, |∡ADC| = 180° − 90° = 90°.'
+  - Sprawdź sumę 360° i warunek 180° przy każdym ramieniu.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: x
+      answer:
+        kind: NUMERIC
+        value: 40.0
+    - name: kat DAB
+      answer:
+        kind: NUMERIC
+        value: 90.0
+    - name: kat ABC
+      answer:
+        kind: NUMERIC
+        value: 60.0
+    - name: kat BCD
+      answer:
+        kind: NUMERIC
+        value: 120.0
+    - name: kat ADC
+      answer:
+        kind: NUMERIC
+        value: 90.0
+  checks:
+  - kind: solve_equation
+    expr: \left(x+20\right)+3\cdot x = 180
+    part: x
+  - kind: evaluate
+    expr: 2\cdot 40 + 10
+    part: kat DAB
+  - kind: evaluate
+    expr: 40 + 20
+    part: kat ABC
+  - kind: evaluate
+    expr: 3\cdot 40
+    part: kat BCD
+  - kind: evaluate
+    expr: 180 - \left(2\cdot 40 + 10\right)
+    part: kat ADC
+  skills:
+  - układanie równania z kątami trapezu
+  - kąty przy tym samym ramieniu sumują się do 180°
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 5 parts solved fresh · det: [x] SymPy solved it fresh: 40.0 vs 40.0 (tol 1e-09) ; [kat
+      DAB] SymPy solved it fresh: 90.0 vs 90.0 (tol 1e-09) ; [kat ABC] SymPy solved it fresh: 60.0 vs
+      60.0 (tol 1e-09) ; [kat BCD] SymPy solved it fresh: 120.0 vs 120.0 (tol 1e-09) ; [kat ADC] SymPy
+      solved it fresh: 90.0 vs 90.0 (tol 1e-09)'
+- id: g-ch-t02
+  slot: CHALLENGE
+  ramp_index: 0
+  difficulty: 4
+  exercise_type: zadanie problemowe (przekątne prostokąta, wzór skróconego mnożenia)
+  statement: Przekątne prostokąta ABCD przecinają się w punkcie S, przy czym |AS| = 5. Obwód tego prostokąta
+    jest równy 28. Oblicz pole prostokąta ABCD. Zapisz obliczenia.
+  statement_latex: a+b=\frac{28}{2},\qquad a^{2}+b^{2}=\left(2\cdot 5\right)^{2},\qquad P=a\cdot b
+  solution: |-
+    Oznaczmy |AB| = a, |BC| = b.
+
+    Krok 1. W prostokącie przekątne są równe i dzielą się na połowy, więc |AC| = |BD| = 2\cdot|AS| = 2\cdot 5 = 10.
+
+    Krok 2. Z obwodu: 2a+2b = 28, czyli a+b = 14.
+
+    Krok 3. Trójkąt ABC jest prostokątny (kąt przy B jest prosty), więc z twierdzenia Pitagorasa
+    a^{2}+b^{2} = 10^{2} = 100.
+
+    Krok 4. Nie musimy wyznaczać osobno a i b. Korzystamy ze wzoru skróconego mnożenia:
+    \left(a+b\right)^{2} = a^{2}+2ab+b^{2},
+    14^{2} = 100 + 2ab,
+    196 - 100 = 2ab,
+    ab = \frac{96}{2} = 48.
+
+    Zatem P = a\cdot b = 48.
+
+    Sprawdzenie: a+b = 14 i ab = 48 dają boki 6 i 8; wtedy \sqrt{6^{2}+8^{2}} = 10 ✓ oraz obwód 2\cdot(6+8) = 28 ✓.
+
+    Odpowiedź: pole prostokąta ABCD jest równe 48.
+  solution_steps:
+  - 'Wprowadź oznaczenia boków: |AB| = a, |BC| = b.'
+  - 'Z własności przekątnych prostokąta: przekątna d = 2·|AS| = 10.'
+  - 'Z obwodu: a + b = 14; z twierdzenia Pitagorasa: a² + b² = 100.'
+  - 'Podnieś a + b = 14 do kwadratu: 196 = 100 + 2ab, więc ab = 48.'
+  - 'Pole P = ab = 48 (kontrola: boki 6 i 8).'
+  answer:
+    kind: NUMERIC
+    value: 48.0
+  checks:
+  - kind: evaluate
+    expr: \frac{\left(\frac{28}{2}\right)^{2}-\left(2\cdot 5\right)^{2}}{2}
+  skills:
+  - własności przekątnych prostokąta
+  - wprowadzenie zmiennych do opisu boków
+  - wzór (a+b)² = a² + 2ab + b²
+  - twierdzenie Pitagorasa
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 48.0 vs 48.0 (tol 1e-09)'
+- id: g-ch-t03
+  slot: CHALLENGE
+  ramp_index: 1
+  difficulty: 5
+  exercise_type: zadanie problemowe (romb — przekątne z boku i pola, filtr kąta ostrego)
+  statement: Romb ABCD ma bok długości 10, a jego pole jest równe 96. Kąt BAD tego rombu jest kątem ostrym.
+    Oblicz długości przekątnych AC i BD oraz tangens kąta, jaki przekątna AC tworzy z bokiem AB. Zapisz
+    obliczenia.
+  statement_latex: \left(\frac{e}{2}\right)^{2}+\left(\frac{f}{2}\right)^{2}=10^{2},\qquad \frac{1}{2}\cdot
+    e\cdot f=96
+  solution: |-
+    Oznaczmy e = |AC| oraz f = |BD|.
+
+    Krok 1. Przekątne rombu są prostopadłe i dzielą się na połowy, więc
+    \left(\frac{e}{2}\right)^{2}+\left(\frac{f}{2}\right)^{2} = 10^{2}, czyli e^{2}+f^{2} = 4\cdot 100 = 400.
+
+    Krok 2. Z pola: \frac{1}{2}\cdot e\cdot f = 96, czyli e\cdot f = 192.
+
+    Krok 3. Stosujemy wzory skróconego mnożenia:
+    \left(e+f\right)^{2} = 400+2\cdot 192 = 784, więc e+f = 28 (długości są dodatnie),
+    \left(e-f\right)^{2} = 400-2\cdot 192 = 16, więc |e-f| = 4.
+    Zatem jedna przekątna ma długość \frac{28+4}{2} = 16, a druga \frac{28-4}{2} = 12.
+
+    Krok 4. Która jest która? Przekątna AC jest dwusieczną kąta BAD, więc w trójkącie prostokątnym ABS (S — punkt przecięcia przekątnych) kąt SAB ma miarę \frac{1}{2}\left|\measuredangle BAD\right| < 45^{\circ}. Naprzeciw mniejszego kąta ostrego leży krótsza przyprostokątna, więc |BS| < |AS|, czyli \frac{f}{2} < \frac{e}{2}. Stąd
+    |AC| = e = 16 oraz |BD| = f = 12.
+
+    Krok 5. Tangens kąta między AC a AB:
+    \operatorname{tg}\left|\measuredangle SAB\right| = \frac{\frac{12}{2}}{\frac{16}{2}} = \frac{6}{8} = \frac{3}{4}.
+
+    Sprawdzenie: 8^{2}+6^{2} = 100 ✓, \frac{1}{2}\cdot 16\cdot 12 = 96 ✓, a \frac{3}{4} < 1, więc kąt SAB jest mniejszy od 45^{\circ} i kąt BAD jest ostry ✓.
+
+    Odpowiedź: |AC| = 16, |BD| = 12, \operatorname{tg}\left|\measuredangle SAB\right| = \frac{3}{4}.
+  solution_steps:
+  - Oznacz e = |AC|, f = |BD| i zapisz e² + f² = 4·10² = 400 (przekątne prostopadłe, dzielą się na połowy).
+  - Z pola ½·e·f = 96 otrzymaj e·f = 192.
+  - 'Ze wzorów skróconego mnożenia: (e + f)² = 784 → e + f = 28 oraz (e − f)² = 16 → |e − f| = 4.'
+  - 'Wyznacz obie liczby: 16 i 12.'
+  - 'Ponieważ kąt BAD jest ostry, a AC jest jego dwusieczną, kąt SAB < 45°, więc AC jest dłuższą przekątną:
+    |AC| = 16, |BD| = 12.'
+  - Oblicz tg |∡SAB| = (12/2)/(16/2) = 3/4.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: AC
+      answer:
+        kind: NUMERIC
+        value: 16.0
+    - name: BD
+      answer:
+        kind: NUMERIC
+        value: 12.0
+    - name: tg_kata
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{3}{4}
+  checks:
+  - kind: evaluate
+    expr: \frac{\sqrt{4\cdot 10^{2}+2\cdot 192}+\sqrt{4\cdot 10^{2}-2\cdot 192}}{2}
+    part: AC
+  - kind: evaluate
+    expr: \frac{\sqrt{4\cdot 10^{2}+2\cdot 192}-\sqrt{4\cdot 10^{2}-2\cdot 192}}{2}
+    part: BD
+  - kind: evaluate
+    expr: \frac{\frac{\sqrt{4\cdot 10^{2}+2\cdot 192}-\sqrt{4\cdot 10^{2}-2\cdot 192}}{2}}{\frac{\sqrt{4\cdot
+      10^{2}+2\cdot 192}+\sqrt{4\cdot 10^{2}-2\cdot 192}}{2}}
+    part: tg_kata
+  skills:
+  - związek (e/2)² + (f/2)² = a²
+  - pole rombu z przekątnych
+  - wzory skróconego mnożenia
+  - przekątna rombu jako dwusieczna kąta
+  - wybór właściwego przyporządkowania rozwiązań
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [AC] SymPy solved it fresh: 16.0 vs 16.0 (tol 1e-09) ; [BD]
+      SymPy solved it fresh: 12.0 vs 12.0 (tol 1e-09) ; [tg_kata] SymPy solved it fresh: 0.75 vs 0.75
+      (tol 1e-09)'
+- id: g-ch-t04
+  slot: CHALLENGE
+  ramp_index: 2
+  difficulty: 5
+  exercise_type: zadanie optymalizacyjne z ograniczeniem (pole rombu jako funkcja przekątnej)
+  statement: |-
+    W rombie ABCD suma długości przekątnych AC i BD jest równa 24, a przekątna AC ma długość nie większą niż 10. Przyjmij |AC| = x.
+    a) Wyznacz wzór na pole P tego rombu jako funkcję zmiennej x i podaj dziedzinę tej funkcji.
+    b) Oblicz największe możliwe pole tego rombu oraz długość przekątnej BD, przy której to pole jest osiągane.
+    Zapisz obliczenia.
+  statement_latex: P\left(x\right)=\frac{1}{2}\cdot x\cdot\left(24-x\right)=12x-\frac{1}{2}x^{2},\qquad
+    x\in\left(0,\ 10\right\rangle
+  solution: |-
+    a) Skoro |AC| = x oraz |AC|+|BD| = 24, to |BD| = 24 - x.
+    Przekątne rombu są prostopadłe, więc pole obliczamy ze wzoru P = \frac{1}{2}\cdot e\cdot f:
+    P\left(x\right) = \frac{1}{2}\cdot x\cdot\left(24-x\right) = 12x-\frac{1}{2}x^{2}.
+
+    Dziedzina. Obie przekątne muszą mieć dodatnią długość: x > 0 oraz 24-x > 0, czyli x < 24. Dodatkowo z treści x \le 10. Warunek x \le 10 jest mocniejszy, więc
+    D = \left(0,\ 10\right\rangle.
+
+    b) Funkcja P jest funkcją kwadratową o współczynniku a = -\frac{1}{2} < 0, więc jej wykresem jest parabola o ramionach skierowanych w dół. Pierwsza współrzędna wierzchołka:
+    x_{w} = -\frac{b}{2a} = -\frac{12}{2\cdot\left(-\frac{1}{2}\right)} = 12.
+
+    Wierzchołek nie należy do dziedziny, bo 12 > 10. Na przedziale \left(0,\ 12\right\rangle funkcja jest rosnąca, a \left(0,\ 10\right\rangle \subset \left(0,\ 12\right\rangle, więc największą wartość przyjmuje na prawym końcu dziedziny, czyli dla x = 10:
+    P\left(10\right) = \frac{1}{2}\cdot 10\cdot\left(24-10\right) = \frac{1}{2}\cdot 10\cdot 14 = 70.
+    Wtedy |BD| = 24-10 = 14.
+
+    Sprawdzenie sensowności: dla przekątnych 10 i 14 bok rombu wynosi \sqrt{5^{2}+7^{2}} = \sqrt{74} \approx 8{,}6 — taki romb istnieje; jego dłuższą przekątną jest BD, a warunek |AC| \le 10 jest spełniony z równością. ✓
+
+    Odpowiedź: a) P\left(x\right) = 12x-\frac{1}{2}x^{2} dla x\in\left(0,\ 10\right\rangle; b) największe pole wynosi 70 i jest osiągane dla |BD| = 14.
+  solution_steps:
+  - 'Zapisz drugą przekątną: |BD| = 24 − x.'
+  - 'Zbuduj pole rombu (przekątne prostopadłe): P(x) = ½·x·(24 − x) = 12x − ½x².'
+  - 'Wyznacz dziedzinę: x > 0, 24 − x > 0 oraz x ≤ 10, czyli x ∈ (0, 10⟩.'
+  - 'Wyznacz wierzchołek paraboli: x_w = 12, i stwierdź, że 12 ∉ (0, 10⟩.'
+  - 'Ponieważ na (0, 12⟩ funkcja rośnie, największą wartość osiąga dla x = 10: P(10) = 70.'
+  - 'Oblicz odpowiadającą przekątną: |BD| = 24 − 10 = 14 i sprawdź, że taki romb istnieje (bok √74).'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wzor_pola
+      answer:
+        kind: SYMBOLIC
+        latex: 12x-\frac{1}{2}x^{2}
+    - name: dziedzina
+      answer:
+        kind: INTERVAL
+        lo: '0'
+        hi: '10'
+        hi_open: false
+    - name: pole_max
+      answer:
+        kind: NUMERIC
+        value: 70.0
+    - name: BD
+      answer:
+        kind: NUMERIC
+        value: 14.0
+  checks:
+  - kind: simplify
+    expr: \frac{1}{2}\cdot x\cdot\left(24-x\right)
+    part: wzor_pola
+  - kind: evaluate
+    expr: \frac{1}{2}\cdot 10\cdot\left(24-10\right)
+    part: pole_max
+  - kind: evaluate
+    expr: 24-10
+    part: BD
+  stated_model:
+    variable: x
+    objective_latex: P\left(x\right)=\frac{1}{2}\cdot x\cdot\left(24-x\right)
+    domain_lo: '0'
+    domain_hi: '10'
+    domain_hi_open: false
+    constraint_used: \left|AC\right|+\left|BD\right|=24,\quad \left|AC\right|\le 10
+  skills:
+  - pole rombu z przekątnych
+  - budowa funkcji kwadratowej z warunku geometrycznego
+  - wyznaczanie dziedziny z warunków dodatniości i ograniczenia
+  - monotoniczność paraboli i wierzchołek
+  - sprawdzenie położenia wierzchołka względem dziedziny
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''x'': ''P\\left(x\\right)=\\frac{1}{2}\\cdot
+      x\\cdot\\left(24-x\\right)'') — human review'

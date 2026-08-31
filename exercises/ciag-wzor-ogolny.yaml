@@ -1,0 +1,934 @@
+section: ciag-wzor-ogolny
+name: Ciąg i jego wyrazy; wzór ogólny
+scope: Sequence as a function on the positive integers; computing terms from a general formula; the index-term
+  correspondence.
+requirements:
+- VI.1
+counts:
+  total: 16
+  DETERMINISTIC: 7
+  REFERENCE_CALL: 5
+  NOT_MACHINE_CHECKABLE: 1
+  STATED_MODEL: 3
+exercises:
+- id: g-th-00
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: obliczanie wyrazu ciągu ze wzoru ogólnego
+  statement: Ciąg \left(a_{n}\right) jest określony wzorem a_{n}=4\cdot n-7 dla każdej liczby naturalnej
+    n\geq 1. Oblicz pierwszy wyraz tego ciągu oraz wyraz a_{5}.
+  statement_latex: a_{n}=4\cdot n-7,\qquad n\geq 1
+  solution: |-
+    W miejsce n wstawiamy kolejno podane numery wyrazów.
+    Dla n=1: a_{1}=4\cdot 1-7=4-7=-3.
+    Dla n=5: a_{5}=4\cdot 5-7=20-7=13.
+    Pierwszym wyrazem ciągu jest a_{1} (nie a_{0}), zatem a_{1}=-3 oraz a_{5}=13.
+  solution_steps:
+  - Zapisz wzór ogólny a_{n}=4\cdot n-7.
+  - 'Podstaw n=1: a_{1}=4\cdot 1-7=-3.'
+  - 'Podstaw n=5: a_{5}=4\cdot 5-7=13.'
+  - 'Zapisz odpowiedź: a_{1}=-3, a_{5}=13.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: a_1
+      answer:
+        kind: NUMERIC
+        value: -3.0
+    - name: a_5
+      answer:
+        kind: NUMERIC
+        value: 13.0
+  checks:
+  - kind: evaluate
+    expr: 4\cdot 1-7
+    var: n
+    part: a_1
+  - kind: evaluate
+    expr: 4\cdot 5-7
+    var: n
+    part: a_5
+  skills:
+  - podstawianie liczby do wzoru ogólnego
+  - rozumienie symbolu a_n
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [a_1] SymPy solved it fresh: -3.0 vs -3.0 (tol 1e-09) ; [a_5]
+      SymPy solved it fresh: 13.0 vs 13.0 (tol 1e-09)'
+- id: g-th-01
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: wypisywanie początkowych wyrazów ciągu
+  statement: Ciąg \left(a_{n}\right) jest określony wzorem a_{n}=\left(-1\right)^{n}\cdot\left(2\cdot
+    n+1\right) dla każdej liczby naturalnej n\geq 1. Wypisz trzy początkowe wyrazy tego ciągu.
+  statement_latex: a_{n}=\left(-1\right)^{n}\cdot\left(2\cdot n+1\right),\qquad n\geq 1
+  solution: |-
+    Podstawiamy kolejno n=1, n=2, n=3.
+    n=1: \left(-1\right)^{1}=-1 oraz 2\cdot 1+1=3, więc a_{1}=-1\cdot 3=-3.
+    n=2: \left(-1\right)^{2}=1 oraz 2\cdot 2+1=5, więc a_{2}=1\cdot 5=5.
+    n=3: \left(-1\right)^{3}=-1 oraz 2\cdot 3+1=7, więc a_{3}=-1\cdot 7=-7.
+    Odpowiedź: -3,\ 5,\ -7. Wyrazy o indeksach nieparzystych są ujemne, a o parzystych dodatnie — tak działa czynnik \left(-1\right)^{n}.
+  solution_steps:
+  - Ustal, że ciąg zaczyna się od n=1.
+  - 'Podstaw n=1: a_{1}=\left(-1\right)^{1}\cdot 3=-3.'
+  - 'Podstaw n=2: a_{2}=\left(-1\right)^{2}\cdot 5=5.'
+  - 'Podstaw n=3: a_{3}=\left(-1\right)^{3}\cdot 7=-7.'
+  - 'Zapisz wyrazy w kolejności: -3, 5, -7.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: a_1
+      answer:
+        kind: NUMERIC
+        value: -3.0
+    - name: a_2
+      answer:
+        kind: NUMERIC
+        value: 5.0
+    - name: a_3
+      answer:
+        kind: NUMERIC
+        value: -7.0
+  checks:
+  - kind: evaluate
+    expr: \left(-1\right)^{1}\cdot\left(2\cdot 1+1\right)
+    var: n
+    part: a_1
+  - kind: evaluate
+    expr: \left(-1\right)^{2}\cdot\left(2\cdot 2+1\right)
+    var: n
+    part: a_2
+  - kind: evaluate
+    expr: \left(-1\right)^{3}\cdot\left(2\cdot 3+1\right)
+    var: n
+    part: a_3
+  skills:
+  - podstawianie kolejnych wartości n
+  - działanie czynnika (-1)^n
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [a_1] SymPy solved it fresh: -3.0 vs -3.0 (tol 1e-09) ; [a_2]
+      SymPy solved it fresh: 5.0 vs 5.0 (tol 1e-09) ; [a_3] SymPy solved it fresh: -7.0 vs -7.0 (tol 1e-09)'
+- id: g-th-02
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: obliczanie wyrazu ciągu danego wzorem z ułamkiem
+  statement: Ciąg \left(a_{n}\right) jest określony wzorem a_{n}=\frac{n^{2}+2}{n+1} dla każdej liczby
+    naturalnej n\geq 1. Oblicz wyraz a_{5} i zapisz wynik w postaci ułamka nieskracalnego.
+  statement_latex: a_{n}=\frac{n^{2}+2}{n+1},\qquad n\geq 1
+  solution: |-
+    Podstawiamy n=5 w każdym miejscu, w którym występuje n:
+    a_{5}=\frac{5^{2}+2}{5+1}=\frac{25+2}{6}=\frac{27}{6}=\frac{9}{2}.
+    Odpowiedź: a_{5}=\frac{9}{2}=4{,}5.
+  solution_steps:
+  - 'Wstaw n=5 do licznika: 5^{2}+2=27.'
+  - 'Wstaw n=5 do mianownika: 5+1=6.'
+  - 'Zapisz iloraz: \frac{27}{6}.'
+  - 'Skróć ułamek przez 3: \frac{9}{2}.'
+  answer:
+    kind: NUMERIC
+    value: 4.5
+  checks:
+  - kind: evaluate
+    expr: \frac{5^{2}+2}{5+1}
+    var: n
+  skills:
+  - podstawianie do wzoru z ułamkiem
+  - skracanie ułamka
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 4.5 vs 4.5 (tol 1e-09)'
+- id: g-ex-03
+  slot: EXERCISE
+  ramp_index: 1
+  difficulty: 2
+  exercise_type: obliczanie wyrazów i ich różnicy
+  statement: Ciąg \left(a_{n}\right) jest określony wzorem a_{n}=2^{n}-3\cdot n dla każdej liczby naturalnej
+    n\geq 1. Oblicz wyrazy a_{1} oraz a_{4}, a następnie oblicz różnicę a_{4}-a_{1}.
+  statement_latex: a_{n}=2^{n}-3\cdot n,\qquad n\geq 1
+  solution: |-
+    Podstawiamy kolejno numery wyrazów.
+    a_{1}=2^{1}-3\cdot 1=2-3=-1.
+    a_{4}=2^{4}-3\cdot 4=16-12=4.
+    Różnica: a_{4}-a_{1}=4-\left(-1\right)=5.
+    Odpowiedź: a_{1}=-1, a_{4}=4, a_{4}-a_{1}=5.
+  solution_steps:
+  - 'Podstaw n=1: a_{1}=2^{1}-3\cdot 1=-1.'
+  - 'Podstaw n=4: a_{4}=2^{4}-3\cdot 4=16-12=4.'
+  - 'Oblicz różnicę: 4-\left(-1\right)=5.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: a_1
+      answer:
+        kind: NUMERIC
+        value: -1.0
+    - name: a_4
+      answer:
+        kind: NUMERIC
+        value: 4.0
+    - name: roznica
+      answer:
+        kind: NUMERIC
+        value: 5.0
+  checks:
+  - kind: evaluate
+    expr: 2^{1}-3\cdot 1
+    var: n
+    part: a_1
+  - kind: evaluate
+    expr: 2^{4}-3\cdot 4
+    var: n
+    part: a_4
+  - kind: evaluate
+    expr: \left(2^{4}-3\cdot 4\right)-\left(2^{1}-3\cdot 1\right)
+    var: n
+    part: roznica
+  skills:
+  - potęgowanie przy podstawianiu
+  - porównywanie wyrazów ciągu
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [a_1] SymPy solved it fresh: -1.0 vs -1.0 (tol 1e-09) ; [a_4]
+      SymPy solved it fresh: 4.0 vs 4.0 (tol 1e-09) ; [roznica] SymPy solved it fresh: 5.0 vs 5.0 (tol
+      1e-09)'
+- id: g-ex-04
+  slot: EXERCISE
+  ramp_index: 2
+  difficulty: 3
+  exercise_type: sprawdzanie, czy liczba jest wyrazem ciągu
+  statement: Ciąg \left(a_{n}\right) jest określony wzorem a_{n}=\frac{4\cdot n-3}{n+1} dla każdej liczby
+    naturalnej n\geq 1. a) Oblicz wyraz a_{5}. b) Sprawdź, czy liczba 3 jest wyrazem tego ciągu, a jeśli
+    tak — podaj jego numer. c) Rozstrzygnij, czy liczba 4 jest wyrazem tego ciągu.
+  statement_latex: a_{n}=\frac{4\cdot n-3}{n+1},\qquad n\geq 1
+  solution: |-
+    a) a_{5}=\frac{4\cdot 5-3}{5+1}=\frac{17}{6}.
+    b) Rozwiązujemy równanie \frac{4\cdot n-3}{n+1}=3. Ponieważ dla n\geq 1 mamy n+1\neq 0, mnożymy obie strony przez n+1: 4n-3=3\left(n+1\right), czyli 4n-3=3n+3, stąd n=6. Liczba 6 jest liczbą naturalną dodatnią, więc 3 jest wyrazem ciągu — jest to wyraz a_{6}. Sprawdzenie: a_{6}=\frac{24-3}{7}=\frac{21}{7}=3. ✓
+    c) Rozwiązujemy \frac{4\cdot n-3}{n+1}=4, czyli 4n-3=4n+4, stąd -3=4 — sprzeczność. Równanie nie ma rozwiązań, więc liczba 4 nie jest wyrazem tego ciągu.
+    Odpowiedź: a_{5}=\frac{17}{6}; liczba 3 jest szóstym wyrazem ciągu; liczba 4 nie jest wyrazem ciągu.
+  solution_steps:
+  - 'Podstaw n=5: a_{5}=\frac{17}{6}.'
+  - Ułóż równanie \frac{4\cdot n-3}{n+1}=3 i pomnóż przez n+1.
+  - Rozwiąż 4n-3=3n+3, otrzymując n=6; sprawdź, że 6\in\mathbb{N}_{+}.
+  - Ułóż równanie \frac{4\cdot n-3}{n+1}=4 i doprowadź do sprzeczności -3=4.
+  - Sformułuj odpowiedzi.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: a_5
+      answer:
+        kind: NUMERIC
+        value: 2.8333333333333335
+        tol: 1.0e-06
+    - name: numer wyrazu równego 3
+      answer:
+        kind: NUMERIC
+        value: 6.0
+    - name: czy 4 jest wyrazem ciągu
+      answer:
+        kind: BOOLEAN
+        truth: false
+  checks:
+  - kind: evaluate
+    expr: \frac{4\cdot 5-3}{5+1}
+    var: n
+    part: a_5
+  - kind: solve_equation
+    expr: \frac{4\cdot n-3}{n+1}=3
+    var: n
+    part: numer wyrazu równego 3
+  skills:
+  - obliczanie wyrazu ciągu
+  - rozwiązywanie równania a_n = c
+  - sprawdzanie warunku n ∈ N+
+  verification:
+    checkability: REFERENCE_CALL
+    note: 'could not compare: part disagrees: kind mismatch: answer=NUMERIC reference=BOOLEAN'
+- id: g-ex-05
+  slot: EXERCISE
+  ramp_index: 3
+  difficulty: 4
+  exercise_type: wyznaczanie parametru we wzorze ogólnym
+  statement: Ciąg \left(a_{n}\right) jest określony wzorem a_{n}=3\cdot n^{2}+k\cdot n-4 dla każdej liczby
+    naturalnej n\geq 1, gdzie k jest pewną liczbą rzeczywistą. Wiadomo, że a_{3}=20. a) Wyznacz k. b)
+    Dla znalezionego k wyznacz i uprość różnicę a_{n+1}-a_{n}. c) Rozstrzygnij, czy liczba 0 jest wyrazem
+    tego ciągu.
+  statement_latex: a_{n}=3\cdot n^{2}+k\cdot n-4,\qquad a_{3}=20
+  solution: |-
+    a) Podstawiamy n=3: a_{3}=3\cdot 3^{2}+k\cdot 3-4=27+3k-4=23+3k. Z warunku 23+3k=20 otrzymujemy 3k=-3, czyli k=-1. Wzór ogólny ma postać a_{n}=3\cdot n^{2}-n-4.
+    b) Wstawiamy \left(n+1\right) w miejsce każdego n:
+    a_{n+1}=3\cdot\left(n+1\right)^{2}-\left(n+1\right)-4=3n^{2}+6n+3-n-1-4=3n^{2}+5n-2.
+    Stąd a_{n+1}-a_{n}=\left(3n^{2}+5n-2\right)-\left(3n^{2}-n-4\right)=6n+2.
+    Kontrola: a_{1}=-2, a_{2}=6, różnica 8=6\cdot 1+2. ✓
+    c) Rozwiązujemy równanie 3n^{2}-n-4=0. \Delta=1+48=49, \sqrt{\Delta}=7, więc n=\frac{1-7}{6}=-1 lub n=\frac{1+7}{6}=\frac{4}{3}. Żadna z tych liczb nie jest liczbą naturalną dodatnią, zatem liczba 0 nie jest wyrazem tego ciągu.
+  solution_steps:
+  - 'Podstaw n=3 do wzoru: 23+3k.'
+  - 'Przyrównaj do 20 i rozwiąż: k=-1.'
+  - Zapisz wzór a_{n}=3\cdot n^{2}-n-4.
+  - Wyznacz a_{n+1}=3\cdot\left(n+1\right)^{2}-\left(n+1\right)-4=3n^{2}+5n-2.
+  - 'Odejmij a_{n} i uprość: a_{n+1}-a_{n}=6n+2.'
+  - Rozwiąż 3n^{2}-n-4=0, otrzymując n=-1 i n=\frac{4}{3}; odrzuć oba jako nienależące do \mathbb{N}_{+}.
+  - 'Odpowiedz: liczba 0 nie jest wyrazem ciągu.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: k
+      answer:
+        kind: NUMERIC
+        value: -1.0
+    - name: a_{n+1}-a_n
+      answer:
+        kind: SYMBOLIC
+        latex: 6\cdot n+2
+    - name: czy 0 jest wyrazem ciągu
+      answer:
+        kind: BOOLEAN
+        truth: false
+  checks:
+  - kind: solve_equation
+    expr: 3\cdot 3^{2}+k\cdot 3-4=20
+    var: k
+    part: k
+  - kind: simplify
+    expr: 3\cdot\left(n+1\right)^{2}-\left(n+1\right)-4-\left(3\cdot n^{2}-n-4\right)
+    var: n
+    part: a_{n+1}-a_n
+  skills:
+  - wyznaczanie parametru z warunku o wyrazie
+  - wyznaczanie a_{n+1} i różnicy a_{n+1}-a_n
+  - sprawdzanie warunku n ∈ N+
+  verification:
+    checkability: REFERENCE_CALL
+    note: '3 parts matched · det: [k] SymPy solved it fresh: -1.0 vs -1.0 (tol 1e-09) ; [a_{n+1}-a_n]
+      SymPy solved it fresh: ''6\\cdot n+2'' vs ''6*n + 2'''
+- id: g-ex-t00
+  slot: EXERCISE
+  ramp_index: 6
+  difficulty: 3
+  exercise_type: wyznaczanie parametru we wzorze ogólnym i badanie, czy liczba jest wyrazem ciągu
+  statement: |-
+    Ciąg (a_n) jest określony wzorem a_n = n^2 + k \cdot n - 21 dla każdej liczby naturalnej n \geq 1, gdzie k jest pewną liczbą rzeczywistą. Wiadomo, że a_5 = 9.
+    a) Wyznacz k.
+    b) Rozstrzygnij, czy liczba 51 jest wyrazem tego ciągu, a jeśli tak — podaj numer tego wyrazu.
+    c) Rozstrzygnij, czy liczba (-21) jest wyrazem tego ciągu.
+  statement_latex: a_n = n^2 + k \cdot n - 21,\qquad a_5 = 9
+  solution: |-
+    a) Podstawiamy n = 5 do wzoru ogólnego: a_5 = 5^2 + k \cdot 5 - 21 = 25 + 5k - 21 = 4 + 5k. Z warunku 4 + 5k = 9 otrzymujemy 5k = 5, czyli k = 1. Zatem a_n = n^2 + n - 21.
+    Sprawdzenie: a_5 = 25 + 5 - 21 = 9. ✓
+
+    b) Rozwiązujemy równanie n^2 + n - 21 = 51, czyli n^2 + n - 72 = 0. Wyróżnik: \Delta = 1 + 4 \cdot 72 = 289, \sqrt{\Delta} = 17, więc n = \frac{-1 - 17}{2} = -9 albo n = \frac{-1 + 17}{2} = 8. Liczba -9 nie jest liczbą naturalną dodatnią, więc ją odrzucamy. Pozostaje n = 8, a więc liczba 51 jest ósmym wyrazem ciągu (a_8 = 64 + 8 - 21 = 51 ✓).
+
+    c) Rozwiązujemy równanie n^2 + n - 21 = -21, czyli n^2 + n = 0, stąd n \cdot (n + 1) = 0, więc n = 0 albo n = -1. Żadna z tych liczb nie należy do zbioru liczb naturalnych dodatnich (ciąg zaczyna się od n = 1), zatem liczba -21 nie jest wyrazem tego ciągu.
+  solution_steps:
+  - 'Podstaw n = 5: a_5 = 25 + 5k - 21 = 4 + 5k.'
+  - 'Przyrównaj do 9 i rozwiąż: 5k = 5, czyli k = 1; wzór ogólny to a_n = n^2 + n - 21.'
+  - Ułóż równanie n^2 + n - 21 = 51, czyli n^2 + n - 72 = 0.
+  - Oblicz \Delta = 289, \sqrt{\Delta} = 17 i pierwiastki n = -9 oraz n = 8; odrzuć n = -9.
+  - 'Odpowiedz: 51 jest ósmym wyrazem ciągu.'
+  - Ułóż równanie n^2 + n - 21 = -21, czyli n(n+1) = 0; rozwiązania n = 0 i n = -1 nie są liczbami naturalnymi
+    dodatnimi.
+  - 'Wniosek: liczba -21 nie jest wyrazem ciągu.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: k
+      answer:
+        kind: NUMERIC
+        value: 1.0
+    - name: indeks_51
+      answer:
+        kind: NUMERIC
+        value: 8.0
+    - name: czy_minus21_jest_wyrazem
+      answer:
+        kind: BOOLEAN
+        truth: false
+  checks:
+  - kind: solve_equation
+    expr: 5^2 + 5 \cdot k - 21 = 9
+    var: k
+    part: k
+  - kind: evaluate
+    expr: \frac{-1 + \sqrt{1 + 4 \cdot 72}}{2}
+    var: n
+    part: indeks_51
+  skills:
+  - podstawianie indeksu do wzoru ogólnego
+  - wyznaczanie parametru z równania
+  - rozwiązywanie równania kwadratowego a_n = c
+  - kontrola warunku n ∈ N+
+  verification:
+    checkability: REFERENCE_CALL
+    note: 'could not compare: part disagrees: kind mismatch: answer=NUMERIC reference=MULTIPART'
+- id: g-ex-t01
+  slot: EXERCISE
+  ramp_index: 7
+  difficulty: 4
+  exercise_type: wyrazy o indeksach symbolicznych i różnica kolejnych wyrazów
+  statement: |-
+    Ciąg (a_n) jest określony wzorem a_n = \frac{3n + 2}{n + 1} dla każdej liczby naturalnej n \geq 1.
+    a) Wyznacz i uprość a_{n+1} oraz a_{2n}.
+    b) Oblicz i uprość różnicę a_{n+1} - a_n.
+    c) Uzasadnij, że ciąg (a_n) jest rosnący.
+    d) Rozstrzygnij, czy liczba 3 jest wyrazem tego ciągu.
+  statement_latex: a_n = \frac{3n + 2}{n + 1}
+  solution: |-
+    a) W miejsce KAŻDEGO n wstawiamy wyrażenie w nawiasie.
+    a_{n+1} = \frac{3 \cdot \left(n+1\right) + 2}{\left(n+1\right) + 1} = \frac{3n + 5}{n + 2}.
+    a_{2n} = \frac{3 \cdot \left(2n\right) + 2}{\left(2n\right) + 1} = \frac{6n + 2}{2n + 1}.
+
+    b) a_{n+1} - a_n = \frac{3n+5}{n+2} - \frac{3n+2}{n+1}. Wspólny mianownik: \left(n+1\right)\left(n+2\right).
+    Licznik: \left(3n+5\right)\left(n+1\right) - \left(3n+2\right)\left(n+2\right) = \left(3n^2 + 8n + 5\right) - \left(3n^2 + 8n + 4\right) = 1.
+    Zatem a_{n+1} - a_n = \frac{1}{\left(n+1\right)\left(n+2\right)}.
+
+    c) Dla każdej liczby naturalnej n \geq 1 mamy n + 1 > 0 i n + 2 > 0, więc \frac{1}{\left(n+1\right)\left(n+2\right)} > 0, czyli a_{n+1} - a_n > 0, a stąd a_{n+1} > a_n dla każdego n. Ciąg jest więc rosnący.
+    Kontrola liczbowa: a_1 = \frac{5}{2}, a_2 = \frac{8}{3}, różnica \frac{8}{3} - \frac{5}{2} = \frac{1}{6} = \frac{1}{2 \cdot 3}. ✓
+
+    d) Rozwiązujemy równanie \frac{3n+2}{n+1} = 3. Mnożymy obie strony przez n + 1 > 0: 3n + 2 = 3n + 3, czyli 2 = 3 — sprzeczność. Równanie nie ma rozwiązań, więc liczba 3 nie jest wyrazem tego ciągu.
+  solution_steps:
+  - 'Wstaw (n+1) w miejsce każdego n: a_{n+1} = \frac{3(n+1)+2}{(n+1)+1} = \frac{3n+5}{n+2}.'
+  - 'Wstaw (2n) w miejsce każdego n: a_{2n} = \frac{6n+2}{2n+1}.'
+  - Zapisz różnicę \frac{3n+5}{n+2} - \frac{3n+2}{n+1} i sprowadź do wspólnego mianownika (n+1)(n+2).
+  - 'Rozwiń liczniki: (3n^2+8n+5) - (3n^2+8n+4) = 1, czyli a_{n+1} - a_n = \frac{1}{(n+1)(n+2)}.'
+  - Zauważ, że dla n \geq 1 mianownik jest dodatni, więc różnica jest dodatnia — ciąg jest rosnący.
+  - 'Rozwiąż \frac{3n+2}{n+1} = 3: 3n+2 = 3n+3, sprzeczność — liczba 3 nie jest wyrazem ciągu.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: a_nplus1
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{3n + 5}{n + 2}
+    - name: a_2n
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{6n + 2}{2n + 1}
+    - name: roznica
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{1}{\left(n + 1\right) \cdot \left(n + 2\right)}
+    - name: uzasadnienie_rosnacy
+      answer:
+        kind: NOT_MACHINE_CHECKABLE
+        reason: Należy uzasadnić, że dla każdego n ∈ N+ różnica a_{n+1} - a_n = \frac{1}{(n+1)(n+2)} jest
+          dodatnia (mianownik dodatni), a więc a_{n+1} > a_n i ciąg jest rosnący.
+    - name: czy_3_jest_wyrazem
+      answer:
+        kind: BOOLEAN
+        truth: false
+  checks:
+  - kind: simplify
+    expr: \frac{3 \cdot \left(n + 1\right) + 2}{\left(n + 1\right) + 1}
+    var: n
+    part: a_nplus1
+  - kind: simplify
+    expr: \frac{3 \cdot \left(2 \cdot n\right) + 2}{\left(2 \cdot n\right) + 1}
+    var: n
+    part: a_2n
+  - kind: simplify
+    expr: \frac{3 \cdot \left(n + 1\right) + 2}{\left(n + 1\right) + 1} - \frac{3 \cdot n + 2}{n + 1}
+    var: n
+    part: roznica
+  skills:
+  - wyznaczanie a_{n+1} i a_{2n}
+  - sprowadzanie ułamków do wspólnego mianownika
+  - uzasadnianie monotoniczności przez znak różnicy
+  - sprawdzanie, czy liczba jest wyrazem ciągu
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'part(s) need a human: uzasadnienie_rosnacy · 3/4 other parts solved fresh'
+- id: g-cm-06
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: 'korekta błędu: pierwszy wyraz ciągu'
+  statement: 'Ciąg \left(a_{n}\right) jest określony wzorem a_{n}=n^{2}-4\cdot n+1 dla każdej liczby naturalnej
+    n\geq 1. Uczeń obliczył pierwszy wyraz tego ciągu tak: „podstawiam n=0, więc pierwszy wyraz jest równy
+    0^{2}-4\cdot 0+1=1”. Wyjaśnij, na czym polega błąd, i podaj poprawną wartość pierwszego wyrazu.'
+  statement_latex: a_{n}=n^{2}-4\cdot n+1,\qquad n\geq 1
+  solution: |-
+    Błędne rozumowanie: uczeń przyjmuje, że ciąg zaczyna się od n=0 („liczby naturalne zaczynają się od zera”) i podaje 0^{2}-4\cdot 0+1=1 jako pierwszy wyraz. Otrzymuje błędną odpowiedź 1.
+    Dlaczego to błąd: ciąg jest z definicji funkcją określoną na zbiorze liczb naturalnych DODATNICH \mathbb{N}_{+}=\{1,2,3,\dots\}, a w zadaniu wprost napisano „dla każdej liczby naturalnej n\geq 1”. Wyraz a_{0} po prostu nie istnieje — 0 nie jest numerem żadnego miejsca w ciągu.
+    Poprawne rozwiązanie: pierwszym wyrazem jest a_{1}=1^{2}-4\cdot 1+1=1-4+1=-2.
+    Odpowiedź: a_{1}=-2.
+  solution_steps:
+  - Zauważ, że uczeń podstawił n=0 i otrzymał 1.
+  - 'Przypomnij definicję: dziedziną ciągu jest \mathbb{N}_{+}, więc pierwszym wyrazem jest a_{1}, a a_{0}
+    nie istnieje.'
+  - 'Podstaw n=1: a_{1}=1-4+1=-2.'
+  - 'Zapisz poprawną odpowiedź: a_{1}=-2.'
+  answer:
+    kind: NUMERIC
+    value: -2.0
+  checks:
+  - kind: evaluate
+    expr: 1^{2}-4\cdot 1+1
+    var: n
+  skills:
+  - rozumienie dziedziny ciągu (N+)
+  - obliczanie wyrazu ze wzoru
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: -2.0 vs -2.0 (tol 1e-09)'
+- id: g-cm-07
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: 'korekta błędu: wyraz o indeksie n+1'
+  statement: 'Ciąg \left(a_{n}\right) jest określony wzorem a_{n}=n^{2}-3\cdot n dla każdej liczby naturalnej
+    n\geq 1. Uczeń napisał: „skoro a_{n}=n^{2}-3\cdot n, to następny wyraz jest o 1 większy, czyli a_{n+1}=n^{2}-3\cdot
+    n+1”. Wyjaśnij błąd i wyznacz poprawny wzór na a_{n+1} w postaci uporządkowanej.'
+  statement_latex: a_{n}=n^{2}-3\cdot n,\qquad a_{n+1}=?
+  solution: |-
+    Błędne rozumowanie: uczeń dodaje 1 do wartości wyrazu, przyjmując a_{n+1}=a_{n}+1=n^{2}-3\cdot n+1. Sprawdźmy to liczbowo dla n=4: a_{4}=16-12=4, więc według ucznia a_{5}=5. Tymczasem a_{5}=25-15=10 — odpowiedź ucznia jest fałszywa.
+    Dlaczego to błąd: indeks n+1 jest ARGUMENTEM funkcji, a nie liczbą dodawaną do wartości. a_{n+1}=f\left(n+1\right), czyli w miejsce KAŻDEGO n wstawiamy \left(n+1\right) w nawiasie.
+    Poprawne rozwiązanie:
+    a_{n+1}=\left(n+1\right)^{2}-3\cdot\left(n+1\right)=n^{2}+2n+1-3n-3=n^{2}-n-2.
+    Kontrola dla n=4: 16-4-2=10=a_{5}. ✓
+    Odpowiedź: a_{n+1}=n^{2}-n-2.
+  solution_steps:
+  - 'Zauważ błąd: uczeń użył wzoru a_{n+1}=a_{n}+1.'
+  - 'Pokaż kontrprzykład: a_{4}=4, ale a_{5}=10, a nie 5.'
+  - 'Wstaw \left(n+1\right) w miejsce każdego n: a_{n+1}=\left(n+1\right)^{2}-3\cdot\left(n+1\right).'
+  - 'Rozwiń nawiasy i zredukuj: n^{2}+2n+1-3n-3=n^{2}-n-2.'
+  answer:
+    kind: SYMBOLIC
+    latex: n^{2}-n-2
+  checks:
+  - kind: simplify
+    expr: \left(n+1\right)^{2}-3\cdot\left(n+1\right)
+    var: n
+  skills:
+  - wyznaczanie a_{n+1} przez podstawienie (n+1)
+  - przekształcanie wyrażeń algebraicznych
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: ''n^{2}-n-2'' vs ''n**2 - n - 2'''
+- id: g-cm-08
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: 'korekta błędu: wyraz o indeksie podwojonym'
+  statement: 'Ciąg \left(a_{n}\right) jest określony wzorem a_{n}=2\cdot n^{2}-3 dla każdej liczby naturalnej
+    n\geq 1. Uczeń stwierdził: „skoro indeks się podwaja, to wartość też, więc a_{2n}=2\cdot a_{n}=4\cdot
+    n^{2}-6”. Wyjaśnij błąd, wyznacz poprawny wzór na a_{2n} oraz oblicz a_{6}.'
+  statement_latex: a_{n}=2\cdot n^{2}-3,\qquad a_{2n}=?
+  solution: |-
+    Błędne rozumowanie: uczeń pisze a_{2n}=2\cdot a_{n}=2\cdot\left(2n^{2}-3\right)=4n^{2}-6. Dla n=3 dałoby to a_{6}=4\cdot 9-6=30.
+    Dlaczego to błąd: indeks jest ARGUMENTEM, a nie czynnikiem — podwojenie numeru miejsca nie podwaja wartości. Poprawnie a_{2n}=f\left(2n\right), czyli w miejsce każdego n wstawiamy \left(2n\right) w nawiasie.
+    Poprawne rozwiązanie:
+    a_{2n}=2\cdot\left(2n\right)^{2}-3=2\cdot 4n^{2}-3=8\cdot n^{2}-3.
+    Dla n=3: a_{6}=2\cdot 6^{2}-3=2\cdot 36-3=72-3=69 (a ze wzoru 8n^{2}-3 mamy 8\cdot 9-3=69 ✓), a nie 30.
+    Odpowiedź: a_{2n}=8\cdot n^{2}-3, a_{6}=69.
+  solution_steps:
+  - 'Zauważ błąd: uczeń użył a_{2n}=2\cdot a_{n}.'
+  - 'Wstaw \left(2n\right) w miejsce każdego n: a_{2n}=2\cdot\left(2n\right)^{2}-3.'
+  - 'Uprość: 2\cdot 4n^{2}-3=8n^{2}-3.'
+  - Oblicz a_{6}=2\cdot 6^{2}-3=69 i porównaj z błędnym wynikiem 30.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: a_{2n}
+      answer:
+        kind: SYMBOLIC
+        latex: 8\cdot n^{2}-3
+    - name: a_6
+      answer:
+        kind: NUMERIC
+        value: 69.0
+  checks:
+  - kind: simplify
+    expr: 2\cdot\left(2\cdot n\right)^{2}-3
+    var: n
+    part: a_{2n}
+  - kind: evaluate
+    expr: 2\cdot 6^{2}-3
+    var: n
+    part: a_6
+  skills:
+  - wyznaczanie a_{2n}
+  - obliczanie wyrazu o konkretnym indeksie
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [a_{2n}] SymPy solved it fresh: ''8\\cdot n^{2}-3'' vs ''8*n**2
+      - 3'' ; [a_6] SymPy solved it fresh: 69.0 vs 69.0 (tol 1e-09)'
+- id: g-cm-09
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: 'korekta błędu: a_n to nie iloczyn a·n'
+  statement: 'Ciąg \left(a_{n}\right) jest określony wzorem a_{n}=3\cdot n+4 dla każdej liczby naturalnej
+    n\geq 1. Uczeń twierdzi: „a_{n} to a razy n, więc a_{2}+a_{3}=a\cdot 2+a\cdot 3=a\cdot 5=a_{5}”. Oblicz
+    wyrazy a_{2}, a_{3} i a_{5} oraz rozstrzygnij, czy równość a_{2}+a_{3}=a_{5} jest prawdziwa.'
+  statement_latex: a_{n}=3\cdot n+4,\qquad a_{2}+a_{3}\overset{?}{=}a_{5}
+  solution: |-
+    Błędne rozumowanie: uczeń czyta a_{2} jako „a razy 2”, a_{3} jako „a razy 3” i wyciąga a przed nawias, otrzymując rzekomą równość a_{2}+a_{3}=a_{5}.
+    Dlaczego to błąd: a_{n} jest jednym symbolem — nazwą n-tego wyrazu ciągu; indeks n pisany u dołu wskazuje miejsce w kolejce, nie jest czynnikiem. Nie istnieje żadna liczba a, przez którą mnożymy.
+    Poprawne rozwiązanie: obliczamy wyrazy ze wzoru.
+    a_{2}=3\cdot 2+4=10,
+    a_{3}=3\cdot 3+4=13,
+    a_{5}=3\cdot 5+4=19.
+    Wówczas a_{2}+a_{3}=10+13=23\neq 19=a_{5}, więc równość jest FAŁSZYWA.
+    Odpowiedź: a_{2}=10, a_{3}=13, a_{5}=19; równość a_{2}+a_{3}=a_{5} nie zachodzi.
+  solution_steps:
+  - 'Zauważ błąd: a_{n} nie oznacza iloczynu a\cdot n.'
+  - Oblicz a_{2}=3\cdot 2+4=10.
+  - Oblicz a_{3}=3\cdot 3+4=13.
+  - Oblicz a_{5}=3\cdot 5+4=19.
+  - 'Porównaj: 10+13=23\neq 19, więc równość jest fałszywa.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: a_2
+      answer:
+        kind: NUMERIC
+        value: 10.0
+    - name: a_3
+      answer:
+        kind: NUMERIC
+        value: 13.0
+    - name: a_5
+      answer:
+        kind: NUMERIC
+        value: 19.0
+    - name: czy a_2+a_3=a_5
+      answer:
+        kind: BOOLEAN
+        truth: false
+  checks:
+  - kind: evaluate
+    expr: 3\cdot 2+4
+    var: n
+    part: a_2
+  - kind: evaluate
+    expr: 3\cdot 3+4
+    var: n
+    part: a_3
+  - kind: evaluate
+    expr: 3\cdot 5+4
+    var: n
+    part: a_5
+  skills:
+  - rozumienie zapisu a_n jako jednego symbolu
+  - obliczanie wyrazów ciągu
+  - ocena prawdziwości równości
+  verification:
+    checkability: REFERENCE_CALL
+    note: '4 parts matched · det: [a_2] SymPy solved it fresh: 10.0 vs 10.0 (tol 1e-09) ; [a_3] SymPy
+      solved it fresh: 13.0 vs 13.0 (tol 1e-09) ; [a_5] SymPy solved it fresh: 19.0 vs 19.0 (tol 1e-09)'
+- id: g-cm-10
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: 'korekta błędu: warunek n ∈ N+'
+  statement: 'Ciąg \left(a_{n}\right) jest określony wzorem a_{n}=7\cdot n-4 dla każdej liczby naturalnej
+    n\geq 1. Uczeń rozwiązał równanie 7\cdot n-4=39, otrzymał n=\frac{43}{7} i odpowiedział: „tak, liczba
+    39 jest wyrazem tego ciągu”. Wyjaśnij błąd i rozstrzygnij, czy liczba 39 jest wyrazem tego ciągu.
+    Podaj też numer wyrazu ciągu równego 45.'
+  statement_latex: a_{n}=7\cdot n-4,\qquad 7\cdot n-4=39,\quad 7\cdot n-4=45
+  solution: |-
+    Błędne rozumowanie: uczeń rozwiązał równanie 7n-4=39, czyli 7n=43, n=\frac{43}{7}\approx 6{,}14, i uznał, że skoro równanie ma rozwiązanie, to 39 jest wyrazem ciągu.
+    Dlaczego to błąd: liczba c jest wyrazem ciągu tylko wtedy, gdy równanie a_{n}=c ma rozwiązanie będące liczbą NATURALNĄ DODATNIĄ — indeks to numer miejsca w kolejce. Liczba \frac{43}{7} nie jest liczbą naturalną, więc trzeba ją odrzucić.
+    Poprawne rozwiązanie:
+    1) 7n-4=39 \Rightarrow n=\frac{43}{7}\notin\mathbb{N}_{+}, zatem liczba 39 NIE jest wyrazem tego ciągu (sprawdzenie: a_{6}=38, a_{7}=45).
+    2) 7n-4=45 \Rightarrow 7n=49 \Rightarrow n=7, a 7 jest liczbą naturalną dodatnią, więc 45 jest siódmym wyrazem ciągu: a_{7}=45.
+    Odpowiedź: 39 nie jest wyrazem ciągu; liczba 45 jest wyrazem o numerze n=7.
+  solution_steps:
+  - 'Zauważ błąd: uczeń pominął warunek n\in\mathbb{N}_{+}.'
+  - 'Rozwiąż 7\cdot n-4=39: n=\frac{43}{7}, liczba niecałkowita — odrzuć.'
+  - 'Wniosek: 39 nie jest wyrazem ciągu.'
+  - 'Rozwiąż 7\cdot n-4=45: 7n=49, n=7 \in\mathbb{N}_{+}.'
+  - 'Odpowiedz: liczba 45 jest siódmym wyrazem ciągu.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: czy 39 jest wyrazem ciągu
+      answer:
+        kind: BOOLEAN
+        truth: false
+    - name: numer wyrazu równego 45
+      answer:
+        kind: NUMERIC
+        value: 7.0
+  checks:
+  - kind: solve_equation
+    expr: 7\cdot n-4=45
+    var: n
+    part: numer wyrazu równego 45
+  skills:
+  - rozwiązywanie równania a_n = c
+  - sprawdzanie naturalności indeksu
+  - odróżnianie numeru wyrazu od jego wartości
+  verification:
+    checkability: REFERENCE_CALL
+    note: '2 parts matched · det: [numer wyrazu równego 45] SymPy solved it fresh: 7.0 vs 7.0 (tol 1e-09)'
+- id: g-ch-t02
+  slot: CHALLENGE
+  ramp_index: 0
+  difficulty: 4
+  exercise_type: ciąg zbudowany z opisu geometrycznego; największy wyraz
+  statement: Rozważamy prostokąty o obwodzie równym 26, których długości boków są liczbami naturalnymi
+    dodatnimi. Dla każdej liczby naturalnej dodatniej n, dla której taki prostokąt istnieje, przez a_n
+    oznaczamy pole prostokąta, którego jeden z boków ma długość n. Wyznacz wzór ogólny ciągu (a_n) wraz
+    z zakresem indeksów n, oblicz największy wyraz tego ciągu oraz podaj wszystkie indeksy, dla których
+    ten największy wyraz jest osiągany.
+  statement_latex: 2 \cdot \left(n + b\right) = 26,\qquad a_n = n \cdot \left(13 - n\right)
+  solution: |-
+    Oznaczmy przez n długość jednego boku, a przez b długość drugiego boku. Z warunku na obwód: 2 \cdot \left(n + b\right) = 26, czyli n + b = 13, stąd b = 13 - n.
+    Pole prostokąta: a_n = n \cdot \left(13 - n\right).
+    Zakres: obie długości muszą być dodatnimi liczbami naturalnymi, więc n \geq 1 oraz 13 - n \geq 1, czyli n \leq 12. Zatem n \in \{1, 2, \ldots, 12\}.
+    Funkcja kwadratowa f(x) = x \cdot \left(13 - x\right) = -x^2 + 13x ma ramiona skierowane w dół, a jej wierzchołek leży dla x = \frac{13}{2} = 6{,}5. Liczba 6,5 nie jest liczbą naturalną, więc sprawdzamy dwa najbliższe dopuszczalne indeksy:
+    a_6 = 6 \cdot \left(13 - 6\right) = 6 \cdot 7 = 42, a_7 = 7 \cdot \left(13 - 7\right) = 7 \cdot 6 = 42.
+    Oba wyrazy są równe 42 i są większe od pozostałych (np. a_5 = 40, a_8 = 40).
+    Odpowiedź: a_n = n \cdot \left(13 - n\right) dla n \in \{1, 2, \ldots, 12\}; największy wyraz jest równy 42 i jest osiągany dla n = 6 oraz n = 7 (ten sam wyraz odpowiada dwóm różnym indeksom).
+  solution_steps:
+  - 'Oznacz boki prostokąta przez n oraz b i zapisz warunek obwodu: 2(n + b) = 26, czyli b = 13 - n.'
+  - 'Zapisz pole jako funkcję indeksu: a_n = n \cdot (13 - n).'
+  - 'Wyznacz zakres: n \geq 1 i 13 - n \geq 1, czyli n \in \{1, 2, \ldots, 12\}.'
+  - Zauważ, że f(x) = -x^2 + 13x ma maksimum dla x = 6,5, które nie jest liczbą naturalną.
+  - Oblicz a_6 = 42 i a_7 = 42 i stwierdź, że to największa wartość ciągu.
+  - 'Podaj odpowiedź: największy wyraz 42, osiągany dla n = 6 i n = 7.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wzor
+      answer:
+        kind: SYMBOLIC
+        latex: n \cdot \left(13 - n\right)
+    - name: zakres
+      answer:
+        kind: SET
+        members:
+        - '1'
+        - '2'
+        - '3'
+        - '4'
+        - '5'
+        - '6'
+        - '7'
+        - '8'
+        - '9'
+        - '10'
+        - '11'
+        - '12'
+    - name: najwiekszy_wyraz
+      answer:
+        kind: NUMERIC
+        value: 42.0
+    - name: indeksy
+      answer:
+        kind: SET
+        members:
+        - '6'
+        - '7'
+  checks:
+  - kind: simplify
+    expr: n \cdot \left(13 - n\right)
+    var: n
+    part: wzor
+  - kind: evaluate
+    expr: 6 \cdot \left(13 - 6\right)
+    var: n
+    part: najwiekszy_wyraz
+  - kind: solve_equation
+    expr: n \cdot \left(13 - n\right) = 42
+    var: n
+    part: indeksy
+  stated_model:
+    variable: n
+    objective_latex: a_n = n \cdot \left(13 - n\right)
+    domain_lo: '1'
+    domain_hi: '12'
+    domain_lo_open: false
+    domain_hi_open: false
+    constraint_used: 2 \cdot \left(n + b\right) = 26
+  skills:
+  - układanie wzoru ogólnego z warunku geometrycznego
+  - wyznaczanie zakresu indeksów
+  - maksimum funkcji kwadratowej dla argumentu naturalnego
+  - odpowiedniość indeks–wyraz (jedna wartość, dwa indeksy)
+  verification:
+    checkability: STATED_MODEL
+    note: 'stage 1 inconclusive: TypeError: name should be a string, not Token'
+- id: g-ch-t03
+  slot: CHALLENGE
+  ramp_index: 1
+  difficulty: 4
+  exercise_type: ciąg pól trójkątów; czy liczba jest wyrazem ciągu, z warunkiem dodatkowym
+  statement: |-
+    Suma długości obu przyprostokątnych pewnego trójkąta prostokątnego jest równa 20, a długość jednej z nich jest liczbą naturalną dodatnią n. Pole tego trójkąta oznaczamy przez a_n.
+    a) Zapisz wzór ogólny ciągu (a_n) i podaj, dla jakich n ma on sens.
+    b) Rozstrzygnij, czy liczba 48 jest wyrazem ciągu (a_n), i podaj wszystkie indeksy, dla których wyraz jest równy 48.
+    c) Spośród znalezionych indeksów wskaż ten, dla którego przyprostokątna o długości n jest krótsza od drugiej przyprostokątnej.
+  statement_latex: a_n = \frac{n \cdot \left(20 - n\right)}{2}
+  solution: |-
+    a) Jeżeli jedna przyprostokątna ma długość n, to druga ma długość 20 - n. Obie długości muszą być dodatnie, a n jest liczbą naturalną dodatnią, więc 1 \leq n \leq 19.
+    Pole trójkąta prostokątnego to połowa iloczynu przyprostokątnych:
+    a_n = \frac{n \cdot \left(20 - n\right)}{2}, \quad n \in \{1, 2, \ldots, 19\}.
+
+    b) Rozwiązujemy równanie \frac{n \cdot \left(20 - n\right)}{2} = 48, czyli n \cdot \left(20 - n\right) = 96, a więc n^2 - 20n + 96 = 0.
+    \Delta = 400 - 384 = 16, \sqrt{\Delta} = 4, stąd n = \frac{20 - 4}{2} = 8 albo n = \frac{20 + 4}{2} = 12.
+    Obie liczby są naturalne i należą do zakresu \{1, \ldots, 19\}, więc liczba 48 jest wyrazem ciągu — i to dwa razy: a_8 = 48 oraz a_{12} = 48.
+    Sprawdzenie: a_8 = \frac{8 \cdot 12}{2} = 48, a_{12} = \frac{12 \cdot 8}{2} = 48. ✓
+
+    c) Warunek: n < 20 - n, czyli 2n < 20, a więc n < 10. Spośród liczb 8 i 12 warunek spełnia tylko n = 8 (przyprostokątne mają wtedy długości 8 i 12).
+    Odpowiedź: a_n = \frac{n \cdot \left(20 - n\right)}{2} dla n \in \{1, \ldots, 19\}; wyraz równy 48 mają indeksy 8 i 12; warunek z punktu c) spełnia n = 8.
+  solution_steps:
+  - Oznacz przyprostokątne przez n i 20 - n; zauważ, że obie muszą być dodatnie, więc n \in \{1, \ldots,
+    19\}.
+  - 'Zapisz pole: a_n = \frac{n \cdot (20 - n)}{2}.'
+  - Ułóż równanie \frac{n(20-n)}{2} = 48 i przekształć do n^2 - 20n + 96 = 0.
+  - Oblicz \Delta = 16 i pierwiastki n = 8 oraz n = 12; sprawdź, że oba są w zakresie indeksów.
+  - Zastosuj warunek n < 20 - n, czyli n < 10, i wybierz n = 8.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wzor
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{n \cdot \left(20 - n\right)}{2}
+    - name: zakres
+      answer:
+        kind: INTERVAL
+        lo: '1'
+        hi: '19'
+        lo_open: false
+        hi_open: false
+    - name: indeksy_48
+      answer:
+        kind: SET
+        members:
+        - '8'
+        - '12'
+    - name: n_krotsza
+      answer:
+        kind: NUMERIC
+        value: 8.0
+  checks:
+  - kind: simplify
+    expr: \frac{n \cdot \left(20 - n\right)}{2}
+    var: n
+    part: wzor
+  - kind: solve_equation
+    expr: \frac{n \cdot \left(20 - n\right)}{2} = 48
+    var: n
+    part: indeksy_48
+  - kind: evaluate
+    expr: \frac{20 - \sqrt{400 - 4 \cdot 96}}{2}
+    var: n
+    part: n_krotsza
+  stated_model:
+    variable: n
+    objective_latex: a_n = \frac{n \cdot \left(20 - n\right)}{2}
+    domain_lo: '1'
+    domain_hi: '19'
+    domain_lo_open: false
+    domain_hi_open: false
+    goal: value
+    constraint_used: n + \left(20 - n\right) = 20,\ n \in \mathbb{N}_+
+  skills:
+  - 'modelowanie: wprowadzenie zmiennej i ułożenie wzoru ogólnego'
+  - rozwiązywanie równania a_n = c
+  - odrzucanie rozwiązań spoza zakresu indeksów
+  - wybór rozwiązania spełniającego warunek dodatkowy
+  verification:
+    checkability: STATED_MODEL
+    note: 'stage 1 inconclusive: TypeError: name should be a string, not Token'
+- id: g-ch-t04
+  slot: CHALLENGE
+  ramp_index: 2
+  difficulty: 5
+  exercise_type: ciąg pól powierzchni prostopadłościanu; wzór z zakresem, największy wyraz, wyraz o danej
+    wartości
+  statement: |-
+    Suma długości wszystkich krawędzi prostopadłościanu o podstawie kwadratowej jest równa 48. Długość krawędzi podstawy tego prostopadłościanu jest liczbą naturalną dodatnią n, a pole jego powierzchni całkowitej oznaczamy przez S_n.
+    a) Wyznacz wzór ogólny ciągu (S_n) oraz zbiór wszystkich indeksów n, dla których taki prostopadłościan istnieje.
+    b) Oblicz największy wyraz ciągu (S_n) i podaj jego indeks.
+    c) Rozstrzygnij, czy liczba 90 jest wyrazem ciągu (S_n), i podaj wszystkie indeksy, dla których wyraz jest równy 90.
+  statement_latex: 8 \cdot n + 4 \cdot h = 48,\qquad S_n = 2 \cdot n^2 + 4 \cdot n \cdot h
+  solution: |-
+    Oznaczmy przez n krawędź podstawy, a przez h wysokość prostopadłościanu.
+    Krok 1. Prostopadłościan o podstawie kwadratowej ma 8 krawędzi podstaw o długości n i 4 krawędzie boczne o długości h, więc 8 \cdot n + 4 \cdot h = 48, stąd 2n + h = 12, czyli h = 12 - 2n.
+    Krok 2. Wysokość musi być dodatnia: 12 - 2n > 0, czyli n < 6. Ponieważ n jest liczbą naturalną dodatnią, mamy n \in \{1, 2, 3, 4, 5\}.
+    Krok 3. Pole powierzchni całkowitej: S_n = 2 \cdot n^2 + 4 \cdot n \cdot h = 2n^2 + 4n \cdot \left(12 - 2n\right) = 2n^2 + 48n - 8n^2 = -6n^2 + 48n.
+    Krok 4. Funkcja f(x) = -6x^2 + 48x ma ramiona skierowane w dół, a jej wierzchołek leży dla x = \frac{-48}{2 \cdot \left(-6\right)} = 4. Liczba 4 jest liczbą naturalną i należy do zbioru \{1, \ldots, 5\}, więc największym wyrazem ciągu jest
+    S_4 = -6 \cdot 4^2 + 48 \cdot 4 = -96 + 192 = 96.
+    (Wtedy podstawa ma bok 4, a wysokość h = 12 - 8 = 4 — jest to sześcian o polu 6 \cdot 16 = 96. ✓)
+    Krok 5. Rozwiązujemy równanie -6n^2 + 48n = 90, czyli po podzieleniu przez -6: n^2 - 8n + 15 = 0. \Delta = 64 - 60 = 4, \sqrt{\Delta} = 2, więc n = 3 albo n = 5. Obie liczby należą do zbioru \{1, 2, 3, 4, 5\}, zatem liczba 90 jest wyrazem ciągu, i to dla dwóch indeksów: S_3 = 90 oraz S_5 = 90.
+    Odpowiedź: S_n = -6n^2 + 48n dla n \in \{1, 2, 3, 4, 5\}; największy wyraz to S_4 = 96; liczba 90 jest wyrazem ciągu dla n = 3 i n = 5.
+  solution_steps:
+  - 'Oznacz krawędź podstawy przez n, wysokość przez h i zapisz sumę krawędzi: 8n + 4h = 48.'
+  - Wyznacz h = 12 - 2n.
+  - Z warunku h > 0 otrzymaj n < 6, czyli n \in \{1, 2, 3, 4, 5\}.
+  - 'Zapisz pole całkowite: S_n = 2n^2 + 4n(12 - 2n) = -6n^2 + 48n.'
+  - 'Znajdź wierzchołek: n = \frac{48}{2 \cdot 6} = 4 i sprawdź, że 4 należy do zakresu indeksów.'
+  - Oblicz S_4 = -6 \cdot 16 + 192 = 96.
+  - Rozwiąż -6n^2 + 48n = 90, czyli n^2 - 8n + 15 = 0, otrzymując n = 3 i n = 5 (oba w zakresie).
+  - Sformułuj odpowiedzi do punktów a), b), c).
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wzor
+      answer:
+        kind: SYMBOLIC
+        latex: -6 \cdot n^2 + 48 \cdot n
+    - name: zakres
+      answer:
+        kind: SET
+        members:
+        - '1'
+        - '2'
+        - '3'
+        - '4'
+        - '5'
+    - name: indeks_max
+      answer:
+        kind: NUMERIC
+        value: 4.0
+    - name: S_max
+      answer:
+        kind: NUMERIC
+        value: 96.0
+    - name: indeksy_90
+      answer:
+        kind: SET
+        members:
+        - '3'
+        - '5'
+  checks:
+  - kind: simplify
+    expr: 2 \cdot n^2 + 4 \cdot n \cdot \left(12 - 2 \cdot n\right)
+    var: n
+    part: wzor
+  - kind: evaluate
+    expr: \frac{48}{2 \cdot 6}
+    var: n
+    part: indeks_max
+  - kind: evaluate
+    expr: -6 \cdot 4^2 + 48 \cdot 4
+    var: n
+    part: S_max
+  - kind: solve_equation
+    expr: -6 \cdot n^2 + 48 \cdot n = 90
+    var: n
+    part: indeksy_90
+  stated_model:
+    variable: n
+    objective_latex: S_n = -6 \cdot n^2 + 48 \cdot n
+    domain_lo: '1'
+    domain_hi: '5'
+    domain_lo_open: false
+    domain_hi_open: false
+    constraint_used: 8 \cdot n + 4 \cdot h = 48,\ h = 12 - 2 \cdot n > 0
+  skills:
+  - wykorzystanie sumy krawędzi prostopadłościanu
+  - wyrażenie wysokości przez krawędź podstawy
+  - ułożenie wzoru ogólnego ciągu
+  - maksimum funkcji kwadratowej i sprawdzenie zakresu indeksów
+  - rozwiązywanie równania a_n = c i weryfikacja n ∈ N+
+  verification:
+    checkability: STATED_MODEL
+    note: 'stage 1 inconclusive: TypeError: name should be a string, not Token'

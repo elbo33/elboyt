@@ -1,0 +1,871 @@
+section: proste-plaszczyzny-katy-w-przestrzeni
+name: Proste, płaszczyzny i kąty w przestrzeni
+scope: Relative position of lines in space, including skew perpendicular lines; angle between a line and
+  a plane; dihedral angle.
+requirements:
+- X.1
+- X.2
+counts:
+  total: 16
+  DETERMINISTIC: 4
+  REFERENCE_CALL: 7
+  NOT_MACHINE_CHECKABLE: 5
+exercises:
+- id: g-th-00
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: obliczenie tangensa kąta nachylenia przekątnej sześcianu
+  statement: Dany jest sześcian ABCDA'B'C'D' o krawędzi długości 6. Odcinek AC' jest przekątną tego sześcianu
+    (A i C' są wierzchołkami nienależącymi do jednej ściany). Rzutem prostokątnym punktu C' na płaszczyznę
+    podstawy ABCD jest punkt C. Oblicz tangens kąta nachylenia przekątnej AC' do płaszczyzny podstawy
+    ABCD.
+  statement_latex: a=6,\qquad |AC|=a\sqrt{2},\qquad \operatorname{tg}\alpha=\frac{|CC'|}{|AC|}=\frac{6}{6\cdot\sqrt{2}}
+  solution: |-
+    Ponieważ krawędź CC' jest prostopadła do płaszczyzny podstawy, rzutem prostokątnym punktu C' na tę płaszczyznę jest punkt C, a rzutem odcinka AC' jest odcinek AC. Szukanym kątem jest więc kąt C'AC w trójkącie prostokątnym ACC' o kącie prostym przy wierzchołku C.
+    Przekątna kwadratu ABCD ma długość |AC| = 6\sqrt{2}, a |CC'| = 6.
+    Stąd tg α = \frac{6}{6\cdot\sqrt{2}} = \frac{1}{\sqrt{2}} = \frac{\sqrt{2}}{2} ≈ 0,7071.
+  solution_steps:
+  - Zauważ, że CC' ⊥ płaszczyzna ABCD, więc rzutem C' na podstawę jest C, a rzutem AC' jest AC.
+  - 'Wskaż kąt: α = ∠C''AC w trójkącie prostokątnym ACC'' (kąt prosty przy C).'
+  - Oblicz |AC| = 6\sqrt{2} (przekątna kwadratu o boku 6) oraz |CC'| = 6.
+  - Zapisz tg α = \frac{6}{6\sqrt{2}} = \frac{\sqrt{2}}{2}.
+  answer:
+    kind: SYMBOLIC
+    latex: \frac{\sqrt{2}}{2}
+  checks:
+  - kind: evaluate
+    expr: \frac{6}{6\cdot\sqrt{2}}
+  skills:
+  - rzut prostokątny odcinka na płaszczyznę
+  - kąt między prostą a płaszczyzną
+  - przekątne sześcianu
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 0.7071067811865476 vs 0.7071067811865476 (tol 1e-09)'
+- id: g-th-01
+  slot: THEORY_SUPPORT
+  ramp_index: 1
+  difficulty: 2
+  exercise_type: klasyfikacja wzajemnego położenia prostych w sześcianie
+  statement: 'Dany jest sześcian ABCDA''B''C''D'' o krawędzi długości 4, w którym ABCD jest dolną podstawą,
+    a A''B''C''D'' – górną (przy czym AA'', BB'', CC'', DD'' są krawędziami bocznymi). Rozważ proste AD
+    oraz BB''. Odpowiedz na pytania: (a) Czy proste AD i BB'' mają punkt wspólny? (b) Czy istnieje płaszczyzna
+    zawierająca obie te proste? (c) Jaka jest miara kąta między prostymi AD i BB'' (w stopniach)?'
+  statement_latex: AD\ \text{i}\ BB':\quad AD\cap BB'=\varnothing,\qquad BB'\parallel AA',\qquad \measuredangle\left(AD,AA'\right)=90^\circ
+  solution: |-
+    (a) Prosta AD leży w dolnej podstawie i przechodzi przez wierzchołki A i D; prosta BB' przechodzi przez B i B'. Ich jedyny punkt na dolnej podstawie to B, który nie należy do prostej AD. Zatem proste nie mają punktu wspólnego – odpowiedź: NIE.
+    (b) Gdyby istniała płaszczyzna zawierająca obie proste, to przy braku punktu wspólnego byłyby one równoległe; tymczasem AD jest pozioma, a BB' pionowa – nie mają tego samego kierunku. Nie ma takiej płaszczyzny – odpowiedź: NIE. Proste AD i BB' są więc skośne.
+    (c) Przesuwamy prostą BB' równolegle do punktu A: BB' ∥ AA'. Kąt między AD a AA' jest kątem ściany ADD'A' przy wierzchołku A, czyli 90°. Zatem kąt między prostymi skośnymi AD i BB' ma miarę 90° – są to proste prostopadłe nieprzecinające się.
+  solution_steps:
+  - Sprawdź punkty wspólne prostych AD i BB' – nie ma ich.
+  - Sprawdź, czy proste leżą w jednej płaszczyźnie – nie leżą, bo mają różne kierunki, więc są skośne.
+  - 'Przesuń BB'' równolegle: BB'' ∥ AA''.'
+  - Odczytaj kąt ∠(AD, AA') = 90°, czyli kąt między AD i BB' wynosi 90°.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: czy mają punkt wspólny
+      answer:
+        kind: BOOLEAN
+        truth: false
+    - name: czy istnieje płaszczyzna zawierająca obie proste
+      answer:
+        kind: BOOLEAN
+        truth: false
+    - name: kąt między prostymi (stopnie)
+      answer:
+        kind: NUMERIC
+        value: 90.0
+  skills:
+  - wzajemne położenie prostych w przestrzeni
+  - proste skośne
+  - kąt między prostymi skośnymi
+  verification:
+    checkability: REFERENCE_CALL
+    note: 3 parts matched
+- id: g-th-02
+  slot: THEORY_SUPPORT
+  ramp_index: 2
+  difficulty: 2
+  exercise_type: elementy ostrosłupa prawidłowego i tangens kąta dwuściennego
+  statement: 'Dany jest ostrosłup prawidłowy czworokątny ABCDS o podstawie ABCD będącej kwadratem o boku
+    długości 10 i o wysokości SO równej 12, gdzie O jest środkiem kwadratu ABCD. Punkt M jest środkiem
+    krawędzi BC. Oblicz: (a) długość odcinka OM, czyli promień r okręgu wpisanego w podstawę, (b) tangens
+    kąta SMO, będącego kątem dwuściennym między ścianą boczną SBC a płaszczyzną podstawy.'
+  statement_latex: r=|OM|=\frac{10}{2},\qquad \operatorname{tg}\beta=\frac{|SO|}{|OM|}=\frac{12}{5}
+  solution: |-
+    (a) W kwadracie o boku 10 odległość środka O od boku BC jest równa połowie boku: r = |OM| = \frac{10}{2} = 5.
+    (b) Ponieważ OM ⊥ BC oraz SM ⊥ BC (SM jest wysokością trójkąta równoramiennego SBC), kąt SMO jest kątem liniowym kąta dwuściennego między ścianą SBC a podstawą. Trójkąt SOM ma kąt prosty przy O (bo SO ⊥ płaszczyzna podstawy), zatem
+    tg β = \frac{|SO|}{|OM|} = \frac{12}{5} = 2,4.
+  solution_steps:
+  - Wyznacz r = |OM| = \frac{10}{2} = 5 (połowa boku kwadratu).
+  - 'Uzasadnij, że ∠SMO jest kątem liniowym: OM ⊥ BC i SM ⊥ BC.'
+  - W trójkącie prostokątnym SOM zapisz tg β = \frac{|SO|}{|OM|}.
+  - Oblicz tg β = \frac{12}{5} = 2,4.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: r
+      answer:
+        kind: NUMERIC
+        value: 5.0
+    - name: tangens kąta dwuściennego
+      answer:
+        kind: NUMERIC
+        value: 2.4
+  checks:
+  - kind: evaluate
+    expr: \frac{10}{2}
+    part: r
+  - kind: evaluate
+    expr: \frac{12}{5}
+    part: tangens kąta dwuściennego
+  skills:
+  - promień okręgu wpisanego w podstawę
+  - kąt dwuścienny ściana boczna – podstawa
+  - trójkąt (H, r, m)
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [r] SymPy solved it fresh: 5.0 vs 5.0 (tol 1e-09) ; [tangens
+      kąta dwuściennego] SymPy solved it fresh: 2.4 vs 2.4 (tol 1e-09)'
+- id: g-ex-03
+  slot: EXERCISE
+  ramp_index: 1
+  difficulty: 3
+  exercise_type: kąt nachylenia przekątnej graniastosłupa do podstawy
+  statement: 'Dany jest graniastosłup prawidłowy czworokątny ABCDA''B''C''D'', w którym krawędź podstawy
+    ma długość 3, a wysokość graniastosłupa jest równa 3\sqrt{6} (krawędzie boczne to AA'', BB'', CC'',
+    DD''). Odcinek AC'' jest przekątną tego graniastosłupa. Oblicz: (a) tangens kąta α nachylenia przekątnej
+    AC'' do płaszczyzny podstawy ABCD, (b) miarę kąta α, (c) długość przekątnej AC''.'
+  statement_latex: '|AC|=3\sqrt{2},\qquad \operatorname{tg}\alpha=\frac{3\sqrt{6}}{3\sqrt{2}},\qquad |AC''|=\sqrt{\left(3\sqrt{2}\right)^{2}+\left(3\sqrt{6}\right)^{2}}'
+  solution: |-
+    Krawędź CC' jest prostopadła do płaszczyzny podstawy, więc rzutem prostokątnym punktu C' na tę płaszczyznę jest C, a rzutem odcinka AC' jest przekątna podstawy AC. Szukany kąt to α = ∠C'AC w trójkącie prostokątnym ACC' o kącie prostym przy C.
+    (a) |AC| = 3\sqrt{2} (przekątna kwadratu o boku 3), |CC'| = 3\sqrt{6}, zatem
+    tg α = \frac{3\sqrt{6}}{3\sqrt{2}} = \sqrt{3}.
+    (b) Ponieważ tg α = \sqrt{3}, mamy α = 60°.
+    (c) |AC'| = \sqrt{\left(3\sqrt{2}\right)^{2}+\left(3\sqrt{6}\right)^{2}} = \sqrt{18+54} = \sqrt{72} = 6\sqrt{2}.
+  solution_steps:
+  - Zauważ, że rzutem AC' na podstawę jest przekątna AC, więc α = ∠C'AC.
+  - Oblicz |AC| = 3\sqrt{2}.
+  - Zapisz tg α = \frac{3\sqrt{6}}{3\sqrt{2}} = \sqrt{3}.
+  - Odczytaj α = 60°.
+  - Z twierdzenia Pitagorasa |AC'| = \sqrt{18+54} = 6\sqrt{2}.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: tangens kąta alfa
+      answer:
+        kind: SYMBOLIC
+        latex: \sqrt{3}
+    - name: miara kąta alfa (stopnie)
+      answer:
+        kind: NUMERIC
+        value: 60.0
+    - name: długość przekątnej
+      answer:
+        kind: SYMBOLIC
+        latex: 6\sqrt{2}
+  checks:
+  - kind: evaluate
+    expr: \frac{3\cdot\sqrt{6}}{3\cdot\sqrt{2}}
+    part: tangens kąta alfa
+  - kind: evaluate
+    expr: \sqrt{\left(3\cdot\sqrt{2}\right)^{2}+\left(3\cdot\sqrt{6}\right)^{2}}
+    part: długość przekątnej
+  skills:
+  - rzut przekątnej na podstawę
+  - tangens kąta nachylenia
+  - twierdzenie Pitagorasa w bryle
+  verification:
+    checkability: REFERENCE_CALL
+    note: 'could not compare: PARSE_ERROR: "UnexpectedCharacters: No terminal matches ''\\'' in the current
+      parser context, at line 1 col 4"'
+- id: g-ex-04
+  slot: EXERCISE
+  ramp_index: 2
+  difficulty: 4
+  exercise_type: kąty w ostrosłupie prawidłowym trójkątnym
+  statement: Dany jest ostrosłup prawidłowy trójkątny ABCS, w którym podstawa ABC jest trójkątem równobocznym
+    o boku długości 12, a wysokość SO ostrosłupa jest równa 6 (O jest środkiem trójkąta ABC, czyli punktem
+    przecięcia jego wysokości). Punkt M jest środkiem krawędzi BC. (a) Uzasadnij, że kąt SMO jest kątem
+    liniowym kąta dwuściennego między ścianą boczną SBC a płaszczyzną podstawy. (b) Oblicz miarę tego
+    kąta dwuściennego. (c) Oblicz długość apotemy SM. (d) Oblicz tangens kąta nachylenia krawędzi bocznej
+    SA do płaszczyzny podstawy.
+  statement_latex: r=|OM|=\frac{12\sqrt{3}}{6},\qquad \operatorname{tg}\beta=\frac{6}{2\sqrt{3}},\qquad
+    |SM|=\sqrt{6^{2}+\left(2\sqrt{3}\right)^{2}},\qquad R=|OA|=\frac{12\sqrt{3}}{3},\qquad \operatorname{tg}\alpha=\frac{6}{4\sqrt{3}}
+  solution: |-
+    Oznaczmy a = 12, H = |SO| = 6.
+    Promienie: r = |OM| = \frac{a\sqrt{3}}{6} = 2\sqrt{3}, R = |OA| = \frac{a\sqrt{3}}{3} = 4\sqrt{3}.
+    (a) Odcinek OM leży w podstawie i jest częścią wysokości trójkąta równobocznego poprowadzonej z A, więc OM ⊥ BC. Odcinek SM jest wysokością trójkąta równoramiennego SBC (|SB| = |SC|) poprowadzoną do podstawy BC, więc SM ⊥ BC. Obie półproste MO i MS wychodzą z punktu M krawędzi BC i są do niej prostopadłe, leżąc odpowiednio w płaszczyźnie podstawy i w płaszczyźnie ściany SBC – zatem ∠SMO jest kątem liniowym rozważanego kąta dwuściennego. (Prostopadłość SM ⊥ BC wynika też z twierdzenia o trzech prostych prostopadłych: rzutem SM na podstawę jest OM ⊥ BC.)
+    (b) Trójkąt SOM ma kąt prosty przy O, więc tg β = \frac{|SO|}{|OM|} = \frac{6}{2\sqrt{3}} = \frac{6\sqrt{3}}{6} = \sqrt{3}, czyli β = 60°.
+    (c) |SM| = \sqrt{6^{2}+\left(2\sqrt{3}\right)^{2}} = \sqrt{36+12} = \sqrt{48} = 4\sqrt{3}.
+    (d) Rzutem krawędzi SA na podstawę jest odcinek OA, więc kąt nachylenia to α = ∠SAO, a tg α = \frac{|SO|}{|OA|} = \frac{6}{4\sqrt{3}} = \frac{\sqrt{3}}{2} ≈ 0{,}866 (α ≈ 40°54'). Zgodnie z regułą R > r otrzymujemy α < β.
+  solution_steps:
+  - Wyznacz r = \frac{12\sqrt{3}}{6} = 2\sqrt{3} oraz R = \frac{12\sqrt{3}}{3} = 4\sqrt{3}.
+  - Uzasadnij OM ⊥ BC i SM ⊥ BC, skąd ∠SMO jest kątem liniowym.
+  - Oblicz tg β = \frac{6}{2\sqrt{3}} = \sqrt{3}, więc β = 60°.
+  - Oblicz |SM| = \sqrt{36+12} = 4\sqrt{3}.
+  - Oblicz tg α = \frac{6}{4\sqrt{3}} = \frac{\sqrt{3}}{2}.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: uzasadnienie kąta liniowego
+      answer:
+        kind: NOT_MACHINE_CHECKABLE
+        reason: Należy wykazać, że OM ⊥ BC (OM zawiera się w wysokości trójkąta równobocznego) oraz SM
+          ⊥ BC (SM jest wysokością trójkąta równoramiennego SBC lub z twierdzenia o trzech prostych prostopadłych),
+          a obie półproste wychodzą z punktu M leżącego na krawędzi BC i leżą w odpowiednich półpłaszczyznach.
+    - name: miara kąta dwuściennego (stopnie)
+      answer:
+        kind: NUMERIC
+        value: 60.0
+    - name: apotema SM
+      answer:
+        kind: SYMBOLIC
+        latex: 4\sqrt{3}
+    - name: tangens kąta nachylenia krawędzi bocznej
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{\sqrt{3}}{2}
+  checks:
+  - kind: evaluate
+    expr: \sqrt{6^{2}+\left(2\cdot\sqrt{3}\right)^{2}}
+    part: apotema SM
+  - kind: evaluate
+    expr: \frac{6}{4\cdot\sqrt{3}}
+    part: tangens kąta nachylenia krawędzi bocznej
+  skills:
+  - kąt dwuścienny ściana boczna – podstawa
+  - kąt nachylenia krawędzi bocznej
+  - r i R w trójkącie równobocznym
+  - uzasadnianie prostopadłości
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'part(s) need a human: uzasadnienie kąta liniowego · 2/3 other parts solved fresh'
+- id: g-ex-05
+  slot: EXERCISE
+  ramp_index: 3
+  difficulty: 5
+  exercise_type: ostrosłup prawidłowy czworokątny z danym kątem dwuściennym
+  statement: 'Dany jest ostrosłup prawidłowy czworokątny ABCDS, w którym podstawa ABCD jest kwadratem
+    o boku długości 6, a każda ściana boczna jest nachylona do płaszczyzny podstawy pod kątem 60°. Punkt
+    O jest środkiem kwadratu ABCD, a M – środkiem krawędzi BC. Oblicz: (a) wysokość SO ostrosłupa, (b)
+    długość krawędzi bocznej SA, (c) tangens kąta α nachylenia krawędzi bocznej SA do płaszczyzny podstawy.
+    (d) Uzasadnij, że kąt α jest mniejszy od 60°.'
+  statement_latex: r=\frac{6}{2},\quad |SO|=\frac{6}{2}\cdot\sqrt{3},\quad R=\frac{6\sqrt{2}}{2},\quad
+    |SA|=\sqrt{\left(3\sqrt{3}\right)^{2}+\left(3\sqrt{2}\right)^{2}},\quad \operatorname{tg}\alpha=\frac{3\sqrt{3}}{3\sqrt{2}}
+  solution: |-
+    Kąt dwuścienny między ścianą SBC a podstawą ma krawędź BC, a jego kątem liniowym jest ∠SMO, bo OM ⊥ BC i SM ⊥ BC. Zatem ∠SMO = 60°.
+    (a) W trójkącie prostokątnym SOM (kąt prosty przy O) mamy |OM| = r = \frac{6}{2} = 3, więc
+    |SO| = r\cdot\operatorname{tg}60^\circ = 3\cdot\sqrt{3} = 3\sqrt{3}.
+    (b) Rzutem krawędzi SA na podstawę jest odcinek OA o długości R = \frac{6\sqrt{2}}{2} = 3\sqrt{2}. W trójkącie prostokątnym SOA (kąt prosty przy O):
+    |SA| = \sqrt{\left(3\sqrt{3}\right)^{2}+\left(3\sqrt{2}\right)^{2}} = \sqrt{27+18} = \sqrt{45} = 3\sqrt{5}.
+    (c) tg α = \frac{|SO|}{|OA|} = \frac{3\sqrt{3}}{3\sqrt{2}} = \frac{\sqrt{6}}{2} ≈ 1{,}2247 (α ≈ 50°46').
+    (d) Ponieważ R = 3\sqrt{2} > r = 3, a licznik |SO| jest w obu przypadkach ten sam, mamy tg α = \frac{H}{R} < \frac{H}{r} = \operatorname{tg}60^\circ. Tangens jest funkcją rosnącą dla kątów ostrych, więc α < 60°.
+  solution_steps:
+  - Wskaż kąt liniowy ∠SMO = 60° (OM ⊥ BC, SM ⊥ BC) i wyznacz r = 3.
+  - Oblicz |SO| = 3\cdot\operatorname{tg}60^\circ = 3\sqrt{3}.
+  - Wyznacz R = |OA| = 3\sqrt{2}.
+  - Oblicz |SA| = \sqrt{27+18} = 3\sqrt{5}.
+  - Oblicz tg α = \frac{3\sqrt{3}}{3\sqrt{2}} = \frac{\sqrt{6}}{2}.
+  - 'Porównaj: R > r, więc tg α < tg 60°, czyli α < 60°.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wysokość SO
+      answer:
+        kind: SYMBOLIC
+        latex: 3\sqrt{3}
+    - name: krawędź boczna SA
+      answer:
+        kind: SYMBOLIC
+        latex: 3\sqrt{5}
+    - name: tangens kąta alfa
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{\sqrt{6}}{2}
+    - name: uzasadnienie, że alfa < 60 stopni
+      answer:
+        kind: NOT_MACHINE_CHECKABLE
+        reason: Należy zauważyć, że R = 3\sqrt{2} > r = 3, więc tg α = H/R < H/r = tg 60°, a ponieważ
+          tangens rośnie dla kątów ostrych, α < 60°.
+  checks:
+  - kind: evaluate
+    expr: \frac{6}{2}\cdot\sqrt{3}
+    part: wysokość SO
+  - kind: evaluate
+    expr: \sqrt{\left(3\cdot\sqrt{3}\right)^{2}+\left(3\cdot\sqrt{2}\right)^{2}}
+    part: krawędź boczna SA
+  - kind: evaluate
+    expr: \frac{3\cdot\sqrt{3}}{3\cdot\sqrt{2}}
+    part: tangens kąta alfa
+  skills:
+  - kąt dwuścienny ściana boczna – podstawa
+  - wysokość ostrosłupa z tangensa
+  - krawędź boczna
+  - porównywanie kątów nachylenia
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'part(s) need a human: uzasadnienie, że alfa < 60 stopni · 3/3 other parts solved fresh'
+- id: g-ex-t00
+  slot: EXERCISE
+  ramp_index: 6
+  difficulty: 4
+  exercise_type: obliczanie kątów w ostrosłupie prawidłowym
+  statement: Dany jest ostrosłup prawidłowy czworokątny $ABCDS$ o podstawie $ABCD$, w którym krawędź podstawy
+    ma długość $|AB| = 8$. Ściana boczna tego ostrosłupa jest nachylona do płaszczyzny podstawy pod kątem
+    $60^\circ$. Oblicz wysokość tego ostrosłupa oraz tangens kąta nachylenia krawędzi bocznej do płaszczyzny
+    podstawy.
+  statement_latex: \operatorname{tg}60^\circ = \frac{H}{r},\qquad r = \frac{8}{2},\qquad \operatorname{tg}\alpha
+    = \frac{H}{R},\qquad R = \frac{8 \cdot \sqrt{2}}{2}
+  solution: |-
+    Niech $O$ będzie środkiem kwadratu $ABCD$ (spodkiem wysokości $SO = H$), a $M$ — środkiem krawędzi $BC$.
+
+    Kąt dwuścienny między ścianą boczną $SBC$ a podstawą ma krawędź $BC$. Ponieważ $OM \perp BC$ oraz $SM \perp BC$ (odcinek $SM$ jest wysokością trójkąta równoramiennego $SBC$), kątem liniowym tego kąta dwuściennego jest $\angle SMO = 60^\circ$.
+
+    W trójkącie prostokątnym $SOM$ (kąt prosty przy $O$) mamy $|OM| = r = \frac{8}{2} = 4$, zatem
+    $$H = r \cdot \operatorname{tg}60^\circ = 4 \cdot \sqrt{3}.$$
+
+    Rzutem prostokątnym krawędzi bocznej $SB$ na płaszczyznę podstawy jest odcinek $OB$, więc kątem nachylenia krawędzi bocznej do podstawy jest $\alpha = \angle SBO$. Przy tym $|OB| = R = \frac{8 \cdot \sqrt{2}}{2} = 4 \cdot \sqrt{2}$, zatem
+    $$\operatorname{tg}\alpha = \frac{H}{R} = \frac{4 \cdot \sqrt{3}}{4 \cdot \sqrt{2}} = \frac{\sqrt{6}}{2} \approx 1{,}2247.$$
+
+    Sprawdzenie sensowności: $\operatorname{tg}\alpha < \operatorname{tg}60^\circ = \sqrt{3}$, czyli $\alpha < 60^\circ$, zgodnie z regułą $R > r$.
+  solution_steps:
+  - Oznacz $O$ — środek podstawy, $M$ — środek krawędzi $BC$; wskaż kąt liniowy $\angle SMO = 60^\circ$.
+  - Oblicz $r = |OM| = \frac{8}{2} = 4$.
+  - 'Wyznacz wysokość: $H = r \cdot \operatorname{tg}60^\circ = 4\sqrt{3}$.'
+  - 'Wskaż rzut krawędzi $SB$ na podstawę: odcinek $OB$, $|OB| = R = 4\sqrt{2}$.'
+  - Oblicz $\operatorname{tg}\alpha = \frac{H}{R} = \frac{4\sqrt{3}}{4\sqrt{2}} = \frac{\sqrt{6}}{2}$.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: H
+      answer:
+        kind: NUMERIC
+        value: 6.928203230275509
+        tol: 1.0e-06
+        latex: 4\sqrt{3}
+    - name: tg_alfa
+      answer:
+        kind: NUMERIC
+        value: 1.224744871391589
+        tol: 1.0e-06
+        latex: \frac{\sqrt{6}}{2}
+  checks:
+  - kind: evaluate
+    expr: 4 \cdot \sqrt{3}
+    part: H
+  - kind: evaluate
+    expr: \frac{4 \cdot \sqrt{3}}{4 \cdot \sqrt{2}}
+    part: tg_alfa
+  skills:
+  - rozróżnianie kąta ściany bocznej i kąta krawędzi bocznej
+  - wyznaczanie r i R dla kwadratu
+  - zastosowanie tangensa w trójkącie prostokątnym
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [H] SymPy solved it fresh: 6.928203230275509 vs 6.928203230275509
+      (tol 1e-06) ; [tg_alfa] SymPy solved it fresh: 1.224744871391589 vs 1.224744871391589 (tol 1e-06)'
+- id: g-ex-t01
+  slot: EXERCISE
+  ramp_index: 7
+  difficulty: 4
+  exercise_type: kąt dwuścienny i kąt prostej z płaszczyzną w graniastosłupie
+  statement: |-
+    Dany jest graniastosłup prawidłowy trójkątny $ABCA'B'C'$, w którym $ABC$ jest dolną podstawą, $A'B'C'$ — górną podstawą, a $AA'$, $BB'$, $CC'$ są krawędziami bocznymi prostopadłymi do podstaw. Krawędź podstawy ma długość $6$, a wysokość graniastosłupa jest równa $4$. Oblicz:
+    a) tangens kąta dwuściennego o krawędzi $BC$, którego ścianami są półpłaszczyzna zawierająca trójkąt $A'BC$ oraz półpłaszczyzna podstawy zawierająca punkt $A$;
+    b) tangens kąta nachylenia przekątnej $A'B$ ściany bocznej $ABB'A'$ do płaszczyzny podstawy $ABC$.
+  statement_latex: \operatorname{tg}\beta = \frac{|AA'|}{|AM|} = \frac{4}{3 \cdot \sqrt{3}},\qquad \operatorname{tg}\alpha
+    = \frac{|AA'|}{|AB|} = \frac{4}{6}
+  solution: |-
+    a) Niech $M$ będzie środkiem krawędzi $BC$. W trójkącie równobocznym $ABC$ odcinek $AM$ jest wysokością, więc $AM \perp BC$ oraz $|AM| = \frac{6 \cdot \sqrt{3}}{2} = 3 \cdot \sqrt{3}$. Rzutem prostokątnym odcinka $A'M$ na płaszczyznę podstawy jest odcinek $AM$, a $AM \perp BC$, więc na mocy twierdzenia o trzech prostych prostopadłych $A'M \perp BC$. Zatem $\angle A'MA = \beta$ jest kątem liniowym szukanego kąta dwuściennego.
+    W trójkącie prostokątnym $A'AM$ (kąt prosty przy $A$, bo $AA' \perp$ podstawa):
+    $$\operatorname{tg}\beta = \frac{|AA'|}{|AM|} = \frac{4}{3 \cdot \sqrt{3}} = \frac{4 \cdot \sqrt{3}}{9} \approx 0{,}7698.$$
+
+    b) Rzutem prostokątnym punktu $A'$ na płaszczyznę podstawy jest punkt $A$, więc rzutem odcinka $A'B$ jest odcinek $AB$ i kątem nachylenia jest $\alpha = \angle A'BA$. W trójkącie prostokątnym $A'AB$ (kąt prosty przy $A$):
+    $$\operatorname{tg}\alpha = \frac{|AA'|}{|AB|} = \frac{4}{6} = \frac{2}{3} \approx 0{,}6667.$$
+  solution_steps:
+  - Wprowadź $M$ — środek $BC$; zauważ, że $AM \perp BC$ i $A'M \perp BC$, więc $\angle A'MA$ jest kątem
+    liniowym.
+  - Oblicz $|AM| = \frac{6\sqrt{3}}{2} = 3\sqrt{3}$ (wysokość trójkąta równobocznego).
+  - Wyznacz $\operatorname{tg}\beta = \frac{4}{3\sqrt{3}} = \frac{4\sqrt{3}}{9}$.
+  - Zauważ, że rzutem $A'$ na podstawę jest $A$, więc rzutem $A'B$ jest $AB$.
+  - Wyznacz $\operatorname{tg}\alpha = \frac{4}{6} = \frac{2}{3}$.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: tg_beta
+      answer:
+        kind: NUMERIC
+        value: 0.7698003589195009
+        tol: 1.0e-06
+        latex: \frac{4\sqrt{3}}{9}
+    - name: tg_alfa
+      answer:
+        kind: NUMERIC
+        value: 0.6666666666666666
+        tol: 1.0e-06
+        latex: \frac{2}{3}
+  checks:
+  - kind: evaluate
+    expr: \frac{4}{3 \cdot \sqrt{3}}
+    part: tg_beta
+  - kind: evaluate
+    expr: \frac{4}{6}
+    part: tg_alfa
+  skills:
+  - budowanie kąta liniowego kąta dwuściennego
+  - wysokość trójkąta równobocznego
+  - kąt nachylenia przekątnej ściany bocznej do podstawy
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [tg_beta] SymPy solved it fresh: 0.7698003589195009 vs 0.769800358919501
+      (tol 1e-06) ; [tg_alfa] SymPy solved it fresh: 0.6666666666666666 vs 0.6666666666666666 (tol 1e-06)'
+- id: g-cm-06
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: klasyfikacja położenia prostych – demonstracja błędu
+  statement: 'Dany jest prostopadłościan ABCDA''B''C''D'', w którym |AB| = 8, |BC| = 5, |AA''| = 4 (ABCD
+    jest dolną podstawą, a AA'', BB'', CC'', DD'' – krawędziami bocznymi). Uczeń stwierdził: „Proste AB
+    i CC'' nie mają punktu wspólnego, więc są równoległe”. Odpowiedz: (a) Czy proste AB i CC'' są równoległe?
+    (b) Czy proste AB i CC'' są skośne? Wyjaśnij, na czym polega błąd ucznia.'
+  statement_latex: AB\cap CC'=\varnothing\ \nRightarrow\ AB\parallel CC'
+  solution: |-
+    BŁĘDNE ROZUMOWANIE UCZNIA: „Na płaszczyźnie dwie proste, które się nie przecinają, są równoległe. Proste AB i CC' nie mają punktu wspólnego, więc AB ∥ CC'.” Otrzymana (błędna) odpowiedź: proste są równoległe.
+    DLACZEGO TO BŁĄD: reguła „brak punktu wspólnego ⇒ równoległość” obowiązuje tylko dla prostych leżących w jednej płaszczyźnie. W przestrzeni brak punktu wspólnego oznacza jedynie, że proste są równoległe LUB skośne.
+    POPRAWNE ROZUMOWANIE: prosta AB leży w płaszczyźnie dolnej podstawy, a prosta CC' jest prostopadła do tej płaszczyzny i przebija ją w punkcie C, który nie należy do prostej AB. Gdyby istniała płaszczyzna zawierająca AB i CC', to zawierałaby punkty A, B, C, C'; płaszczyzna przez A, B, C to płaszczyzna podstawy, a do niej punkt C' nie należy – sprzeczność. Zatem nie ma płaszczyzny zawierającej obie proste, więc proste AB i CC' są SKOŚNE (a nie równoległe). Dodatkowo, ponieważ CC' ∥ BB' i AB ⊥ BB', kąt między tymi prostymi skośnymi wynosi 90°.
+  solution_steps:
+  - 'Błąd: przeniesienie planimetrycznej reguły „brak punktu wspólnego ⇒ równoległe” do przestrzeni; wynik
+    błędny: AB ∥ CC''.'
+  - 'W przestrzeni brak punktu wspólnego daje tylko alternatywę: równoległe lub skośne.'
+  - 'Sprawdź, czy istnieje płaszczyzna zawierająca AB i CC'': punkty A, B, C wyznaczają płaszczyznę podstawy,
+    do której C'' nie należy – takiej płaszczyzny nie ma.'
+  - 'Wniosek: proste AB i CC'' są skośne, a nie równoległe (kąt między nimi wynosi 90°).'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: czy proste są równoległe
+      answer:
+        kind: BOOLEAN
+        truth: false
+    - name: czy proste są skośne
+      answer:
+        kind: BOOLEAN
+        truth: true
+  skills:
+  - wzajemne położenie prostych w przestrzeni
+  - rozpoznawanie prostych skośnych
+  verification:
+    checkability: REFERENCE_CALL
+    note: 2 parts matched
+- id: g-cm-07
+  slot: COMMON_MISTAKE
+  ramp_index: 1
+  difficulty: 3
+  exercise_type: prostopadłość prostych skośnych – demonstracja błędu
+  statement: 'Dany jest sześcian ABCDA''B''C''D'' o krawędzi długości 5 (ABCD – dolna podstawa, A''B''C''D''
+    – górna, AA'', BB'', CC'', DD'' – krawędzie boczne). Rozważamy proste AC (przekątna dolnej podstawy)
+    oraz B''D'' (przekątna górnej podstawy). Uczeń napisał: „Proste AC i B''D'' nie przecinają się, więc
+    nie ma między nimi żadnego kąta i na pewno nie mogą być prostopadłe”. Podaj miarę kąta między prostymi
+    AC i B''D'' oraz rozstrzygnij, czy proste te są prostopadłe. Wyjaśnij błąd ucznia.'
+  statement_latex: B'D'\parallel BD,\qquad AC\perp BD\ \Rightarrow\ \measuredangle\left(AC,B'D'\right)=90^\circ
+  solution: |-
+    BŁĘDNE ROZUMOWANIE UCZNIA: „Kąt można zmierzyć tylko tam, gdzie proste się przecinają. Proste AC i B'D' leżą w różnych płaszczyznach (dolnej i górnej podstawie) i nie mają punktu wspólnego, więc kąt między nimi nie istnieje, a prostopadłość jest wykluczona.” Błędny wniosek: proste nie są prostopadłe.
+    DLACZEGO TO BŁĄD: kąt między prostymi skośnymi definiujemy przez równoległe przesunięcie jednej z nich do punktu leżącego na drugiej; taki kąt zawsze istnieje i nie zależy od wyboru punktu.
+    POPRAWNE ROZUMOWANIE: ściana BB'D'D (przekrój) daje BD ∥ B'D', bo BB'D'D jest prostokątem. Zamiast prostej B'D' bierzemy więc prostą BD, która przecina AC w środku O kwadratu ABCD. Przekątne kwadratu są prostopadłe, więc ∠(AC, BD) = 90°, a stąd kąt między prostymi skośnymi AC i B'D' ma miarę 90°. Proste AC i B'D' są zatem prostopadłe, mimo że nie mają punktu wspólnego – to przykład prostych prostopadłych nieprzecinających się.
+  solution_steps:
+  - 'Błąd: założenie, że prostopadłość wymaga punktu wspólnego; błędny wniosek – proste nie są prostopadłe.'
+  - 'Przypomnij definicję: kąt między prostymi skośnymi to kąt między ich prostymi równoległymi przecinającymi
+    się w jednym punkcie.'
+  - Zauważ, że B'D' ∥ BD (BB'D'D jest prostokątem).
+  - Kąt między AC a BD to kąt przekątnych kwadratu, czyli 90°.
+  - 'Wniosek: ∠(AC, B''D'') = 90°, proste są prostopadłe, choć się nie przecinają.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: kąt między prostymi (stopnie)
+      answer:
+        kind: NUMERIC
+        value: 90.0
+    - name: czy proste są prostopadłe
+      answer:
+        kind: BOOLEAN
+        truth: true
+  skills:
+  - kąt między prostymi skośnymi
+  - proste prostopadłe nieprzecinające się
+  - przekątne kwadratu
+  verification:
+    checkability: REFERENCE_CALL
+    note: 2 parts matched
+- id: g-cm-08
+  slot: COMMON_MISTAKE
+  ramp_index: 2
+  difficulty: 3
+  exercise_type: kąt nachylenia krawędzi bocznej – demonstracja błędu
+  statement: Dany jest ostrosłup prawidłowy czworokątny ABCDS, w którym podstawa ABCD jest kwadratem o
+    boku długości 6, a wysokość SO ostrosłupa jest równa 3\sqrt{6} (O – środek kwadratu ABCD). Uczeń obliczył
+    kąt między krawędzią boczną SA a wysokością SO i podał, że kąt nachylenia krawędzi bocznej SA do płaszczyzny
+    podstawy wynosi 30°. Oblicz poprawną miarę kąta nachylenia krawędzi SA do płaszczyzny podstawy oraz
+    długość krawędzi bocznej SA. Wyjaśnij błąd ucznia.
+  statement_latex: R=|OA|=\frac{6\sqrt{2}}{2}=3\sqrt{2},\qquad \operatorname{tg}\alpha=\frac{3\sqrt{6}}{3\sqrt{2}},\qquad
+    |SA|=\sqrt{\left(3\sqrt{6}\right)^{2}+\left(3\sqrt{2}\right)^{2}}
+  solution: |-
+    BŁĘDNE ROZUMOWANIE UCZNIA: „Kąt nachylenia krawędzi bocznej to kąt między SA a wysokością SO”. W trójkącie prostokątnym SOA (kąt prosty przy O) mamy tg∠OSA = \frac{|OA|}{|SO|} = \frac{3\sqrt{2}}{3\sqrt{6}} = \frac{\sqrt{3}}{3}, czyli ∠OSA = 30°. Błędna odpowiedź: 30°.
+    DLACZEGO TO BŁĄD: kąt między prostą a płaszczyzną mierzymy między tą prostą a jej rzutem prostokątnym na płaszczyznę, a nie między prostą a prostopadłą do płaszczyzny. Wysokość SO jest prostopadła do podstawy, więc kąt ∠OSA jest dopełnieniem szukanego kąta do 90°.
+    POPRAWNE ROZUMOWANIE: rzutem prostokątnym punktu S na podstawę jest O, więc rzutem odcinka SA jest odcinek OA i szukany kąt to α = ∠SAO. Mamy |OA| = R = \frac{6\sqrt{2}}{2} = 3\sqrt{2}, |SO| = 3\sqrt{6}, zatem
+    tg α = \frac{3\sqrt{6}}{3\sqrt{2}} = \sqrt{3}, czyli α = 60° (istotnie 60° = 90° − 30°).
+    Ponadto |SA| = \sqrt{\left(3\sqrt{6}\right)^{2}+\left(3\sqrt{2}\right)^{2}} = \sqrt{54+18} = \sqrt{72} = 6\sqrt{2}.
+  solution_steps:
+  - 'Błąd: mierzenie kąta od wysokości SO (prostopadłej do podstawy); błędny wynik 30°.'
+  - 'Przypomnij definicję: kąt prostej z płaszczyzną to kąt z jej rzutem prostokątnym.'
+  - Rzutem S na podstawę jest O, więc rzutem SA jest OA, a szukany kąt to ∠SAO.
+  - Oblicz R = 3\sqrt{2} i tg α = \frac{3\sqrt{6}}{3\sqrt{2}} = \sqrt{3}, czyli α = 60°.
+  - Oblicz |SA| = \sqrt{54+18} = 6\sqrt{2}.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: kąt nachylenia krawędzi bocznej (stopnie)
+      answer:
+        kind: NUMERIC
+        value: 60.0
+    - name: długość krawędzi bocznej SA
+      answer:
+        kind: SYMBOLIC
+        latex: 6\sqrt{2}
+  checks:
+  - kind: evaluate
+    expr: \sqrt{\left(3\cdot\sqrt{6}\right)^{2}+\left(3\cdot\sqrt{2}\right)^{2}}
+    part: długość krawędzi bocznej SA
+  skills:
+  - kąt między prostą a płaszczyzną
+  - rzut prostokątny krawędzi bocznej
+  - trójkąt (H, R, b)
+  verification:
+    checkability: REFERENCE_CALL
+    note: '2 parts matched · det: [długość krawędzi bocznej SA] SymPy solved it fresh: 8.48528137423857
+      vs 8.48528137423857 (tol 1e-09)'
+- id: g-cm-09
+  slot: COMMON_MISTAKE
+  ramp_index: 3
+  difficulty: 4
+  exercise_type: kąt liniowy kąta dwuściennego – demonstracja błędu
+  statement: Dany jest ostrosłup prawidłowy czworokątny ABCDS, w którym podstawa ABCD jest kwadratem o
+    boku długości 12, a wysokość SO ostrosłupa jest równa 6 (O – środek kwadratu ABCD, M – środek krawędzi
+    BC). Uczeń twierdzi, że kątem dwuściennym między ścianą boczną SBC a płaszczyzną podstawy jest kąt
+    SBC (między krawędzią boczną SB a krawędzią podstawy BC). Oblicz poprawną miarę kąta dwuściennego
+    między ścianą SBC a podstawą oraz długość apotemy SM. Wyjaśnij błąd ucznia.
+  statement_latex: r=|OM|=\frac{12}{2}=6,\qquad \operatorname{tg}\beta=\frac{6}{6},\qquad |SM|=\sqrt{6^{2}+6^{2}}
+  solution: |-
+    BŁĘDNE ROZUMOWANIE UCZNIA: przyjmuje kąt SBC. Ponieważ |SB| = \sqrt{|SO|^{2}+|OB|^{2}} = \sqrt{36+72} = 6\sqrt{3}, a trójkąt SBC jest równoramienny o podstawie BC = 12, to cos∠SBC = \frac{6}{6\sqrt{3}} = \frac{\sqrt{3}}{3}, czyli ∠SBC ≈ 54°44'. Błędna odpowiedź: około 54°44'.
+    DLACZEGO TO BŁĄD: krawędzią kąta dwuściennego jest BC, a półproste tworzące kąt liniowy MUSZĄ być prostopadłe do tej krawędzi. Półprosta BS nie jest prostopadła do BC, więc kąt SBC nie jest kątem liniowym tego kąta dwuściennego.
+    POPRAWNE ROZUMOWANIE: bierzemy punkt M – środek krawędzi BC. Wtedy OM ⊥ BC (OM łączy środek kwadratu ze środkiem boku) oraz SM ⊥ BC (SM jest wysokością trójkąta równoramiennego SBC; wynika to również z twierdzenia o trzech prostych prostopadłych, bo rzutem SM na podstawę jest OM). Kątem liniowym jest więc ∠SMO. W trójkącie prostokątnym SOM: |OM| = r = \frac{12}{2} = 6, |SO| = 6, zatem
+    tg β = \frac{6}{6} = 1, czyli β = 45°.
+    Apotema: |SM| = \sqrt{6^{2}+6^{2}} = \sqrt{72} = 6\sqrt{2}.
+  solution_steps:
+  - 'Błąd: przyjęcie kąta SBC, którego ramię BS nie jest prostopadłe do krawędzi BC; błędny wynik ≈54°44''.'
+  - 'Przypomnij warunek kąta liniowego: obie półproste prostopadłe do krawędzi kąta dwuściennego.'
+  - Wybierz M – środek BC; wtedy OM ⊥ BC i SM ⊥ BC, więc ∠SMO jest kątem liniowym.
+  - Oblicz r = |OM| = 6 i tg β = \frac{6}{6} = 1, czyli β = 45°.
+  - Oblicz |SM| = \sqrt{36+36} = 6\sqrt{2}.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: miara kąta dwuściennego (stopnie)
+      answer:
+        kind: NUMERIC
+        value: 45.0
+    - name: apotema SM
+      answer:
+        kind: SYMBOLIC
+        latex: 6\sqrt{2}
+  checks:
+  - kind: evaluate
+    expr: \sqrt{6^{2}+6^{2}}
+    part: apotema SM
+  skills:
+  - kąt liniowy kąta dwuściennego
+  - półproste prostopadłe do krawędzi
+  - apotema ostrosłupa
+  verification:
+    checkability: REFERENCE_CALL
+    note: '2 parts matched · det: [apotema SM] SymPy solved it fresh: 8.48528137423857 vs 8.48528137423857
+      (tol 1e-09)'
+- id: g-cm-10
+  slot: COMMON_MISTAKE
+  ramp_index: 4
+  difficulty: 4
+  exercise_type: mylenie r z R w ostrosłupie – demonstracja błędu
+  statement: 'Dany jest ostrosłup prawidłowy czworokątny ABCDS, w którym podstawa ABCD jest kwadratem
+    o boku długości 8, a wysokość SO ostrosłupa jest równa 4 (O – środek kwadratu ABCD, M – środek krawędzi
+    BC). Uczeń, licząc tangens kąta nachylenia ściany bocznej SBC do płaszczyzny podstawy, w mianowniku
+    wstawił długość odcinka OB (promień okręgu opisanego na podstawie) i otrzymał \frac{\sqrt{2}}{2}.
+    Oblicz poprawnie: (a) tangens kąta β nachylenia ściany bocznej do podstawy, (b) miarę kąta β, (c)
+    tangens kąta α nachylenia krawędzi bocznej SB do podstawy. Wyjaśnij błąd ucznia.'
+  statement_latex: r=|OM|=\frac{8}{2}=4,\quad R=|OB|=\frac{8\sqrt{2}}{2}=4\sqrt{2},\quad \operatorname{tg}\beta=\frac{4}{4},\quad
+    \operatorname{tg}\alpha=\frac{4}{4\sqrt{2}}
+  solution: |-
+    BŁĘDNE ROZUMOWANIE UCZNIA: „W trójkącie z wysokością ostrosłupa przyprostokątną leżącą w podstawie jest odcinek OB”, więc tg β = \frac{|SO|}{|OB|} = \frac{4}{4\sqrt{2}} = \frac{\sqrt{2}}{2} (co dałoby β ≈ 35°16'). Błędna odpowiedź: tg β = \frac{\sqrt{2}}{2}.
+    DLACZEGO TO BŁĄD: to jest tangens innego kąta – kąta nachylenia KRAWĘDZI BOCZNEJ do podstawy. Do kąta dwuściennego między ścianą boczną a podstawą służy trójkąt (H, r, m), czyli SOM, gdzie |OM| = r; do kąta krawędzi bocznej – trójkąt (H, R, b), czyli SOB, gdzie |OB| = R.
+    POPRAWNE ROZUMOWANIE:
+    r = |OM| = \frac{8}{2} = 4, R = |OB| = \frac{8\sqrt{2}}{2} = 4\sqrt{2}.
+    (a) tg β = \frac{|SO|}{|OM|} = \frac{4}{4} = 1.
+    (b) β = 45°.
+    (c) tg α = \frac{|SO|}{|OB|} = \frac{4}{4\sqrt{2}} = \frac{\sqrt{2}}{2} ≈ 0,7071 (α ≈ 35°16').
+    Wartość otrzymana przez ucznia jest więc poprawną wartością, ale dla innego kąta. Zgodnie z regułą R > r zawsze α < β.
+  solution_steps:
+  - 'Błąd: użycie R = |OB| zamiast r = |OM| w trójkącie dla kąta ściany bocznej; błędny wynik tg β = \frac{\sqrt{2}}{2}.'
+  - 'Rozróżnij trójkąty: (H, r, m) – ściana boczna, (H, R, b) – krawędź boczna.'
+  - Wyznacz r = \frac{8}{2} = 4 oraz R = \frac{8\sqrt{2}}{2} = 4\sqrt{2}.
+  - Oblicz tg β = \frac{4}{4} = 1, więc β = 45°.
+  - Oblicz tg α = \frac{4}{4\sqrt{2}} = \frac{\sqrt{2}}{2}; zauważ, że α < β, bo R > r.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: tangens kąta beta (ściana boczna)
+      answer:
+        kind: NUMERIC
+        value: 1.0
+    - name: miara kąta beta (stopnie)
+      answer:
+        kind: NUMERIC
+        value: 45.0
+    - name: tangens kąta alfa (krawędź boczna)
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{\sqrt{2}}{2}
+  checks:
+  - kind: evaluate
+    expr: \frac{4}{4}
+    part: tangens kąta beta (ściana boczna)
+  - kind: evaluate
+    expr: \frac{4}{4\cdot\sqrt{2}}
+    part: tangens kąta alfa (krawędź boczna)
+  skills:
+  - rozróżnianie trójkątów (H, r, m) i (H, R, b)
+  - kąt ściany bocznej i kąt krawędzi bocznej
+  - tangens kąta
+  verification:
+    checkability: REFERENCE_CALL
+    note: 'could not compare: PARSE_ERROR: "UnexpectedCharacters: No terminal matches ''\\'' in the current
+      parser context, at line 1 col 4"'
+- id: g-ch-t02
+  slot: CHALLENGE
+  ramp_index: 0
+  difficulty: 4
+  exercise_type: 'zadanie odwrotne: od objętości i kąta do krawędzi'
+  statement: Objętość pewnego ostrosłupa prawidłowego czworokątnego jest równa $36\sqrt{3}$, a każda jego
+    ściana boczna jest nachylona do płaszczyzny podstawy pod kątem $60^\circ$. Oblicz długość krawędzi
+    podstawy tego ostrosłupa.
+  statement_latex: \frac{1}{3} \cdot a^{2} \cdot \left(\frac{a}{2} \cdot \operatorname{tg}60^\circ\right)
+    = 36 \cdot \sqrt{3}
+  solution: |-
+    Oznaczmy przez $a$ długość krawędzi podstawy, przez $O$ — środek podstawy (spodek wysokości $H$), a przez $M$ — środek jednej z krawędzi podstawy.
+
+    Odcinek $OM$ jest prostopadły do tej krawędzi i $|OM| = r = \frac{a}{2}$; apotema poprowadzona z wierzchołka ostrosłupa też jest do niej prostopadła, więc kątem liniowym kąta dwuściennego ściana boczna–podstawa jest kąt o mierze $60^\circ$ w trójkącie prostokątnym o przyprostokątnych $H$ i $r$. Stąd
+    $$H = r \cdot \operatorname{tg}60^\circ = \frac{a}{2} \cdot \sqrt{3} = \frac{a \cdot \sqrt{3}}{2}.$$
+
+    Objętość ostrosłupa:
+    $$V = \frac{1}{3} \cdot a^{2} \cdot H = \frac{1}{3} \cdot a^{2} \cdot \frac{a \cdot \sqrt{3}}{2} = \frac{a^{3} \cdot \sqrt{3}}{6}.$$
+
+    Z warunku zadania $\frac{a^{3} \cdot \sqrt{3}}{6} = 36 \cdot \sqrt{3}$, czyli $a^{3} = 216$, zatem $a = \sqrt[3]{216} = 6$.
+
+    Odpowiedź: krawędź podstawy ma długość $6$ (wtedy $H = 3\sqrt{3}$).
+  solution_steps:
+  - Wprowadź zmienną $a$ — długość krawędzi podstawy.
+  - 'Zbuduj kąt liniowy: $r = \frac{a}{2}$, kąt $60^\circ$ w trójkącie o przyprostokątnych $H$ i $r$.'
+  - 'Wyraź wysokość: $H = \frac{a}{2} \cdot \sqrt{3}$.'
+  - 'Zapisz objętość jako funkcję $a$: $V = \frac{a^{3}\sqrt{3}}{6}$.'
+  - Rozwiąż równanie $\frac{a^{3}\sqrt{3}}{6} = 36\sqrt{3}$, czyli $a^{3} = 216$, skąd $a = 6$.
+  answer:
+    kind: NUMERIC
+    value: 6.0
+    latex: '6'
+  checks:
+  - kind: evaluate
+    expr: \sqrt[3]{216}
+    var: a
+  stated_model:
+    variable: a
+    objective_latex: V\left(a\right) = \frac{a^{3} \cdot \sqrt{3}}{6}
+    domain_lo: '0'
+    goal: value
+    constraint_used: H = \frac{a}{2} \cdot \operatorname{tg}60^\circ
+  skills:
+  - wprowadzenie zmiennej dla nieznanej krawędzi
+  - kąt dwuścienny ściana boczna–podstawa
+  - łączenie wzoru na objętość z zależnościami kątowymi
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''a'': ''V\\left(a\\right)
+      = \\frac{a^{3} \\cdot \\sqrt{3}}{6}'') — human review'
+- id: g-ch-t03
+  slot: CHALLENGE
+  ramp_index: 1
+  difficulty: 5
+  exercise_type: położenie punktu na krawędzi z warunku prostopadłości
+  statement: Dany jest prostopadłościan $ABCDA'B'C'D'$, w którym podstawa $ABCD$ jest kwadratem o boku
+    $4$, a krawędzie boczne $AA'$, $BB'$, $CC'$, $DD'$ mają długość $10$ i są prostopadłe do płaszczyzny
+    podstawy (punkty $A'$, $B'$, $C'$, $D'$ leżą odpowiednio nad $A$, $B$, $C$, $D$). Punkt $P$ leży na
+    krawędzi $CC'$ i jest tak dobrany, że odcinki $PA'$ i $PB$ są prostopadłe oraz $|CP| > |PC'|$. Oblicz
+    długość odcinka $CP$ oraz tangens kąta nachylenia prostej $BP$ do płaszczyzny podstawy $ABCD$.
+  statement_latex: \left|A'P\right|^{2} + \left|PB\right|^{2} = \left|A'B\right|^{2},\qquad \left(32 +
+    \left(10 - x\right)^{2}\right) + \left(16 + x^{2}\right) = 116
+  solution: |-
+    Oznaczmy $|CP| = x$, gdzie $x \in \left(0;\,10\right)$; wtedy $|PC'| = 10 - x$.
+
+    Krok 1. $|PB|$: trójkąt $BCP$ ma kąt prosty przy $C$ (bo $CC' \perp$ podstawa, więc $CP \perp CB$), zatem
+    $$|PB|^{2} = 4^{2} + x^{2} = 16 + x^{2}.$$
+
+    Krok 2. $|A'P|$: trójkąt $A'C'P$ ma kąt prosty przy $C'$ (bo $CC' \perp$ górna podstawa, więc $C'P \perp C'A'$), a $|A'C'| = 4 \cdot \sqrt{2}$ jako przekątna kwadratu, zatem
+    $$|A'P|^{2} = \left(4 \cdot \sqrt{2}\right)^{2} + \left(10 - x\right)^{2} = 32 + \left(10 - x\right)^{2}.$$
+
+    Krok 3. $|A'B|$: trójkąt $A'AB$ ma kąt prosty przy $A$, więc $|A'B|^{2} = 10^{2} + 4^{2} = 116$.
+
+    Krok 4. Warunek $PA' \perp PB$ oznacza, że trójkąt $A'PB$ ma kąt prosty przy $P$, czyli
+    $$\left(32 + \left(10 - x\right)^{2}\right) + \left(16 + x^{2}\right) = 116.$$
+    Po uporządkowaniu: $2x^{2} - 20x + 32 = 0$, czyli $x^{2} - 10x + 16 = 0$. Wyróżnik $\Delta = 100 - 64 = 36$, $\sqrt{\Delta} = 6$, więc $x = 2$ lub $x = 8$. Oba punkty leżą na krawędzi, ale warunek $|CP| > |PC'|$ (czyli $x > 5$) spełnia tylko $x = 8$. Zatem $|CP| = 8$.
+
+    Krok 5. Rzutem prostokątnym punktu $P$ na płaszczyznę podstawy jest punkt $C$ (bo $PC \perp$ podstawa), więc rzutem odcinka $BP$ jest $BC$, a szukanym kątem jest $\angle PBC$. W trójkącie prostokątnym $BCP$:
+    $$\operatorname{tg}\angle PBC = \frac{|CP|}{|BC|} = \frac{8}{4} = 2.$$
+  solution_steps:
+  - Wprowadź $x = |CP|$, $x \in (0;10)$, oraz $|PC'| = 10 - x$.
+  - 'Z trójkąta prostokątnego $BCP$: $|PB|^{2} = 16 + x^{2}$.'
+  - 'Z trójkąta prostokątnego $A''C''P$ (przekątna $|A''C''| = 4\sqrt{2}$): $|A''P|^{2} = 32 + (10-x)^{2}$.'
+  - 'Z trójkąta prostokątnego $A''AB$: $|A''B|^{2} = 116$.'
+  - Z warunku $PA' \perp PB$ zapisz $|A'P|^{2} + |PB|^{2} = |A'B|^{2}$ i doprowadź do $x^{2} - 10x + 16
+    = 0$.
+  - 'Rozwiąż: $x = 2$ lub $x = 8$; warunek $|CP| > |PC''|$ eliminuje $x = 2$, więc $|CP| = 8$.'
+  - Rzutem $P$ na podstawę jest $C$, więc $\operatorname{tg}\angle PBC = \frac{8}{4} = 2$.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: CP
+      answer:
+        kind: NUMERIC
+        value: 8.0
+        latex: '8'
+    - name: tg_kata
+      answer:
+        kind: NUMERIC
+        value: 2.0
+        latex: '2'
+  checks:
+  - kind: evaluate
+    expr: \frac{10 + \sqrt{100 - 4 \cdot 16}}{2}
+    part: CP
+  - kind: evaluate
+    expr: \frac{8}{4}
+    part: tg_kata
+  stated_model:
+    variable: x
+    objective_latex: \left(32 + \left(10 - x\right)^{2}\right) + \left(16 + x^{2}\right) = 116
+    domain_lo: '0'
+    domain_hi: '10'
+    goal: value
+    constraint_used: \left|CP\right| > \left|PC'\right|
+  skills:
+  - wielokrotne stosowanie twierdzenia Pitagorasa w bryle
+  - warunek prostopadłości odcinków jako równanie kwadratowe
+  - odrzucenie rozwiązania niespełniającego warunku dodatkowego
+  - kąt prostej z płaszczyzną podstawy
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''x'': ''\\left(32
+      + \\left(10 - x\\right)^{2}\\right) + \\left(16 + x^{2}\\right) = 116'') — human review'
+- id: g-ch-t04
+  slot: CHALLENGE
+  ramp_index: 2
+  difficulty: 5
+  exercise_type: 'modelowanie: wzór z dziedziną, kąt dwuścienny i kontrola warunku zewnętrznego'
+  statement: |-
+    Szkielet namiotu ma kształt ostrosłupa prawidłowego czworokątnego. Suma długości krawędzi podstawy tego ostrosłupa i jego wysokości jest równa $12$ m. Długość krawędzi podstawy (wyrażoną w metrach) oznaczmy przez $x$.
+    a) Wyznacz wzór na tangens kąta nachylenia ściany bocznej namiotu do płaszczyzny podstawy jako funkcję zmiennej $x$ i podaj dziedzinę tej funkcji.
+    b) Wyznacz tę wartość $x$, dla której ściana boczna jest nachylona do płaszczyzny podstawy pod kątem $45^\circ$, i oblicz odpowiadającą jej wysokość namiotu. Namiot ma stanąć w hali o wysokości $4{,}5$ m — rozstrzygnij, czy się w niej zmieści.
+    c) Dla wyznaczonej w punkcie b) wartości $x$ oblicz tangens kąta nachylenia krawędzi bocznej namiotu do płaszczyzny podstawy.
+  statement_latex: \operatorname{tg}\beta\left(x\right) = \frac{12 - x}{\frac{x}{2}} = \frac{2 \cdot \left(12
+    - x\right)}{x}
+  solution: |-
+    a) Niech $x$ — krawędź podstawy, wtedy wysokość ostrosłupa $H = 12 - x$. Niech $O$ będzie środkiem podstawy, a $M$ — środkiem krawędzi podstawy. Wtedy $OM \perp$ krawędź podstawy i apotema $SM \perp$ krawędź podstawy, więc kątem liniowym kąta dwuściennego ściana boczna–podstawa jest $\beta = \angle SMO$. W trójkącie prostokątnym $SOM$ mamy $|OM| = r = \frac{x}{2}$ oraz $|SO| = H = 12 - x$, zatem
+    $$\operatorname{tg}\beta\left(x\right) = \frac{12 - x}{\frac{x}{2}} = \frac{2 \cdot \left(12 - x\right)}{x}.$$
+    Dziedzina: musi być $x > 0$ oraz $H = 12 - x > 0$, czyli $x \in \left(0;\,12\right)$.
+
+    b) Warunek $\beta = 45^\circ$ oznacza $\operatorname{tg}\beta = 1$:
+    $$\frac{2 \cdot \left(12 - x\right)}{x} = 1 \iff 24 - 2x = x \iff 3x = 24 \iff x = 8,$$
+    i $x = 8 \in \left(0;\,12\right)$. Wtedy wysokość namiotu $H = 12 - 8 = 4$ (m). Ponieważ $4 < 4{,}5$, namiot zmieści się w hali.
+
+    c) Rzutem krawędzi bocznej $SA$ na podstawę jest odcinek $OA$ o długości $R = \frac{x \cdot \sqrt{2}}{2} = \frac{8 \cdot \sqrt{2}}{2} = 4 \cdot \sqrt{2}$. Zatem
+    $$\operatorname{tg}\alpha = \frac{H}{R} = \frac{4}{4 \cdot \sqrt{2}} = \frac{\sqrt{2}}{2} \approx 0{,}7071.$$
+    Wynik jest zgodny z regułą $R > r$: $\operatorname{tg}\alpha < \operatorname{tg}\beta = 1$, czyli $\alpha < 45^\circ$.
+  solution_steps:
+  - Wprowadź $x$ — krawędź podstawy; z warunku sumy $H = 12 - x$.
+  - Zbuduj kąt liniowy $\beta = \angle SMO$ ($M$ — środek krawędzi podstawy), $r = \frac{x}{2}$.
+  - Zapisz wzór $\operatorname{tg}\beta(x) = \frac{2(12-x)}{x}$.
+  - 'Wyznacz dziedzinę z warunków $x > 0$ i $12 - x > 0$: $x \in (0;12)$.'
+  - Rozwiąż $\frac{2(12-x)}{x} = 1$, skąd $x = 8$, a $H = 12 - 8 = 4$.
+  - 'Porównaj $H = 4$ z ograniczeniem $4{,}5$ m: warunek spełniony, namiot się mieści.'
+  - Oblicz $R = \frac{8\sqrt{2}}{2} = 4\sqrt{2}$ i $\operatorname{tg}\alpha = \frac{4}{4\sqrt{2}} = \frac{\sqrt{2}}{2}$.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wzor
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{2 \cdot \left(12 - x\right)}{x}
+    - name: dziedzina
+      answer:
+        kind: INTERVAL
+        lo: '0'
+        hi: '12'
+    - name: x
+      answer:
+        kind: NUMERIC
+        value: 8.0
+        latex: '8'
+    - name: wysokosc
+      answer:
+        kind: NUMERIC
+        value: 4.0
+        latex: '4'
+    - name: czy_miesci
+      answer:
+        kind: BOOLEAN
+        truth: true
+    - name: tg_alfa
+      answer:
+        kind: NUMERIC
+        value: 0.7071067811865476
+        tol: 1.0e-06
+        latex: \frac{\sqrt{2}}{2}
+  checks:
+  - kind: simplify
+    expr: \frac{12 - x}{\frac{x}{2}}
+    part: wzor
+  - kind: solve_equation
+    expr: \frac{2 \cdot \left(12 - x\right)}{x} = 1
+    part: x
+  - kind: evaluate
+    expr: 12 - 8
+    part: wysokosc
+  - kind: evaluate
+    expr: \frac{4}{\frac{8 \cdot \sqrt{2}}{2}}
+    part: tg_alfa
+  stated_model:
+    variable: x
+    objective_latex: \operatorname{tg}\beta\left(x\right) = \frac{2 \cdot \left(12 - x\right)}{x}
+    domain_lo: '0'
+    domain_hi: '12'
+    goal: value
+    constraint_used: x + H = 12,\quad H \le 4{,}5
+  skills:
+  - wprowadzenie zmiennej i zapisanie zależności z warunku sumy
+  - wyznaczanie wzoru funkcji i jej dziedziny
+  - kąt dwuścienny ściana boczna–podstawa
+  - kąt nachylenia krawędzi bocznej do podstawy
+  - sprawdzenie warunku dopuszczalności wyniku
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (PARSE_ERROR: "UnexpectedCharacters: No terminal
+      matches ''\\'' in the current parser context, at line 1 col 1") — human review'

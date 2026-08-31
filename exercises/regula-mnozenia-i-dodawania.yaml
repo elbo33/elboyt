@@ -1,0 +1,792 @@
+section: regula-mnozenia-i-dodawania
+name: Reguła mnożenia i reguła dodawania
+scope: The multiplication rule and the addition rule, and using them together, for a sequence of choices
+  with any number of steps.
+requirements:
+- XI.2
+counts:
+  total: 16
+  DETERMINISTIC: 13
+  NOT_MACHINE_CHECKABLE: 1
+  STATED_MODEL: 2
+exercises:
+- id: g-th-00
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: zliczanie dwuetapowe / porównanie obu reguł
+  statement: W stołówce w zestawie obiadowym można wybrać jedną z 4 zup oraz jedno z 6 dań głównych. a)
+    Ile jest różnych zestawów obiadowych złożonych z zupy i dania głównego? b) Na ile sposobów można zamówić
+    tylko jedną potrawę (zupę albo danie główne)?
+  statement_latex: a)\ N_a = 4\cdot 6,\qquad b)\ N_b = 4 + 6
+  solution: |-
+    a) Zestaw powstaje w dwóch etapach: najpierw wybieramy zupę (4 sposoby), a potem danie główne (6 sposobów). Liczba możliwości na drugim etapie nie zależy od tego, którą zupę wybrano, więc stosujemy regułę mnożenia: N_a = 4\cdot 6 = 24.
+    b) Teraz zamawiamy TYLKO JEDNĄ potrawę: jest to zupa ALBO danie główne. Te przypadki są rozłączne (żadna potrawa nie jest jednocześnie zupą i daniem głównym), więc stosujemy regułę dodawania: N_b = 4 + 6 = 10.
+    Odpowiedź: 24 zestawy oraz 10 sposobów wyboru jednej potrawy.
+  solution_steps:
+  - 'a) Rozbij konstrukcję zestawu na etapy: zupa, potem danie główne.'
+  - 'a) Zapisz liczby możliwości: 4 i 6, i zastosuj regułę mnożenia: 4·6 = 24.'
+  - b) Zauważ, że wybór jednej potrawy to przypadek „zupa” albo „danie główne” — przypadki rozłączne.
+  - 'b) Zastosuj regułę dodawania: 4 + 6 = 10.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: zestawy
+      answer:
+        kind: NUMERIC
+        value: 24.0
+    - name: jedna potrawa
+      answer:
+        kind: NUMERIC
+        value: 10.0
+  checks:
+  - kind: evaluate
+    expr: 4\cdot 6
+    part: zestawy
+  - kind: evaluate
+    expr: 4 + 6
+    part: jedna potrawa
+  skills:
+  - reguła mnożenia
+  - reguła dodawania
+  - rozpoznanie „i” kontra „albo”
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [zestawy] SymPy solved it fresh: 24.0 vs 24.0 (tol 1e-09) ;
+      [jedna potrawa] SymPy solved it fresh: 10.0 vs 10.0 (tol 1e-09)'
+- id: g-th-01
+  slot: THEORY_SUPPORT
+  ramp_index: 1
+  difficulty: 1
+  exercise_type: wybór z powtórzeniami
+  statement: Kod zabezpieczający rower składa się z trzech cyfr ustawionych w ustalonej kolejności; na
+    każdym miejscu może stać dowolna z cyfr 0, 1, 2, …, 9 i cyfry mogą się powtarzać. Oblicz, ile jest
+    wszystkich takich kodów.
+  statement_latex: N = 10\cdot 10\cdot 10
+  solution: |-
+    Kod powstaje w trzech etapach: ustawiamy cyfrę na pierwszym miejscu, potem na drugim, potem na trzecim. Ponieważ cyfry mogą się powtarzać, na każdym etapie mamy tyle samo, czyli 10 możliwości (cyfry od 0 do 9), niezależnie od wcześniejszych wyborów.
+    Z reguły mnożenia: N = 10\cdot 10\cdot 10 = 10^{3} = 1000.
+    Odpowiedź: jest 1000 takich kodów.
+  solution_steps:
+  - Zauważ, że kod to trójka cyfr ustawionych w kolejności — kolejność ma znaczenie.
+  - 'Sprawdź, czy dozwolone są powtórzenia: tak, więc na każdym miejscu 10 możliwości.'
+  - 'Zastosuj regułę mnożenia: 10·10·10 = 1000.'
+  answer:
+    kind: NUMERIC
+    value: 1000.0
+  checks:
+  - kind: evaluate
+    expr: 10\cdot 10\cdot 10
+  skills:
+  - reguła mnożenia
+  - wybór z powtórzeniami
+  - metoda miejsc
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 1000.0 vs 1000.0 (tol 1e-09)'
+- id: g-th-02
+  slot: THEORY_SUPPORT
+  ramp_index: 2
+  difficulty: 2
+  exercise_type: ustawienia wszystkich elementów
+  statement: Na półce ustawiamy obok siebie 5 różnych książek. Oblicz, na ile sposobów można to zrobić.
+  statement_latex: N = 5\cdot 4\cdot 3\cdot 2\cdot 1
+  solution: |-
+    Ustawienie powstaje w pięciu etapach: wybieramy książkę na pierwsze miejsce (5 sposobów), potem na drugie (pozostały 4 książki), potem na trzecie (3), czwarte (2) i piąte (1). Raz ustawionej książki nie można użyć ponownie, więc liczba możliwości maleje o 1 na każdym etapie, ale nie zależy od tego, KTÓRE książki już zużyliśmy.
+    Z reguły mnożenia: N = 5\cdot 4\cdot 3\cdot 2\cdot 1 = 120.
+    Odpowiedź: 120 sposobów.
+  solution_steps:
+  - 'Rozbij ustawianie na etapy: kolejno obsadzamy miejsca od pierwszego do piątego.'
+  - 'Zauważ brak powtórzeń: liczby możliwości to 5, 4, 3, 2, 1.'
+  - 'Pomnóż: 5·4·3·2·1 = 120.'
+  answer:
+    kind: NUMERIC
+    value: 120.0
+  checks:
+  - kind: evaluate
+    expr: 5\cdot 4\cdot 3\cdot 2\cdot 1
+  skills:
+  - reguła mnożenia bez powtórzeń
+  - permutacje
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 120.0 vs 120.0 (tol 1e-09)'
+- id: g-ex-03
+  slot: EXERCISE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: zliczanie liczb metodą miejsc
+  statement: Rozważamy liczby naturalne trzycyfrowe o wszystkich cyfrach różnych, w których zapisie dziesiętnym
+    występują wyłącznie cyfry ze zbioru \{0,\ 2,\ 4,\ 5,\ 7\}. a) Oblicz, ile jest wszystkich takich liczb.
+    b) Oblicz, ile spośród nich jest nieparzystych. Zapisz obliczenia.
+  statement_latex: a)\ N_a = 4\cdot 4\cdot 3,\qquad b)\ N_b = 2\cdot 3\cdot 3
+  solution: |-
+    a) Rysujemy trzy miejsca: setki, dziesiątki, jedności. Najbardziej ograniczone jest miejsce setek, bo cyfra 0 nie może tam stać: pozostają cyfry 2, 4, 5, 7, czyli 4 możliwości. Na miejscu dziesiątek może stać każda z pozostałych 4 cyfr zbioru (w tym 0), a na miejscu jedności każda z pozostałych 3.
+    N_a = 4\cdot 4\cdot 3 = 48.
+
+    b) Warunek nieparzystości dotyczy ostatniego miejsca, więc wypełniamy je najpierw: cyfra jedności musi być nieparzysta, czyli 5 albo 7 — 2 możliwości. Następnie setki: cyfra różna od 0 i różna od użytej na końcu, czyli jedna z 3 pozostałych cyfr zbioru \{2,4,5,7\} — 3 możliwości. Na koniec dziesiątki: dowolna z 3 niewykorzystanych cyfr — 3 możliwości.
+    N_b = 2\cdot 3\cdot 3 = 18.
+    Odpowiedź: a) 48 liczb, b) 18 liczb nieparzystych.
+  solution_steps:
+  - 'a) Zapisz ograniczenia: trzy miejsca, cyfry różne, na pierwszym miejscu nie może być 0.'
+  - a) Wypełnij najpierw setki (4 możliwości), potem dziesiątki (4) i jedności (3).
+  - 'a) Pomnóż: 4·4·3 = 48.'
+  - 'b) Zacznij od miejsca najbardziej ograniczonego: jedności nieparzyste, czyli 5 lub 7 — 2 możliwości.'
+  - 'b) Setki: cyfra ≠ 0 i ≠ użyta — 3 możliwości; dziesiątki: 3 możliwości.'
+  - 'b) Pomnóż: 2·3·3 = 18.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wszystkie
+      answer:
+        kind: NUMERIC
+        value: 48.0
+    - name: nieparzyste
+      answer:
+        kind: NUMERIC
+        value: 18.0
+  checks:
+  - kind: evaluate
+    expr: 4\cdot 4\cdot 3
+    part: wszystkie
+  - kind: evaluate
+    expr: 2\cdot 3\cdot 3
+    part: nieparzyste
+  skills:
+  - metoda miejsc
+  - zakaz zera na pierwszym miejscu
+  - warunek na ostatniej cyfrze
+  - reguła mnożenia bez powtórzeń
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [wszystkie] SymPy solved it fresh: 48.0 vs 48.0 (tol 1e-09)
+      ; [nieparzyste] SymPy solved it fresh: 18.0 vs 18.0 (tol 1e-09)'
+- id: g-ex-04
+  slot: EXERCISE
+  ramp_index: 1
+  difficulty: 3
+  exercise_type: zliczanie kodów (mnożenie z powtórzeniami i bez)
+  statement: Kod dostępu do szafki składa się kolejno z dwóch liter wybranych ze zbioru \{A,\ B,\ C,\
+    D,\ E,\ F\}, a następnie z trzech cyfr ze zbioru \{0,\ 1,\ 2,\ \ldots,\ 9\}, przy czym ostatnia cyfra
+    kodu musi być nieparzysta. a) Oblicz, ile jest wszystkich takich kodów, jeżeli litery mogą się powtarzać
+    i cyfry mogą się powtarzać. b) Oblicz, ile jest takich kodów, w których wszystkie trzy cyfry są różne
+    (litery nadal mogą się powtarzać). Zapisz obliczenia.
+  statement_latex: a)\ N_a = 6\cdot 6\cdot 10\cdot 10\cdot 5,\qquad b)\ N_b = 6\cdot 6\cdot 8\cdot 9\cdot
+    5
+  solution: |-
+    a) Kod powstaje w pięciu etapach. Pierwsza litera: 6 możliwości, druga litera: 6 możliwości (mogą się powtarzać). Pierwsza i druga cyfra: po 10 możliwości. Ostatnia cyfra musi być nieparzysta, czyli należy do \{1,3,5,7,9\}: 5 możliwości. Liczby możliwości nie zależą od wcześniejszych wyborów, więc
+    N_a = 6\cdot 6\cdot 10\cdot 10\cdot 5 = 18000.
+
+    b) Teraz trzy cyfry mają być różne. Zaczynamy od miejsca najbardziej ograniczonego, czyli od ostatniej cyfry: 5 możliwości (cyfra nieparzysta). Pierwsza cyfra bloku cyfr: dowolna z 9 pozostałych, druga: dowolna z 8 pozostałych. Litery jak poprzednio: 6 i 6.
+    N_b = 6\cdot 6\cdot 8\cdot 9\cdot 5 = 36\cdot 360 = 12960.
+    Odpowiedź: a) 18000 kodów, b) 12960 kodów.
+  solution_steps:
+  - 'a) Rozbij kod na 5 etapów: litera, litera, cyfra, cyfra, cyfra.'
+  - 'a) Podaj liczby możliwości: 6, 6, 10, 10 oraz 5 (cyfra nieparzysta na ostatnim miejscu).'
+  - 'a) Pomnóż: 6·6·10·10·5 = 18000.'
+  - 'b) Zacznij od ostatniej cyfry (5 możliwości), potem pozostałe cyfry: 9 i 8 możliwości (cyfry różne).'
+  - 'b) Dołóż wybór liter: 6 i 6, i pomnóż: 6·6·8·9·5 = 12960.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: kody
+      answer:
+        kind: NUMERIC
+        value: 18000.0
+    - name: kody o różnych cyfrach
+      answer:
+        kind: NUMERIC
+        value: 12960.0
+  checks:
+  - kind: evaluate
+    expr: 6\cdot 6\cdot 10\cdot 10\cdot 5
+    part: kody
+  - kind: evaluate
+    expr: 6\cdot 6\cdot 8\cdot 9\cdot 5
+    part: kody o różnych cyfrach
+  skills:
+  - reguła mnożenia
+  - wybór z powtórzeniami
+  - wybór bez powtórzeń
+  - warunek na jednym miejscu
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [kody] SymPy solved it fresh: 18000.0 vs 18000.0 (tol 1e-09)
+      ; [kody o różnych cyfrach] SymPy solved it fresh: 12960.0 vs 12960.0 (tol 1e-09)'
+- id: g-ex-05
+  slot: EXERCISE
+  ramp_index: 2
+  difficulty: 4
+  exercise_type: zliczanie liczb — obie reguły (suma iloczynów)
+  statement: Rozważamy liczby naturalne czterocyfrowe o wszystkich cyfrach różnych, podzielne przez 5.
+    a) Oblicz, ile jest wszystkich takich liczb. Zapisz obliczenia. b) Uzasadnij, dlaczego liczby tej
+    nie można otrzymać jednym iloczynem postaci 9\cdot 8\cdot 7\cdot 2 (najpierw trzy pierwsze cyfry,
+    na końcu „dwie możliwości na ostatnim miejscu”).
+  statement_latex: N = 1\cdot 9\cdot 8\cdot 7 + 1\cdot 8\cdot 8\cdot 7
+  solution: |-
+    a) Liczba jest podzielna przez 5, gdy jej ostatnia cyfra to 0 albo 5. Te dwa przypadki są rozłączne (ostatnia cyfra nie może być jednocześnie zerem i piątką) i wyczerpują wszystkie możliwości, więc liczby przypadków dodamy.
+
+    Przypadek A: ostatnia cyfra to 0.
+    – jedności: 1 sposób,
+    – tysiące: dowolna z cyfr 1–9, czyli 9 sposobów (0 jest już zużyte),
+    – setki: 8 sposobów, dziesiątki: 7 sposobów.
+    A = 1\cdot 9\cdot 8\cdot 7 = 504.
+
+    Przypadek B: ostatnia cyfra to 5.
+    – jedności: 1 sposób,
+    – tysiące: cyfra różna od 0 i od 5, czyli 8 sposobów,
+    – setki: pozostało 8 cyfr, czyli 8 sposobów, dziesiątki: 7 sposobów.
+    B = 1\cdot 8\cdot 8\cdot 7 = 448.
+
+    Z reguły dodawania: N = 504 + 448 = 952.
+    Kontrola: wszystkich liczb czterocyfrowych o różnych cyfrach jest 9\cdot 9\cdot 8\cdot 7 = 4536, a 952 to około jedna piąta tej liczby — wynik wiarygodny.
+
+    b) Iloczyn 9\cdot 8\cdot 7\cdot 2 zakłada, że po wybraniu trzech pierwszych cyfr na ostatnim miejscu zawsze zostają dokładnie 2 możliwości (0 i 5). Tak nie jest: jeśli wśród trzech pierwszych cyfr użyto zera albo piątki, to na ostatnim miejscu zostaje tylko jedna możliwość (albo żadna, gdy użyto obu). Liczba możliwości na ostatnim etapie zależy więc od wcześniejszych wyborów, a reguła mnożenia tego nie dopuszcza — dlatego trzeba zacząć od miejsca najbardziej ograniczonego i rozbić zadanie na rozłączne przypadki.
+  solution_steps:
+  - 'Zauważ, że warunek podzielności przez 5 dotyczy ostatniej cyfry: 0 albo 5.'
+  - Podziel zadanie na dwa rozłączne i wyczerpujące przypadki według ostatniej cyfry.
+  - 'Przypadek A (ostatnia cyfra 0): 1·9·8·7 = 504.'
+  - 'Przypadek B (ostatnia cyfra 5): 1·8·8·7 = 448 (tysiące ≠ 0 i ≠ 5).'
+  - 'Dodaj wyniki przypadków: 504 + 448 = 952.'
+  - b) Wyjaśnij, że przy wypełnianiu od lewej liczba dostępnych cyfr na ostatnim miejscu zależy od wcześniejszych
+    wyborów, więc iloczyn 9·8·7·2 nie jest poprawny.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: liczba
+      answer:
+        kind: NUMERIC
+        value: 952.0
+    - name: uzasadnienie
+      answer:
+        kind: NOT_MACHINE_CHECKABLE
+        reason: Uczeń ma uzasadnić, że iloczyn 9·8·7·2 jest błędny, bo liczba możliwości na ostatnim miejscu
+          (cyfra 0 lub 5) zależy od tego, czy cyfry 0 lub 5 zostały już użyte na wcześniejszych miejscach;
+          reguła mnożenia wymaga stałej liczby możliwości na każdym etapie, stąd konieczny podział na
+          rozłączne przypadki.
+  checks:
+  - kind: evaluate
+    expr: 1\cdot 9\cdot 8\cdot 7 + 1\cdot 8\cdot 8\cdot 7
+    part: liczba
+  skills:
+  - podział na rozłączne przypadki
+  - reguła mnożenia
+  - reguła dodawania
+  - podzielność przez 5
+  - uzasadnianie poprawności zliczenia
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'part(s) need a human: uzasadnienie · 1/1 other parts solved fresh'
+- id: g-ex-t00
+  slot: EXERCISE
+  ramp_index: 6
+  difficulty: 4
+  exercise_type: zliczanie z powtórzeniami; metoda dopełnienia
+  statement: |-
+    Kod dostępu do skrytki depozytowej składa się z czterech znaków. Każdy znak jest jedną z sześciu liter: a, b, c, d, e, f, albo jedną z dziesięciu cyfr: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9. Znaki w kodzie mogą się powtarzać, a kolejność znaków ma znaczenie.
+    a) Oblicz, ile jest wszystkich takich kodów.
+    b) Oblicz, ile jest takich kodów, w których występuje co najmniej jedna cyfra.
+    Zapisz obliczenia.
+  statement_latex: N_{\text{wszystkie}}=\left(6+10\right)^{4},\qquad N_{\text{co najmniej jedna cyfra}}=\left(6+10\right)^{4}-6^{4}
+  solution: |-
+    Na jednym miejscu kodu możemy postawić literę ALBO cyfrę — te możliwości się wykluczają, więc regułą dodawania liczba znaków dostępnych na jednym miejscu wynosi 6+10=16.
+
+    a) Kod powstaje w czterech etapach (znak 1., potem 2., potem 3., potem 4.), a na każdym etapie mamy te same 16 możliwości (znaki mogą się powtarzać). Regułą mnożenia:
+    N = 16 \cdot 16 \cdot 16 \cdot 16 = 16^{4} = 65536.
+
+    b) Zaprzeczeniem warunku „występuje co najmniej jedna cyfra” jest „nie występuje ani jedna cyfra”, czyli kod złożony wyłącznie z liter. Takich kodów jest
+    6 \cdot 6 \cdot 6 \cdot 6 = 6^{4} = 1296.
+    Metodą dopełnienia:
+    N = 65536 - 1296 = 64240.
+
+    Uwaga: nie wolno liczyć tego jako 4 \cdot 10 \cdot 16^{3} („wybieram miejsce na cyfrę, cyfrę i resztę dowolnie”), bo kod z dwiema cyframi zostałby policzony kilka razy.
+
+    Odpowiedź: a) 65536 kodów, b) 64240 kodów.
+  solution_steps:
+  - 'Na jednym miejscu: litera albo cyfra, przypadki rozłączne, więc 6+10=16 możliwości.'
+  - 'Wszystkie kody (4 etapy, powtórzenia dozwolone): 16^{4}=65536.'
+  - 'Zaprzeczenie warunku: „ani jednej cyfry”, czyli same litery: 6^{4}=1296.'
+  - 'Dopełnienie: 65536-1296=64240.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wszystkie_kody
+      answer:
+        kind: NUMERIC
+        value: 65536.0
+    - name: co_najmniej_jedna_cyfra
+      answer:
+        kind: NUMERIC
+        value: 64240.0
+  checks:
+  - kind: evaluate
+    expr: \left(6+10\right)^{4}
+    part: wszystkie_kody
+  - kind: evaluate
+    expr: \left(6+10\right)^{4}-6^{4}
+    part: co_najmniej_jedna_cyfra
+  skills:
+  - reguła mnożenia
+  - reguła dodawania w obrębie jednego miejsca
+  - wybór z powtórzeniami
+  - metoda dopełnienia
+  - poprawne zaprzeczenie warunku "co najmniej jeden"
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [wszystkie_kody] SymPy solved it fresh: 65536.0 vs 65536.0
+      (tol 1e-09) ; [co_najmniej_jedna_cyfra] SymPy solved it fresh: 64240.0 vs 64240.0 (tol 1e-09)'
+- id: g-ex-t01
+  slot: EXERCISE
+  ramp_index: 7
+  difficulty: 5
+  exercise_type: metoda miejsc z rozbiciem na przypadki (suma iloczynów)
+  statement: |-
+    a) Oblicz, ile jest wszystkich liczb naturalnych czterocyfrowych o wszystkich cyfrach różnych, które są podzielne przez 5.
+    b) Oblicz, ile spośród liczb z punktu a) jest większych od 5000.
+    Zapisz obliczenia.
+  statement_latex: N_{a}=1\cdot 9\cdot 8\cdot 7+1\cdot 8\cdot 8\cdot 7,\qquad N_{b}=1\cdot 5\cdot 8\cdot
+    7+1\cdot 4\cdot 8\cdot 7
+  solution: |-
+    Liczba jest podzielna przez 5, gdy jej ostatnia cyfra to 0 albo 5. Warunek dotyczy ostatniego miejsca, więc je wypełniamy w pierwszej kolejności; ponieważ cyfra 0 „zabiera” możliwość z pierwszego miejsca, dzielimy zadanie na dwa rozłączne przypadki.
+
+    a) Przypadek A — ostatnia cyfra to 0:
+    jedności: 1 sposób, tysiące: dowolna z cyfr 1–9, czyli 9 sposobów, setki: 8 (dwie cyfry zużyte), dziesiątki: 7.
+    A = 1 \cdot 9 \cdot 8 \cdot 7 = 504.
+
+    Przypadek B — ostatnia cyfra to 5:
+    jedności: 1 sposób, tysiące: cyfra różna od 0 i od 5, czyli 8 sposobów, setki: 8, dziesiątki: 7.
+    B = 1 \cdot 8 \cdot 8 \cdot 7 = 448.
+
+    Przypadki są rozłączne i wyczerpują wszystkie możliwości, więc regułą dodawania:
+    N = 504 + 448 = 952.
+
+    b) Liczba czterocyfrowa jest większa od 5000 dokładnie wtedy, gdy jej cyfra tysięcy należy do zbioru {5, 6, 7, 8, 9} (przy różnych cyfrach nie ma liczby 5000).
+    Przypadek A — ostatnia cyfra 0: tysiące: 5 sposobów, setki: 8, dziesiątki: 7, czyli 1 \cdot 5 \cdot 8 \cdot 7 = 280.
+    Przypadek B — ostatnia cyfra 5: cyfra 5 jest już zużyta, więc tysiące: 6, 7, 8 albo 9, czyli 4 sposoby; setki: 8, dziesiątki: 7, czyli 1 \cdot 4 \cdot 8 \cdot 7 = 224.
+    N = 280 + 224 = 504.
+
+    Kontrola: 504 < 952 oraz 952 < 4536 (tyle jest wszystkich liczb czterocyfrowych o różnych cyfrach) — wyniki wiarygodne.
+
+    Odpowiedź: a) 952 liczby, b) 504 liczby.
+  solution_steps:
+  - 'Warunek podzielności przez 5 dotyczy ostatniej cyfry: 0 albo 5 — zaczynamy od tego miejsca.'
+  - 'Przypadek A (ostatnia cyfra 0): 1\cdot 9\cdot 8\cdot 7=504.'
+  - 'Przypadek B (ostatnia cyfra 5, tysiące ≠ 0 i ≠ 5): 1\cdot 8\cdot 8\cdot 7=448.'
+  - 'Reguła dodawania: 504+448=952.'
+  - 'Warunek „większa od 5000” dotyczy cyfry tysięcy: należy ona do {5,6,7,8,9}.'
+  - 'Przypadek A: 1\cdot 5\cdot 8\cdot 7=280; Przypadek B (cyfra 5 zużyta): 1\cdot 4\cdot 8\cdot 7=224.'
+  - 'Reguła dodawania: 280+224=504.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: podzielne_przez_5
+      answer:
+        kind: NUMERIC
+        value: 952.0
+    - name: wieksze_od_5000
+      answer:
+        kind: NUMERIC
+        value: 504.0
+  checks:
+  - kind: evaluate
+    expr: 1 \cdot 9 \cdot 8 \cdot 7 + 1 \cdot 8 \cdot 8 \cdot 7
+    part: podzielne_przez_5
+  - kind: evaluate
+    expr: 1 \cdot 5 \cdot 8 \cdot 7 + 1 \cdot 4 \cdot 8 \cdot 7
+    part: wieksze_od_5000
+  skills:
+  - metoda miejsc
+  - podzielność przez 5
+  - wybór bez powtórzeń
+  - rozbicie na rozłączne przypadki
+  - reguła dodawania i mnożenia łącznie
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [podzielne_przez_5] SymPy solved it fresh: 952.0 vs 952.0 (tol
+      1e-09) ; [wieksze_od_5000] SymPy solved it fresh: 504.0 vs 504.0 (tol 1e-09)'
+- id: g-cm-06
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: 'demonstracja błędu: dodawanie zamiast mnożenia'
+  statement: 'W kawiarni jest 6 rodzajów ciasta i 4 rodzaje herbaty. Zestaw deserowy składa się z jednego
+    ciasta i jednej herbaty. Uczeń zapisał: „6 + 4 = 10, więc jest 10 zestawów”. Oceń to rozumowanie,
+    wskaż błąd i oblicz poprawną liczbę zestawów.'
+  statement_latex: N = 6\cdot 4
+  solution: |-
+    Błędne rozumowanie ucznia: „mam 6 ciast i 4 herbaty, więc razem 6 + 4 = 10 zestawów”. Wynik 10 jest zły.
+    Gdzie tkwi błąd: reguły dodawania używamy tylko wtedy, gdy zliczany obiekt należy do jednego z rozłącznych przypadków — tak byłoby, gdybyśmy zamawiali TYLKO jedną rzecz (ciasto ALBO herbatę); wtedy istotnie mielibyśmy 6 + 4 = 10 możliwości. Tutaj jednak zestaw to ciasto I herbata, czyli obiekt powstający w dwóch kolejnych etapach.
+    Poprawnie: wybieramy ciasto (6 sposobów), a potem do każdego z nich jedną z 4 herbat, przy czym liczba herbat nie zależy od wybranego ciasta. Z reguły mnożenia N = 6\cdot 4 = 24.
+    Sprawdzenie „drzewkiem”: z każdego z 6 rozgałęzień pierwszego etapu wychodzą 4 gałęzie, więc liści jest 6\cdot 4 = 24.
+    Odpowiedź: 24 zestawy.
+  solution_steps:
+  - 'Odtwórz błędne rozumowanie: uczeń dodał liczby możliwości i otrzymał 6 + 4 = 10.'
+  - 'Wskaż błąd: dodawanie stosuje się do rozłącznych przypadków („albo”), a zestaw wymaga dwóch czynności
+    („i potem”).'
+  - 'Zastosuj regułę mnożenia: 6·4 = 24.'
+  - 'Sprawdź wynik drzewkiem: 6 gałęzi po 4 rozgałęzienia daje 24 liście.'
+  answer:
+    kind: NUMERIC
+    value: 24.0
+  checks:
+  - kind: evaluate
+    expr: 6\cdot 4
+  skills:
+  - reguła mnożenia
+  - rozpoznanie „i” kontra „albo”
+  - ocena cudzego rozwiązania
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 24.0 vs 24.0 (tol 1e-09)'
+- id: g-cm-07
+  slot: COMMON_MISTAKE
+  ramp_index: 1
+  difficulty: 2
+  exercise_type: 'demonstracja błędu: mnożenie rozłącznych przypadków'
+  statement: 'Oblicz, ile jest liczb naturalnych trzycyfrowych podzielnych przez 5 (cyfry mogą się powtarzać).
+    Uczeń rozwiązał zadanie tak: „liczba jest podzielna przez 5, gdy kończy się cyfrą 0 albo cyfrą 5;
+    liczb kończących się zerem jest 9\cdot 10\cdot 1 = 90 i tyle samo kończących się piątką, więc wszystkich
+    jest 90\cdot 90 = 8100”. Wskaż błąd i podaj poprawny wynik.'
+  statement_latex: N = 9\cdot 10\cdot 1 + 9\cdot 10\cdot 1
+  solution: |-
+    Błędne rozumowanie ucznia: policzył poprawnie oba przypadki (po 90 liczb), ale wyniki pomnożył: 90\cdot 90 = 8100. Wynik jest absurdalny — wszystkich liczb trzycyfrowych jest tylko 900, więc podzielnych przez 5 nie może być 8100.
+    Gdzie tkwi błąd: mnożymy liczby możliwości KOLEJNYCH ETAPÓW jednej konstrukcji. Tutaj „ostatnia cyfra to 0” i „ostatnia cyfra to 5” to dwa wykluczające się przypadki (żadna liczba nie należy do obu), a nie dwa etapy. Przypadki rozłączne dodajemy.
+    Poprawnie:
+    Przypadek A (ostatnia cyfra 0): setki 9 możliwości, dziesiątki 10, jedności 1 → 9\cdot 10\cdot 1 = 90.
+    Przypadek B (ostatnia cyfra 5): 9\cdot 10\cdot 1 = 90.
+    Z reguły dodawania: N = 90 + 90 = 180.
+    Odpowiedź: 180 liczb.
+  solution_steps:
+  - 'Odtwórz błędne rozumowanie: uczeń pomnożył liczebności dwóch przypadków, otrzymując 8100.'
+  - 'Zauważ sprzeczność: wszystkich liczb trzycyfrowych jest 900, więc wynik musi być mniejszy od 900.'
+  - 'Wskaż błąd: „kończy się 0” i „kończy się 5” to rozłączne przypadki — ich liczebności dodajemy, a
+    nie mnożymy.'
+  - 'Policz przypadki: 9·10·1 = 90 oraz 9·10·1 = 90.'
+  - 'Dodaj: 90 + 90 = 180.'
+  answer:
+    kind: NUMERIC
+    value: 180.0
+  checks:
+  - kind: evaluate
+    expr: 9\cdot 10\cdot 1 + 9\cdot 10\cdot 1
+  skills:
+  - reguła dodawania
+  - rozłączność przypadków
+  - metoda miejsc
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 180.0 vs 180.0 (tol 1e-09)'
+- id: g-cm-08
+  slot: COMMON_MISTAKE
+  ramp_index: 2
+  difficulty: 2
+  exercise_type: 'demonstracja błędu: zero na pierwszym miejscu'
+  statement: 'Oblicz, ile jest liczb naturalnych czterocyfrowych o wszystkich cyfrach różnych. Uczeń zapisał:
+    „na pierwszym miejscu 10 cyfr, na drugim 9, na trzecim 8, na czwartym 7, więc takich liczb jest 10\cdot
+    9\cdot 8\cdot 7 = 5040”. Wskaż błąd i podaj poprawny wynik.'
+  statement_latex: N = 9\cdot 9\cdot 8\cdot 7
+  solution: |-
+    Błędne rozumowanie ucznia: 10\cdot 9\cdot 8\cdot 7 = 5040.
+    Gdzie tkwi błąd: wśród policzonych ciągów cyfr są takie jak 0123 czy 0987, a zapis zaczynający się od zera nie jest liczbą czterocyfrową. Uczeń policzył zatem obiekty niedozwolone.
+    Poprawnie, metodą miejsc:
+    – tysiące: cyfra różna od 0, czyli jedna z 1, 2, …, 9 → 9 możliwości,
+    – setki: dowolna z pozostałych 9 cyfr (teraz 0 jest dozwolone) → 9 możliwości,
+    – dziesiątki: 8 możliwości,
+    – jedności: 7 możliwości.
+    Z reguły mnożenia: N = 9\cdot 9\cdot 8\cdot 7 = 4536.
+    Kontrola: 4536 < 9000, a 9000 to liczba wszystkich liczb czterocyfrowych — wynik jest wiarygodny.
+    Odpowiedź: 4536 liczb.
+  solution_steps:
+  - 'Odtwórz błędne rozumowanie: uczeń dopuścił 10 możliwości na pierwszym miejscu i otrzymał 5040.'
+  - 'Wskaż błąd: zapis typu 0123 nie jest liczbą czterocyfrową, więc policzono obiekty niedozwolone.'
+  - 'Popraw pierwsze miejsce: 9 możliwości (cyfry 1–9), na drugim znów 9 (pozostałe cyfry, w tym 0).'
+  - 'Pomnóż: 9·9·8·7 = 4536.'
+  - 'Sprawdź rząd wielkości: 4536 < 9000.'
+  answer:
+    kind: NUMERIC
+    value: 4536.0
+  checks:
+  - kind: evaluate
+    expr: 9\cdot 9\cdot 8\cdot 7
+  skills:
+  - metoda miejsc
+  - reguła mnożenia bez powtórzeń
+  - zakaz zera na pierwszym miejscu
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 4536.0 vs 4536.0 (tol 1e-09)'
+- id: g-cm-09
+  slot: COMMON_MISTAKE
+  ramp_index: 3
+  difficulty: 3
+  exercise_type: 'demonstracja błędu: zła kolejność wypełniania miejsc'
+  statement: 'Oblicz, ile jest liczb naturalnych czterocyfrowych parzystych o wszystkich cyfrach różnych,
+    w których zapisie dziesiętnym występują wyłącznie cyfry ze zbioru \{1,\ 2,\ 3,\ 4,\ 5,\ 6,\ 7\}. Uczeń
+    zapisał: „tysiące 7 sposobów, setki 6, dziesiątki 5, a na końcu 3 cyfry parzyste, więc 7\cdot 6\cdot
+    5\cdot 3 = 630”. Wskaż błąd i podaj poprawny wynik.'
+  statement_latex: N = 3\cdot 6\cdot 5\cdot 4
+  solution: |-
+    Błędne rozumowanie ucznia: 7\cdot 6\cdot 5\cdot 3 = 630.
+    Gdzie tkwi błąd: uczeń wypełniał miejsca od lewej i przyjął, że na końcu zawsze zostają 3 cyfry parzyste. Tak nie jest: gdy na pierwszych trzech miejscach postawimy np. 2, 4, 6, to na ostatnim miejscu nie zostaje ŻADNA cyfra parzysta; gdy postawimy 1, 3, 5 — zostają wszystkie trzy. Liczba możliwości na ostatnim etapie zależy więc od wcześniejszych wyborów, a reguła mnożenia wymaga, aby była stała.
+    Poprawnie: zaczynamy od miejsca najbardziej ograniczonego, czyli od cyfry jedności.
+    – jedności: cyfra parzysta ze zbioru, czyli 2, 4 lub 6 → 3 możliwości,
+    – tysiące: dowolna z pozostałych 6 cyfr (zbiór nie zawiera 0, więc nie ma dodatkowego ograniczenia) → 6,
+    – setki: 5 możliwości,
+    – dziesiątki: 4 możliwości.
+    Teraz liczby możliwości nie zależą od konkretnych wcześniejszych wyborów, więc z reguły mnożenia:
+    N = 3\cdot 6\cdot 5\cdot 4 = 360.
+    Odpowiedź: 360 liczb.
+  solution_steps:
+  - 'Odtwórz błędne rozumowanie: wypełnianie od lewej dało 7·6·5·3 = 630.'
+  - 'Podaj kontrprzykład: dla początku 2, 4, 6 na ostatnim miejscu nie zostaje żadna cyfra parzysta —
+    liczba możliwości nie jest stała.'
+  - 'Zacznij od miejsca najbardziej ograniczonego: jedności parzyste — 3 możliwości.'
+  - 'Uzupełnij pozostałe miejsca: 6, 5 i 4 możliwości (cyfry różne).'
+  - 'Pomnóż: 3·6·5·4 = 360.'
+  answer:
+    kind: NUMERIC
+    value: 360.0
+  checks:
+  - kind: evaluate
+    expr: 3\cdot 6\cdot 5\cdot 4
+  skills:
+  - metoda miejsc
+  - kolejność wypełniania miejsc
+  - stałość liczby możliwości na etapie
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 360.0 vs 360.0 (tol 1e-09)'
+- id: g-cm-10
+  slot: COMMON_MISTAKE
+  ramp_index: 4
+  difficulty: 4
+  exercise_type: 'demonstracja błędu: nierozłączne przypadki (podwójne liczenie)'
+  statement: 'Oblicz, ile jest liczb naturalnych trzycyfrowych, w których zapisie dziesiętnym występuje
+    cyfra 1 lub cyfra 2 (cyfry mogą się powtarzać). Uczeń rozwiązał zadanie tak: „liczb trzycyfrowych
+    zawierających cyfrę 1 jest 900 - 8\cdot 9\cdot 9 = 252, tyle samo zawierających cyfrę 2, więc szukanych
+    liczb jest 252 + 252 = 504”. Wskaż błąd i podaj poprawny wynik.'
+  statement_latex: N = 900 - 7\cdot 8\cdot 8
+  solution: |-
+    Błędne rozumowanie ucznia: 252 + 252 = 504.
+    Gdzie tkwi błąd: przypadki „zawiera cyfrę 1” i „zawiera cyfrę 2” NIE są rozłączne — np. liczba 123 zawiera obie cyfry i została policzona dwukrotnie. Reguła dodawania wymaga, aby każdy obiekt pasował do dokładnie jednego przypadku.
+    Poprawnie — metodą dopełnienia. Warunek: „w zapisie występuje cyfra 1 lub cyfra 2”. Jego zaprzeczeniem jest: „nie występuje ani 1, ani 2”.
+    – wszystkich liczb trzycyfrowych: 9\cdot 10\cdot 10 = 900,
+    – liczb bez cyfr 1 i 2: setki — cyfra ze zbioru \{3,4,5,6,7,8,9\}, czyli 7 możliwości; dziesiątki i jedności — cyfra ze zbioru \{0,3,4,5,6,7,8,9\}, czyli po 8 możliwości: 7\cdot 8\cdot 8 = 448.
+    N = 900 - 448 = 452.
+    Komentarz: różnica 504 - 452 = 52 to dokładnie liczba tych liczb trzycyfrowych, w których występują obie cyfry 1 i 2 — one w rachunku ucznia zostały policzone dwa razy.
+    Odpowiedź: 452 liczby.
+  solution_steps:
+  - 'Odtwórz błędne rozumowanie: uczeń dodał liczebności dwóch przypadków i otrzymał 504.'
+  - 'Wskaż błąd: przypadki nie są rozłączne — liczby zawierające jednocześnie 1 i 2 (np. 123) policzono
+    dwukrotnie.'
+  - 'Zastosuj metodę dopełnienia: zaprzeczeniem warunku jest „nie występuje ani 1, ani 2”.'
+  - 'Policz wszystkie liczby trzycyfrowe: 9·10·10 = 900.'
+  - 'Policz liczby bez cyfr 1 i 2: 7·8·8 = 448.'
+  - 'Odejmij: 900 − 448 = 452.'
+  answer:
+    kind: NUMERIC
+    value: 452.0
+  checks:
+  - kind: evaluate
+    expr: 9\cdot 10\cdot 10 - 7\cdot 8\cdot 8
+  skills:
+  - rozłączność przypadków
+  - metoda dopełnienia
+  - reguła mnożenia
+  - ocena poprawności zliczenia
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 452.0 vs 452.0 (tol 1e-09)'
+- id: g-ch-t02
+  slot: CHALLENGE
+  ramp_index: 0
+  difficulty: 4
+  exercise_type: 'zadanie odwrotne: znana liczba obiektów, szukany parametr'
+  statement: 'W pewnym klubie każdy członek otrzymuje kod złożony z trzech znaków: pierwsze dwa znaki
+    to dwie różne litery pewnego alfabetu, a trzeci znak to jedna z cyfr 0, 1, 2, 3, 4, 5, 6, 7, 8, 9.
+    Kolejność liter ma znaczenie (kody „ab7” i „ba7” są różne). Wszystkich możliwych kodów jest 1560.
+    Oblicz, ile liter liczy ten alfabet. Zapisz obliczenia.'
+  statement_latex: 10 \cdot n \cdot \left(n-1\right)=1560
+  solution: |-
+    Oznaczmy przez n liczbę liter alfabetu (n jest liczbą naturalną, n \geq 2).
+
+    Kod powstaje w trzech etapach:
+    – pierwsza litera: n sposobów,
+    – druga litera (musi być inna niż pierwsza): n-1 sposobów,
+    – cyfra: 10 sposobów.
+    Liczba możliwości na każdym etapie nie zależy od tego, które konkretnie litery wybrano wcześniej, więc regułą mnożenia liczba wszystkich kodów wynosi
+    N\left(n\right)=n \cdot \left(n-1\right) \cdot 10.
+
+    Z warunku zadania:
+    10 \cdot n \cdot \left(n-1\right)=1560, czyli n \cdot \left(n-1\right)=156, czyli n^{2}-n-156=0.
+    \Delta = 1+4 \cdot 156 = 625, \sqrt{\Delta}=25,
+    n_{1}=\frac{1-25}{2}=-12, \qquad n_{2}=\frac{1+25}{2}=13.
+
+    Liczba liter musi być dodatnia, więc rozwiązanie n=-12 odrzucamy.
+
+    Sprawdzenie: 13 \cdot 12 \cdot 10 = 1560.
+
+    Odpowiedź: alfabet liczy 13 liter.
+  solution_steps:
+  - 'Wprowadzam niewiadomą: n — liczba liter alfabetu, n naturalne, n \geq 2.'
+  - 'Reguła mnożenia: liczba kodów wynosi N\left(n\right)=n \cdot \left(n-1\right) \cdot 10.'
+  - Układam równanie 10 \cdot n \cdot \left(n-1\right)=1560, czyli n^{2}-n-156=0.
+  - 'Rozwiązuję: \Delta=625, n=-12 albo n=13.'
+  - 'Odrzucam n=-12 (liczba liter jest dodatnia); sprawdzam: 13 \cdot 12 \cdot 10=1560.'
+  - 'Odpowiedź: 13 liter.'
+  answer:
+    kind: NUMERIC
+    value: 13.0
+  checks:
+  - kind: evaluate
+    expr: \frac{1+\sqrt{1+4 \cdot 156}}{2}
+    var: n
+  stated_model:
+    variable: n
+    objective_latex: N\left(n\right)=10 \cdot n \cdot \left(n-1\right)
+    domain_lo: '2'
+    domain_lo_open: false
+    goal: value
+    constraint_used: N\left(n\right)=1560, n \in \mathbb{N}, n \geq 2
+  skills:
+  - reguła mnożenia
+  - wybór bez powtórzeń
+  - wprowadzenie niewiadomej
+  - rozwiązanie równania kwadratowego
+  - odrzucenie rozwiązania sprzecznego z warunkami zadania
+  verification:
+    checkability: STATED_MODEL
+    note: 'stage 1 inconclusive: SympifyError: SympifyError: "cannot sympify object of type <class ''function''>"'
+- id: g-ch-t03
+  slot: CHALLENGE
+  ramp_index: 1
+  difficulty: 5
+  exercise_type: zliczanie liczb z warunkiem podzielności przez 4 i ograniczeniem wartości
+  statement: Rozważamy liczby naturalne czterocyfrowe, w których zapisie dziesiętnym występują wyłącznie
+    cyfry ze zbioru {1, 2, 3, 4} (cyfry mogą się powtarzać, np. 1244, 3333). Oblicz, ile wśród nich jest
+    liczb podzielnych przez 4 i jednocześnie większych od 2000. Zapisz obliczenia.
+  statement_latex: N = 3 \cdot 4 \cdot 4
+  solution: |-
+    Liczba jest podzielna przez 4 dokładnie wtedy, gdy liczba utworzona z jej dwóch ostatnich cyfr jest podzielna przez 4. Dlatego zamiast rozpatrywać całą liczbę, wystarczy zbadać PARĘ dwóch ostatnich cyfr, a dwa pierwsze miejsca potraktować osobno.
+
+    Etap 1 — dwie ostatnie cyfry. Obie należą do zbioru {1, 2, 3, 4}, więc jest 16 par; sprawdzamy, które dają liczbę podzielną przez 4:
+    11, 12, 13, 14, 21, 22, 23, 24, 31, 32, 33, 34, 41, 42, 43, 44.
+    Podzielne przez 4 są: 12, 24, 32, 44 — czyli 4 możliwości.
+
+    Etap 2 — cyfra tysięcy. Każda rozważana liczba ma cyfry ze zbioru {1, 2, 3, 4}, więc liczba jest większa od 2000 dokładnie wtedy, gdy jej cyfra tysięcy to 2, 3 albo 4 (przy cyfrze tysięcy 2 najmniejsza możliwa liczba to 2112 > 2000). Daje to 3 możliwości.
+
+    Etap 3 — cyfra setek: dowolna ze zbioru {1, 2, 3, 4}, czyli 4 możliwości.
+
+    Liczba możliwości na każdym etapie nie zależy od pozostałych wyborów, więc regułą mnożenia:
+    N = 3 \cdot 4 \cdot 4 = 48.
+
+    Kontrola: wszystkich rozważanych liczb czterocyfrowych jest 4^{4}=256; liczb podzielnych przez 4 jest 4 \cdot 4 \cdot 4 = 64, a warunek „większa od 2000” usuwa z nich te z cyfrą tysięcy równą 1, czyli 1 \cdot 4 \cdot 4 = 16 liczb: 64-16=48. Zgadza się.
+
+    Odpowiedź: takich liczb jest 48.
+  solution_steps:
+  - Zauważam, że podzielność przez 4 zależy tylko od dwóch ostatnich cyfr.
+  - 'Wypisuję pary dwóch ostatnich cyfr z {1,2,3,4} podzielne przez 4: 12, 24, 32, 44 — 4 możliwości.'
+  - 'Warunek „większa od 2000” dotyczy cyfry tysięcy: 2, 3 albo 4 — 3 możliwości.'
+  - 'Cyfra setek: dowolna z 4 cyfr.'
+  - 'Reguła mnożenia: N = 3 \cdot 4 \cdot 4 = 48.'
+  - 'Kontrola dopełnieniem: 4 \cdot 4 \cdot 4 - 1 \cdot 4 \cdot 4 = 48.'
+  answer:
+    kind: NUMERIC
+    value: 48.0
+  checks:
+  - kind: evaluate
+    expr: 3 \cdot 4 \cdot 4
+  skills:
+  - 'wybór reprezentacji: cecha podzielności przez 4 dotyczy dwóch ostatnich cyfr'
+  - wypisanie przypadków dla dwóch ostatnich cyfr
+  - reguła mnożenia z powtórzeniami
+  - uwzględnienie warunku na cyfrę tysięcy
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 48.0 vs 48.0 (tol 1e-09)'
+- id: g-ch-t04
+  slot: CHALLENGE
+  ramp_index: 2
+  difficulty: 5
+  exercise_type: zliczanie wieloetapowe z podziałem na przypadki oraz sprawdzeniem wystarczalności (zadanie
+    odwrotne)
+  statement: |-
+    W pewnej firmie każdy pracownik ma otrzymać własny, różny od pozostałych, identyfikator. Identyfikator składa się z jednej litery wybranej ze zbioru {A, B, C, D, E, F} oraz zapisanej po niej liczby trzycyfrowej o wszystkich cyfrach różnych, podzielnej przez 5 (np. A340, F195).
+    a) Oblicz, ile jest wszystkich takich identyfikatorów.
+    b) W firmie pracuje 1000 osób. Rozstrzygnij, czy dla każdego pracownika wystarczy inny identyfikator. Jeżeli nie wystarczy, oblicz, ile co najmniej liter musiałby liczyć zbiór dopuszczalnych liter (przy niezmienionych pozostałych warunkach), aby identyfikatorów było co najmniej 1000.
+    Zapisz obliczenia.
+  statement_latex: N = 6 \cdot \left(1 \cdot 9 \cdot 8 + 1 \cdot 8 \cdot 8\right), \qquad 136 \cdot k
+    \geq 1000
+  solution: |-
+    Identyfikator powstaje w dwóch etapach: wybór litery, a potem wybór liczby trzycyfrowej o żądanych własnościach. Najpierw liczymy, ile jest takich liczb trzycyfrowych.
+
+    Liczba jest podzielna przez 5, gdy kończy się cyfrą 0 albo 5. Warunek dotyczy ostatniego miejsca, a cyfra 0 wpływa na możliwości na pierwszym miejscu (cyfra setek nie może być zerem), więc dzielimy na dwa rozłączne przypadki.
+
+    Przypadek A — ostatnia cyfra to 0:
+    jedności: 1 sposób, setki: dowolna z cyfr 1–9, czyli 9 sposobów, dziesiątki: pozostałe 8 cyfr, czyli 8 sposobów.
+    A = 1 \cdot 9 \cdot 8 = 72.
+
+    Przypadek B — ostatnia cyfra to 5:
+    jedności: 1 sposób, setki: cyfra różna od 0 i od 5, czyli 8 sposobów, dziesiątki: pozostałe 8 cyfr, czyli 8 sposobów.
+    B = 1 \cdot 8 \cdot 8 = 64.
+
+    Regułą dodawania takich liczb trzycyfrowych jest 72 + 64 = 136.
+
+    a) Regułą mnożenia (litera, a potem liczba):
+    N = 6 \cdot 136 = 816.
+
+    b) Ponieważ 816 < 1000, identyfikatorów nie wystarczy dla 1000 pracowników — odpowiedź brzmi: nie.
+    Niech k oznacza liczbę dopuszczalnych liter (k liczba naturalna dodatnia). Wtedy identyfikatorów jest 136 \cdot k i musi być spełniony warunek
+    136 \cdot k \geq 1000, czyli k \geq \frac{1000}{136} = 7{,}35...
+    Najmniejszą liczbą naturalną spełniającą tę nierówność jest k = 8 (sprawdzenie: 136 \cdot 7 = 952 < 1000, a 136 \cdot 8 = 1088 \geq 1000).
+
+    Odpowiedź: a) 816 identyfikatorów; b) nie wystarczy; potrzeba co najmniej 8 liter.
+  solution_steps:
+  - 'Zauważam, że identyfikator powstaje w dwóch etapach: litera, potem liczba trzycyfrowa.'
+  - Liczę liczby trzycyfrowe o różnych cyfrach podzielne przez 5, dzieląc na przypadki.
+  - 'Przypadek A (ostatnia cyfra 0): 1 \cdot 9 \cdot 8 = 72.'
+  - 'Przypadek B (ostatnia cyfra 5, setki ≠ 0 i ≠ 5): 1 \cdot 8 \cdot 8 = 64.'
+  - 'Reguła dodawania: 72 + 64 = 136 liczb trzycyfrowych.'
+  - 'Reguła mnożenia: N = 6 \cdot 136 = 816 identyfikatorów.'
+  - 'Porównuję: 816 < 1000, więc identyfikatorów nie wystarczy.'
+  - Wprowadzam k — liczbę liter; rozwiązuję 136 \cdot k \geq 1000, czyli k \geq \frac{1000}{136}.
+  - 'Najmniejsza liczba naturalna: k = 8.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: liczba_identyfikatorow
+      answer:
+        kind: NUMERIC
+        value: 816.0
+    - name: czy_wystarczy
+      answer:
+        kind: BOOLEAN
+        truth: false
+    - name: najmniejsza_liczba_liter
+      answer:
+        kind: NUMERIC
+        value: 8.0
+  checks:
+  - kind: evaluate
+    expr: 6 \cdot \left(1 \cdot 9 \cdot 8 + 1 \cdot 8 \cdot 8\right)
+    part: liczba_identyfikatorow
+  - kind: evaluate
+    expr: \left\lceil \frac{1000}{136} \right\rceil
+    var: k
+    part: najmniejsza_liczba_liter
+  stated_model:
+    variable: k
+    objective_latex: N\left(k\right)=136 \cdot k
+    domain_lo: '1'
+    domain_lo_open: false
+    goal: min
+    constraint_used: 136 \cdot k \geq 1000, k \in \mathbb{N}, k \geq 1
+  skills:
+  - podział na rozłączne przypadki
+  - metoda miejsc z zakazem zera na pierwszym miejscu
+  - reguła mnożenia i dodawania łącznie
+  - sprawdzenie warunku wystarczalności
+  - wyznaczenie najmniejszej liczby całkowitej spełniającej nierówność
+  verification:
+    checkability: STATED_MODEL
+    note: 'stage 1 inconclusive: SympifyError: SympifyError: "cannot sympify object of type <class ''function''>"'

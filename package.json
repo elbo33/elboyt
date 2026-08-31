@@ -1,10 +1,14 @@
 {
-  "name": "ai-math-longform-generator",
+  "name": "elboyt",
   "version": "0.1.0",
   "private": true,
-  "description": "Local AI-directed long-form (8+ minute) mathematical YouTube video generator using Manim and Remotion. Same visual language as ai-math-shorts-generator, landscape 16:9, chaptered repetitive structure.",
+  "description": "Local Polish Matura video production pipeline using committed ZasPro curriculum YAML, Manim, Remotion, and FFmpeg.",
   "scripts": {
+    "next": "tsc -p tsconfig.cli.json && node dist/cli/next.js",
+    "generate:next": "tsc -p tsconfig.cli.json && node dist/cli/generateNext.js",
+    "publish:ready": "tsc -p tsconfig.cli.json && node dist/cli/publishReady.js",
     "generate": "tsc -p tsconfig.cli.json && node dist/cli/generate.js",
+    "publish": "tsc -p tsconfig.cli.json && node dist/cli/publish.js",
     "render:remotion": "remotion render src/remotion/index.ts MathLong generated/video.mp4",
     "studio": "remotion studio src/remotion/index.ts",
     "typecheck": "tsc --noEmit -p tsconfig.cli.json"

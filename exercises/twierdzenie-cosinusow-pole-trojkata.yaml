@@ -1,0 +1,758 @@
+section: twierdzenie-cosinusow-pole-trojkata
+name: Twierdzenie cosinusów i pole trójkąta przez sinus
+scope: Law of cosines; area = 1/2 * a * b * sin(gamma); choosing between them from the given data.
+requirements:
+- VII.3
+counts:
+  total: 16
+  DETERMINISTIC: 13
+  NOT_MACHINE_CHECKABLE: 3
+exercises:
+- id: g-th-00
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: obliczenie trzeciego boku (BKB)
+  statement: W trójkącie ABC dane są długości boków |AC| = 3 oraz |BC| = 8, a kąt zawarty między nimi
+    ma miarę |∠ACB| = 60°. Oblicz długość boku AB. Zapisz obliczenia.
+  statement_latex: '|AB|^2 = 3^2 + 8^2 - 2\cdot 3\cdot 8\cdot\cos 60^\circ'
+  solution: |-
+    Kąt ACB leży między bokami AC i BC, a naprzeciw niego leży bok AB. Stosujemy twierdzenie cosinusów:
+    |AB|^2 = |AC|^2 + |BC|^2 - 2\cdot|AC|\cdot|BC|\cdot\cos 60^\circ.
+    Podstawiamy cos 60° = 1/2:
+    |AB|^2 = 3^2 + 8^2 - 2\cdot 3\cdot 8\cdot\frac{1}{2} = 9 + 64 - 24 = 49.
+    Stąd |AB| = \sqrt{49} = 7.
+    Kontrola: 7 < 3 + 8, więc nierówność trójkąta jest spełniona.
+  solution_steps:
+  - Zauważ, że kąt 60° jest kątem między bokami AC i BC, więc naprzeciw niego leży szukany bok AB.
+  - 'Zapisz twierdzenie cosinusów: |AB|^2 = |AC|^2 + |BC|^2 - 2\cdot|AC|\cdot|BC|\cdot\cos 60^\circ.'
+  - 'Podstaw dane i cos 60° = 1/2: |AB|^2 = 9 + 64 - 24 = 49.'
+  - 'Wyciągnij pierwiastek: |AB| = 7.'
+  answer:
+    kind: NUMERIC
+    value: 7.0
+  checks:
+  - kind: evaluate
+    expr: \sqrt{3^2 + 8^2 - 2\cdot 3\cdot 8\cdot\frac{1}{2}}
+  skills:
+  - twierdzenie cosinusów
+  - wartości cosinusa kątów tablicowych
+  - pierwiastkowanie wyniku
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 7.0 vs 7.0 (tol 1e-09)'
+- id: g-th-01
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: pole trójkąta przez sinus
+  statement: W trójkącie KLM dane są |KL| = 6, |KM| = 10 oraz |∠LKM| = 150°. Oblicz pole tego trójkąta.
+    Zapisz obliczenia.
+  statement_latex: P = \frac{1}{2}\cdot 6\cdot 10\cdot\sin 150^\circ
+  solution: |-
+    Kąt LKM leży między bokami KL i KM, więc możemy skorzystać ze wzoru na pole:
+    P = \frac{1}{2}\cdot|KL|\cdot|KM|\cdot\sin\angle LKM.
+    Ponieważ sin 150° = sin 30° = 1/2 (sinus kąta rozwartego jest dodatni), otrzymujemy
+    P = \frac{1}{2}\cdot 6\cdot 10\cdot\frac{1}{2} = 15.
+    Kontrola: P \le \frac{1}{2}\cdot 6\cdot 10 = 30, a 15 < 30.
+  solution_steps:
+  - Sprawdź, że kąt 150° jest kątem zawartym między bokami KL i KM.
+  - Zapisz wzór P = \frac{1}{2}\cdot|KL|\cdot|KM|\cdot\sin\angle LKM.
+  - Podstaw sin 150° = 1/2.
+  - Oblicz P = \frac{1}{2}\cdot 6\cdot 10\cdot\frac{1}{2} = 15.
+  answer:
+    kind: NUMERIC
+    value: 15.0
+  checks:
+  - kind: evaluate
+    expr: \frac{1}{2}\cdot 6\cdot 10\cdot\frac{1}{2}
+  skills:
+  - wzór P = 1/2 ab sin γ
+  - sinus kąta rozwartego
+  - wartości tablicowe
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 15.0 vs 15.0 (tol 1e-09)'
+- id: g-th-02
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: cosinus kąta z trzech boków (BBB)
+  statement: Dany jest trójkąt ABC, w którym |BC| = 5, |AC| = 7 oraz |AB| = 8. Oblicz cosinus kąta ACB.
+    Zapisz obliczenia.
+  statement_latex: \cos\angle ACB = \frac{5^2 + 7^2 - 8^2}{2\cdot 5\cdot 7}
+  solution: |-
+    Naprzeciw kąta ACB leży bok AB o długości 8, a ramionami tego kąta są boki BC = 5 i AC = 7. Zatem
+    \cos\angle ACB = \frac{|BC|^2 + |AC|^2 - |AB|^2}{2\cdot|BC|\cdot|AC|} = \frac{25 + 49 - 64}{2\cdot 5\cdot 7} = \frac{10}{70} = \frac{1}{7}.
+    Wynik należy do przedziału (-1; 1), a jego dodatni znak oznacza, że kąt ACB jest ostry.
+  solution_steps:
+  - Zidentyfikuj bok leżący naprzeciw kąta ACB — jest to AB = 8.
+  - Zapisz wzór \cos\angle ACB = \frac{|BC|^2+|AC|^2-|AB|^2}{2\cdot|BC|\cdot|AC|}.
+  - 'Podstaw dane: \frac{25+49-64}{70} = \frac{10}{70}.'
+  - 'Skróć ułamek: \cos\angle ACB = \frac{1}{7}.'
+  answer:
+    kind: SYMBOLIC
+    latex: \frac{1}{7}
+  checks:
+  - kind: evaluate
+    expr: \frac{5^2 + 7^2 - 8^2}{2\cdot 5\cdot 7}
+  skills:
+  - wzór na cosinus z trzech boków
+  - identyfikacja boku naprzeciw kąta
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 0.14285714285714285 vs 0.14285714285714285 (tol 1e-09)'
+- id: g-ex-03
+  slot: EXERCISE
+  ramp_index: 1
+  difficulty: 2
+  exercise_type: 'BKB: bok i pole przy kącie rozwartym'
+  statement: W trójkącie ABC dane są |AB| = 3, |AC| = 5 oraz |∠BAC| = 120°. Oblicz długość boku BC oraz
+    pole trójkąta ABC. Zapisz obliczenia.
+  statement_latex: '|BC|^2 = 3^2 + 5^2 - 2\cdot 3\cdot 5\cdot\cos 120^\circ,\qquad P = \frac{1}{2}\cdot
+    3\cdot 5\cdot\sin 120^\circ'
+  solution: |-
+    Kąt BAC leży między bokami AB i AC, a naprzeciw niego leży bok BC.
+    Twierdzenie cosinusów: |BC|^2 = |AB|^2 + |AC|^2 - 2\cdot|AB|\cdot|AC|\cdot\cos 120^\circ.
+    Ponieważ cos 120° = -\frac{1}{2}, składnik poprawkowy jest dodatni:
+    -2\cdot 3\cdot 5\cdot\left(-\frac{1}{2}\right) = +15,
+    więc |BC|^2 = 9 + 25 + 15 = 49, czyli |BC| = 7.
+    Pole: sin 120° = \frac{\sqrt{3}}{2}, zatem
+    P = \frac{1}{2}\cdot 3\cdot 5\cdot\frac{\sqrt{3}}{2} = \frac{15\sqrt{3}}{4} \approx 6{,}5.
+    Kontrola: 7 < 3 + 5 = 8 (nierówność trójkąta), a najdłuższy bok BC leży naprzeciw największego, rozwartego kąta.
+  solution_steps:
+  - Ustal, że kąt 120° jest kątem między bokami AB i AC, a bok BC leży naprzeciw niego.
+  - Zapisz |BC|^2 = 3^2 + 5^2 - 2\cdot 3\cdot 5\cdot\cos 120^\circ.
+  - 'Podstaw cos 120° = -\frac{1}{2}: |BC|^2 = 9 + 25 + 15 = 49, więc |BC| = 7.'
+  - 'Oblicz pole: P = \frac{1}{2}\cdot 3\cdot 5\cdot\frac{\sqrt{3}}{2} = \frac{15\sqrt{3}}{4}.'
+  - 'Sprawdź sensowność wyniku: nierówność trójkąta i zasada ''większy bok naprzeciw większego kąta''.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: '|BC|'
+      answer:
+        kind: NUMERIC
+        value: 7.0
+    - name: pole
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{15\sqrt{3}}{4}
+  checks:
+  - kind: evaluate
+    expr: \sqrt{3^2 + 5^2 - 2\cdot 3\cdot 5\cdot\left(-\frac{1}{2}\right)}
+    part: '|BC|'
+  - kind: evaluate
+    expr: \frac{1}{2}\cdot 3\cdot 5\cdot\frac{\sqrt{3}}{2}
+    part: pole
+  skills:
+  - twierdzenie cosinusów
+  - cosinus i sinus kąta 120°
+  - pole przez sinus
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [|BC|] SymPy solved it fresh: 7.0 vs 7.0 (tol 1e-09) ; [pole]
+      SymPy solved it fresh: 6.49519052838329 vs 6.49519052838329 (tol 1e-09)'
+- id: g-ex-04
+  slot: EXERCISE
+  ramp_index: 2
+  difficulty: 3
+  exercise_type: 'BBB: największy kąt i pole'
+  statement: Dany jest trójkąt ABC o bokach długości |BC| = 7, |AC| = 8 oraz |AB| = 13. Oblicz cosinus
+    największego kąta tego trójkąta, podaj miarę tego kąta oraz oblicz pole trójkąta ABC. Zapisz obliczenia.
+  statement_latex: \cos\angle ACB = \frac{7^2 + 8^2 - 13^2}{2\cdot 7\cdot 8},\qquad P = \frac{1}{2}\cdot
+    7\cdot 8\cdot\sin\angle ACB
+  solution: |-
+    Największy kąt leży naprzeciw najdłuższego boku, czyli naprzeciw AB = 13; jest to kąt ACB.
+    \cos\angle ACB = \frac{|BC|^2 + |AC|^2 - |AB|^2}{2\cdot|BC|\cdot|AC|} = \frac{49 + 64 - 169}{2\cdot 7\cdot 8} = \frac{-56}{112} = -\frac{1}{2}.
+    Cosinus jest ujemny, więc kąt jest rozwarty, a wartości -\frac{1}{2} odpowiada kąt 120°: |∠ACB| = 120°.
+    Pole liczymy ze wzoru z sinusem kąta zawartego między bokami BC i AC; sin 120° = \frac{\sqrt{3}}{2}:
+    P = \frac{1}{2}\cdot 7\cdot 8\cdot\frac{\sqrt{3}}{2} = 14\sqrt{3} \approx 24{,}25.
+    Kontrola: 13^2 = 169 > 49 + 64 = 113, więc trójkąt jest rozwartokątny — zgodnie z otrzymanym kątem.
+  solution_steps:
+  - 'Wskaż największy kąt: leży on naprzeciw najdłuższego boku AB = 13, czyli jest to kąt ACB.'
+  - Zastosuj wzór \cos\angle ACB = \frac{7^2+8^2-13^2}{2\cdot 7\cdot 8} = \frac{-56}{112} = -\frac{1}{2}.
+  - Z ujemnego cosinusa i wartości tablicowej odczytaj |∠ACB| = 120°.
+  - 'Oblicz pole: P = \frac{1}{2}\cdot 7\cdot 8\cdot\frac{\sqrt{3}}{2} = 14\sqrt{3}.'
+  - 'Sprawdź: 169 > 113, więc trójkąt jest rozwartokątny.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: cosinus największego kąta
+      answer:
+        kind: SYMBOLIC
+        latex: -\frac{1}{2}
+    - name: miara największego kąta
+      answer:
+        kind: NUMERIC
+        value: 120.0
+        tol: 1.0e-06
+    - name: pole
+      answer:
+        kind: SYMBOLIC
+        latex: 14\sqrt{3}
+  checks:
+  - kind: evaluate
+    expr: \frac{7^2 + 8^2 - 13^2}{2\cdot 7\cdot 8}
+    part: cosinus największego kąta
+  - kind: evaluate
+    expr: \frac{180}{\pi}\cdot\arccos\left(\frac{7^2 + 8^2 - 13^2}{2\cdot 7\cdot 8}\right)
+    part: miara największego kąta
+  - kind: evaluate
+    expr: \frac{1}{2}\cdot 7\cdot 8\cdot\frac{\sqrt{3}}{2}
+    part: pole
+  skills:
+  - cosinus kąta z trzech boków
+  - rozpoznanie kąta rozwartego
+  - pole przez sinus
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [cosinus największego kąta] SymPy solved it fresh: -0.5 vs
+      -0.5 (tol 1e-09) ; [miara największego kąta] SymPy solved it fresh: 120.0 vs 120.0 (tol 1e-06) ;
+      [pole] SymPy solved it fresh: 24.24871130596428 vs 24.24871130596428 (tol 1e-09)'
+- id: g-ex-05
+  slot: EXERCISE
+  ramp_index: 3
+  difficulty: 4
+  exercise_type: 'zadanie praktyczne: równoległobok, pole i przekątne'
+  statement: Działka ma kształt równoległoboku ABCD, w którym |AB| = 40 m, |BC| = 30 m oraz |∠ABC| = 60°.
+    Oblicz pole tej działki oraz długości obu przekątnych AC i BD. Wyniki podaj w postaci dokładnej. Zapisz
+    obliczenia.
+  statement_latex: P = 40\cdot 30\cdot\sin 60^\circ,\qquad |AC|^2 = 40^2 + 30^2 - 2\cdot 40\cdot 30\cdot\cos
+    60^\circ,\qquad |BD|^2 = 40^2 + 30^2 - 2\cdot 40\cdot 30\cdot\cos 120^\circ
+  solution: |-
+    Pole równoległoboku o bokach a, b i kącie α między nimi wynosi P = a\cdot b\cdot\sin\alpha, więc
+    P = 40\cdot 30\cdot\sin 60^\circ = 1200\cdot\frac{\sqrt{3}}{2} = 600\sqrt{3}\ \text{m}^2 \approx 1039{,}2\ \text{m}^2.
+    Przekątna AC leży naprzeciw kąta ABC = 60° w trójkącie ABC o bokach AB = 40 i BC = 30:
+    |AC|^2 = 40^2 + 30^2 - 2\cdot 40\cdot 30\cdot\frac{1}{2} = 1600 + 900 - 1200 = 1300,
+    zatem |AC| = \sqrt{1300} = 10\sqrt{13} \approx 36{,}1 m.
+    Kąt przy wierzchołku A w równoległoboku jest kątem przyległym do kąta ABC, więc |∠DAB| = 180^\circ - 60^\circ = 120^\circ, a przekątna BD leży w trójkącie ABD naprzeciw tego kąta (przy czym |AD| = |BC| = 30):
+    |BD|^2 = 40^2 + 30^2 - 2\cdot 40\cdot 30\cdot\left(-\frac{1}{2}\right) = 1600 + 900 + 1200 = 3700,
+    czyli |BD| = \sqrt{3700} = 10\sqrt{37} \approx 60{,}8 m.
+    Kontrola: 1300 + 3700 = 5000 = 2\left(40^2 + 30^2\right) — spełniona jest zależność między przekątnymi równoległoboku.
+  solution_steps:
+  - 'Zapisz pole równoległoboku: P = |AB|\cdot|BC|\cdot\sin 60^\circ = 40\cdot 30\cdot\frac{\sqrt{3}}{2}
+    = 600\sqrt{3}.'
+  - 'W trójkącie ABC zastosuj twierdzenie cosinusów dla kąta 60°: |AC|^2 = 1600 + 900 - 1200 = 1300, więc
+    |AC| = 10\sqrt{13}.'
+  - Zauważ, że kąt DAB = 180° - 60° = 120° i że |AD| = |BC| = 30.
+  - 'W trójkącie ABD: |BD|^2 = 1600 + 900 + 1200 = 3700, więc |BD| = 10\sqrt{37}.'
+  - 'Sprawdź poprawność: suma kwadratów przekątnych 1300 + 3700 = 5000 równa się 2(40^2+30^2).'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: pole
+      answer:
+        kind: SYMBOLIC
+        latex: 600\sqrt{3}
+    - name: '|AC|'
+      answer:
+        kind: SYMBOLIC
+        latex: 10\sqrt{13}
+    - name: '|BD|'
+      answer:
+        kind: SYMBOLIC
+        latex: 10\sqrt{37}
+  checks:
+  - kind: evaluate
+    expr: 40\cdot 30\cdot\frac{\sqrt{3}}{2}
+    part: pole
+  - kind: evaluate
+    expr: \sqrt{40^2 + 30^2 - 2\cdot 40\cdot 30\cdot\frac{1}{2}}
+    part: '|AC|'
+  - kind: evaluate
+    expr: \sqrt{40^2 + 30^2 - 2\cdot 40\cdot 30\cdot\left(-\frac{1}{2}\right)}
+    part: '|BD|'
+  skills:
+  - pole równoległoboku przez sinus
+  - twierdzenie cosinusów dla obu przekątnych
+  - cosinus kąta rozwartego
+  - model geometryczny sytuacji praktycznej
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [pole] SymPy solved it fresh: 1039.2304845413264 vs 1039.2304845413264
+      (tol 1e-09) ; [|AC|] SymPy solved it fresh: 36.05551275463989 vs 36.05551275463989 (tol 1e-09) ;
+      [|BD|] SymPy solved it fresh: 60.8276253029822 vs 60.8276253029822 (tol 1e-09)'
+- id: g-ex-t00
+  slot: EXERCISE
+  ramp_index: 6
+  difficulty: 3
+  exercise_type: 'Trójkąt o danych trzech bokach (BBB): cosinus kąta i pole'
+  statement: Dany jest trójkąt ABC, w którym |BC| = 4, |AC| = 5 oraz |AB| = 6. Oblicz cosinus największego
+    kąta tego trójkąta oraz pole trójkąta ABC. Zapisz obliczenia i podaj wynik w postaci dokładnej.
+  statement_latex: \cos\gamma = \frac{4^2 + 5^2 - 6^2}{2\cdot 4\cdot 5},\qquad P = \frac{1}{2}\cdot 4\cdot
+    5\cdot\sin\gamma
+  solution: |-
+    Największy kąt leży naprzeciw najdłuższego boku, czyli naprzeciw boku AB = 6. Jest to kąt przy wierzchołku C, oznaczmy go \gamma; kąt ten jest zawarty między bokami BC = 4 i AC = 5.
+
+    Z twierdzenia cosinusów: 6^2 = 4^2 + 5^2 - 2\cdot 4\cdot 5\cdot\cos\gamma, czyli 36 = 16 + 25 - 40\cos\gamma, zatem 40\cos\gamma = 5 oraz \cos\gamma = \frac{1}{8}.
+
+    Cosinus jest dodatni, więc największy kąt jest ostry — trójkąt jest ostrokątny (kontrola: 36 < 16 + 25).
+
+    Kąt trójkąta spełnia 0^\circ < \gamma < 180^\circ, więc \sin\gamma > 0 i \sin\gamma = \sqrt{1 - \left(\frac{1}{8}\right)^2} = \sqrt{\frac{63}{64}} = \frac{3\sqrt{7}}{8}.
+
+    Pole: P = \frac{1}{2}\cdot 4\cdot 5\cdot\frac{3\sqrt{7}}{8} = \frac{30\sqrt{7}}{8} = \frac{15\sqrt{7}}{4} \approx 9,92.
+
+    Kontrola: P \le \frac{1}{2}\cdot 4\cdot 5 = 10 i rzeczywiście 9,92 < 10.
+  solution_steps:
+  - Rozpoznaj, że największy kąt leży naprzeciw najdłuższego boku AB = 6; jest to kąt \gamma przy wierzchołku
+    C, zawarty między bokami 4 i 5.
+  - 'Zapisz twierdzenie cosinusów: 6^2 = 4^2 + 5^2 - 2\cdot 4\cdot 5\cdot\cos\gamma.'
+  - Oblicz \cos\gamma = \frac{16 + 25 - 36}{40} = \frac{5}{40} = \frac{1}{8}.
+  - Wyznacz \sin\gamma = \sqrt{1 - \frac{1}{64}} = \frac{3\sqrt{7}}{8} (znak plus, bo 0^\circ < \gamma
+    < 180^\circ).
+  - Oblicz P = \frac{1}{2}\cdot 4\cdot 5\cdot\frac{3\sqrt{7}}{8} = \frac{15\sqrt{7}}{4}.
+  - 'Sprawdź sensowność: P < \frac{1}{2}\cdot 4\cdot 5 = 10.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: cosinus_najwiekszego_kata
+      answer:
+        kind: NUMERIC
+        value: 0.125
+    - name: pole
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{15\sqrt{7}}{4}
+  checks:
+  - kind: evaluate
+    expr: \frac{4^2 + 5^2 - 6^2}{2\cdot 4\cdot 5}
+    part: cosinus_najwiekszego_kata
+  - kind: evaluate
+    expr: \frac{1}{2}\cdot 4\cdot 5\cdot\sqrt{1 - \left(\frac{1}{8}\right)^2}
+    part: pole
+  skills:
+  - twierdzenie cosinusów
+  - cosinus kąta z trzech boków
+  - jedynka trygonometryczna
+  - pole trójkąta przez sinus
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [cosinus_najwiekszego_kata] SymPy solved it fresh: 0.125 vs
+      0.125 (tol 1e-09) ; [pole] SymPy solved it fresh: 9.921567416492215 vs 9.921567416492215 (tol 1e-09)'
+- id: g-ex-t01
+  slot: EXERCISE
+  ramp_index: 7
+  difficulty: 4
+  exercise_type: Kąt wyznaczony z pola (dwie możliwości) i trzeci bok z twierdzenia cosinusów
+  statement: W trójkącie ABC dane są boki |AB| = 10 i |AC| = 6. Pole tego trójkąta jest równe 15\sqrt{3},
+    a kąt BAC jest rozwarty. Oblicz miarę kąta BAC oraz długość boku BC. Zapisz obliczenia.
+  statement_latex: 15\sqrt{3} = \frac{1}{2}\cdot 10\cdot 6\cdot\sin\alpha,\qquad |BC|^2 = 10^2 + 6^2 -
+    2\cdot 10\cdot 6\cdot\cos\alpha
+  solution: |-
+    Kąt BAC = \alpha leży między bokami AB = 10 i AC = 6, więc do pola stosujemy wzór P = \frac{1}{2}\cdot|AB|\cdot|AC|\cdot\sin\alpha.
+
+    15\sqrt{3} = \frac{1}{2}\cdot 10\cdot 6\cdot\sin\alpha = 30\sin\alpha, stąd \sin\alpha = \frac{15\sqrt{3}}{30} = \frac{\sqrt{3}}{2}.
+
+    W przedziale (0^\circ;\,180^\circ) równanie \sin\alpha = \frac{\sqrt{3}}{2} ma dwa rozwiązania: \alpha = 60^\circ oraz \alpha = 120^\circ. Z treści zadania kąt BAC jest rozwarty, więc \alpha = 120^\circ i \cos\alpha = -\frac{1}{2}.
+
+    Z twierdzenia cosinusów (bok BC leży naprzeciw kąta \alpha):
+    |BC|^2 = 10^2 + 6^2 - 2\cdot 10\cdot 6\cdot\left(-\frac{1}{2}\right) = 100 + 36 + 60 = 196,
+    zatem |BC| = 14.
+
+    Kontrola: 14 < 10 + 6 = 16 (nierówność trójkąta) i najdłuższy bok leży naprzeciw kąta rozwartego — wynik jest spójny.
+  solution_steps:
+  - Zauważ, że kąt BAC jest zawarty między danymi bokami, więc P = \frac{1}{2}\cdot 10\cdot 6\cdot\sin\alpha.
+  - Wyznacz \sin\alpha = \frac{2\cdot 15\sqrt{3}}{10\cdot 6} = \frac{\sqrt{3}}{2}.
+  - 'Wypisz oba kąty spełniające to równanie: 60^\circ i 120^\circ.'
+  - Odrzuć 60^\circ, bo kąt BAC ma być rozwarty; przyjmij \alpha = 120^\circ, \cos\alpha = -\frac{1}{2}.
+  - 'Zastosuj twierdzenie cosinusów: |BC|^2 = 100 + 36 + 60 = 196, więc |BC| = 14.'
+  - 'Sprawdź nierówność trójkąta: 14 < 16.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: kat_BAC_w_stopniach
+      answer:
+        kind: NUMERIC
+        value: 120.0
+    - name: dlugosc_BC
+      answer:
+        kind: NUMERIC
+        value: 14.0
+  checks:
+  - kind: evaluate
+    expr: 180 - \frac{180}{\pi}\cdot\arcsin\left(\frac{\sqrt{3}}{2}\right)
+    part: kat_BAC_w_stopniach
+  - kind: evaluate
+    expr: \sqrt{10^2 + 6^2 - 2\cdot 10\cdot 6\cdot\left(-\frac{1}{2}\right)}
+    part: dlugosc_BC
+  skills:
+  - sinus wyznaczony z pola
+  - niejednoznaczność kąta z sinusa
+  - twierdzenie cosinusów
+  - kontrola poprawności wyniku
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [kat_BAC_w_stopniach] SymPy solved it fresh: 120.0 vs 120.0
+      (tol 1e-09) ; [dlugosc_BC] SymPy solved it fresh: 14.0 vs 14.0 (tol 1e-09)'
+- id: g-cm-06
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: 'analiza błędu: Pitagoras w trójkącie nieprostokątnym'
+  statement: 'W trójkącie ABC dane są |AB| = 8, |AC| = 5 oraz |∠BAC| = 60°. Uczeń zapisał: „|BC| = \sqrt{8^2
+    + 5^2} = \sqrt{89} \approx 9{,}43”. Wskaż błąd w tym rozumowaniu i oblicz poprawną długość boku BC.'
+  statement_latex: '|BC|^2 = 8^2 + 5^2 - 2\cdot 8\cdot 5\cdot\cos 60^\circ'
+  solution: |-
+    Błędne rozumowanie: uczeń potraktował boki AB i AC jak przyprostokątne i użył twierdzenia Pitagorasa: |BC| = \sqrt{64 + 25} = \sqrt{89} \approx 9{,}43.
+    Dlaczego to źle: twierdzenie Pitagorasa obowiązuje tylko wtedy, gdy kąt między danymi bokami jest prosty. Tutaj |∠BAC| = 60°, więc trójkąt nie jest prostokątny. Pitagoras to szczególny przypadek twierdzenia cosinusów dla kąta 90°, bo cos 90° = 0; przy innym kącie nie wolno pominąć składnika -2bc\cos\alpha.
+    Poprawne obliczenie:
+    |BC|^2 = |AB|^2 + |AC|^2 - 2\cdot|AB|\cdot|AC|\cdot\cos 60^\circ = 64 + 25 - 2\cdot 8\cdot 5\cdot\frac{1}{2} = 89 - 40 = 49,
+    zatem |BC| = 7.
+    Komentarz: kąt 60° jest ostry, więc bok naprzeciw niego musi być KRÓTSZY niż \sqrt{89} — wynik 7 < 9{,}43 potwierdza sens odpowiedzi.
+  solution_steps:
+  - 'Odtwórz błąd: zastosowanie |BC| = \sqrt{8^2+5^2} = \sqrt{89} zakłada kąt prosty między AB i AC.'
+  - 'Wskaż przyczynę: kąt BAC ma 60°, a Pitagoras to twierdzenie cosinusów dla kąta 90° (cos 90° = 0).'
+  - 'Zapisz poprawny wzór: |BC|^2 = 8^2 + 5^2 - 2\cdot 8\cdot 5\cdot\cos 60^\circ.'
+  - 'Podstaw cos 60° = \frac{1}{2}: |BC|^2 = 89 - 40 = 49.'
+  - 'Wyciągnij pierwiastek: |BC| = 7 (mniej niż \sqrt{89}, bo kąt jest ostry).'
+  answer:
+    kind: NUMERIC
+    value: 7.0
+  checks:
+  - kind: evaluate
+    expr: \sqrt{8^2 + 5^2 - 2\cdot 8\cdot 5\cdot\frac{1}{2}}
+  skills:
+  - twierdzenie cosinusów
+  - rozumienie Pitagorasa jako przypadku szczególnego
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 7.0 vs 7.0 (tol 1e-09)'
+- id: g-cm-07
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: 'analiza błędu: kąt niezawarty między danymi bokami'
+  statement: 'W trójkącie ABC dane są |AB| = 8, |BC| = 5, |AC| = 7 oraz |∠ABC| = 60°. Uczeń obliczył pole
+    tego trójkąta tak: „P = \frac{1}{2}\cdot|AB|\cdot|AC|\cdot\sin\angle ABC = \frac{1}{2}\cdot 8\cdot
+    7\cdot\frac{\sqrt{3}}{2} = 14\sqrt{3}”. Wskaż błąd w tym rozumowaniu i oblicz poprawne pole trójkąta
+    ABC.'
+  statement_latex: P = \frac{1}{2}\cdot|AB|\cdot|BC|\cdot\sin\angle ABC = \frac{1}{2}\cdot 8\cdot 5\cdot\sin
+    60^\circ
+  solution: |-
+    Błędne rozumowanie: uczeń użył boków AB i AC razem z kątem ABC i otrzymał P = \frac{1}{2}\cdot 8\cdot 7\cdot\frac{\sqrt{3}}{2} = 14\sqrt{3} \approx 24{,}25.
+    Dlaczego to źle: we wzorze P = \frac{1}{2}ab\sin\gamma kąt γ musi być kątem ZAWARTYM między wybranymi bokami. Kąt ABC ma wierzchołek w B, więc jego ramionami są boki BA i BC, a nie AB i AC. Bok AC leży naprzeciw tego kąta i nie może wystąpić w tym wzorze razem z kątem ABC.
+    Poprawne obliczenie: bierzemy boki wychodzące z wierzchołka B, czyli AB = 8 i BC = 5:
+    P = \frac{1}{2}\cdot 8\cdot 5\cdot\sin 60^\circ = 20\cdot\frac{\sqrt{3}}{2} = 10\sqrt{3} \approx 17{,}32.
+    Kontrola danych: z twierdzenia cosinusów |AC|^2 = 64 + 25 - 2\cdot 8\cdot 5\cdot\frac{1}{2} = 49, czyli |AC| = 7 — dane są spójne.
+  solution_steps:
+  - 'Odtwórz błąd: użycie boków AB i AC wraz z kątem ABC daje 14\sqrt{3}.'
+  - 'Wskaż przyczynę: ramionami kąta ABC są boki BA i BC, więc AC nie jest bokiem tworzącym ten kąt.'
+  - 'Zapisz poprawny wzór: P = \frac{1}{2}\cdot|AB|\cdot|BC|\cdot\sin\angle ABC.'
+  - 'Podstaw dane i sin 60° = \frac{\sqrt{3}}{2}: P = \frac{1}{2}\cdot 8\cdot 5\cdot\frac{\sqrt{3}}{2}
+    = 10\sqrt{3}.'
+  - 'Sprawdź spójność danych twierdzeniem cosinusów: |AC| = 7.'
+  answer:
+    kind: SYMBOLIC
+    latex: 10\sqrt{3}
+  checks:
+  - kind: evaluate
+    expr: \frac{1}{2}\cdot 8\cdot 5\cdot\frac{\sqrt{3}}{2}
+  skills:
+  - pole trójkąta przez sinus
+  - identyfikacja kąta zawartego między bokami
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 17.320508075688775 vs 17.320508075688775 (tol 1e-09)'
+- id: g-cm-08
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: 'analiza błędu: znak cosinusa kąta rozwartego'
+  statement: 'W trójkącie ABC dane są |CA| = 7, |CB| = 8 oraz |∠ACB| = 120°. Uczeń zapisał: „|AB|^2 =
+    7^2 + 8^2 - 2\cdot 7\cdot 8\cdot\frac{1}{2} = 57, więc |AB| = \sqrt{57} \approx 7{,}55”. Wskaż błąd
+    w tym rozumowaniu i oblicz poprawną długość boku AB.'
+  statement_latex: '|AB|^2 = 7^2 + 8^2 - 2\cdot 7\cdot 8\cdot\cos 120^\circ'
+  solution: |-
+    Błędne rozumowanie: uczeń przyjął cos 120° = \frac{1}{2} i otrzymał |AB|^2 = 49 + 64 - 56 = 57, czyli |AB| = \sqrt{57} \approx 7{,}55.
+    Dlaczego to źle: kąt 120° jest rozwarty, a dla kątów z przedziału (90°; 180°) cosinus jest UJEMNY: cos 120° = -\frac{1}{2}. Wtedy składnik poprawkowy zmienia znak na dodatni: -2\cdot 7\cdot 8\cdot\left(-\frac{1}{2}\right) = +56.
+    Poprawne obliczenie:
+    |AB|^2 = 49 + 64 + 56 = 169, więc |AB| = 13.
+    Komentarz: bok leżący naprzeciw kąta rozwartego musi być dłuższy niż w trójkącie prostokątnym o tych samych ramionach, czyli dłuższy niż \sqrt{49+64} = \sqrt{113} \approx 10{,}6. Wynik 13 jest sensowny, a błędne 7,55 — nie.
+  solution_steps:
+  - 'Odtwórz błąd: przyjęcie cos 120° = \frac{1}{2} prowadzi do |AB| = \sqrt{57}.'
+  - 'Wskaż przyczynę: dla kąta rozwartego cosinus jest ujemny, cos 120° = -\frac{1}{2}.'
+  - 'Popraw znak składnika: -2\cdot 7\cdot 8\cdot\left(-\frac{1}{2}\right) = +56.'
+  - Oblicz |AB|^2 = 49 + 64 + 56 = 169, stąd |AB| = 13.
+  - 'Sprawdź sensowność: 13 > \sqrt{113}, bo kąt jest rozwarty.'
+  answer:
+    kind: NUMERIC
+    value: 13.0
+  checks:
+  - kind: evaluate
+    expr: \sqrt{7^2 + 8^2 - 2\cdot 7\cdot 8\cdot\left(-\frac{1}{2}\right)}
+  skills:
+  - cosinus kąta rozwartego
+  - twierdzenie cosinusów
+  - kontrola sensowności wyniku
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 13.0 vs 13.0 (tol 1e-09)'
+- id: g-cm-09
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: 'analiza błędu: zły znak w liczniku wzoru na cosinus'
+  statement: 'Dany jest trójkąt ABC, w którym |BC| = 4, |AC| = 5 oraz |AB| = 6. Uczeń obliczył cosinus
+    kąta ACB tak: „\cos\angle ACB = \frac{4^2 + 5^2 + 6^2}{2\cdot 4\cdot 5} = \frac{77}{40} = 1{,}925”.
+    Wskaż błąd w tym rozumowaniu i oblicz poprawną wartość cosinusa kąta ACB.'
+  statement_latex: \cos\angle ACB = \frac{4^2 + 5^2 - 6^2}{2\cdot 4\cdot 5}
+  solution: |-
+    Błędne rozumowanie: uczeń dodał w liczniku kwadrat trzeciego boku i otrzymał \cos\angle ACB = \frac{77}{40} = 1{,}925.
+    Dlaczego to źle: po pierwsze, wynik jest niemożliwy, bo zawsze -1 < \cos\alpha < 1. Po drugie, we wzorze wyprowadzonym z twierdzenia cosinusów kwadrat boku leżącego NAPRZECIW szukanego kąta ODEJMUJEMY. Naprzeciw kąta ACB leży bok AB = 6.
+    Poprawne obliczenie:
+    \cos\angle ACB = \frac{|BC|^2 + |AC|^2 - |AB|^2}{2\cdot|BC|\cdot|AC|} = \frac{16 + 25 - 36}{2\cdot 4\cdot 5} = \frac{5}{40} = \frac{1}{8}.
+    Wynik należy do przedziału (-1; 1) i jest dodatni, więc kąt ACB jest ostry — co się zgadza, bo 6^2 = 36 < 16 + 25 = 41.
+  solution_steps:
+  - 'Odtwórz błąd: dodanie 6^2 w liczniku daje \frac{77}{40} = 1{,}925.'
+  - 'Wskaż przyczynę: wynik przekracza 1, a we wzorze kwadrat boku leżącego naprzeciw kąta należy odjąć.'
+  - 'Zapisz poprawny wzór: \cos\angle ACB = \frac{4^2+5^2-6^2}{2\cdot 4\cdot 5}.'
+  - 'Oblicz: \frac{16+25-36}{40} = \frac{5}{40} = \frac{1}{8}.'
+  - 'Sprawdź: 0 < \frac{1}{8} < 1, więc kąt ACB jest ostry (36 < 41).'
+  answer:
+    kind: SYMBOLIC
+    latex: \frac{1}{8}
+  checks:
+  - kind: evaluate
+    expr: \frac{4^2 + 5^2 - 6^2}{2\cdot 4\cdot 5}
+  skills:
+  - wzór na cosinus z trzech boków
+  - kontrola warunku -1 < cos < 1
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 0.125 vs 0.125 (tol 1e-09)'
+- id: g-cm-10
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: 'analiza błędu: kolejność działań w wyrażeniu 2bc cos α'
+  statement: 'W trójkącie ABC dane są |AB| = 10, |AC| = 6 oraz |∠BAC| = 60°. Uczeń zapisał: „|BC|^2 =
+    \left(10^2 + 6^2 - 2\cdot 10\cdot 6\right)\cdot\cos 60^\circ = 16\cdot\frac{1}{2} = 8, więc |BC| =
+    \sqrt{8} = 2\sqrt{2}”. Wskaż błąd w tym rozumowaniu i oblicz poprawną długość boku BC. Wynik podaj
+    w postaci dokładnej.'
+  statement_latex: '|BC|^2 = 10^2 + 6^2 - 2\cdot 10\cdot 6\cdot\cos 60^\circ'
+  solution: |-
+    Błędne rozumowanie: uczeń najpierw obliczył 10^2 + 6^2 - 2\cdot 10\cdot 6 = 100 + 36 - 120 = 16, a dopiero potem pomnożył całość przez cos 60° = \frac{1}{2}, otrzymując |BC|^2 = 8 i |BC| = 2\sqrt{2} \approx 2{,}83.
+    Dlaczego to źle: wyrażenie 2\cdot b\cdot c\cdot\cos\alpha jest JEDNYM składnikiem — cosinus wchodzi tylko do tego iloczynu, a nie mnoży całej różnicy. Kolejność działań jest taka: najpierw cały iloczyn 2\cdot 10\cdot 6\cdot\cos 60^\circ, potem odejmowanie.
+    Poprawne obliczenie:
+    2\cdot 10\cdot 6\cdot\cos 60^\circ = 120\cdot\frac{1}{2} = 60,
+    |BC|^2 = 100 + 36 - 60 = 76,
+    |BC| = \sqrt{76} = 2\sqrt{19} \approx 8{,}72.
+    Kontrola: wynik 2\sqrt{2} \approx 2{,}83 był niemożliwy, bo z nierówności trójkąta |BC| > |AB| - |AC| = 4.
+  solution_steps:
+  - 'Odtwórz błąd: pomnożenie różnicy 100 + 36 - 120 = 16 przez cos 60° daje |BC|^2 = 8.'
+  - 'Wskaż przyczynę: 2\cdot 10\cdot 6\cdot\cos 60^\circ to jeden składnik, cosinus nie mnoży całej sumy
+    kwadratów.'
+  - 'Oblicz poprawnie składnik: 2\cdot 10\cdot 6\cdot\frac{1}{2} = 60.'
+  - 'Odejmij: |BC|^2 = 100 + 36 - 60 = 76.'
+  - 'Wyciągnij pierwiastek i uprość: |BC| = \sqrt{76} = 2\sqrt{19}; sprawdź nierówność trójkąta |BC| >
+    4.'
+  answer:
+    kind: SYMBOLIC
+    latex: 2\sqrt{19}
+  checks:
+  - kind: evaluate
+    expr: \sqrt{10^2 + 6^2 - 2\cdot 10\cdot 6\cdot\frac{1}{2}}
+  skills:
+  - kolejność działań w twierdzeniu cosinusów
+  - upraszczanie pierwiastków
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 8.717797887081346 vs 8.717797887081346 (tol 1e-09)'
+- id: g-ch-t02
+  slot: CHALLENGE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: 'Modelowanie: pole równoległoboku z warunków na boki'
+  statement: Obwód pewnego równoległoboku jest równy 34 cm, a jeden z jego boków jest o 5 cm dłuższy od
+    boku sąsiedniego. Kąt rozwarty tego równoległoboku ma miarę 150^\circ. Oblicz pole tego równoległoboku.
+    Zapisz obliczenia.
+  statement_latex: 2\cdot\left(x + \left(x+5\right)\right) = 34,\qquad P = x\cdot\left(x+5\right)\cdot\sin
+    150^\circ
+  solution: |-
+    Oznaczmy przez x (w centymetrach) długość krótszego boku równoległoboku; bok sąsiedni ma wtedy długość x + 5, przy czym x > 0.
+
+    Z warunku na obwód: 2\cdot\left(x + \left(x+5\right)\right) = 34, czyli 4x + 10 = 34, stąd 4x = 24 oraz x = 6.
+
+    Boki równoległoboku mają więc długości 6 cm i 11 cm, a kąt między nimi ma miarę 150^\circ.
+
+    Pole równoległoboku: P = 6\cdot 11\cdot\sin 150^\circ. Ponieważ \sin 150^\circ = \sin 30^\circ = \frac{1}{2}, otrzymujemy
+    P = 66\cdot\frac{1}{2} = 33.
+
+    Pole równoległoboku jest równe 33 cm^2.
+
+    Kontrola: P < 6\cdot 11 = 66, bo \sin 150^\circ < 1 — wynik jest sensowny.
+  solution_steps:
+  - 'Wprowadź zmienną: x — długość krótszego boku, x + 5 — długość boku sąsiedniego, x > 0.'
+  - 'Zapisz warunek na obwód: 2\cdot\left(x + \left(x+5\right)\right) = 34.'
+  - 'Rozwiąż równanie: 4x + 10 = 34, więc x = 6; boki mają długości 6 cm i 11 cm.'
+  - 'Zapisz wzór na pole równoległoboku: P = 6\cdot 11\cdot\sin 150^\circ.'
+  - Podstaw \sin 150^\circ = \frac{1}{2} i oblicz P = 33 cm^2.
+  answer:
+    kind: NUMERIC
+    value: 33.0
+  checks:
+  - kind: evaluate
+    expr: \frac{34 - 2\cdot 5}{4}\cdot\left(\frac{34 - 2\cdot 5}{4} + 5\right)\cdot\frac{1}{2}
+  stated_model:
+    variable: x
+    objective_latex: P\left(x\right) = x\cdot\left(x+5\right)\cdot\sin 150^\circ
+    domain_lo: '0'
+    goal: value
+    constraint_used: 2\cdot\left(x + \left(x+5\right)\right) = 34
+  skills:
+  - wprowadzenie zmiennej
+  - równanie liniowe z warunku na obwód
+  - pole równoległoboku przez sinus
+  - sinus kąta rozwartego
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (PARSE_ERROR: "UnexpectedCharacters: No terminal
+      matches ''\\'' in the current parser context, at line 1 col 62") — human review'
+- id: g-ch-t03
+  slot: CHALLENGE
+  ramp_index: 1
+  difficulty: 4
+  exercise_type: Nieznany bok z twierdzenia cosinusów — równanie kwadratowe i filtr warunku ostrokątności
+  statement: 'W trójkącie ostrokątnym ABC dane są: |AB| = 8, |BC| = 7 oraz |\measuredangle BAC| = 60^\circ.
+    Oblicz długość boku AC oraz pole trójkąta ABC. Zapisz obliczenia i uzasadnij wybór wyniku.'
+  statement_latex: 7^2 = 8^2 + x^2 - 2\cdot 8\cdot x\cdot\cos 60^\circ,\qquad P = \frac{1}{2}\cdot 8\cdot
+    x\cdot\sin 60^\circ
+  solution: |-
+    Oznaczmy x = |AC|, x > 0. Kąt BAC = 60^\circ jest kątem zawartym między bokami AB = 8 i AC = x, a naprzeciw niego leży bok BC = 7. Z twierdzenia cosinusów:
+
+    7^2 = 8^2 + x^2 - 2\cdot 8\cdot x\cdot\cos 60^\circ.
+
+    Ponieważ \cos 60^\circ = \frac{1}{2}, mamy 49 = 64 + x^2 - 8x, czyli
+    x^2 - 8x + 15 = 0.
+
+    Wyróżnik: \Delta = 64 - 60 = 4, \sqrt{\Delta} = 2, więc x = \frac{8-2}{2} = 3 lub x = \frac{8+2}{2} = 5. Obie liczby są dodatnie, trzeba więc skorzystać z warunku, że trójkąt jest ostrokątny.
+
+    Dla x = 3 boki mają długości 8, 7, 3; najdłuższy bok to 8 i 8^2 = 64 > 7^2 + 3^2 = 58, więc kąt naprzeciw boku AB byłby rozwarty — ten przypadek odrzucamy.
+
+    Dla x = 5 boki mają długości 8, 7, 5; najdłuższy bok to 8 i 8^2 = 64 < 7^2 + 5^2 = 74, więc największy kąt jest ostry — trójkąt jest ostrokątny. Zatem |AC| = 5.
+
+    Pole: P = \frac{1}{2}\cdot|AB|\cdot|AC|\cdot\sin 60^\circ = \frac{1}{2}\cdot 8\cdot 5\cdot\frac{\sqrt{3}}{2} = 10\sqrt{3} \approx 17,3.
+  solution_steps:
+  - Wprowadź niewiadomą x = |AC|, x > 0.
+  - 'Zauważ, że kąt 60^\circ leży między bokami AB i AC, a naprzeciw niego leży bok BC = 7, i zapisz twierdzenie
+    cosinusów: 7^2 = 8^2 + x^2 - 2\cdot 8\cdot x\cdot\frac{1}{2}.'
+  - Doprowadź do równania kwadratowego x^2 - 8x + 15 = 0 i wyznacz pierwiastki x = 3 oraz x = 5.
+  - 'Sprawdź warunek ostrokątności: dla x = 3 mamy 8^2 > 7^2 + 3^2 (trójkąt rozwartokątny) — odrzuć; dla
+    x = 5 mamy 8^2 < 7^2 + 5^2 — przyjmij |AC| = 5.'
+  - 'Oblicz pole: P = \frac{1}{2}\cdot 8\cdot 5\cdot\frac{\sqrt{3}}{2} = 10\sqrt{3}.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: dlugosc_AC
+      answer:
+        kind: NUMERIC
+        value: 5.0
+    - name: pole
+      answer:
+        kind: SYMBOLIC
+        latex: 10\sqrt{3}
+  checks:
+  - kind: evaluate
+    expr: \frac{8 + \sqrt{8^2 - 4\cdot 15}}{2}
+    part: dlugosc_AC
+  - kind: evaluate
+    expr: \frac{1}{2}\cdot 8\cdot 5\cdot\frac{\sqrt{3}}{2}
+    part: pole
+  stated_model:
+    variable: x
+    objective_latex: P\left(x\right) = \frac{1}{2}\cdot 8\cdot x\cdot\sin 60^\circ
+    domain_lo: '0'
+    goal: value
+    constraint_used: 7^2 = 8^2 + x^2 - 2\cdot 8\cdot x\cdot\cos 60^\circ \text{ oraz trójkąt ostrokątny}
+  skills:
+  - wprowadzenie zmiennej
+  - twierdzenie cosinusów jako równanie kwadratowe
+  - kryterium rodzaju trójkąta
+  - pole trójkąta przez sinus
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (PARSE_ERROR: "UnexpectedCharacters: No terminal
+      matches ''\\'' in the current parser context, at line 1 col 64") — human review · FOLD? statement
+      asks to prove/justify/read but the answer carries no NOT_MACHINE_CHECKABLE part'
+- id: g-ch-t04
+  slot: CHALLENGE
+  ramp_index: 2
+  difficulty: 5
+  exercise_type: 'Optymalizacja pola trójkąta: wzór z dziedziną, funkcja kwadratowa i ograniczenie zewnętrzne'
+  statement: |-
+    Z drutu o długości 24 cm wykonano łamaną BAC złożoną z dwóch odcinków AB i AC (bok BC nie jest wykonany z drutu), przy czym kąt BAC ma miarę 150^\circ. Ze względów konstrukcyjnych odcinek AB nie może być dłuższy niż 9 cm. Niech x oznacza długość odcinka AB (w centymetrach).
+    a) Wyznacz wzór funkcji P opisującej pole trójkąta ABC w zależności od x i podaj dziedzinę tej funkcji.
+    b) Oblicz, dla jakiej długości odcinka AB pole trójkąta ABC jest największe, i oblicz to największe pole.
+  statement_latex: P\left(x\right) = \frac{1}{2}\cdot x\cdot\left(24 - x\right)\cdot\sin 150^\circ = \frac{x\cdot\left(24
+    - x\right)}{4}
+  solution: |-
+    a) Jeżeli |AB| = x, to na odcinek AC pozostaje 24 - x centymetrów drutu, czyli |AC| = 24 - x. Kąt BAC = 150^\circ jest kątem zawartym między bokami AB i AC, więc
+
+    P\left(x\right) = \frac{1}{2}\cdot x\cdot\left(24 - x\right)\cdot\sin 150^\circ = \frac{1}{2}\cdot x\cdot\left(24 - x\right)\cdot\frac{1}{2} = \frac{x\cdot\left(24 - x\right)}{4}.
+
+    Dziedzina: musi być x > 0 oraz 24 - x > 0, czyli 0 < x < 24, a dodatkowo warunek konstrukcyjny x \le 9. Ostatecznie dziedziną jest przedział \left(0;\,9\right\rangle.
+
+    b) Funkcja P\left(x\right) = -\frac{1}{4}x^2 + 6x jest funkcją kwadratową o współczynniku przy x^2 ujemnym, więc jej wykresem jest parabola o ramionach skierowanych w dół. Pierwsza współrzędna wierzchołka:
+    x_w = \frac{0 + 24}{2} = 12.
+
+    Wierzchołek leży poza dziedziną, bo 12 > 9. Na przedziale \left(0;\,12\right\rangle funkcja jest rosnąca, więc na dziedzinie \left(0;\,9\right\rangle największą wartość przyjmuje dla x = 9:
+
+    P\left(9\right) = \frac{9\cdot\left(24 - 9\right)}{4} = \frac{9\cdot 15}{4} = \frac{135}{4} = 33,75.
+
+    Odpowiedź: pole jest największe dla |AB| = 9 cm (wtedy |AC| = 15 cm) i wynosi 33,75 cm^2.
+  solution_steps:
+  - Zauważ, że |AB| + |AC| = 24, więc |AC| = 24 - x.
+  - 'Zapisz pole przez sinus kąta zawartego: P\left(x\right) = \frac{1}{2}\cdot x\cdot\left(24 - x\right)\cdot\sin
+    150^\circ i podstaw \sin 150^\circ = \frac{1}{2}, otrzymując P\left(x\right) = \frac{x\cdot\left(24
+    - x\right)}{4}.'
+  - 'Wyznacz dziedzinę: x > 0, 24 - x > 0 oraz x \le 9, czyli x \in \left(0;\,9\right\rangle.'
+  - Zauważ, że P jest funkcją kwadratową o ramionach skierowanych w dół, i oblicz x_w = \frac{0 + 24}{2}
+    = 12.
+  - Sprawdź, że wierzchołek nie należy do dziedziny (12 > 9), więc na \left(0;\,9\right\rangle funkcja
+    jest rosnąca i największą wartość przyjmuje dla x = 9.
+  - Oblicz P\left(9\right) = \frac{9\cdot 15}{4} = 33,75 cm^2.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wzor_funkcji
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{x\cdot\left(24 - x\right)}{4}
+    - name: dziedzina
+      answer:
+        kind: INTERVAL
+        lo: '0'
+        hi: '9'
+        hi_open: false
+    - name: dlugosc_AB_dla_max
+      answer:
+        kind: NUMERIC
+        value: 9.0
+    - name: najwieksze_pole
+      answer:
+        kind: NUMERIC
+        value: 33.75
+  checks:
+  - kind: simplify
+    expr: \frac{1}{2}\cdot x\cdot\left(24 - x\right)\cdot\frac{1}{2}
+    part: wzor_funkcji
+  - kind: evaluate
+    expr: \frac{9\cdot\left(24 - 9\right)}{4}
+    part: najwieksze_pole
+  stated_model:
+    variable: x
+    objective_latex: P\left(x\right) = \frac{1}{2}\cdot x\cdot\left(24 - x\right)\cdot\sin 150^\circ
+    domain_lo: '0'
+    domain_hi: '9'
+    domain_hi_open: false
+    constraint_used: '|AB| + |AC| = 24,\ |AB| \le 9'
+  skills:
+  - budowanie modelu z opisu
+  - pole trójkąta przez sinus
+  - wyznaczanie dziedziny
+  - funkcja kwadratowa i wierzchołek
+  - sprawdzenie ograniczenia zewnętrznego
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (PARSE_ERROR: "UnexpectedCharacters: No terminal
+      matches ''\\'' in the current parser context, at line 1 col 82") — human review'

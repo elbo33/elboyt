@@ -46,6 +46,7 @@ export async function copyManimSupport(): Promise<void> {
     "compute.py",
     "archetypes.py",
     "shorts.py",
+    "thumbnail.py",
     "template.py"
   ]) {
     await copyFileEnsured(path.join(manimSrc, file), path.join(supportDir, file));
@@ -97,4 +98,57 @@ export async function renderManimScene(
   await copyFileEnsured(movie, scene.renderPath);
   await copyFileEnsured(movie, path.join(PUBLIC_GENERATED_DIR, "scenes", path.basename(scene.renderPath)));
   await ensureDir(SCENE_RENDER_DIR);
+}
+
+/**
+ * Render a single Manim scene's last frame to a PNG (the episode thumbnail).
+ * `sourcePath` is a .py file with one `LessonScene` subclass; `outPath` is
+ * where the finished 1920x1080 still is copied.
+ */
+export async function renderThumbnailFrame(
+  sourcePath: string,
+  className: string,
+  outPath: string,
+  formatId = "still-16x9",
+  resolution: [number, number] = [1920, 1080]
+): Promise<void> {
+  const python = resolveManimPython();
+  await run(
+    python,
+    [
+      "-m",
+      "manim",
+      "-s",
+      sourcePath,
+      className,
+      "--quality",
+      "h",
+      "--resolution",
+      `${resolution[0]},${resolution[1]}`,
+      "--format",
+      "png",
+      "-o",
+      "thumbnail",
+      "--media_dir",
+      path.join(GENERATED_DIR, "media"),
+      "--disable_caching",
+      "--progress_bar",
+      "none",
+      "--verbosity",
+      "warning"
+    ],
+    PROJECT_ROOT,
+    {MANIM_FORMAT: formatId}
+  );
+
+  const stem = path.basename(sourcePath, ".py");
+  const imageDir = path.join(GENERATED_DIR, "media", "images", stem);
+  const entries = await fs.readdir(imageDir);
+  const png =
+    entries.find((f) => f === "thumbnail.png") ??
+    entries.filter((f) => f.endsWith(".png")).sort().pop();
+  if (!png) {
+    throw new Error(`No thumbnail PNG produced in ${imageDir}`);
+  }
+  await copyFileEnsured(path.join(imageDir, png), outPath);
 }

@@ -1,0 +1,816 @@
+section: przeksztalcenia-wykresow
+name: 'Przekształcenia wykresów: przesunięcia wzdłuż osi'
+scope: From the graph of y = f(x), sketching the graphs obtained by shifting it along the x-axis and along
+  the y-axis; reading off how the shift changes zeros, domain and range.
+requirements:
+- V.12
+counts:
+  total: 16
+  REFERENCE_CALL: 11
+  NOT_MACHINE_CHECKABLE: 2
+  DETERMINISTIC: 2
+  STATED_MODEL: 1
+exercises:
+- id: g-th-00
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: obraz punktu przy przesunięciu wykresu
+  statement: Punkt A = (-3,\ 5) należy do wykresu funkcji f. Funkcja g jest określona wzorem g(x) = f(x
+    - 4) + 1. Podaj współrzędne punktu A', który jest obrazem punktu A i należy do wykresu funkcji g.
+  statement_latex: g(x) = f\left(x - 4\right) + 1,\qquad A = \left(-3,\ 5\right)
+  solution: |-
+    Wzór wzorcowy przesunięcia to g(x) = f(x - p) + q. Porównując: x - 4 = x - p, więc p = 4, oraz q = 1. Wykres funkcji f przesuwamy zatem o wektor [4,\ 1] (4 jednostki w prawo i 1 jednostkę w górę).
+    Każdy punkt wykresu wędruje o ten sam wektor: (x,\ y) \mapsto (x + 4,\ y + 1).
+    Zatem A' = (-3 + 4,\ 5 + 1) = (1,\ 6).
+    Sprawdzenie: g(1) = f(1 - 4) + 1 = f(-3) + 1 = 5 + 1 = 6, więc punkt (1,\ 6) rzeczywiście leży na wykresie g.
+  solution_steps:
+  - Porównaj wzór g(x) = f(x - 4) + 1 ze wzorem g(x) = f(x - p) + q i odczytaj p = 4, q = 1.
+  - 'Zapisz wektor przesunięcia: [4, 1].'
+  - 'Do pierwszej współrzędnej punktu A dodaj 4, do drugiej dodaj 1: A'' = (-3 + 4, 5 + 1).'
+  - 'Zapisz odpowiedź: A'' = (1, 6) i sprawdź, że g(1) = f(-3) + 1 = 6.'
+  answer:
+    kind: TUPLE
+    items:
+    - '1'
+    - '6'
+  skills:
+  - obraz punktu wykresu przy przesunięciu
+  - odczytywanie wektora [p, q] ze wzoru
+  verification:
+    checkability: REFERENCE_CALL
+    note: 2 components matched
+- id: g-th-01
+  slot: THEORY_SUPPORT
+  ramp_index: 1
+  difficulty: 1
+  exercise_type: odczytanie wektora przesunięcia ze wzoru
+  statement: Wykres funkcji g otrzymano przez przesunięcie wykresu funkcji f, przy czym g(x) = f(x + 6)
+    - 2. Podaj współrzędne wektora \vec{u} = [p,\ q], o który przesunięto wykres funkcji f.
+  statement_latex: g(x) = f\left(x + 6\right) - 2
+  solution: |-
+    Wzorem wzorcowym jest g(x) = f(x - p) + q.
+    Zapisujemy x + 6 = x - (-6), więc p = -6 (pierwszą współrzędną bierzemy z przeciwnym znakiem niż liczba w nawiasie).
+    Liczba dopisana na zewnątrz to -2, więc q = -2 (tę bierzemy bez zmiany znaku).
+    Wektor przesunięcia: \vec{u} = [-6,\ -2], czyli 6 jednostek w lewo i 2 jednostki w dół.
+  solution_steps:
+  - Zapisz wzór wzorcowy g(x) = f(x - p) + q.
+  - Przekształć x + 6 = x - (-6), stąd p = -6.
+  - Odczytaj q = -2 ze składnika dopisanego poza nawiasem.
+  - 'Zapisz wektor: [-6, -2] (6 w lewo, 2 w dół).'
+  answer:
+    kind: TUPLE
+    items:
+    - '-6'
+    - '-2'
+  skills:
+  - odczytywanie znaków p i q
+  - zapis wektora przesunięcia
+  verification:
+    checkability: REFERENCE_CALL
+    note: 2 components matched
+- id: g-th-02
+  slot: THEORY_SUPPORT
+  ramp_index: 2
+  difficulty: 2
+  exercise_type: przesunięta hiperbola - asymptoty i dziedzina
+  statement: Wykres funkcji g jest opisany wzorem g(x) = \frac{3}{x - 2} + 5 i powstał z wykresu funkcji
+    f(x) = \frac{3}{x} przez przesunięcie o pewien wektor. Podaj równanie asymptoty pionowej oraz równanie
+    asymptoty poziomej wykresu funkcji g, a także dziedzinę tej funkcji.
+  statement_latex: g(x) = \frac{3}{x - 2} + 5
+  solution: |-
+    Wzór g(x) = f(x - 2) + 5 oznacza przesunięcie wykresu funkcji f o wektor [2,\ 5].
+    Razem z wykresem przesuwają się jego asymptoty:
+    - asymptota pionowa x = 0 przechodzi na prostą x = 0 + 2, czyli x = 2,
+    - asymptota pozioma y = 0 przechodzi na prostą y = 0 + 5, czyli y = 5.
+    Dziedziną funkcji f jest \mathbb{R} \setminus \{0\}; liczbę wykluczoną również przesuwamy o p = 2, więc D_g = \mathbb{R} \setminus \{2\}. Zgadza się to z warunkiem x - 2 \neq 0.
+  solution_steps:
+  - 'Odczytaj ze wzoru wektor przesunięcia: p = 2, q = 5.'
+  - 'Przesuń asymptotę pionową: x = 0 przechodzi na x = 2.'
+  - 'Przesuń asymptotę poziomą: y = 0 przechodzi na y = 5.'
+  - 'Przesuń punkt wykluczony z dziedziny: 0 przechodzi na 2, więc D = R \ {2}.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: asymptota pionowa
+      answer:
+        kind: SYMBOLIC
+        latex: x = 2
+    - name: asymptota pozioma
+      answer:
+        kind: SYMBOLIC
+        latex: y = 5
+    - name: dziedzina
+      answer:
+        kind: SYMBOLIC
+        latex: \mathbb{R}\setminus\left\{2\right\}
+  skills:
+  - przesunięcie hiperboli
+  - wyznaczanie asymptot wykresu przesuniętego
+  - dziedzina funkcji wymiernej
+  verification:
+    checkability: REFERENCE_CALL
+    note: 'could not compare: part disagrees: NOT_MACHINE_CHECKABLE: ''piecewise / matrix form'''
+- id: g-ex-03
+  slot: EXERCISE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: własności funkcji po przesunięciu poziomym
+  statement: Funkcja f jest określona w przedziale \langle -5,\ 3 \rangle, jej zbiorem wartości jest przedział
+    \langle -2,\ 4 \rangle, a jej miejscami zerowymi są liczby -4 oraz 1. Funkcja g jest określona wzorem
+    g(x) = f(x + 2). Wyznacz dziedzinę funkcji g, jej zbiór wartości oraz wszystkie jej miejsca zerowe.
+  statement_latex: g(x) = f\left(x + 2\right)
+  solution: |-
+    Ponieważ x + 2 = x - (-2), mamy p = -2 oraz q = 0, czyli przesunięcie o wektor [-2,\ 0] — o 2 jednostki w lewo.
+    Dziedzina: do obu końców przedziału \langle -5,\ 3 \rangle dodajemy p = -2, więc D_g = \langle -7,\ 1 \rangle.
+    Zbiór wartości: przesunięcie poziome nie zmienia żadnej wartości funkcji, więc ZW_g = \langle -2,\ 4 \rangle.
+    Miejsca zerowe: przy przesunięciu poziomym każde miejsce zerowe przesuwa się o p, więc -4 + (-2) = -6 oraz 1 + (-2) = -1. Obie liczby należą do dziedziny \langle -7,\ 1 \rangle.
+    Sprawdzenie: g(-6) = f(-6 + 2) = f(-4) = 0 oraz g(-1) = f(-1 + 2) = f(1) = 0.
+  solution_steps:
+  - Zapisz x + 2 = x - (-2), stąd p = -2, q = 0 — przesunięcie o 2 w lewo.
+  - 'Dziedzina: <-5 - 2, 3 - 2> = <-7, 1>.'
+  - 'Zbiór wartości nie zmienia się przy ruchu poziomym: <-2, 4>.'
+  - 'Miejsca zerowe przesuń o p: -4 - 2 = -6 oraz 1 - 2 = -1.'
+  - 'Sprawdź: g(-6) = f(-4) = 0 i g(-1) = f(1) = 0.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: dziedzina
+      answer:
+        kind: INTERVAL
+        lo: '-7'
+        hi: '1'
+        lo_open: false
+        hi_open: false
+    - name: zbior wartosci
+      answer:
+        kind: INTERVAL
+        lo: '-2'
+        hi: '4'
+        lo_open: false
+        hi_open: false
+    - name: miejsca zerowe
+      answer:
+        kind: SET
+        members:
+        - '-6'
+        - '-1'
+  skills:
+  - wpływ przesunięcia na dziedzinę
+  - wpływ przesunięcia na zbiór wartości
+  - miejsca zerowe po przesunięciu poziomym
+  verification:
+    checkability: REFERENCE_CALL
+    note: 3 parts matched
+- id: g-ex-04
+  slot: EXERCISE
+  ramp_index: 1
+  difficulty: 3
+  exercise_type: przesunięcie wykresu wartości bezwzględnej
+  statement: Dana jest funkcja g określona wzorem g(x) = \left| x + 1 \right| - 3, której wykres powstaje
+    z wykresu funkcji f(x) = \left| x \right| przez przesunięcie o pewien wektor. a) Naszkicuj wykres
+    funkcji g i uzasadnij, że jego wierzchołek ma współrzędne (-1,\ -3). b) Wyznacz miejsca zerowe funkcji
+    g. c) Podaj zbiór wartości funkcji g. d) Podaj maksymalny przedział, w którym funkcja g jest malejąca.
+  statement_latex: g(x) = \left| x + 1 \right| - 3
+  solution: |-
+    a) Zapisujemy x + 1 = x - (-1), więc g(x) = f(x - (-1)) + (-3) — przesunięcie o wektor [-1,\ -3] (1 w lewo, 3 w dół). Wierzchołek (załamanie) wykresu f, czyli punkt (0,\ 0), przechodzi na (0 - 1,\ 0 - 3) = (-1,\ -3). Ramiona zachowują nachylenia -1 i 1, więc rysujemy literę V o wierzchołku (-1,\ -3), przechodzącą np. przez punkty (-4,\ 0), (2,\ 0) oraz (0,\ -2).
+    b) \left| x + 1 \right| - 3 = 0 \iff \left| x + 1 \right| = 3 \iff x + 1 = 3 lub x + 1 = -3, czyli x = 2 lub x = -4.
+    c) Zbiorem wartości funkcji f jest \langle 0,\ +\infty ), po przesunięciu o q = -3 otrzymujemy ZW_g = \langle -3,\ +\infty ).
+    d) Funkcja f maleje w przedziale ( -\infty,\ 0 \rangle; przedział ten przesuwamy o p = -1, więc g maleje w ( -\infty,\ -1 \rangle.
+  solution_steps:
+  - 'Odczytaj wektor przesunięcia: x + 1 = x - (-1), zatem [p, q] = [-1, -3].'
+  - Przesuń wierzchołek (0, 0) na (-1, -3) i naszkicuj literę V o tych samych nachyleniach ramion.
+  - 'Rozwiąż |x + 1| - 3 = 0: |x + 1| = 3, stąd x = 2 lub x = -4.'
+  - 'Przesuń zbiór wartości <0, +oo) o q = -3: ZW = <-3, +oo).'
+  - 'Przesuń przedział malejący (-oo, 0> o p = -1: (-oo, -1>.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: szkic i wierzcholek
+      answer:
+        kind: NOT_MACHINE_CHECKABLE
+        reason: Uczeń ma naszkicować literę V o wierzchołku (-1, -3), przechodzącą przez punkty (-4, 0)
+          i (2, 0), oraz uzasadnić, że wierzchołek (0,0) wykresu y = |x| przechodzi przy przesunięciu
+          o wektor [-1, -3] na punkt (-1, -3).
+    - name: miejsca zerowe
+      answer:
+        kind: SET
+        members:
+        - '-4'
+        - '2'
+    - name: zbior wartosci
+      answer:
+        kind: INTERVAL
+        lo: '-3'
+        hi: \infty
+        lo_open: false
+    - name: przedzial malejacy
+      answer:
+        kind: INTERVAL
+        lo: -\infty
+        hi: '-1'
+        hi_open: false
+  checks:
+  - kind: solve_equation
+    expr: \left| x + 1 \right| - 3 = 0
+    part: miejsca zerowe
+  skills:
+  - szkicowanie wykresu y = f(x - p) + q
+  - miejsca zerowe funkcji z wartością bezwzględną
+  - przedziały monotoniczności po przesunięciu
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'part(s) need a human: szkic i wierzcholek · 0/3 other parts solved fresh'
+- id: g-ex-05
+  slot: EXERCISE
+  ramp_index: 2
+  difficulty: 4
+  exercise_type: wyznaczanie wektora przesunięcia paraboli
+  statement: Dane są funkcje f(x) = x^{2} oraz g(x) = x^{2} - 10 \cdot x + 19. a) Wyznacz wektor \vec{u}
+    = [p,\ q], o który należy przesunąć wykres funkcji f, aby otrzymać wykres funkcji g. b) Podaj współrzędne
+    wierzchołka paraboli będącej wykresem funkcji g. c) Punkt A = (1,\ 1) leży na wykresie funkcji f.
+    Podaj współrzędne jego obrazu A' przy tym przesunięciu. d) Wyznacz miejsca zerowe funkcji g.
+  statement_latex: f(x) = x^{2},\qquad g(x) = x^{2} - 10 \cdot x + 19
+  solution: |-
+    a) Doprowadzamy wzór funkcji g do postaci kanonicznej (uzupełnianie do kwadratu):
+    g(x) = x^{2} - 10 \cdot x + 19 = \left( x^{2} - 10 \cdot x + 25 \right) - 25 + 19 = \left( x - 5 \right)^{2} - 6.
+    Zatem g(x) = f(x - 5) + (-6), czyli \vec{u} = [5,\ -6] (5 jednostek w prawo i 6 jednostek w dół).
+    b) Wierzchołek (0,\ 0) paraboli y = x^{2} przechodzi na W = (0 + 5,\ 0 - 6) = (5,\ -6) — zgodnie z postacią kanoniczną.
+    c) A' = (1 + 5,\ 1 - 6) = (6,\ -5). Sprawdzenie: g(6) = 36 - 60 + 19 = -5, więc A' leży na wykresie g.
+    d) \left( x - 5 \right)^{2} - 6 = 0 \iff \left( x - 5 \right)^{2} = 6 \iff x - 5 = \sqrt{6} lub x - 5 = -\sqrt{6}, czyli x = 5 - \sqrt{6} lub x = 5 + \sqrt{6}.
+  solution_steps:
+  - 'Uzupełnij do kwadratu: x^2 - 10x + 19 = (x - 5)^2 - 6.'
+  - 'Porównaj z f(x - p) + q: p = 5, q = -6, więc wektor to [5, -6].'
+  - 'Przesuń wierzchołek (0, 0) o wektor: W = (5, -6).'
+  - 'Przesuń punkt A = (1, 1): A'' = (6, -5); sprawdź g(6) = -5.'
+  - 'Rozwiąż (x - 5)^2 = 6: x = 5 - sqrt(6) lub x = 5 + sqrt(6).'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wektor
+      answer:
+        kind: TUPLE
+        items:
+        - '5'
+        - '-6'
+    - name: wierzcholek
+      answer:
+        kind: TUPLE
+        items:
+        - '5'
+        - '-6'
+    - name: obraz punktu A
+      answer:
+        kind: TUPLE
+        items:
+        - '6'
+        - '-5'
+    - name: miejsca zerowe
+      answer:
+        kind: SET
+        members:
+        - 5 - \sqrt{6}
+        - 5 + \sqrt{6}
+  checks:
+  - kind: solve_equation
+    expr: x^{2} - 10 \cdot x + 19 = 0
+    part: miejsca zerowe
+  skills:
+  - postać kanoniczna funkcji kwadratowej
+  - wyznaczanie wektora przesunięcia z dwóch wzorów
+  - obraz punktu wykresu
+  - miejsca zerowe funkcji kwadratowej
+  verification:
+    checkability: REFERENCE_CALL
+    note: 4 parts matched
+- id: g-ex-t00
+  slot: EXERCISE
+  ramp_index: 6
+  difficulty: 3
+  exercise_type: wyznaczanie wektora przesunięcia z postaci ogólnej i własności funkcji przesuniętej
+  statement: Dane są funkcje f oraz g określone dla każdej liczby rzeczywistej x wzorami f\left(x\right)=x^2
+    oraz g\left(x\right)=x^2-8x+11. Wykres funkcji g powstaje z wykresu funkcji f przez przesunięcie o
+    wektor \vec{u}=\left[p,\ q\right]. Wyznacz liczby p i q, wyznacz miejsca zerowe funkcji g oraz podaj
+    zbiór wartości funkcji g.
+  statement_latex: g\left(x\right)=x^2-8\cdot x+11=\left(x-p\right)^2+q
+  solution: |-
+    Doprowadzamy wzór funkcji g do postaci kanonicznej (uzupełnianie do kwadratu):
+    g(x)=x^2-8x+11=\left(x^2-8x+16\right)-16+11=\left(x-4\right)^2-5.
+    Można też skorzystać ze wzorów: p=-\frac{b}{2a}=-\frac{-8}{2\cdot 1}=4 oraz q=g(4)=16-32+11=-5.
+    Zatem g(x)=f\left(x-4\right)+\left(-5\right), czyli wektor przesunięcia to \vec{u}=[4,\ -5]: 4 jednostki w prawo i 5 jednostek w dół. Wierzchołkiem paraboli g jest punkt W=(4,-5) (obraz punktu (0,0)).
+
+    Miejsca zerowe wyznaczamy z równania \left(x-4\right)^2-5=0, czyli \left(x-4\right)^2=5, stąd x-4=\sqrt{5} lub x-4=-\sqrt{5}, więc x=4+\sqrt{5} lub x=4-\sqrt{5}. (Uwaga: miejsca zerowe funkcji f, czyli x=0, NIE przesuwają się tylko o p, bo przesunięcie ma także część pionową.)
+
+    Zbiór wartości funkcji f to \langle 0,+\infty\right), po przesunięciu o q=-5 otrzymujemy ZW_g=\langle -5,+\infty\right).
+  solution_steps:
+  - 'Uzupełnij wyrażenie x^2-8x+11 do kwadratu: x^2-8x+11=\left(x-4\right)^2-5.'
+  - Odczytaj z postaci f(x-p)+q liczby p=4 oraz q=-5, czyli \vec{u}=[4,-5].
+  - Rozwiąż równanie \left(x-4\right)^2-5=0 i otrzymaj x=4-\sqrt{5} oraz x=4+\sqrt{5}.
+  - 'Przesuń zbiór wartości \langle 0,+\infty\right) o q=-5: ZW_g=\langle -5,+\infty\right).'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: p
+      answer:
+        kind: NUMERIC
+        value: 4.0
+    - name: q
+      answer:
+        kind: NUMERIC
+        value: -5.0
+    - name: miejsca_zerowe
+      answer:
+        kind: SET
+        members:
+        - 4-\sqrt{5}
+        - 4+\sqrt{5}
+    - name: zbior_wartosci
+      answer:
+        kind: INTERVAL
+        lo: '-5'
+        hi: \infty
+        lo_open: false
+  checks:
+  - kind: evaluate
+    expr: -\frac{-8}{2\cdot 1}
+    part: p
+  - kind: evaluate
+    expr: \frac{4\cdot 1\cdot 11-\left(-8\right)^2}{4\cdot 1}
+    part: q
+  - kind: solve_equation
+    expr: x^2-8\cdot x+11=0
+    part: miejsca_zerowe
+  skills:
+  - postać kanoniczna funkcji kwadratowej
+  - odczytywanie wektora przesunięcia
+  - miejsca zerowe funkcji kwadratowej
+  - zbiór wartości po przesunięciu pionowym
+  verification:
+    checkability: REFERENCE_CALL
+    note: 4 parts matched
+- id: g-ex-t01
+  slot: EXERCISE
+  ramp_index: 7
+  difficulty: 4
+  exercise_type: przesunięcie hiperboli o wektor — wzór, asymptoty, miejsce zerowe, punkt wykresu
+  statement: |-
+    Dana jest funkcja f określona wzorem f\left(x\right)=\frac{-3}{x} dla każdej liczby rzeczywistej x\neq 0. Wykres funkcji f przesunięto o wektor \vec{u}=\left[2,\ -1\right] i otrzymano wykres funkcji g.
+    a) Zapisz wzór funkcji g i podaj jej dziedzinę.
+    b) Podaj równania asymptoty pionowej i asymptoty poziomej wykresu funkcji g.
+    c) Wyznacz miejsce zerowe funkcji g.
+    d) Oblicz g\left(5\right) i rozstrzygnij, czy punkt A=\left(5,\ -2\right) należy do wykresu funkcji g.
+  statement_latex: g\left(x\right)=\frac{-3}{x-2}-1
+  solution: |-
+    a) Dla wektora \vec{u}=[p,q]=[2,-1] mamy g(x)=f\left(x-2\right)+\left(-1\right), czyli g(x)=\frac{-3}{x-2}-1. Dziedziną funkcji f jest \mathbb{R}\setminus\{0\}; przesuwamy ją o p=2, więc D_g=\mathbb{R}\setminus\{2\} (sprawdzenie: mianownik x-2\neq 0).
+
+    b) Asymptota pionowa x=0 przechodzi na x=0+2=2, asymptota pozioma y=0 przechodzi na y=0+(-1)=-1. Zatem asymptoty mają równania x=2 oraz y=-1.
+
+    c) \frac{-3}{x-2}-1=0 \iff \frac{-3}{x-2}=1 \iff -3=x-2 (dla x\neq 2) \iff x=-1. Liczba -1 należy do dziedziny, więc jedynym miejscem zerowym jest x=-1.
+
+    d) g(5)=\frac{-3}{5-2}-1=\frac{-3}{3}-1=-1-1=-2. Ponieważ g(5)=-2, punkt A=(5,-2) należy do wykresu funkcji g. (Kontrola: przesuwając A o wektor przeciwny [-2,1], otrzymujemy punkt (3,-1), a f(3)=\frac{-3}{3}=-1 ✓.)
+  solution_steps:
+  - Z wektora [2,-1] odczytaj p=2, q=-1 i zapisz g(x)=f\left(x-2\right)-1=\frac{-3}{x-2}-1.
+  - 'Przesuń punkt wykluczony z dziedziny: 0\mapsto 2, więc D_g=\mathbb{R}\setminus\{2\}.'
+  - 'Przesuń asymptoty: x=0\mapsto x=2 oraz y=0\mapsto y=-1.'
+  - Rozwiąż \frac{-3}{x-2}-1=0, otrzymując x=-1 (należy do dziedziny).
+  - Oblicz g(5)=\frac{-3}{3}-1=-2 i porównaj z drugą współrzędną punktu A — punkt należy do wykresu.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wzor_g
+      answer:
+        kind: SYMBOLIC
+        latex: g\left(x\right)=\frac{-3}{x-2}-1
+    - name: dziedzina
+      answer:
+        kind: SYMBOLIC
+        latex: \mathbb{R}\setminus\{2\}
+    - name: asymptota_pionowa
+      answer:
+        kind: SYMBOLIC
+        latex: x=2
+    - name: asymptota_pozioma
+      answer:
+        kind: SYMBOLIC
+        latex: y=-1
+    - name: miejsce_zerowe
+      answer:
+        kind: NUMERIC
+        value: -1.0
+    - name: g_w_5
+      answer:
+        kind: NUMERIC
+        value: -2.0
+    - name: czy_A_nalezy
+      answer:
+        kind: BOOLEAN
+        truth: true
+  checks:
+  - kind: solve_equation
+    expr: \frac{-3}{x-2}-1=0
+    part: miejsce_zerowe
+  - kind: evaluate
+    expr: \frac{-3}{5-2}-1
+    part: g_w_5
+  skills:
+  - zapisywanie wzoru funkcji po przesunięciu o wektor
+  - przesuwanie asymptot
+  - dziedzina funkcji wymiernej
+  - sprawdzanie, czy punkt należy do wykresu
+  verification:
+    checkability: REFERENCE_CALL
+    note: 7 parts matched
+- id: g-cm-06
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: kierunek przesunięcia poziomego
+  statement: 'Wykres funkcji f(x) = \left| x \right| przekształcono w wykres funkcji g(x) = f(x - 4).
+    Uczeń zapisał: „we wzorze jest minus, więc wykres przesuwamy o 4 jednostki w lewo, a wierzchołek litery
+    V ma współrzędne (-4,\ 0)”. Wyjaśnij, na czym polega błąd, i podaj poprawne współrzędne wierzchołka
+    wykresu funkcji g.'
+  statement_latex: g(x) = f\left(x - 4\right),\qquad f(x) = \left| x \right|
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: „W nawiasie widzę -4, więc przesuwam wykres w lewo o 4” — stąd błędna odpowiedź: wierzchołek (-4,\ 0), czyli g(x) = \left| x + 4 \right|.
+    DLACZEGO TO BŁĄD: znak w nawiasie jest przeciwny do kierunku ruchu, bo we wzorze wzorcowym f(x - p) liczba p jest odejmowana. Z x - 4 = x - p odczytujemy p = 4 > 0, czyli przesunięcie o wektor [4,\ 0] — w PRAWO.
+    KONTROLA NA PUNKCIE: wierzchołek to punkt, w którym wyrażenie pod wartością bezwzględną się zeruje. Dla g(x) = \left| x - 4 \right| mamy x - 4 = 0, czyli x = 4. Ponadto g(4) = \left| 0 \right| = 0, a np. g(-4) = \left| -8 \right| = 8 \neq 0, więc punkt (-4,\ 0) na pewno nie leży na wykresie g.
+    POPRAWNA ODPOWIEDŹ: wierzchołek ma współrzędne (4,\ 0).
+  solution_steps:
+  - 'Błędnie: minus w nawiasie odczytany jako ruch w lewo -> wierzchołek (-4, 0).'
+  - 'Poprawnie: z x - 4 = x - p wynika p = 4, wektor [4, 0], czyli ruch w prawo.'
+  - 'Sprawdź na punkcie: |x - 4| = 0 dla x = 4, a g(-4) = 8 różne od 0.'
+  - Wierzchołek wykresu g to punkt (4, 0).
+  answer:
+    kind: TUPLE
+    items:
+    - '4'
+    - '0'
+  skills:
+  - kierunek przesunięcia przy f(x - p)
+  - kontrola wyniku na punkcie charakterystycznym
+  verification:
+    checkability: REFERENCE_CALL
+    note: 2 components matched
+- id: g-cm-07
+  slot: COMMON_MISTAKE
+  ramp_index: 1
+  difficulty: 3
+  exercise_type: miejsca zerowe po przesunięciu pionowym
+  statement: 'Funkcja f jest określona wzorem f(x) = x^{2} - 1, a jej miejscami zerowymi są liczby -1
+    oraz 1. Funkcja g jest określona wzorem g(x) = f(x) - 3. Uczeń zapisał: „wykres przesuwamy o 3 w dół,
+    więc miejsca zerowe też przesuwają się o 3, czyli są to liczby -1 - 3 = -4 oraz 1 - 3 = -2”. Wyjaśnij
+    błąd i wyznacz wszystkie miejsca zerowe funkcji g.'
+  statement_latex: f(x) = x^{2} - 1,\qquad g(x) = f(x) - 3
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: „miejsca zerowe -1 i 1 przesuwam o -3”, co daje błędną odpowiedź \{-4,\ -2\}.
+    DLACZEGO TO BŁĄD: przesunięcie pionowe zmienia wartości funkcji, a nie argumenty — punkty wykresu wędrują pionowo, więc ich pierwsze współrzędne (a to one są miejscami zerowymi) nie przesuwają się w poziomie. Sprawdzenie: g(-4) = f(-4) - 3 = 15 - 3 = 12 \neq 0.
+    POPRAWNE POSTĘPOWANIE: miejsca zerowe wyznaczamy na nowo z równania g(x) = 0, czyli f(x) = 3:
+    g(x) = \left( x^{2} - 1 \right) - 3 = x^{2} - 4, więc x^{2} - 4 = 0 \iff x^{2} = 4 \iff x = -2 lub x = 2.
+    Sprawdzenie: g(2) = 4 - 4 = 0 ✓, g(-2) = 0 ✓.
+    POPRAWNA ODPOWIEDŹ: miejscami zerowymi funkcji g są liczby -2 oraz 2.
+  solution_steps:
+  - 'Błędnie: przesunięcie miejsc zerowych o q = -3 daje {-4, -2}.'
+  - 'Kontrola: g(-4) = 15 - 3 = 12, a nie 0 — odpowiedź jest fałszywa.'
+  - 'Poprawnie: ruch pionowy nie zmienia argumentów, rozwiąż g(x) = 0, czyli f(x) = 3.'
+  - 'Zapisz g(x) = x^2 - 4 i rozwiąż x^2 - 4 = 0: x = -2 lub x = 2.'
+  answer:
+    kind: SET
+    members:
+    - '-2'
+    - '2'
+  checks:
+  - kind: solve_equation
+    expr: \left(x^{2} - 1\right) - 3 = 0
+  skills:
+  - miejsca zerowe funkcji przesuniętej pionowo
+  - rozwiązywanie równania f(x) = -q
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 2 members matched'
+- id: g-cm-08
+  slot: COMMON_MISTAKE
+  ramp_index: 2
+  difficulty: 2
+  exercise_type: dziedzina przy przesunięciu pionowym
+  statement: 'Funkcja f jest określona w przedziale \langle -2,\ 6 \rangle, a jej zbiorem wartości jest
+    przedział \langle 1,\ 7 \rangle. Funkcja g jest określona wzorem g(x) = f(x) - 4. Uczeń zapisał: „odejmuję
+    4, więc dziedziną funkcji g jest przedział \langle -6,\ 2 \rangle”. Wyjaśnij błąd oraz podaj poprawną
+    dziedzinę i poprawny zbiór wartości funkcji g.'
+  statement_latex: g(x) = f(x) - 4
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: „liczbę -4 dodaję do końców dziedziny”, stąd błędna dziedzina \langle -6,\ 2 \rangle.
+    DLACZEGO TO BŁĄD: wzór g(x) = f(x) - 4 to przesunięcie o wektor [0,\ -4], czyli ruch wyłącznie pionowy (p = 0). Każdy punkt (x,\ y) przechodzi na (x,\ y - 4) — pierwsza współrzędna się nie zmienia, więc zbiór argumentów pozostaje ten sam. Dodatkowo: aby obliczyć g(x), trzeba znać f(x), a to jest możliwe tylko dla x \in \langle -2,\ 6 \rangle; np. g(-6) nie istnieje, bo f(-6) nie istnieje.
+    POPRAWNIE: D_g = \langle -2,\ 6 \rangle, natomiast to zbiór wartości przesuwa się o q = -4: ZW_g = \langle 1 - 4,\ 7 - 4 \rangle = \langle -3,\ 3 \rangle.
+  solution_steps:
+  - 'Błędnie: końce dziedziny zmniejszone o 4 dają <-6, 2>.'
+  - 'Poprawnie: g(x) = f(x) - 4 to wektor [0, -4], p = 0, więc dziedzina się nie zmienia.'
+  - 'Kontrargument: g(-6) nie istnieje, bo f(-6) nie jest określone.'
+  - Zapisz D_g = <-2, 6> oraz ZW_g = <1 - 4, 7 - 4> = <-3, 3>.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: dziedzina
+      answer:
+        kind: INTERVAL
+        lo: '-2'
+        hi: '6'
+        lo_open: false
+        hi_open: false
+    - name: zbior wartosci
+      answer:
+        kind: INTERVAL
+        lo: '-3'
+        hi: '3'
+        lo_open: false
+        hi_open: false
+  skills:
+  - wpływ przesunięcia pionowego na dziedzinę
+  - wpływ przesunięcia pionowego na zbiór wartości
+  verification:
+    checkability: REFERENCE_CALL
+    note: 2 parts matched
+- id: g-cm-09
+  slot: COMMON_MISTAKE
+  ramp_index: 3
+  difficulty: 2
+  exercise_type: zbiór wartości przy przesunięciu poziomym
+  statement: 'Funkcja f jest określona w przedziale \langle 0,\ 8 \rangle, a jej zbiorem wartości jest
+    przedział \langle -3,\ 5 \rangle. Funkcja g jest określona wzorem g(x) = f(x - 3). Uczeń zapisał:
+    „przesuwam o 3, więc zbiorem wartości funkcji g jest przedział \langle 0,\ 8 \rangle”. Wyjaśnij błąd
+    oraz podaj poprawną dziedzinę i poprawny zbiór wartości funkcji g.'
+  statement_latex: g(x) = f\left(x - 3\right)
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń dodał 3 do końców zbioru wartości \langle -3,\ 5 \rangle i otrzymał \langle 0,\ 8 \rangle.
+    DLACZEGO TO BŁĄD: wzór g(x) = f(x - 3) to przesunięcie o wektor [3,\ 0], czyli ruch wyłącznie poziomy (q = 0). Każdy punkt (x,\ y) przechodzi na (x + 3,\ y) — druga współrzędna się nie zmienia, więc funkcja g przyjmuje dokładnie te same wartości co f, tylko dla argumentów większych o 3.
+    POPRAWNIE:
+    Zbiór wartości bez zmian: ZW_g = \langle -3,\ 5 \rangle.
+    Dziedzina przesuwa się o p = 3: D_g = \langle 0 + 3,\ 8 + 3 \rangle = \langle 3,\ 11 \rangle.
+    Kontrola: jeżeli f przyjmuje wartość największą 5 dla pewnego argumentu x_{0}, to g(x_{0} + 3) = f(x_{0}) = 5 — wartość ta nadal jest przyjmowana.
+  solution_steps:
+  - 'Błędnie: końce zbioru wartości zwiększone o 3 dają <0, 8>.'
+  - 'Poprawnie: g(x) = f(x - 3) to wektor [3, 0], q = 0, więc wartości się nie zmieniają.'
+  - Zapisz ZW_g = <-3, 5>.
+  - 'Przesuń dziedzinę o p = 3: D_g = <3, 11>.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: dziedzina
+      answer:
+        kind: INTERVAL
+        lo: '3'
+        hi: '11'
+        lo_open: false
+        hi_open: false
+    - name: zbior wartosci
+      answer:
+        kind: INTERVAL
+        lo: '-3'
+        hi: '5'
+        lo_open: false
+        hi_open: false
+  skills:
+  - wpływ przesunięcia poziomego na zbiór wartości
+  - wpływ przesunięcia poziomego na dziedzinę
+  verification:
+    checkability: REFERENCE_CALL
+    note: 2 parts matched
+- id: g-cm-10
+  slot: COMMON_MISTAKE
+  ramp_index: 4
+  difficulty: 3
+  exercise_type: rozróżnienie f(x + p) i f(x) + p
+  statement: 'Dana jest funkcja f(x) = x^{2} oraz funkcje g(x) = f(x + 5) i h(x) = f(x) + 5. Uczeń stwierdził:
+    „to są te same funkcje, bo w obu dodaję 5”. Oblicz g(2) oraz h(2) i rozstrzygnij, czy funkcje g i
+    h są równe (odpowiedz TAK lub NIE).'
+  statement_latex: g(x) = f\left(x + 5\right),\qquad h(x) = f(x) + 5,\qquad f(x) = x^{2}
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: „f(x + 5) i f(x) + 5 to to samo, bo w obu przypadkach dodaję 5” — uczeń nie odróżnia zmiany argumentu od zmiany wartości.
+    OBLICZENIA:
+    g(2) = f(2 + 5) = f(7) = 7^{2} = 49,
+    h(2) = f(2) + 5 = 2^{2} + 5 = 4 + 5 = 9.
+    Skoro g(2) = 49, a h(2) = 9, to g \neq h — odpowiedź NIE.
+    DLACZEGO: g(x) = f(x + 5) = \left( x + 5 \right)^{2} = x^{2} + 10 \cdot x + 25 to przesunięcie wykresu funkcji f o wektor [-5,\ 0] (5 w lewo, zmieniamy argument), natomiast h(x) = x^{2} + 5 to przesunięcie o wektor [0,\ 5] (5 w górę, zmieniamy wartość). Wierzchołek wykresu g to (-5,\ 0), a wierzchołek wykresu h to (0,\ 5) — to zupełnie różne parabole.
+  solution_steps:
+  - 'Błędnie: uznanie, że f(x + 5) = f(x) + 5.'
+  - Oblicz g(2) = f(7) = 49.
+  - Oblicz h(2) = f(2) + 5 = 9.
+  - 'Porównaj: 49 różne od 9, więc funkcje nie są równe (NIE).'
+  - 'Wyjaśnij: g to przesunięcie o [-5, 0], a h o [0, 5]; wierzchołki to (-5, 0) i (0, 5).'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: g(2)
+      answer:
+        kind: NUMERIC
+        value: 49.0
+    - name: h(2)
+      answer:
+        kind: NUMERIC
+        value: 9.0
+    - name: czy rowne
+      answer:
+        kind: BOOLEAN
+        truth: false
+  checks:
+  - kind: evaluate
+    expr: \left(2 + 5\right)^{2}
+    part: g(2)
+  - kind: evaluate
+    expr: 2^{2} + 5
+    part: h(2)
+  skills:
+  - obliczanie wartości funkcji przesuniętej
+  - rozróżnianie przesunięcia poziomego i pionowego
+  verification:
+    checkability: REFERENCE_CALL
+    note: '3 parts matched · det: [g(2)] SymPy solved it fresh: 49.0 vs 49.0 (tol 1e-09) ; [h(2)] SymPy
+      solved it fresh: 9.0 vs 9.0 (tol 1e-09)'
+- id: g-ch-t02
+  slot: CHALLENGE
+  ramp_index: 0
+  difficulty: 4
+  exercise_type: odtworzenie wektora przesunięcia z danych o wykresie i wyznaczenie miejsca zerowego
+  statement: Wykres funkcji f określonej wzorem f\left(x\right)=\frac{6}{x} dla x\neq 0 przesunięto o
+    pewien wektor \vec{u}=\left[p,\ q\right] i otrzymano wykres funkcji g. Asymptotą pionową wykresu funkcji
+    g jest prosta o równaniu x=-3, a do wykresu funkcji g należy punkt P=\left(-1,\ 6\right). Oblicz miejsce
+    zerowe funkcji g.
+  statement_latex: g\left(x\right)=\frac{6}{x-p}+q
+  solution: |-
+    Po przesunięciu o wektor [p,q] wzór ma postać g(x)=\frac{6}{x-p}+q, a asymptota pionowa x=0 przechodzi na prostą x=p. Z warunku, że asymptotą pionową jest x=-3, otrzymujemy p=-3, czyli
+    g(x)=\frac{6}{x+3}+q.
+
+    Punkt P=(-1,6) należy do wykresu g, więc g(-1)=6:
+    \frac{6}{-1+3}+q=6, czyli \frac{6}{2}+q=6, czyli 3+q=6, stąd q=3.
+
+    Zatem g(x)=\frac{6}{x+3}+3 (przesunięcie o wektor [-3,3]).
+
+    Miejsce zerowe: \frac{6}{x+3}+3=0 \iff \frac{6}{x+3}=-3 \iff 6=-3\left(x+3\right) (dla x\neq -3) \iff 6=-3x-9 \iff 3x=-15 \iff x=-5.
+    Liczba -5 należy do dziedziny \mathbb{R}\setminus\{-3\}, więc miejscem zerowym funkcji g jest x=-5.
+  solution_steps:
+  - 'Zapisz ogólną postać wykresu po przesunięciu: g(x)=\frac{6}{x-p}+q.'
+  - Z położenia asymptoty pionowej x=-3 wywnioskuj p=-3.
+  - 'Z warunku g(-1)=6 wyznacz q: 3+q=6, więc q=3.'
+  - Rozwiąż równanie \frac{6}{x+3}+3=0 i otrzymaj x=-5 (liczba należy do dziedziny).
+  answer:
+    kind: NUMERIC
+    value: -5.0
+  checks:
+  - kind: solve_equation
+    expr: \frac{6}{x+3}+3=0
+  skills:
+  - przesuwanie asymptot
+  - wyznaczanie nieznanych parametrów przesunięcia z warunku należenia punktu
+  - rozwiązywanie równania wymiernego
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: -5.0 vs -5.0 (tol 1e-09)'
+- id: g-ch-t03
+  slot: CHALLENGE
+  ramp_index: 1
+  difficulty: 5
+  exercise_type: przesunięcie wykresu wartości bezwzględnej z warunkiem geometrycznym (pole trójkąta)
+  statement: Wykres funkcji f określonej dla każdej liczby rzeczywistej x wzorem f\left(x\right)=\left|x\right|
+    przesunięto o wektor \vec{u}=\left[3,\ q\right] i otrzymano wykres funkcji g. Wykres funkcji g przecina
+    oś Ox w dwóch punktach A i B, a wraz z odcinkiem AB tworzy trójkąt o polu równym 25. Wyznacz liczbę
+    q oraz współrzędne punktów A i B.
+  statement_latex: g\left(x\right)=\left|x-3\right|+q,\qquad P=\frac{1}{2}\cdot\left|AB\right|\cdot h=25
+  solution: |-
+    Po przesunięciu o wektor [3,q] mamy g(x)=\left|x-3\right|+q. Jest to 'litera V' o wierzchołku W=(3,\ q) i ramionach o współczynnikach kierunkowych -1 oraz 1.
+
+    Wykres przecina oś Ox w dwóch punktach tylko wtedy, gdy wierzchołek leży poniżej osi Ox, czyli gdy q<0. Podstawmy q=-t, gdzie t>0.
+    Miejsca zerowe: \left|x-3\right|=t \iff x=3-t lub x=3+t, więc A=(3-t,\ 0), B=(3+t,\ 0) oraz \left|AB\right|=2t.
+    Wysokość trójkąta o podstawie AB i trzecim wierzchołku W=(3,-t) jest równa odległości W od osi Ox, czyli t.
+
+    Pole: P=\frac{1}{2}\cdot 2t\cdot t=t^2. Z warunku t^2=25 i t>0 otrzymujemy t=5 (rozwiązanie t=-5 odrzucamy, bo t>0).
+
+    Zatem q=-5, a punkty przecięcia z osią Ox to A=(3-5,\ 0)=(-2,\ 0) oraz B=(3+5,\ 0)=(8,\ 0).
+    Sprawdzenie: g(x)=\left|x-3\right|-5, g(-2)=5-5=0, g(8)=5-5=0, wierzchołek (3,-5), pole \frac{1}{2}\cdot 10\cdot 5=25 ✓.
+  solution_steps:
+  - 'Zapisz wzór funkcji po przesunięciu: g(x)=\left|x-3\right|+q, wierzchołek W=(3,q).'
+  - Zauważ, że dwa miejsca zerowe istnieją tylko dla q<0; podstaw q=-t, t>0.
+  - 'Wyznacz miejsca zerowe: x=3-t oraz x=3+t, więc \left|AB\right|=2t, a wysokość trójkąta wynosi t.'
+  - 'Ułóż równanie pola: \frac{1}{2}\cdot 2t\cdot t=25, czyli t^2=25, skąd t=5 (t=-5 odrzucamy).'
+  - Odczytaj q=-5 oraz A=(-2,0), B=(8,0).
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: q
+      answer:
+        kind: NUMERIC
+        value: -5.0
+    - name: A_x
+      answer:
+        kind: NUMERIC
+        value: -2.0
+    - name: B_x
+      answer:
+        kind: NUMERIC
+        value: 8.0
+  checks:
+  - kind: evaluate
+    expr: -\sqrt{25}
+    var: t
+    part: q
+  - kind: evaluate
+    expr: 3-\sqrt{25}
+    var: t
+    part: A_x
+  - kind: evaluate
+    expr: 3+\sqrt{25}
+    var: t
+    part: B_x
+  stated_model:
+    variable: t
+    objective_latex: P\left(t\right)=\frac{1}{2}\cdot 2\cdot t\cdot t=t^2,\quad q=-t
+    domain_lo: '0'
+    goal: value
+    constraint_used: P\left(t\right)=25
+  skills:
+  - przesunięcie wykresu o wektor
+  - miejsca zerowe funkcji z wartością bezwzględną
+  - modelowanie pola trójkąta
+  - odrzucanie rozwiązania niezgodnego z warunkami zadania
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (PARSE_ERROR: "UnexpectedCharacters: No terminal
+      matches ''='' in the current parser context, at line 1 col 56") — human review'
+- id: g-ch-t04
+  slot: CHALLENGE
+  ramp_index: 2
+  difficulty: 5
+  exercise_type: optymalizacja pola prostokąta wpisanego pod przesuniętym wykresem, z ograniczeniem zewnętrznym
+  statement: |-
+    Dana jest funkcja f określona dla każdej liczby rzeczywistej x wzorem f\left(x\right)=-\left|x\right|. Wykres funkcji f przesunięto o wektor \vec{u}=\left[4,\ 6\right] i otrzymano wykres funkcji g. Rozważamy prostokąty ABCD takie, że bok AB zawiera się w osi Ox, A=\left(4-x,\ 0\right) oraz B=\left(4+x,\ 0\right) dla pewnej liczby x, wierzchołek C leży na wykresie funkcji g i ma tę samą pierwszą współrzędną co B, a wierzchołek D leży na wykresie funkcji g i ma tę samą pierwszą współrzędną co A.
+    a) Wyznacz wzór funkcji S, opisującej pole prostokąta ABCD w zależności od x, oraz podaj dziedzinę funkcji S.
+    b) Dodatkowo wymagamy, aby bok AB miał długość nie mniejszą niż 8. Oblicz największe możliwe pole prostokąta ABCD spełniającego ten warunek oraz odpowiadającą mu wartość x.
+  statement_latex: S\left(x\right)=2\cdot x\cdot\left(6-x\right)
+  solution: |-
+    Wykres funkcji f to 'daszek' o wierzchołku (0,0). Po przesunięciu o wektor [4,6] otrzymujemy g(x)=-\left|x-4\right|+6 — 'daszek' o wierzchołku W=(4,\ 6), którego miejscami zerowymi są liczby -2 oraz 10 (bo \left|x-4\right|=6).
+
+    a) Wierzchołek C ma pierwszą współrzędną 4+x, więc jego druga współrzędna to
+    g(4+x)=-\left|4+x-4\right|+6=6-\left|x\right|.
+    Dla x>0 wysokość prostokąta wynosi 6-x, a długość podstawy \left|AB\right|=\left(4+x\right)-\left(4-x\right)=2x. Zatem
+    S(x)=2\cdot x\cdot\left(6-x\right)=-2x^2+12x.
+    Prostokąt istnieje, gdy 2x>0 oraz 6-x>0, czyli dla x\in\left(0,\ 6\right).
+
+    b) Warunek \left|AB\right|\ge 8 daje 2x\ge 8, czyli x\ge 4. Uwzględniając dziedzinę, rozważamy x\in\langle 4,\ 6\right).
+    Parabola S(x)=-2x^2+12x ma ramiona skierowane w dół, a jej wierzchołek ma pierwszą współrzędną x_w=-\frac{12}{2\cdot\left(-2\right)}=3. Wartość x=3 nie spełnia warunku x\ge 4, więc nie jest dopuszczalna.
+    W przedziale \langle 4,\ 6\right) funkcja S jest malejąca (leży on na prawo od wierzchołka), więc największą wartość przyjmuje dla x=4:
+    S(4)=-2\cdot 16+12\cdot 4=-32+48=16.
+    Prostokąt ma wtedy wymiary \left|AB\right|=8 oraz wysokość 6-4=2, a jego pole wynosi 16.
+  solution_steps:
+  - 'Zapisz wzór funkcji po przesunięciu: g(x)=-\left|x-4\right|+6, wierzchołek (4,6), miejsca zerowe
+    -2 i 10.'
+  - 'Oblicz wysokość prostokąta: g(4+x)=6-x, a długość podstawy \left|AB\right|=2x.'
+  - 'Zbuduj funkcję pola: S(x)=2\cdot x\cdot\left(6-x\right)=-2x^2+12x, z warunków 2x>0 i 6-x>0 dziedzina
+    to (0,6).'
+  - Uwzględnij ograniczenie 2x\ge 8, czyli x\ge 4; rozważ x\in\langle 4,6\right).
+  - Wyznacz wierzchołek paraboli x_w=3 i stwierdź, że nie należy do \langle 4,6\right), więc S jest tam
+    malejąca.
+  - 'Największe pole otrzymujemy dla x=4: S(4)=16 (prostokąt o wymiarach 8 i 2).'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wzor_S
+      answer:
+        kind: SYMBOLIC
+        latex: S\left(x\right)=-2x^2+12x
+    - name: dziedzina_S
+      answer:
+        kind: INTERVAL
+        lo: '0'
+        hi: '6'
+    - name: x_optymalne
+      answer:
+        kind: NUMERIC
+        value: 4.0
+    - name: pole_maksymalne
+      answer:
+        kind: NUMERIC
+        value: 16.0
+  checks:
+  - kind: simplify
+    expr: 2\cdot x\cdot\left(6-x\right)
+    part: wzor_S
+  - kind: evaluate
+    expr: \frac{8}{2}
+    part: x_optymalne
+  - kind: evaluate
+    expr: 2\cdot 4\cdot\left(6-4\right)
+    part: pole_maksymalne
+  stated_model:
+    variable: x
+    objective_latex: S\left(x\right)=2\cdot x\cdot\left(6-x\right)
+    domain_lo: '4'
+    domain_hi: '6'
+    domain_lo_open: false
+    constraint_used: \left|AB\right|=2\cdot x\ge 8
+  skills:
+  - przesunięcie wykresu o wektor
+  - wprowadzanie zmiennej i budowanie funkcji pola
+  - dziedzina wynikająca z warunków geometrycznych
+  - wierzchołek paraboli i monotoniczność
+  - uwzględnienie dodatkowego ograniczenia
+  verification:
+    checkability: STATED_MODEL
+    note: 'stage 1 inconclusive: SympifyError: SympifyError: "cannot sympify object of type <class ''sympy.core.singleton.SingletonRegistry''>"'

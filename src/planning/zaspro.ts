@@ -96,8 +96,35 @@ export type Section = {
   exercises: SectionExercises;
 };
 
+export type TeachingSection = {
+  slug: string;
+  name: string;
+  scope: string;
+  requirements: string[];
+};
+
+type TeachingSectionsFile = {
+  subject: string;
+  sections: TeachingSection[];
+};
+
 function readYaml<T>(file: string): T {
   return yaml.load(fs.readFileSync(file, "utf8")) as T;
+}
+
+export function loadTeachingSections(): TeachingSection[] {
+  const root = resolveZasproDir();
+  const candidates = [
+    path.join(root, "topics", "teaching_sections.yaml"),
+    path.join(root, "seeds", "teaching_sections.yaml")
+  ];
+  const file = candidates.find((p) => fs.existsSync(p));
+  if (!file) {
+    throw new Error(
+      `ZasPro: expected topics/teaching_sections.yaml for the ordered section list.`
+    );
+  }
+  return readYaml<TeachingSectionsFile>(file).sections;
 }
 
 export function loadSection(slug: string): Section {

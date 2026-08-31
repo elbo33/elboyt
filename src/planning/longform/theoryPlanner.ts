@@ -11,16 +11,16 @@ import {slugify} from "../../core/slug";
 import type {SceneType, Storyboard, VideoScene} from "../../core/types";
 import {loadSection} from "../zaspro";
 import {THEORY_SKELETON} from "./skeletons";
-import {ciagArytmetyczny} from "./sections/ciagArytmetyczny";
 import type {AuthoredScene, ExampleAuthoring, SectionAuthoring} from "./sections/types";
 
 // Per-section THEORY authoring. One entry per section as they are written.
-const SECTIONS: Record<string, SectionAuthoring> = {
-  "ciag-arytmetyczny": ciagArytmetyczny
-};
+const SECTIONS: Record<string, SectionAuthoring> = {};
 
 function currentSlug(): string {
-  return process.env.SECTION || "ciag-arytmetyczny";
+  if (!process.env.SECTION) {
+    throw new Error("SECTION is required. Use: npm run generate -- <section> theory");
+  }
+  return process.env.SECTION;
 }
 
 type ScenePlan = Omit<
@@ -183,7 +183,13 @@ export function createStoryboard(topic: string): Storyboard {
 const _cache = new Map<string, ScenePlan[]>();
 function plansForCurrent(): ScenePlan[] {
   const slug = currentSlug();
-  if (!_cache.has(slug)) _cache.set(slug, buildScenePlans(SECTIONS[slug]));
+  const section = SECTIONS[slug];
+  if (!section) {
+    throw new Error(
+      `No THEORY authoring for section "${slug}" yet. Build a generic planner or add section authoring.`
+    );
+  }
+  if (!_cache.has(slug)) _cache.set(slug, buildScenePlans(section));
   return _cache.get(slug)!;
 }
 
@@ -191,4 +197,17 @@ export function getSceneCode(sceneId: string): string {
   const plan = plansForCurrent().find((p) => p.id === sceneId);
   if (!plan) throw new Error(`Unknown scene ${sceneId}`);
   return `${plan.code}\n`;
+}
+
+// The episode thumbnail: a single authored `stage_thumbnail(...)` scene,
+// rendered as one still at the end of the long-form stage. `null` if the
+// section has not authored a thumbnail yet (the stage warns and skips).
+export function getThumbnailCode(): string | null {
+  const t = SECTIONS[currentSlug()]?.thumbnail;
+  return t ? `${t.py}\n` : null;
+}
+
+export function getThumbnailClassName(): string {
+  const py = SECTIONS[currentSlug()]?.thumbnail?.py ?? "";
+  return py.match(/class\s+(\w+)\s*\(/)?.[1] ?? "ThumbnailScene";
 }

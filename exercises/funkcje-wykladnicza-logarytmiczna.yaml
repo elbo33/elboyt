@@ -1,0 +1,862 @@
+section: funkcje-wykladnicza-logarytmiczna
+name: Funkcje wykładnicza i logarytmiczna
+scope: The exponential and logarithmic functions and their graphs; using them to describe and interpret
+  growth, decay and scales.
+requirements:
+- V.14
+counts:
+  total: 16
+  REFERENCE_CALL: 3
+  DETERMINISTIC: 5
+  STATED_MODEL: 3
+  NOT_MACHINE_CHECKABLE: 5
+exercises:
+- id: g-th-00
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: obliczanie wartości funkcji wykładniczej
+  statement: 'Dana jest funkcja wykładnicza f(x) = 3^{x} określona dla każdej liczby rzeczywistej x. a)
+    Oblicz f(-2). b) Oblicz f(0). c) Oblicz f(3). d) Rozstrzygnij, czy funkcja f jest rosnąca (odpowiedz:
+    tak albo nie).'
+  statement_latex: f\left(x\right)=3^{x}
+  solution: |-
+    a) f(-2) = 3^{-2} = \frac{1}{3^{2}} = \frac{1}{9}.
+    b) f(0) = 3^{0} = 1 — każdy wykres funkcji wykładniczej przechodzi przez punkt (0,\,1).
+    c) f(3) = 3^{3} = 27.
+    d) Podstawa a = 3 > 1, więc funkcja f jest rosnąca (zwiększenie x o 1 mnoży wartość przez 3).
+  solution_steps:
+  - 'Korzystamy z a^{-x}=\frac{1}{a^{x}}: f(-2)=3^{-2}=\frac{1}{9}.'
+  - f(0)=3^{0}=1.
+  - f(3)=3^{3}=27.
+  - 'Podstawa 3>1, zatem funkcja jest rosnąca — odpowiedź: tak.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: f(-2)
+      answer:
+        kind: NUMERIC
+        value: 0.1111111111111111
+        tol: 1.0e-06
+        latex: \frac{1}{9}
+    - name: f(0)
+      answer:
+        kind: NUMERIC
+        value: 1.0
+        latex: '1'
+    - name: f(3)
+      answer:
+        kind: NUMERIC
+        value: 27.0
+        latex: '27'
+    - name: czy f jest rosnąca
+      answer:
+        kind: BOOLEAN
+        truth: true
+  checks:
+  - kind: evaluate
+    expr: 3^{-2}
+    part: f(-2)
+  - kind: evaluate
+    expr: 3^{0}
+    part: f(0)
+  - kind: evaluate
+    expr: 3^{3}
+    part: f(3)
+  skills:
+  - obliczanie wartości funkcji wykładniczej
+  - monotoniczność funkcji wykładniczej
+  verification:
+    checkability: REFERENCE_CALL
+    note: '4 parts matched · det: [f(-2)] SymPy solved it fresh: 0.1111111111111111 vs 0.1111111111111111
+      (tol 1e-06) ; [f(0)] SymPy solved it fresh: 1.0 vs 1.0 (tol 1e-09) ; [f(3)] SymPy solved it fresh:
+      27.0 vs 27.0 (tol 1e-09)'
+- id: g-th-01
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: obliczanie logarytmów z definicji
+  statement: 'Korzystając z definicji logarytmu, oblicz: a) \log_{2} 32, b) \log_{5}\frac{1}{25}, c) \log
+    1000 (logarytm dziesiętny).'
+  statement_latex: \log_{2} 32,\qquad \log_{5}\frac{1}{25},\qquad \log_{10} 1000
+  solution: |-
+    a) Pytamy: do której potęgi podnieść 2, aby otrzymać 32? Ponieważ 2^{5}=32, więc \log_{2}32 = 5.
+    b) 5^{-2}=\frac{1}{25}, więc \log_{5}\frac{1}{25} = -2.
+    c) 10^{3}=1000, więc \log 1000 = 3.
+  solution_steps:
+  - 'Zapisujemy 32 jako potęgę dwójki: 32 = 2^{5}, stąd \log_{2}32 = 5.'
+  - Zapisujemy \frac{1}{25} = 5^{-2}, stąd \log_{5}\frac{1}{25} = -2.
+  - Zapisujemy 1000 = 10^{3}, stąd \log 1000 = 3.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: log_2 32
+      answer:
+        kind: NUMERIC
+        value: 5.0
+        latex: '5'
+    - name: log_5 1/25
+      answer:
+        kind: NUMERIC
+        value: -2.0
+        latex: '-2'
+    - name: log 1000
+      answer:
+        kind: NUMERIC
+        value: 3.0
+        latex: '3'
+  checks:
+  - kind: evaluate
+    expr: \log_{2}\left(32\right)
+    part: log_2 32
+  - kind: evaluate
+    expr: \log_{5}\left(\frac{1}{25}\right)
+    part: log_5 1/25
+  - kind: evaluate
+    expr: \log_{10}\left(1000\right)
+    part: log 1000
+  skills:
+  - definicja logarytmu
+  - logarytm dziesiętny
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [log_2 32] SymPy solved it fresh: 5.0 vs 5.0 (tol 1e-09) ;
+      [log_5 1/25] SymPy solved it fresh: -2.0 vs -2.0 (tol 1e-09) ; [log 1000] SymPy solved it fresh:
+      3.0 vs 3.0 (tol 1e-09)'
+- id: g-th-02
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: budowanie modelu wykładniczego (podwajanie)
+  statement: Liczebność hodowli bakterii podwaja się co 4 godziny. W chwili t = 0 w hodowli było 300 bakterii.
+    a) Zapisz wzór opisujący liczbę N(t) bakterii po t godzinach. b) Oblicz liczbę bakterii po 12 godzinach.
+  statement_latex: N\left(t\right)=300\cdot 2^{\frac{t}{4}}
+  solution: |-
+    a) Wartość początkowa N_{0}=300, a czas podwojenia T = 4 h, więc N(t) = 300\cdot 2^{\frac{t}{4}}, gdzie t jest wyrażone w godzinach.
+    b) Dla t = 12 mamy wykładnik \frac{12}{4}=3 (czyli trzy podwojenia):
+    N(12) = 300\cdot 2^{3} = 300\cdot 8 = 2400.
+    Po 12 godzinach w hodowli będzie 2400 bakterii.
+  solution_steps:
+  - Odczytujemy wartość początkową N_{0}=300 oraz czas podwojenia T=4 h.
+  - 'Zapisujemy model: N(t)=300\cdot 2^{\frac{t}{4}}.'
+  - 'Podstawiamy t=12: wykładnik \frac{12}{4}=3.'
+  - Obliczamy N(12)=300\cdot 2^{3}=2400 bakterii.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wzór N(t)
+      answer:
+        kind: SYMBOLIC
+        latex: N\left(t\right)=300\cdot 2^{\frac{t}{4}}
+    - name: N(12)
+      answer:
+        kind: NUMERIC
+        value: 2400.0
+        tol: 1.0e-06
+        latex: '2400'
+  checks:
+  - kind: evaluate
+    expr: 300\cdot 2^{\frac{12}{4}}
+    var: t
+    part: N(12)
+  stated_model:
+    variable: t
+    objective_latex: N\left(t\right)=300\cdot 2^{\frac{t}{4}}
+    domain_lo: '0'
+    domain_lo_open: false
+    goal: value
+    constraint_used: podwojenie liczebności co 4 godziny, N(0)=300
+  skills:
+  - model wykładniczy N(t)=N_0 q^t
+  - czas podwojenia
+  verification:
+    checkability: STATED_MODEL
+    note: 'stage 1 inconclusive: SympifyError: SympifyError: "cannot sympify object of type <class ''function''>"'
+- id: g-ex-03
+  slot: EXERCISE
+  ramp_index: 1
+  difficulty: 2
+  exercise_type: równanie i nierówność wykładnicza
+  statement: Rozwiąż równanie \left(\frac{1}{3}\right)^{x} = 27 oraz nierówność \left(\frac{1}{3}\right)^{x}
+    > \frac{1}{9}.
+  statement_latex: \left(\frac{1}{3}\right)^{x} = 27,\qquad \left(\frac{1}{3}\right)^{x} > \frac{1}{9}
+  solution: |-
+    Równanie: 27 = 3^{3} = \left(\frac{1}{3}\right)^{-3}, więc \left(\frac{1}{3}\right)^{x} = \left(\frac{1}{3}\right)^{-3}. Funkcja wykładnicza jest różnowartościowa, zatem x = -3.
+
+    Nierówność: \frac{1}{9} = \left(\frac{1}{3}\right)^{2}, więc \left(\frac{1}{3}\right)^{x} > \left(\frac{1}{3}\right)^{2}. Podstawa \frac{1}{3}\in(0,1), więc funkcja jest malejąca i znak nierówności między wykładnikami się odwraca: x < 2.
+    Odpowiedź: x \in \left(-\infty,\ 2\right).
+  solution_steps:
+  - 'Zapisujemy prawą stronę równania w podstawie \frac{1}{3}: 27=\left(\frac{1}{3}\right)^{-3}.'
+  - 'Z różnowartościowości przyrównujemy wykładniki: x=-3.'
+  - Zapisujemy \frac{1}{9}=\left(\frac{1}{3}\right)^{2}.
+  - 'Podstawa należy do (0,1) — funkcja malejąca, więc znak nierówności odwracamy: x<2.'
+  - 'Zapisujemy odpowiedź w postaci przedziału: x\in\left(-\infty,2\right).'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: rozwiązanie równania
+      answer:
+        kind: SET
+        members:
+        - '-3'
+    - name: rozwiązanie nierówności
+      answer:
+        kind: INTERVAL
+        lo: -\infty
+        hi: '2'
+  checks:
+  - kind: solve_equation
+    expr: \left(\frac{1}{3}\right)^{x} = 27
+    part: rozwiązanie równania
+  - kind: solve_inequality
+    expr: \left(\frac{1}{3}\right)^{x} > \frac{1}{9}
+    part: rozwiązanie nierówności
+  skills:
+  - sprowadzanie do wspólnej podstawy
+  - monotoniczność a znak nierówności
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [rozwiązanie równania] SymPy solved it fresh: 1 members matched
+      ; [rozwiązanie nierówności] SymPy solved it fresh: endpoints matched'
+- id: g-ex-04
+  slot: EXERCISE
+  ramp_index: 2
+  difficulty: 3
+  exercise_type: procent składany z wyznaczaniem czasu
+  statement: Na lokatę wpłacono 8000 zł. Oprocentowanie lokaty wynosi 3% w skali roku, a odsetki są kapitalizowane
+    raz w roku (dopisywane do kapitału na koniec każdego roku). a) Zapisz wzór na wartość kapitału K(n)
+    po n pełnych latach oszczędzania. b) Oblicz wartość kapitału po 4 latach (wynik podaj z dokładnością
+    do 1 grosza). c) Wyznacz najmniejszą liczbę pełnych lat, po których kapitał przekroczy 10 000 zł.
+    Przyjmij \log 1{,}25 \approx 0{,}09691 oraz \log 1{,}03 \approx 0{,}01284.
+  statement_latex: K\left(n\right)=8000\cdot\left(1+\frac{3}{100}\right)^{n}
+  solution: |-
+    a) Każdy rok mnoży kapitał przez 1{,}03, więc K(n) = 8000\cdot 1{,}03^{n}.
+    b) K(4) = 8000\cdot 1{,}03^{4} = 8000\cdot 1{,}12550881 = 9004{,}07 zł (po zaokrągleniu do 1 grosza).
+    c) Szukamy najmniejszej liczby naturalnej n, dla której 8000\cdot 1{,}03^{n} > 10000, czyli 1{,}03^{n} > 1{,}25.
+    Logarytmujemy obie strony: n\cdot\log 1{,}03 > \log 1{,}25, stąd n > \frac{\log 1{,}25}{\log 1{,}03} \approx \frac{0{,}09691}{0{,}01284} \approx 7{,}55.
+    Najmniejsza liczba naturalna spełniająca ten warunek to n = 8.
+    Sprawdzenie: 8000\cdot 1{,}03^{7} \approx 9838{,}99 zł (za mało), 8000\cdot 1{,}03^{8} \approx 10134{,}16 zł (wystarczy).
+  solution_steps:
+  - 'Ustalamy mnożnik roczny: q = 1+\frac{3}{100}=1{,}03.'
+  - 'Zapisujemy model procentu składanego: K(n)=8000\cdot 1{,}03^{n}.'
+  - 'Podstawiamy n=4: K(4)=8000\cdot 1{,}03^{4}=9004{,}07 zł.'
+  - Zapisujemy warunek 8000\cdot 1{,}03^{n}>10000, czyli 1{,}03^{n}>1{,}25.
+  - 'Logarytmujemy: n>\frac{\log 1{,}25}{\log 1{,}03}\approx 7{,}55.'
+  - Najmniejsza liczba pełnych lat to n=8; sprawdzamy K(7)<10000<K(8).
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wzór K(n)
+      answer:
+        kind: SYMBOLIC
+        latex: K\left(n\right)=8000\cdot\left(1{,}03\right)^{n}
+    - name: kapitał po 4 latach
+      answer:
+        kind: NUMERIC
+        value: 9004.07
+        tol: 0.01
+        latex: 9004{,}07\ \text{zł}
+    - name: liczba pełnych lat
+      answer:
+        kind: NUMERIC
+        value: 8.0
+        latex: '8'
+  checks:
+  - kind: evaluate
+    expr: 8000\cdot\left(1.03\right)^{4}
+    var: n
+    part: kapitał po 4 latach
+  stated_model:
+    variable: n
+    objective_latex: K\left(n\right)=8000\cdot 1{,}03^{n}
+    domain_lo: '0'
+    domain_lo_open: false
+    goal: value
+    constraint_used: kapitalizacja roczna, stopa 3% w skali roku, n — liczba pełnych lat
+  skills:
+  - procent składany
+  - logarytmowanie w celu wyznaczenia czasu
+  - zaokrąglanie zgodne z sensem zadania
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''n'': ''K\\left(n\\right)=8000\\cdot
+      1{,}03^{n}'') — human review'
+- id: g-ex-05
+  slot: EXERCISE
+  ramp_index: 3
+  difficulty: 4
+  exercise_type: skala logarytmiczna (decybele)
+  statement: Poziom natężenia dźwięku L (w decybelach) wyraża się wzorem L = 10\cdot\log\frac{I}{I_{0}},
+    gdzie I to natężenie dźwięku (w \frac{\text{W}}{\text{m}^{2}}), a I_{0} = 10^{-12}\ \frac{\text{W}}{\text{m}^{2}}
+    jest progiem słyszalności. a) Oblicz poziom natężenia dźwięku odkurzacza, dla którego I = 10^{-6}\
+    \frac{\text{W}}{\text{m}^{2}}. b) Poziom natężenia dźwięku młota pneumatycznego jest równy 85 dB.
+    Oblicz natężenie I tego dźwięku (wynik podaj z dokładnością do trzech cyfr znaczących). c) Oblicz,
+    ile razy natężenie dźwięku młota jest większe od natężenia dźwięku odkurzacza. d) Uzasadnij, że wzrost
+    poziomu natężenia dźwięku o 20 dB oznacza stukrotny wzrost natężenia.
+  statement_latex: L = 10\cdot\log\frac{I}{I_{0}},\qquad I_{0}=10^{-12}
+  solution: |-
+    a) L = 10\cdot\log\frac{10^{-6}}{10^{-12}} = 10\cdot\log 10^{6} = 10\cdot 6 = 60 dB.
+    b) Z równania 85 = 10\cdot\log\frac{I}{I_{0}} otrzymujemy \log\frac{I}{I_{0}} = 8{,}5, czyli \frac{I}{I_{0}} = 10^{8{,}5}.
+    Stąd I = 10^{-12}\cdot 10^{8{,}5} = 10^{-3{,}5} \approx 3{,}16\cdot 10^{-4}\ \frac{\text{W}}{\text{m}^{2}}.
+    c) \frac{I_{\text{młot}}}{I_{\text{odkurzacz}}} = \frac{10^{-3{,}5}}{10^{-6}} = 10^{2{,}5} \approx 316. Natężenie dźwięku młota jest około 316 razy większe (różnica 25 dB to czynnik 10^{2{,}5}, a nie 25).
+    d) Jeśli natężenie wzrośnie ze I do 100I, to nowy poziom wynosi 10\cdot\log\frac{100I}{I_{0}} = 10\cdot\left(\log 100 + \log\frac{I}{I_{0}}\right) = 10\cdot 2 + L = L + 20, czyli poziom rośnie dokładnie o 20 dB. Rozumowanie odwrotne daje tezę.
+  solution_steps:
+  - 'Podstawiamy I=10^{-6} i I_{0}=10^{-12}: \frac{I}{I_{0}}=10^{6}, więc L=10\cdot 6=60 dB.'
+  - Z 85=10\cdot\log\frac{I}{I_{0}} wyznaczamy \log\frac{I}{I_{0}}=8{,}5.
+  - 'Przechodzimy do postaci wykładniczej: I = 10^{-12}\cdot 10^{8{,}5}=10^{-3{,}5}\approx 3{,}16\cdot
+    10^{-4}\ \frac{\text{W}}{\text{m}^{2}}.'
+  - 'Liczymy iloraz natężeń: \frac{10^{-3{,}5}}{10^{-6}}=10^{2{,}5}\approx 316.'
+  - 'Uzasadniamy: 10\cdot\log\frac{100I}{I_{0}}=10\cdot\log 100+10\cdot\log\frac{I}{I_{0}}=L+20.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: poziom dla odkurzacza
+      answer:
+        kind: NUMERIC
+        value: 60.0
+        tol: 1.0e-06
+        latex: 60\ \text{dB}
+    - name: natężenie dla 85 dB
+      answer:
+        kind: NUMERIC
+        value: 0.000316227766
+        tol: 1.0e-06
+        latex: 3{,}16\cdot 10^{-4}\ \frac{\text{W}}{\text{m}^{2}}
+    - name: krotność natężeń
+      answer:
+        kind: NUMERIC
+        value: 316.227766
+        tol: 0.5
+        latex: 10^{2{,}5}\approx 316
+    - name: uzasadnienie wzrostu o 20 dB
+      answer:
+        kind: NOT_MACHINE_CHECKABLE
+        reason: Uczeń ma wykazać rachunkiem, że 10\cdot\log\frac{100I}{I_{0}} = 10\cdot\log 100 + 10\cdot\log\frac{I}{I_{0}}
+          = L + 20, czyli stukrotny wzrost natężenia odpowiada wzrostowi poziomu o 20 dB.
+  checks:
+  - kind: evaluate
+    expr: 10\cdot\log_{10}\left(\frac{10^{-6}}{10^{-12}}\right)
+    var: I
+    part: poziom dla odkurzacza
+  - kind: evaluate
+    expr: 10^{-12}\cdot 10^{\frac{85}{10}}
+    var: I
+    part: natężenie dla 85 dB
+  - kind: evaluate
+    expr: 10^{\frac{85-60}{10}}
+    var: I
+    part: krotność natężeń
+  skills:
+  - praca ze skalą logarytmiczną
+  - przechodzenie między postacią logarytmiczną a wykładniczą
+  - interpretacja krotności
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'part(s) need a human: uzasadnienie wzrostu o 20 dB · 3/3 other parts solved fresh'
+- id: g-ex-t00
+  slot: EXERCISE
+  ramp_index: 6
+  difficulty: 4
+  exercise_type: budowanie i stosowanie modelu wykładniczego (zanik)
+  statement: |-
+    Liczebność populacji pewnego gatunku ryb w jeziorze maleje wykładniczo, tzn. opisuje ją wzór N(t)=N_{0}\cdot q^{t}, gdzie t jest czasem w latach liczonym od początku roku 2015. Na początku roku 2015 populacja liczyła 12000 osobników, a na początku roku 2021 — 3000 osobników.
+    a) Wyznacz wzór opisujący liczebność populacji po t latach.
+    b) Oblicz, ile osobników będzie liczyła ta populacja na początku roku 2027.
+    c) Na początku którego roku liczebność populacji będzie po raz pierwszy mniejsza niż 500 osobników? Przyjmij \log 2 \approx 0{,}301 oraz \log 3 \approx 0{,}477.
+  statement_latex: N(t)=12000\cdot\left(\frac{1}{2}\right)^{\frac{t}{3}}
+  solution: |-
+    a) W ciągu 6 lat liczebność zmalała z 12000 do 3000, czyli \frac{3000}{12000}=\frac{1}{4}=\left(\frac{1}{2}\right)^{2}. Oznacza to, że w ciągu 6 lat nastąpiły dwa połowienia, więc czas połowienia wynosi T=\frac{6}{2}=3 lata. Zatem N(t)=12000\cdot\left(\frac{1}{2}\right)^{\frac{t}{3}}. Sprawdzenie: N(6)=12000\cdot\left(\frac{1}{2}\right)^{2}=3000. ✓
+    b) Początek roku 2027 to t=12, więc N(12)=12000\cdot\left(\frac{1}{2}\right)^{\frac{12}{3}}=12000\cdot\left(\frac{1}{2}\right)^{4}=\frac{12000}{16}=750 osobników.
+    c) Szukamy najmniejszej liczby całkowitej t\ge 0 takiej, że 12000\cdot\left(\frac{1}{2}\right)^{\frac{t}{3}}<500, czyli \left(\frac{1}{2}\right)^{\frac{t}{3}}<\frac{1}{24}. Podstawa \frac{1}{2}\in(0,1), więc funkcja jest malejąca i znak nierówności między wykładnikami się odwraca: \frac{t}{3}>\log_{2}24. Ponieważ \log_{2}24=\frac{\log 24}{\log 2}=\frac{3\log 2+\log 3}{\log 2}\approx\frac{0{,}903+0{,}477}{0{,}301}=\frac{1{,}380}{0{,}301}\approx 4{,}585, to t>3\cdot 4{,}585\approx 13{,}75. Najmniejsza liczba całkowita to t=14. Sprawdzenie: N(13)=12000\cdot\left(\frac{1}{2}\right)^{\frac{13}{3}}\approx 595>500, a N(14)\approx 472<500. Rok: 2015+14=2029.
+  solution_steps:
+  - 'Oblicz krotność zmiany: 3000:12000=\frac{1}{4}=\left(\frac{1}{2}\right)^{2}.'
+  - Stąd dwa połowienia w 6 lat, czyli T=3 lata i N(t)=12000\cdot\left(\frac{1}{2}\right)^{\frac{t}{3}}.
+  - 'Podstaw t=12: N(12)=12000\cdot\left(\frac{1}{2}\right)^{4}=750.'
+  - Zapisz nierówność 12000\cdot\left(\frac{1}{2}\right)^{\frac{t}{3}}<500, czyli \left(\frac{1}{2}\right)^{\frac{t}{3}}<\frac{1}{24}.
+  - 'Skorzystaj z malejącej monotoniczności: \frac{t}{3}>\log_{2}24\approx 4{,}585, więc t>13{,}75.'
+  - Najmniejsza liczba całkowita t=14, czyli początek roku 2029.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wzor
+      answer:
+        kind: SYMBOLIC
+        latex: N(t)=12000\cdot\left(\frac{1}{2}\right)^{\frac{t}{3}}
+    - name: liczebnosc_2027
+      answer:
+        kind: NUMERIC
+        value: 750.0
+        tol: 1.0e-06
+    - name: rok
+      answer:
+        kind: NUMERIC
+        value: 2029.0
+  checks:
+  - kind: evaluate
+    expr: 12000\cdot\left(\frac{1}{2}\right)^{\frac{12}{3}}
+    var: t
+    part: liczebnosc_2027
+  - kind: evaluate
+    expr: 2015+\left\lceil \frac{3\cdot\log 24}{\log 2} \right\rceil
+    var: t
+    part: rok
+  stated_model:
+    variable: t
+    objective_latex: N(t)=12000\cdot\left(\frac{1}{2}\right)^{\frac{t}{3}}
+    domain_lo: '0'
+    domain_lo_open: false
+    goal: value
+    constraint_used: N(0)=12000,\ N(6)=3000
+  skills:
+  - budowanie modelu N(t)=N_0 q^t z dwóch pomiarów
+  - rozpoznanie krotności jako potęgi liczby 2
+  - obliczanie wartości modelu
+  - rozwiązywanie nierówności wykładniczej z użyciem logarytmu
+  - zaokrąglanie zgodnie z sensem zadania
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (AMBIGUOUS: ''parser returned an unresolved ambiguity
+      (_ambig)'') — human review'
+- id: g-ex-t01
+  slot: EXERCISE
+  ramp_index: 7
+  difficulty: 4
+  exercise_type: procent składany z wyznaczaniem czasu
+  statement: |-
+    Pan Adam wpłacił do banku 12000 zł na lokatę oprocentowaną 3% w skali roku, z roczną kapitalizacją odsetek (odsetki są dopisywane do kapitału na koniec każdego roku; podatek pomijamy). Kapitał po n latach opisuje wzór K_{n}=12000\cdot\left(1+\frac{3}{100}\right)^{n}.
+    a) Oblicz wartość kapitału po 3 latach oszczędzania (wynik podaj z dokładnością do 1 grosza).
+    b) O ile procent wzrósł kapitał po tych 3 latach (wynik podaj z dokładnością do 0,1 punktu procentowego)?
+    c) Po ilu pełnych latach oszczędzania kapitał będzie co najmniej dwa razy większy od kwoty wpłaconej? Przyjmij \log 2 \approx 0{,}30103 oraz \log 1{,}03 \approx 0{,}01284.
+  statement_latex: K_{n}=12000\cdot\left(1+\frac{3}{100}\right)^{n}
+  solution: |-
+    a) K_{3}=12000\cdot\left(1{,}03\right)^{3}=12000\cdot 1{,}092727=13112{,}724, czyli po zaokrągleniu 13112{,}72 zł.
+    b) Mnożnik po trzech latach to \left(1{,}03\right)^{3}=1{,}092727, czyli \left(1{,}092727-1\right)\cdot 100\%=9{,}2727\%\approx 9{,}3\%. (Uwaga: to NIE jest 3\cdot 3\%=9\%.)
+    c) Warunek: 12000\cdot\left(1{,}03\right)^{n}\ge 2\cdot 12000, czyli \left(1{,}03\right)^{n}\ge 2. Logarytmujemy obie strony: n\cdot\log 1{,}03\ge \log 2, więc n\ge \frac{\log 2}{\log 1{,}03}\approx\frac{0{,}30103}{0{,}01284}\approx 23{,}45. Najmniejsza liczba naturalna spełniająca ten warunek to n=24. Sprawdzenie: \left(1{,}03\right)^{23}\approx 1{,}974<2 oraz \left(1{,}03\right)^{24}\approx 2{,}033>2. Odpowiedź: po 24 latach.
+  solution_steps:
+  - 'Zapisz mnożnik roczny: 1+\frac{3}{100}=1{,}03.'
+  - Oblicz K_{3}=12000\cdot\left(1{,}03\right)^{3}=13112{,}72 zł.
+  - 'Wzrost procentowy: \left(\left(1{,}03\right)^{3}-1\right)\cdot 100\%\approx 9{,}3\%.'
+  - 'Zapisz warunek podwojenia: \left(1{,}03\right)^{n}\ge 2.'
+  - 'Zlogarytmuj: n\ge\frac{\log 2}{\log 1{,}03}\approx 23{,}45.'
+  - 'Najmniejsza liczba naturalna: n=24 lata.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: kapital_po_3_latach
+      answer:
+        kind: NUMERIC
+        value: 13112.72
+        tol: 0.01
+    - name: wzrost_procentowy
+      answer:
+        kind: NUMERIC
+        value: 9.3
+        tol: 0.05
+    - name: liczba_lat
+      answer:
+        kind: NUMERIC
+        value: 24.0
+  checks:
+  - kind: evaluate
+    expr: 12000\cdot\left(1.03\right)^{3}
+    var: n
+    part: kapital_po_3_latach
+  - kind: evaluate
+    expr: \left(\left(1.03\right)^{3}-1\right)\cdot 100
+    var: n
+    part: wzrost_procentowy
+  - kind: evaluate
+    expr: \left\lceil \frac{\log 2}{\log 1.03} \right\rceil
+    var: n
+    part: liczba_lat
+  skills:
+  - stosowanie wzoru na procent składany
+  - obliczanie wzrostu procentowego z mnożnika
+  - logarytmowanie obu stron nierówności wykładniczej
+  - zaokrąglanie w górę do pełnych okresów
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [kapital_po_3_latach] SymPy solved it fresh: 13112.72 vs 13112.724
+      (tol 0.01) ; [wzrost_procentowy] SymPy solved it fresh: 9.3 vs 9.2727 (tol 0.05) ; [liczba_lat]
+      SymPy solved it fresh: 24.0 vs 24.0 (tol 1e-09)'
+- id: g-cm-06
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: 'wykrycie błędu: wzrost liniowy zamiast wykładniczego'
+  statement: 'Liczebność kolonii bakterii podwaja się co 5 godzin. Na początku obserwacji (t = 0) kolonia
+    liczyła 600 bakterii. Uczeń rozumował tak: „W ciągu 20 godzin mieszczą się cztery okresy po 5 godzin,
+    więc bakterii będzie 4 razy więcej, czyli 4\cdot 600 = 2400.” Wyjaśnij, na czym polega błąd tego rozumowania,
+    i oblicz poprawną liczbę bakterii po 20 godzinach.'
+  statement_latex: N\left(t\right)=600\cdot 2^{\frac{t}{5}}
+  solution: |-
+    Błędne rozumowanie: uczeń policzył liczbę okresów \frac{20}{5}=4 i pomnożył przez nią liczbę początkową, otrzymując 4\cdot 600 = 2400. To jest model LINIOWY (dodawanie stałej porcji), a nie wykładniczy.
+
+    Korekta: w modelu wykładniczym w każdym okresie MNOŻYMY liczebność przez 2, a nie dodajemy stałą liczbę. Po czterech podwojeniach mnożnik wynosi 2^{4} = 16, a nie 4.
+    N(t) = 600\cdot 2^{\frac{t}{5}}, więc N(20) = 600\cdot 2^{\frac{20}{5}} = 600\cdot 2^{4} = 600\cdot 16 = 9600.
+    Po 20 godzinach w kolonii będzie 9600 bakterii (a nie 2400).
+  solution_steps:
+  - 'Rozpoznajemy błąd: uczeń pomnożył liczebność przez liczbę okresów (model liniowy) zamiast przez czynnik
+    2 w każdym okresie.'
+  - 'Zapisujemy poprawny model: N(t)=600\cdot 2^{\frac{t}{5}}.'
+  - 'Obliczamy liczbę podwojeń: \frac{20}{5}=4, więc mnożnik to 2^{4}=16.'
+  - N(20)=600\cdot 16 = 9600 bakterii.
+  answer:
+    kind: NUMERIC
+    value: 9600.0
+    tol: 1.0e-06
+    latex: '9600'
+  checks:
+  - kind: evaluate
+    expr: 600\cdot 2^{\frac{20}{5}}
+    var: t
+  stated_model:
+    variable: t
+    objective_latex: N\left(t\right)=600\cdot 2^{\frac{t}{5}}
+    domain_lo: '0'
+    domain_lo_open: false
+    goal: value
+    constraint_used: podwojenie co 5 godzin, N(0)=600
+  skills:
+  - model wykładniczy
+  - odróżnianie wzrostu liniowego od wykładniczego
+  verification:
+    checkability: STATED_MODEL
+    note: 'stage 1 inconclusive: SympifyError: SympifyError: "cannot sympify object of type <class ''function''>"'
+- id: g-cm-07
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: 'wykrycie błędu: procent razy liczba okresów'
+  statement: 'Klient wpłacił 12 000 zł na lokatę oprocentowaną 5% w skali roku z roczną kapitalizacją
+    odsetek. Uczeń obliczył wartość lokaty po 6 latach tak: „5\% \cdot 6 = 30\%, więc kapitał wzrośnie
+    o 30\%, czyli do 12000\cdot 1{,}3 = 15600 zł.” Wskaż błąd w tym rozumowaniu i oblicz poprawną wartość
+    kapitału po 6 latach (wynik zaokrąglij do 1 grosza).'
+  statement_latex: K\left(6\right)=12000\cdot\left(1+\frac{5}{100}\right)^{6}
+  solution: |-
+    Błędne rozumowanie: uczeń pomnożył stopę procentową przez liczbę lat (5\%\cdot 6 = 30\%) i otrzymał 12000\cdot 1{,}3 = 15600 zł. Procenty składane nie dodają się — dodają się tylko wtedy, gdy odsetki są wypłacane i nie procentują dalej.
+
+    Korekta: przy kapitalizacji rocznej każdy rok mnoży kapitał przez 1{,}05, więc mnożnikiem po 6 latach jest 1{,}05^{6}, a nie 1{,}3.
+    K(6) = 12000\cdot 1{,}05^{6} = 12000\cdot 1{,}340095640625 = 16081{,}15 zł (po zaokrągleniu do 1 grosza).
+    Wzrost wynosi więc około 34\%, a nie 30\% — różnica 481,15 zł to odsetki naliczone od odsetek.
+  solution_steps:
+  - 'Rozpoznajemy błąd: nie wolno mnożyć stopy procentowej przez liczbę okresów, bo odsetki same procentują.'
+  - 'Zapisujemy poprawny model: K(n)=12000\cdot\left(1+\frac{5}{100}\right)^{n}.'
+  - 'Podstawiamy n=6: mnożnik 1{,}05^{6}\approx 1{,}3401.'
+  - Obliczamy K(6)=12000\cdot 1{,}05^{6}\approx 16081{,}15 zł.
+  answer:
+    kind: NUMERIC
+    value: 16081.15
+    tol: 0.01
+    latex: 16081{,}15\ \text{zł}
+  checks:
+  - kind: evaluate
+    expr: 12000\cdot\left(1.05\right)^{6}
+    var: n
+  skills:
+  - procent składany
+  - poprawne stosowanie mnożnika (1+r)^n
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 16081.15 vs 16081.1476875 (tol 0.01)'
+- id: g-cm-08
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: 'wykrycie błędu: wartości funkcji wykładniczej'
+  statement: 'Uczeń rozwiązywał równanie 2^{x} + 8 = 0 i zapisał: „2^{x} = -8 = -2^{3}, więc x = 3”. Wyjaśnij,
+    dlaczego to rozumowanie jest błędne. a) Podaj zbiór rozwiązań równania 2^{x} + 8 = 0. b) Podaj zbiór
+    wartości funkcji g(x) = 2^{x} + 8.'
+  statement_latex: 2^{x}+8=0,\qquad g\left(x\right)=2^{x}+8
+  solution: |-
+    Błędne rozumowanie: uczeń „przeniósł” minus do potęgi i uznał, że 2^{x} może być liczbą ujemną. Tymczasem -2^{3} = -8 nie jest potęgą liczby 2 o żadnym wykładniku: (-8) < 0, a potęga liczby dodatniej jest zawsze dodatnia.
+
+    Korekta: zbiorem wartości funkcji wykładniczej y = 2^{x} jest przedział (0,\ +\infty). Wartości maleją do zera, gdy x \to -\infty, ale nigdy zera nie osiągają — prosta y = 0 jest asymptotą poziomą.
+    a) Równanie 2^{x} = -8 nie ma rozwiązań, więc zbiór rozwiązań jest pusty: \varnothing.
+    b) Skoro 2^{x} > 0 dla każdego x, to 2^{x} + 8 > 8, a wartości dowolnie bliskie 8 i dowolnie duże są przyjmowane. Zatem zbiorem wartości funkcji g jest przedział (8,\ +\infty) (asymptota pozioma y = 8).
+  solution_steps:
+  - 'Wskazujemy błąd: 2^{x} nigdy nie przyjmuje wartości ujemnej ani zera, więc zapis 2^{x}=-8 jest sprzeczny.'
+  - 'Przypominamy zbiór wartości: dla f(x)=2^{x} jest to (0,+\infty), a prosta y=0 to asymptota pozioma.'
+  - 'Wniosek dla a): równanie 2^{x}+8=0 nie ma rozwiązań — zbiór rozwiązań jest pusty.'
+  - 'Dla b): z 2^{x}>0 wynika 2^{x}+8>8, więc zbiór wartości g to (8,+\infty).'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: zbiór rozwiązań równania
+      answer:
+        kind: SET
+        latex: \varnothing
+    - name: zbiór wartości funkcji g
+      answer:
+        kind: INTERVAL
+        lo: '8'
+        hi: \infty
+  skills:
+  - zbiór wartości funkcji wykładniczej
+  - asymptota pozioma
+  - równania bez rozwiązań
+  verification:
+    checkability: REFERENCE_CALL
+    note: 2 parts matched
+- id: g-cm-09
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: 'wykrycie błędu: dziedzina logarytmu'
+  statement: 'Dana jest funkcja f(x) = \log_{3}\left(5 - 2x\right). Uczeń zapisał: „f(4) = \log_{3}\left(-3\right)
+    = -1, bo 3^{-1} to coś ujemnego”. Wyjaśnij, dlaczego to obliczenie jest błędne. a) Wyznacz dziedzinę
+    funkcji f. b) Oblicz f(1).'
+  statement_latex: f\left(x\right)=\log_{3}\left(5-2\cdot x\right)
+  solution: |-
+    Błędne rozumowanie: uczeń policzył logarytm liczby ujemnej. Z definicji \log_{a}b = c \iff a^{c} = b, przy czym b > 0 — nie istnieje wykładnik c taki, że 3^{c} = -3, bo potęga liczby dodatniej jest dodatnia (w szczególności 3^{-1} = \frac{1}{3} > 0). Zatem f(4) w ogóle nie jest określone.
+
+    Korekta:
+    a) Dziedzinę wyznaczamy z warunku 5 - 2x > 0, czyli 2x < 5, stąd x < \frac{5}{2}. Dziedzina: D = \left(-\infty,\ \frac{5}{2}\right). Liczba 4 do niej nie należy, więc f(4) nie istnieje.
+    b) x = 1 należy do dziedziny: f(1) = \log_{3}\left(5 - 2\cdot 1\right) = \log_{3}3 = 1.
+  solution_steps:
+  - 'Wskazujemy błąd: logarytmować można tylko liczby dodatnie, więc \log_{3}(-3) nie istnieje.'
+  - 'Zapisujemy warunek dziedziny: 5-2x>0.'
+  - 'Rozwiązujemy: x<\frac{5}{2}, czyli D=\left(-\infty,\frac{5}{2}\right); punkt x=4 nie należy do dziedziny.'
+  - Obliczamy f(1)=\log_{3}\left(5-2\cdot 1\right)=\log_{3}3=1.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: dziedzina f
+      answer:
+        kind: INTERVAL
+        lo: -\infty
+        hi: \frac{5}{2}
+    - name: f(1)
+      answer:
+        kind: NUMERIC
+        value: 1.0
+        latex: '1'
+  checks:
+  - kind: solve_inequality
+    expr: 5-2\cdot x > 0
+    part: dziedzina f
+  - kind: evaluate
+    expr: \log_{3}\left(5-2\cdot 1\right)
+    part: f(1)
+  skills:
+  - dziedzina funkcji logarytmicznej
+  - definicja logarytmu
+  - obliczanie wartości funkcji
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [dziedzina f] SymPy solved it fresh: endpoints matched ; [f(1)]
+      SymPy solved it fresh: 1.0 vs 1.0 (tol 1e-09)'
+- id: g-cm-10
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: 'wykrycie błędu: fałszywe wzory na logarytmy'
+  statement: 'Uczeń obliczał wartości dwóch wyrażeń i zapisał: „A = \log_{2}40 - \log_{2}5 = \frac{\log_{2}40}{\log_{2}5}”
+    oraz „B = \log 2 + \log 5 = \log\left(2 + 5\right) = \log 7”. Wskaż, które wzory zostały użyte błędnie,
+    i oblicz poprawne wartości wyrażeń A oraz B.'
+  statement_latex: A=\log_{2}40-\log_{2}5,\qquad B=\log 2+\log 5
+  solution: |-
+    Błędne rozumowanie: uczeń użył nieistniejących „wzorów” \log x - \log y = \frac{\log x}{\log y} oraz \log x + \log y = \log(x+y). Poprawne wzory to \log_{a}\frac{x}{y} = \log_{a}x - \log_{a}y oraz \log_{a}(x\cdot y) = \log_{a}x + \log_{a}y — różnicy logarytmów odpowiada ILORAZ liczb, a sumie logarytmów ILOCZYN liczb.
+
+    Korekta:
+    A = \log_{2}40 - \log_{2}5 = \log_{2}\frac{40}{5} = \log_{2}8 = 3.
+    B = \log 2 + \log 5 = \log\left(2\cdot 5\right) = \log 10 = 1.
+    (Dla porównania: błędne wyniki ucznia to \frac{\log_{2}40}{\log_{2}5} \approx \frac{5{,}32}{2{,}32}\approx 2{,}29 oraz \log 7 \approx 0{,}85 — obie liczby są inne niż poprawne 3 i 1.)
+  solution_steps:
+  - 'Wskazujemy błąd: różnica logarytmów to logarytm ILORAZU, a nie iloraz logarytmów; suma logarytmów
+    to logarytm ILOCZYNU, a nie logarytm sumy.'
+  - 'Stosujemy wzór na logarytm ilorazu: A=\log_{2}\frac{40}{5}=\log_{2}8=3.'
+  - 'Stosujemy wzór na logarytm iloczynu: B=\log\left(2\cdot 5\right)=\log 10=1.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: A
+      answer:
+        kind: NUMERIC
+        value: 3.0
+        latex: '3'
+    - name: B
+      answer:
+        kind: NUMERIC
+        value: 1.0
+        latex: '1'
+  checks:
+  - kind: evaluate
+    expr: \log_{2}\left(40\right)-\log_{2}\left(5\right)
+    part: A
+  - kind: evaluate
+    expr: \log_{10}\left(2\right)+\log_{10}\left(5\right)
+    part: B
+  skills:
+  - logarytm ilorazu i iloczynu
+  - obliczanie wartości wyrażeń logarytmicznych
+  verification:
+    checkability: REFERENCE_CALL
+    note: 2 parts matched
+- id: g-ch-t02
+  slot: CHALLENGE
+  ramp_index: 0
+  difficulty: 4
+  exercise_type: model półtrwania — wyznaczenie parametru z danej zmiany i predykcja
+  statement: Pewna substancja rozpada się tak, że co stały okres czasu jej masa maleje o połowę. W ciągu
+    pierwszych 12 dni obserwacji masa próbki tej substancji zmniejszyła się o 87,5%. Ile procent masy
+    początkowej pozostanie w próbce po kolejnych ośmiu dniach?
+  statement_latex: N(t)=N_{0}\cdot\left(\frac{1}{2}\right)^{\frac{t}{T}}
+  solution: |-
+    Model rozpadu z okresem półtrwania T (w dniach): N(t)=N_{0}\cdot\left(\frac{1}{2}\right)^{\frac{t}{T}}.
+    Skoro masa zmalała o 87,5%, to pozostało 100\%-87{,}5\%=12{,}5\%, czyli \frac{N(12)}{N_{0}}=0{,}125=\frac{1}{8}=\left(\frac{1}{2}\right)^{3}.
+    Zatem \left(\frac{1}{2}\right)^{\frac{12}{T}}=\left(\frac{1}{2}\right)^{3}, a z różnowartościowości funkcji wykładniczej \frac{12}{T}=3, czyli T=4 dni.
+    Po kolejnych ośmiu dniach mamy t=12+8=20 dni, więc \frac{N(20)}{N_{0}}=\left(\frac{1}{2}\right)^{\frac{20}{4}}=\left(\frac{1}{2}\right)^{5}=\frac{1}{32}=0{,}03125.
+    Pozostanie 3,125% masy początkowej.
+  solution_steps:
+  - Wprowadź model N(t)=N_{0}\cdot\left(\frac{1}{2}\right)^{\frac{t}{T}} z nieznanym okresem półtrwania
+    T.
+  - 'Zamień ''spadek o 87,5%'' na ''pozostało 12,5%'': \frac{N(12)}{N_{0}}=\frac{1}{8}.'
+  - 'Zapisz \frac{1}{8}=\left(\frac{1}{2}\right)^{3} i przyrównaj wykładniki: \frac{12}{T}=3, więc T=4
+    dni.'
+  - Po kolejnych 8 dniach t=20, czyli \frac{20}{4}=5 połowień.
+  - Oblicz \left(\frac{1}{2}\right)^{5}=\frac{1}{32}=3{,}125\% masy początkowej.
+  answer:
+    kind: NUMERIC
+    value: 3.125
+    tol: 0.0001
+  checks:
+  - kind: evaluate
+    expr: 100\cdot\left(\frac{1}{2}\right)^{\frac{20}{4}}
+    var: t
+  stated_model:
+    variable: t
+    objective_latex: \frac{N(t)}{N_{0}}\cdot 100\%=100\cdot\left(\frac{1}{2}\right)^{\frac{t}{4}}
+    domain_lo: '0'
+    domain_lo_open: false
+    goal: value
+    constraint_used: N(12)=0{,}125\cdot N_{0}
+  skills:
+  - rozpoznanie modelu wykładniczego w opisie słownym
+  - przejście od 'zmalało o 87,5%' do 'pozostało 12,5%'
+  - zapisanie krotności jako potęgi 1/2
+  - wyznaczenie okresu półtrwania (zadanie odwrotne)
+  - obliczenie wartości modelu po zadanym czasie
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (PARSE_ERROR: "UnexpectedCharacters: No terminal
+      matches ''\\'' in the current parser context, at line 1 col 28") — human review'
+- id: g-ch-t03
+  slot: CHALLENGE
+  ramp_index: 1
+  difficulty: 5
+  exercise_type: skala logarytmiczna z ograniczeniem — maksymalna liczba obiektów
+  statement: Poziom natężenia dźwięku wyraża się wzorem L=10\cdot\log\frac{I}{I_{0}}, gdzie L jest wyrażone
+    w decybelach, I to natężenie dźwięku, a I_{0}=10^{-12}\ \frac{\mathrm{W}}{\mathrm{m}^{2}} to próg
+    słyszalności. W hali produkcyjnej pracują jednakowe maszyny. Gdy pracuje dokładnie jedna maszyna,
+    poziom natężenia dźwięku w punkcie kontrolnym hali jest równy 74 dB. Natężenia dźwięków pochodzących
+    od wszystkich pracujących maszyn sumują się w punkcie kontrolnym. Przepisy dopuszczają w tym punkcie
+    poziom natężenia dźwięku nieprzekraczający 86 dB. Ile najwięcej maszyn może pracować w tej hali jednocześnie?
+    Przyjmij \log 2 \approx 0{,}301 oraz \log 3 \approx 0{,}477.
+  statement_latex: L\left(n\right)=10\cdot\log\frac{n\cdot I_{1}}{I_{0}}=74+10\cdot\log n
+  solution: |-
+    Niech I_{1} będzie natężeniem dźwięku od jednej maszyny w punkcie kontrolnym, a n — liczbą jednocześnie pracujących maszyn. Wtedy natężenie od n maszyn wynosi n\cdot I_{1}, więc
+    L\left(n\right)=10\cdot\log\frac{n\cdot I_{1}}{I_{0}}=10\cdot\log\frac{I_{1}}{I_{0}}+10\cdot\log n=74+10\cdot\log n.
+    Warunek przepisów: 74+10\cdot\log n\le 86, czyli 10\cdot\log n\le 12, a stąd \log n\le 1{,}2, czyli n\le 10^{1{,}2}.
+    Sprawdzamy kandydatów: \log 15=\log 3+\log 5=\log 3+1-\log 2\approx 0{,}477+0{,}699=1{,}176\le 1{,}2, natomiast \log 16=4\cdot\log 2\approx 1{,}204>1{,}2.
+    Zatem n=15 spełnia warunek, a n=16 już nie (dla 15 maszyn L\approx 85{,}8 dB, dla 16 maszyn L\approx 86{,}0\ldots>86 dB).
+    Odpowiedź: jednocześnie może pracować najwyżej 15 maszyn.
+  solution_steps:
+  - Wprowadź n — liczbę jednocześnie pracujących maszyn oraz I_{1} — natężenie od jednej maszyny.
+  - 'Złóż model: natężenie od n maszyn to n\cdot I_{1}, więc L\left(n\right)=10\cdot\log\frac{n\cdot I_{1}}{I_{0}}.'
+  - 'Skorzystaj ze wzoru na logarytm iloczynu: L\left(n\right)=74+10\cdot\log n.'
+  - 'Zapisz ograniczenie: 74+10\cdot\log n\le 86, czyli \log n\le 1{,}2.'
+  - 'Przejdź do postaci wykładniczej: n\le 10^{1{,}2}.'
+  - 'Sprawdź: \log 15\approx 1{,}176\le 1{,}2 oraz \log 16\approx 1{,}204>1{,}2, więc największa liczba
+    maszyn to 15.'
+  answer:
+    kind: NUMERIC
+    value: 15.0
+  checks:
+  - kind: evaluate
+    expr: \left\lfloor 10^{1.2} \right\rfloor
+    var: n
+  stated_model:
+    variable: n
+    objective_latex: L\left(n\right)=74+10\cdot\log n
+    domain_lo: '1'
+    domain_lo_open: false
+    constraint_used: L\left(n\right)\le 86,\ n\in\mathbb{N}_{+}
+  skills:
+  - wprowadzenie zmiennej opisującej liczbę źródeł
+  - 'złożenie modelu: sumowanie natężeń i wzór na poziom w dB'
+  - przejście między postacią logarytmiczną a wykładniczą
+  - nierówność z logarytmem i ograniczenie zewnętrzne
+  - wybór największej liczby całkowitej spełniającej warunek
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''n'': ''L\\left(n\\right)=74+10\\cdot\\log
+      n'') — human review'
+- id: g-ch-t04
+  slot: CHALLENGE
+  ramp_index: 2
+  difficulty: 5
+  exercise_type: kumulacja dawek leku — wzór ogólny i ocena bezpieczeństwa
+  statement: |-
+    Masa leku w organizmie po przyjęciu jednorazowej dawki m_{0} zmienia się zgodnie z zależnością m\left(t\right)=m_{0}\cdot\left(\frac{1}{2}\right)^{\frac{t}{T}}, gdzie T jest czasem półtrwania leku, a t — czasem liczonym od momentu przyjęcia tej dawki. Masy leku pozostałe z wszystkich wcześniej przyjętych dawek sumują się. Pacjent przyjmuje lek o czasie półtrwania T=8 godzin: pierwszą dawkę 120 mg o godzinie 8:00, a każdą następną dawkę 120 mg dokładnie co 8 godzin.
+    a) Wyznacz wzór na masę M_{n} (w miligramach) leku w organizmie pacjenta w chwili tuż po przyjęciu n-tej dawki, gdzie n jest liczbą naturalną dodatnią.
+    b) Oblicz masę leku w organizmie tuż po przyjęciu czwartej dawki oraz rozstrzygnij, czy przy takim schemacie przyjmowania leku masa leku w organizmie tego pacjenta może kiedykolwiek przekroczyć 250 mg. Odpowiedź uzasadnij.
+  statement_latex: M_{n}=120\cdot\left(1+\frac{1}{2}+\frac{1}{4}+\ldots+\left(\frac{1}{2}\right)^{n-1}\right)=240\cdot\left(1-\left(\frac{1}{2}\right)^{n}\right)
+  solution: |-
+    a) W chwili przyjęcia n-tej dawki dawka o numerze k (k=1,2,\ldots,n) została przyjęta \left(n-k\right)\cdot 8 godzin wcześniej, więc pozostało z niej 120\cdot\left(\frac{1}{2}\right)^{\frac{\left(n-k\right)\cdot 8}{8}}=120\cdot\left(\frac{1}{2}\right)^{n-k} mg. Sumując po wszystkich dawkach:
+    M_{n}=120\cdot\left(1+\frac{1}{2}+\left(\frac{1}{2}\right)^{2}+\ldots+\left(\frac{1}{2}\right)^{n-1}\right)=120\cdot\frac{1-\left(\frac{1}{2}\right)^{n}}{1-\frac{1}{2}}=240\cdot\left(1-\left(\frac{1}{2}\right)^{n}\right)\ \mathrm{mg}.
+    Sprawdzenie: M_{1}=240\cdot\frac{1}{2}=120 mg. ✓
+    b) M_{4}=240\cdot\left(1-\left(\frac{1}{2}\right)^{4}\right)=240\cdot\frac{15}{16}=225 mg.
+    Między kolejnymi dawkami masa leku maleje, więc największe wartości masa przyjmuje dokładnie w momentach przyjęcia dawek, czyli są to liczby M_{n}. Ponieważ \left(\frac{1}{2}\right)^{n}>0 dla każdego n, mamy M_{n}=240-240\cdot\left(\frac{1}{2}\right)^{n}<240<250 mg.
+    Odpowiedź: nie — masa leku w organizmie nigdy nie przekroczy 250 mg (pozostaje zawsze poniżej 240 mg).
+  solution_steps:
+  - Zauważ, że tuż po przyjęciu n-tej dawki z dawki numer k pozostało 120\cdot\left(\frac{1}{2}\right)^{n-k}
+    mg.
+  - 'Zsumuj wkłady wszystkich dawek: M_{n}=120\cdot\left(1+\frac{1}{2}+\ldots+\left(\frac{1}{2}\right)^{n-1}\right).'
+  - 'Zsumuj skończony ciąg geometryczny: M_{n}=240\cdot\left(1-\left(\frac{1}{2}\right)^{n}\right) mg.'
+  - 'Podstaw n=4: M_{4}=240\cdot\frac{15}{16}=225 mg.'
+  - Zauważ, że maksima masy występują w momentach przyjęcia dawek, a M_{n}<240 dla każdego n, bo \left(\frac{1}{2}\right)^{n}>0.
+  - 'Wniosek: 240<250, więc masa leku nigdy nie przekroczy 250 mg.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wzor_Mn
+      answer:
+        kind: SYMBOLIC
+        latex: M_{n}=240\cdot\left(1-\left(\frac{1}{2}\right)^{n}\right)
+    - name: M_4
+      answer:
+        kind: NUMERIC
+        value: 225.0
+        tol: 1.0e-06
+    - name: czy_przekroczy_250
+      answer:
+        kind: BOOLEAN
+        truth: false
+    - name: uzasadnienie
+      answer:
+        kind: NOT_MACHINE_CHECKABLE
+        reason: Uczeń musi uzasadnić, że największe wartości masa osiąga w momentach przyjęcia dawek oraz
+          że M_{n}=240-240\cdot\left(\frac{1}{2}\right)^{n}<240<250 mg dla każdego n, bo \left(\frac{1}{2}\right)^{n}>0
+          (funkcja wykładnicza przyjmuje tylko wartości dodatnie).
+  checks:
+  - kind: evaluate
+    expr: 240\cdot\left(1-\left(\frac{1}{2}\right)^{4}\right)
+    var: n
+    part: M_4
+  stated_model:
+    variable: n
+    objective_latex: M_{n}=240\cdot\left(1-\left(\frac{1}{2}\right)^{n}\right)
+    domain_lo: '1'
+    domain_lo_open: false
+    goal: value
+    constraint_used: dawka 120 mg co 8 h, T=8 h, masy z dawek sumują się
+  skills:
+  - stosowanie modelu półtrwania do wielu dawek
+  - składanie sumy mas pozostałych z poprzednich dawek
+  - wyprowadzenie wzoru ogólnego M_n
+  - obliczenie wartości dla konkretnego n
+  - porównanie z zewnętrznym ograniczeniem i ocena wyniku
+  verification:
+    checkability: STATED_MODEL
+    note: 'stage 1 inconclusive: TypeError: name should be a string, not Token'

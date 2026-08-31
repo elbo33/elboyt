@@ -1,0 +1,892 @@
+section: dowody-geometryczne
+name: Dowody geometryczne
+scope: Structuring a plane-geometry proof; typical arguments with congruent triangles, angles and the
+  circle theorems.
+requirements:
+- VIII.11
+counts:
+  total: 16
+  NOT_MACHINE_CHECKABLE: 10
+  DETERMINISTIC: 5
+  STATED_MODEL: 1
+exercises:
+- id: g-th-00
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: rachunek kątów z uzasadnieniem
+  statement: Dany jest trójkąt ABC, w którym |AB| = |AC| oraz kąt przy wierzchołku A ma miarę |∡BAC| =
+    44°. a) Oblicz miarę kąta ABC. b) Zapisz założenie i tezę twierdzenia, z którego skorzystałeś, uzasadniając
+    równość kątów przy podstawie BC.
+  statement_latex: '|AB|=|AC|,\quad |\sphericalangle BAC| = 44^\circ,\qquad |\sphericalangle ABC| = \frac{180^\circ
+    - 44^\circ}{2}'
+  solution: |-
+    ZAŁOŻENIE: w trójkącie ABC zachodzi |AB| = |AC| oraz |∡BAC| = 44°.
+
+    a) Trójkąt ABC jest równoramienny o ramionach AB i AC, więc kąty przy podstawie BC są równe: |∡ABC| = |∡ACB|. Oznaczmy tę wspólną miarę przez α.
+    Suma kątów w trójkącie wynosi 180°, zatem
+    44° + α + α = 180°,
+    2α = 136°,
+    α = 68°.
+    Stąd |∡ABC| = 68°.
+
+    b) Skorzystano z twierdzenia o trójkącie równoramiennym.
+    Założenie: w trójkącie ABC zachodzi |AB| = |AC|.
+    Teza: |∡ABC| = |∡ACB|.
+    Uwaga: samo „widać z rysunku, że kąty są równe” nie jest uzasadnieniem — powołujemy się na twierdzenie.
+  solution_steps:
+  - 'Zapisz założenie: |AB| = |AC|, |∡BAC| = 44°.'
+  - 'Z twierdzenia o trójkącie równoramiennym: |∡ABC| = |∡ACB| = α.'
+  - 'Ułóż równanie z sumy kątów trójkąta: 44° + 2α = 180°.'
+  - 'Rozwiąż: α = 68°, czyli |∡ABC| = 68°.'
+  - Zapisz założenie i tezę użytego twierdzenia.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: miara kąta ABC (w stopniach)
+      answer:
+        kind: NUMERIC
+        value: 68.0
+    - name: założenie i teza twierdzenia
+      answer:
+        kind: NOT_MACHINE_CHECKABLE
+        reason: 'Uczeń ma zapisać: założenie — |AB| = |AC| w trójkącie ABC; teza — |∡ABC| = |∡ACB| (twierdzenie
+          o kątach przy podstawie trójkąta równoramiennego).'
+  checks:
+  - kind: evaluate
+    expr: \frac{180-44}{2}
+    part: miara kąta ABC (w stopniach)
+  skills:
+  - kąty w trójkącie równoramiennym
+  - suma kątów w trójkącie
+  - rozdzielenie założenia i tezy
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'part(s) need a human: założenie i teza twierdzenia · 1/1 other parts solved fresh'
+- id: g-th-01
+  slot: THEORY_SUPPORT
+  ramp_index: 1
+  difficulty: 2
+  exercise_type: twierdzenie o kącie wpisanym i środkowym
+  statement: Punkty A, B i C leżą na okręgu o środku O. Kąt środkowy AOB oparty na tym łuku AB, który
+    NIE zawiera punktu C, ma miarę 130°. a) Oblicz miarę kąta wpisanego ACB. b) Uzasadnij, na jakim łuku
+    oparty jest kąt ACB i z jakiego twierdzenia korzystasz.
+  statement_latex: '|\sphericalangle AOB| = 130^\circ,\qquad |\sphericalangle ACB| = \frac{1}{2}\cdot
+    130^\circ'
+  solution: |-
+    ZAŁOŻENIE: A, B, C leżą na okręgu o środku O, kąt środkowy AOB oparty na łuku AB niezawierającym C ma miarę 130°.
+
+    a) Kąt wpisany ACB ma wierzchołek C leżący na okręgu, a jego ramiona przechodzą przez A i B. Jest on oparty na tym samym łuku AB, który nie zawiera punktu C — czyli na tym samym łuku co kąt środkowy AOB.
+    Z twierdzenia o kącie wpisanym i środkowym opartych na tym samym łuku: kąt wpisany jest połową kąta środkowego, więc
+    |∡ACB| = 1/2 · 130° = 65°.
+
+    b) Kąt ACB jest oparty na łuku AB niezawierającym punktu C; twierdzenie o kącie wpisanym i środkowym stosujemy tylko wtedy, gdy oba kąty są oparte na TYM SAMYM łuku. Uwaga na kierunek zależności: to kąt środkowy jest dwa razy większy od wpisanego, a nie odwrotnie.
+  solution_steps:
+  - 'Ustal, na jakim łuku oparty jest kąt wpisany ACB: na łuku AB niezawierającym C.'
+  - Zauważ, że kąt środkowy AOB jest oparty na tym samym łuku.
+  - 'Zastosuj twierdzenie: kąt wpisany = połowa kąta środkowego.'
+  - 'Oblicz: |∡ACB| = 1/2 · 130° = 65°.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: miara kąta ACB (w stopniach)
+      answer:
+        kind: NUMERIC
+        value: 65.0
+    - name: uzasadnienie
+      answer:
+        kind: NOT_MACHINE_CHECKABLE
+        reason: Uczeń ma wskazać, że kąt ACB jest kątem wpisanym opartym na łuku AB niezawierającym C
+          — tym samym, na którym oparty jest kąt środkowy AOB — i powołać się na twierdzenie o kącie wpisanym
+          i środkowym (wpisany = połowa środkowego).
+  checks:
+  - kind: evaluate
+    expr: \frac{1}{2}\cdot 130
+    part: miara kąta ACB (w stopniach)
+  skills:
+  - kąt wpisany i środkowy
+  - wskazanie łuku, na którym oparty jest kąt
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'part(s) need a human: uzasadnienie · 1/1 other parts solved fresh'
+- id: g-th-02
+  slot: THEORY_SUPPORT
+  ramp_index: 2
+  difficulty: 2
+  exercise_type: czworokąt wpisany w okrąg
+  statement: Czworokąt ABCD jest wpisany w okrąg, przy czym |∡DAB| = 105° oraz |∡ABC| = 82°. a) Oblicz
+    miarę kąta BCD. b) Oblicz miarę kąta CDA. c) Uzasadnij, z jakiego twierdzenia korzystasz w obu obliczeniach.
+  statement_latex: '|\sphericalangle BCD| = 180^\circ - 105^\circ,\qquad |\sphericalangle CDA| = 180^\circ
+    - 82^\circ'
+  solution: |-
+    ZAŁOŻENIE: ABCD jest czworokątem wpisanym w okrąg, |∡DAB| = 105°, |∡ABC| = 82°.
+    TEZA (do obliczenia): |∡BCD| i |∡CDA|.
+
+    W czworokącie wpisanym w okrąg sumy kątów przeciwległych są równe 180°.
+
+    a) Kąty DAB i BCD są przeciwległe, więc
+    |∡BCD| = 180° − 105° = 75°.
+
+    b) Kąty ABC i CDA są przeciwległe, więc
+    |∡CDA| = 180° − 82° = 98°.
+
+    c) Korzystamy z twierdzenia o czworokącie wpisanym w okrąg: kąty przeciwległe sumują się do 180°. Wynika ono z twierdzenia o kącie wpisanym — kąty DAB i BCD są kątami wpisanymi opartymi na dwóch dopełniających się łukach BD, a odpowiadające im kąty środkowe dają w sumie 360°.
+
+    Sprawdzenie: 105° + 82° + 75° + 98° = 360°, czyli suma kątów czworokąta jest poprawna.
+  solution_steps:
+  - 'Zapisz założenie: ABCD wpisany w okrąg, |∡DAB| = 105°, |∡ABC| = 82°.'
+  - 'Powołaj się na twierdzenie o czworokącie wpisanym: kąty przeciwległe sumują się do 180°.'
+  - Oblicz |∡BCD| = 180° − 105° = 75°.
+  - Oblicz |∡CDA| = 180° − 82° = 98°.
+  - 'Sprawdź: suma wszystkich czterech kątów wynosi 360°.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: miara kąta BCD (w stopniach)
+      answer:
+        kind: NUMERIC
+        value: 75.0
+    - name: miara kąta CDA (w stopniach)
+      answer:
+        kind: NUMERIC
+        value: 98.0
+    - name: uzasadnienie
+      answer:
+        kind: NOT_MACHINE_CHECKABLE
+        reason: Uczeń ma powołać się na twierdzenie o czworokącie wpisanym w okrąg (kąty przeciwległe
+          sumują się do 180°) i wskazać właściwe pary kątów przeciwległych.
+  checks:
+  - kind: evaluate
+    expr: 180-105
+    part: miara kąta BCD (w stopniach)
+  - kind: evaluate
+    expr: 180-82
+    part: miara kąta CDA (w stopniach)
+  skills:
+  - czworokąt wpisany w okrąg
+  - rachunek kątów
+  - uzasadnianie kroków
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'part(s) need a human: uzasadnienie · 2/2 other parts solved fresh'
+- id: g-ex-03
+  slot: EXERCISE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: dowód przez przystawanie + obliczenie
+  statement: W trójkącie ABC dane są |AB| = |AC| = 10 oraz |BC| = 12. Punkt D jest środkiem boku BC. a)
+    Wykaż, korzystając z cechy przystawania trójkątów, że |∡ADB| = 90°, czyli że odcinek AD jest wysokością
+    trójkąta ABC. b) Oblicz długość odcinka AD.
+  statement_latex: '|AB|=|AC|=10,\quad |BC|=12,\quad |BD|=|DC|=6,\qquad |AD|=\sqrt{10^{2}-6^{2}}'
+  solution: |-
+    ZAŁOŻENIE: |AB| = |AC| = 10, |BC| = 12, D — środek BC, czyli |BD| = |DC| = 6.
+    TEZA a): |∡ADB| = 90°.
+
+    a) Porównajmy trójkąty ABD i ACD (w odpowiedniości A↔A, B↔C, D↔D):
+    1) |AB| = |AC| — z założenia;
+    2) |BD| = |CD| — bo D jest środkiem boku BC;
+    3) |AD| = |AD| — bok wspólny.
+    Trzy pary równych boków, więc z cechy bbb trójkąty ABD i ACD są przystające.
+    Z przystawania wynika równość odpowiadających kątów, w szczególności |∡ADB| = |∡ADC|.
+    Kąty ADB i ADC są kątami przyległymi (punkt D leży wewnątrz odcinka BC), więc |∡ADB| + |∡ADC| = 180°.
+    Stąd 2·|∡ADB| = 180°, czyli |∡ADB| = 90°. To jest teza — odcinek AD jest wysokością trójkąta ABC, co należało wykazać.
+
+    b) Trójkąt ABD jest prostokątny (kąt przy D jest prosty), o przeciwprostokątnej AB. Z twierdzenia Pitagorasa:
+    |AD|² = |AB|² − |BD|² = 10² − 6² = 100 − 36 = 64,
+    |AD| = 8.
+  solution_steps:
+  - Zapisz założenie i tezę; zauważ, że |BD| = |DC| = 6.
+  - Wskaż trójkąty ABD i ACD i ustal odpowiedniość wierzchołków.
+  - Zbierz trzy pary równych boków (AB = AC, BD = CD, AD wspólny) i powołaj cechę bbb.
+  - 'Z przystawania: |∡ADB| = |∡ADC|.'
+  - Kąty ADB i ADC są przyległe, więc każdy ma 90° — teza części a).
+  - 'W trójkącie prostokątnym ABD zastosuj twierdzenie Pitagorasa: |AD| = √(100 − 36) = 8.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: dowód, że kąt ADB jest prosty
+      answer:
+        kind: NOT_MACHINE_CHECKABLE
+        reason: Uczeń ma wykazać przystawanie trójkątów ABD i ACD z cechy bbb (AB = AC, BD = CD, AD wspólny),
+          stąd |∡ADB| = |∡ADC|, a z przyległości tych kątów |∡ADB| = 90°.
+    - name: długość odcinka AD
+      answer:
+        kind: NUMERIC
+        value: 8.0
+  checks:
+  - kind: evaluate
+    expr: \sqrt{10^{2}-6^{2}}
+    part: długość odcinka AD
+  skills:
+  - cechy przystawania trójkątów (bbb)
+  - trójkąt równoramienny
+  - twierdzenie Pitagorasa
+  - redagowanie dowodu
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'part(s) need a human: dowód, że kąt ADB jest prosty · 1/1 other parts solved fresh'
+- id: g-ex-04
+  slot: EXERCISE
+  ramp_index: 1
+  difficulty: 3
+  exercise_type: rachunek kątów w okręgu + dowód
+  statement: Punkty A, B i C leżą na okręgu o środku O, przy czym odcinek AB jest średnicą tego okręgu,
+    a punkt C jest różny od A i od B. Wiadomo, że |∡CAB| = 34°. a) Oblicz miary kątów ACB oraz ABC. b)
+    Wykaż, że kąt środkowy COB, oparty na łuku CB niezawierającym punktu A, spełnia równość |∡COB| = 2·|∡CAB|
+    (skorzystaj z tego, że trójkąt AOC jest równoramienny).
+  statement_latex: '|\sphericalangle ACB| = \frac{1}{2}\cdot 180^\circ,\qquad |\sphericalangle ABC| =
+    180^\circ - 90^\circ - 34^\circ,\qquad |\sphericalangle COB| = 2\cdot|\sphericalangle CAB|'
+  solution: |-
+    ZAŁOŻENIE: A, B, C leżą na okręgu o środku O, AB jest średnicą, |∡CAB| = 34°.
+
+    a) Kąt ACB jest kątem wpisanym opartym na średnicy AB, a odpowiadający mu kąt środkowy AOB jest kątem półpełnym o mierze 180°. Z twierdzenia o kącie wpisanym i środkowym:
+    |∡ACB| = 1/2 · 180° = 90°.
+    Z sumy kątów w trójkącie ABC:
+    |∡ABC| = 180° − 90° − 34° = 56°.
+
+    b) Dorysujmy promień OC. Ponieważ |OA| = |OC| = r (promienie tego samego okręgu), trójkąt AOC jest równoramienny, więc kąty przy podstawie AC są równe:
+    |∡OAC| = |∡OCA| = |∡CAB| = 34° (punkt O leży na odcinku AB, więc kąt OAC to ten sam kąt co CAB).
+    Kąt COB jest kątem zewnętrznym trójkąta AOC przy wierzchołku O (bo punkty A, O, B leżą na jednej prostej, a kąty AOC i COB są przyległe). Z twierdzenia o kącie zewnętrznym:
+    |∡COB| = |∡OAC| + |∡OCA| = 34° + 34° = 2 · 34° = 2·|∡CAB|.
+    Ogólnie, jeśli oznaczymy |∡CAB| = α, to |∡OAC| = |∡OCA| = α i |∡COB| = 2α, co należało wykazać.
+    (Kontrola: |∡COB| = 68°, a |∡ABC| = 56° — dane te są zgodne, bo trójkąt BOC jest równoramienny: 68° + 56° + 56° = 180°.)
+  solution_steps:
+  - Zauważ, że kąt środkowy oparty na średnicy ma 180°, więc kąt wpisany ACB ma 90°.
+  - Z sumy kątów w trójkącie ABC oblicz |∡ABC| = 180° − 90° − 34° = 56°.
+  - Dorysuj promień OC i zauważ, że |OA| = |OC| = r.
+  - 'Z trójkąta równoramiennego AOC: |∡OAC| = |∡OCA| = α = |∡CAB|.'
+  - 'Zastosuj twierdzenie o kącie zewnętrznym trójkąta AOC przy wierzchołku O: |∡COB| = α + α = 2α.'
+  - 'Sformułuj wniosek: |∡COB| = 2·|∡CAB|, co należało wykazać.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: miara kąta ACB (w stopniach)
+      answer:
+        kind: NUMERIC
+        value: 90.0
+    - name: miara kąta ABC (w stopniach)
+      answer:
+        kind: NUMERIC
+        value: 56.0
+    - name: dowód równości kąta środkowego i podwojonego wpisanego
+      answer:
+        kind: NOT_MACHINE_CHECKABLE
+        reason: Uczeń ma wykorzystać |OA| = |OC| = r (trójkąt AOC równoramienny), stąd |∡OAC| = |∡OCA|
+          = α, a następnie twierdzenie o kącie zewnętrznym (lub kąty przyległe i sumę kątów trójkąta)
+          do otrzymania |∡COB| = 2α.
+  checks:
+  - kind: evaluate
+    expr: \frac{1}{2}\cdot 180
+    part: miara kąta ACB (w stopniach)
+  - kind: evaluate
+    expr: 180-90-34
+    part: miara kąta ABC (w stopniach)
+  skills:
+  - kąt oparty na średnicy
+  - trójkąt równoramienny z promieni
+  - twierdzenie o kącie zewnętrznym
+  - redagowanie dowodu
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'part(s) need a human: dowód równości kąta środkowego i podwojonego wpisanego · 2/2 other parts
+      solved fresh'
+- id: g-ex-05
+  slot: EXERCISE
+  ramp_index: 2
+  difficulty: 4
+  exercise_type: dowód z twierdzeń o okręgu + obliczenia
+  statement: Punkt P leży na zewnątrz okręgu o środku O i promieniu 5, przy czym |OP| = 13. Z punktu P
+    poprowadzono dwie styczne do tego okręgu; punktami styczności są A i B. a) Wykaż, że trójkąty OAP
+    i OBP są przystające, i wywnioskuj stąd, że półprosta PO jest dwusieczną kąta APB. b) Oblicz długość
+    odcinka PA. c) Oblicz pole czworokąta OAPB.
+  statement_latex: '|OA|=|OB|=5,\quad |OP|=13,\qquad |PA|=\sqrt{13^{2}-5^{2}},\qquad P_{OAPB}=2\cdot\frac{1}{2}\cdot
+    5\cdot 12'
+  solution: |-
+    ZAŁOŻENIE: PA i PB są styczne do okręgu o środku O i promieniu r = 5 w punktach A i B, |OP| = 13.
+    TEZA a): trójkąty OAP i OBP przystają oraz |∡APO| = |∡BPO|.
+
+    a) Prosta PA jest styczna do okręgu w punkcie A, więc promień OA jest do niej prostopadły: |∡OAP| = 90°. Analogicznie |∡OBP| = 90°. Trójkąty OAP i OBP są zatem prostokątne o wspólnej przeciwprostokątnej OP.
+    Z twierdzenia Pitagorasa w trójkącie OAP: |PA|² = |OP|² − |OA|² = 13² − 5² = 169 − 25 = 144.
+    Analogicznie w trójkącie OBP: |PB|² = |OP|² − |OB|² = 144.
+    Zatem |PA|² = |PB|², a ponieważ długości są dodatnie, |PA| = |PB|.
+    Teraz trójkąty OAP i OBP (w odpowiedniości O↔O, A↔B, P↔P) mają:
+    |OA| = |OB| = 5, |PA| = |PB|, |OP| = |OP| — bok wspólny.
+    Z cechy bbb są przystające: OAP ≅ OBP.
+    Z przystawania wynika równość odpowiadających kątów, w szczególności |∡APO| = |∡BPO|, czyli półprosta PO dzieli kąt APB na dwa równe kąty — jest jego dwusieczną. Co należało wykazać.
+
+    b) Z obliczeń w punkcie a): |PA| = √144 = 12.
+
+    c) Czworokąt OAPB składa się z dwóch przystających trójkątów prostokątnych OAP i OBP o przyprostokątnych 5 i 12:
+    P = 2 · (1/2 · 5 · 12) = 60.
+  solution_steps:
+  - 'Z własności stycznej: OA ⊥ PA i OB ⊥ PB, więc trójkąty OAP i OBP są prostokątne.'
+  - 'Z twierdzenia Pitagorasa: |PA|² = |PB|² = 13² − 5² = 144, stąd |PA| = |PB|.'
+  - Wskaż trzy pary równych boków (OA = OB, PA = PB, OP wspólny) i powołaj cechę bbb.
+  - Z przystawania OAP ≅ OBP wynika |∡APO| = |∡BPO|, czyli PO jest dwusieczną kąta APB.
+  - Oblicz |PA| = √144 = 12.
+  - 'Oblicz pole: P = 2 · (1/2 · 5 · 12) = 60.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: dowód przystawania i własności dwusiecznej
+      answer:
+        kind: NOT_MACHINE_CHECKABLE
+        reason: Uczeń ma użyć prostopadłości stycznej do promienia, twierdzenia Pitagorasa do uzasadnienia
+          |PA| = |PB|, cechy bbb dla trójkątów OAP i OBP oraz wywnioskować |∡APO| = |∡BPO|.
+    - name: długość odcinka PA
+      answer:
+        kind: NUMERIC
+        value: 12.0
+    - name: pole czworokąta OAPB
+      answer:
+        kind: NUMERIC
+        value: 60.0
+  checks:
+  - kind: evaluate
+    expr: \sqrt{13^{2}-5^{2}}
+    part: długość odcinka PA
+  - kind: evaluate
+    expr: 2\cdot\frac{1}{2}\cdot 5\cdot 12
+    part: pole czworokąta OAPB
+  skills:
+  - styczna prostopadła do promienia
+  - cecha przystawania bbb
+  - twierdzenie Pitagorasa
+  - pole trójkąta prostokątnego
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'part(s) need a human: dowód przystawania i własności dwusiecznej · 2/2 other parts solved fresh'
+- id: g-ex-t00
+  slot: EXERCISE
+  ramp_index: 6
+  difficulty: 3
+  exercise_type: dowód z twierdzeń o okręgu + rachunek kątów
+  statement: |-
+    Z punktu P leżącego na zewnątrz okręgu o środku O poprowadzono dwie proste styczne do tego okręgu: pierwsza z nich jest styczna do okręgu w punkcie A, druga — w punkcie B. Miara kąta APB jest równa 52^\circ.
+    a) Wykaż, że trójkąt APB jest równoramienny.
+    b) Oblicz miarę kąta OAB.
+  statement_latex: '|\sphericalangle APB| = 52^\circ,\qquad |\sphericalangle OAB| = 90^\circ - \frac{180^\circ
+    - 52^\circ}{2}'
+  solution: |-
+    Założenie: PA i PB są odcinkami stycznych poprowadzonych z punktu P do okręgu o środku O, A i B to punkty styczności, |∡APB| = 52°. Teza a): |PA| = |PB|. Teza b): wyznaczyć |∡OAB|.
+
+    a) Ponieważ prosta PA jest styczna do okręgu w punkcie A, to OA ⊥ PA, czyli |∡OAP| = 90°. Analogicznie |∡OBP| = 90°. Trójkąty OAP i OBP są więc prostokątne o wspólnej przeciwprostokątnej OP.
+    Z twierdzenia Pitagorasa w trójkącie OAP: |PA|^2 = |OP|^2 - |OA|^2 = |OP|^2 - r^2, a w trójkącie OBP: |PB|^2 = |OP|^2 - |OB|^2 = |OP|^2 - r^2 (bo |OA| = |OB| = r jako promienie).
+    Zatem |PA|^2 = |PB|^2, a ponieważ długości odcinków są dodatnie, |PA| = |PB|. Trójkąt APB ma dwa boki równej długości, więc jest równoramienny — co należało wykazać.
+
+    b) W trójkącie równoramiennym APB kąty przy podstawie AB są równe, a kąt między ramionami ma miarę 52°, więc
+    |∡PAB| = |∡PBA| = (180° - 52°) : 2 = 64°.
+    Półprosta AO leży wewnątrz kąta PAB nie jest potrzebna — wystarczy, że kąt OAP jest prosty i że kąt OAB jest jego częścią: |∡OAB| = |∡OAP| - |∡PAB| = 90° - 64° = 26°.
+
+    Odpowiedź: |∡OAB| = 26°.
+  solution_steps:
+  - Zapisz założenie (dwie styczne z punktu P, |∡APB| = 52°) i obie tezy.
+  - 'Z prostopadłości stycznej do promienia: |∡OAP| = |∡OBP| = 90°.'
+  - Z twierdzenia Pitagorasa w trójkątach OAP i OBP otrzymaj |PA|^2 = |PB|^2 = |OP|^2 - r^2, stąd |PA|
+    = |PB| — trójkąt APB jest równoramienny.
+  - 'W trójkącie równoramiennym APB oblicz kąty przy podstawie: \frac{180^\circ - 52^\circ}{2} = 64^\circ.'
+  - 'Odejmij ten kąt od kąta prostego OAP: |∡OAB| = 90^\circ - 64^\circ = 26^\circ.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: a) dowód równoramienności
+      answer:
+        kind: NOT_MACHINE_CHECKABLE
+        reason: 'Należy wykazać, że |PA| = |PB|: z prostopadłości stycznej i promienia trójkąty OAP i
+          OBP są prostokątne o wspólnej przeciwprostokątnej OP i równych przyprostokątnych OA = OB = r,
+          więc z twierdzenia Pitagorasa |PA| = |PB|; stąd trójkąt APB jest równoramienny.'
+    - name: b) miara kąta OAB
+      answer:
+        kind: NUMERIC
+        value: 26.0
+  checks:
+  - kind: evaluate
+    expr: 90 - \frac{180 - 52}{2}
+    part: b) miara kąta OAB
+  skills:
+  - styczna prostopadła do promienia
+  - równość odcinków stycznych
+  - przystawanie trójkątów prostokątnych
+  - rachunek kątów w trójkącie równoramiennym
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'part(s) need a human: a) dowód równoramienności · 1/1 other parts solved fresh'
+- id: g-ex-t01
+  slot: EXERCISE
+  ramp_index: 7
+  difficulty: 4
+  exercise_type: dowód z podobieństwa trójkątów + rachunki
+  statement: |-
+    Czworokąt ABCD jest wpisany w okrąg. Jego przekątne AC i BD przecinają się w punkcie S. Wiadomo, że |AS| = 6, |CS| = 4 oraz |BS| = 8.
+    a) Wykaż, że trójkąty ASB i DSC są podobne.
+    b) Oblicz długość odcinka DS.
+    c) Oblicz stosunek pola trójkąta ASB do pola trójkąta DSC.
+  statement_latex: '|DS| = \frac{6 \cdot 4}{8},\qquad \frac{P_{ASB}}{P_{DSC}} = \left(\frac{8}{4}\right)^{2}'
+  solution: |-
+    Założenie: ABCD jest czworokątem wpisanym w okrąg, S — punkt przecięcia przekątnych AC i BD, |AS| = 6, |CS| = 4, |BS| = 8. Teza a): trójkąty ASB i DSC są podobne.
+
+    a) Kąty SAB i CAB to ten sam kąt; jest to kąt wpisany oparty na łuku BC niezawierającym punktu A. Kąt SDC to kąt BDC — kąt wpisany oparty na tym samym łuku BC (punkty A i D leżą po tej samej stronie cięciwy BC, na tym samym łuku). Zatem |∡SAB| = |∡SDC|.
+    Kąty ASB i DSC są kątami wierzchołkowymi (proste AC i BD przecinają się w S), więc |∡ASB| = |∡DSC|.
+    Dwie pary równych kątów dają, z cechy kk, podobieństwo trójkątów w odpowiedniości A↔D, S↔S, B↔C, czyli ASB ~ DSC — co należało wykazać.
+
+    b) Z podobieństwa (w tej właśnie odpowiedniości) zachodzi proporcja
+    \frac{|AS|}{|DS|} = \frac{|BS|}{|CS|}, czyli \frac{6}{|DS|} = \frac{8}{4}.
+    Stąd 8 · |DS| = 6 · 4, więc |DS| = \frac{6\cdot 4}{8} = 3.
+
+    c) Skala podobieństwa trójkąta ASB względem trójkąta DSC wynosi k = \frac{|BS|}{|CS|} = \frac{8}{4} = 2 (to samo daje \frac{|AS|}{|DS|} = \frac{6}{3} = 2). Pola figur podobnych są w stosunku k^2, zatem \frac{P_{ASB}}{P_{DSC}} = 2^2 = 4.
+
+    Odpowiedź: |DS| = 3, stosunek pól jest równy 4.
+  solution_steps:
+  - 'Wskaż równe kąty wpisane: |∡SAB| = |∡SDC| — oba oparte na łuku BC niezawierającym A i D.'
+  - 'Wskaż kąty wierzchołkowe: |∡ASB| = |∡DSC|.'
+  - Z cechy kk wywnioskuj podobieństwo ASB ~ DSC w odpowiedniości A↔D, S↔S, B↔C.
+  - Zapisz proporcję \frac{|AS|}{|DS|} = \frac{|BS|}{|CS|} i wylicz |DS| = \frac{6\cdot 4}{8} = 3.
+  - Wyznacz skalę k = \frac{8}{4} = 2 i stosunek pól k^2 = 4.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: a) dowód podobieństwa
+      answer:
+        kind: NOT_MACHINE_CHECKABLE
+        reason: 'Należy wskazać dwie pary równych kątów: |∡SAB| = |∡SDC| (kąty wpisane oparte na tym samym
+          łuku BC) oraz |∡ASB| = |∡DSC| (kąty wierzchołkowe), i powołać się na cechę kk w odpowiedniości
+          A↔D, S↔S, B↔C.'
+    - name: b) |DS|
+      answer:
+        kind: NUMERIC
+        value: 3.0
+    - name: c) stosunek pól
+      answer:
+        kind: NUMERIC
+        value: 4.0
+  checks:
+  - kind: evaluate
+    expr: \frac{6 \cdot 4}{8}
+    part: b) |DS|
+  - kind: evaluate
+    expr: \left(\frac{8}{4}\right)^{2}
+    part: c) stosunek pól
+  skills:
+  - kąty wpisane oparte na tym samym łuku
+  - kąty wierzchołkowe
+  - cecha kk podobieństwa
+  - proporcje boków
+  - stosunek pól figur podobnych
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'part(s) need a human: a) dowód podobieństwa · 2/2 other parts solved fresh'
+- id: g-cm-06
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: ocena błędnego rozumowania
+  statement: 'W trójkącie ABC dane są |∡BAC| = 58° oraz |∡ABC| = 63°. Uczeń miał obliczyć miarę kąta ACB
+    i napisał: „Narysowałem ten trójkąt i widzę, że boki AB i BC są jednakowej długości, więc trójkąt
+    jest równoramienny, a zatem |∡ACB| = |∡BAC| = 58°”. Wskaż błąd w tym rozumowaniu i oblicz poprawnie
+    miarę kąta ACB.'
+  statement_latex: '|\sphericalangle ACB| = 180^\circ - 58^\circ - 63^\circ'
+  solution: |-
+    BŁĘDNE ROZUMOWANIE UCZNIA: „na rysunku |AB| = |BC|, więc kąty przy podstawie AC są równe i |∡ACB| = 58°”. Wynik ucznia: 58°.
+
+    DLACZEGO TO BŁĄD: rysunek jest zawsze niedokładny i przedstawia tylko jeden, przypadkowy obraz sytuacji; zmierzenie linijką nie jest uzasadnieniem matematycznym. W założeniu nie ma żadnej informacji o równości boków — jest tylko informacja o dwóch kątach. Co więcej, wynik ucznia sam sobie przeczy: gdyby było |AB| = |BC|, to kąty przy podstawie AC (czyli kąty BAC i BCA) byłyby równe, ale wtedy suma kątów wynosiłaby 58° + 63° + 58° = 179° ≠ 180°, co jest niemożliwe.
+
+    POPRAWNE ROZWIĄZANIE: korzystamy wyłącznie z założenia i z twierdzenia o sumie kątów w trójkącie:
+    |∡ACB| = 180° − 58° − 63° = 59°.
+
+    WNIOSEK: |∡ACB| = 59°. Ponieważ 59° ≠ 58°, trójkąt nie jest równoramienny — rysunek wprowadził ucznia w błąd. Rysunek służy tylko do znalezienia pomysłu; każdy krok dowodu musi wynikać z założenia, definicji lub twierdzenia.
+  solution_steps:
+  - 'Odtwórz rozumowanie ucznia: z rysunku |AB| = |BC|, stąd |∡ACB| = 58°.'
+  - 'Pokaż sprzeczność: 58° + 63° + 58° = 179° ≠ 180°, więc wniosek z rysunku jest fałszywy.'
+  - 'Zastosuj twierdzenie o sumie kątów w trójkącie: |∡ACB| = 180° − 58° − 63°.'
+  - 'Oblicz: |∡ACB| = 59°.'
+  - 'Sformułuj morał: rysunek ilustruje, ale nie dowodzi.'
+  answer:
+    kind: NUMERIC
+    value: 59.0
+  checks:
+  - kind: evaluate
+    expr: 180-58-63
+  skills:
+  - suma kątów w trójkącie
+  - krytyka rozumowania opartego na rysunku
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 59.0 vs 59.0 (tol 1e-09)'
+- id: g-cm-07
+  slot: COMMON_MISTAKE
+  ramp_index: 1
+  difficulty: 3
+  exercise_type: ocena błędnego rozumowania
+  statement: 'Uczeń miał uzasadnić zdanie: „w każdym czworokącie wpisanym w okrąg suma miar kątów przeciwległych
+    jest równa 180°”. Napisał: „Sprawdziłem to dla kwadratu wpisanego w okrąg: 90° + 90° = 180°, oraz
+    dla prostokąta: też 90° + 90° = 180°, zatem twierdzenie jest udowodnione”. Wyjaśnij, dlaczego takie
+    sprawdzenie nie jest dowodem, naszkicuj poprawne uzasadnienie, a następnie oblicz miarę kąta BCD w
+    czworokącie ABCD wpisanym w okrąg, w którym |∡DAB| = 118°.'
+  statement_latex: '|\sphericalangle DAB| + |\sphericalangle BCD| = 180^\circ,\qquad |\sphericalangle
+    BCD| = 180^\circ - 118^\circ'
+  solution: |-
+    BŁĘDNE ROZUMOWANIE UCZNIA: sprawdzenie tezy dla kwadratu i prostokąta i uznanie zdania ogólnego za udowodnione.
+
+    DLACZEGO TO BŁĄD: zdanie zaczyna się od słowa „każdy”, więc dotyczy nieskończenie wielu czworokątów. Sprawdzenie jednego (ani stu) przykładów nie dowodzi zdania ogólnego — dowodzi tylko, że w tych konkretnych przypadkach teza zachodzi. Dodatkowo uczeń wybrał przypadki wyjątkowo szczególne (wszystkie kąty proste), z których nic nie widać o czworokącie ogólnym. Pojedynczy przykład wystarcza wyłącznie do OBALENIA zdania ogólnego (kontrprzykład), a nie do jego udowodnienia.
+
+    POPRAWNE UZASADNIENIE (dla dowolnego czworokąta ABCD wpisanego w okrąg o środku O): kąt DAB jest kątem wpisanym opartym na tym łuku BD, który zawiera punkt C; odpowiadający mu kąt środkowy oznaczmy φ, wtedy φ = 2·|∡DAB|. Kąt BCD jest kątem wpisanym opartym na drugim łuku BD (zawierającym A); odpowiadający mu kąt środkowy ψ spełnia ψ = 2·|∡BCD|. Oba łuki tworzą razem cały okrąg, więc φ + ψ = 360°, czyli 2·|∡DAB| + 2·|∡BCD| = 360°, a stąd |∡DAB| + |∡BCD| = 180°. Rozumowanie nie korzystało z żadnej szczególnej własności czworokąta — dlatego jest dowodem.
+
+    OBLICZENIE: dla |∡DAB| = 118° mamy |∡BCD| = 180° − 118° = 62°.
+    Zauważ, że wynik 62° ≠ 90° — przykłady ucznia (kwadrat, prostokąt) w ogóle nie obejmowały takiej sytuacji.
+  solution_steps:
+  - 'Nazwij błąd: sprawdzenie przykładów zamiast dowodu zdania ogólnego.'
+  - Wyjaśnij, że przykład obala zdanie ogólne, ale go nie dowodzi.
+  - 'Podaj poprawne uzasadnienie: kąty wpisane DAB i BCD oparte na dopełniających się łukach BD, odpowiadające
+    kąty środkowe dają 360°.'
+  - 'Przekształć: 2·|∡DAB| + 2·|∡BCD| = 360°, czyli |∡DAB| + |∡BCD| = 180°.'
+  - Podstaw |∡DAB| = 118° i oblicz |∡BCD| = 62°.
+  answer:
+    kind: NUMERIC
+    value: 62.0
+  checks:
+  - kind: evaluate
+    expr: 180-118
+  skills:
+  - czworokąt wpisany w okrąg
+  - różnica między przykładem a dowodem
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 62.0 vs 62.0 (tol 1e-09)'
+- id: g-cm-08
+  slot: COMMON_MISTAKE
+  ramp_index: 2
+  difficulty: 3
+  exercise_type: ocena błędnego rozumowania
+  statement: 'W trójkącie ABC zachodzi |AB| = |AC| = 25 oraz |BC| = 14. Punkt D leży na boku BC i odcinek
+    AD jest dwusieczną kąta BAC, tzn. |∡BAD| = |∡CAD|. Uczeń miał wykazać, że |BD| = |DC|, i napisał:
+    „Ponieważ |BD| = |DC|, a ponadto |AB| = |AC| i bok AD jest wspólny, to trójkąty ABD i ACD przystają
+    z cechy bbb, więc |BD| = |DC|”. Wskaż błąd w tym rozumowaniu, przeprowadź poprawny dowód, a następnie
+    oblicz |BD| oraz |AD|.'
+  statement_latex: '|BD| = \frac{14}{2},\qquad |AD| = \sqrt{25^{2}-7^{2}}'
+  solution: |-
+    BŁĘDNE ROZUMOWANIE UCZNIA: jako jedną z trzech par równych boków uczeń przyjął |BD| = |DC| — czyli dokładnie to, co miał udowodnić. To błędne koło: teza została użyta jako argument, a na końcu „wywnioskowana” z samej siebie. Takie rozumowanie niczego nie dowodzi (w ten sposób można „udowodnić” dowolne zdanie).
+
+    POPRAWNY DOWÓD: porównujemy trójkąty ABD i ACD w odpowiedniości A↔A, B↔C, D↔D:
+    1) |AB| = |AC| — z założenia;
+    2) |∡BAD| = |∡CAD| — bo AD jest dwusieczną kąta BAC (założenie);
+    3) |AD| = |AD| — bok wspólny.
+    Są to dwa boki i kąt MIĘDZY nimi, więc z cechy bkb trójkąty ABD i ACD są przystające.
+    Z przystawania wynika równość odpowiadających boków, w szczególności |BD| = |CD| — a to jest teza. Co należało wykazać.
+    (Zauważ: teza pojawia się dopiero jako ostatni wniosek, a nie jako założenie.)
+
+    OBLICZENIA: skoro |BD| = |DC| i |BD| + |DC| = |BC| = 14, to |BD| = 14/2 = 7.
+    Z przystawania mamy też |∡ADB| = |∡ADC|, a ponieważ kąty te są przyległe, każdy z nich ma 90°. Trójkąt ABD jest prostokątny o przeciwprostokątnej AB, więc z twierdzenia Pitagorasa:
+    |AD|² = 25² − 7² = 625 − 49 = 576, czyli |AD| = 24.
+  solution_steps:
+  - 'Wskaż błąd: uczeń użył tezy |BD| = |DC| jako jednej z przesłanek (błędne koło).'
+  - 'Zbierz poprawne przesłanki: |AB| = |AC| (założenie), |∡BAD| = |∡CAD| (dwusieczna), AD bok wspólny.'
+  - Powołaj cechę bkb (kąt leży między danymi bokami) i stwierdź przystawanie ABD ≅ ACD.
+  - Z przystawania wywnioskuj tezę |BD| = |DC|.
+  - Oblicz |BD| = 14/2 = 7.
+  - Zauważ, że |∡ADB| = 90°, i z twierdzenia Pitagorasa oblicz |AD| = √(625 − 49) = 24.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: długość odcinka BD
+      answer:
+        kind: NUMERIC
+        value: 7.0
+    - name: długość odcinka AD
+      answer:
+        kind: NUMERIC
+        value: 24.0
+  checks:
+  - kind: evaluate
+    expr: \frac{14}{2}
+    part: długość odcinka BD
+  - kind: evaluate
+    expr: \sqrt{25^{2}-7^{2}}
+    part: długość odcinka AD
+  skills:
+  - cechy przystawania trójkątów
+  - wykrywanie błędnego koła
+  - twierdzenie Pitagorasa
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [długość odcinka BD] SymPy solved it fresh: 7.0 vs 7.0 (tol
+      1e-09) ; [długość odcinka AD] SymPy solved it fresh: 24.0 vs 24.0 (tol 1e-09)'
+- id: g-cm-09
+  slot: COMMON_MISTAKE
+  ramp_index: 3
+  difficulty: 2
+  exercise_type: ocena błędnego rozumowania
+  statement: 'Czworokąt wypukły ABCD ma wszystkie boki równej długości 6 oraz |∡ABC| = 70°. Uczeń miał
+    obliczyć miarę kąta BCD i napisał: „Skoro wszystkie boki są równe, to ABCD jest kwadratem, a w kwadracie
+    wszystkie kąty są proste, więc |∡BCD| = 90°”. Wskaż błąd w tym rozumowaniu i oblicz poprawnie miarę
+    kąta BCD.'
+  statement_latex: '|\sphericalangle ABC| + |\sphericalangle BCD| = 180^\circ,\qquad |\sphericalangle
+    BCD| = 180^\circ - 70^\circ'
+  solution: |-
+    BŁĘDNE ROZUMOWANIE UCZNIA: z równości wszystkich boków uczeń wywnioskował, że czworokąt jest kwadratem, i otrzymał |∡BCD| = 90°.
+
+    DLACZEGO TO BŁĄD: w założeniu jest tylko informacja o równości boków — nic o kątach prostych. Czworokąt o czterech równych bokach to romb, a kwadrat jest tylko jego szczególnym przypadkiem. Uczeń „dorobił” własność, której nie ma w założeniu. Zresztą dane wprost temu przeczą: |∡ABC| = 70° ≠ 90°, więc ABCD na pewno nie jest kwadratem.
+
+    POPRAWNE ROZWIĄZANIE: czworokąt wypukły o czterech równych bokach jest rombem, a więc równoległobokiem: AB ∥ CD i BC ∥ AD. Kąty ABC i BCD są kątami jednostronnymi wewnętrznymi przy prostych równoległych AB i CD przeciętych prostą BC, zatem
+    |∡ABC| + |∡BCD| = 180°,
+    |∡BCD| = 180° − 70° = 110°.
+
+    WNIOSEK: |∡BCD| = 110°. Morał: wolno korzystać wyłącznie z własności zapisanych w założeniu lub z nich wynikających; rysunek pomocniczy warto robić wyraźnie „nieregularny”, żeby nie kusiło korzystanie z przypadkowej symetrii.
+  solution_steps:
+  - 'Nazwij błąd: dorobienie własności (kątów prostych), której nie ma w założeniu.'
+  - 'Zauważ sprzeczność z danymi: |∡ABC| = 70°, więc figura nie jest kwadratem.'
+  - 'Ustal, co naprawdę wynika z założenia: czworokąt o czterech równych bokach jest rombem, czyli równoległobokiem.'
+  - 'Zastosuj własność kątów jednostronnych: |∡ABC| + |∡BCD| = 180°.'
+  - Oblicz |∡BCD| = 180° − 70° = 110°.
+  answer:
+    kind: NUMERIC
+    value: 110.0
+  checks:
+  - kind: evaluate
+    expr: 180-70
+  skills:
+  - własności rombu
+  - kąty jednostronne przy prostych równoległych
+  - korzystanie wyłącznie z założenia
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 110.0 vs 110.0 (tol 1e-09)'
+- id: g-cm-10
+  slot: COMMON_MISTAKE
+  ramp_index: 4
+  difficulty: 4
+  exercise_type: ocena błędnego rozumowania / kontrprzykład
+  statement: 'Dane są dwa trójkąty: trójkąt ABC, w którym |AB| = 8, |AC| = 7 oraz |∡ABC| = 60°, i trójkąt
+    KLM, w którym |KL| = 8, |KM| = 7 oraz |∡KLM| = 60°. Uczeń napisał: „Trójkąty mają po dwa równe boki
+    i równy kąt, więc przystają, a zatem |BC| = |LM|”. Wskaż błąd w tym rozumowaniu i wyznacz wszystkie
+    możliwe długości boku BC w trójkącie ABC.'
+  statement_latex: x^{2}-2\cdot 8\cdot x\cdot\frac{1}{2}+8^{2}-7^{2}=0,\qquad \text{czyli}\qquad x^{2}-8\cdot
+    x+15=0
+  solution: |-
+    BŁĘDNE ROZUMOWANIE UCZNIA: powołanie się na nieistniejącą „cechę bok–bok–kąt”. Dane boki to AB i AC, a dany kąt jest kątem przy wierzchołku B — leży on między bokami AB i BC, a NIE między dwoma danymi bokami. Cechy przystawania to bbb, bkb (kąt MIĘDZY danymi bokami) i kbk; układ bok–bok–kąt nieleżący między nimi na ogół nie wyznacza trójkąta jednoznacznie.
+
+    POKAŻMY KONTRPRZYKŁAD, czyli policzmy |BC|. Niech H będzie spodkiem wysokości poprowadzonej z wierzchołka A na prostą BC. W trójkącie prostokątnym ABH mamy |∡ABH| = 60°, więc
+    |BH| = 8·cos60° = 8·(1/2) = 4, |AH| = 8·sin60° = 4√3.
+    Z twierdzenia Pitagorasa w trójkącie AHC: |HC|² = |AC|² − |AH|² = 49 − 48 = 1, czyli |HC| = 1.
+    Punkt C leży na prostej BC po tej samej stronie co H, ale może wypaść przed punktem H albo za nim:
+    |BC| = |BH| − |HC| = 4 − 1 = 3 albo |BC| = |BH| + |HC| = 4 + 1 = 5.
+    (Ten sam wynik daje twierdzenie cosinusów: 7² = |BC|² + 8² − 2·|BC|·8·cos60°, czyli |BC|² − 8·|BC| + 15 = 0, skąd |BC| = 3 lub |BC| = 5.)
+
+    WNIOSEK: istnieją DWA nieprzystające trójkąty o danych |AB| = 8, |AC| = 7, |∡ABC| = 60° — jeden z bokiem BC długości 3, drugi z bokiem długości 5. Dane ucznia nie wyznaczają więc trójkąta jednoznacznie i wniosek |BC| = |LM| jest nieuprawniony. Wyjątkiem, w którym układ bok–bok–kąt działa, jest sytuacja, gdy dany kąt jest prosty — wtedy trzeci bok liczymy z twierdzenia Pitagorasa i wracamy do cechy bbb.
+  solution_steps:
+  - Zauważ, że dany kąt (przy B) nie leży między danymi bokami AB i AC — to układ bbk, a nie bkb.
+  - Poprowadź wysokość AH na prostą BC i oblicz |BH| = 8·cos60° = 4 oraz |AH| = 4√3.
+  - 'Z twierdzenia Pitagorasa w trójkącie AHC: |HC| = √(49 − 48) = 1.'
+  - 'Rozważ oba położenia punktu C: |BC| = 4 − 1 = 3 lub |BC| = 4 + 1 = 5.'
+  - Alternatywnie rozwiąż równanie |BC|² − 8·|BC| + 15 = 0 (twierdzenie cosinusów).
+  - 'Wniosek: dane bbk nie wyznaczają trójkąta jednoznacznie, więc rozumowanie ucznia jest błędne.'
+  answer:
+    kind: SET
+    members:
+    - '3'
+    - '5'
+  checks:
+  - kind: solve_equation
+    expr: x^{2}-8\cdot x+15=0
+  skills:
+  - cechy przystawania trójkątów
+  - układ bok–bok–kąt
+  - wysokość trójkąta i twierdzenie Pitagorasa
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 2 members matched'
+- id: g-ch-t02
+  slot: CHALLENGE
+  ramp_index: 0
+  difficulty: 4
+  exercise_type: rachunek kątów z niewiadomą wprowadzoną przez ucznia
+  statement: Dany jest trójkąt ABC, w którym |CA| = |CB|. Na boku AC obrano punkt D, różny od A i od C,
+    taki że |BD| = |BA| oraz |DC| = |DB|. Oblicz miarę kąta ACB.
+  statement_latex: 4 \cdot x = 180 - x
+  solution: |-
+    Nic w treści nie podpowiada, co oznaczyć — wprowadzamy więc jedną niewiadomą i wszystkie kąty wyrażamy przez nią.
+    Niech x oznacza miarę kąta ACB (w stopniach).
+
+    Krok 1. Trójkąt DCB jest równoramienny, bo |DC| = |DB|. Kąty przy podstawie CB są równe, a jednym z nich jest kąt DCB = ACB (punkt D leży na boku AC). Zatem |∡DBC| = |∡DCB| = x.
+
+    Krok 2. Kąt BDA jest kątem zewnętrznym trójkąta DCB przy wierzchołku D, więc jest równy sumie kątów wewnętrznych przy pozostałych wierzchołkach:
+    |∡BDA| = |∡DCB| + |∡DBC| = x + x = 2x.
+
+    Krok 3. Trójkąt ABD jest równoramienny, bo |BA| = |BD|. Kąty przy podstawie AD są równe, więc
+    |∡BAD| = |∡BDA| = 2x. Ponieważ D leży na boku AC, kąt BAD to kąt BAC trójkąta ABC, czyli |∡BAC| = 2x.
+
+    Krok 4. Trójkąt ABC jest równoramienny (|CA| = |CB|), więc jego kąty przy podstawie AB są równe:
+    |∡BAC| = \frac{180^\circ - x}{2}.
+
+    Krok 5. Porównujemy wyrażenia z kroków 3 i 4:
+    2x = \frac{180^\circ - x}{2}, czyli 4x = 180^\circ - x, stąd 5x = 180^\circ oraz x = 36^\circ.
+
+    Sprawdzenie sensowności: wtedy |∡BAC| = |∡ABC| = 72°, |∡BAD| = 72° = 2·36°, wszystkie kąty są dodatnie i punkt D rzeczywiście leży wewnątrz boku AC.
+
+    Odpowiedź: |∡ACB| = 36^\circ.
+  solution_steps:
+  - Oznacz x = |∡ACB| — treść zadania nie podaje żadnej miary, trzeba wprowadzić niewiadomą.
+  - Z |DC| = |DB| wywnioskuj |∡DBC| = x.
+  - 'Z twierdzenia o kącie zewnętrznym: |∡BDA| = 2x.'
+  - Z |BA| = |BD| wywnioskuj |∡BAC| = |∡BDA| = 2x.
+  - 'Z równoramienności trójkąta ABC: |∡BAC| = \frac{180^\circ - x}{2}.'
+  - Rozwiąż równanie 4x = 180^\circ - x i otrzymaj x = 36^\circ.
+  answer:
+    kind: NUMERIC
+    value: 36.0
+  checks:
+  - kind: solve_equation
+    expr: 4 \cdot x = 180 - x
+  stated_model:
+    variable: x
+    objective_latex: 2 \cdot x = \frac{180 - x}{2}
+    domain_lo: '0'
+    domain_hi: '180'
+    goal: value
+    constraint_used: '|CA|=|CB|, |BD|=|BA|, |DC|=|DB|, D na boku AC'
+  skills:
+  - wprowadzenie oznaczenia kąta
+  - własności trójkąta równoramiennego
+  - twierdzenie o kącie zewnętrznym
+  - układanie i rozwiązywanie równania na miarę kąta
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''x'': ''2 \\cdot
+      x = \\frac{180 - x}{2}'') — human review'
+- id: g-ch-t03
+  slot: CHALLENGE
+  ramp_index: 1
+  difficulty: 5
+  exercise_type: dowód z twierdzeń o okręgu z rozstrzygnięciem położenia punktu
+  statement: |-
+    Punkty A i B leżą na okręgu o środku O i promieniu r, przy czym |AB| = r \cdot \sqrt{2}. Punkt C leży na tym okręgu, jest różny od A i od B, a kąt ACB jest rozwarty.
+    a) Wykaż, że kąt AOB jest kątem prostym.
+    b) Oblicz miarę kąta ACB.
+  statement_latex: '|AB| = r\cdot\sqrt{2},\qquad |\sphericalangle ACB| = \frac{360 - 90}{2}'
+  solution: |-
+    Założenie: |OA| = |OB| = r, |AB| = r\sqrt{2}, C leży na okręgu i kąt ACB jest rozwarty.
+
+    a) W trójkącie AOB mamy |OA| = |OB| = r oraz |AB| = r\sqrt{2}. Sprawdzamy zależność Pitagorasa:
+    |OA|^2 + |OB|^2 = r^2 + r^2 = 2r^2, a |AB|^2 = \left(r\sqrt{2}\right)^2 = 2r^2.
+    Zatem |OA|^2 + |OB|^2 = |AB|^2, więc z twierdzenia odwrotnego do twierdzenia Pitagorasa trójkąt AOB jest prostokątny, a kąt prosty leży naprzeciw najdłuższego boku AB, czyli |∡AOB| = 90^\circ. To była teza a).
+
+    b) Kluczowe pytanie brzmi: na którym łuku AB leży punkt C?
+    Gdyby C leżał na dłuższym łuku AB, to kąt wpisany ACB byłby oparty na krótszym łuku AB, któremu odpowiada kąt środkowy AOB o mierze 90^\circ; wtedy |∡ACB| = \frac{90^\circ}{2} = 45^\circ, a więc kąt ACB byłby ostry — sprzecznie z założeniem, że jest rozwarty. Ten przypadek odpada.
+    Zatem C leży na krótszym łuku AB. Wówczas kąt wpisany ACB jest oparty na dłuższym łuku AB, a odpowiadający mu kąt środkowy (niewypukły) ma miarę 360^\circ - 90^\circ = 270^\circ. Z twierdzenia o kącie wpisanym i środkowym
+    |∡ACB| = \frac{360^\circ - 90^\circ}{2} = 135^\circ.
+    (Ten sam wynik daje twierdzenie o czworokącie wpisanym: 180^\circ - 45^\circ = 135^\circ.)
+    Kąt 135^\circ jest rozwarty, więc warunek zadania jest spełniony.
+
+    Odpowiedź: |∡ACB| = 135^\circ.
+  solution_steps:
+  - 'Zauważ, że w trójkącie AOB znane są wszystkie trzy boki: r, r i r\sqrt{2}.'
+  - Sprawdź warunek r^2 + r^2 = \left(r\sqrt{2}\right)^2 i z twierdzenia odwrotnego do twierdzenia Pitagorasa
+    wywnioskuj |∡AOB| = 90^\circ.
+  - 'Rozważ położenie C na dłuższym łuku AB: dostajesz |∡ACB| = 45^\circ, kąt ostry — sprzeczność z założeniem,
+    przypadek odpada.'
+  - Zatem C leży na krótszym łuku AB, a kąt ACB jest oparty na dłuższym łuku, któremu odpowiada kąt środkowy
+    360^\circ - 90^\circ = 270^\circ.
+  - Oblicz |∡ACB| = \frac{360^\circ - 90^\circ}{2} = 135^\circ i sprawdź, że jest to kąt rozwarty.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: a) dowód, że kąt AOB jest prosty
+      answer:
+        kind: NOT_MACHINE_CHECKABLE
+        reason: Należy zauważyć, że w trójkącie AOB boki mają długości r, r, r\sqrt{2}, sprawdzić równość
+          r^2 + r^2 = \left(r\sqrt{2}\right)^2 i powołać się na twierdzenie odwrotne do twierdzenia Pitagorasa,
+          wskazując, że kąt prosty leży naprzeciw boku AB.
+    - name: b) miara kąta ACB
+      answer:
+        kind: NUMERIC
+        value: 135.0
+  checks:
+  - kind: evaluate
+    expr: \frac{360 - 90}{2}
+    part: b) miara kąta ACB
+  skills:
+  - twierdzenie odwrotne do twierdzenia Pitagorasa
+  - kąt środkowy i kąt wpisany
+  - wybór właściwego łuku
+  - eliminacja przypadku sprzecznego z założeniem
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'part(s) need a human: a) dowód, że kąt AOB jest prosty · 1/1 other parts solved fresh'
+- id: g-ch-t04
+  slot: CHALLENGE
+  ramp_index: 2
+  difficulty: 5
+  exercise_type: 'dowód geometryczny z parametrem: wzór, dziedzina i rozstrzygnięcie'
+  statement: |-
+    Punkty A, B, C leżą na okręgu o środku O i promieniu r. Trójkąt ABC jest równoramienny, |CA| = |CB|, a środek O leży wewnątrz tego trójkąta. Przez x oznaczamy miarę kąta ACB wyrażoną w stopniach.
+    a) Wykaż, że prosta CO jest symetralną odcinka AB.
+    b) Wyznacz miarę kąta OAB w zależności od x oraz podaj zbiór wszystkich wartości x, dla których opisana konfiguracja jest możliwa.
+    c) Rozstrzygnij, czy przy powyższych założeniach może zachodzić równość |\sphericalangle OAB| = |\sphericalangle ABC|.
+  statement_latex: '|\sphericalangle OAB| = \frac{180 - 2 \cdot x}{2} = 90 - x,\qquad x \in \left(0^\circ,\
+    90^\circ\right)'
+  solution: |-
+    Założenie: A, B, C na okręgu o środku O, |CA| = |CB|, O leży wewnątrz trójkąta ABC, x = |∡ACB|.
+
+    a) Punkt C spełnia |CA| = |CB|, więc leży na symetralnej odcinka AB (symetralna to zbiór punktów równoodległych od końców odcinka). Punkt O spełnia |OA| = |OB| = r, więc również leży na symetralnej odcinka AB. Punkty C i O są różne (C leży na okręgu, O jest jego środkiem, r > 0), a przez dwa różne punkty przechodzi dokładnie jedna prosta. Zatem prosta CO jest symetralną odcinka AB — co należało wykazać.
+
+    b) Kąt ACB jest kątem wpisanym opartym na łuku AB niezawierającym punktu C. Kąt środkowy oparty na tym samym łuku to kąt AOB, więc
+    |∡AOB| = 2 \cdot x.
+    W trójkącie AOB mamy |OA| = |OB| = r, więc jest on równoramienny, a kąty przy podstawie AB są równe:
+    |∡OAB| = \frac{180^\circ - 2\cdot x}{2} = 90^\circ - x.
+    Dziedzina: środek O leży wewnątrz trójkąta ABC dokładnie wtedy, gdy trójkąt ABC jest ostrokątny. Kąty trójkąta ABC to x (przy C) oraz \frac{180^\circ - x}{2} = 90^\circ - \frac{x}{2} przy A i przy B. Warunki: x < 90^\circ oraz 90^\circ - \frac{x}{2} < 90^\circ, czyli x > 0^\circ. Zatem x \in \left(0^\circ, 90^\circ\right).
+
+    c) Przypuśćmy, że |∡OAB| = |∡ABC|. Wtedy
+    90^\circ - x = 90^\circ - \frac{x}{2}, czyli \frac{x}{2} = 0, a więc x = 0^\circ.
+    Wartość x = 0^\circ nie należy do wyznaczonego zbioru \left(0^\circ, 90^\circ\right) (dla x = 0 punkty A, B, C nie tworzą trójkąta). Zatem taka konfiguracja nie istnieje — równość |∡OAB| = |∡ABC| jest niemożliwa.
+
+    Odpowiedź: b) |∡OAB| = 90^\circ - x dla x \in \left(0^\circ, 90^\circ\right); c) nie, taka konfiguracja nie istnieje.
+  solution_steps:
+  - a) Zauważ, że zarówno C (bo |CA| = |CB|), jak i O (bo |OA| = |OB| = r) leżą na symetralnej odcinka
+    AB; przez dwa różne punkty przechodzi jedna prosta, więc CO jest tą symetralną.
+  - b) Kąt ACB to kąt wpisany oparty na łuku AB niezawierającym C, więc kąt środkowy |∡AOB| = 2\cdot x.
+  - b) Trójkąt AOB jest równoramienny (|OA| = |OB| = r), więc |∡OAB| = \frac{180^\circ - 2\cdot x}{2}
+    = 90^\circ - x.
+  - 'b) Warunek „O wewnątrz trójkąta ABC” oznacza, że trójkąt ABC jest ostrokątny: x < 90^\circ oraz 90^\circ
+    - \frac{x}{2} < 90^\circ, czyli x \in \left(0^\circ, 90^\circ\right).'
+  - 'c) Zapisz |∡ABC| = 90^\circ - \frac{x}{2} i rozwiąż 90^\circ - x = 90^\circ - \frac{x}{2}; jedyne
+    rozwiązanie x = 0^\circ jest poza dziedziną, więc odpowiedź brzmi: nie.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: a) dowód, że CO jest symetralną AB
+      answer:
+        kind: NOT_MACHINE_CHECKABLE
+        reason: Należy uzasadnić, że C leży na symetralnej AB (bo |CA| = |CB|) i że O leży na symetralnej
+          AB (bo |OA| = |OB| = r), oraz że C ≠ O, więc prosta CO pokrywa się z symetralną odcinka AB.
+    - name: b) wzór na miarę kąta OAB
+      answer:
+        kind: SYMBOLIC
+        latex: 90 - x
+    - name: b) dziedzina (dopuszczalne x)
+      answer:
+        kind: INTERVAL
+        lo: '0'
+        hi: '90'
+    - name: c) czy |∡OAB| = |∡ABC| jest możliwe
+      answer:
+        kind: BOOLEAN
+        truth: false
+  checks:
+  - kind: simplify
+    expr: \frac{180 - 2 \cdot x}{2}
+    part: b) wzór na miarę kąta OAB
+  stated_model:
+    variable: x
+    objective_latex: 90 - x
+    domain_lo: '0'
+    domain_hi: '90'
+    goal: value
+    constraint_used: '|CA|=|CB| oraz O wewnątrz trójkąta ABC (trójkąt ostrokątny)'
+  skills:
+  - symetralna odcinka jako zbiór punktów równoodległych
+  - kąt środkowy i wpisany
+  - trójkąt równoramienny o ramionach będących promieniami
+  - wyznaczanie zbioru dopuszczalnych wartości parametru
+  - rozstrzyganie istnienia konfiguracji
+  verification:
+    checkability: STATED_MODEL
+    note: 'stage 1 inconclusive: kind mismatch: answer=SYMBOLIC reference=MULTIPART'

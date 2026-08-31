@@ -1,0 +1,961 @@
+section: zastosowania-funkcji-optymalizacja
+name: Zastosowania funkcji liniowej i kwadratowej; optymalizacja
+scope: Using linear and quadratic functions to interpret geometric, physical and everyday problems; optimisation
+  reducible to a quadratic - expressing the quantity as a quadratic function of one variable under constraints
+  and reading the extremum.
+requirements:
+- V.11
+- XIII.1
+counts:
+  total: 16
+  REFERENCE_CALL: 2
+  DETERMINISTIC: 3
+  NOT_MACHINE_CHECKABLE: 10
+  STATED_MODEL: 1
+exercises:
+- id: g-th-00
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: model liniowy z opisu słownego
+  statement: Wypożyczalnia hulajnóg elektrycznych pobiera 3 zł opłaty początkowej za odblokowanie pojazdu
+    oraz 0,40 zł za każdą minutę jazdy. Niech t oznacza czas jazdy wyrażony w minutach (t \ge 0), a K(t)
+    – łączny koszt jazdy w złotych. (a) Zapisz wzór funkcji K. (b) Oblicz koszt jazdy trwającej 25 minut.
+    Zapisz obliczenia.
+  statement_latex: K(t)=\frac{2}{5}\cdot t+3,\qquad K\left(25\right)=\frac{2}{5}\cdot 25+3
+  solution: |-
+    (a) Opłata początkowa nie zależy od czasu jazdy – jest to wartość początkowa b, czyli K(0)=3 zł. Za każdą kolejną minutę dopłacamy tyle samo, czyli 0,40 zł – to stałe tempo zmian a. Zatem model jest liniowy: K(t)=0{,}4\cdot t+3, dla t \ge 0.
+    (b) Podstawiamy t=25: K(25)=0{,}4\cdot 25+3=10+3=13.
+    Odpowiedź: (a) K(t)=0{,}4t+3; (b) jazda trwająca 25 minut kosztuje 13 zł.
+  solution_steps:
+  - 'Wprowadź zmienną: t – czas jazdy w minutach, t \ge 0.'
+  - 'Odczytaj wartość początkową: b = 3 (zł) – opłata za odblokowanie.'
+  - 'Odczytaj tempo zmian: a = 0,40 (zł za każdą minutę).'
+  - 'Zapisz wzór: K(t)=0{,}4t+3.'
+  - 'Podstaw t=25: K(25)=0{,}4\cdot 25+3=13.'
+  - 'Odpowiedź z jednostką: 13 zł.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wzór funkcji K
+      answer:
+        kind: SYMBOLIC
+        latex: K(t)=\frac{2}{5}t+3
+    - name: koszt jazdy 25-minutowej (zł)
+      answer:
+        kind: NUMERIC
+        value: 13.0
+  checks:
+  - kind: evaluate
+    expr: \frac{2}{5}\cdot 25+3
+    var: t
+    part: koszt jazdy 25-minutowej (zł)
+  skills:
+  - budowa modelu liniowego
+  - interpretacja współczynników a i b
+  - obliczanie wartości funkcji
+  verification:
+    checkability: REFERENCE_CALL
+    note: 'could not compare: part disagrees: AMBIGUOUS: ''parser returned an unresolved ambiguity (_ambig)'''
+- id: g-th-01
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: rzut pionowy – wierzchołek paraboli
+  statement: W chwili t = 0 z poziomu ziemi wyrzucono pionowo w górę kamień. Wysokość kamienia (w metrach)
+    po t sekundach opisuje wzór h\left(t\right)=-5t^{2}+30t. (a) Oblicz, po jakim czasie kamień osiągnie
+    największą wysokość. (b) Oblicz tę największą wysokość. Zapisz obliczenia.
+  statement_latex: h\left(t\right)=-5t^{2}+30t
+  solution: |-
+    Funkcja h jest funkcją kwadratową o współczynniku a=-5<0, więc jej wykres to parabola o ramionach skierowanych w dół i największą wartość funkcja przyjmuje w wierzchołku.
+    (a) p=-\frac{b}{2a}=-\frac{30}{2\cdot(-5)}=3. Zatem kamień jest najwyżej po 3 sekundach.
+    (b) q=h(3)=-5\cdot 3^{2}+30\cdot 3=-45+90=45.
+    Odpowiedź: kamień osiąga największą wysokość 45 m po 3 sekundach lotu. (p = 3 s to CHWILA, q = 45 m to WYSOKOŚĆ.)
+  solution_steps:
+  - Zauważ, że a = -5 < 0, więc funkcja ma wartość największą w wierzchołku.
+  - Oblicz p = -\frac{30}{2\cdot(-5)} = 3 (s).
+  - Oblicz q = h(3) = -5\cdot 9 + 90 = 45 (m).
+  - 'Zinterpretuj: p to czas w sekundach, q to wysokość w metrach.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: czas osiągnięcia największej wysokości (s)
+      answer:
+        kind: NUMERIC
+        value: 3.0
+    - name: największa wysokość (m)
+      answer:
+        kind: NUMERIC
+        value: 45.0
+  checks:
+  - kind: evaluate
+    expr: -\frac{30}{2\cdot\left(-5\right)}
+    var: t
+    part: czas osiągnięcia największej wysokości (s)
+  - kind: evaluate
+    expr: -5\cdot 3^{2}+30\cdot 3
+    var: t
+    part: największa wysokość (m)
+  skills:
+  - wierzchołek paraboli jako ekstremum
+  - interpretacja p i q
+  - rzut pionowy
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [czas osiągnięcia największej wysokości (s)] SymPy solved it
+      fresh: 3.0 vs 3.0 (tol 1e-09) ; [największa wysokość (m)] SymPy solved it fresh: 45.0 vs 45.0 (tol
+      1e-09)'
+- id: g-th-02
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: model geometryczny – wzór i dziedzina
+  statement: Rozważamy wszystkie prostokąty o obwodzie równym 36 cm. Niech x oznacza długość jednego boku
+    takiego prostokąta (w centymetrach), a y – długość boku sąsiedniego. (a) Zapisz wzór funkcji P opisującej
+    pole prostokąta w zależności od x, doprowadzając go do postaci ogólnej funkcji kwadratowej. (b) Wyznacz
+    dziedzinę tej funkcji wynikającą z warunków zadania. Zapisz obliczenia.
+  statement_latex: 2\cdot\left(x+y\right)=36,\qquad P\left(x\right)=x\cdot\left(18-x\right)
+  solution: |-
+    (a) Warunek wiążący (obwód): 2(x+y)=36, czyli x+y=18, skąd y=18-x.
+    Pole prostokąta: P=x\cdot y=x\cdot(18-x)=18x-x^{2}=-x^{2}+18x.
+    (b) Obie długości muszą być dodatnie: x>0 oraz y=18-x>0, czyli x<18. Część wspólna tych warunków to x \in (0,18).
+    Odpowiedź: P(x)=-x^{2}+18x, D=(0,18).
+  solution_steps:
+  - 'Zapisz warunek wiążący z obwodu: 2(x+y)=36, czyli x+y=18.'
+  - 'Wyznacz y z warunku wiążącego: y=18-x.'
+  - 'Wstaw do wzoru na pole: P(x)=x(18-x)=-x^{2}+18x.'
+  - 'Zapisz warunki dodatniości: x>0 oraz 18-x>0.'
+  - 'Wyznacz część wspólną: D=(0,18).'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wzór funkcji pola
+      answer:
+        kind: SYMBOLIC
+        latex: -x^{2}+18x
+    - name: dziedzina
+      answer:
+        kind: INTERVAL
+        lo: '0'
+        hi: '18'
+  checks:
+  - kind: simplify
+    expr: x\cdot\left(18-x\right)
+    part: wzór funkcji pola
+  stated_model:
+    variable: x
+    objective_latex: P\left(x\right)=x\cdot\left(18-x\right)
+    domain_lo: '0'
+    domain_hi: '18'
+    goal: value
+    constraint_used: 2\cdot\left(x+y\right)=36
+  skills:
+  - warunek wiążący
+  - redukcja do funkcji jednej zmiennej
+  - dziedzina wynikająca z kontekstu
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''x'': ''P\\left(x\\right)=x\\cdot\\left(18-x\\right)'')
+      — human review'
+- id: g-ex-03
+  slot: EXERCISE
+  ramp_index: 1
+  difficulty: 2
+  exercise_type: porównanie dwóch modeli liniowych
+  statement: Dwaj operatorzy proponują różne taryfy za rozmowy telefoniczne. W taryfie A abonent płaci
+    25 zł miesięcznego abonamentu oraz 0,20 zł za każdą minutę rozmowy. W taryfie B nie ma abonamentu,
+    ale każda minuta rozmowy kosztuje 0,45 zł. Niech t oznacza łączny czas rozmów w miesiącu, wyrażony
+    w minutach (t \ge 0). (a) Oblicz, dla jakiego czasu rozmów miesięczne rachunki w obu taryfach są równe.
+    (b) Wyznacz wszystkie czasy rozmów, dla których taryfa A jest tańsza od taryfy B. Zapisz obliczenia.
+  statement_latex: K_{A}\left(t\right)=\frac{1}{5}t+25,\qquad K_{B}\left(t\right)=\frac{9}{20}t
+  solution: |-
+    Oznaczmy przez t czas rozmów w minutach, t \ge 0.
+    Koszt w taryfie A: K_{A}(t)=0{,}2t+25 (25 zł to opłata stała, 0,20 zł – koszt jednej minuty).
+    Koszt w taryfie B: K_{B}(t)=0{,}45t.
+    (a) Rozwiązujemy równanie K_{A}(t)=K_{B}(t):
+    0{,}2t+25=0{,}45t \Rightarrow 25=0{,}25t \Rightarrow t=100.
+    Przy 100 minutach rozmów oba rachunki wynoszą 0{,}45\cdot 100=45 zł.
+    (b) Rozwiązujemy nierówność K_{A}(t)<K_{B}(t):
+    0{,}2t+25<0{,}45t \Rightarrow 25<0{,}25t \Rightarrow t>100.
+    Po przecięciu z dziedziną t \ge 0 otrzymujemy t \in (100,\infty).
+    Odpowiedź: rachunki są równe przy 100 minutach rozmów; taryfa A jest tańsza, gdy abonent rozmawia dłużej niż 100 minut miesięcznie.
+  solution_steps:
+  - 'Zapisz oba modele: K_A(t)=0,2t+25 oraz K_B(t)=0,45t.'
+  - Rozwiąż równanie 0,2t+25=0,45t, otrzymując 0,25t=25, czyli t=100.
+  - Rozwiąż nierówność 0,2t+25<0,45t, otrzymując t>100.
+  - Przetnij rozwiązanie z dziedziną t \ge 0.
+  - Sformułuj odpowiedź słowną z jednostkami (minuty).
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: czas równych rachunków (min)
+      answer:
+        kind: NUMERIC
+        value: 100.0
+    - name: czasy, dla których taryfa A jest tańsza (min)
+      answer:
+        kind: INTERVAL
+        lo: '100'
+  checks:
+  - kind: solve_equation
+    expr: \frac{1}{5}\cdot t+25=\frac{9}{20}\cdot t
+    var: t
+    part: czas równych rachunków (min)
+  - kind: solve_inequality
+    expr: \frac{1}{5}\cdot t+25<\frac{9}{20}\cdot t
+    var: t
+    part: czasy, dla których taryfa A jest tańsza (min)
+  skills:
+  - porównywanie dwóch modeli liniowych
+  - równanie liniowe
+  - nierówność liniowa
+  - interpretacja wyniku
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [czas równych rachunków (min)] SymPy solved it fresh: 100.0
+      vs 100.0 (tol 1e-09) ; [czasy, dla których taryfa A jest tańsza (min)] SymPy solved it fresh: endpoints
+      matched'
+- id: g-ex-04
+  slot: EXERCISE
+  ramp_index: 2
+  difficulty: 3
+  exercise_type: optymalizacja ekonomiczna – przychód
+  statement: Przy cenie biletu 30 zł na spektakl teatralny sprzedaje się 400 biletów. Z analizy sprzedaży
+    wynika, że każda podwyżka ceny biletu o 5 zł powoduje spadek liczby sprzedanych biletów o 40. Niech
+    x oznacza liczbę podwyżek ceny o 5 zł (x jest liczbą całkowitą nieujemną). Oblicz, jaką cenę biletu
+    należy ustalić, aby przychód ze sprzedaży biletów był największy. Podaj tę cenę, liczbę sprzedanych
+    wówczas biletów oraz największy przychód. Zapisz obliczenia.
+  statement_latex: P\left(x\right)=\left(30+5x\right)\cdot\left(400-40x\right)
+  solution: |-
+    Niech x – liczba podwyżek ceny o 5 zł, x \in \{0,1,2,\ldots\}.
+    Cena biletu: c(x)=30+5x (zł). Liczba sprzedanych biletów: n(x)=400-40x.
+    Dziedzina: n(x)>0 \Rightarrow 400-40x>0 \Rightarrow x<10, więc x \in \{0,1,\ldots,9\}.
+    Przychód: P(x)=(30+5x)(400-40x)=12000-1200x+2000x-200x^{2}=-200x^{2}+800x+12000.
+    Współczynnik a=-200<0, więc funkcja przyjmuje wartość największą w wierzchołku:
+    p=-\frac{800}{2\cdot(-200)}=2 – liczba całkowita należąca do dziedziny.
+    q=P(2)=-200\cdot 4+1600+12000=12800.
+    Wracamy do oznaczeń: cena = 30+5\cdot 2=40 zł, liczba biletów = 400-40\cdot 2=320.
+    Sprawdzenie: 40\cdot 320=12800 zł – zgadza się.
+    Odpowiedź: bilet powinien kosztować 40 zł; sprzeda się wtedy 320 biletów, a przychód wyniesie 12 800 zł.
+  solution_steps:
+  - Oznacz x – liczbę podwyżek o 5 zł; zapisz cenę c(x)=30+5x i sprzedaż n(x)=400-40x.
+  - 'Wyznacz dziedzinę: 400-40x>0, czyli x \in \{0,1,\ldots,9\}.'
+  - Zapisz przychód P(x)=(30+5x)(400-40x)=-200x^{2}+800x+12000.
+  - Stwierdź, że a=-200<0, więc maksimum jest w wierzchołku.
+  - Oblicz p=-\frac{800}{2\cdot(-200)}=2 i sprawdź, że 2 należy do dziedziny.
+  - Oblicz cenę 30+5\cdot 2=40 zł, liczbę biletów 400-40\cdot 2=320 oraz P(2)=12800 zł.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: cena biletu (zł)
+      answer:
+        kind: NUMERIC
+        value: 40.0
+    - name: liczba sprzedanych biletów
+      answer:
+        kind: NUMERIC
+        value: 320.0
+    - name: największy przychód (zł)
+      answer:
+        kind: NUMERIC
+        value: 12800.0
+  checks:
+  - kind: evaluate
+    expr: 30+5\cdot\left(-\frac{800}{2\cdot\left(-200\right)}\right)
+    part: cena biletu (zł)
+  - kind: evaluate
+    expr: 400-40\cdot\left(-\frac{800}{2\cdot\left(-200\right)}\right)
+    part: liczba sprzedanych biletów
+  - kind: evaluate
+    expr: \left(30+5\cdot 2\right)\cdot\left(400-40\cdot 2\right)
+    part: największy przychód (zł)
+  stated_model:
+    variable: x
+    objective_latex: P\left(x\right)=\left(30+5x\right)\cdot\left(400-40x\right)
+    domain_lo: '0'
+    domain_hi: '10'
+    domain_lo_open: false
+    constraint_used: cena =30+5x, sprzedaż =400-40x, x – całkowite, 400-40x>0
+  skills:
+  - model ekonomiczny przychodu
+  - iloczyn dwóch wielkości liniowych
+  - wierzchołek paraboli
+  - interpretacja zmiennej pomocniczej
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''x'': ''P\\left(x\\right)=\\left(30+5x\\right)\\cdot\\left(400-40x\\right)'')
+      — human review'
+- id: g-ex-05
+  slot: EXERCISE
+  ramp_index: 3
+  difficulty: 4
+  exercise_type: optymalizacja geometryczna z ograniczeniem przedziału
+  statement: Właściciel gospodarstwa dysponuje 48 metrami bieżącymi siatki i chce ogrodzić prostokątny
+    wybieg dla kur, przylegający jednym bokiem do prostej, długiej ściany budynku (przy tej ścianie siatki
+    nie stawia). Ze względu na ustawienie karmników bok przylegający do ściany musi mieć długość co najmniej
+    30 m. Niech x (w metrach) oznacza długość boku przylegającego do ściany, a y (w metrach) – długość
+    boku prostopadłego do ściany. (a) Zapisz wzór funkcji P opisującej pole wybiegu w zależności od x
+    (w postaci ogólnej) oraz wyznacz dziedzinę tej funkcji. (b) Oblicz wymiary x i y wybiegu o największym
+    polu. (c) Oblicz to największe pole. Zapisz obliczenia.
+  statement_latex: x+2y=48,\qquad P\left(x\right)=x\cdot\left(24-\frac{x}{2}\right)
+  solution: |-
+    (a) Grodzimy jeden bok o długości x oraz dwa boki o długości y, zatem warunek wiążący ma postać x+2y=48, skąd y=\frac{48-x}{2}=24-\frac{x}{2}.
+    Pole: P(x)=x\cdot\left(24-\frac{x}{2}\right)=-\frac{1}{2}x^{2}+24x.
+    Dziedzina: y>0 \Rightarrow 24-\frac{x}{2}>0 \Rightarrow x<48, a z treści x \ge 30. Zatem D=[30,48).
+    (b) Wierzchołek: p=-\frac{24}{2\cdot\left(-\frac{1}{2}\right)}=24. Liczba 24 NIE należy do dziedziny [30,48).
+    Ponieważ a=-\frac{1}{2}<0, funkcja jest malejąca na przedziale [24,\infty), a więc jest malejąca na całym [30,48). Największą wartość przyjmuje zatem w lewym końcu, czyli dla x=30.
+    Wtedy y=24-\frac{30}{2}=24-15=9.
+    (c) P(30)=30\cdot 9=270.
+    Sprawdzenie: 30+2\cdot 9=48 m siatki – zgadza się.
+    Odpowiedź: P(x)=-\frac{1}{2}x^{2}+24x, D=[30,48); wybieg ma wymiary 30 m (przy ścianie) na 9 m, a jego największe pole to 270 m².
+  solution_steps:
+  - 'Zapisz warunek wiążący: grodzone są jeden bok x i dwa boki y, więc x+2y=48.'
+  - 'Wyznacz y=24-\frac{x}{2} i wstaw do wzoru na pole: P(x)=-\frac{1}{2}x^{2}+24x.'
+  - 'Wyznacz dziedzinę: y>0 daje x<48, a warunek z treści daje x \ge 30, więc D=[30,48).'
+  - Oblicz p=-\frac{24}{2\cdot(-0,5)}=24 i stwierdź, że p \notin D.
+  - 'Skorzystaj z monotoniczności: a<0, więc na [30,48) funkcja maleje – maksimum w x=30.'
+  - Oblicz y=24-15=9 oraz P(30)=30\cdot 9=270 (m²).
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wzór funkcji pola
+      answer:
+        kind: SYMBOLIC
+        latex: -\frac{1}{2}x^{2}+24x
+    - name: dziedzina
+      answer:
+        kind: INTERVAL
+        lo: '30'
+        hi: '48'
+        lo_open: false
+    - name: wymiary (x, y) w metrach
+      answer:
+        kind: TUPLE
+        items:
+        - '30'
+        - '9'
+    - name: największe pole (m^2)
+      answer:
+        kind: NUMERIC
+        value: 270.0
+  checks:
+  - kind: simplify
+    expr: x\cdot\left(24-\frac{x}{2}\right)
+    part: wzór funkcji pola
+  - kind: evaluate
+    expr: 30\cdot\left(24-\frac{30}{2}\right)
+    part: największe pole (m^2)
+  stated_model:
+    variable: x
+    objective_latex: P\left(x\right)=x\cdot\left(24-\frac{x}{2}\right)
+    domain_lo: '30'
+    domain_hi: '48'
+    domain_lo_open: false
+    constraint_used: x+2y=48 oraz x \ge 30, y>0
+  skills:
+  - warunek wiążący
+  - redukcja do funkcji jednej zmiennej
+  - dziedzina z ograniczeniem
+  - ekstremum na przedziale (monotoniczność)
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''x'': ''P\\left(x\\right)=x\\cdot\\left(24-\\frac{x}{2}\\right)'')
+      — human review'
+- id: g-ex-t00
+  slot: EXERCISE
+  ramp_index: 6
+  difficulty: 4
+  exercise_type: optymalizacja ekonomiczna (zysk, dziedzina całkowitoliczbowa)
+  statement: Właściciel pensjonatu wynajmuje pokoje na doby. Przy cenie 120 zł za dobę wynajmowanych jest
+    40 pokoi. Właściciel oszacował, że każda podwyżka ceny o 10 zł zmniejsza liczbę wynajętych pokoi o
+    2. Obsługa jednego wynajętego pokoju kosztuje właściciela 20 zł na dobę. Zysk jest różnicą przychodu
+    ze sprzedaży noclegów i kosztów obsługi wynajętych pokoi. Oblicz, jaką cenę za dobę należy ustalić,
+    aby dobowy zysk pensjonatu był największy, oraz oblicz ten największy zysk. Zapisz obliczenia.
+  statement_latex: Z\left(x\right)=\left(120+10\cdot x-20\right)\cdot\left(40-2\cdot x\right)=-20x^{2}+200x+4000
+  solution: |-
+    Niech x oznacza liczbę podwyżek ceny o 10 zł, przy czym x jest liczbą całkowitą nieujemną.
+    Cena doby: c\left(x\right)=120+10\cdot x (zł). Liczba wynajętych pokoi: n\left(x\right)=40-2\cdot x.
+    Dziedzina: n\left(x\right)>0, czyli 40-2\cdot x>0, stąd x<20; zatem x\in\{0,1,\ldots,19\}.
+    Przychód: P\left(x\right)=\left(120+10\cdot x\right)\cdot\left(40-2\cdot x\right). Koszt obsługi: K\left(x\right)=20\cdot\left(40-2\cdot x\right).
+    Zysk: Z\left(x\right)=P\left(x\right)-K\left(x\right)=\left(120+10\cdot x-20\right)\cdot\left(40-2\cdot x\right)=\left(100+10\cdot x\right)\cdot\left(40-2\cdot x\right).
+    Po wymnożeniu: Z\left(x\right)=4000-200x+400x-20x^{2}=-20x^{2}+200x+4000.
+    Współczynnik przy x^{2} jest równy -20<0, więc funkcja przyjmuje wartość największą w wierzchołku:
+    p=-\frac{200}{2\cdot\left(-20\right)}=5, a 5 jest liczbą całkowitą należącą do dziedziny.
+    q=Z\left(5\right)=-20\cdot 25+200\cdot 5+4000=-500+1000+4000=4500.
+    Wracamy do oznaczeń: cena doby wynosi 120+10\cdot 5=170 zł, wynajętych jest 40-2\cdot 5=30 pokoi.
+    Sprawdzenie: przychód 170\cdot 30=5100 zł, koszt obsługi 20\cdot 30=600 zł, zysk 5100-600=4500 zł.
+    Odpowiedź: cena za dobę powinna wynosić 170 zł, a największy dobowy zysk to 4500 zł.
+  solution_steps:
+  - 'Wprowadź zmienną: x – liczba podwyżek ceny o 10 zł, x całkowite, x ≥ 0.'
+  - Zapisz cenę c(x)=120+10x oraz liczbę pokoi n(x)=40-2x.
+  - 'Wyznacz dziedzinę z warunku n(x)>0: x ∈ {0,1,...,19}.'
+  - 'Zapisz zysk Z(x)=P(x)-K(x)=(120+10x-20)(40-2x) i wymnóż: Z(x)=-20x²+200x+4000.'
+  - Zauważ, że a=-20<0, więc maksimum jest w wierzchołku; oblicz p=5 i sprawdź, że p należy do dziedziny.
+  - Oblicz q=Z(5)=4500.
+  - 'Przelicz p na cenę: 120+10·5=170 zł i sformułuj odpowiedź z jednostkami.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: cena
+      answer:
+        kind: NUMERIC
+        value: 170.0
+    - name: zysk_max
+      answer:
+        kind: NUMERIC
+        value: 4500.0
+  checks:
+  - kind: evaluate
+    expr: 120+10\cdot 5
+    part: cena
+  - kind: evaluate
+    expr: \left(120+10\cdot 5-20\right)\cdot\left(40-2\cdot 5\right)
+    part: zysk_max
+  stated_model:
+    variable: x
+    objective_latex: Z\left(x\right)=-20x^{2}+200x+4000
+    domain_lo: '0'
+    domain_hi: '19'
+    domain_lo_open: false
+    domain_hi_open: false
+    constraint_used: cena =120+10x, liczba pokoi =40-2x, koszt obsługi 20 zł na pokój
+  skills:
+  - budowa modelu kwadratowego z opisu słownego
+  - wyznaczanie dziedziny dyskretnej
+  - wierzchołek paraboli jako maksimum
+  - interpretacja zmiennej pomocniczej
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''x'': ''Z\\left(x\\right)=-20x^{2}+200x+4000'')
+      — human review'
+- id: g-ex-t01
+  slot: EXERCISE
+  ramp_index: 7
+  difficulty: 4
+  exercise_type: optymalizacja geometryczna z wierzchołkiem poza dziedziną
+  statement: Prostokątny wybieg dla zwierząt o bokach długości x metrów i y metrów ogrodzono siatką, a
+    następnie podzielono go na dwa mniejsze prostokąty dodatkowym odcinkiem siatki równoległym do boku
+    o długości y metrów. Na całe ogrodzenie, wraz ze ścianką wewnętrzną, zużyto dokładnie 36 metrów bieżących
+    siatki. Ze względu na szerokość bramki bok o długości y musi mieć co najmniej 8 m. Oblicz wymiary
+    x oraz y tego z rozważanych wybiegów, którego pole jest największe, i oblicz to największe pole. Zapisz
+    obliczenia.
+  statement_latex: 2\cdot x+3\cdot y=36,\qquad P\left(x\right)=x\cdot\frac{36-2\cdot x}{3}=12x-\frac{2}{3}x^{2}
+  solution: |-
+    Ogrodzenie tworzą dwa boki długości x oraz trzy odcinki długości y (dwa boki prostokąta i ścianka wewnętrzna równoległa do nich), zatem warunek wiążący ma postać 2\cdot x+3\cdot y=36, skąd y=\frac{36-2\cdot x}{3}.
+    Dziedzina: x>0 oraz y\geq 8, czyli \frac{36-2\cdot x}{3}\geq 8, stąd 36-2\cdot x\geq 24, czyli x\leq 6. Zatem x\in\left(0,6\right].
+    Pole wybiegu: P\left(x\right)=x\cdot y=x\cdot\frac{36-2\cdot x}{3}=12x-\frac{2}{3}x^{2}.
+    Jest to funkcja kwadratowa o współczynniku a=-\frac{2}{3}<0. Wierzchołek: p=-\frac{12}{2\cdot\left(-\frac{2}{3}\right)}=9.
+    Liczba 9 nie należy do dziedziny \left(0,6\right]. Ponieważ a<0, funkcja rośnie na przedziale \left(-\infty,9\right], więc na całym \left(0,6\right] jest rosnąca i wartość największą przyjmuje w prawym końcu, dla x=6.
+    P\left(6\right)=12\cdot 6-\frac{2}{3}\cdot 36=72-24=48, a wtedy y=\frac{36-12}{3}=8.
+    Sprawdzenie: 2\cdot 6+3\cdot 8=36 m siatki, y=8\geq 8, pole 6\cdot 8=48 \mathrm{m}^{2}.
+    Odpowiedź: wybieg powinien mieć wymiary x=6 m oraz y=8 m, a jego największe możliwe pole wynosi 48 \mathrm{m}^{2}.
+  solution_steps:
+  - 'Zapisz warunek wiążący: 2x+3y=36, bo ścianka wewnętrzna jest równoległa do boków długości y.'
+  - Wyznacz y=(36-2x)/3.
+  - 'Ustal dziedzinę: x>0 oraz y ≥ 8, czyli x ∈ (0,6].'
+  - 'Zapisz pole jako funkcję jednej zmiennej: P(x)=12x-(2/3)x².'
+  - Oblicz p=9 i stwierdź, że p ∉ (0,6].
+  - Skorzystaj z monotoniczności (a<0, funkcja rośnie na (-∞,9]) – maksimum w x=6.
+  - Oblicz P(6)=48 i y=8; podaj odpowiedź z jednostkami.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: x
+      answer:
+        kind: NUMERIC
+        value: 6.0
+    - name: y
+      answer:
+        kind: NUMERIC
+        value: 8.0
+    - name: P_max
+      answer:
+        kind: NUMERIC
+        value: 48.0
+  checks:
+  - kind: evaluate
+    expr: \frac{36-3\cdot 8}{2}
+    part: x
+  - kind: evaluate
+    expr: \frac{36-2\cdot 6}{3}
+    part: y
+  - kind: evaluate
+    expr: 12\cdot 6-\frac{2}{3}\cdot 6^{2}
+    part: P_max
+  stated_model:
+    variable: x
+    objective_latex: P\left(x\right)=12x-\frac{2}{3}x^{2}
+    domain_lo: '0'
+    domain_hi: '6'
+    domain_hi_open: false
+    constraint_used: 2x+3y=36 oraz y \geq 8
+  skills:
+  - warunek wiążący dla ogrodzenia
+  - redukcja do funkcji jednej zmiennej
+  - ekstremum na przedziale, gdy p ∉ D
+  - monotoniczność funkcji kwadratowej
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''x'': ''P\\left(x\\right)=12x-\\frac{2}{3}x^{2}'')
+      — human review'
+- id: g-cm-06
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: 'błąd: podanie p zamiast q'
+  statement: 'Rozważamy wszystkie prostokąty o obwodzie równym 52 cm. Oblicz największe możliwe pole takiego
+    prostokąta. Uczeń zapisał: „Niech x będzie bokiem prostokąta, wtedy drugi bok ma długość 26-x, a pole
+    to P\left(x\right)=x\cdot\left(26-x\right)=-x^{2}+26x. Wierzchołek: p=13, więc największe pole wynosi
+    13 cm²”. Wskaż błąd w tym rozumowaniu i podaj poprawny wynik. Zapisz obliczenia.'
+  statement_latex: P\left(x\right)=x\cdot\left(26-x\right)=-x^{2}+26x
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń poprawnie zbudował model P(x)=-x^{2}+26x i poprawnie obliczył p=-\frac{26}{2\cdot(-1)}=13, ale jako odpowiedź podał liczbę 13 jako pole. Otrzymał więc błędny wynik: 13 cm².
+    DLACZEGO TO BŁĄD: p to ARGUMENT, dla którego funkcja przyjmuje wartość największą – tutaj jest to długość boku (w centymetrach), a nie pole. Wartość największa to druga współrzędna wierzchołka q=P(p). Uczeń pomylił oś poziomą (bok) z osią pionową (pole); świadczy o tym też jednostka: 13 cm to długość, a pole musi wyjść w cm².
+    POPRAWNIE: dziedzina to x \in (0,26) (oba boki dodatnie), a=-1<0, więc maksimum jest w wierzchołku.
+    p=-\frac{26}{2\cdot(-1)}=13 \in (0,26) – to długość boku.
+    q=P(13)=13\cdot(26-13)=13\cdot 13=169.
+    Odpowiedź: największe pole ma kwadrat o boku 13 cm i wynosi ono 169 cm².
+  solution_steps:
+  - 'Odtwórz błędne rozumowanie: obliczono p=13 i podano 13 jako pole.'
+  - 'Wskaż błąd: p jest argumentem (długością boku), a wartość największa to q=P(p).'
+  - 'Sprawdź jednostki: bok w cm, pole w cm² – 13 cm nie może być polem.'
+  - 'Podstaw p do wzoru: q=P(13)=13\cdot 13=169.'
+  - 'Podaj poprawną odpowiedź: 169 cm² (dla kwadratu o boku 13 cm).'
+  answer:
+    kind: NUMERIC
+    value: 169.0
+  checks:
+  - kind: evaluate
+    expr: 13\cdot\left(26-13\right)
+  stated_model:
+    variable: x
+    objective_latex: P\left(x\right)=x\cdot\left(26-x\right)
+    domain_lo: '0'
+    domain_hi: '26'
+    constraint_used: 2\cdot\left(x+y\right)=52
+  skills:
+  - wierzchołek paraboli
+  - interpretacja p i q
+  - optymalizacja pola prostokąta
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''x'': ''P\\left(x\\right)=x\\cdot\\left(26-x\\right)'')
+      — human review'
+- id: g-cm-07
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: 'błąd: ignorowanie dziedziny z treści'
+  statement: 'Zakład produkuje karmniki dla ptaków. Tygodniowy zysk (w złotych) ze sprzedaży x karmników
+    opisuje funkcja Z\left(x\right)=-x^{2}+180x-3200. Tygodniowo zakład może wyprodukować i sprzedać co
+    najwyżej 60 karmników. Uczeń napisał: „p=-\frac{180}{2\cdot\left(-1\right)}=90, więc największy zysk
+    osiągniemy przy 90 karmnikach i wyniesie on Z\left(90\right)=4900 zł”. Wskaż błąd w tym rozumowaniu,
+    a następnie oblicz, ile karmników należy sprzedać, aby tygodniowy zysk był największy, i oblicz ten
+    zysk. Zapisz obliczenia.'
+  statement_latex: Z\left(x\right)=-x^{2}+180x-3200,\qquad x\in\left[0,60\right]
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń policzył tylko wierzchołek paraboli: p=-\frac{180}{2\cdot(-1)}=90 oraz Z(90)=-8100+16200-3200=4900 i podał odpowiedź 90 karmników, zysk 4900 zł.
+    DLACZEGO TO BŁĄD: wzór funkcji jest określony dla wszystkich liczb rzeczywistych, ale zadanie – nie. Z treści wynika, że x \in [0,60] (i x jest liczbą całkowitą). Ponieważ 90 \notin [0,60], zakład nie może wyprodukować 90 karmników – wynik ucznia jest niewykonalny.
+    POPRAWNIE: a=-1<0, więc funkcja Z rośnie na przedziale (-\infty,90], a zatem rośnie na całym [0,60]. Największą wartość przyjmuje więc w prawym końcu dziedziny, dla x=60.
+    Z(60)=-60^{2}+180\cdot 60-3200=-3600+10800-3200=4000.
+    Odpowiedź: należy sprzedawać 60 karmników tygodniowo, a największy tygodniowy zysk wynosi 4000 zł.
+  solution_steps:
+  - 'Odtwórz błędne rozumowanie: p=90 i Z(90)=4900 zł.'
+  - 'Wskaż błąd: dziedziną wynikającą z treści jest [0,60], a 90 do niej nie należy.'
+  - 'Zbadaj monotoniczność: a=-1<0, więc na (-\infty,90] funkcja rośnie, czyli rośnie na [0,60].'
+  - 'Wybierz prawy koniec przedziału: x=60.'
+  - Oblicz Z(60)=-3600+10800-3200=4000 zł.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: liczba karmników
+      answer:
+        kind: NUMERIC
+        value: 60.0
+    - name: największy zysk (zł)
+      answer:
+        kind: NUMERIC
+        value: 4000.0
+  checks:
+  - kind: evaluate
+    expr: -60^{2}+180\cdot 60-3200
+    part: największy zysk (zł)
+  stated_model:
+    variable: x
+    objective_latex: Z\left(x\right)=-x^{2}+180x-3200
+    domain_lo: '0'
+    domain_hi: '60'
+    domain_lo_open: false
+    domain_hi_open: false
+    constraint_used: x \le 60, x \ge 0
+  skills:
+  - dziedzina wynikająca z kontekstu
+  - ekstremum na przedziale
+  - monotoniczność funkcji kwadratowej
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''x'': ''Z\\left(x\\right)=-x^{2}+180x-3200'')
+      — human review'
+- id: g-cm-08
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: 'błąd: dwie zmienne we wzorze'
+  statement: 'Suma dwóch liczb dodatnich x i y jest równa 30. Oblicz, dla jakich liczb x i y ich iloczyn
+    jest największy, i oblicz ten największy iloczyn. Uczeń zapisał: „Iloczyn to I=x\cdot y, więc szukam
+    wierzchołka funkcji I\left(x\right)=x\cdot y: p=-\frac{y}{2}”. Wskaż błąd w tym rozumowaniu i rozwiąż
+    zadanie poprawnie. Zapisz obliczenia.'
+  statement_latex: x+y=30,\qquad I\left(x\right)=x\cdot\left(30-x\right)
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń potraktował wyrażenie x\cdot y jak funkcję kwadratową zmiennej x i „obliczył” p=-\frac{y}{2}. Otrzymał wynik zawierający literę y, a więc żadnej konkretnej liczby.
+    DLACZEGO TO BŁĄD: wyrażenie x\cdot y zawiera DWIE zmienne – nie jest to funkcja jednej zmiennej i nie ma ono wykresu w postaci paraboli, więc wzorów na wierzchołek nie wolno tu stosować. Najpierw trzeba wykorzystać warunek wiążący i wyeliminować y.
+    POPRAWNIE: z warunku x+y=30 mamy y=30-x. Ponieważ x>0 i y>0, dziedziną jest x \in (0,30).
+    I(x)=x\cdot(30-x)=-x^{2}+30x – to już funkcja kwadratowa jednej zmiennej, a=-1<0.
+    p=-\frac{30}{2\cdot(-1)}=15 \in (0,30), więc x=15, a wtedy y=30-15=15.
+    q=I(15)=15\cdot(30-15)=225.
+    Odpowiedź: iloczyn jest największy dla x=15 i y=15 i wynosi 225 (zgodnie z regułą: przy stałej sumie iloczyn jest największy, gdy składniki są równe).
+  solution_steps:
+  - 'Odtwórz błędne rozumowanie: liczenie wierzchołka dla wyrażenia x·y z dwiema zmiennymi.'
+  - 'Wskaż błąd: to nie jest funkcja jednej zmiennej; trzeba użyć warunku wiążącego.'
+  - Z warunku x+y=30 wyznacz y=30-x i wyznacz dziedzinę x \in (0,30).
+  - Zapisz I(x)=x(30-x)=-x^{2}+30x.
+  - Oblicz p=15 oraz y=15 i q=I(15)=225.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: liczby (x, y)
+      answer:
+        kind: TUPLE
+        items:
+        - '15'
+        - '15'
+    - name: największy iloczyn
+      answer:
+        kind: NUMERIC
+        value: 225.0
+  checks:
+  - kind: evaluate
+    expr: 15\cdot\left(30-15\right)
+    part: największy iloczyn
+  stated_model:
+    variable: x
+    objective_latex: I\left(x\right)=x\cdot\left(30-x\right)
+    domain_lo: '0'
+    domain_hi: '30'
+    constraint_used: x+y=30, x>0, y>0
+  skills:
+  - warunek wiążący
+  - redukcja do funkcji jednej zmiennej
+  - wierzchołek paraboli
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''x'': ''I\\left(x\\right)=x\\cdot\\left(30-x\\right)'')
+      — human review'
+- id: g-cm-09
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: 'błąd: mylenie maksimum z minimum'
+  statement: 'Dzienny koszt produkcji (w złotych) x sztuk pewnego wyrobu w małej pracowni opisuje funkcja
+    K\left(x\right)=\frac{1}{2}x^{2}-30x+800, przy czym x jest liczbą całkowitą i 0 \le x \le 80. Uczeń
+    stwierdził: „Wierzchołek paraboli zawsze daje wartość największą, więc dla x=30 koszt jest największy”.
+    Wskaż błąd w tym rozumowaniu, a następnie oblicz, przy jakiej dziennej produkcji koszt jest najmniejszy
+    i ile on wtedy wynosi. Zapisz obliczenia.'
+  statement_latex: K\left(x\right)=\frac{1}{2}x^{2}-30x+800
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń obliczył p=-\frac{-30}{2\cdot\frac{1}{2}}=30 i uznał, że wierzchołek zawsze daje wartość NAJWIĘKSZĄ, więc odpowiedział, że dla x=30 koszt jest największy.
+    DLACZEGO TO BŁĄD: o rodzaju ekstremum decyduje znak współczynnika a. Tutaj a=\frac{1}{2}>0, więc ramiona paraboli są skierowane w górę i wierzchołek daje wartość NAJMNIEJSZĄ, a nie największą. (Największy koszt na przedziale [0,80] jest zresztą przyjmowany na końcu przedziału: K(80)=3200-2400+800=1600 zł.)
+    POPRAWNIE: a=\frac{1}{2}>0, więc funkcja przyjmuje wartość najmniejszą w wierzchołku.
+    p=-\frac{-30}{2\cdot\frac{1}{2}}=30 – liczba całkowita należąca do przedziału [0,80].
+    q=K(30)=\frac{1}{2}\cdot 900-30\cdot 30+800=450-900+800=350.
+    Odpowiedź: koszt jest najmniejszy przy produkcji 30 sztuk dziennie i wynosi wtedy 350 zł.
+  solution_steps:
+  - 'Odtwórz błędne rozumowanie: „wierzchołek zawsze daje maksimum”.'
+  - 'Wskaż błąd: a=\frac{1}{2}>0, ramiona w górę, więc wierzchołek daje minimum.'
+  - Oblicz p=-\frac{-30}{2\cdot\frac{1}{2}}=30 i sprawdź, że 30 \in [0,80] oraz jest liczbą całkowitą.
+  - Oblicz q=K(30)=450-900+800=350.
+  - 'Podaj odpowiedź: 30 sztuk dziennie, koszt najmniejszy 350 zł.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: liczba sztuk
+      answer:
+        kind: NUMERIC
+        value: 30.0
+    - name: najmniejszy koszt (zł)
+      answer:
+        kind: NUMERIC
+        value: 350.0
+  checks:
+  - kind: evaluate
+    expr: -\frac{-30}{2\cdot\frac{1}{2}}
+    part: liczba sztuk
+  - kind: evaluate
+    expr: \frac{1}{2}\cdot 30^{2}-30\cdot 30+800
+    part: najmniejszy koszt (zł)
+  skills:
+  - znak współczynnika a
+  - wierzchołek jako minimum
+  - model kosztu
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [liczba sztuk] SymPy solved it fresh: 30.0 vs 30.0 (tol 1e-09)
+      ; [najmniejszy koszt (zł)] SymPy solved it fresh: 350.0 vs 350.0 (tol 1e-09)'
+- id: g-cm-10
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: 'błąd: wybór rozwiązania bez sensu fizycznego'
+  statement: 'Z balkonu położonego na wysokości 15 m nad ziemią wyrzucono pionowo w górę piłkę. Wysokość
+    piłki nad ziemią (w metrach) po t sekundach opisuje wzór h\left(t\right)=-5t^{2}+10t+15, przy czym
+    t \ge 0. Uczeń rozwiązał równanie h\left(t\right)=0, otrzymał t=-1 oraz t=3 i napisał: „piłka uderza
+    w ziemię dwukrotnie: w chwili t=-1 s oraz w chwili t=3 s”. Wskaż błąd w tym rozumowaniu i podaj (a)
+    chwilę, w której piłka uderzy w ziemię, oraz (b) wysokość piłki po 1 sekundzie lotu. Zapisz obliczenia.'
+  statement_latex: h\left(t\right)=-5t^{2}+10t+15
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń poprawnie rozwiązał równanie -5t^{2}+10t+15=0 (po podzieleniu przez -5: t^{2}-2t-3=0, \Delta=16, t_{1}=-1, t_{2}=3), ale oba pierwiastki potraktował jako chwile czasu i stwierdził, że piłka uderza w ziemię dwa razy, w tym w chwili t=-1 s.
+    DLACZEGO TO BŁĄD: t oznacza czas liczony od chwili wyrzucenia, więc dziedziną modelu jest t \ge 0. Liczba t=-1 nie należy do dziedziny – nie opisuje żadnej chwili ruchu i trzeba ją odrzucić jako niezgodną z sytuacją. Ruch kończy się w chwili pierwszego zetknięcia z ziemią, więc jest tylko jedna taka chwila.
+    POPRAWNIE: (a) spośród pierwiastków -1 i 3 do dziedziny należy tylko t=3, zatem piłka uderzy w ziemię po 3 sekundach.
+    (b) h(1)=-5\cdot 1^{2}+10\cdot 1+15=-5+10+15=20, czyli po 1 sekundzie piłka jest na wysokości 20 m (to jednocześnie największa wysokość, bo p=-\frac{10}{2\cdot(-5)}=1).
+    Odpowiedź: piłka uderzy w ziemię po 3 s; po 1 s znajduje się na wysokości 20 m.
+  solution_steps:
+  - 'Odtwórz błędne rozumowanie: uznanie obu pierwiastków (-1 i 3) za chwile upadku.'
+  - 'Wskaż błąd: dziedziną modelu jest t \ge 0, więc t=-1 należy odrzucić.'
+  - 'Rozwiąż h(t)=0: t^{2}-2t-3=0, \Delta=16, t=-1 lub t=3; wybierz t=3.'
+  - Oblicz h(1)=-5+10+15=20 (m).
+  - 'Zapisz odpowiedź z jednostkami: 3 s oraz 20 m.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: chwila uderzenia o ziemię (s)
+      answer:
+        kind: NUMERIC
+        value: 3.0
+    - name: wysokość po 1 sekundzie (m)
+      answer:
+        kind: NUMERIC
+        value: 20.0
+  checks:
+  - kind: evaluate
+    expr: -5\cdot 1^{2}+10\cdot 1+15
+    var: t
+    part: wysokość po 1 sekundzie (m)
+  skills:
+  - rzut pionowy
+  - miejsca zerowe funkcji kwadratowej
+  - dziedzina wynikająca z kontekstu
+  - wartość funkcji
+  verification:
+    checkability: REFERENCE_CALL
+    note: '2 parts matched · det: [wysokość po 1 sekundzie (m)] SymPy solved it fresh: 20.0 vs 20.0 (tol
+      1e-09)'
+- id: g-ch-t02
+  slot: CHALLENGE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: optymalizacja – minimum sumy pól (zmienna niepodana w treści)
+  statement: Odcinek o długości 10 podzielono punktem na dwie części i na każdej z tych części, jako na
+    boku, zbudowano kwadrat. Wyznacz długości obu części, dla których suma pól tych dwóch kwadratów jest
+    najmniejsza, oraz oblicz tę najmniejszą sumę pól. Zapisz obliczenia.
+  statement_latex: S\left(x\right)=x^{2}+\left(10-x\right)^{2}=2x^{2}-20x+100,\qquad x\in\left(0,10\right)
+  solution: |-
+    Niech x oznacza długość jednej z części odcinka. Wtedy druga część ma długość 10-x.
+    Dziedzina: obie części są dodatnie, czyli x>0 oraz 10-x>0, zatem x\in\left(0,10\right).
+    Suma pól kwadratów zbudowanych na tych częściach: S\left(x\right)=x^{2}+\left(10-x\right)^{2}=x^{2}+100-20x+x^{2}=2x^{2}-20x+100.
+    Jest to funkcja kwadratowa o współczynniku a=2>0, więc przyjmuje wartość najmniejszą w wierzchołku.
+    p=-\frac{-20}{2\cdot 2}=5, przy czym 5\in\left(0,10\right).
+    q=S\left(5\right)=2\cdot 25-20\cdot 5+100=50-100+100=50.
+    Uzasadnienie bez pochodnych: S\left(x\right)=2\left(x-5\right)^{2}+50, a ponieważ \left(x-5\right)^{2}\geq 0, to S\left(x\right)\geq 50, z równością tylko dla x=5.
+    Odpowiedź: obie części powinny mieć długość 5 (odcinek dzielimy na połowy), a najmniejsza suma pól kwadratów wynosi 50.
+  solution_steps:
+  - Oznacz przez x długość jednej części; druga część ma długość 10-x.
+  - 'Ustal dziedzinę: x>0 i 10-x>0, czyli x ∈ (0,10).'
+  - 'Zapisz sumę pól: S(x)=x²+(10-x)² i wymnóż: S(x)=2x²-20x+100.'
+  - Zauważ, że a=2>0, więc minimum jest w wierzchołku; oblicz p=5 i sprawdź p ∈ (0,10).
+  - Oblicz q=S(5)=50 (lub użyj postaci kanonicznej S(x)=2(x-5)²+50).
+  - 'Podaj odpowiedź: części po 5, najmniejsza suma pól 50.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: x
+      answer:
+        kind: NUMERIC
+        value: 5.0
+    - name: S_min
+      answer:
+        kind: NUMERIC
+        value: 50.0
+  checks:
+  - kind: evaluate
+    expr: \frac{20}{2\cdot 2}
+    part: x
+  - kind: evaluate
+    expr: 2\cdot 5^{2}-20\cdot 5+100
+    part: S_min
+  stated_model:
+    variable: x
+    objective_latex: S\left(x\right)=2x^{2}-20x+100
+    domain_lo: '0'
+    domain_hi: '10'
+    goal: min
+    constraint_used: suma długości części równa 10
+  skills:
+  - wprowadzenie zmiennej niezależnej
+  - złożenie funkcji celu
+  - dziedzina otwarta z warunku dodatniości
+  - wierzchołek jako minimum przy a>0
+  verification:
+    checkability: STATED_MODEL
+    note: 'stage 1 inconclusive: SympifyError: SympifyError: "cannot sympify object of type <class ''sympy.core.singleton.SingletonRegistry''>"'
+- id: g-ch-t03
+  slot: CHALLENGE
+  ramp_index: 1
+  difficulty: 4
+  exercise_type: prostokąt wpisany w trójkąt prostokątny z dodatkowym ograniczeniem
+  statement: Dany jest trójkąt prostokątny ABC, w którym kąt przy wierzchołku C jest prosty, |AC| = 8
+    oraz |BC| = 12. Punkt M leży na przyprostokątnej BC, punkt N leży na przyprostokątnej AC, a punkt
+    K leży na przeciwprostokątnej AB, przy czym czworokąt CMKN jest prostokątem (odcinek KM jest prostopadły
+    do BC, a odcinek KN jest prostopadły do AC). Rozważamy tylko te prostokąty CMKN, w których bok CN
+    ma długość nie mniejszą niż 6. Oblicz długości boków tego z rozważanych prostokątów, który ma największe
+    pole, i oblicz to pole. Zapisz obliczenia.
+  statement_latex: P\left(x\right)=x\cdot\left(8-\frac{2}{3}\cdot x\right)=8x-\frac{2}{3}x^{2},\qquad
+    x=\left|CM\right|\in\left(0,3\right]
+  solution: |-
+    Niech x=\left|CM\right| (x>0). Wtedy \left|BM\right|=12-x.
+    Trójkąt BMK jest podobny do trójkąta BCA (oba mają kąt przy wierzchołku B i kąt prosty), więc \frac{\left|MK\right|}{\left|CA\right|}=\frac{\left|BM\right|}{\left|BC\right|}, czyli \frac{\left|MK\right|}{8}=\frac{12-x}{12}.
+    Stąd \left|MK\right|=\frac{8\cdot\left(12-x\right)}{12}=8-\frac{2}{3}\cdot x. Ponieważ CMKN jest prostokątem, mamy \left|CN\right|=\left|MK\right|=8-\frac{2}{3}\cdot x.
+    Warunek z treści: \left|CN\right|\geq 6, czyli 8-\frac{2}{3}\cdot x\geq 6, stąd \frac{2}{3}\cdot x\leq 2, czyli x\leq 3. Dziedzina: x\in\left(0,3\right].
+    Pole prostokąta: P\left(x\right)=x\cdot\left(8-\frac{2}{3}\cdot x\right)=8x-\frac{2}{3}x^{2}.
+    Współczynnik a=-\frac{2}{3}<0, wierzchołek: p=-\frac{8}{2\cdot\left(-\frac{2}{3}\right)}=6. Liczba 6 nie należy do dziedziny \left(0,3\right].
+    Funkcja o a<0 rośnie na \left(-\infty,6\right], więc na \left(0,3\right] jest rosnąca i wartość największą przyjmuje dla x=3.
+    P\left(3\right)=8\cdot 3-\frac{2}{3}\cdot 9=24-6=18, a wtedy \left|CN\right|=8-\frac{2}{3}\cdot 3=6.
+    Odpowiedź: największe pole ma prostokąt o bokach \left|CM\right|=3 i \left|CN\right|=6, a to pole jest równe 18. (Bez dodatkowego warunku optymalne byłoby x=6 i pole 24, ale wtedy \left|CN\right|=4<6.)
+  solution_steps:
+  - Oznacz x=|CM| i zauważ, że |BM|=12-x.
+  - Z podobieństwa trójkątów BMK i BCA wyznacz |MK|=|CN|=8-(2/3)x.
+  - 'Z warunku |CN| ≥ 6 wyznacz dziedzinę: x ∈ (0,3].'
+  - Zapisz pole P(x)=x(8-(2/3)x)=8x-(2/3)x².
+  - Oblicz p=6 i stwierdź, że p ∉ (0,3].
+  - Z monotoniczności (a<0, funkcja rosnąca na (-∞,6]) wybierz x=3.
+  - Oblicz |CN|=6 oraz P(3)=18 i sformułuj odpowiedź.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: CM
+      answer:
+        kind: NUMERIC
+        value: 3.0
+    - name: CN
+      answer:
+        kind: NUMERIC
+        value: 6.0
+    - name: P_max
+      answer:
+        kind: NUMERIC
+        value: 18.0
+  checks:
+  - kind: solve_equation
+    expr: 8-\frac{2}{3}\cdot x=6
+    part: CM
+  - kind: evaluate
+    expr: 8-\frac{2}{3}\cdot 3
+    part: CN
+  - kind: evaluate
+    expr: 3\cdot\left(8-\frac{2}{3}\cdot 3\right)
+    part: P_max
+  stated_model:
+    variable: x
+    objective_latex: P\left(x\right)=8x-\frac{2}{3}x^{2}
+    domain_lo: '0'
+    domain_hi: '3'
+    domain_hi_open: false
+    constraint_used: '|CN|=8-\frac{2}{3}x z podobieństwa trójkątów oraz |CN| \geq 6'
+  skills:
+  - podobieństwo trójkątów jako warunek wiążący
+  - redukcja do funkcji jednej zmiennej
+  - dziedzina wymuszona warunkiem z treści
+  - ekstremum na końcu przedziału
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''x'': ''P\\left(x\\right)=8x-\\frac{2}{3}x^{2}'')
+      — human review'
+- id: g-ch-t04
+  slot: CHALLENGE
+  ramp_index: 2
+  difficulty: 5
+  exercise_type: wzór i dziedzina funkcji pola powierzchni prostopadłościanu + optymalizacja z ograniczeniem
+  statement: Rozważamy wszystkie prostopadłościany ABCDEFGH, w których podstawa ABCD jest kwadratem o
+    boku długości x, a suma długości trzech krawędzi wychodzących z wierzchołka A (są to krawędzie AB,
+    AD oraz AE) jest równa 18. Ponadto wysokość |AE| każdego z rozważanych prostopadłościanów ma być nie
+    mniejsza niż 8. (a) Wyznacz wzór i dziedzinę funkcji P opisującej pole powierzchni całkowitej takiego
+    prostopadłościanu w zależności od x. (b) Oblicz długość krawędzi podstawy tego z rozważanych prostopadłościanów,
+    którego pole powierzchni całkowitej jest największe, oraz oblicz to największe pole. Zapisz obliczenia.
+  statement_latex: 2\cdot x+\left|AE\right|=18,\qquad P\left(x\right)=2\cdot x^{2}+4\cdot x\cdot\left(18-2\cdot
+    x\right)=-6x^{2}+72x
+  solution: |-
+    Oznaczmy h=\left|AE\right| – wysokość prostopadłościanu. Ponieważ podstawa jest kwadratem, to \left|AB\right|=\left|AD\right|=x, a warunek z treści daje x+x+h=18, czyli h=18-2\cdot x.
+    (a) Pole powierzchni całkowitej to suma pól dwóch kwadratowych podstaw i czterech prostokątnych ścian bocznych:
+    P\left(x\right)=2\cdot x^{2}+4\cdot x\cdot h=2\cdot x^{2}+4\cdot x\cdot\left(18-2\cdot x\right)=2x^{2}+72x-8x^{2}=-6x^{2}+72x.
+    Dziedzina: x>0 oraz h\geq 8, czyli 18-2\cdot x\geq 8, stąd 2\cdot x\leq 10, czyli x\leq 5. Zatem D=\left(0,5\right].
+    (b) Współczynnik przy x^{2} jest równy -6<0, więc parabola ma ramiona skierowane w dół, a jej wierzchołek ma pierwszą współrzędną
+    p=-\frac{72}{2\cdot\left(-6\right)}=6.
+    Liczba 6 nie należy do dziedziny D=\left(0,5\right], więc wierzchołek jest niedopuszczalny. Ponieważ a<0, funkcja P rośnie na przedziale \left(-\infty,6\right], a więc rośnie na całym \left(0,5\right] i wartość największą przyjmuje w prawym końcu, dla x=5.
+    P\left(5\right)=-6\cdot 25+72\cdot 5=-150+360=210.
+    Sprawdzenie: dla x=5 mamy h=18-10=8\geq 8, pole podstaw 2\cdot 25=50, pole boczne 4\cdot 5\cdot 8=160, razem 210.
+    Odpowiedź: P\left(x\right)=-6x^{2}+72x, D=\left(0,5\right]; największe pole powierzchni całkowitej, równe 210, ma prostopadłościan o krawędzi podstawy x=5 (i wysokości 8).
+  solution_steps:
+  - 'Oznacz h=|AE| i zapisz warunek wiążący: x+x+h=18, stąd h=18-2x.'
+  - 'Zapisz pole powierzchni całkowitej: P=2x²+4xh.'
+  - 'Podstaw h i wymnóż: P(x)=2x²+4x(18-2x)=-6x²+72x.'
+  - 'Wyznacz dziedzinę: x>0 oraz 18-2x ≥ 8, czyli D=(0,5].'
+  - Oblicz p=-72/(2·(-6))=6 i sprawdź, że 6 ∉ D.
+  - Z monotoniczności (a=-6<0, funkcja rosnąca na (-∞,6]) wybierz x=5.
+  - Oblicz P(5)=210 i sprawdź, że h=8 spełnia warunek; zapisz pełną odpowiedź.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wzor_P
+      answer:
+        kind: SYMBOLIC
+        latex: -6x^{2}+72x
+    - name: dziedzina
+      answer:
+        kind: INTERVAL
+        lo: '0'
+        hi: '5'
+        hi_open: false
+    - name: x_opt
+      answer:
+        kind: NUMERIC
+        value: 5.0
+    - name: P_max
+      answer:
+        kind: NUMERIC
+        value: 210.0
+  checks:
+  - kind: simplify
+    expr: 2\cdot x^{2}+4\cdot x\cdot\left(18-2\cdot x\right)
+    part: wzor_P
+  - kind: solve_equation
+    expr: 18-2\cdot x=8
+    part: x_opt
+  - kind: evaluate
+    expr: -6\cdot 5^{2}+72\cdot 5
+    part: P_max
+  stated_model:
+    variable: x
+    objective_latex: P\left(x\right)=-6x^{2}+72x
+    domain_lo: '0'
+    domain_hi: '5'
+    domain_hi_open: false
+    constraint_used: 2x+h=18 oraz h \geq 8
+  skills:
+  - zapis warunku wiążącego dla krawędzi bryły
+  - złożenie pola powierzchni całkowitej
+  - wyznaczenie dziedziny z warunków zadania
+  - sprawdzenie położenia wierzchołka względem dziedziny
+  - monotoniczność i wartość na końcu przedziału
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''x'': ''P\\left(x\\right)=-6x^{2}+72x'')
+      — human review'

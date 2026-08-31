@@ -1,0 +1,746 @@
+section: wartosc-bezwzgledna
+name: 'Wartość bezwzględna: interpretacja i proste równania'
+scope: Absolute value read geometrically (distance) and algebraically; solving simple equations with an
+  absolute value.
+requirements:
+- I.7
+counts:
+  total: 16
+  DETERMINISTIC: 6
+  REFERENCE_CALL: 7
+  NOT_MACHINE_CHECKABLE: 3
+exercises:
+- id: g-th-00
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: obliczanie wartości wyrażenia z modułem
+  statement: Oblicz wartość wyrażenia A = \left|-8\right| + \left|3 - 10\right| - \left|-2\right|.
+  statement_latex: A = \left|-8\right| + \left|3 - 10\right| - \left|-2\right|
+  solution: |-
+    Korzystamy z definicji: dla liczby nieujemnej moduł nie zmienia jej wartości, dla liczby ujemnej daje liczbę do niej przeciwną.
+    \left|-8\right| = 8, bo -8 < 0.
+    3 - 10 = -7 < 0, więc \left|3 - 10\right| = 7.
+    \left|-2\right| = 2.
+    Stąd A = 8 + 7 - 2 = 13.
+    Odpowiedź: A = 13.
+  solution_steps:
+  - Oblicz \left|-8\right| = 8.
+  - 'Wykonaj odejmowanie pod modułem: 3 - 10 = -7, więc \left|3-10\right| = 7.'
+  - Oblicz \left|-2\right| = 2.
+  - 'Wykonaj działania: A = 8 + 7 - 2 = 13.'
+  answer:
+    kind: NUMERIC
+    value: 13.0
+    latex: '13'
+  checks:
+  - kind: evaluate
+    expr: \left|-8\right| + \left|3 - 10\right| - \left|-2\right|
+  skills:
+  - definicja wartości bezwzględnej
+  - opuszczanie modułu z liczby
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 13.0 vs 13.0 (tol 1e-09)'
+- id: g-th-01
+  slot: THEORY_SUPPORT
+  ramp_index: 1
+  difficulty: 1
+  exercise_type: proste równanie z modułem
+  statement: Rozwiąż równanie \left|x - 6\right| = 2 i podaj interpretację geometryczną otrzymanych rozwiązań
+    na osi liczbowej.
+  statement_latex: \left|x - 6\right| = 2
+  solution: |-
+    Wyrażenie \left|x-6\right| oznacza odległość liczby x od liczby 6 na osi liczbowej. Szukamy więc liczb odległych od 6 dokładnie o 2.
+    Algebraicznie: ponieważ 2 > 0, mamy alternatywę
+    x - 6 = 2 lub x - 6 = -2,
+    czyli x = 8 lub x = 4.
+    Geometrycznie: punkty 4 i 8 leżą na osi symetrycznie względem punktu 6, każdy w odległości 2 od niego.
+    Odpowiedź: x = 4 lub x = 8.
+  solution_steps:
+  - Zauważ, że \left|x-6\right| to odległość x od 6.
+  - 'Ponieważ prawa strona jest dodatnia, rozbij równanie: x - 6 = 2 lub x - 6 = -2.'
+  - 'Rozwiąż oba równania: x = 8 oraz x = 4.'
+  - Zapisz odpowiedź i zauważ symetrię punktów 4 i 8 względem 6.
+  answer:
+    kind: SET
+    latex: x = 4 \ \lor\ x = 8
+    members:
+    - '4'
+    - '8'
+  checks:
+  - kind: solve_equation
+    expr: \left|x - 6\right| = 2
+  skills:
+  - interpretacja geometryczna modułu
+  - równanie |x-a|=r
+  verification:
+    checkability: REFERENCE_CALL
+    note: 2 members matched
+- id: g-th-02
+  slot: THEORY_SUPPORT
+  ramp_index: 2
+  difficulty: 2
+  exercise_type: odległość na osi liczbowej
+  statement: Na osi liczbowej punkt A ma współrzędną -3, a punkt B ma współrzędną 5. a) Oblicz odległość
+    d\left(A, B\right), korzystając ze wzoru d\left(a,b\right) = \left|a - b\right|. b) Oblicz współrzędną
+    środka S odcinka AB.
+  statement_latex: d\left(A,B\right) = \left|-3 - 5\right|, \qquad S = \frac{-3 + 5}{2}
+  solution: |-
+    a) Odległość punktów o współrzędnych a i b wynosi \left|a - b\right|.
+    d\left(A,B\right) = \left|-3 - 5\right| = \left|-8\right| = 8.
+    b) Środek odcinka o końcach -3 i 5 ma współrzędną równą średniej arytmetycznej tych liczb:
+    S = \frac{-3 + 5}{2} = \frac{2}{2} = 1.
+    Sprawdzenie: \left|1 - \left(-3\right)\right| = 4 oraz \left|5 - 1\right| = 4, czyli S jest jednakowo odległy od A i od B.
+    Odpowiedź: d\left(A,B\right) = 8, S = 1.
+  solution_steps:
+  - 'Zastosuj wzór na odległość: d\left(A,B\right) = \left|-3 - 5\right|.'
+  - Oblicz \left|-8\right| = 8.
+  - 'Współrzędną środka policz jako średnią: S = \frac{-3+5}{2}.'
+  - Otrzymaj S = 1 i sprawdź, że odległości od A i od B są równe 4.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: odleglosc
+      answer:
+        kind: NUMERIC
+        value: 8.0
+        latex: '8'
+    - name: srodek
+      answer:
+        kind: NUMERIC
+        value: 1.0
+        latex: '1'
+  checks:
+  - kind: evaluate
+    expr: \left|-3 - 5\right|
+    part: odleglosc
+  - kind: evaluate
+    expr: \frac{-3 + 5}{2}
+    part: srodek
+  skills:
+  - odległość dwóch liczb na osi
+  - środek odcinka na osi
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [odleglosc] SymPy solved it fresh: 8.0 vs 8.0 (tol 1e-09) ;
+      [srodek] SymPy solved it fresh: 1.0 vs 1.0 (tol 1e-09)'
+- id: g-ex-03
+  slot: EXERCISE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: równanie |ax+b| = c
+  statement: Rozwiąż równanie \left|3\cdot x + 5\right| = 7.
+  statement_latex: \left|3\cdot x + 5\right| = 7
+  solution: |-
+    Prawa strona jest dodatnia, więc równanie jest równoważne alternatywie
+    3\cdot x + 5 = 7 lub 3\cdot x + 5 = -7.
+    Z pierwszego równania: 3\cdot x = 2, czyli x = \frac{2}{3}.
+    Z drugiego równania: 3\cdot x = -12, czyli x = -4.
+    Sprawdzenie: \left|3\cdot \frac{2}{3} + 5\right| = \left|7\right| = 7 oraz \left|3\cdot \left(-4\right) + 5\right| = \left|-7\right| = 7.
+    Odpowiedź: x = \frac{2}{3} lub x = -4.
+  solution_steps:
+  - Zauważ, że 7 > 0, więc równanie ma dwa przypadki.
+  - 'Zapisz alternatywę: 3\cdot x + 5 = 7 lub 3\cdot x + 5 = -7.'
+  - 'Rozwiąż pierwsze równanie: x = \frac{2}{3}.'
+  - 'Rozwiąż drugie równanie: x = -4.'
+  - Sprawdź oba rozwiązania i zapisz odpowiedź.
+  answer:
+    kind: SET
+    latex: x = \frac{2}{3} \ \lor\ x = -4
+    members:
+    - \frac{2}{3}
+    - '-4'
+  checks:
+  - kind: solve_equation
+    expr: \left|3\cdot x + 5\right| = 7
+  skills:
+  - rozbicie na dwa przypadki
+  - rozwiązywanie równań liniowych
+  verification:
+    checkability: REFERENCE_CALL
+    note: 2 members matched
+- id: g-ex-04
+  slot: EXERCISE
+  ramp_index: 1
+  difficulty: 3
+  exercise_type: równanie |f(x)| = |g(x)|
+  statement: Rozwiąż równanie \left|2\cdot x - 1\right| = \left|x + 4\right|.
+  statement_latex: \left|2\cdot x - 1\right| = \left|x + 4\right|
+  solution: |-
+    Moduły stoją po obu stronach, więc korzystamy z równoważności \left|f\right| = \left|g\right| \iff f = g \lor f = -g.
+    Przypadek 1: 2\cdot x - 1 = x + 4, stąd 2\cdot x - x = 4 + 1, czyli x = 5.
+    Przypadek 2: 2\cdot x - 1 = -\left(x + 4\right) = -x - 4, stąd 3\cdot x = -3, czyli x = -1.
+    Sprawdzenie: dla x = 5: \left|2\cdot 5 - 1\right| = 9 i \left|5 + 4\right| = 9. Dla x = -1: \left|-3\right| = 3 i \left|3\right| = 3.
+    Odpowiedź: x = -1 lub x = 5.
+  solution_steps:
+  - 'Zapisz alternatywę: 2\cdot x - 1 = x + 4 lub 2\cdot x - 1 = -\left(x + 4\right).'
+  - 'Rozwiąż pierwsze równanie: x = 5.'
+  - 'W drugim przypadku opuść nawias: 2\cdot x - 1 = -x - 4, czyli 3\cdot x = -3.'
+  - Otrzymaj x = -1.
+  - Sprawdź oba rozwiązania w równaniu wyjściowym.
+  answer:
+    kind: SET
+    latex: x = -1 \ \lor\ x = 5
+    members:
+    - '5'
+    - '-1'
+  checks:
+  - kind: solve_equation
+    expr: \left|2\cdot x - 1\right| = \left|x + 4\right|
+  skills:
+  - alternatywa f=g lub f=-g
+  - poprawne użycie nawiasu przy minusie
+  verification:
+    checkability: REFERENCE_CALL
+    note: 2 members matched
+- id: g-ex-05
+  slot: EXERCISE
+  ramp_index: 2
+  difficulty: 4
+  exercise_type: metoda przypadków i równanie z parametrem
+  statement: a) Rozwiąż równanie \left|x - 3\right| = 2\cdot x + 1. b) Wyznacz wartość parametru m, dla
+    której równanie \left|x - 3\right| = m - 4 ma dokładnie jedno rozwiązanie.
+  statement_latex: \left|x - 3\right| = 2\cdot x + 1, \qquad \left|x - 3\right| = m - 4
+  solution: |-
+    a) Po prawej stronie występuje niewiadoma, więc konieczny jest warunek 2\cdot x + 1 \ge 0, czyli x \ge -\frac{1}{2}.
+    Miejscem zerowym wyrażenia x - 3 jest liczba 3, więc dzielimy oś na dwa przedziały.
+    Przypadek 1: x \ge 3. Wtedy \left|x-3\right| = x - 3, więc x - 3 = 2\cdot x + 1, stąd x = -4. Liczba -4 nie należy do przedziału \left[3, +\infty\right), więc ją odrzucamy.
+    Przypadek 2: x < 3. Wtedy \left|x-3\right| = 3 - x, więc 3 - x = 2\cdot x + 1, stąd 2 = 3\cdot x, czyli x = \frac{2}{3}. Liczba \frac{2}{3} należy do przedziału \left(-\infty, 3\right) i spełnia warunek x \ge -\frac{1}{2}, więc jest rozwiązaniem.
+    Sprawdzenie: \left|\frac{2}{3} - 3\right| = \frac{7}{3} oraz 2\cdot \frac{2}{3} + 1 = \frac{7}{3}.
+    b) Równanie \left|x - 3\right| = m - 4 ma dokładnie jedno rozwiązanie wtedy i tylko wtedy, gdy prawa strona jest równa zero (promień zerowy), czyli m - 4 = 0, stąd m = 4 (wtedy x = 3).
+    Odpowiedź: a) x = \frac{2}{3}; b) m = 4.
+  solution_steps:
+  - Zapisz warunek konieczny 2\cdot x + 1 \ge 0, czyli x \ge -\frac{1}{2}.
+  - Podziel oś miejscem zerowym x = 3 wyrażenia spod modułu.
+  - Dla x \ge 3 rozwiąż x - 3 = 2\cdot x + 1 i odrzuć x = -4 jako spoza przedziału.
+  - Dla x < 3 rozwiąż 3 - x = 2\cdot x + 1 i otrzymaj x = \frac{2}{3}, które spełnia założenia.
+  - W części b) zauważ, że jedno rozwiązanie występuje dokładnie wtedy, gdy m - 4 = 0.
+  - Rozwiąż m - 4 = 0 i zapisz m = 4.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: rownanie
+      answer:
+        kind: SET
+        latex: x = \frac{2}{3}
+        members:
+        - \frac{2}{3}
+    - name: parametr
+      answer:
+        kind: NUMERIC
+        value: 4.0
+        latex: m = 4
+  checks:
+  - kind: solve_equation
+    expr: \left|x - 3\right| = 2\cdot x + 1
+    part: rownanie
+  - kind: solve_equation
+    expr: m - 4 = 0
+    var: m
+    part: parametr
+  skills:
+  - metoda przypadków dla |f(x)|=g(x)
+  - odrzucanie rozwiązań spoza przedziału
+  - liczba rozwiązań równania z parametrem
+  verification:
+    checkability: REFERENCE_CALL
+    note: '2 parts matched · det: [parametr] SymPy solved it fresh: 4.0 vs 4.0 (tol 1e-09)'
+- id: g-ex-t00
+  slot: EXERCISE
+  ramp_index: 6
+  difficulty: 3
+  exercise_type: równanie z wartością bezwzględną po obu stronach
+  statement: Rozwiąż równanie \left|3x+2\right| = \left|x-6\right|. Następnie oblicz odległość między
+    otrzymanymi rozwiązaniami na osi liczbowej.
+  statement_latex: \left|3x+2\right| = \left|x-6\right|
+  solution: |-
+    Moduły stoją po obu stronach równania, więc korzystamy z równoważności |f(x)| = |g(x)| ⟺ f(x) = g(x) lub f(x) = −g(x).
+
+    Przypadek 1: 3x+2 = x-6, stąd 2x = -8, czyli x = -4.
+    Przypadek 2: 3x+2 = -\left(x-6\right) = -x+6, stąd 4x = 4, czyli x = 1.
+
+    Sprawdzenie: dla x = -4 mamy \left|3\cdot(-4)+2\right| = \left|-10\right| = 10 oraz \left|-4-6\right| = 10 ✓; dla x = 1 mamy \left|3\cdot 1+2\right| = 5 oraz \left|1-6\right| = 5 ✓.
+
+    Odległość rozwiązań na osi liczbowej: d = \left|1-\left(-4\right)\right| = 5.
+
+    Odpowiedź: x = -4 lub x = 1; odległość tych liczb na osi wynosi 5.
+  solution_steps:
+  - 'Zapisz alternatywę: 3x+2 = x-6 lub 3x+2 = -\left(x-6\right).'
+  - 'Z pierwszego równania: 2x = -8, czyli x = -4.'
+  - 'Z drugiego równania: 3x+2 = -x+6, czyli 4x = 4, x = 1.'
+  - Sprawdź oba rozwiązania w równaniu wyjściowym.
+  - 'Oblicz odległość: d = \left|1-\left(-4\right)\right| = 5.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: rozwiazania
+      answer:
+        kind: SET
+        members:
+        - '-4'
+        - '1'
+    - name: odleglosc
+      answer:
+        kind: NUMERIC
+        value: 5.0
+  checks:
+  - kind: solve_equation
+    expr: \left|3x+2\right| = \left|x-6\right|
+    part: rozwiazania
+  - kind: evaluate
+    expr: \left|1-\left(-4\right)\right|
+    part: odleglosc
+  skills:
+  - rozwiązywanie równania |f(x)|=|g(x)|
+  - rozbicie na alternatywę dwóch równań liniowych
+  - odległość dwóch liczb na osi liczbowej
+  - sprawdzenie rozwiązań przez podstawienie
+  verification:
+    checkability: REFERENCE_CALL
+    note: 2 parts matched
+- id: g-ex-t01
+  slot: EXERCISE
+  ramp_index: 7
+  difficulty: 4
+  exercise_type: równanie |f(x)| = g(x) i odtworzenie równania z dwóch rozwiązań
+  statement: Dane jest równanie \left|2x+1\right| = x+5. a) Rozwiąż to równanie. b) Wyznacz liczby a oraz
+    r takie, że równanie \left|x-a\right| = r ma dokładnie te same rozwiązania, i zapisz to równanie.
+  statement_latex: \left|2x+1\right| = x+5
+  solution: |-
+    a) Po prawej stronie występuje niewiadoma, więc najpierw warunek konieczny: x+5 \ge 0, czyli x \ge -5 (moduł nie może być równy liczbie ujemnej).
+    Miejsce zerowe wyrażenia pod modułem: 2x+1 = 0, czyli x = -\frac{1}{2}.
+
+    Przypadek 1: x \ge -\frac{1}{2}. Wtedy \left|2x+1\right| = 2x+1, więc 2x+1 = x+5, stąd x = 4. Liczba 4 należy do przedziału \left[-\frac{1}{2},+\infty\right), więc jest rozwiązaniem.
+    Przypadek 2: x < -\frac{1}{2}. Wtedy \left|2x+1\right| = -\left(2x+1\right), więc -2x-1 = x+5, stąd 3x = -6, czyli x = -2. Liczba -2 należy do przedziału \left(-\infty,-\frac{1}{2}\right) i spełnia warunek x \ge -5, więc jest rozwiązaniem.
+
+    Sprawdzenie: \left|2\cdot 4+1\right| = 9 = 4+5 ✓; \left|2\cdot(-2)+1\right| = \left|-3\right| = 3 = -2+5 ✓.
+
+    b) Rozwiązaniami równania \left|x-a\right| = r są liczby a-r oraz a+r, symetryczne względem a.
+    Środek: a = \frac{-2+4}{2} = 1. Promień: r = \frac{\left|4-\left(-2\right)\right|}{2} = 3.
+    Szukane równanie: \left|x-1\right| = 3 (istotnie: x-1 = 3 daje x = 4, a x-1 = -3 daje x = -2).
+
+    Odpowiedź: a) x = -2 lub x = 4; b) a = 1, r = 3, równanie \left|x-1\right| = 3.
+  solution_steps:
+  - 'Zapisz warunek konieczny: x+5 \ge 0, czyli x \ge -5.'
+  - 'Wyznacz miejsce zerowe wyrażenia pod modułem: x = -\frac{1}{2} i podziel oś na przedziały.'
+  - 'Dla x \ge -\frac{1}{2}: 2x+1 = x+5, stąd x = 4 (należy do przedziału).'
+  - 'Dla x < -\frac{1}{2}: -2x-1 = x+5, stąd x = -2 (należy do przedziału).'
+  - Sprawdź oba rozwiązania w równaniu wyjściowym.
+  - Oblicz środek a = \frac{-2+4}{2} = 1 i promień r = \frac{\left|4-\left(-2\right)\right|}{2} = 3.
+  - Zapisz równanie \left|x-1\right| = 3.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: rozwiazania
+      answer:
+        kind: SET
+        members:
+        - '-2'
+        - '4'
+    - name: a
+      answer:
+        kind: NUMERIC
+        value: 1.0
+    - name: r
+      answer:
+        kind: NUMERIC
+        value: 3.0
+    - name: rownanie
+      answer:
+        kind: SYMBOLIC
+        latex: \left|x-1\right| = 3
+  checks:
+  - kind: solve_equation
+    expr: \left|2x+1\right| = x+5
+    part: rozwiazania
+  - kind: evaluate
+    expr: \frac{-2+4}{2}
+    part: a
+  - kind: evaluate
+    expr: \frac{\left|4-\left(-2\right)\right|}{2}
+    part: r
+  skills:
+  - warunek konieczny g(x) ≥ 0
+  - metoda przypadków
+  - weryfikacja rozwiązań
+  - środek i promień w równaniu |x − a| = r
+  verification:
+    checkability: REFERENCE_CALL
+    note: 'could not compare: reference produced 2 outputs, answer has 4'
+- id: g-cm-06
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: równanie z modułem — analiza błędu
+  statement: 'Uczeń rozwiązywał równanie \left|x + 5\right| = 6 i zapisał: "x + 5 = 6, więc x = 1 i jest
+    to jedyne rozwiązanie". Wyjaśnij, na czym polega błąd, i podaj wszystkie rozwiązania równania.'
+  statement_latex: \left|x + 5\right| = 6
+  solution: |-
+    Błędne rozumowanie: uczeń założył, że wyrażenie spod modułu musi być równe 6, i rozwiązał tylko jedno równanie x + 5 = 6, otrzymując x = 1 jako jedyną odpowiedź.
+    Gdzie tkwi błąd: moduł oznacza odległość od zera, a odległość 6 od zera mają dwie liczby: 6 i -6. Wyrażenie x + 5 może więc być równe 6 albo -6. Pominięcie drugiego przypadku gubi jedno rozwiązanie.
+    Poprawne rozwiązanie: \left|x + 5\right| = 6 \iff x + 5 = 6 \lor x + 5 = -6, czyli x = 1 lub x = -11.
+    Geometrycznie: \left|x + 5\right| = \left|x - \left(-5\right)\right| to odległość x od -5, a liczby odległe od -5 o 6 to -5 + 6 = 1 oraz -5 - 6 = -11.
+    Sprawdzenie: \left|1 + 5\right| = 6 oraz \left|-11 + 5\right| = \left|-6\right| = 6.
+    Odpowiedź: x = -11 lub x = 1.
+  solution_steps:
+  - 'Wskaż błąd: uczeń rozważył tylko przypadek x + 5 = 6.'
+  - Przypomnij, że \left|w\right| = 6 oznacza w = 6 lub w = -6.
+  - 'Rozwiąż drugie równanie: x + 5 = -6, czyli x = -11.'
+  - 'Sprawdź oba rozwiązania i zapisz odpowiedź: x = -11 lub x = 1.'
+  answer:
+    kind: SET
+    latex: x = -11 \ \lor\ x = 1
+    members:
+    - '1'
+    - '-11'
+  checks:
+  - kind: solve_equation
+    expr: \left|x + 5\right| = 6
+  skills:
+  - rozbicie na dwa przypadki
+  - interpretacja geometryczna modułu
+  verification:
+    checkability: REFERENCE_CALL
+    note: 2 members matched
+- id: g-cm-07
+  slot: COMMON_MISTAKE
+  ramp_index: 1
+  difficulty: 2
+  exercise_type: równanie sprzeczne z modułem — analiza błędu
+  statement: 'Uczeń rozwiązywał równanie \left|3\cdot x - 1\right| + 8 = 2 i zapisał: "\left|3\cdot x
+    - 1\right| = -6, więc 3\cdot x - 1 = -6 lub 3\cdot x - 1 = 6, czyli x = -\frac{5}{3} lub x = \frac{7}{3}".
+    Wyjaśnij, na czym polega błąd, i podaj poprawny zbiór rozwiązań.'
+  statement_latex: \left|3\cdot x - 1\right| + 8 = 2
+  solution: |-
+    Błędne rozumowanie: uczeń poprawnie przekształcił równanie do postaci \left|3\cdot x - 1\right| = -6, ale mimo ujemnej prawej strony rozbił je na dwa przypadki i podał dwie liczby: x = -\frac{5}{3} oraz x = \frac{7}{3}.
+    Gdzie tkwi błąd: dla każdej liczby rzeczywistej w zachodzi \left|w\right| \ge 0, więc moduł nie może być równy liczbie ujemnej. Przed rozbiciem na przypadki trzeba sprawdzić znak prawej strony.
+    Sprawdzenie "rozwiązań" ucznia: dla x = \frac{7}{3} mamy \left|3\cdot \frac{7}{3} - 1\right| + 8 = 6 + 8 = 14 \ne 2, więc liczba ta nie spełnia równania.
+    Poprawne rozwiązanie: \left|3\cdot x - 1\right| = 2 - 8 = -6 < 0, a moduł jest nieujemny, więc równanie jest sprzeczne.
+    Odpowiedź: równanie nie ma rozwiązań (zbiór rozwiązań jest pusty).
+  solution_steps:
+  - 'Przekształć równanie: \left|3\cdot x - 1\right| = 2 - 8 = -6.'
+  - Zauważ, że prawa strona jest ujemna.
+  - Skorzystaj z własności \left|w\right| \ge 0 dla każdego w.
+  - Wywnioskuj, że równanie jest sprzeczne — zbiór rozwiązań jest pusty.
+  answer:
+    kind: SET
+    latex: \emptyset
+  checks:
+  - kind: solve_equation
+    expr: \left|3\cdot x - 1\right| + 8 = 2
+  skills:
+  - nieujemność modułu
+  - rozpoznawanie równań sprzecznych
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 0 members matched'
+- id: g-cm-08
+  slot: COMMON_MISTAKE
+  ramp_index: 2
+  difficulty: 3
+  exercise_type: upraszczanie wyrażenia z modułem — analiza błędu
+  statement: 'Uprość wyrażenie W = \left|x - 5\right| + 2\cdot x przy założeniu, że x < 5. Uczeń zapisał:
+    "moduł usuwa minusy, więc \left|x - 5\right| = x - 5 i W = 3\cdot x - 5". Wyjaśnij błąd i podaj poprawną
+    postać wyrażenia.'
+  statement_latex: W = \left|x - 5\right| + 2\cdot x, \qquad x < 5
+  solution: |-
+    Błędne rozumowanie: uczeń przyjął, że \left|x - 5\right| = x - 5 dla każdego x, i otrzymał W = x - 5 + 2\cdot x = 3\cdot x - 5.
+    Gdzie tkwi błąd: równość \left|x - 5\right| = x - 5 zachodzi tylko wtedy, gdy x - 5 \ge 0, czyli dla x \ge 5. Przy założeniu x < 5 wyrażenie x - 5 jest ujemne, więc zgodnie z definicją \left|x - 5\right| = -\left(x - 5\right) = 5 - x. Zmiana znaku dotyczy całego wyrażenia, a nie tylko jednego składnika.
+    Kontrola liczbowa dla x = 1: \left|1 - 5\right| + 2\cdot 1 = 4 + 2 = 6, a wzór ucznia daje 3\cdot 1 - 5 = -2 — wynik błędny.
+    Poprawne rozwiązanie: W = \left(5 - x\right) + 2\cdot x = x + 5.
+    Sprawdzenie dla x = 1: 1 + 5 = 6.
+    Odpowiedź: W = x + 5.
+  solution_steps:
+  - 'Wskaż błąd: równość \left|x-5\right| = x - 5 obowiązuje tylko dla x \ge 5.'
+  - 'Dla x < 5 zastosuj definicję: \left|x-5\right| = -\left(x-5\right) = 5 - x.'
+  - 'Podstaw i uprość: W = \left(5 - x\right) + 2\cdot x = x + 5.'
+  - Sprawdź wynik dla przykładowej liczby x = 1.
+  answer:
+    kind: SYMBOLIC
+    latex: x + 5
+  checks:
+  - kind: simplify
+    expr: \left(5 - x\right) + 2\cdot x
+  skills:
+  - definicja modułu na przedziale
+  - opuszczanie modułu ze zmianą znaku całego wyrażenia
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: ''x + 5'' vs ''x + 5'''
+- id: g-cm-09
+  slot: COMMON_MISTAKE
+  ramp_index: 3
+  difficulty: 2
+  exercise_type: wartość wyrażenia z modułami — analiza błędu
+  statement: 'Oblicz wartość wyrażenia W = \left|2 - 9\right| - \left|-5 + 1\right|. Uczeń zapisał: "moduł
+    zamienia każdy minus na plus, więc \left|2 - 9\right| = 2 + 9 = 11 oraz \left|-5 + 1\right| = 5 +
+    1 = 6, zatem W = 11 - 6 = 5". Wyjaśnij błąd i podaj poprawny wynik.'
+  statement_latex: W = \left|2 - 9\right| - \left|-5 + 1\right|
+  solution: |-
+    Błędne rozumowanie: uczeń rozdzielił moduł na poszczególne składniki sumy, czyli przyjął \left|a + b\right| = \left|a\right| + \left|b\right|, i otrzymał W = 11 - 6 = 5.
+    Gdzie tkwi błąd: moduł jest zgodny z mnożeniem i dzieleniem, ale nie z dodawaniem. Zachodzi jedynie nierówność trójkąta \left|a + b\right| \le \left|a\right| + \left|b\right|. Przykład: \left|3 + \left(-5\right)\right| = 2, a \left|3\right| + \left|-5\right| = 8.
+    Poprawne rozwiązanie: najpierw wykonujemy działania pod modułami.
+    2 - 9 = -7, więc \left|2 - 9\right| = 7.
+    -5 + 1 = -4, więc \left|-5 + 1\right| = 4.
+    Stąd W = 7 - 4 = 3.
+    Odpowiedź: W = 3.
+  solution_steps:
+  - 'Wskaż błąd: nie wolno stosować równości \left|a+b\right| = \left|a\right| + \left|b\right|.'
+  - 'Wykonaj działania pod modułami: 2 - 9 = -7 oraz -5 + 1 = -4.'
+  - 'Opuść moduły: \left|-7\right| = 7, \left|-4\right| = 4.'
+  - Oblicz W = 7 - 4 = 3.
+  answer:
+    kind: NUMERIC
+    value: 3.0
+    latex: '3'
+  checks:
+  - kind: evaluate
+    expr: \left|2 - 9\right| - \left|-5 + 1\right|
+  skills:
+  - własności modułu
+  - moduł sumy a suma modułów
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 3.0 vs 3.0 (tol 1e-09)'
+- id: g-cm-10
+  slot: COMMON_MISTAKE
+  ramp_index: 4
+  difficulty: 3
+  exercise_type: moduł wyrażenia niewymiernego — analiza błędu
+  statement: 'Oblicz wartość wyrażenia W = \left|\sqrt{7} - 3\right| + \left|2 - \sqrt{7}\right|. Uczeń
+    zapisał: "pierwiastek jest liczbą dodatnią, więc \left|\sqrt{7} - 3\right| = \sqrt{7} - 3 oraz \left|2
+    - \sqrt{7}\right| = 2 - \sqrt{7}, zatem W = \sqrt{7} - 3 + 2 - \sqrt{7} = -1". Wyjaśnij błąd i podaj
+    poprawny wynik.'
+  statement_latex: W = \left|\sqrt{7} - 3\right| + \left|2 - \sqrt{7}\right|
+  solution: |-
+    Błędne rozumowanie: uczeń opuścił oba moduły bez zmiany znaku i otrzymał W = -1. Już sam wynik ujemny sygnalizuje błąd: suma dwóch modułów nie może być liczbą ujemną.
+    Gdzie tkwi błąd: przed opuszczeniem modułu trzeba rozstrzygnąć znak wyrażenia. Porównujemy: \sqrt{7} \approx 2{,}65, bo 2^2 = 4 < 7 < 9 = 3^2, czyli 2 < \sqrt{7} < 3.
+    Stąd \sqrt{7} - 3 < 0, więc \left|\sqrt{7} - 3\right| = 3 - \sqrt{7}.
+    Oraz 2 - \sqrt{7} < 0, więc \left|2 - \sqrt{7}\right| = \sqrt{7} - 2.
+    Poprawne rozwiązanie: W = \left(3 - \sqrt{7}\right) + \left(\sqrt{7} - 2\right) = 3 - \sqrt{7} + \sqrt{7} - 2 = 1.
+    Odpowiedź: W = 1.
+  solution_steps:
+  - Zauważ, że wynik ucznia jest ujemny, co jest niemożliwe dla sumy modułów.
+  - 'Porównaj \sqrt{7} z liczbami 2 i 3: z 4 < 7 < 9 wynika 2 < \sqrt{7} < 3.'
+  - Stwierdź, że \sqrt{7} - 3 < 0, więc \left|\sqrt{7}-3\right| = 3 - \sqrt{7}.
+  - Stwierdź, że 2 - \sqrt{7} < 0, więc \left|2-\sqrt{7}\right| = \sqrt{7} - 2.
+  - 'Dodaj: W = \left(3 - \sqrt{7}\right) + \left(\sqrt{7} - 2\right) = 1.'
+  answer:
+    kind: NUMERIC
+    value: 1.0
+    latex: '1'
+  checks:
+  - kind: evaluate
+    expr: \left|\sqrt{7} - 3\right| + \left|2 - \sqrt{7}\right|
+  skills:
+  - porównywanie liczb niewymiernych
+  - opuszczanie modułu z wyrażenia z pierwiastkiem
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 1.0 vs 1.0 (tol 1e-09)'
+- id: g-ch-t02
+  slot: CHALLENGE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: zadanie na osi liczbowej — ułożenie i rozwiązanie równania z modułami
+  statement: Na osi liczbowej dane są punkty A o współrzędnej \left(-7\right) oraz B o współrzędnej 5.
+    Punkt P leży na tej osi i jego odległość od punktu A jest trzy razy większa od jego odległości od
+    punktu B. Wyznacz wszystkie możliwe współrzędne punktu P.
+  statement_latex: \left|x+7\right| = 3\cdot\left|x-5\right|
+  solution: |-
+    Oznaczmy przez x współrzędną punktu P. Odległość na osi liczbowej to moduł różnicy współrzędnych, więc \left|PA\right| = \left|x-\left(-7\right)\right| = \left|x+7\right| oraz \left|PB\right| = \left|x-5\right|.
+
+    Warunek zadania zapisujemy jako równanie \left|x+7\right| = 3\cdot\left|x-5\right|, czyli \left|x+7\right| = \left|3x-15\right|.
+
+    Moduły po obu stronach — rozbijamy na alternatywę:
+    Przypadek 1: x+7 = 3x-15, stąd 22 = 2x, czyli x = 11.
+    Przypadek 2: x+7 = -\left(3x-15\right) = -3x+15, stąd 4x = 8, czyli x = 2.
+
+    Sprawdzenie: dla x = 11: \left|11+7\right| = 18 oraz 3\cdot\left|11-5\right| = 3\cdot 6 = 18 ✓; dla x = 2: \left|2+7\right| = 9 oraz 3\cdot\left|2-5\right| = 3\cdot 3 = 9 ✓.
+
+    Odpowiedź: punkt P ma współrzędną 2 albo 11.
+  solution_steps:
+  - Oznacz przez x współrzędną punktu P.
+  - 'Zapisz odległości: \left|PA\right| = \left|x+7\right|, \left|PB\right| = \left|x-5\right|.'
+  - Ułóż równanie \left|x+7\right| = 3\cdot\left|x-5\right|, czyli \left|x+7\right| = \left|3x-15\right|.
+  - 'Rozbij na alternatywę: x+7 = 3x-15 lub x+7 = -\left(3x-15\right).'
+  - 'Rozwiąż: x = 11 oraz x = 2.'
+  - Sprawdź oba wyniki w warunku zadania.
+  answer:
+    kind: SET
+    members:
+    - '2'
+    - '11'
+  checks:
+  - kind: solve_equation
+    expr: \left|x+7\right| = 3\cdot\left|x-5\right|
+  stated_model:
+    variable: x
+    objective_latex: \left|x+7\right| = 3\cdot\left|x-5\right|
+    goal: value
+    constraint_used: x — współrzędna punktu P na osi liczbowej, |PA| = 3|PB|
+  skills:
+  - interpretacja modułu jako odległości
+  - wprowadzenie zmiennej i ułożenie równania
+  - rozwiązywanie równania |f(x)| = k·|g(x)|
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''x'': ''\\left|x+7\\right|
+      = 3\\cdot\\left|x-5\\right|'') — human review'
+- id: g-ch-t03
+  slot: CHALLENGE
+  ramp_index: 1
+  difficulty: 4
+  exercise_type: zadanie na osi liczbowej z warunkiem odrzucającym jedno rozwiązanie
+  statement: Na osi liczbowej dane są punkty A o współrzędnej \left(-5\right) oraz B o współrzędnej 7.
+    Punkt P leży na tej osi, ale nie należy do odcinka AB. Odległość punktu P od punktu A jest równa trzykrotnej
+    odległości punktu P od punktu B. Wyznacz współrzędną punktu P oraz oblicz długość odcinka PB.
+  statement_latex: \left|x+5\right| = 3\cdot\left|x-7\right|
+  solution: |-
+    Niech x będzie współrzędną punktu P. Wtedy \left|PA\right| = \left|x-\left(-5\right)\right| = \left|x+5\right| oraz \left|PB\right| = \left|x-7\right|.
+
+    Warunek zadania: \left|x+5\right| = 3\cdot\left|x-7\right|, czyli \left|x+5\right| = \left|3x-21\right|.
+
+    Przypadek 1: x+5 = 3\cdot\left(x-7\right) = 3x-21, stąd 26 = 2x, czyli x = 13.
+    Przypadek 2: x+5 = -\left(3x-21\right) = -3x+21, stąd 4x = 16, czyli x = 4.
+
+    Teraz uwzględniamy warunek, że punkt P nie należy do odcinka AB, czyli x < -5 lub x > 7.
+    Liczba 4 należy do przedziału \left[-5,7\right], więc punkt o współrzędnej 4 leży na odcinku AB — odrzucamy go.
+    Liczba 13 spełnia warunek 13 > 7, więc P ma współrzędną 13.
+
+    Sprawdzenie: \left|13+5\right| = 18 oraz 3\cdot\left|13-7\right| = 3\cdot 6 = 18 ✓.
+
+    Długość odcinka PB: \left|PB\right| = \left|13-7\right| = 6.
+
+    Odpowiedź: punkt P ma współrzędną 13, a \left|PB\right| = 6.
+  solution_steps:
+  - Oznacz przez x współrzędną punktu P i zapisz \left|PA\right| = \left|x+5\right|, \left|PB\right| =
+    \left|x-7\right|.
+  - Ułóż równanie \left|x+5\right| = 3\cdot\left|x-7\right|.
+  - 'Rozbij na alternatywę: x+5 = 3\left(x-7\right) lub x+5 = -\left(3x-21\right).'
+  - 'Otrzymaj kandydatów: x = 13 oraz x = 4.'
+  - 'Zapisz warunek „P nie należy do odcinka AB”: x < -5 lub x > 7; odrzuć x = 4.'
+  - 'Podaj współrzędną punktu P: x = 13 i oblicz \left|PB\right| = \left|13-7\right| = 6.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: x_P
+      answer:
+        kind: NUMERIC
+        value: 13.0
+    - name: PB
+      answer:
+        kind: NUMERIC
+        value: 6.0
+  checks:
+  - kind: solve_equation
+    expr: x+5 = 3\cdot\left(x-7\right)
+    part: x_P
+  - kind: evaluate
+    expr: \left|13-7\right|
+    part: PB
+  stated_model:
+    variable: x
+    objective_latex: \left|x+5\right| = 3\cdot\left|x-7\right|
+    domain_lo: '7'
+    goal: value
+    constraint_used: P \notin AB, czyli x < -5 lub x > 7
+  skills:
+  - wprowadzenie zmiennej
+  - zapis warunku odległościowego przy pomocy modułów
+  - metoda przypadków
+  - odrzucenie rozwiązania sprzecznego z warunkiem zadania
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''x'': ''\\left|x+5\\right|
+      = 3\\cdot\\left|x-7\\right|'') — human review'
+- id: g-ch-t04
+  slot: CHALLENGE
+  ramp_index: 2
+  difficulty: 5
+  exercise_type: 'zadanie wieloczęściowe: ułożenie równania z dwoma modułami, metoda przedziałów, wnioski'
+  statement: Na osi liczbowej dane są punkty A o współrzędnej \left(-6\right) oraz B o współrzędnej 10.
+    Punkt P o współrzędnej x leży na tej osi, a suma jego odległości od punktu A i od punktu B jest równa
+    24. a) Zapisz warunek zadania w postaci równania z wartościami bezwzględnymi i wyznacz wszystkie możliwe
+    współrzędne punktu P. b) Oblicz długość odcinka o końcach w znalezionych punktach oraz współrzędną
+    środka tego odcinka. c) Uzasadnij, że żaden punkt należący do odcinka AB nie spełnia warunku zadania.
+  statement_latex: \left|x+6\right| + \left|x-10\right| = 24
+  solution: |-
+    a) Odległości punktu P od A i od B to \left|x-\left(-6\right)\right| = \left|x+6\right| oraz \left|x-10\right|. Warunek zadania:
+    \left|x+6\right| + \left|x-10\right| = 24.
+    Miejsca zerowe wyrażeń pod modułami: x = -6 i x = 10 — dzielą oś na trzy przedziały.
+
+    Przypadek 1: x < -6. Wtedy x+6 < 0 i x-10 < 0, więc -\left(x+6\right) - \left(x-10\right) = 24, czyli -2x+4 = 24, stąd -2x = 20, x = -10. Liczba -10 należy do przedziału \left(-\infty,-6\right), więc jest rozwiązaniem.
+    Przypadek 2: -6 \le x \le 10. Wtedy x+6 \ge 0 i x-10 \le 0, więc \left(x+6\right) - \left(x-10\right) = 16, czyli 16 = 24 — sprzeczność, brak rozwiązań.
+    Przypadek 3: x > 10. Wtedy \left(x+6\right) + \left(x-10\right) = 24, czyli 2x-4 = 24, stąd x = 14. Liczba 14 należy do przedziału \left(10,+\infty\right), więc jest rozwiązaniem.
+
+    Sprawdzenie: dla x = -10: \left|-10+6\right| + \left|-10-10\right| = 4+20 = 24 ✓; dla x = 14: \left|14+6\right| + \left|14-10\right| = 20+4 = 24 ✓.
+
+    b) Długość odcinka o końcach -10 i 14 wynosi \left|14-\left(-10\right)\right| = 24, a współrzędna jego środka to \frac{-10+14}{2} = 2. (Środek odcinka AB też ma współrzędną \frac{-6+10}{2} = 2, więc oba odcinki mają wspólny środek.)
+
+    c) Jeżeli punkt P należy do odcinka AB, to -6 \le x \le 10 i wtedy \left|x+6\right| + \left|x-10\right| = \left(x+6\right) + \left(10-x\right) = 16, niezależnie od x. Ponieważ 16 \ne 24, żaden punkt odcinka AB nie spełnia warunku zadania (dla punktów odcinka suma odległości jest zawsze równa długości AB, czyli 16).
+
+    Odpowiedź: a) \left|x+6\right| + \left|x-10\right| = 24, x = -10 lub x = 14; b) długość 24, środek o współrzędnej 2.
+  solution_steps:
+  - 'Zapisz odległości: \left|PA\right| = \left|x+6\right|, \left|PB\right| = \left|x-10\right| i ułóż
+    równanie \left|x+6\right| + \left|x-10\right| = 24.'
+  - Wyznacz miejsca zerowe wyrażeń pod modułami (x = -6, x = 10) i podziel oś na trzy przedziały.
+  - 'Dla x < -6: -2x+4 = 24, stąd x = -10 (należy do przedziału).'
+  - 'Dla -6 \le x \le 10: lewa strona jest równa 16, więc 16 = 24 — brak rozwiązań.'
+  - 'Dla x > 10: 2x-4 = 24, stąd x = 14 (należy do przedziału).'
+  - 'Oblicz długość odcinka: \left|14-\left(-10\right)\right| = 24 oraz środek \frac{-10+14}{2} = 2.'
+  - Uzasadnij, że dla x z przedziału \left[-6,10\right] suma odległości jest stała i równa 16 \ne 24.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: rownanie
+      answer:
+        kind: SYMBOLIC
+        latex: \left|x+6\right| + \left|x-10\right| = 24
+    - name: wspolrzedne
+      answer:
+        kind: SET
+        members:
+        - '-10'
+        - '14'
+    - name: dlugosc
+      answer:
+        kind: NUMERIC
+        value: 24.0
+    - name: srodek
+      answer:
+        kind: NUMERIC
+        value: 2.0
+    - name: uzasadnienie
+      answer:
+        kind: NOT_MACHINE_CHECKABLE
+        reason: Należy pokazać, że dla -6 \le x \le 10 zachodzi \left|x+6\right| + \left|x-10\right| =
+          \left(x+6\right)+\left(10-x\right) = 16, a 16 \ne 24, więc żaden punkt odcinka AB nie spełnia
+          warunku.
+  checks:
+  - kind: solve_equation
+    expr: \left|x+6\right| + \left|x-10\right| = 24
+    part: wspolrzedne
+  - kind: evaluate
+    expr: \left|14-\left(-10\right)\right|
+    part: dlugosc
+  - kind: evaluate
+    expr: \frac{-10+14}{2}
+    part: srodek
+  stated_model:
+    variable: x
+    objective_latex: \left|x+6\right| + \left|x-10\right| = 24
+    goal: value
+    constraint_used: x — współrzędna punktu P na osi liczbowej; suma odległości od A(-6) i B(10) równa
+      24
+  skills:
+  - ułożenie równania z sumą odległości
+  - metoda przypadków na trzech przedziałach
+  - odrzucenie przedziału bez rozwiązań
+  - obliczenie długości odcinka i współrzędnej środka
+  - uzasadnienie
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''x'': ''\\left|x+6\\right|
+      + \\left|x-10\\right| = 24'') — human review'

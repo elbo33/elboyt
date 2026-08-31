@@ -24,10 +24,18 @@ export type ExampleAuthoring = {
   ex: Record<string, unknown> & {beats: string[]};
 };
 
+// The episode thumbnail (1920x1080, ThumbA-flat style). `py` is a full Manim
+// scene file whose one class calls `stage_thumbnail(...)`; it is rendered as a
+// single frame at the end of the long-form stage, never as part of the video.
+export type ThumbnailAuthoring = {
+  py: string;
+};
+
 export type SectionAuthoring = {
   slug: string;
   topic: string; // human episode title
   authored: AuthoredScene[]; // hook / intuition / definition / why_it_works / summary
   examples: ExampleAuthoring[]; // THEORY_SUPPORT problems, easy -> hard
   maturaExample?: ExampleAuthoring; // the MATURA_CONNECTION band, staged as a worked block
+  thumbnail?: ThumbnailAuthoring;
 };

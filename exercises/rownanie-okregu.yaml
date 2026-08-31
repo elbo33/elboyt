@@ -1,0 +1,837 @@
+section: rownanie-okregu
+name: Równanie okręgu
+scope: Circle equation in canonical form; centre, radius and checking whether a point lies on the circle.
+requirements:
+- IX.4
+counts:
+  total: 16
+  REFERENCE_CALL: 10
+  DETERMINISTIC: 3
+  NOT_MACHINE_CHECKABLE: 3
+exercises:
+- id: g-th-00
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: zapisanie równania okręgu
+  statement: W kartezjańskim układzie współrzędnych (x, y) dany jest okrąg o środku S = (3, -1) i promieniu
+    r = 4. Zapisz równanie tego okręgu w postaci kanonicznej.
+  statement_latex: S=\left(3,-1\right),\ r=4\ \Rightarrow\ \left(x-a\right)^2+\left(y-b\right)^2=r^2
+  solution: |-
+    Korzystamy z szablonu (x-a)^2+(y-b)^2=r^2, w którym S=(a,b).
+    Tu a=3, b=-1, więc w nawiasach piszemy liczby przeciwne: (x-3)^2 oraz (y-(-1))^2=(y+1)^2.
+    Po prawej stronie stoi KWADRAT promienia: r^2=4^2=16.
+    Zatem równanie ma postać (x-3)^2+(y+1)^2=16.
+    Kontrola: punkt (a+r,b)=(7,-1) spełnia równanie, bo (7-3)^2+(-1+1)^2=16+0=16.
+  solution_steps:
+  - Zapisz szablon \left(x-a\right)^2+\left(y-b\right)^2=r^2.
+  - 'Podstaw a=3, b=-1 ze zmienionym znakiem: \left(x-3\right)^2+\left(y+1\right)^2.'
+  - Oblicz r^2=4^2=16 i wpisz po prawej stronie.
+  - Zapisz równanie \left(x-3\right)^2+\left(y+1\right)^2=16 i sprawdź je punktem \left(7,-1\right).
+  answer:
+    kind: SYMBOLIC
+    latex: \left(x-3\right)^2+\left(y+1\right)^2=16
+  skills:
+  - postać kanoniczna równania okręgu
+  - zapis środka ze zmienionym znakiem
+  verification:
+    checkability: REFERENCE_CALL
+    note: '''\\left(x-3\\right)^2+\\left(y+1\\right)^2=16'' vs ''(x-3)^2 + (y+1)^2 = 16'''
+- id: g-th-01
+  slot: THEORY_SUPPORT
+  ramp_index: 1
+  difficulty: 1
+  exercise_type: odczytanie środka i promienia
+  statement: W kartezjańskim układzie współrzędnych (x, y) dany jest okrąg o równaniu \left(x-4\right)^2+\left(y+2\right)^2=49.
+    Podaj współrzędne środka S tego okręgu oraz jego promień r.
+  statement_latex: \left(x-4\right)^2+\left(y+2\right)^2=49
+  solution: |-
+    Przepisujemy nawiasy tak, by w obu stał znak minus: (x-4)^2+(y-(-2))^2=49.
+    Stąd a=4 oraz b=-2, czyli środek S=(4,-2).
+    Prawa strona to r^2, więc r=\sqrt{49}=7.
+    Odpowiedź: S=(4,-2), r=7.
+  solution_steps:
+  - 'Zapisz oba nawiasy w postaci \left(x-a\right)^2 i \left(y-b\right)^2: \left(y+2\right)^2=\left(y-\left(-2\right)\right)^2.'
+  - Odczytaj środek S=\left(4,-2\right).
+  - Zauważ, że prawa strona to r^2, i oblicz r=\sqrt{49}=7.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: srodek
+      answer:
+        kind: TUPLE
+        items:
+        - '4'
+        - '-2'
+    - name: promien
+      answer:
+        kind: NUMERIC
+        value: 7.0
+  checks:
+  - kind: evaluate
+    expr: \sqrt{49}
+    part: promien
+  skills:
+  - odczytywanie środka z postaci kanonicznej
+  - wyznaczanie promienia jako pierwiastka z prawej strony
+  verification:
+    checkability: REFERENCE_CALL
+    note: '2 parts matched · det: [promien] SymPy solved it fresh: 7.0 vs 7.0 (tol 1e-09)'
+- id: g-th-02
+  slot: THEORY_SUPPORT
+  ramp_index: 2
+  difficulty: 2
+  exercise_type: sprawdzenie położenia punktu
+  statement: W kartezjańskim układzie współrzędnych (x, y) dany jest okrąg o równaniu x^{2}+y^{2}=40 oraz
+    punkt A = (6, 2). Oblicz wartość lewej strony równania dla punktu A i rozstrzygnij, czy punkt A leży
+    na tym okręgu.
+  statement_latex: x^{2}+y^{2}=40,\quad A=\left(6,2\right)
+  solution: |-
+    Okrąg x^2+y^2=40 ma środek S=(0,0) i r^2=40.
+    Podstawiamy współrzędne punktu A do lewej strony:
+    L=6^2+2^2=36+4=40.
+    Porównujemy: L=40 oraz r^2=40, czyli L=r^2.
+    Zatem punkt A leży na okręgu (nie trzeba obliczać \sqrt{40}).
+  solution_steps:
+  - Zapisz lewą stronę L=x_0^{2}+y_0^{2}.
+  - 'Podstaw A=\left(6,2\right): L=6^{2}+2^{2}=36+4=40.'
+  - Porównaj L=40 z r^{2}=40.
+  - 'Wniosek: L=r^{2}, więc punkt A leży na okręgu.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wartosc_L
+      answer:
+        kind: NUMERIC
+        value: 40.0
+    - name: czy_lezy_na_okregu
+      answer:
+        kind: BOOLEAN
+        truth: true
+  checks:
+  - kind: evaluate
+    expr: 6^{2}+2^{2}
+    part: wartosc_L
+  skills:
+  - podstawianie współrzędnych do równania okręgu
+  - porównanie L z r^2
+  verification:
+    checkability: REFERENCE_CALL
+    note: '2 parts matched · det: [wartosc_L] SymPy solved it fresh: 40.0 vs 40.0 (tol 1e-09)'
+- id: g-ex-03
+  slot: EXERCISE
+  ramp_index: 1
+  difficulty: 2
+  exercise_type: okrąg o danym środku przechodzący przez dany punkt
+  statement: W kartezjańskim układzie współrzędnych (x, y) okrąg O o środku S = (-2, 3) przechodzi przez
+    punkt P = (1, 7). Oblicz promień okręgu O oraz zapisz jego równanie w postaci kanonicznej.
+  statement_latex: S=\left(-2,3\right),\quad P=\left(1,7\right),\quad r=\sqrt{\left(1-\left(-2\right)\right)^{2}+\left(7-3\right)^{2}}
+  solution: |-
+    Promień to odległość środka od punktu leżącego na okręgu:
+    r^2=(1-(-2))^2+(7-3)^2=3^2+4^2=9+16=25, więc r=\sqrt{25}=5.
+    Wstawiamy a=-2, b=3 oraz r^2=25 do postaci kanonicznej:
+    (x+2)^2+(y-3)^2=25.
+    Kontrola: dla P=(1,7) mamy (1+2)^2+(7-3)^2=9+16=25 ✓.
+  solution_steps:
+  - Oblicz r^{2}=\left(1-\left(-2\right)\right)^{2}+\left(7-3\right)^{2}=9+16=25.
+  - Wyznacz r=\sqrt{25}=5.
+  - Podstaw a=-2, b=3 i r^{2}=25 do \left(x-a\right)^2+\left(y-b\right)^2=r^2.
+  - Zapisz \left(x+2\right)^{2}+\left(y-3\right)^{2}=25 i sprawdź równanie punktem P.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: promien
+      answer:
+        kind: NUMERIC
+        value: 5.0
+    - name: rownanie
+      answer:
+        kind: SYMBOLIC
+        latex: \left(x+2\right)^{2}+\left(y-3\right)^{2}=25
+  checks:
+  - kind: evaluate
+    expr: \sqrt{\left(1-\left(-2\right)\right)^{2}+\left(7-3\right)^{2}}
+    part: promien
+  skills:
+  - promień jako odległość środka od punktu okręgu
+  - zapisanie równania okręgu
+  verification:
+    checkability: REFERENCE_CALL
+    note: '2 parts matched · det: [promien] SymPy solved it fresh: 5.0 vs 5.0 (tol 1e-09)'
+- id: g-ex-04
+  slot: EXERCISE
+  ramp_index: 2
+  difficulty: 3
+  exercise_type: okrąg zadany średnicą
+  statement: W kartezjańskim układzie współrzędnych (x, y) punkty A = (-1, 2) oraz B = (7, 8) są końcami
+    średnicy okręgu O. a) Wyznacz środek S i promień r okręgu O. b) Zapisz równanie okręgu O w postaci
+    kanonicznej. c) Rozstrzygnij, czy punkt M = (2, 9) leży na okręgu O, wewnątrz niego, czy na zewnątrz.
+  statement_latex: S=\left(\frac{-1+7}{2},\ \frac{2+8}{2}\right),\qquad r=\frac{1}{2}\cdot\sqrt{\left(7-\left(-1\right)\right)^{2}+\left(8-2\right)^{2}}
+  solution: |-
+    a) Środek okręgu to środek odcinka AB:
+    S=\left(\frac{-1+7}{2},\frac{2+8}{2}\right)=(3,5).
+    Promień: r^2=|SA|^2=(-1-3)^2+(2-5)^2=16+9=25, więc r=5.
+    (Sprawdzenie: |AB|=\sqrt{8^2+6^2}=\sqrt{100}=10, więc r=\frac{1}{2}\cdot 10=5 ✓.)
+
+    b) Równanie: (x-3)^2+(y-5)^2=25. Kontrola: dla B=(7,8) mamy (7-3)^2+(8-5)^2=16+9=25 ✓.
+
+    c) Dla M=(2,9): L=(2-3)^2+(9-5)^2=1+16=17. Ponieważ 17<25, czyli L<r^2, punkt M leży WEWNĄTRZ okręgu (należy do koła, ale nie do okręgu).
+  solution_steps:
+  - 'Oblicz środek odcinka AB: S=\left(\frac{-1+7}{2},\ \frac{2+8}{2}\right)=\left(3,5\right).'
+  - Oblicz r=\frac{1}{2}\cdot\left|AB\right|=\frac{1}{2}\cdot\sqrt{64+36}=5.
+  - Zapisz równanie \left(x-3\right)^{2}+\left(y-5\right)^{2}=25.
+  - 'Podstaw M=\left(2,9\right): L=\left(2-3\right)^{2}+\left(9-5\right)^{2}=17.'
+  - Porównaj 17<25, więc M leży wewnątrz okręgu.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: srodek
+      answer:
+        kind: TUPLE
+        items:
+        - '3'
+        - '5'
+    - name: promien
+      answer:
+        kind: NUMERIC
+        value: 5.0
+    - name: rownanie
+      answer:
+        kind: SYMBOLIC
+        latex: \left(x-3\right)^{2}+\left(y-5\right)^{2}=25
+    - name: wartosc_L_dla_M
+      answer:
+        kind: NUMERIC
+        value: 17.0
+    - name: polozenie_M
+      answer:
+        kind: SYMBOLIC
+        latex: \text{punkt } M \text{ leży wewnątrz okręgu}
+  checks:
+  - kind: evaluate
+    expr: \frac{1}{2}\cdot\sqrt{\left(7-\left(-1\right)\right)^{2}+\left(8-2\right)^{2}}
+    part: promien
+  - kind: evaluate
+    expr: \left(2-3\right)^{2}+\left(9-5\right)^{2}
+    part: wartosc_L_dla_M
+  skills:
+  - środek odcinka
+  - promień z długości średnicy
+  - położenie punktu względem okręgu
+  verification:
+    checkability: REFERENCE_CALL
+    note: 'could not compare: reference produced 3 outputs, answer has 5'
+- id: g-ex-05
+  slot: EXERCISE
+  ramp_index: 3
+  difficulty: 4
+  exercise_type: równanie okręgu z parametrem
+  statement: W kartezjańskim układzie współrzędnych (x, y) dane jest równanie \left(x+3\right)^{2}+\left(y-1\right)^{2}=2\cdot
+    m-6 z parametrem m. a) Wyznacz wszystkie wartości m, dla których równanie to opisuje okrąg. b) Wyznacz
+    m, dla którego promień tego okręgu jest równy 4. c) Wyznacz m, dla którego okrąg ten jest styczny
+    do osi Oy układu współrzędnych.
+  statement_latex: \left(x+3\right)^{2}+\left(y-1\right)^{2}=2\cdot m-6
+  solution: |-
+    Lewa strona jest sumą kwadratów, a środek okręgu to S=(-3,1).
+
+    a) Równanie opisuje okrąg dokładnie wtedy, gdy prawa strona jest dodatnia:
+    2m-6>0 \iff 2m>6 \iff m>3.
+    (Dla m=3 zbiorem rozwiązań jest jeden punkt (-3,1), dla m<3 zbiór jest pusty.)
+
+    b) r=4 oznacza r^2=16, czyli 2m-6=16, stąd 2m=22 i m=11. Warunek m>3 jest spełniony ✓.
+
+    c) Odległość środka S=(-3,1) od osi Oy wynosi |-3|=3, więc styczność do Oy zachodzi, gdy r=3, czyli r^2=9:
+    2m-6=9, 2m=15, m=\frac{15}{2}. Warunek m>3 jest spełniony ✓ (okrąg dotyka osi Oy w punkcie (0,1)).
+  solution_steps:
+  - 'Zapisz warunek istnienia okręgu: 2\cdot m-6>0.'
+  - 'Rozwiąż nierówność: m>3.'
+  - 'Dla r=4 zapisz 2\cdot m-6=16 i rozwiąż: m=11.'
+  - Odczytaj środek S=\left(-3,1\right); odległość od osi Oy to \left|-3\right|=3.
+  - 'Z warunku styczności r=3 zapisz 2\cdot m-6=9 i rozwiąż: m=\frac{15}{2}.'
+  - Sprawdź, że otrzymane wartości spełniają warunek m>3.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: a_warunek_okregu
+      answer:
+        kind: INTERVAL
+        lo: '3'
+        hi: \infty
+    - name: b_promien_4
+      answer:
+        kind: NUMERIC
+        value: 11.0
+    - name: c_stycznosc_Oy
+      answer:
+        kind: NUMERIC
+        value: 7.5
+  checks:
+  - kind: solve_inequality
+    expr: 2\cdot m-6>0
+    var: m
+    part: a_warunek_okregu
+  - kind: solve_equation
+    expr: 2\cdot m-6=16
+    var: m
+    part: b_promien_4
+  - kind: solve_equation
+    expr: 2\cdot m-6=9
+    var: m
+    part: c_stycznosc_Oy
+  skills:
+  - warunek istnienia okręgu
+  - dobór parametru do zadanego promienia
+  - styczność okręgu do osi układu
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [a_warunek_okregu] SymPy solved it fresh: endpoints matched
+      ; [b_promien_4] SymPy solved it fresh: 11.0 vs 11.0 (tol 1e-09) ; [c_stycznosc_Oy] SymPy solved
+      it fresh: 7.5 vs 7.5 (tol 1e-09)'
+- id: g-ex-t00
+  slot: EXERCISE
+  ramp_index: 6
+  difficulty: 4
+  exercise_type: równanie okręgu z parametrem
+  statement: W kartezjańskim układzie współrzędnych (x, y) dane jest równanie \left(x+3\right)^2+\left(y-1\right)^2=3\cdot
+    m-2 z parametrem m. a) Wyznacz wszystkie wartości m, dla których to równanie opisuje okrąg. b) Wyznacz
+    tę wartość m, dla której punkt P=\left(1,4\right) leży na tym okręgu. c) Wyznacz tę wartość m, dla
+    której okrąg ten jest styczny do osi Oy.
+  statement_latex: \left(x+3\right)^2+\left(y-1\right)^2=3\cdot m-2
+  solution: |-
+    Lewa strona równania jest sumą kwadratów, a środek odczytujemy ze zmienionymi znakami: S=\left(-3,1\right). Prawa strona to r^2.
+
+    a) Równanie opisuje okrąg dokładnie wtedy, gdy prawa strona jest dodatnia: 3\cdot m-2>0, czyli m>\frac{2}{3}. Zatem m\in\left(\frac{2}{3},\infty\right).
+
+    b) Punkt P=\left(1,4\right) leży na okręgu, gdy spełnia równanie:
+    \left(1+3\right)^2+\left(4-1\right)^2=3\cdot m-2,
+    16+9=3\cdot m-2, czyli 3\cdot m-2=25, stąd m=9. Warunek m>\frac{2}{3} jest spełniony, więc dla m=9 mamy okrąg o promieniu r=5.
+
+    c) Odległość środka S=\left(-3,1\right) od osi Oy wynosi \left|-3\right|=3, więc styczność do Oy zachodzi dokładnie wtedy, gdy r=3, czyli r^2=9:
+    3\cdot m-2=9, stąd m=\frac{11}{3}. Ta wartość spełnia m>\frac{2}{3}, więc jest to okrąg \left(x+3\right)^2+\left(y-1\right)^2=9, styczny do osi Oy w punkcie \left(0,1\right).
+  solution_steps:
+  - 'Odczytaj środek: S=\left(-3,1\right); prawa strona równa się r^2.'
+  - 'a) Zapisz warunek istnienia okręgu 3\cdot m-2>0 i rozwiąż: m>\frac{2}{3}.'
+  - 'b) Podstaw współrzędne punktu P: \left(1+3\right)^2+\left(4-1\right)^2=25, więc 3\cdot m-2=25 i m=9.'
+  - Sprawdź, że m=9 spełnia warunek m>\frac{2}{3}.
+  - c) Odległość S od osi Oy to \left|-3\right|=3, więc warunek styczności to r^2=9, czyli 3\cdot m-2=9
+    i m=\frac{11}{3}.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: m_okrag
+      answer:
+        kind: INTERVAL
+        lo: \frac{2}{3}
+        hi: \infty
+    - name: m_przez_P
+      answer:
+        kind: NUMERIC
+        value: 9.0
+        latex: '9'
+    - name: m_stycznosc_Oy
+      answer:
+        kind: NUMERIC
+        value: 3.6666666666666665
+        latex: \frac{11}{3}
+  checks:
+  - kind: solve_inequality
+    expr: 3\cdot m-2>0
+    var: m
+    part: m_okrag
+  - kind: solve_equation
+    expr: 3\cdot m-2=\left(1+3\right)^2+\left(4-1\right)^2
+    var: m
+    part: m_przez_P
+  - kind: solve_equation
+    expr: 3\cdot m-2=9
+    var: m
+    part: m_stycznosc_Oy
+  skills:
+  - warunek istnienia okręgu
+  - podstawianie punktu do równania okręgu
+  - styczność okręgu do osi układu
+  - rozwiązywanie równań i nierówności liniowych z parametrem
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [m_okrag] SymPy solved it fresh: endpoints matched ; [m_przez_P]
+      SymPy solved it fresh: 9.0 vs 9.0 (tol 1e-09) ; [m_stycznosc_Oy] SymPy solved it fresh: 3.6666666666666665
+      vs 3.6666666666666665 (tol 1e-09)'
+- id: g-ex-t01
+  slot: EXERCISE
+  ramp_index: 7
+  difficulty: 4
+  exercise_type: okrąg zadany średnicą i położenie punktów
+  statement: W kartezjańskim układzie współrzędnych (x, y) punkty A=\left(-2,-1\right) oraz B=\left(6,5\right)
+    są końcami średnicy okręgu O. a) Wyznacz promień okręgu O i zapisz jego równanie. b) Rozstrzygnij
+    dla każdego z punktów C=\left(5,6\right), D=\left(-1,5\right), E=\left(6,-3\right), czy leży on na
+    okręgu O, wewnątrz niego, czy na zewnątrz.
+  statement_latex: S=\left(\frac{-2+6}{2},\ \frac{-1+5}{2}\right),\qquad r=\frac{1}{2}\cdot\left|AB\right|
+  solution: |-
+    a) Środkiem okręgu jest środek średnicy AB:
+    S=\left(\frac{-2+6}{2},\frac{-1+5}{2}\right)=\left(2,2\right).
+    Promień to połowa długości średnicy:
+    \left|AB\right|=\sqrt{\left(6+2\right)^2+\left(5+1\right)^2}=\sqrt{64+36}=\sqrt{100}=10, więc r=\frac{10}{2}=5.
+    (Kontrola: r^2=\left(-2-2\right)^2+\left(-1-2\right)^2=16+9=25.)
+    Równanie okręgu: \left(x-2\right)^2+\left(y-2\right)^2=25.
+
+    b) Liczymy L=\left(x_0-2\right)^2+\left(y_0-2\right)^2 i porównujemy z r^2=25.
+    C=\left(5,6\right): L=\left(5-2\right)^2+\left(6-2\right)^2=9+16=25=r^2 — punkt leży na okręgu.
+    D=\left(-1,5\right): L=\left(-1-2\right)^2+\left(5-2\right)^2=9+9=18<25 — punkt leży wewnątrz okręgu.
+    E=\left(6,-3\right): L=\left(6-2\right)^2+\left(-3-2\right)^2=16+25=41>25 — punkt leży na zewnątrz okręgu.
+  solution_steps:
+  - 'Wyznacz środek okręgu jako środek odcinka AB: S=\left(2,2\right).'
+  - Oblicz \left|AB\right|=\sqrt{\left(6+2\right)^2+\left(5+1\right)^2}=10 i promień r=\frac{10}{2}=5.
+  - 'Zapisz równanie: \left(x-2\right)^2+\left(y-2\right)^2=25.'
+  - 'Dla C: L=9+16=25=r^2 — punkt na okręgu.'
+  - 'Dla D: L=9+9=18<25 — punkt wewnątrz.'
+  - 'Dla E: L=16+25=41>25 — punkt na zewnątrz.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: promien
+      answer:
+        kind: NUMERIC
+        value: 5.0
+        latex: '5'
+    - name: rownanie
+      answer:
+        kind: SYMBOLIC
+        latex: \left(x-2\right)^2+\left(y-2\right)^2=25
+    - name: polozenie_C
+      answer:
+        kind: SYMBOLIC
+        latex: na okręgu
+    - name: polozenie_D
+      answer:
+        kind: SYMBOLIC
+        latex: wewnątrz
+    - name: polozenie_E
+      answer:
+        kind: SYMBOLIC
+        latex: na zewnątrz
+  checks:
+  - kind: evaluate
+    expr: \frac{\sqrt{\left(6+2\right)^2+\left(5+1\right)^2}}{2}
+    part: promien
+  skills:
+  - środek odcinka
+  - promień z długości średnicy
+  - zapis równania okręgu w postaci kanonicznej
+  - badanie położenia punktu względem okręgu
+  verification:
+    checkability: REFERENCE_CALL
+    note: 5 parts matched
+- id: g-cm-06
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: odczytanie środka i promienia (typowy błąd znaku)
+  statement: W kartezjańskim układzie współrzędnych (x, y) dany jest okrąg o równaniu \left(x+6\right)^{2}+\left(y-2\right)^{2}=49.
+    Podaj współrzędne środka S oraz promień r tego okręgu. Uczeń zapisał odpowiedź S = (6, -2). Wyjaśnij,
+    na czym polega jego błąd, i podaj poprawną odpowiedź.
+  statement_latex: \left(x+6\right)^{2}+\left(y-2\right)^{2}=49
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń przepisał liczby widoczne w nawiasach bez zmiany znaku — z (x+6)^2 wziął 6, a z (y-2)^2 wziął -2 — i otrzymał S=(6,-2).
+
+    DLACZEGO TO JEST ŹLE: wzorcem jest zawsze (x-a)^2+(y-b)^2=r^2, a więc w nawiasie stoi RÓŻNICA x-a. Liczba widoczna w nawiasie jest liczbą PRZECIWNĄ do współrzędnej środka. Łatwo to sprawdzić: dla S=(6,-2) i r=7 środek musiałby spełniać (6+6)^2+(-2-2)^2=144+16=160\neq 0, tzn. sam środek 'wypadałby' daleko od okręgu w sposób niezgodny z równaniem, bo lewa strona zeruje się dopiero dla x=-6, y=2.
+
+    POPRAWNIE: (x+6)^2=(x-(-6))^2, więc a=-6; (y-2)^2 daje b=2. Zatem S=(-6,2).
+    Promień: prawa strona to r^2, więc r=\sqrt{49}=7.
+    Odpowiedź: S=(-6,2), r=7.
+  solution_steps:
+  - 'Zauważ błąd: przepisanie liczb z nawiasów bez zmiany znaku daje S=\left(6,-2\right).'
+  - 'Przekształć nawiasy do wzorca: \left(x+6\right)^{2}=\left(x-\left(-6\right)\right)^{2}, \left(y-2\right)^{2}.'
+  - Odczytaj poprawnie a=-6, b=2, czyli S=\left(-6,2\right).
+  - Oblicz r=\sqrt{49}=7.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: srodek
+      answer:
+        kind: TUPLE
+        items:
+        - '-6'
+        - '2'
+    - name: promien
+      answer:
+        kind: NUMERIC
+        value: 7.0
+  checks:
+  - kind: evaluate
+    expr: \sqrt{49}
+    part: promien
+  skills:
+  - odczytywanie środka z postaci kanonicznej
+  - kontrola znaków w nawiasach
+  verification:
+    checkability: REFERENCE_CALL
+    note: '2 parts matched · det: [promien] SymPy solved it fresh: 7.0 vs 7.0 (tol 1e-09)'
+- id: g-cm-07
+  slot: COMMON_MISTAKE
+  ramp_index: 1
+  difficulty: 2
+  exercise_type: równanie okręgu (mylenie r z r^2)
+  statement: a) Zapisz równanie okręgu o środku S = (2, -3) i promieniu r = 7. b) Podaj promień okręgu
+    o równaniu \left(x-1\right)^{2}+\left(y-5\right)^{2}=64. Uczeń w podpunkcie a) napisał \left(x-2\right)^{2}+\left(y+3\right)^{2}=7,
+    a w podpunkcie b) odpowiedział r = 64. Wskaż jego błąd i podaj poprawne odpowiedzi.
+  statement_latex: S=\left(2,-3\right),\ r=7;\qquad \left(x-1\right)^{2}+\left(y-5\right)^{2}=64
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń wpisuje po prawej stronie sam promień (7 zamiast 7^2) i odwrotnie — z prawej strony odczytuje promień bez pierwiastkowania (64 zamiast \sqrt{64}).
+
+    DLACZEGO TO JEST ŹLE: postać kanoniczna to (x-a)^2+(y-b)^2=r^2 — po prawej stronie stoi zawsze KWADRAT promienia. Gdyby równanie z a) brzmiało (x-2)^2+(y+3)^2=7, to promień wynosiłby \sqrt{7}\approx 2{,}65, a nie 7. Podobnie w b) promień 64 dałby prawą stronę 64^2=4096.
+
+    POPRAWNIE:
+    a) r^2=7^2=49, więc równanie ma postać (x-2)^2+(y+3)^2=49. Kontrola punktem (a+r,b)=(9,-3): (9-2)^2+(-3+3)^2=49 ✓.
+    b) r=\sqrt{64}=8.
+  solution_steps:
+  - 'Zauważ błąd: po prawej stronie równania okręgu stoi r^{2}, a nie r.'
+  - a) Oblicz r^{2}=7^{2}=49 i zapisz \left(x-2\right)^{2}+\left(y+3\right)^{2}=49.
+  - b) Z r^{2}=64 oblicz r=\sqrt{64}=8.
+  - Sprawdź równanie z a) punktem \left(9,-3\right).
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: rownanie
+      answer:
+        kind: SYMBOLIC
+        latex: \left(x-2\right)^{2}+\left(y+3\right)^{2}=49
+    - name: promien
+      answer:
+        kind: NUMERIC
+        value: 8.0
+  checks:
+  - kind: evaluate
+    expr: \sqrt{64}
+    part: promien
+  skills:
+  - zapisanie równania okręgu
+  - wyznaczanie promienia z prawej strony równania
+  verification:
+    checkability: REFERENCE_CALL
+    note: '2 parts matched · det: [promien] SymPy solved it fresh: 8.0 vs 8.0 (tol 1e-09)'
+- id: g-cm-08
+  slot: COMMON_MISTAKE
+  ramp_index: 2
+  difficulty: 2
+  exercise_type: promień niewymierny (upraszczanie pierwiastka)
+  statement: W kartezjańskim układzie współrzędnych (x, y) dany jest okrąg o równaniu \left(x-3\right)^{2}+\left(y+2\right)^{2}=48.
+    Podaj promień r tego okręgu w postaci uproszczonej. Uczeń odpowiedział r = 24. Wyjaśnij jego błąd
+    i podaj poprawny wynik.
+  statement_latex: \left(x-3\right)^{2}+\left(y+2\right)^{2}=48,\qquad r=\sqrt{48}
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń 'podzielił przez 2' liczbę stojącą po prawej stronie i napisał r=\frac{48}{2}=24. Inni zostawiają wynik w postaci r=\sqrt{48}, nie upraszczając go.
+
+    DLACZEGO TO JEST ŹLE: pierwiastkowanie NIE jest dzieleniem przez 2. Gdyby r=24, to prawa strona wynosiłaby 24^2=576, a nie 48.
+
+    POPRAWNIE: r^2=48, więc r=\sqrt{48}. Wyłączamy przed pierwiastek największy kwadrat będący dzielnikiem 48, czyli 16:
+    r=\sqrt{16\cdot 3}=\sqrt{16}\cdot\sqrt{3}=4\sqrt{3}\approx 6{,}93.
+    Odpowiedź: r=4\sqrt{3}.
+  solution_steps:
+  - 'Zauważ błąd: r^{2}=48 nie oznacza r=\frac{48}{2}.'
+  - Zapisz r=\sqrt{48}.
+  - 'Rozłóż 48=16\cdot 3 i wyłącz czynnik: r=\sqrt{16}\cdot\sqrt{3}=4\sqrt{3}.'
+  - 'Sprawdź: \left(4\sqrt{3}\right)^{2}=16\cdot 3=48.'
+  answer:
+    kind: SYMBOLIC
+    latex: 4\sqrt{3}
+  checks:
+  - kind: evaluate
+    expr: \sqrt{48}
+  skills:
+  - wyznaczanie promienia z r^2
+  - wyłączanie czynnika przed pierwiastek
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 6.928203230275509 vs 6.928203230275509 (tol 1e-09)'
+- id: g-cm-09
+  slot: COMMON_MISTAKE
+  ramp_index: 3
+  difficulty: 3
+  exercise_type: okrąg a koło
+  statement: 'W kartezjańskim układzie współrzędnych (x, y) dany jest okrąg O o równaniu \left(x-2\right)^{2}+\left(y+1\right)^{2}=36
+    oraz punkt P = (4, 2). Oblicz wartość lewej strony równania dla punktu P, rozstrzygnij, czy P należy
+    do okręgu O, oraz zapisz nierówność opisującą koło o tym samym środku i promieniu. Uczeń stwierdził:
+    "P leży blisko środka, więc na pewno należy do okręgu O". Wyjaśnij, na czym polega jego błąd.'
+  statement_latex: \left(x-2\right)^{2}+\left(y+1\right)^{2}=36,\qquad P=\left(4,2\right)
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń miesza okrąg z kołem — sprawdza tylko, czy punkt 'mieści się w środku figury', i na tej podstawie mówi, że punkt należy do okręgu.
+
+    OBLICZENIA: L=(4-2)^2+(2+1)^2=2^2+3^2=4+9=13. Prawa strona to r^2=36.
+    Ponieważ 13<36, punkt P leży WEWNĄTRZ okręgu, a więc NIE należy do okręgu O.
+
+    DLACZEGO TO JEST ŹLE: okrąg to sama linia — zbiór punktów odległych od środka DOKŁADNIE o r; opisuje go RÓWNANIE (x-2)^2+(y+1)^2=36. Koło to linia wraz z wnętrzem; opisuje je NIERÓWNOŚĆ (x-2)^2+(y+1)^2\le 36. Punkt P spełnia nierówność ostrą, więc należy do koła, ale nie do okręgu.
+
+    ODPOWIEDŹ: L=13; P nie należy do okręgu O (leży wewnątrz); koło: (x-2)^2+(y+1)^2\le 36.
+  solution_steps:
+  - 'Podstaw P=\left(4,2\right) do lewej strony: L=\left(4-2\right)^{2}+\left(2+1\right)^{2}=13.'
+  - 'Porównaj z r^{2}=36: 13<36, więc P leży wewnątrz.'
+  - 'Wniosek: P nie należy do okręgu O, bo okrąg to tylko brzeg.'
+  - 'Zapisz nierówność opisującą koło: \left(x-2\right)^{2}+\left(y+1\right)^{2}\le 36.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wartosc_L
+      answer:
+        kind: NUMERIC
+        value: 13.0
+    - name: czy_P_nalezy_do_okregu
+      answer:
+        kind: BOOLEAN
+        truth: false
+    - name: nierownosc_kola
+      answer:
+        kind: SYMBOLIC
+        latex: \left(x-2\right)^{2}+\left(y+1\right)^{2}\le 36
+  checks:
+  - kind: evaluate
+    expr: \left(4-2\right)^{2}+\left(2+1\right)^{2}
+    part: wartosc_L
+  skills:
+  - porównanie L z r^2
+  - rozróżnienie równania okręgu i nierówności opisującej koło
+  verification:
+    checkability: REFERENCE_CALL
+    note: '3 parts matched · det: [wartosc_L] SymPy solved it fresh: 13.0 vs 13.0 (tol 1e-09)'
+- id: g-cm-10
+  slot: COMMON_MISTAKE
+  ramp_index: 4
+  difficulty: 3
+  exercise_type: sprawdzenie punktu (kwadrat różnicy)
+  statement: W kartezjańskim układzie współrzędnych (x, y) dany jest okrąg O o równaniu \left(x-2\right)^{2}+\left(y+1\right)^{2}=52
+    oraz punkt A = (-4, 3). Oblicz wartość lewej strony równania dla punktu A i rozstrzygnij, czy A leży
+    na okręgu O. Uczeń obliczył \left(-4-2\right)^{2} jako \left(-4\right)^{2}-2^{2}=12 oraz \left(3+1\right)^{2}
+    jako 3^{2}+1^{2}=10 i otrzymał 22. Wskaż błąd i podaj poprawny wynik.
+  statement_latex: \left(x-2\right)^{2}+\left(y+1\right)^{2}=52,\qquad A=\left(-4,3\right)
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń podniósł do kwadratu 'po składnikach': (-4-2)^2 potraktował jako (-4)^2-2^2=16-4=12, a (3+1)^2 jako 3^2+1^2=9+1=10, dostając L=22 i wniosek, że punkt nie leży na okręgu.
+
+    DLACZEGO TO JEST ŹLE: kwadrat różnicy nie jest różnicą kwadratów, a kwadrat sumy nie jest sumą kwadratów. Najpierw wykonujemy działanie w nawiasie, dopiero potem podnosimy do kwadratu.
+
+    POPRAWNIE:
+    (-4-2)^2=(-6)^2=36 (kwadrat liczby ujemnej jest dodatni),
+    (3+1)^2=4^2=16,
+    L=36+16=52.
+    Ponieważ L=52=r^2, punkt A LEŻY na okręgu O (promień to r=\sqrt{52}=2\sqrt{13}).
+  solution_steps:
+  - 'Zauważ błąd: \left(-4-2\right)^{2}\neq\left(-4\right)^{2}-2^{2}.'
+  - 'Wykonaj działania w nawiasach: -4-2=-6 oraz 3+1=4.'
+  - 'Podnieś do kwadratu: \left(-6\right)^{2}=36, 4^{2}=16, więc L=36+16=52.'
+  - 'Porównaj z r^{2}=52: L=r^{2}, więc punkt A leży na okręgu O.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wartosc_L
+      answer:
+        kind: NUMERIC
+        value: 52.0
+    - name: czy_A_lezy_na_okregu
+      answer:
+        kind: BOOLEAN
+        truth: true
+  checks:
+  - kind: evaluate
+    expr: \left(-4-2\right)^{2}+\left(3+1\right)^{2}
+    part: wartosc_L
+  skills:
+  - poprawne podstawianie ujemnych współrzędnych
+  - kwadrat różnicy a różnica kwadratów
+  verification:
+    checkability: REFERENCE_CALL
+    note: '2 parts matched · det: [wartosc_L] SymPy solved it fresh: 52.0 vs 52.0 (tol 1e-09)'
+- id: g-ch-t02
+  slot: CHALLENGE
+  ramp_index: 0
+  difficulty: 4
+  exercise_type: okrąg o środku na osi przechodzący przez dwa punkty
+  statement: W kartezjańskim układzie współrzędnych (x, y) dane są punkty A=\left(-1,4\right) oraz B=\left(5,2\right).
+    Środek okręgu O leży na osi Ox, a oba punkty A i B należą do tego okręgu. Wyznacz odciętą środka okręgu
+    O, jego promień oraz równanie tego okręgu.
+  statement_latex: \left(x+1\right)^2+\left(0-4\right)^2=\left(x-5\right)^2+\left(0-2\right)^2
+  solution: |-
+    Skoro środek leży na osi Ox, ma postać S=\left(x,0\right) — to jest szukana niewiadoma.
+    Punkty A i B leżą na okręgu, więc \left|SA\right|=\left|SB\right|, a wygodniej porównać kwadraty odległości:
+    \left(x+1\right)^2+\left(0-4\right)^2=\left(x-5\right)^2+\left(0-2\right)^2.
+    x^2+2\cdot x+1+16=x^2-10\cdot x+25+4
+    2\cdot x+17=-10\cdot x+29
+    12\cdot x=12, stąd x=1.
+    Zatem S=\left(1,0\right).
+    Promień: r^2=\left(-1-1\right)^2+\left(4-0\right)^2=4+16=20, więc r=\sqrt{20}=2\cdot\sqrt{5}.
+    (Kontrola dla B: \left(5-1\right)^2+\left(2-0\right)^2=16+4=20 ✓.)
+    Równanie okręgu: \left(x-1\right)^2+y^2=20.
+  solution_steps:
+  - Zauważ, że środek na osi Ox ma postać S=\left(x,0\right) — wprowadź niewiadomą x.
+  - 'Zapisz warunek \left|SA\right|^2=\left|SB\right|^2: \left(x+1\right)^2+16=\left(x-5\right)^2+4.'
+  - 'Rozwiąż równanie: 12\cdot x=12, czyli x=1, więc S=\left(1,0\right).'
+  - Oblicz r^2=\left(-1-1\right)^2+\left(4-0\right)^2=20, więc r=2\cdot\sqrt{5}.
+  - 'Zapisz równanie okręgu: \left(x-1\right)^2+y^2=20 i sprawdź, że punkt B je spełnia.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: odcieta_srodka
+      answer:
+        kind: NUMERIC
+        value: 1.0
+        latex: '1'
+    - name: promien
+      answer:
+        kind: SYMBOLIC
+        latex: 2\cdot\sqrt{5}
+    - name: rownanie
+      answer:
+        kind: SYMBOLIC
+        latex: \left(x-1\right)^2+y^2=20
+  checks:
+  - kind: solve_equation
+    expr: \left(x+1\right)^2+\left(0-4\right)^2=\left(x-5\right)^2+\left(0-2\right)^2
+    part: odcieta_srodka
+  - kind: evaluate
+    expr: \sqrt{\left(-1-1\right)^2+\left(4-0\right)^2}
+    part: promien
+  stated_model:
+    variable: x
+    objective_latex: \left(x+1\right)^2+\left(0-4\right)^2=\left(x-5\right)^2+\left(0-2\right)^2
+    goal: value
+    constraint_used: środek okręgu leży na osi Ox, więc S=\left(x,0\right); A i B leżą na okręgu
+  skills:
+  - wprowadzenie zmiennej opisującej środek
+  - równość odległości jako warunek
+  - wzór na odległość punktów
+  - zapis równania okręgu
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''x'': ''\\left(x+1\\right)^2+\\left(0-4\\right)^2=\\left(x-5\\right)^2+\\left(0-2\\right)^2'')
+      — human review'
+- id: g-ch-t03
+  slot: CHALLENGE
+  ramp_index: 1
+  difficulty: 5
+  exercise_type: okrąg styczny do obu osi z warunkiem odsiewającym
+  statement: W kartezjańskim układzie współrzędnych (x, y) okrąg O jest styczny do obu osi układu współrzędnych,
+    a jego środek leży w drugiej ćwiartce układu współrzędnych. Punkt A=\left(-2,4\right) leży na okręgu
+    O. Ponadto pole koła ograniczonego okręgiem O jest mniejsze od 50. Wyznacz promień okręgu O i zapisz
+    równanie tego okręgu.
+  statement_latex: \left(-2+r\right)^2+\left(4-r\right)^2=r^2
+  solution: |-
+    Środek okręgu leży w drugiej ćwiartce, więc jego pierwsza współrzędna jest ujemna, a druga dodatnia. Odległość środka od osi Oy równa się \left|a\right|, a od osi Ox równa się \left|b\right|; styczność do obu osi oznacza \left|a\right|=\left|b\right|=r. Stąd środek ma postać S=\left(-r,r\right), gdzie r>0.
+    Punkt A=\left(-2,4\right) leży na okręgu, więc
+    \left(-2+r\right)^2+\left(4-r\right)^2=r^2.
+    r^2-4\cdot r+4+r^2-8\cdot r+16=r^2
+    r^2-12\cdot r+20=0
+    \Delta=144-80=64, \sqrt{\Delta}=8, więc r=\frac{12-8}{2}=2 albo r=\frac{12+8}{2}=10.
+    Oba są dodatnie, więc decyduje warunek na pole koła: P=\pi\cdot r^2<50.
+    Dla r=2: P=4\cdot\pi\approx12{,}6<50 ✓.
+    Dla r=10: P=100\cdot\pi\approx314>50 ✗ — tę wartość odrzucamy.
+    Zatem r=2, środek S=\left(-2,2\right), a równanie okręgu to \left(x+2\right)^2+\left(y-2\right)^2=4.
+    (Kontrola: \left(-2+2\right)^2+\left(4-2\right)^2=0+4=4 ✓.)
+  solution_steps:
+  - Z warunku styczności do obu osi i położenia środka w drugiej ćwiartce zapisz S=\left(-r,r\right),
+    r>0.
+  - 'Wykorzystaj to, że A=\left(-2,4\right) leży na okręgu: \left(-2+r\right)^2+\left(4-r\right)^2=r^2.'
+  - 'Doprowadź do równania kwadratowego r^2-12\cdot r+20=0 i rozwiąż: r=2 lub r=10.'
+  - 'Sprawdź warunek \pi\cdot r^2<50: dla r=2 pole to 4\cdot\pi<50, dla r=10 pole to 100\cdot\pi>50 —
+    odrzuć r=10.'
+  - 'Zapisz odpowiedź: r=2, S=\left(-2,2\right), równanie \left(x+2\right)^2+\left(y-2\right)^2=4.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: promien
+      answer:
+        kind: NUMERIC
+        value: 2.0
+        latex: '2'
+    - name: rownanie
+      answer:
+        kind: SYMBOLIC
+        latex: \left(x+2\right)^2+\left(y-2\right)^2=4
+  checks:
+  - kind: evaluate
+    expr: \frac{12-\sqrt{12^2-4\cdot 20}}{2}
+    var: r
+    part: promien
+  stated_model:
+    variable: r
+    objective_latex: \left(-2+r\right)^2+\left(4-r\right)^2=r^2
+    domain_lo: '0'
+    goal: value
+    constraint_used: S=\left(-r,r\right) (styczność do obu osi, środek w II ćwiartce) oraz \pi\cdot r^2<50
+  skills:
+  - warunek styczności okręgu do osi układu
+  - wprowadzenie zmiennej (promienia) jako niewiadomej
+  - rozwiązywanie równania kwadratowego
+  - odrzucanie rozwiązania sprzecznego z warunkiem zadania
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''r'': ''\\left(-2+r\\right)^2+\\left(4-r\\right)^2=r^2'')
+      — human review'
+- id: g-ch-t04
+  slot: CHALLENGE
+  ramp_index: 2
+  difficulty: 5
+  exercise_type: okrąg opisany na kwadracie i jego punkty wspólne z osią
+  statement: W kartezjańskim układzie współrzędnych (x, y) dany jest kwadrat ABCD, którego przeciwległymi
+    wierzchołkami są A=\left(1,-1\right) oraz C=\left(7,3\right) (odcinek AC jest przekątną tego kwadratu).
+    Okrąg O jest okręgiem opisanym na kwadracie ABCD. a) Wyznacz promień okręgu O oraz zapisz jego równanie.
+    b) Uzasadnij, że okrąg O ma z osią Ox dokładnie dwa punkty wspólne. c) Wyznacz odcięte punktów wspólnych
+    okręgu O z osią Ox.
+  statement_latex: S=\left(\frac{1+7}{2},\ \frac{-1+3}{2}\right),\qquad r=\frac{1}{2}\cdot\sqrt{\left(7-1\right)^2+\left(3+1\right)^2}
+  solution: |-
+    a) Środek okręgu opisanego na kwadracie to punkt przecięcia jego przekątnych, czyli środek odcinka AC:
+    S=\left(\frac{1+7}{2},\frac{-1+3}{2}\right)=\left(4,1\right).
+    Promień to połowa przekątnej:
+    \left|AC\right|=\sqrt{\left(7-1\right)^2+\left(3+1\right)^2}=\sqrt{36+16}=\sqrt{52}=2\cdot\sqrt{13},
+    więc r=\frac{2\cdot\sqrt{13}}{2}=\sqrt{13} oraz r^2=13.
+    Równanie okręgu: \left(x-4\right)^2+\left(y-1\right)^2=13.
+
+    b) Odległość środka S=\left(4,1\right) od osi Ox wynosi \left|1\right|=1. Ponieważ 1<\sqrt{13} (bo 1^2=1<13=r^2), odległość środka od osi jest mniejsza od promienia, a więc okrąg przecina oś Ox w dwóch punktach.
+
+    c) Podstawiamy y=0 do równania okręgu:
+    \left(x-4\right)^2+\left(0-1\right)^2=13
+    \left(x-4\right)^2=12
+    x-4=2\cdot\sqrt{3} albo x-4=-2\cdot\sqrt{3},
+    czyli x=4+2\cdot\sqrt{3} albo x=4-2\cdot\sqrt{3}.
+    Punkty wspólne to \left(4-2\cdot\sqrt{3},0\right) i \left(4+2\cdot\sqrt{3},0\right).
+  solution_steps:
+  - 'Zauważ, że środek okręgu opisanego na kwadracie to środek jego przekątnej AC: S=\left(4,1\right).'
+  - Oblicz \left|AC\right|=\sqrt{36+16}=2\cdot\sqrt{13} i promień r=\sqrt{13}, czyli r^2=13.
+  - 'Zapisz równanie okręgu: \left(x-4\right)^2+\left(y-1\right)^2=13.'
+  - 'Porównaj odległość środka od osi Ox, równą 1, z promieniem \sqrt{13}: 1<\sqrt{13}, więc okrąg przecina
+    oś Ox w dwóch punktach.'
+  - 'Podstaw y=0: \left(x-4\right)^2=12, stąd x=4-2\cdot\sqrt{3} lub x=4+2\cdot\sqrt{3}.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: promien
+      answer:
+        kind: SYMBOLIC
+        latex: \sqrt{13}
+    - name: rownanie
+      answer:
+        kind: SYMBOLIC
+        latex: \left(x-4\right)^2+\left(y-1\right)^2=13
+    - name: uzasadnienie_dwa_punkty
+      answer:
+        kind: NOT_MACHINE_CHECKABLE
+        reason: Uczeń ma uzasadnić, że odległość środka S=\left(4,1\right) od osi Ox, równa 1, jest mniejsza
+          od promienia \sqrt{13} (bo 1<13), a zatem okrąg ma z osią Ox dokładnie dwa punkty wspólne.
+    - name: odciete_punktow
+      answer:
+        kind: SET
+        members:
+        - 4-2\cdot\sqrt{3}
+        - 4+2\cdot\sqrt{3}
+  checks:
+  - kind: evaluate
+    expr: \frac{\sqrt{\left(7-1\right)^2+\left(3+1\right)^2}}{2}
+    part: promien
+  - kind: solve_equation
+    expr: \left(x-4\right)^2+\left(0-1\right)^2=13
+    part: odciete_punktow
+  skills:
+  - środek odcinka jako środek okręgu opisanego
+  - promień z długości przekątnej
+  - zapis równania okręgu
+  - porównanie odległości środka od osi z promieniem
+  - wyznaczanie punktów wspólnych okręgu z osią
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'part(s) need a human: uzasadnienie_dwa_punkty · 2/3 other parts solved fresh'

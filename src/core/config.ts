@@ -17,6 +17,12 @@ export const FRAME_DIR = path.join(GENERATED_DIR, "frames");
 export const STORYBOARD_PATH = path.join(GENERATED_DIR, "storyboard.json");
 export const MANIFEST_PATH = path.join(GENERATED_DIR, "manifest.json");
 export const FINAL_VIDEO_PATH = path.join(GENERATED_DIR, "video.mp4");
+export const THUMBNAIL_PATH = path.join(GENERATED_DIR, "thumbnail.png");
+export const SHORTS_OUT_DIR = path.join(GENERATED_DIR, "shorts");
+export const STILLS_OUT_DIR = path.join(GENERATED_DIR, "stills");
+// Written by `generate` at the end of a stage, checked by `publish` so a stale
+// generated/ can never be published as if it were fresh.
+export const READY_MARKER = path.join(GENERATED_DIR, ".ready.json");
 
 export function resolveManimPython(): string {
   if (process.env.MANIM_PYTHON) {
@@ -43,15 +49,18 @@ export function resolveManimPython(): string {
 }
 
 /**
- * Locate the ZasPro checkout that holds the verified curriculum (knowledge
- * specs + approved exercises). Set ZASPRO_DIR to override; otherwise we look
- * for a sibling `ZasPro/` next to the repo root, then next to this generator.
- * Fails loudly rather than falling back to invented content.
+ * Locate the curriculum data root that holds the verified ZasPro exports:
+ * knowledge/sections/*.yaml and exercises/*.yaml.
+ *
+ * elboyt now carries its own committed copy as the source of truth. ZASPRO_DIR
+ * remains an explicit override for comparing against or temporarily consuming a
+ * live ZasPro checkout.
  */
 export function resolveZasproDir(): string {
   const candidates = process.env.ZASPRO_DIR
     ? [path.resolve(process.env.ZASPRO_DIR)]
     : [
+        PROJECT_ROOT,
         path.resolve(PROJECT_ROOT, "..", "..", "ZasPro"),
         path.resolve(PROJECT_ROOT, "..", "ZasPro")
       ];
@@ -65,8 +74,8 @@ export function resolveZasproDir(): string {
   }
 
   throw new Error(
-    "ZasPro checkout not found. Looked in:\n  " +
+    "ZasPro curriculum data not found. Looked in:\n  " +
       candidates.join("\n  ") +
-      "\nSet ZASPRO_DIR to the ZasPro repo root (must contain knowledge/sections/ and exercises/)."
+      "\nExpected knowledge/sections/ and exercises/. Set ZASPRO_DIR to override."
   );
 }

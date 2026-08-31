@@ -1,0 +1,469 @@
+# ZasPro curriculum seed — Mathematics (Formuła 2023).
+#
+# Source of truth: Dz.U. 2024 poz. 1019 (Rozporządzenie MEN z 28.06.2024),
+#   matematyka annex for liceum ogólnokształcące / technikum,
+#   "Treści nauczania – wymagania szczegółowe".
+# Extracted from sources/raw/DU_programowej_2024.pdf on 2026-08-26 (M0.6).
+#
+# matematyka.pdf (CKE _OD_2015 extract) was checked and DISCARDED: its
+#   requirement text diverges from the 2024 amendment. See
+#   m0/curriculum_notes.md for the spot-check.
+#
+# rozszerzony = podstawowy + additions ("a ponadto"). Additions carry an
+#   R in the code (I.R1) to stay unique alongside the podstawowy codes.
+#
+# STATUS: VERIFIED — all 132 nodes and both review sheets checked
+#   against the Dz.U. text by Elie Boulanger on 2026-08-27. Review sheets:
+#   - curriculum_matematyka_review.md          all 132 nodes, Dz.U. order
+#   - curriculum_matematyka_formulas_review.md  the formula rows only
+#
+# `pdftotext` corrupts the maths in DU_programowej_2024.pdf (M0.5): every
+#   math-italic variable is doubled and stacked fractions/superscripts
+#   collapse. So a requirement's prose lives in `name` and its formula in
+#   `statement_latex`, hand-transcribed from the RENDERED PDF. `name`
+#   without `statement_latex` means the requirement carries no formula.
+
+subject:
+  name: Matematyka
+  slug: matematyka
+  language: pl
+  levels: [podstawowy, rozszerzony]
+  official_source: "Dz.U. 2024 poz. 1019"
+  status: VERIFIED
+  verified_by: "Elie Boulanger"
+  verified_on: 2026-08-27
+
+units:
+  - code: I
+    name: "Liczby rzeczywiste"
+    order_index: 1
+    topics:
+      - code: I.1
+        level: podstawowy
+        name: "wykonuje działania (dodawanie, odejmowanie, mnożenie, dzielenie, potęgowanie, pierwiastkowanie, logarytmowanie) w zbiorze liczb rzeczywistych"
+      - code: I.2
+        level: podstawowy
+        name: "przeprowadza proste dowody dotyczące podzielności liczb całkowitych i reszt z dzielenia, np.:"
+        # I.2a: dowód podzielności przez 24 iloczynu czterech kolejnych liczb naturalnych,
+        # I.2b: dowód własności: jeśli liczba przy dzieleniu przez 4 daje resztę 3, to nie jest kwadratem liczby całkowitej
+      - code: I.3
+        level: podstawowy
+        name: "stosuje własności pierwiastków dowolnego stopnia, w tym pierwiastków stopnia nieparzystego z liczb ujemnych"
+      - code: I.4
+        level: podstawowy
+        name: "stosuje związek pierwiastkowania z potęgowaniem oraz prawa działań na potęgach i pierwiastkach"
+      - code: I.5
+        level: podstawowy
+        name: "stosuje monotoniczność potęgowania, w szczególności własności dla podstawy większej niż 1 oraz z przedziału (0, 1)"
+        statement_latex: "x < y \\,\\land\\, a > 1 \\;\\Rightarrow\\; a^{x} < a^{y}; \\qquad x < y \\,\\land\\, 0 < a < 1 \\;\\Rightarrow\\; a^{x} > a^{y}"
+      - code: I.6
+        level: podstawowy
+        name: "posługuje się pojęciem przedziału liczbowego, zaznacza przedziały na osi liczbowej"
+      - code: I.7
+        level: podstawowy
+        name: "stosuje interpretację geometryczną i algebraiczną wartości bezwzględnej, rozwiązuje proste równania z wartością bezwzględną"
+        statement_latex: "\\left| x + 4 \\right| = 5"
+      - code: I.8
+        level: podstawowy
+        name: "wykorzystuje własności potęgowania i pierwiastkowania w sytuacjach praktycznych, w tym do obliczania procentów składanych, zysków z lokat i kosztów kredytów"
+      - code: I.9
+        level: podstawowy
+        name: "stosuje związek logarytmowania z potęgowaniem, posługuje się wzorami na logarytm iloczynu, logarytm ilorazu i logarytm potęgi"
+      - code: I.R1
+        level: rozszerzony
+        name: "stosuje wzór na zamianę podstawy logarytmu"
+  - code: II
+    name: "Wyrażenia algebraiczne"
+    order_index: 2
+    topics:
+      - code: II.1
+        level: podstawowy
+        name: "stosuje wzory skróconego mnożenia na kwadrat sumy, kwadrat różnicy i różnicę kwadratów"
+        statement_latex: "\\left( a + b \\right)^{2}, \\quad \\left( a - b \\right)^{2}, \\quad a^{2} - b^{2}"
+      - code: II.2
+        level: podstawowy
+        name: "dodaje, odejmuje i mnoży wielomiany jednej i wielu zmiennych"
+      - code: II.3
+        level: podstawowy
+        name: "wyłącza poza nawias jednomian z sumy algebraicznej"
+      - code: II.4
+        level: podstawowy
+        name: "mnoży i dzieli wyrażenia wymierne"
+      - code: II.R1
+        level: rozszerzony
+        name: "dzieli wielomian jednej zmiennej przez dwumian postaci x minus a"
+        statement_latex: "W(x) : \\left( x - a \\right)"
+      - code: II.R2
+        level: rozszerzony
+        name: "rozkłada wielomiany na czynniki metodą wyłączania wspólnego czynnika przed nawias oraz metodą grupowania wyrazów"
+      - code: II.R3
+        level: rozszerzony
+        name: "znajduje pierwiastki całkowite wielomianu o współczynnikach całkowitych"
+      - code: II.R4
+        level: rozszerzony
+        name: "stosuje podstawowe własności trójkąta Pascala oraz następujące własności współczynnika dwumianowego (symbolu Newtona)"
+        statement_latex: "\\binom{n}{0} = 1, \\quad \\binom{n}{1} = n, \\quad \\binom{n}{n-1} = n, \\quad \\binom{n}{k} = \\binom{n}{n-k}, \\quad \\binom{n}{k} + \\binom{n}{k+1} = \\binom{n+1}{k+1}"
+      - code: II.R5
+        level: rozszerzony
+        name: "korzysta ze wzorów na sumę i różnicę sześcianów, różnicę n-tych potęg oraz n-tą potęgę sumy i różnicy"
+        statement_latex: "a^{3} + b^{3}, \\quad a^{3} - b^{3}, \\quad a^{n} - b^{n}, \\quad \\left( a + b \\right)^{n}, \\quad \\left( a - b \\right)^{n}"
+      - code: II.R6
+        level: rozszerzony
+        name: "dodaje i odejmuje wyrażenia wymierne w przypadkach nie trudniejszych niż podane przykłady"
+        statement_latex: "\\frac{1}{x+1} - \\frac{1}{x}; \\qquad \\frac{1}{x} + \\frac{1}{x^{2}} + \\frac{1}{x^{3}}; \\qquad \\frac{x+1}{x+2} + \\frac{x-1}{x+1}"
+  - code: III
+    name: "Równania i nierówności"
+    order_index: 3
+    topics:
+      - code: III.1
+        level: podstawowy
+        name: "przekształca równania i nierówności w sposób równoważny, w tym równania wymierne prowadzące do równania liniowego"
+        statement_latex: "\\frac{5}{x+1} = \\frac{x+3}{2x-1}"
+      - code: III.2
+        level: podstawowy
+        name: "interpretuje równania i nierówności liniowe sprzeczne oraz tożsamościowe"
+      - code: III.3
+        level: podstawowy
+        name: "rozwiązuje nierówności liniowe z jedną niewiadomą"
+      - code: III.4
+        level: podstawowy
+        name: "rozwiązuje równania i nierówności kwadratowe"
+      - code: III.5
+        level: podstawowy
+        name: "rozwiązuje równania wielomianowe dla wielomianów doprowadzonych do postaci iloczynowej"
+        statement_latex: "W(x) = 0"
+      - code: III.R1
+        level: rozszerzony
+        name: "rozwiązuje równania i nierówności wielomianowe dla wielomianów doprowadzonych do postaci iloczynowej (także przez wyłączanie czynnika lub grupowanie)"
+        statement_latex: "W(x) = 0; \\qquad W(x) > 0, \\; W(x) \\ge 0, \\; W(x) < 0, \\; W(x) \\le 0"
+      - code: III.R2
+        level: rozszerzony
+        name: "rozwiązuje równania i nierówności wymierne, które dadzą się sprowadzić do równania lub nierówności liniowej lub kwadratowej"
+      - code: III.R3
+        level: rozszerzony
+        name: "stosuje wzory Viète’a dla równań kwadratowych"
+      - code: III.R4
+        level: rozszerzony
+        name: "rozwiązuje równania i nierówności z wartością bezwzględną"
+      - code: III.R5
+        level: rozszerzony
+        name: "analizuje równania i nierówności liniowe z parametrami oraz równania i nierówności kwadratowe z parametrami, w szczególności: wyznacza liczbę rozwiązań w zależności od parametrów, podaje warunki, przy których rozwiązania mają określone znaki bądź należą do określonego przedziału, wyznacza rozwiązania w zależności od parametrów"
+      - code: III.R6
+        level: rozszerzony
+        name: "rozwiązuje równania wielomianowe, które dają się doprowadzić do równania kwadratowego, w szczególności równania dwukwadratowe"
+      - code: III.R7
+        level: rozszerzony
+        name: "rozwiązuje równania wymierne, których licznik i mianownik są zapisane w postaci iloczynowej"
+        statement_latex: "\\frac{V(x)}{W(x)} = 0"
+  - code: IV
+    name: "Układy równań"
+    order_index: 4
+    topics:
+      - code: IV.1
+        level: podstawowy
+        name: "rozwiązuje układy równań liniowych z dwiema niewiadomymi, podaje interpretację geometryczną układów oznaczonych, nieoznaczonych i sprzecznych"
+      - code: IV.2
+        level: podstawowy
+        name: "stosuje układy równań do rozwiązywania zadań tekstowych"
+      - code: IV.R1
+        level: rozszerzony
+        name: "rozwiązuje układy równań liniowych i kwadratowych z dwiema niewiadomymi, które można sprowadzić do równania kwadratowego lub liniowego i które nie są trudniejsze niż podany przykład"
+        statement_latex: "\\begin{cases} x^{2} + y^{2} + ax + by = c \\\\ x^{2} + y^{2} + dx + ey = f \\end{cases}"
+  - code: V
+    name: "Funkcje"
+    order_index: 5
+    topics:
+      - code: V.1
+        level: podstawowy
+        name: "określa funkcje jako jednoznaczne przyporządkowanie za pomocą opisu słownego, tabeli, wykresu, wzoru (także różnymi wzorami na różnych przedziałach)"
+      - code: V.2
+        level: podstawowy
+        name: "oblicza wartość funkcji zadanej wzorem algebraicznym"
+      - code: V.3
+        level: podstawowy
+        name: "odczytuje i interpretuje wartości funkcji określonych za pomocą tabel, wykresów, wzorów itp., również w sytuacjach wielokrotnego użycia tego samego źródła informacji lub kilku źródeł jednocześnie"
+      - code: V.4
+        level: podstawowy
+        name: "odczytuje z wykresu funkcji: dziedzinę, zbiór wartości, miejsca zerowe, przedziały monotoniczności, przedziały, w których funkcja przyjmuje wartości większe (nie mniejsze) lub mniejsze (nie większe) od danej liczby, największe i najmniejsze wartości funkcji (o ile istnieją) w danym przedziale domkniętym oraz argumenty, dla których wartości największe i najmniejsze są przez funkcję przyjmowane"
+      - code: V.5
+        level: podstawowy
+        name: "interpretuje współczynniki występujące we wzorze funkcji liniowej"
+      - code: V.6
+        level: podstawowy
+        name: "wyznacza wzór funkcji liniowej na podstawie informacji o jej wykresie lub o jej własnościach"
+      - code: V.7
+        level: podstawowy
+        name: "szkicuje wykres funkcji kwadratowej zadanej wzorem"
+      - code: V.8
+        level: podstawowy
+        name: "interpretuje współczynniki występujące we wzorze funkcji kwadratowej w postaci ogólnej, kanonicznej i iloczynowej (jeśli istnieje)"
+      - code: V.9
+        level: podstawowy
+        name: "wyznacza wzór funkcji kwadratowej na podstawie informacji o tej funkcji lub o jej wykresie"
+      - code: V.10
+        level: podstawowy
+        name: "wyznacza największą i najmniejszą wartość funkcji kwadratowej w przedziale domkniętym"
+      - code: V.11
+        level: podstawowy
+        name: "wykorzystuje własności funkcji liniowej i kwadratowej do interpretacji zagadnień geometrycznych, fizycznych itp., także osadzonych w kontekście praktycznym"
+      - code: V.12
+        level: podstawowy
+        name: "na podstawie wykresu funkcji y = f(x) szkicuje wykresy funkcji powstałych przez przesunięcie wzdłuż osi"
+        statement_latex: "y = f(x) \\;\\longrightarrow\\; y = f\\left( x - a \\right), \\quad y = f(x) + b"
+      - code: V.13
+        level: podstawowy
+        name: "posługuje się funkcją odwrotnie proporcjonalną, w tym jej wykresem, do opisu i interpretacji zagadnień związanych z wielkościami odwrotnie proporcjonalnymi"
+        statement_latex: "f(x) = \\frac{a}{x}"
+      - code: V.14
+        level: podstawowy
+        name: "posługuje się funkcjami wykładniczą i logarytmiczną, w tym ich wykresami, do opisu i interpretacji zagadnień związanych z zastosowaniami praktycznymi"
+      - code: V.R1
+        level: rozszerzony
+        name: "na podstawie wykresu funkcji y = f(x) rysuje wykresy funkcji powstałych przez odbicie względem osi"
+        statement_latex: "y = f(x) \\;\\longrightarrow\\; y = -f(x), \\quad y = f\\left( -x \\right)"
+      - code: V.R2
+        level: rozszerzony
+        name: "posługuje się złożeniami funkcji"
+      - code: V.R3
+        level: rozszerzony
+        name: "dowodzi monotoniczności funkcji zadanej wzorem, jak w przykładzie: wykazanie, że dana funkcja wymierna jest monotoniczna w podanym przedziale"
+        statement_latex: "f(x) = \\frac{x-1}{x+2} \\quad \\text{monotoniczna w} \\quad \\left( -\\infty,\\, -2 \\right)"
+  - code: VI
+    name: "Ciągi"
+    order_index: 6
+    topics:
+      - code: VI.1
+        level: podstawowy
+        name: "oblicza wyrazy ciągu określonego wzorem ogólnym"
+      - code: VI.2
+        level: podstawowy
+        name: "oblicza początkowe wyrazy ciągów określonych rekurencyjnie"
+      - code: VI.3
+        level: podstawowy
+        name: "w prostych przypadkach bada, czy ciąg jest rosnący, czy malejący"
+      - code: VI.4
+        level: podstawowy
+        name: "sprawdza, czy dany ciąg jest arytmetyczny lub geometryczny"
+      - code: VI.5
+        level: podstawowy
+        name: "stosuje wzór na n-ty wyraz i na sumę n początkowych wyrazów ciągu arytmetycznego"
+      - code: VI.6
+        level: podstawowy
+        name: "stosuje wzór na n-ty wyraz i na sumę n początkowych wyrazów ciągu geometrycznego"
+      - code: VI.7
+        level: podstawowy
+        name: "wykorzystuje własności ciągów, w tym arytmetycznych i geometrycznych, do rozwiązywania zadań, również osadzonych w kontekście praktycznym"
+      - code: VI.R1
+        level: rozszerzony
+        name: "oblicza granice ciągów, korzystając z granic ciągów wzorcowych (typu 1/n oraz n-tego pierwiastka z a) oraz twierdzeń o granicy sumy, różnicy, iloczynu i ilorazu ciągów zbieżnych, a także twierdzenia o trzech ciągach"
+        statement_latex: "\\tfrac{1}{n}, \\quad \\sqrt[n]{a}"
+      - code: VI.R2
+        level: rozszerzony
+        name: "rozpoznaje zbieżne szeregi geometryczne i oblicza ich sumę"
+  - code: VII
+    name: "Trygonometria"
+    order_index: 7
+    topics:
+      - code: VII.1
+        level: podstawowy
+        name: "wykorzystuje definicje funkcji: sinus, cosinus i tangens dla kątów od 0° do 180°, w szczególności wyznacza wartości funkcji trygonometrycznych dla kątów 30°, 45°, 60°"
+      - code: VII.2
+        level: podstawowy
+        name: "korzysta z jedynki trygonometrycznej oraz z definicji tangensa jako ilorazu sinusa i cosinusa"
+        statement_latex: "\\sin^{2}\\alpha + \\cos^{2}\\alpha = 1; \\qquad \\tg\\alpha = \\frac{\\sin\\alpha}{\\cos\\alpha}"
+      - code: VII.3
+        level: podstawowy
+        name: "stosuje twierdzenie cosinusów oraz wzór na pole trójkąta wyrażone przez dwa boki i sinus kąta między nimi"
+        statement_latex: "P = \\tfrac{1}{2} \\cdot a \\cdot b \\cdot \\sin\\gamma"
+      - code: VII.4
+        level: podstawowy
+        name: "oblicza kąty trójkąta prostokątnego i długości jego boków przy odpowiednich danych (rozwiązuje trójkąty prostokątne, w tym z wykorzystaniem funkcji trygonometrycznych)"
+      - code: VII.R1
+        level: rozszerzony
+        name: "stosuje miarę łukową, zamienia stopnie na radiany i odwrotnie"
+      - code: VII.R2
+        level: rozszerzony
+        name: "posługuje się wykresami funkcji trygonometrycznych: sinus, cosinus, tangens"
+      - code: VII.R3
+        level: rozszerzony
+        name: "wykorzystuje okresowość funkcji trygonometrycznych"
+      - code: VII.R4
+        level: rozszerzony
+        name: "stosuje wzory redukcyjne dla funkcji trygonometrycznych"
+      - code: VII.R5
+        level: rozszerzony
+        name: "korzysta z wzorów na sinus, cosinus i tangens sumy i różnicy kątów, a także na funkcje trygonometryczne kątów podwojonych"
+      - code: VII.R6
+        level: rozszerzony
+        name: "rozwiązuje równania trygonometryczne"
+      - code: VII.R7
+        level: rozszerzony
+        name: "stosuje twierdzenie sinusów"
+      - code: VII.R8
+        level: rozszerzony
+        name: "oblicza kąty trójkąta i długości jego boków przy odpowiednich danych (rozwiązuje trójkąty)"
+  - code: VIII
+    name: "Planimetria"
+    order_index: 8
+    topics:
+      - code: VIII.1
+        level: podstawowy
+        name: "wyznacza promienie i średnice okręgów, długości cięciw okręgów oraz odcinków stycznych, w tym z wykorzystaniem twierdzenia Pitagorasa"
+      - code: VIII.2
+        level: podstawowy
+        name: "rozpoznaje trójkąty ostrokątne, prostokątne i rozwartokątne przy danych długościach boków (m.in. stosuje twierdzenie odwrotne do twierdzenia Pitagorasa i twierdzenie cosinusów); stosuje twierdzenie: w trójkącie naprzeciw większego kąta wewnętrznego leży dłuższy bok"
+      - code: VIII.3
+        level: podstawowy
+        name: "rozpoznaje wielokąty foremne i korzysta z ich podstawowych własności"
+      - code: VIII.4
+        level: podstawowy
+        name: "korzysta z własności kątów i przekątnych w prostokątach, równoległobokach, rombach i trapezach"
+      - code: VIII.5
+        level: podstawowy
+        name: "stosuje własności kątów wpisanych i środkowych"
+      - code: VIII.6
+        level: podstawowy
+        name: "stosuje wzory na pole wycinka koła i długość łuku okręgu"
+      - code: VIII.7
+        level: podstawowy
+        name: "stosuje twierdzenie Talesa"
+      - code: VIII.8
+        level: podstawowy
+        name: "korzysta z cech podobieństwa trójkątów"
+      - code: VIII.9
+        level: podstawowy
+        name: "wykorzystuje zależności między obwodami oraz między polami figur podobnych"
+      - code: VIII.10
+        level: podstawowy
+        name: "wskazuje podstawowe punkty szczególne w trójkącie: środek okręgu wpisanego w trójkąt, środek okręgu opisanego na trójkącie, ortocentrum, środek ciężkości oraz korzysta z ich własności"
+      - code: VIII.11
+        level: podstawowy
+        name: "przeprowadza dowody geometryczne"
+      - code: VIII.12
+        level: podstawowy
+        name: "stosuje funkcje trygonometryczne do wyznaczania długości odcinków w figurach płaskich oraz obliczania pól figur"
+      - code: VIII.R1
+        level: rozszerzony
+        name: "stosuje własności czworokątów wpisanych w okrąg i opisanych na okręgu"
+      - code: VIII.R2
+        level: rozszerzony
+        name: "stosuje twierdzenie odwrotne do twierdzenia Talesa"
+  - code: IX
+    name: "Geometria analityczna na płaszczyźnie kartezjańskiej"
+    order_index: 9
+    topics:
+      - code: IX.1
+        level: podstawowy
+        name: "rozpoznaje wzajemne położenie prostych na płaszczyźnie na podstawie ich równań, w tym znajduje wspólny punkt dwóch prostych, jeśli taki istnieje"
+      - code: IX.2
+        level: podstawowy
+        name: "posługuje się równaniami prostych na płaszczyźnie, w postaci kierunkowej i ogólnej, w tym wyznacza równanie prostej o zadanych własnościach (takich, jak np. przechodzenie przez dwa dane punkty, znany współczynnik kierunkowy, równoległość do innej prostej)"
+      - code: IX.3
+        level: podstawowy
+        name: "oblicza odległość dwóch punktów w układzie współrzędnych"
+      - code: IX.4
+        level: podstawowy
+        name: "posługuje się równaniem okręgu w postaci kanonicznej"
+        statement_latex: "\\left( x - a \\right)^{2} + \\left( y - b \\right)^{2} = r^{2}"
+      - code: IX.5
+        level: podstawowy
+        name: "wyznacza obrazy okręgów i wielokątów w symetriach osiowych względem osi układu współrzędnych, symetrii środkowej (o środku w początku układu współrzędnych)"
+      - code: IX.R1
+        level: rozszerzony
+        name: "znajduje punkty wspólne prostej i okręgu"
+      - code: IX.R2
+        level: rozszerzony
+        name: "znajduje punkty wspólne dwóch okręgów"
+      - code: IX.R3
+        level: rozszerzony
+        name: "zna pojęcie wektora i oblicza jego współrzędne oraz długość, dodaje wektory i mnoży wektor przez liczbę, oba te działania wykonuje zarówno analitycznie, jak i geometrycznie"
+      - code: IX.R4
+        level: rozszerzony
+        name: "wyznacza równanie prostej prostopadłej do zadanej prostej i prostej stycznej do zadanego okręgu"
+  - code: X
+    name: "Stereometria"
+    order_index: 10
+    topics:
+      - code: X.1
+        level: podstawowy
+        name: "rozpoznaje wzajemne położenie prostych w przestrzeni, w szczególności proste prostopadłe nieprzecinające się"
+      - code: X.2
+        level: podstawowy
+        name: "posługuje się pojęciem kąta między prostą a płaszczyzną oraz pojęciem kąta dwuściennego między półpłaszczyznami"
+      - code: X.3
+        level: podstawowy
+        name: "rozpoznaje w graniastosłupach i ostrosłupach kąty między odcinkami (np. krawędziami, krawędziami i przekątnymi) oraz kąty między ścianami, oblicza miary tych kątów"
+      - code: X.4
+        level: podstawowy
+        name: "rozpoznaje w walcach i w stożkach kąt między odcinkami oraz kąt między odcinkami i płaszczyznami (np. kąt rozwarcia stożka, kąt między tworzącą a podstawą), oblicza miary tych kątów"
+      - code: X.5
+        level: podstawowy
+        name: "oblicza objętości i pola powierzchni graniastosłupów, ostrosłupów, walca, stożka i kuli, również z wykorzystaniem trygonometrii"
+      - code: X.6
+        level: podstawowy
+        name: "wykorzystuje zależność między objętościami brył podobnych"
+      - code: X.R1
+        level: rozszerzony
+        name: "zna i stosuje twierdzenie o prostej prostopadłej do płaszczyzny i o trzech prostopadłych"
+      - code: X.R2
+        level: rozszerzony
+        name: "wyznacza przekroje sześcianu i ostrosłupów prawidłowych oraz oblicza ich pola, także z wykorzystaniem trygonometrii"
+  - code: XI
+    name: "Kombinatoryka"
+    order_index: 11
+    topics:
+      - code: XI.1
+        level: podstawowy
+        name: "zlicza obiekty w prostych sytuacjach kombinatorycznych"
+      - code: XI.2
+        level: podstawowy
+        name: "zlicza obiekty, stosując reguły mnożenia i dodawania (także łącznie) dla dowolnej liczby czynności, np.:"
+        # XI.2a: obliczenie, ile jest czterocyfrowych nieparzystych liczb całkowitych dodatnich takich, że w ich zapisie dziesiętnym występuje dokładnie jedna cyfra 1 i dokładnie jedna cyfra 2,
+        # XI.2b: obliczenie, ile jest czterocyfrowych parzystych liczb całkowitych dodatnich takich, że w ich zapisie dziesiętnym występuje dokładnie jedna cyfra 0 i dokładnie jedna cyfra 1
+      - code: XI.R1
+        level: rozszerzony
+        name: "oblicza liczbę możliwych sytuacji, spełniających określone kryteria, z wykorzystaniem reguły mnożenia i dodawania (także łącznie) oraz wzorów na liczbę: permutacji, kombinacji i wariacji"
+      - code: XI.R2
+        level: rozszerzony
+        name: "stosuje współczynnik dwumianowy (symbol Newtona) i jego własności przy rozwiązywaniu problemów kombinatorycznych"
+  - code: XII
+    name: "Rachunek prawdopodobieństwa i statystyka"
+    order_index: 12
+    topics:
+      - code: XII.1
+        level: podstawowy
+        name: "oblicza prawdopodobieństwo w modelu klasycznym"
+      - code: XII.2
+        level: podstawowy
+        name: "oblicza średnią arytmetyczną i średnią ważoną, znajduje medianę i dominantę"
+      - code: XII.R1
+        level: rozszerzony
+        name: "oblicza prawdopodobieństwo warunkowe i stosuje wzór Bayesa, stosuje twierdzenie o prawdopodobieństwie całkowitym"
+      - code: XII.R2
+        level: rozszerzony
+        name: "stosuje schemat Bernoullego"
+  - code: XIII
+    name: "Optymalizacja i rachunek różniczkowy"
+    order_index: 13
+    topics:
+      - code: XIII.1
+        level: podstawowy
+        name: "rozwiązuje zadania optymalizacyjne w sytuacjach dających się opisać funkcją kwadratową"
+      - code: XIII.R1
+        level: rozszerzony
+        name: "oblicza granice funkcji (w tym jednostronne)"
+      - code: XIII.R2
+        level: rozszerzony
+        name: "stosuje własność Darboux do uzasadniania istnienia miejsca zerowego funkcji"
+      - code: XIII.R3
+        level: rozszerzony
+        name: "stosuje definicję pochodnej funkcji, podaje interpretację geometryczną i fizyczną pochodnej"
+      - code: XIII.R4
+        level: rozszerzony
+        name: "oblicza pochodną funkcji potęgowej o wykładniku rzeczywistym oraz oblicza pochodną, korzystając z twierdzeń o pochodnej sumy, różnicy, iloczynu, ilorazu i funkcji złożonej"
+      - code: XIII.R5
+        level: rozszerzony
+        name: "stosuje pochodną do badania monotoniczności funkcji"
+      - code: XIII.R6
+        level: rozszerzony
+        name: "rozwiązuje zadania optymalizacyjne z zastosowaniem pochodnej"

@@ -1,0 +1,740 @@
+section: wzory-skroconego-mnozenia
+name: Wzory skróconego mnożenia
+scope: The identities (a +- b)^2 and a^2 - b^2; using them to expand products and to factor expressions.
+requirements:
+- II.1
+counts:
+  total: 16
+  DETERMINISTIC: 12
+  REFERENCE_CALL: 1
+  NOT_MACHINE_CHECKABLE: 2
+  STATED_MODEL: 1
+exercises:
+- id: g-th-00
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: rozwijanie kwadratu dwumianu
+  statement: Korzystając ze wzoru na kwadrat sumy, rozwiń wyrażenie \left(x+7\right)^{2} i zapisz wynik
+    w postaci trójmianu uporządkowanego malejąco względem potęg x.
+  statement_latex: \left(x+7\right)^{2}
+  solution: |-
+    We wzorze \left(a+b\right)^{2}=a^{2}+2\cdot a\cdot b+b^{2} przyjmujemy a=x oraz b=7.
+    Kwadrat pierwszego składnika: x^{2}.
+    Podwojony iloczyn składników: 2\cdot x\cdot 7=14x.
+    Kwadrat drugiego składnika: 7^{2}=49.
+    Zatem \left(x+7\right)^{2}=x^{2}+14x+49.
+    Kontrola dla x=1: \left(1+7\right)^{2}=64 oraz 1+14+49=64 — zgadza się.
+  solution_steps:
+  - 'Rozpoznaj składniki: a=x, b=7.'
+  - 'Zapisz kwadrat pierwszego składnika: x^{2}.'
+  - 'Oblicz podwojony iloczyn: 2\cdot x\cdot 7=14x.'
+  - 'Zapisz kwadrat drugiego składnika: 7^{2}=49.'
+  - 'Zapisz wynik: x^{2}+14x+49 i sprawdź go dla x=1.'
+  answer:
+    kind: SYMBOLIC
+    latex: x^{2}+14x+49
+  checks:
+  - kind: simplify
+    expr: \left(x+7\right)^{2}
+  skills:
+  - kwadrat sumy
+  - stosowanie wzorów skróconego mnożenia
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: ''x^{2}+14x+49'' vs ''(x + 7)**2'''
+- id: g-th-01
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: rozkład na czynniki
+  statement: Rozłóż na czynniki wyrażenie 4x^{2}-49, korzystając ze wzoru na różnicę kwadratów.
+  statement_latex: 4x^{2}-49
+  solution: |-
+    Oba wyrazy są kwadratami: 4x^{2}=\left(2x\right)^{2} oraz 49=7^{2}, a między nimi stoi znak minus, więc wzór na różnicę kwadratów można zastosować.
+    We wzorze a^{2}-b^{2}=\left(a-b\right)\cdot\left(a+b\right) przyjmujemy a=2x, b=7.
+    Stąd 4x^{2}-49=\left(2x-7\right)\cdot\left(2x+7\right).
+    Kontrola: \left(2x-7\right)\cdot\left(2x+7\right)=4x^{2}+14x-14x-49=4x^{2}-49.
+  solution_steps:
+  - Sprawdź, że między wyrazami jest znak minus.
+  - 'Zapisz wyrazy jako kwadraty: 4x^{2}=\left(2x\right)^{2}, 49=7^{2}.'
+  - Zastosuj wzór a^{2}-b^{2}=\left(a-b\right)\cdot\left(a+b\right) dla a=2x, b=7.
+  - Zapisz rozkład \left(2x-7\right)\cdot\left(2x+7\right) i sprawdź go przez wymnożenie.
+  answer:
+    kind: SYMBOLIC
+    latex: \left(2x-7\right)\cdot\left(2x+7\right)
+  checks:
+  - kind: simplify
+    expr: 4x^{2}-49
+  skills:
+  - różnica kwadratów
+  - rozkład na czynniki
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: ''\\left(2x-7\\right)\\cdot\\left(2x+7\\right)'' vs ''4*x**2
+      - 49'''
+- id: g-th-02
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: sprytne rachunki liczbowe
+  statement: 'Nie używając kalkulatora, oblicz wartość każdego z wyrażeń, stosując wzory skróconego mnożenia:
+    a) 101^{2}, b) 2025^{2}-2024^{2}.'
+  statement_latex: \text{a) } \left(100+1\right)^{2}, \qquad \text{b) } 2025^{2}-2024^{2}
+  solution: |-
+    a) Zapisujemy 101=100+1 i stosujemy kwadrat sumy:
+    101^{2}=\left(100+1\right)^{2}=100^{2}+2\cdot 100\cdot 1+1^{2}=10000+200+1=10201.
+    b) Stosujemy różnicę kwadratów:
+    2025^{2}-2024^{2}=\left(2025-2024\right)\cdot\left(2025+2024\right)=1\cdot 4049=4049.
+  solution_steps:
+  - a) Rozbij 101 na 100+1.
+  - 'a) Zastosuj wzór \left(a+b\right)^{2}=a^{2}+2ab+b^{2}: 10000+200+1=10201.'
+  - b) Zauważ różnicę kwadratów i zapisz ją jako iloczyn \left(2025-2024\right)\cdot\left(2025+2024\right).
+  - b) Oblicz 1\cdot 4049=4049.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: a
+      answer:
+        kind: NUMERIC
+        value: 10201.0
+    - name: b
+      answer:
+        kind: NUMERIC
+        value: 4049.0
+  checks:
+  - kind: evaluate
+    expr: \left(100+1\right)^{2}
+    part: a
+  - kind: evaluate
+    expr: 2025^{2}-2024^{2}
+    part: b
+  skills:
+  - kwadrat sumy
+  - różnica kwadratów
+  - rachunki bez kalkulatora
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [a] SymPy solved it fresh: 10201.0 vs 10201.0 (tol 1e-09) ;
+      [b] SymPy solved it fresh: 4049.0 vs 4049.0 (tol 1e-09)'
+- id: g-ex-03
+  slot: EXERCISE
+  ramp_index: 1
+  difficulty: 2
+  exercise_type: rozwijanie kwadratu dwumianu
+  statement: 'Rozwiń i uporządkuj wyrażenia: a) \left(2x+3y\right)^{2}, b) \left(3x-2\sqrt{5}\right)^{2}.'
+  statement_latex: \text{a) } \left(2x+3y\right)^{2}, \qquad \text{b) } \left(3x-2\sqrt{5}\right)^{2}
+  solution: |-
+    a) Składnikami są 2x oraz 3y.
+    \left(2x\right)^{2}=4x^{2}, podwojony iloczyn 2\cdot 2x\cdot 3y=12xy, \left(3y\right)^{2}=9y^{2}.
+    Zatem \left(2x+3y\right)^{2}=4x^{2}+12xy+9y^{2}.
+    b) Składnikami są 3x oraz 2\sqrt{5}, a między nimi jest znak minus, więc wyraz środkowy będzie ujemny.
+    \left(3x\right)^{2}=9x^{2}, podwojony iloczyn 2\cdot 3x\cdot 2\sqrt{5}=12\sqrt{5}\cdot x, \left(2\sqrt{5}\right)^{2}=4\cdot 5=20.
+    Zatem \left(3x-2\sqrt{5}\right)^{2}=9x^{2}-12\sqrt{5}\cdot x+20.
+  solution_steps:
+  - 'a) Przyjmij a=2x, b=3y i podnieś każdy składnik do kwadratu: 4x^{2} oraz 9y^{2}.'
+  - a) Oblicz podwojony iloczyn 2\cdot 2x\cdot 3y=12xy i zapisz wynik 4x^{2}+12xy+9y^{2}.
+  - b) Przyjmij a=3x, b=2\sqrt{5}; \left(3x\right)^{2}=9x^{2}, \left(2\sqrt{5}\right)^{2}=20.
+  - 'b) Oblicz podwojony iloczyn 2\cdot 3x\cdot 2\sqrt{5}=12\sqrt{5}\cdot x i zapisz wynik ze znakiem
+    minus: 9x^{2}-12\sqrt{5}\cdot x+20.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: a
+      answer:
+        kind: SYMBOLIC
+        latex: 4x^{2}+12xy+9y^{2}
+    - name: b
+      answer:
+        kind: SYMBOLIC
+        latex: 9x^{2}-12\sqrt{5}\cdot x+20
+  checks:
+  - kind: simplify
+    expr: \left(2x+3y\right)^{2}
+    part: a
+  - kind: simplify
+    expr: \left(3x-2\sqrt{5}\right)^{2}
+    part: b
+  skills:
+  - kwadrat sumy
+  - kwadrat różnicy
+  - działania na pierwiastkach
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [a] SymPy solved it fresh: ''4x^{2}+12xy+9y^{2}'' vs ''(2*x
+      + 3*y)**2'' ; [b] SymPy solved it fresh: ''9x^{2}-12\\sqrt{5}\\cdot x+20'' vs ''(3*x - 2*sqrt(5))**2'''
+- id: g-ex-04
+  slot: EXERCISE
+  ramp_index: 2
+  difficulty: 3
+  exercise_type: upraszczanie wyrażenia i obliczanie wartości
+  statement: Dane jest wyrażenie W\left(x\right)=\left(3x-2\right)^{2}-\left(x+5\right)\cdot\left(x-5\right)+2\cdot\left(x+1\right)^{2}.
+    Uprość to wyrażenie do postaci trójmianu, a następnie oblicz W\left(-1\right).
+  statement_latex: W\left(x\right)=\left(3x-2\right)^{2}-\left(x+5\right)\cdot\left(x-5\right)+2\cdot\left(x+1\right)^{2}
+  solution: |-
+    Rozwijamy kolejne składniki:
+    \left(3x-2\right)^{2}=9x^{2}-12x+4,
+    \left(x+5\right)\cdot\left(x-5\right)=x^{2}-25 (różnica kwadratów),
+    2\cdot\left(x+1\right)^{2}=2\cdot\left(x^{2}+2x+1\right)=2x^{2}+4x+2.
+    Uwaga na minus przed nawiasem: -\left(x^{2}-25\right)=-x^{2}+25.
+    Zatem
+    W\left(x\right)=9x^{2}-12x+4-x^{2}+25+2x^{2}+4x+2=10x^{2}-8x+31.
+    Dalej W\left(-1\right)=10\cdot 1+8+31=49.
+    Kontrola bezpośrednia: \left(-3-2\right)^{2}-\left(4\right)\cdot\left(-6\right)+2\cdot 0^{2}=25+24+0=49.
+  solution_steps:
+  - Rozwiń \left(3x-2\right)^{2}=9x^{2}-12x+4.
+  - 'Zastosuj różnicę kwadratów: \left(x+5\right)\cdot\left(x-5\right)=x^{2}-25.'
+  - Rozwiń 2\cdot\left(x+1\right)^{2}=2x^{2}+4x+2.
+  - 'Zmień znaki w nawiasie poprzedzonym minusem i zredukuj wyrazy podobne: W\left(x\right)=10x^{2}-8x+31.'
+  - 'Podstaw x=-1: W\left(-1\right)=10+8+31=49.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: postac_uproszczona
+      answer:
+        kind: SYMBOLIC
+        latex: 10x^{2}-8x+31
+    - name: W(-1)
+      answer:
+        kind: NUMERIC
+        value: 49.0
+  checks:
+  - kind: simplify
+    expr: \left(3x-2\right)^{2}-\left(x+5\right)\cdot\left(x-5\right)+2\cdot\left(x+1\right)^{2}
+    part: postac_uproszczona
+  - kind: evaluate
+    expr: \left(3\cdot\left(-1\right)-2\right)^{2}-\left(\left(-1\right)+5\right)\cdot\left(\left(-1\right)-5\right)+2\cdot\left(\left(-1\right)+1\right)^{2}
+    part: W(-1)
+  skills:
+  - kwadrat różnicy
+  - kwadrat sumy
+  - różnica kwadratów
+  - redukcja wyrazów podobnych
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [postac_uproszczona] SymPy solved it fresh: ''10x^{2}-8x+31''
+      vs ''10*x**2 - 8*x + 31'' ; [W(-1)] SymPy solved it fresh: 49.0 vs 49.0 (tol 1e-09)'
+- id: g-ex-05
+  slot: EXERCISE
+  ramp_index: 3
+  difficulty: 4
+  exercise_type: tożsamości pochodne i usuwanie niewymierności
+  statement: Liczby rzeczywiste a oraz b spełniają warunki a+b=9 i a\cdot b=14. a) Oblicz a^{2}+b^{2}.
+    b) Oblicz \left(a-b\right)^{2}. c) Usuń niewymierność z mianownika ułamka \frac{5}{4-\sqrt{11}}.
+  statement_latex: a+b=9,\quad a\cdot b=14,\qquad \frac{5}{4-\sqrt{11}}
+  solution: |-
+    a) Ze wzoru na kwadrat sumy \left(a+b\right)^{2}=a^{2}+2ab+b^{2} otrzymujemy
+    a^{2}+b^{2}=\left(a+b\right)^{2}-2\cdot a\cdot b=9^{2}-2\cdot 14=81-28=53.
+    b) \left(a-b\right)^{2}=a^{2}-2ab+b^{2}=53-28=25. Równoważnie \left(a-b\right)^{2}=\left(a+b\right)^{2}-4ab=81-56=25.
+    c) Mnożymy licznik i mianownik przez wyrażenie sprzężone 4+\sqrt{11}:
+    \frac{5}{4-\sqrt{11}}=\frac{5\cdot\left(4+\sqrt{11}\right)}{\left(4-\sqrt{11}\right)\cdot\left(4+\sqrt{11}\right)}=\frac{5\cdot\left(4+\sqrt{11}\right)}{16-11}=\frac{5\cdot\left(4+\sqrt{11}\right)}{5}=4+\sqrt{11}.
+  solution_steps:
+  - a) Skorzystaj z tożsamości a^{2}+b^{2}=\left(a+b\right)^{2}-2ab.
+  - 'a) Podstaw dane: 81-28=53.'
+  - 'b) Skorzystaj z \left(a-b\right)^{2}=\left(a+b\right)^{2}-4ab i podstaw: 81-56=25.'
+  - 'c) Wypisz sprzężenie mianownika: 4+\sqrt{11}.'
+  - c) Pomnóż licznik i mianownik przez 4+\sqrt{11}; w mianowniku otrzymasz 16-11=5.
+  - 'c) Skróć ułamek: wynik to 4+\sqrt{11}.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: a2+b2
+      answer:
+        kind: NUMERIC
+        value: 53.0
+    - name: (a-b)^2
+      answer:
+        kind: NUMERIC
+        value: 25.0
+    - name: usuniecie_niewymiernosci
+      answer:
+        kind: SYMBOLIC
+        latex: 4+\sqrt{11}
+  checks:
+  - kind: evaluate
+    expr: 9^{2}-2\cdot 14
+    part: a2+b2
+  - kind: evaluate
+    expr: 9^{2}-4\cdot 14
+    part: (a-b)^2
+  - kind: evaluate
+    expr: \frac{5}{4-\sqrt{11}}
+    part: usuniecie_niewymiernosci
+  skills:
+  - tożsamości pochodne
+  - kwadrat sumy
+  - wyrażenia sprzężone
+  - usuwanie niewymierności z mianownika
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [a2+b2] SymPy solved it fresh: 53.0 vs 53.0 (tol 1e-09) ; [(a-b)^2]
+      SymPy solved it fresh: 25.0 vs 25.0 (tol 1e-09) ; [usuniecie_niewymiernosci] SymPy solved it fresh:
+      7.3166247903554 vs 7.3166247903554 (tol 1e-09)'
+- id: g-ex-t00
+  slot: EXERCISE
+  ramp_index: 6
+  difficulty: 3
+  exercise_type: upraszczanie wyrażeń algebraicznych i obliczanie wartości
+  statement: Dane jest wyrażenie W(x) = \left(3x-2\right)^{2} - \left(2x+5\right)\cdot\left(2x-5\right)
+    + 2\cdot\left(x-3\right)^{2}. a) Zapisz wyrażenie W(x) w najprostszej postaci (jako trójmian uporządkowany
+    malejąco względem potęg x). b) Oblicz W\left(\sqrt{2}\right) i wynik podaj w najprostszej postaci.
+  statement_latex: W(x) = \left(3x-2\right)^{2} - \left(2x+5\right)\cdot\left(2x-5\right) + 2\cdot\left(x-3\right)^{2}
+  solution: |-
+    Rozwijamy każdy składnik osobno.
+    \left(3x-2\right)^{2} = 9x^{2} - 12x + 4 (bo \left(3x\right)^{2} = 9x^{2}, podwojony iloczyn 2\cdot 3x\cdot 2 = 12x, \left(-2\right)^{2}=4).
+    \left(2x+5\right)\cdot\left(2x-5\right) = \left(2x\right)^{2} - 5^{2} = 4x^{2} - 25 (różnica kwadratów).
+    2\cdot\left(x-3\right)^{2} = 2\cdot\left(x^{2}-6x+9\right) = 2x^{2} - 12x + 18.
+    Uwzględniamy minus przed nawiasem: -\left(4x^{2}-25\right) = -4x^{2} + 25.
+    Stąd W(x) = 9x^{2} - 12x + 4 - 4x^{2} + 25 + 2x^{2} - 12x + 18 = 7x^{2} - 24x + 47.
+    b) W\left(\sqrt{2}\right) = 7\cdot\left(\sqrt{2}\right)^{2} - 24\cdot\sqrt{2} + 47 = 14 - 24\sqrt{2} + 47 = 61 - 24\sqrt{2}.
+    Kontrola dla x = 1: z wyjściowego wzoru \left(1\right)^{2} - \left(7\right)\cdot\left(-3\right) + 2\cdot 4 = 1 + 21 + 8 = 30, a z wyniku 7 - 24 + 47 = 30. Zgadza się.
+  solution_steps:
+  - Rozwiń \left(3x-2\right)^{2} = 9x^{2}-12x+4.
+  - 'Zastosuj różnicę kwadratów: \left(2x+5\right)\cdot\left(2x-5\right) = 4x^{2}-25.'
+  - Rozwiń 2\cdot\left(x-3\right)^{2} = 2x^{2}-12x+18.
+  - 'Zmień znaki wyrazów po minusie przed nawiasem i zredukuj wyrazy podobne: W(x) = 7x^{2}-24x+47.'
+  - 'Podstaw x = \sqrt{2}: 7\cdot 2 - 24\sqrt{2} + 47 = 61 - 24\sqrt{2}.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: uproszczenie
+      answer:
+        kind: SYMBOLIC
+        latex: 7x^{2} - 24x + 47
+    - name: wartosc_dla_pierwiastek_z_2
+      answer:
+        kind: SYMBOLIC
+        latex: 61 - 24\sqrt{2}
+  checks:
+  - kind: simplify
+    expr: \left(3x-2\right)^{2} - \left(2x+5\right)\cdot\left(2x-5\right) + 2\cdot\left(x-3\right)^{2}
+    part: uproszczenie
+  - kind: evaluate
+    expr: 7\cdot\left(\sqrt{2}\right)^{2} - 24\cdot\sqrt{2} + 47
+    part: wartosc_dla_pierwiastek_z_2
+  skills:
+  - rozwijanie kwadratu dwumianu
+  - różnica kwadratów
+  - znak minus przed nawiasem
+  - redukcja wyrazów podobnych
+  - działania na pierwiastkach
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [uproszczenie] SymPy solved it fresh: ''7x^{2} - 24x + 47''
+      vs ''7*x**2 - 24*x + 47'' ; [wartosc_dla_pierwiastek_z_2] SymPy solved it fresh: 27.05887450304572
+      vs 27.05887450304572 (tol 1e-09)'
+- id: g-ex-t01
+  slot: EXERCISE
+  ramp_index: 7
+  difficulty: 4
+  exercise_type: usuwanie niewymierności i tożsamości pochodne
+  statement: Dane są liczby x = \frac{4}{3-\sqrt{5}} oraz y = \frac{4}{3+\sqrt{5}}. a) Oblicz sumę x+y.
+    b) Oblicz iloczyn x\cdot y. c) Oblicz x^{2}+y^{2}.
+  statement_latex: x = \frac{4}{3-\sqrt{5}}, \qquad y = \frac{4}{3+\sqrt{5}}
+  solution: |-
+    Usuwamy niewymierność z mianowników, mnożąc licznik i mianownik przez wyrażenie sprzężone.
+    x = \frac{4}{3-\sqrt{5}} = \frac{4\cdot\left(3+\sqrt{5}\right)}{\left(3-\sqrt{5}\right)\cdot\left(3+\sqrt{5}\right)} = \frac{4\cdot\left(3+\sqrt{5}\right)}{9-5} = 3+\sqrt{5}.
+    Podobnie y = \frac{4\cdot\left(3-\sqrt{5}\right)}{9-5} = 3-\sqrt{5}.
+    a) x+y = \left(3+\sqrt{5}\right)+\left(3-\sqrt{5}\right) = 6.
+    b) x\cdot y = \left(3+\sqrt{5}\right)\cdot\left(3-\sqrt{5}\right) = 3^{2}-\left(\sqrt{5}\right)^{2} = 9-5 = 4.
+    c) Korzystamy z tożsamości pochodnej: x^{2}+y^{2} = \left(x+y\right)^{2} - 2\cdot x\cdot y = 6^{2} - 2\cdot 4 = 36-8 = 28.
+    (Kontrola: \left(3+\sqrt{5}\right)^{2}+\left(3-\sqrt{5}\right)^{2} = \left(14+6\sqrt{5}\right)+\left(14-6\sqrt{5}\right) = 28.)
+  solution_steps:
+  - Pomnóż licznik i mianownik ułamka x przez sprzężenie 3+\sqrt{5}; otrzymasz x = 3+\sqrt{5}.
+  - Analogicznie y = 3-\sqrt{5}.
+  - 'Dodaj: x+y = 6.'
+  - 'Pomnóż wyrażenia sprzężone: x\cdot y = 9-5 = 4.'
+  - Zastosuj x^{2}+y^{2} = \left(x+y\right)^{2}-2\cdot x\cdot y = 36-8 = 28.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: suma
+      answer:
+        kind: NUMERIC
+        value: 6.0
+    - name: iloczyn
+      answer:
+        kind: NUMERIC
+        value: 4.0
+    - name: suma_kwadratow
+      answer:
+        kind: NUMERIC
+        value: 28.0
+  checks:
+  - kind: evaluate
+    expr: \frac{4}{3-\sqrt{5}} + \frac{4}{3+\sqrt{5}}
+    part: suma
+  - kind: evaluate
+    expr: \frac{4}{3-\sqrt{5}} \cdot \frac{4}{3+\sqrt{5}}
+    part: iloczyn
+  - kind: evaluate
+    expr: \left(\frac{4}{3-\sqrt{5}}\right)^{2} + \left(\frac{4}{3+\sqrt{5}}\right)^{2}
+    part: suma_kwadratow
+  skills:
+  - mnożenie przez wyrażenie sprzężone
+  - różnica kwadratów
+  - tożsamość a^2+b^2=(a+b)^2-2ab
+  - działania na liczbach niewymiernych
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [suma] SymPy solved it fresh: 6.0 vs 6.0 (tol 1e-09) ; [iloczyn]
+      SymPy solved it fresh: 4.0 vs 4.0 (tol 1e-09) ; [suma_kwadratow] SymPy solved it fresh: 28.0 vs
+      28.0 (tol 1e-09)'
+- id: g-cm-06
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: wykrycie i poprawa błędu
+  statement: 'Uczeń zapisał: \left(x+6\right)^{2}=x^{2}+36. Sprawdź poprawność tego zapisu, podstawiając
+    x=2, wyjaśnij, na czym polega błąd, i podaj poprawne rozwinięcie wyrażenia \left(x+6\right)^{2}.'
+  statement_latex: \left(x+6\right)^{2}
+  solution: |-
+    Błędne rozumowanie ucznia: „kwadrat sumy to suma kwadratów”, czyli \left(x+6\right)^{2}=x^{2}+6^{2}=x^{2}+36. Otrzymany (błędny) wynik: x^{2}+36.
+    Test liczbowy dla x=2: wyrażenie wyjściowe daje \left(2+6\right)^{2}=8^{2}=64, natomiast zapis ucznia daje 2^{2}+36=4+36=40. Skoro 64\ne 40, zapis jest fałszywy.
+    Poprawnie: mnożąc nawiasy „każdy z każdym”, otrzymujemy
+    \left(x+6\right)\cdot\left(x+6\right)=x^{2}+6x+6x+36=x^{2}+12x+36.
+    Brakującym składnikiem jest podwojony iloczyn 2\cdot x\cdot 6=12x.
+    Sprawdzenie dla x=2: 4+24+36=64 — zgadza się.
+  solution_steps:
+  - 'Zapisz błędne rozumowanie: \left(x+6\right)^{2}=x^{2}+36 (pominięty podwojony iloczyn).'
+  - 'Wykonaj test liczbowy dla x=2: 64 wobec 40 — sprzeczność.'
+  - 'Wymnóż nawiasy: \left(x+6\right)\cdot\left(x+6\right)=x^{2}+6x+6x+36.'
+  - Zapisz poprawny wynik x^{2}+12x+36 i wskaż brakujący wyraz 2\cdot x\cdot 6=12x.
+  answer:
+    kind: SYMBOLIC
+    latex: x^{2}+12x+36
+  checks:
+  - kind: simplify
+    expr: \left(x+6\right)^{2}
+  skills:
+  - kwadrat sumy
+  - podwojony iloczyn
+  - kontrprzykład liczbowy
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: ''x^{2}+12x+36'' vs ''(x + 6)**2'''
+- id: g-cm-07
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: wykrycie i poprawa błędu
+  statement: 'Uczeń zapisał: \left(2x-5\right)^{2}=4x^{2}-20x-25. Wskaż błąd w tym zapisie, uzasadnij
+    go podstawieniem x=0 i podaj poprawne rozwinięcie wyrażenia \left(2x-5\right)^{2}.'
+  statement_latex: \left(2x-5\right)^{2}
+  solution: |-
+    Błędne rozumowanie ucznia: „minus przed piątką przechodzi na wszystkie wyrazy”, więc ostatni wyraz też ma być ujemny: 4x^{2}-20x-25.
+    Test liczbowy dla x=0: wyrażenie wyjściowe daje \left(0-5\right)^{2}=25, a zapis ucznia daje -25. Kwadrat nie może być liczbą ujemną, więc zapis jest błędny.
+    Poprawnie, ze wzoru \left(a-b\right)^{2}=a^{2}-2ab+b^{2} dla a=2x, b=5:
+    \left(2x\right)^{2}=4x^{2}, podwojony iloczyn 2\cdot 2x\cdot 5=20x ze znakiem minus, oraz \left(-5\right)^{2}=25 (zawsze plus).
+    Zatem \left(2x-5\right)^{2}=4x^{2}-20x+25. Minus pojawia się wyłącznie przy wyrazie środkowym.
+  solution_steps:
+  - 'Zapisz błędne rozumowanie: ostatni wyraz ma rzekomo znak minus.'
+  - 'Podstaw x=0: 25 wobec -25 — sprzeczność, kwadrat nie bywa ujemny.'
+  - Zastosuj wzór \left(a-b\right)^{2}=a^{2}-2ab+b^{2} dla a=2x, b=5.
+  - Zapisz poprawny wynik 4x^{2}-20x+25 i podkreśl, że \left(-5\right)^{2}=25.
+  answer:
+    kind: SYMBOLIC
+    latex: 4x^{2}-20x+25
+  checks:
+  - kind: simplify
+    expr: \left(2x-5\right)^{2}
+  skills:
+  - kwadrat różnicy
+  - znaki wyrazów rozwinięcia
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: ''4x^{2}-20x+25'' vs ''(2*x - 5)**2'''
+- id: g-cm-08
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: wykrycie i poprawa błędu
+  statement: 'Uczeń rozłożył na czynniki: 4x^{2}+9=\left(2x-3\right)\cdot\left(2x+3\right). a) Rozłóż
+    na czynniki wyrażenie 4x^{2}-9. b) Rozstrzygnij, czy wyrażenie 4x^{2}+9 da się rozłożyć na iloczyn
+    dwóch czynników liniowych o współczynnikach rzeczywistych (odpowiedz TAK albo NIE) i wyjaśnij błąd
+    ucznia.'
+  statement_latex: \text{a) } 4x^{2}-9, \qquad \text{b) } 4x^{2}+9
+  solution: |-
+    Błędne rozumowanie ucznia: „skoro oba wyrazy są kwadratami, to działa wzór”, czyli 4x^{2}+9=\left(2x-3\right)\cdot\left(2x+3\right).
+    Sprawdzenie przez wymnożenie: \left(2x-3\right)\cdot\left(2x+3\right)=4x^{2}-9, a to nie jest 4x^{2}+9. Test liczbowy dla x=0: 4x^{2}+9=9, natomiast \left(0-3\right)\cdot\left(0+3\right)=-9.
+    a) Wzór a^{2}-b^{2}=\left(a-b\right)\cdot\left(a+b\right) dotyczy RÓŻNICY kwadratów, więc
+    4x^{2}-9=\left(2x\right)^{2}-3^{2}=\left(2x-3\right)\cdot\left(2x+3\right).
+    b) Odpowiedź: NIE. Suma kwadratów 4x^{2}+9 przyjmuje wyłącznie wartości dodatnie (jest nie mniejsza niż 9), więc nie ma pierwiastków rzeczywistych i nie rozkłada się na czynniki liniowe rzeczywiste.
+  solution_steps:
+  - 'Wymnóż czynniki podane przez ucznia: \left(2x-3\right)\cdot\left(2x+3\right)=4x^{2}-9\ne 4x^{2}+9.'
+  - 'Wykonaj test liczbowy dla x=0: 9 wobec -9.'
+  - 'a) Rozłóż poprawnie różnicę kwadratów: 4x^{2}-9=\left(2x-3\right)\cdot\left(2x+3\right).'
+  - b) Stwierdź, że suma kwadratów 4x^{2}+9 jest zawsze dodatnia, więc nie ma rozkładu na rzeczywiste
+    czynniki liniowe — odpowiedź NIE.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: a
+      answer:
+        kind: SYMBOLIC
+        latex: \left(2x-3\right)\cdot\left(2x+3\right)
+    - name: b
+      answer:
+        kind: BOOLEAN
+        truth: false
+  checks:
+  - kind: simplify
+    expr: 4x^{2}-9
+    part: a
+  skills:
+  - różnica kwadratów
+  - rozkład na czynniki
+  - suma kwadratów
+  verification:
+    checkability: REFERENCE_CALL
+    note: 2 parts matched
+- id: g-cm-09
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: wykrycie i poprawa błędu
+  statement: 'Uczeń zapisał: \left(4x+3\right)^{2}=4x^{2}+24x+9. Wskaż błąd, sprawdź zapis dla x=1 i podaj
+    poprawne rozwinięcie wyrażenia \left(4x+3\right)^{2}.'
+  statement_latex: \left(4x+3\right)^{2}
+  solution: |-
+    Błędne rozumowanie ucznia: „do kwadratu podnosimy tylko x, a czwórkę przepisujemy”, stąd pierwszy wyraz 4x^{2} i wynik 4x^{2}+24x+9.
+    Test liczbowy dla x=1: wyrażenie wyjściowe daje \left(4+3\right)^{2}=49, a zapis ucznia daje 4+24+9=37. Skoro 49\ne 37, zapis jest błędny.
+    Poprawnie do kwadratu podnosimy CAŁY składnik: \left(4x\right)^{2}=4^{2}\cdot x^{2}=16x^{2}.
+    Podwojony iloczyn: 2\cdot 4x\cdot 3=24x, kwadrat drugiego składnika: 3^{2}=9.
+    Zatem \left(4x+3\right)^{2}=16x^{2}+24x+9. Sprawdzenie dla x=1: 16+24+9=49 — zgadza się.
+  solution_steps:
+  - 'Zapisz błędne rozumowanie: \left(4x\right)^{2} potraktowane jako 4x^{2}.'
+  - 'Wykonaj test liczbowy dla x=1: 49 wobec 37 — sprzeczność.'
+  - 'Popraw kwadrat pierwszego składnika: \left(4x\right)^{2}=16x^{2}.'
+  - 'Dopisz pozostałe wyrazy: 2\cdot 4x\cdot 3=24x oraz 3^{2}=9.'
+  - 'Zapisz poprawny wynik: 16x^{2}+24x+9.'
+  answer:
+    kind: SYMBOLIC
+    latex: 16x^{2}+24x+9
+  checks:
+  - kind: simplify
+    expr: \left(4x+3\right)^{2}
+  skills:
+  - kwadrat sumy
+  - kwadrat iloczynu
+  - współczynniki przy zmiennej
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: ''16x^{2}+24x+9'' vs ''(4*x + 3)**2'''
+- id: g-cm-10
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: wykrycie i poprawa błędu
+  statement: 'Uczeń upraszczał wyrażenie \left(2x+3\right)^{2}-\left(2x-1\right)^{2} i zapisał: 4x^{2}+12x+9-4x^{2}-4x+1=8x+10.
+    Wskaż błąd w jego przekształceniu, sprawdź wynik dla x=1 i podaj poprawną postać uproszczoną tego
+    wyrażenia.'
+  statement_latex: \left(2x+3\right)^{2}-\left(2x-1\right)^{2}
+  solution: |-
+    Błędne rozumowanie ucznia: po rozwinięciu \left(2x-1\right)^{2}=4x^{2}-4x+1 uczeń przepisał rozwinięcie bez zmiany znaków wszystkich jego wyrazów, otrzymując 4x^{2}+12x+9-4x^{2}-4x+1=8x+10.
+    Test liczbowy dla x=1: wyrażenie wyjściowe daje \left(2+3\right)^{2}-\left(2-1\right)^{2}=25-1=24, a wynik ucznia 8\cdot 1+10=18. Skoro 24\ne 18, przekształcenie jest błędne.
+    Poprawnie: minus przed nawiasem zmienia znak KAŻDEGO wyrazu rozwinięcia:
+    -\left(4x^{2}-4x+1\right)=-4x^{2}+4x-1.
+    Zatem \left(2x+3\right)^{2}-\left(2x-1\right)^{2}=4x^{2}+12x+9-4x^{2}+4x-1=16x+8.
+    Szybciej — ze wzoru na różnicę kwadratów:
+    \left[\left(2x+3\right)-\left(2x-1\right)\right]\cdot\left[\left(2x+3\right)+\left(2x-1\right)\right]=4\cdot\left(4x+2\right)=16x+8.
+    Sprawdzenie dla x=1: 16+8=24 — zgadza się.
+  solution_steps:
+  - Zapisz błędne przekształcenie ucznia i jego wynik 8x+10.
+  - 'Sprawdź dla x=1: 24 wobec 18 — sprzeczność.'
+  - 'Zmień znaki wszystkich wyrazów w nawiasie poprzedzonym minusem: -\left(4x^{2}-4x+1\right)=-4x^{2}+4x-1.'
+  - 'Zredukuj wyrazy podobne: 16x+8.'
+  - 'Potwierdź wynik wzorem na różnicę kwadratów: 4\cdot\left(4x+2\right)=16x+8.'
+  answer:
+    kind: SYMBOLIC
+    latex: 16x+8
+  checks:
+  - kind: simplify
+    expr: \left(2x+3\right)^{2}-\left(2x-1\right)^{2}
+  skills:
+  - kwadrat sumy
+  - kwadrat różnicy
+  - znak przed nawiasem
+  - różnica kwadratów
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: ''16x+8'' vs ''16*x + 8'''
+- id: g-ch-t02
+  slot: CHALLENGE
+  ramp_index: 0
+  difficulty: 4
+  exercise_type: zadanie tekstowe z zastosowaniem tożsamości pochodnych
+  statement: W trójkącie prostokątnym suma długości obu przyprostokątnych jest równa 17 cm, a pole tego
+    trójkąta jest równe 30 cm^{2}. Oblicz długość przeciwprostokątnej tego trójkąta.
+  statement_latex: a+b = 17, \qquad \frac{1}{2}\cdot a\cdot b = 30, \qquad c = \sqrt{a^{2}+b^{2}}
+  solution: |-
+    Oznaczmy przez a i b długości przyprostokątnych (w centymetrach), a przez c długość przeciwprostokątnej.
+    Z treści: a+b = 17 oraz \frac{1}{2}\cdot a\cdot b = 30, czyli a\cdot b = 60.
+    Nie musimy wyznaczać osobno a i b. Z twierdzenia Pitagorasa c^{2} = a^{2}+b^{2}, a ze wzoru skróconego mnożenia
+    a^{2}+b^{2} = \left(a+b\right)^{2} - 2\cdot a\cdot b = 17^{2} - 2\cdot 60 = 289-120 = 169.
+    Zatem c^{2} = 169, czyli c = 13 (długość jest dodatnia).
+    Odpowiedź: przeciwprostokątna ma długość 13 cm. (Sprawdzenie: a = 5, b = 12 spełniają oba warunki, a 5^{2}+12^{2}=13^{2}.)
+  solution_steps:
+  - 'Oznacz przyprostokątne przez a i b: a+b = 17.'
+  - 'Z pola: \frac{1}{2}\cdot a\cdot b = 30, więc a\cdot b = 60.'
+  - Zastosuj a^{2}+b^{2} = \left(a+b\right)^{2}-2\cdot a\cdot b = 289-120 = 169.
+  - Z twierdzenia Pitagorasa c = \sqrt{169} = 13 cm.
+  answer:
+    kind: NUMERIC
+    value: 13.0
+  checks:
+  - kind: evaluate
+    expr: \sqrt{17^{2} - 2\cdot 60}
+  stated_model:
+    variable: a
+    objective_latex: c = \sqrt{\left(a+b\right)^{2} - 2\cdot a\cdot b}
+    domain_lo: '0'
+    domain_hi: '17'
+    goal: value
+    constraint_used: a+b = 17 \ \wedge \ a\cdot b = 60, \ a>0, \ b>0
+  skills:
+  - wprowadzenie oznaczeń
+  - tożsamość a^2+b^2=(a+b)^2-2ab
+  - twierdzenie Pitagorasa
+  - pole trójkąta prostokątnego
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''a'': ''c = \\sqrt{\\left(a+b\\right)^{2}
+      - 2\\cdot a\\cdot b}'') — human review'
+- id: g-ch-t03
+  slot: CHALLENGE
+  ramp_index: 1
+  difficulty: 4
+  exercise_type: zadanie tekstowe geometryczne z różnicą kwadratów
+  statement: Bok pewnego kwadratu ma długość większą niż 3 cm. Rozważamy prostokąt, którego jeden bok
+    jest o 3 cm dłuższy od boku tego kwadratu, a bok do niego prostopadły jest o 3 cm krótszy od boku
+    tego kwadratu. a) Oblicz, o ile centymetrów kwadratowych pole tego prostokąta jest mniejsze od pola
+    kwadratu. b) Wiadomo ponadto, że pole tego prostokąta jest równe 40 cm^{2}. Oblicz obwód kwadratu.
+  statement_latex: P_{\text{prost}} = \left(x+3\right)\cdot\left(x-3\right), \qquad P_{\text{kw}} = x^{2},
+    \qquad x>3
+  solution: |-
+    Oznaczmy przez x długość boku kwadratu (w centymetrach); z treści x>3, bo krótszy bok prostokąta x-3 musi być dodatni.
+    Pole kwadratu: P_{\text{kw}} = x^{2}.
+    Pole prostokąta: P_{\text{prost}} = \left(x+3\right)\cdot\left(x-3\right) = x^{2}-9 (wzór na różnicę kwadratów).
+    a) Różnica pól: x^{2} - \left(x^{2}-9\right) = 9, a więc pole prostokąta jest o 9 cm^{2} mniejsze od pola kwadratu — niezależnie od długości boku kwadratu.
+    b) Z warunku P_{\text{prost}} = 40 mamy x^{2}-9 = 40, czyli x^{2} = 49, skąd x = 7 lub x = -7. Warunek x>3 (długość boku) eliminuje x = -7, więc x = 7 cm.
+    Obwód kwadratu: 4\cdot 7 = 28 cm.
+    Sprawdzenie: prostokąt ma boki 10 cm i 4 cm, jego pole to 40 cm^{2}, a pole kwadratu 49 cm^{2} — różnica 9 cm^{2}.
+  solution_steps:
+  - Oznacz bok kwadratu przez x, przy czym x>3 (drugi bok prostokąta x-3 musi być dodatni).
+  - 'Zapisz pole prostokąta: \left(x+3\right)\cdot\left(x-3\right) = x^{2}-9.'
+  - 'Oblicz różnicę pól: x^{2} - \left(x^{2}-9\right) = 9 cm^{2}.'
+  - Z równania x^{2}-9 = 40 otrzymaj x^{2} = 49, czyli x = 7 lub x = -7.
+  - 'Odrzuć x = -7 (nie spełnia warunku x>3) i oblicz obwód: 4\cdot 7 = 28 cm.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: roznica_pol
+      answer:
+        kind: NUMERIC
+        value: 9.0
+    - name: obwod_kwadratu
+      answer:
+        kind: NUMERIC
+        value: 28.0
+  checks:
+  - kind: simplify
+    expr: x^{2} - \left(x+3\right)\cdot\left(x-3\right)
+    part: roznica_pol
+  - kind: evaluate
+    expr: 4\cdot\sqrt{40+9}
+    part: obwod_kwadratu
+  stated_model:
+    variable: x
+    objective_latex: P_{\text{prost}}(x) = \left(x+3\right)\cdot\left(x-3\right) = x^{2}-9
+    domain_lo: '3'
+    goal: value
+    constraint_used: x - 3 > 0
+  skills:
+  - wprowadzenie zmiennej
+  - różnica kwadratów
+  - rozwiązanie równania kwadratowego niezupełnego
+  - odrzucenie rozwiązania sprzecznego z warunkami zadania
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (PARSE_ERROR: "UnexpectedCharacters: No terminal
+      matches ''='' in the current parser context, at line 1 col 54") — human review'
+- id: g-ch-t04
+  slot: CHALLENGE
+  ramp_index: 2
+  difficulty: 5
+  exercise_type: 'modelowanie: funkcja kwadratowa z dziedziną i ograniczeniem'
+  statement: Drut o długości 40 cm rozcięto na dwie części i z każdej z nich zgięto kwadrat (cały drut
+    został zużyty). Wiadomo, że pierwsza część drutu jest co najmniej o 8 cm dłuższa od drugiej części.
+    a) Wyznacz wzór funkcji S opisującej sumę pól obu kwadratów w zależności od długości x boku kwadratu
+    zbudowanego z pierwszej części drutu oraz podaj dziedzinę tej funkcji. b) Oblicz najmniejszą możliwą
+    wartość sumy pól obu kwadratów oraz podaj długości obu części drutu, dla których ta najmniejsza wartość
+    jest osiągana.
+  statement_latex: S\left(x\right) = x^{2} + \left(10-x\right)^{2}, \qquad 4\cdot x - \left(40 - 4\cdot
+    x\right) \ge 8
+  solution: |-
+    Niech x (w cm) oznacza długość boku kwadratu zgiętego z pierwszej części drutu. Wtedy pierwsza część ma długość 4\cdot x, a druga 40 - 4\cdot x, więc bok drugiego kwadratu jest równy \frac{40-4\cdot x}{4} = 10 - x.
+    Suma pól: S\left(x\right) = x^{2} + \left(10-x\right)^{2} = x^{2} + 100 - 20x + x^{2} = 2x^{2} - 20x + 100.
+    Dziedzina: drugi kwadrat musi istnieć, więc 10 - x > 0, czyli x < 10. Warunek z treści: 4\cdot x \ge \left(40-4\cdot x\right) + 8, czyli 8\cdot x \ge 48, a stąd x \ge 6. Zatem D = \left\langle 6;\ 10\right).
+    b) Zwijamy pełny kwadrat: S\left(x\right) = 2\cdot\left(x^{2}-10x+25\right) + 50 = 2\cdot\left(x-5\right)^{2} + 50.
+    Wierzchołek paraboli ma pierwszą współrzędną x = 5, ale 5 \notin D — ta wartość jest niedopuszczalna. Na przedziale \left\langle 6;\ 10\right) funkcja S jest rosnąca (bo 6 > 5), więc najmniejszą wartość przyjmuje na lewym krańcu, dla x = 6:
+    S\left(6\right) = 2\cdot\left(6-5\right)^{2} + 50 = 52.
+    Wtedy pierwsza część drutu ma długość 4\cdot 6 = 24 cm, a druga 40 - 24 = 16 cm (różnica 24-16 = 8 cm, warunek spełniony).
+    Odpowiedź: S\left(x\right) = 2x^{2}-20x+100 dla x \in \left\langle 6;\ 10\right); najmniejsza suma pól to 52 cm^{2} przy podziale drutu na części 24 cm i 16 cm.
+  solution_steps:
+  - Oznacz przez x bok pierwszego kwadratu; pierwsza część drutu ma 4\cdot x cm, druga 40-4\cdot x cm.
+  - 'Wyznacz bok drugiego kwadratu: \frac{40-4\cdot x}{4} = 10-x.'
+  - 'Zapisz i rozwiń objętość celu: S\left(x\right) = x^{2} + \left(10-x\right)^{2} = 2x^{2}-20x+100.'
+  - 'Wyznacz dziedzinę: 10-x>0 oraz 4\cdot x - \left(40-4\cdot x\right) \ge 8, czyli x \in \left\langle
+    6;\ 10\right).'
+  - 'Zwiń pełny kwadrat: S\left(x\right) = 2\cdot\left(x-5\right)^{2}+50; wierzchołek x=5 nie należy do
+    dziedziny.'
+  - 'Na \left\langle 6;\ 10\right) funkcja rośnie, więc minimum w x=6: S\left(6\right)=52 cm^{2}, a części
+    drutu mają 24 cm i 16 cm.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wzor_funkcji
+      answer:
+        kind: SYMBOLIC
+        latex: 2x^{2} - 20x + 100
+    - name: dziedzina
+      answer:
+        kind: INTERVAL
+        lo: '6'
+        hi: '10'
+        lo_open: false
+    - name: najmniejsza_suma_pol
+      answer:
+        kind: NUMERIC
+        value: 52.0
+    - name: dlugosci_czesci_drutu
+      answer:
+        kind: TUPLE
+        items:
+        - '24'
+        - '16'
+  checks:
+  - kind: simplify
+    expr: x^{2} + \left(10-x\right)^{2}
+    part: wzor_funkcji
+  - kind: evaluate
+    expr: 2\cdot 6^{2} - 20\cdot 6 + 100
+    part: najmniejsza_suma_pol
+  stated_model:
+    variable: x
+    objective_latex: S\left(x\right) = x^{2} + \left(10-x\right)^{2}
+    domain_lo: '6'
+    domain_hi: '10'
+    domain_lo_open: false
+    goal: min
+    constraint_used: 10-x>0 \ \wedge \ 4\cdot x - \left(40-4\cdot x\right) \ge 8
+  skills:
+  - wprowadzenie zmiennej i zapisanie objętościowej/polowej zależności
+  - kwadrat różnicy
+  - postać kanoniczna przez zwinięcie pełnego kwadratu
+  - wyznaczanie dziedziny z warunków geometrycznych
+  - badanie wartości najmniejszej na przedziale
+  verification:
+    checkability: STATED_MODEL
+    note: 'stage 1 inconclusive: SympifyError: SympifyError: "cannot sympify object of type <class ''sympy.core.singleton.SingletonRegistry''>"'

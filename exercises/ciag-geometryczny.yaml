@@ -1,0 +1,810 @@
+section: ciag-geometryczny
+name: 'Ciąg geometryczny: n-ty wyraz i suma'
+scope: Recognising a geometric sequence; the nth term and the sum of the first n terms.
+requirements:
+- VI.6
+counts:
+  total: 16
+  DETERMINISTIC: 10
+  REFERENCE_CALL: 3
+  STATED_MODEL: 2
+  NOT_MACHINE_CHECKABLE: 1
+exercises:
+- id: g-th-00
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: obliczanie wyrazu ciągu ze wzoru ogólnego
+  statement: Ciąg geometryczny (a_n) jest określony dla każdej liczby naturalnej n ≥ 1. Pierwszy wyraz
+    tego ciągu jest równy a_1 = 2, a iloraz jest równy q = 5. Oblicz czwarty wyraz tego ciągu.
+  statement_latex: a_1 = 2,\quad q = 5,\quad a_4 = a_1\cdot q^{4-1} = 2\cdot 5^{3}
+  solution: |-
+    Korzystamy ze wzoru na n-ty wyraz ciągu geometrycznego: a_n = a_1 \cdot q^{n-1}.
+    Dla n = 4 wykładnik wynosi n - 1 = 3, zatem a_4 = 2 \cdot 5^3 = 2 \cdot 125 = 250.
+    Sprawdzenie przez wypisanie wyrazów: 2, 10, 50, 250 — każdy kolejny jest 5 razy większy od poprzedniego. ✓
+    Odpowiedź: a_4 = 250.
+  solution_steps:
+  - 'Zapisz wzór ogólny: a_n = a_1 \cdot q^{n-1}.'
+  - 'Podstaw n = 4: a_4 = 2 \cdot 5^{3}.'
+  - 'Oblicz potęgę: 5^3 = 125.'
+  - 'Wykonaj mnożenie: a_4 = 2 \cdot 125 = 250.'
+  answer:
+    kind: NUMERIC
+    value: 250.0
+    latex: a_4 = 250
+  checks:
+  - kind: evaluate
+    expr: 2\cdot 5^{3}
+  skills:
+  - wzór a_n = a_1 q^{n-1}
+  - potęgowanie
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 250.0 vs 250.0 (tol 1e-09)'
+- id: g-th-01
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: odczytanie ilorazu i obliczenie wyrazu
+  statement: 'Czterema początkowymi wyrazami pewnego ciągu geometrycznego (a_n) są kolejno liczby: 96,
+    48, 24, 12. Wyznacz iloraz q tego ciągu oraz oblicz jego szósty wyraz a_6.'
+  statement_latex: q = \frac{48}{96},\qquad a_6 = 96\cdot\left(\frac{1}{2}\right)^{5}
+  solution: |-
+    Iloraz liczymy dzieląc wyraz późniejszy przez wcześniejszy: q = \frac{48}{96} = \frac{1}{2}.
+    Kontrola: \frac{24}{48} = \frac{1}{2} oraz \frac{12}{24} = \frac{1}{2} — iloraz jest stały. ✓
+    Szósty wyraz: a_6 = a_1 \cdot q^{5} = 96 \cdot \left(\frac{1}{2}\right)^{5} = \frac{96}{32} = 3.
+    Sprawdzenie: 96, 48, 24, 12, 6, 3. ✓
+    Odpowiedź: q = \frac{1}{2}, a_6 = 3.
+  solution_steps:
+  - 'Policz iloraz: q = \frac{48}{96} = \frac{1}{2}.'
+  - Sprawdź stałość ilorazu na kolejnych parach wyrazów.
+  - Zastosuj wzór a_6 = a_1 \cdot q^{5} = 96\cdot\left(\frac{1}{2}\right)^{5}.
+  - 'Oblicz: 96 \cdot \frac{1}{32} = 3.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: q
+      answer:
+        kind: NUMERIC
+        value: 0.5
+        latex: q = \frac{1}{2}
+    - name: a_6
+      answer:
+        kind: NUMERIC
+        value: 3.0
+        latex: a_6 = 3
+  checks:
+  - kind: evaluate
+    expr: \frac{48}{96}
+    part: q
+  - kind: evaluate
+    expr: 96\cdot\left(\frac{1}{2}\right)^{5}
+    part: a_6
+  skills:
+  - wyznaczanie ilorazu q = a_{n+1}/a_n
+  - wzór a_n = a_1 q^{n-1}
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [q] SymPy solved it fresh: 0.5 vs 0.5 (tol 1e-09) ; [a_6] SymPy
+      solved it fresh: 3.0 vs 3.0 (tol 1e-09)'
+- id: g-th-02
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: suma n początkowych wyrazów
+  statement: Dany jest ciąg geometryczny (a_n), w którym a_1 = 1 oraz q = 4. Oblicz sumę pięciu początkowych
+    wyrazów tego ciągu.
+  statement_latex: S_5 = a_1\cdot\frac{q^{5}-1}{q-1} = 1\cdot\frac{4^{5}-1}{4-1}
+  solution: |-
+    Ponieważ q = 4 \neq 1, korzystamy ze wzoru S_n = a_1 \cdot \frac{q^{n}-1}{q-1}.
+    Dla n = 5: S_5 = 1 \cdot \frac{4^{5}-1}{4-1} = \frac{1024-1}{3} = \frac{1023}{3} = 341.
+    Sprawdzenie: 1 + 4 + 16 + 64 + 256 = 341. ✓
+    Odpowiedź: S_5 = 341.
+  solution_steps:
+  - Sprawdź, że q = 4 \neq 1, więc obowiązuje wzór z ułamkiem.
+  - 'Podstaw dane: S_5 = 1\cdot\frac{4^{5}-1}{4-1}.'
+  - Oblicz 4^{5} = 1024.
+  - 'Wykonaj działania: \frac{1023}{3} = 341.'
+  answer:
+    kind: NUMERIC
+    value: 341.0
+    latex: S_5 = 341
+  checks:
+  - kind: evaluate
+    expr: 1\cdot\frac{4^{5}-1}{4-1}
+  skills:
+  - wzór na S_n
+  - potęgowanie
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 341.0 vs 341.0 (tol 1e-09)'
+- id: g-ex-03
+  slot: EXERCISE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: wyraz ciągu i suma przy ułamkowym ilorazie
+  statement: Ciąg geometryczny (a_n) jest określony dla każdej liczby naturalnej n ≥ 1. Wiadomo, że a_1
+    = 162 oraz q = \frac{1}{3}. Oblicz piąty wyraz tego ciągu oraz sumę pięciu początkowych jego wyrazów.
+  statement_latex: a_5 = 162\cdot\left(\frac{1}{3}\right)^{4},\qquad S_5 = 162\cdot\frac{1-\left(\frac{1}{3}\right)^{5}}{1-\frac{1}{3}}
+  solution: |-
+    Wyraz piąty: a_5 = a_1 \cdot q^{4} = 162 \cdot \left(\frac{1}{3}\right)^{4} = \frac{162}{81} = 2.
+    Suma: q = \frac{1}{3} \neq 1, więc S_5 = a_1 \cdot \frac{1-q^{5}}{1-q} = 162 \cdot \frac{1-\frac{1}{243}}{1-\frac{1}{3}} = 162 \cdot \frac{\frac{242}{243}}{\frac{2}{3}} = 162 \cdot \frac{242}{243} \cdot \frac{3}{2} = 242.
+    Sprawdzenie przez wypisanie wyrazów: 162, 54, 18, 6, 2; ich suma to 162 + 54 + 18 + 6 + 2 = 242. ✓
+    Odpowiedź: a_5 = 2, S_5 = 242.
+  solution_steps:
+  - Zapisz wzór ogólny a_n = a_1 \cdot q^{n-1} i podstaw n = 5.
+  - Oblicz a_5 = 162\cdot\frac{1}{81} = 2.
+  - Zauważ, że q \neq 1, i podstaw dane do wzoru S_5 = a_1\cdot\frac{1-q^{5}}{1-q}.
+  - 'Uprość ułamek piętrowy: 162\cdot\frac{242}{243}\cdot\frac{3}{2} = 242.'
+  - Sprawdź wynik, wypisując pięć początkowych wyrazów i dodając je.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: a_5
+      answer:
+        kind: NUMERIC
+        value: 2.0
+        latex: a_5 = 2
+    - name: S_5
+      answer:
+        kind: NUMERIC
+        value: 242.0
+        latex: S_5 = 242
+  checks:
+  - kind: evaluate
+    expr: 162\cdot\left(\frac{1}{3}\right)^{4}
+    part: a_5
+  - kind: evaluate
+    expr: 162\cdot\frac{1-\left(\frac{1}{3}\right)^{5}}{1-\frac{1}{3}}
+    part: S_5
+  skills:
+  - wzór a_n = a_1 q^{n-1}
+  - wzór na S_n
+  - działania na ułamkach
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [a_5] SymPy solved it fresh: 2.0 vs 2.0 (tol 1e-09) ; [S_5]
+      SymPy solved it fresh: 242.0 vs 242.0 (tol 1e-09)'
+- id: g-ex-04
+  slot: EXERCISE
+  ramp_index: 1
+  difficulty: 3
+  exercise_type: wyznaczanie a_1 i q z dwóch wyrazów, suma
+  statement: W ciągu geometrycznym (a_n), określonym dla każdej liczby naturalnej n ≥ 1, drugi wyraz jest
+    równy a_2 = -6, a piąty wyraz jest równy a_5 = 48. Wyznacz iloraz q oraz pierwszy wyraz a_1 tego ciągu,
+    a następnie oblicz sumę sześciu początkowych jego wyrazów. Zapisz obliczenia.
+  statement_latex: a_5 = a_2\cdot q^{3}\ \Rightarrow\ 48 = \left(-6\right)\cdot q^{3},\qquad S_6 = a_1\cdot\frac{1-q^{6}}{1-q}
+  solution: |-
+    Korzystamy z zależności między dwoma wyrazami: a_5 = a_2 \cdot q^{5-2} = a_2 \cdot q^{3}.
+    Stąd 48 = (-6)\cdot q^{3}, czyli q^{3} = -8, a więc q = -2 (wykładnik nieparzysty, jedno rozwiązanie rzeczywiste).
+    Z równości a_2 = a_1 \cdot q mamy -6 = a_1 \cdot (-2), zatem a_1 = \frac{-6}{-2} = 3.
+    Sprawdzenie: 3, -6, 12, -24, 48 — istotnie a_5 = 48. ✓
+    Suma: q = -2 \neq 1, więc S_6 = 3 \cdot \frac{1-\left(-2\right)^{6}}{1-\left(-2\right)} = 3\cdot\frac{1-64}{3} = 3\cdot\frac{-63}{3} = -63.
+    Kontrola: 3 - 6 + 12 - 24 + 48 - 96 = -63. ✓
+    Odpowiedź: q = -2, a_1 = 3, S_6 = -63.
+  solution_steps:
+  - 'Zapisz a_5 = a_2 \cdot q^{3} i podstaw dane: 48 = \left(-6\right)\cdot q^{3}.'
+  - Wyznacz q^{3} = -8, stąd q = -2.
+  - Z a_2 = a_1 \cdot q oblicz a_1 = \frac{-6}{-2} = 3.
+  - Sprawdź, że q \neq 1, i podstaw do wzoru S_6 = a_1\cdot\frac{1-q^{6}}{1-q}.
+  - Pamiętaj, że \left(-2\right)^{6} = 64, i oblicz S_6 = -63.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: q
+      answer:
+        kind: NUMERIC
+        value: -2.0
+        latex: q = -2
+    - name: a_1
+      answer:
+        kind: NUMERIC
+        value: 3.0
+        latex: a_1 = 3
+    - name: S_6
+      answer:
+        kind: NUMERIC
+        value: -63.0
+        latex: S_6 = -63
+  checks:
+  - kind: evaluate
+    expr: \frac{-6}{-2}
+    part: a_1
+  - kind: evaluate
+    expr: 3\cdot\frac{1-\left(-2\right)^{6}}{1-\left(-2\right)}
+    part: S_6
+  skills:
+  - zależność a_n = a_k q^{n-k}
+  - równanie potęgowe
+  - wzór na S_n
+  - ujemny iloraz
+  verification:
+    checkability: REFERENCE_CALL
+    note: '3 parts matched · det: [a_1] SymPy solved it fresh: 3.0 vs 3.0 (tol 1e-09) ; [S_6] SymPy solved
+      it fresh: -63.0 vs -63.0 (tol 1e-09)'
+- id: g-ex-05
+  slot: EXERCISE
+  ramp_index: 2
+  difficulty: 4
+  exercise_type: dobieranie parametru (warunek b² = ac)
+  statement: Wyznacz wszystkie wartości x, dla których liczby 2, x, x + 12 — w podanej kolejności — są
+    trzema kolejnymi wyrazami ciągu geometrycznego. Dla każdej znalezionej wartości x podaj iloraz tego
+    ciągu. Zapisz obliczenia.
+  statement_latex: x^{2} = 2\cdot\left(x+12\right)
+  solution: |-
+    Warunek na trzy kolejne wyrazy ciągu geometrycznego: (wyraz środkowy)² = (pierwszy)·(trzeci), czyli x^{2} = 2\cdot\left(x+12\right).
+    Stąd x^{2} - 2x - 24 = 0. Wyróżnik: \Delta = 4 + 96 = 100, \sqrt{\Delta} = 10.
+    Zatem x = \frac{2-10}{2} = -4 lub x = \frac{2+10}{2} = 6.
+    Sprawdzamy warunek, że żaden wyraz nie jest zerem:
+    • dla x = 6 otrzymujemy liczby 2, 6, 18 — wszystkie różne od zera, q = \frac{6}{2} = 3 (i \frac{18}{6} = 3 ✓);
+    • dla x = -4 otrzymujemy liczby 2, -4, 8 — wszystkie różne od zera, q = \frac{-4}{2} = -2 (i \frac{8}{-4} = -2 ✓).
+    Odpowiedź: x = 6 (wtedy q = 3) albo x = -4 (wtedy q = -2).
+  solution_steps:
+  - Zapisz warunek x^{2} = 2\cdot\left(x+12\right).
+  - Przekształć do postaci x^{2} - 2x - 24 = 0.
+  - Oblicz \Delta = 100 i pierwiastki x = -4 oraz x = 6.
+  - Wypisz odpowiadające trójki liczb i sprawdź, że żadna z nich nie zawiera zera.
+  - 'Wyznacz iloraz jako iloraz wyrazu drugiego przez pierwszy: q = 3 dla x = 6 oraz q = -2 dla x = -4.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: x
+      answer:
+        kind: SET
+        latex: x \in \{-4,\ 6\}
+        members:
+        - '-4'
+        - '6'
+    - name: q
+      answer:
+        kind: SET
+        latex: q = -2 \text{ (dla } x=-4\text{)},\ q = 3 \text{ (dla } x=6\text{)}
+        members:
+        - '-2'
+        - '3'
+  checks:
+  - kind: solve_equation
+    expr: x^{2} = 2\cdot\left(x+12\right)
+    part: x
+  skills:
+  - warunek na trzy kolejne wyrazy
+  - równanie kwadratowe
+  - weryfikacja warunku niezerowości
+  - wyznaczanie ilorazu
+  verification:
+    checkability: REFERENCE_CALL
+    note: 'could not compare: part disagrees: kind mismatch: answer=SET reference=NUMERIC'
+- id: g-ex-t00
+  slot: EXERCISE
+  ramp_index: 6
+  difficulty: 4
+  exercise_type: wyznaczanie a_1 i q z dwóch wyrazów, suma n wyrazów
+  statement: Dany jest ciąg geometryczny \left(a_{n}\right) określony dla każdej liczby naturalnej n \geq
+    1, w którym a_{3} = 18 oraz a_{6} = -486. Oblicz iloraz q tego ciągu, jego pierwszy wyraz a_{1} oraz
+    sumę S_{7} siedmiu początkowych wyrazów. Zapisz obliczenia.
+  statement_latex: a_{6} = a_{3} \cdot q^{3}, \qquad S_{7} = a_{1} \cdot \frac{1 - q^{7}}{1 - q}
+  solution: |-
+    Korzystamy z zależności między dwoma dowolnymi wyrazami: a_{6} = a_{3} \cdot q^{6-3} = a_{3} \cdot q^{3}.
+    Stąd -486 = 18 \cdot q^{3}, czyli q^{3} = -27, więc q = -3 (wykładnik nieparzysty — jedno rozwiązanie rzeczywiste).
+    Z zależności a_{3} = a_{1} \cdot q^{2} mamy 18 = a_{1} \cdot \left(-3\right)^{2} = 9 a_{1}, zatem a_{1} = 2.
+    Sprawdzenie: 2, -6, 18, -54, 162, -486 — istotnie a_{3} = 18 i a_{6} = -486.
+    Ponieważ q = -3 \neq 1, stosujemy wzór na sumę:
+    S_{7} = 2 \cdot \frac{1 - \left(-3\right)^{7}}{1 - \left(-3\right)} = 2 \cdot \frac{1 + 2187}{4} = \frac{2 \cdot 2188}{4} = 1094.
+    Odpowiedź: q = -3, a_{1} = 2, S_{7} = 1094.
+  solution_steps:
+  - 'Zapisz a_{6} = a_{3} \cdot q^{3} i podstaw dane: -486 = 18 \cdot q^{3}.'
+  - Wyznacz q^{3} = -27, stąd q = -3.
+  - 'Z a_{3} = a_{1} \cdot q^{2}: 18 = 9 a_{1}, więc a_{1} = 2.'
+  - Sprawdź, że q \neq 1 i podstaw do wzoru S_{7} = a_{1} \cdot \frac{1 - q^{7}}{1 - q}.
+  - 'Oblicz \left(-3\right)^{7} = -2187 i wykonaj działania: S_{7} = 2 \cdot \frac{2188}{4} = 1094.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: q
+      answer:
+        kind: NUMERIC
+        value: -3.0
+        latex: '-3'
+    - name: a_1
+      answer:
+        kind: NUMERIC
+        value: 2.0
+        latex: '2'
+    - name: S_7
+      answer:
+        kind: NUMERIC
+        value: 1094.0
+        latex: '1094'
+  checks:
+  - kind: evaluate
+    expr: -\sqrt[3]{27}
+    var: q
+    part: q
+  - kind: evaluate
+    expr: \frac{18}{\left(-3\right)^{2}}
+    part: a_1
+  - kind: evaluate
+    expr: 2 \cdot \frac{1 - \left(-3\right)^{7}}{1 - \left(-3\right)}
+    part: S_7
+  skills:
+  - zależność a_n = a_k q^{n-k}
+  - rozwiązywanie równania q^3 = c
+  - wzór na sumę n początkowych wyrazów
+  - działania na potęgach o ujemnej podstawie
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [q] SymPy solved it fresh: -3.0 vs -3.0 (tol 1e-09) ; [a_1]
+      SymPy solved it fresh: 2.0 vs 2.0 (tol 1e-09) ; [S_7] SymPy solved it fresh: 1094.0 vs 1094.0 (tol
+      1e-09)'
+- id: g-ex-t01
+  slot: EXERCISE
+  ramp_index: 7
+  difficulty: 4
+  exercise_type: warunek b^2 = ac z parametrem, iloraz, suma
+  statement: Liczby x,\ x+6,\ 2x+3 (w podanej kolejności) są trzema kolejnymi wyrazami ciągu geometrycznego.
+    Wyznacz wszystkie liczby x spełniające ten warunek i dla każdej z nich podaj iloraz otrzymanego ciągu.
+    Następnie dla tego z otrzymanych ciągów, który jest rosnący, oblicz sumę pięciu początkowych wyrazów
+    (przyjmując, że jego pierwszym wyrazem jest liczba x). Zapisz obliczenia.
+  statement_latex: \left(x+6\right)^{2} = x \cdot \left(2x+3\right)
+  solution: |-
+    Warunek na trzy kolejne wyrazy ciągu geometrycznego: \left(x+6\right)^{2} = x \cdot \left(2x+3\right).
+    x^{2} + 12x + 36 = 2x^{2} + 3x, czyli x^{2} - 9x - 36 = 0.
+    \Delta = 81 + 144 = 225, \sqrt{\Delta} = 15, więc x = \frac{9-15}{2} = -3 lub x = \frac{9+15}{2} = 12.
+    Sprawdzamy niezerowość wyrazów i wyznaczamy iloraz:
+    • dla x = 12 liczby to 12, 18, 27 — wszystkie różne od zera, q = \frac{18}{12} = \frac{3}{2} (oraz \frac{27}{18} = \frac{3}{2});
+    • dla x = -3 liczby to -3, 3, -3 — wszystkie różne od zera, q = \frac{3}{-3} = -1.
+    Ciąg jest rosnący tylko w pierwszym przypadku (a_{1} = 12 > 0 i q = \frac{3}{2} > 1); dla q = -1 wyrazy zmieniają znak, więc ciąg nie jest monotoniczny.
+    Suma pięciu początkowych wyrazów ciągu o a_{1} = 12 i q = \frac{3}{2}:
+    S_{5} = 12 \cdot \frac{1 - \left(\frac{3}{2}\right)^{5}}{1 - \frac{3}{2}} = 12 \cdot \frac{1 - \frac{243}{32}}{-\frac{1}{2}} = 12 \cdot \frac{211}{16} = \frac{633}{4} = 158{,}25.
+    Odpowiedź: x = 12 (q = \frac{3}{2}) lub x = -3 (q = -1); dla ciągu rosnącego S_{5} = \frac{633}{4} = 158{,}25.
+  solution_steps:
+  - Zapisz warunek \left(x+6\right)^{2} = x \cdot \left(2x+3\right).
+  - 'Sprowadź do równania x^{2} - 9x - 36 = 0 i rozwiąż: x = 12 lub x = -3.'
+  - 'Dla każdego x wypisz trzy liczby, sprawdź, że są różne od zera, i oblicz iloraz: q = \frac{3}{2}
+    oraz q = -1.'
+  - 'Wskaż ciąg rosnący: a_{1} = 12, q = \frac{3}{2}.'
+  - Oblicz S_{5} = 12 \cdot \frac{1 - \left(\frac{3}{2}\right)^{5}}{1 - \frac{3}{2}} = \frac{633}{4} =
+    158{,}25.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: x
+      answer:
+        kind: SET
+        members:
+        - '12'
+        - '-3'
+    - name: ilorazy
+      answer:
+        kind: SET
+        members:
+        - \frac{3}{2}
+        - '-1'
+    - name: S_5
+      answer:
+        kind: NUMERIC
+        value: 158.25
+        latex: \frac{633}{4}
+  checks:
+  - kind: solve_equation
+    expr: \left(x+6\right)^{2} = x \cdot \left(2x+3\right)
+    part: x
+  - kind: evaluate
+    expr: 12 \cdot \frac{1 - \left(\frac{3}{2}\right)^{5}}{1 - \frac{3}{2}}
+    part: S_5
+  skills:
+  - warunek na trzy kolejne wyrazy ciągu geometrycznego
+  - rozwiązywanie równania kwadratowego
+  - sprawdzanie niezerowości wyrazów
+  - monotoniczność ciągu geometrycznego
+  - wzór na sumę n początkowych wyrazów
+  verification:
+    checkability: REFERENCE_CALL
+    note: 'could not compare: part disagrees: kind mismatch: answer=SET reference=SYMBOLIC'
+- id: g-cm-06
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: 'demonstracja błędu: iloraz a różnica'
+  statement: 'Trzema początkowymi wyrazami ciągu geometrycznego (a_n) są liczby 3, 12, 48. Uczeń zauważył,
+    że różnice kolejnych wyrazów wynoszą 9 i 36, i zapisał: „skoro ciąg rośnie coraz szybciej, to kolejny
+    wyraz otrzymam, dodając 36·4 = 144, czyli a_4 = 48 + 144 = 192, a ogólnie a_n = 3 + \left(n-1\right)\cdot
+    9”. Wskaż błąd w tym rozumowaniu i oblicz poprawnie piąty wyraz tego ciągu.'
+  statement_latex: '\text{błędnie: } a_n = a_1 + \left(n-1\right)\cdot q;\qquad \text{poprawnie: } a_5
+    = 3\cdot 4^{4}'
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń bada RÓŻNICE kolejnych wyrazów (12 - 3 = 9, 48 - 12 = 36) i buduje wyrazy przez dodawanie, a nawet używa wzoru ciągu arytmetycznego a_n = a_1 + \left(n-1\right)\cdot q. Dostaje wtedy a_4 = 192 i np. a_5 = 3 + 4\cdot 9 = 39 — wyniki sprzeczne ze sobą i błędne.
+    DLACZEGO TO BŁĄD: w ciągu geometrycznym kolejne wyrazy powstają przez MNOŻENIE przez stały iloraz q, a nie przez dodawanie stałej różnicy. Wzór a_n = a_1 + \left(n-1\right)r dotyczy ciągu arytmetycznego; dany ciąg arytmetyczny nie jest, bo 9 \neq 36.
+    POPRAWNIE: q = \frac{12}{3} = 4 (kontrola: \frac{48}{12} = 4 ✓), więc a_n = 3\cdot 4^{\,n-1}.
+    Stąd a_4 = 3\cdot 4^{3} = 192 (przypadkowa zgodność nie usprawiedliwia metody) oraz a_5 = 3\cdot 4^{4} = 3\cdot 256 = 768.
+    Sprawdzenie: 3, 12, 48, 192, 768 — każdy wyraz jest 4 razy większy od poprzedniego. ✓
+    Odpowiedź: a_5 = 768.
+  solution_steps:
+  - Zauważ, że różnice kolejnych wyrazów (9 i 36) nie są równe — ciąg nie jest arytmetyczny.
+  - 'Policz ilorazy: \frac{12}{3} = 4 oraz \frac{48}{12} = 4 — iloraz jest stały, q = 4.'
+  - Zapisz poprawny wzór ogólny a_n = 3\cdot 4^{\,n-1}.
+  - 'Podstaw n = 5: a_5 = 3\cdot 4^{4} = 768.'
+  answer:
+    kind: NUMERIC
+    value: 768.0
+    latex: a_5 = 768
+  checks:
+  - kind: evaluate
+    expr: 3\cdot 4^{4}
+  skills:
+  - rozpoznanie ciągu geometrycznego
+  - wzór a_n = a_1 q^{n-1}
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 768.0 vs 768.0 (tol 1e-09)'
+- id: g-cm-07
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: 'demonstracja błędu: zły wykładnik'
+  statement: Dany jest ciąg geometryczny (a_n), w którym a_1 = 5 oraz q = 3. Uczeń zapisał wzór a_n =
+    a_1\cdot q^{n} i obliczył a_6 = 5\cdot 3^{6} = 3645. Wyjaśnij, na czym polega błąd, i podaj poprawną
+    wartość szóstego wyrazu.
+  statement_latex: '\text{błędnie: } a_6 = 5\cdot 3^{6};\qquad \text{poprawnie: } a_6 = 5\cdot 3^{5}'
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń użył wzoru a_n = a_1\cdot q^{n} i otrzymał a_6 = 5\cdot 3^{6} = 5\cdot 729 = 3645.
+    DLACZEGO TO BŁĄD: szybki test — podstawmy do tego wzoru n = 1. Powinniśmy dostać a_1 = 5, a dostajemy 5\cdot 3 = 15. Wzór jest więc zły: od wyrazu pierwszego do n-tego wykonujemy n - 1 mnożeń przez q, a nie n.
+    POPRAWNIE: a_n = a_1\cdot q^{\,n-1} = 5\cdot 3^{\,n-1}, zatem a_6 = 5\cdot 3^{5} = 5\cdot 243 = 1215.
+    Sprawdzenie przez wypisanie wyrazów: 5, 15, 45, 135, 405, 1215. ✓
+    Odpowiedź: a_6 = 1215 (uczeń otrzymał wynik 3 razy za duży).
+  solution_steps:
+  - Sprawdź wzór ucznia dla n = 1 — otrzymujemy 15 zamiast 5, więc wzór jest błędny.
+  - Zapisz poprawny wzór a_n = a_1\cdot q^{\,n-1}.
+  - 'Podstaw n = 6: a_6 = 5\cdot 3^{5}.'
+  - 'Oblicz: 5\cdot 243 = 1215.'
+  answer:
+    kind: NUMERIC
+    value: 1215.0
+    latex: a_6 = 1215
+  checks:
+  - kind: evaluate
+    expr: 5\cdot 3^{5}
+  skills:
+  - wzór a_n = a_1 q^{n-1}
+  - kontrola wzoru dla n = 1
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 1215.0 vs 1215.0 (tol 1e-09)'
+- id: g-cm-08
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: 'demonstracja błędu: suma przy q = 1'
+  statement: 'Ciąg geometryczny (a_n) ma pierwszy wyraz a_1 = -3 i iloraz q = 1. Uczeń podstawił dane
+    do wzoru S_n = a_1\cdot\frac{1-q^{n}}{1-q} i napisał: „w mianowniku wychodzi 1 - 1 = 0, więc suma
+    dziesięciu początkowych wyrazów nie istnieje”. Wyjaśnij błąd i oblicz sumę dziesięciu początkowych
+    wyrazów tego ciągu.'
+  statement_latex: q = 1\ \Rightarrow\ S_{10} = 10\cdot\left(-3\right)
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń podstawia q = 1 do wzoru S_n = a_1\cdot\frac{1-q^{n}}{1-q}, dostaje \frac{0}{0} i wnioskuje, że suma nie istnieje.
+    DLACZEGO TO BŁĄD: wzór z ułamkiem został wyprowadzony przy założeniu q \neq 1 — właśnie dlatego, że dla q = 1 dzielilibyśmy przez zero. Nie oznacza to jednak, że suma nie istnieje: przy q = 1 ciąg jest po prostu stały.
+    POPRAWNIE: skoro q = 1, to a_n = a_1 = -3 dla każdego n, czyli ciąg ma postać -3, -3, -3, \ldots
+    Suma dziesięciu takich wyrazów: S_{10} = 10\cdot a_1 = 10\cdot\left(-3\right) = -30.
+    Odpowiedź: S_{10} = -30.
+  solution_steps:
+  - Zauważ, że wzór S_n = a_1\cdot\frac{1-q^{n}}{1-q} obowiązuje wyłącznie dla q \neq 1.
+  - 'Dla q = 1 ciąg jest stały: -3, -3, -3, \ldots'
+  - Zastosuj wzór S_n = n\cdot a_1.
+  - Oblicz S_{10} = 10\cdot\left(-3\right) = -30.
+  answer:
+    kind: NUMERIC
+    value: -30.0
+    latex: S_{10} = -30
+  checks:
+  - kind: evaluate
+    expr: 10\cdot\left(-3\right)
+  skills:
+  - przypadek q = 1
+  - wzór S_n = n·a_1
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: -30.0 vs -30.0 (tol 1e-09)'
+- id: g-cm-09
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: 'demonstracja błędu: odwrócony iloraz'
+  statement: Trzema początkowymi wyrazami ciągu geometrycznego (a_n) są liczby 81, 27, 9. Uczeń zapisał
+    q = \frac{81}{27} = 3 i stwierdził, że ciąg jest rosnący. Wyjaśnij błąd, a następnie podaj poprawny
+    iloraz tego ciągu i oblicz jego szósty wyraz.
+  statement_latex: q = \frac{27}{81} = \frac{1}{3},\qquad a_6 = 81\cdot\left(\frac{1}{3}\right)^{5}
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń podzielił wyraz wcześniejszy przez późniejszy, czyli q = \frac{a_1}{a_2} = \frac{81}{27} = 3, i na tej podstawie orzekł, że ciąg rośnie (a szósty wyraz wyszedłby mu 81\cdot 3^{5} = 19683).
+    DLACZEGO TO BŁĄD: wystarczy spojrzeć na wyrazy — 81, 27, 9 maleją, więc iloraz nie może być równy 3. Iloraz definiujemy jako q = \frac{a_{n+1}}{a_n}: dzielimy wyraz PÓŹNIEJSZY przez WCZEŚNIEJSZY.
+    POPRAWNIE: q = \frac{27}{81} = \frac{1}{3} (kontrola: \frac{9}{27} = \frac{1}{3} ✓). Ponieważ a_1 > 0 i 0 < q < 1, ciąg jest malejący.
+    Szósty wyraz: a_6 = 81\cdot\left(\frac{1}{3}\right)^{5} = \frac{81}{243} = \frac{1}{3}.
+    Sprawdzenie: 81, 27, 9, 3, 1, \frac{1}{3}. ✓
+    Odpowiedź: q = \frac{1}{3}, a_6 = \frac{1}{3}.
+  solution_steps:
+  - Zauważ, że wyrazy maleją, więc iloraz musi być mniejszy od 1.
+  - Policz poprawnie q = \frac{a_2}{a_1} = \frac{27}{81} = \frac{1}{3}.
+  - Zastosuj wzór a_6 = a_1\cdot q^{5} = 81\cdot\left(\frac{1}{3}\right)^{5}.
+  - Oblicz a_6 = \frac{81}{243} = \frac{1}{3}.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: q
+      answer:
+        kind: NUMERIC
+        value: 0.3333333333333333
+        latex: q = \frac{1}{3}
+    - name: a_6
+      answer:
+        kind: NUMERIC
+        value: 0.3333333333333333
+        latex: a_6 = \frac{1}{3}
+  checks:
+  - kind: evaluate
+    expr: \frac{27}{81}
+    part: q
+  - kind: evaluate
+    expr: 81\cdot\left(\frac{1}{3}\right)^{5}
+    part: a_6
+  skills:
+  - iloraz q = a_{n+1}/a_n
+  - monotoniczność ciągu geometrycznego
+  - wzór a_n = a_1 q^{n-1}
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [q] SymPy solved it fresh: 0.3333333333333333 vs 0.3333333333333333
+      (tol 1e-09) ; [a_6] SymPy solved it fresh: 0.3333333333333333 vs 0.3333333333333333 (tol 1e-09)'
+- id: g-cm-10
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: 'demonstracja błędu: ujemny iloraz i potęgowanie'
+  statement: Trzema początkowymi wyrazami ciągu geometrycznego (a_n) są liczby 5, -10, 20. Uczeń przyjął
+    q = -2, ale zapisał a_7 = 5\cdot\left(-2\right)^{6} = 5\cdot\left(-64\right) = -320. Wyjaśnij, na
+    czym polega jego błąd, i oblicz poprawnie siódmy wyraz oraz sumę sześciu początkowych wyrazów tego
+    ciągu.
+  statement_latex: a_7 = 5\cdot\left(-2\right)^{6},\qquad S_6 = 5\cdot\frac{1-\left(-2\right)^{6}}{1-\left(-2\right)}
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń poprawnie ustalił q = \frac{-10}{5} = -2, ale potęgując „zgubił nawias”: potraktował \left(-2\right)^{6} jak -\left(2^{6}\right) = -64 i otrzymał a_7 = -320.
+    DLACZEGO TO BŁĄD: znak minus należy do podstawy potęgi. Przy PARZYSTYM wykładniku wynik jest dodatni: \left(-2\right)^{6} = 64. Widać to też z wypisania wyrazów — co drugi wyraz ciągu jest dodatni, a a_7 ma numer nieparzysty, więc musi być dodatni.
+    POPRAWNIE: a_7 = 5\cdot\left(-2\right)^{6} = 5\cdot 64 = 320.
+    Suma: q = -2 \neq 1, więc S_6 = 5\cdot\frac{1-\left(-2\right)^{6}}{1-\left(-2\right)} = 5\cdot\frac{1-64}{3} = 5\cdot\left(-21\right) = -105.
+    Sprawdzenie: 5 - 10 + 20 - 40 + 80 - 160 = -105. ✓
+    Odpowiedź: a_7 = 320, S_6 = -105.
+  solution_steps:
+  - 'Sprawdź iloraz: q = \frac{-10}{5} = -2 (oraz \frac{20}{-10} = -2).'
+  - Zauważ, że \left(-2\right)^{6} = 64, a nie -64 — wykładnik parzysty daje wynik dodatni.
+  - Oblicz a_7 = 5\cdot\left(-2\right)^{6} = 320.
+  - Podstaw do wzoru S_6 = a_1\cdot\frac{1-q^{6}}{1-q} = 5\cdot\frac{1-64}{3}.
+  - Otrzymaj S_6 = -105 i sprawdź wynik, dodając sześć wypisanych wyrazów.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: a_7
+      answer:
+        kind: NUMERIC
+        value: 320.0
+        latex: a_7 = 320
+    - name: S_6
+      answer:
+        kind: NUMERIC
+        value: -105.0
+        latex: S_6 = -105
+  checks:
+  - kind: evaluate
+    expr: 5\cdot\left(-2\right)^{6}
+    part: a_7
+  - kind: evaluate
+    expr: 5\cdot\frac{1-\left(-2\right)^{6}}{1-\left(-2\right)}
+    part: S_6
+  skills:
+  - ujemny iloraz
+  - potęgowanie liczb ujemnych
+  - wzór a_n = a_1 q^{n-1}
+  - wzór na S_n
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [a_7] SymPy solved it fresh: 320.0 vs 320.0 (tol 1e-09) ; [S_6]
+      SymPy solved it fresh: -105.0 vs -105.0 (tol 1e-09)'
+- id: g-ch-t02
+  slot: CHALLENGE
+  ramp_index: 0
+  difficulty: 4
+  exercise_type: model procentu składanego — zadanie odwrotne
+  statement: Wartość pewnej maszyny maleje co roku o ten sam procent jej wartości z początku danego roku.
+    Dokładnie dwa lata po zakupie maszyna była warta 32\ 400 zł, a dokładnie cztery lata po zakupie —
+    26\ 244 zł. Oblicz cenę zakupu tej maszyny oraz o ile procent maleje jej wartość w ciągu jednego roku.
+    Zapisz obliczenia.
+  statement_latex: W_{n} = W_{0} \cdot q^{n}, \qquad 32\,400 \cdot q^{2} = 26\,244
+  solution: |-
+    Skoro wartość maleje co roku o ten sam procent, to kolejne roczne wartości maszyny tworzą ciąg geometryczny o pewnym ilorazie q, przy czym q > 0. Oznaczmy przez W_{0} cenę zakupu; wtedy W_{n} = W_{0} \cdot q^{n}.
+    Wartości po dwóch i po czterech latach różnią się o dwa okresy, więc
+    26\,244 = 32\,400 \cdot q^{2}, czyli q^{2} = \frac{26\,244}{32\,400} = 0{,}81.
+    Ponieważ wartość maszyny jest dodatnia, q > 0, zatem q = 0{,}9 (rozwiązanie q = -0{,}9 odrzucamy).
+    Cena zakupu: 32\,400 = W_{0} \cdot q^{2} = W_{0} \cdot 0{,}81, więc W_{0} = \frac{32\,400}{0{,}81} = 40\,000 zł.
+    Iloraz q = 0{,}9 = 1 - \frac{10}{100}, czyli wartość maszyny maleje co roku o 10\%.
+    Sprawdzenie: 40\,000 \cdot 0{,}9^{2} = 32\,400 oraz 40\,000 \cdot 0{,}9^{4} = 26\,244. ✓
+    Odpowiedź: maszyna kosztowała 40\,000 zł, a jej wartość maleje o 10\% rocznie.
+  solution_steps:
+  - 'Zauważ, że kolejne roczne wartości maszyny tworzą ciąg geometryczny: W_{n} = W_{0} \cdot q^{n}, q
+    > 0.'
+  - 'Zapisz zależność między wartościami po 2 i po 4 latach: 26\,244 = 32\,400 \cdot q^{2}.'
+  - Wyznacz q^{2} = 0{,}81 i wybierz rozwiązanie dodatnie q = 0{,}9.
+  - 'Oblicz cenę zakupu: W_{0} = \frac{32\,400}{0{,}81} = 40\,000 zł.'
+  - 'Zinterpretuj iloraz: q = 0{,}9 = 1 - \frac{10}{100}, czyli spadek o 10\% rocznie.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: cena_zakupu
+      answer:
+        kind: NUMERIC
+        value: 40000.0
+        tol: 1.0e-06
+        latex: 40\,000
+    - name: procent_spadku
+      answer:
+        kind: NUMERIC
+        value: 10.0
+        latex: '10'
+  checks:
+  - kind: evaluate
+    expr: \frac{32400 \cdot 32400}{26244}
+    part: cena_zakupu
+  - kind: evaluate
+    expr: 100 \cdot \left(1 - \sqrt{\frac{26244}{32400}}\right)
+    part: procent_spadku
+  stated_model:
+    variable: n
+    objective_latex: W_{n} = W_{0} \cdot q^{n}
+    domain_lo: '0'
+    domain_lo_open: false
+    goal: value
+    constraint_used: q > 0, W_{2} = 32\,400, W_{4} = 26\,244
+  skills:
+  - modelowanie stałej zmiany procentowej ciągiem geometrycznym
+  - zależność a_n = a_k q^{n-k}
+  - rozwiązywanie równania q^2 = c przy warunku q > 0
+  - interpretacja ilorazu jako procentu spadku
+  verification:
+    checkability: STATED_MODEL
+    note: 'stage 1 inconclusive: TypeError: name should be a string, not Token'
+- id: g-ch-t03
+  slot: CHALLENGE
+  ramp_index: 1
+  difficulty: 5
+  exercise_type: ciąg arytmetyczny przekształcony w geometryczny, filtr monotoniczności, suma
+  statement: Trzy liczby, których suma jest równa 15, tworzą w podanej kolejności ciąg arytmetyczny. Jeżeli
+    do trzeciej z tych liczb dodamy 16, a dwie pierwsze pozostawimy bez zmian, to otrzymane trzy liczby
+    będą trzema kolejnymi wyrazami pewnego ciągu geometrycznego rosnącego. Wyznacz te trzy liczby tworzące
+    ciąg arytmetyczny oraz oblicz sumę sześciu początkowych wyrazów tego ciągu geometrycznego. Zapisz
+    obliczenia.
+  statement_latex: 5^{2} = \left(5-r\right) \cdot \left(5+r+16\right)
+  solution: |-
+    Oznaczmy trzy kolejne wyrazy ciągu arytmetycznego przez 5-r,\ 5,\ 5+r — istotnie ich suma wynosi 15, bo \left(5-r\right) + 5 + \left(5+r\right) = 15, więc wyraz środkowy jest równy 5.
+    Po zwiększeniu trzeciej liczby o 16 otrzymujemy liczby 5-r,\ 5,\ 21+r, które mają tworzyć ciąg geometryczny, zatem
+    5^{2} = \left(5-r\right) \cdot \left(21+r\right),
+    25 = 105 - 16r - r^{2}, czyli r^{2} + 16r - 80 = 0.
+    \Delta = 256 + 320 = 576, \sqrt{\Delta} = 24, stąd r = \frac{-16+24}{2} = 4 lub r = \frac{-16-24}{2} = -20.
+    Rozpatrujemy oba przypadki:
+    • r = 4: liczby arytmetyczne 1, 5, 9, a po zmianie 1, 5, 25 — ciąg geometryczny o ilorazie q = 5, rosnący;
+    • r = -20: liczby arytmetyczne 25, 5, -15, a po zmianie 25, 5, 1 — ciąg geometryczny o ilorazie q = \frac{1}{5}, malejący, więc ten przypadek odrzucamy.
+    Zatem szukane liczby to 1, 5, 9, a ciąg geometryczny ma a_{1} = 1 i q = 5.
+    S_{6} = 1 \cdot \frac{5^{6} - 1}{5 - 1} = \frac{15\,625 - 1}{4} = \frac{15\,624}{4} = 3906.
+    Odpowiedź: liczby to 1, 5, 9, a suma sześciu początkowych wyrazów ciągu geometrycznego wynosi 3906.
+  solution_steps:
+  - Oznacz wyrazy ciągu arytmetycznego jako 5-r, 5, 5+r (z sumy 15 wynika, że środkowy wyraz to 5).
+  - 'Zapisz warunek geometryczności po zmianie: 5^{2} = \left(5-r\right)\cdot\left(21+r\right).'
+  - 'Sprowadź do równania r^{2} + 16r - 80 = 0 i rozwiąż: r = 4 lub r = -20.'
+  - 'Wypisz oba ciągi geometryczne: 1, 5, 25 (q = 5, rosnący) oraz 25, 5, 1 (q = \frac{1}{5}, malejący)
+    i odrzuć drugi przypadek.'
+  - Oblicz S_{6} = 1 \cdot \frac{5^{6}-1}{5-1} = 3906.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: trzy_liczby
+      answer:
+        kind: TUPLE
+        items:
+        - '1'
+        - '5'
+        - '9'
+    - name: S_6
+      answer:
+        kind: NUMERIC
+        value: 3906.0
+        latex: '3906'
+  checks:
+  - kind: evaluate
+    expr: 1 \cdot \frac{5^{6} - 1}{5 - 1}
+    part: S_6
+  stated_model:
+    variable: r
+    objective_latex: 5^{2} = \left(5-r\right) \cdot \left(21+r\right)
+    goal: value
+    constraint_used: otrzymany ciąg geometryczny jest rosnący (q > 1 przy a_1 > 0)
+  skills:
+  - oznaczanie trzech wyrazów ciągu arytmetycznego przez a-r, a, a+r
+  - warunek b^2 = ac
+  - rozwiązywanie równania kwadratowego
+  - odrzucanie rozwiązania przez warunek monotoniczności
+  - wzór na sumę n początkowych wyrazów
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''r'': ''5^{2}
+      = \\left(5-r\\right) \\cdot \\left(21+r\\right)'') — human review'
+- id: g-ch-t04
+  slot: CHALLENGE
+  ramp_index: 2
+  difficulty: 5
+  exercise_type: ciąg geometryczny z konstrukcji geometrycznej — wzór, suma, najmniejsze n
+  statement: |-
+    Kwadrat K_{1} ma bok długości 8. Dla każdej liczby naturalnej n \geq 1 wierzchołkami kwadratu K_{n+1} są środki boków kwadratu K_{n}. Przez P_{n} oznaczamy pole kwadratu K_{n}.
+    a) Uzasadnij, że ciąg \left(P_{n}\right) jest geometryczny, i wyznacz jego wzór ogólny.
+    b) Oblicz sumę pól sześciu początkowych kwadratów tej konstrukcji.
+    c) Wyznacz najmniejszą liczbę naturalną n, dla której pole kwadratu K_{n} jest mniejsze od 1.
+    Zapisz obliczenia.
+  statement_latex: P_{n} = 64 \cdot \left(\frac{1}{2}\right)^{n-1}, \qquad S_{6} = 64 \cdot \frac{1 -
+    \left(\frac{1}{2}\right)^{6}}{1 - \frac{1}{2}}
+  solution: |-
+    a) Niech bok kwadratu K_{n} ma długość a. Wierzchołki kwadratu K_{n+1} to środki boków K_{n}, więc każdy bok kwadratu K_{n+1} jest przeciwprostokątną trójkąta prostokątnego równoramiennego o przyprostokątnych \frac{a}{2}. Zatem bok kwadratu K_{n+1} ma długość \sqrt{\left(\frac{a}{2}\right)^{2} + \left(\frac{a}{2}\right)^{2}} = \frac{a\sqrt{2}}{2}, a jego pole wynosi \left(\frac{a\sqrt{2}}{2}\right)^{2} = \frac{a^{2}}{2} = \frac{1}{2} P_{n}.
+    Zatem \frac{P_{n+1}}{P_{n}} = \frac{1}{2} dla każdego n, a wszystkie pola są dodatnie, więc ciąg \left(P_{n}\right) jest geometryczny o ilorazie q = \frac{1}{2}.
+    Pierwszy wyraz: P_{1} = 8^{2} = 64, więc P_{n} = 64 \cdot \left(\frac{1}{2}\right)^{n-1}.
+    b) Ponieważ q = \frac{1}{2} \neq 1:
+    S_{6} = 64 \cdot \frac{1 - \left(\frac{1}{2}\right)^{6}}{1 - \frac{1}{2}} = 64 \cdot 2 \cdot \left(1 - \frac{1}{64}\right) = 128 \cdot \frac{63}{64} = 126.
+    c) P_{n} = 64 \cdot \left(\frac{1}{2}\right)^{n-1} = 2^{6} \cdot 2^{-\left(n-1\right)} = 2^{7-n}.
+    Warunek P_{n} < 1 = 2^{0} oznacza 7 - n < 0, czyli n > 7. Najmniejszą liczbą naturalną spełniającą tę nierówność jest n = 8.
+    Sprawdzenie: P_{7} = 2^{0} = 1 (nie jest mniejsze od 1), a P_{8} = 2^{-1} = \frac{1}{2} < 1. ✓
+    Odpowiedź: P_{n} = 64 \cdot \left(\frac{1}{2}\right)^{n-1}, S_{6} = 126, n = 8.
+  solution_steps:
+  - 'Wyznacz bok kwadratu K_{n+1} z twierdzenia Pitagorasa: \frac{a\sqrt{2}}{2}, gdzie a to bok K_{n}.'
+  - Oblicz \frac{P_{n+1}}{P_{n}} = \frac{1}{2} — iloraz nie zależy od n, więc ciąg pól jest geometryczny.
+  - Podaj P_{1} = 8^{2} = 64 i wzór ogólny P_{n} = 64 \cdot \left(\frac{1}{2}\right)^{n-1}.
+  - Oblicz S_{6} = 64 \cdot \frac{1 - \left(\frac{1}{2}\right)^{6}}{1 - \frac{1}{2}} = 126.
+  - Zapisz P_{n} = 2^{7-n} i rozwiąż nierówność 2^{7-n} < 2^{0}, otrzymując n > 7.
+  - 'Wybierz najmniejszą liczbę naturalną większą od 7: n = 8 (sprawdź P_{7} = 1, P_{8} = \frac{1}{2}).'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: uzasadnienie_geometrycznosci
+      answer:
+        kind: NOT_MACHINE_CHECKABLE
+        reason: Uczeń musi wykazać, że bok kolejnego kwadratu wynosi \frac{a\sqrt{2}}{2}, a zatem \frac{P_{n+1}}{P_{n}}
+          = \frac{1}{2} niezależnie od n (i wszystkie pola są dodatnie), co dowodzi, że ciąg pól jest
+          geometryczny.
+    - name: wzor_ogolny
+      answer:
+        kind: SYMBOLIC
+        latex: P_{n} = 64 \cdot \left(\frac{1}{2}\right)^{n-1}
+    - name: S_6
+      answer:
+        kind: NUMERIC
+        value: 126.0
+        latex: '126'
+    - name: najmniejsze_n
+      answer:
+        kind: NUMERIC
+        value: 8.0
+        latex: '8'
+  checks:
+  - kind: evaluate
+    expr: 64 \cdot \frac{1 - \left(\frac{1}{2}\right)^{6}}{1 - \frac{1}{2}}
+    part: S_6
+  - kind: evaluate
+    expr: \lfloor 7 \rfloor + 1
+    var: n
+    part: najmniejsze_n
+  stated_model:
+    variable: n
+    objective_latex: P_{n} = 64 \cdot \left(\frac{1}{2}\right)^{n-1}
+    domain_lo: '1'
+    domain_lo_open: false
+    goal: value
+    constraint_used: wierzchołki K_{n+1} są środkami boków K_{n}, więc P_{n+1} = \frac{1}{2}P_{n}
+  skills:
+  - modelowanie konstrukcji geometrycznej ciągiem geometrycznym
+  - wyznaczanie wzoru ogólnego a_n = a_1 q^{n-1}
+  - wzór na sumę n początkowych wyrazów
+  - rozwiązywanie nierówności wykładniczej q^n < c
+  - uzasadnianie stałości ilorazu
+  verification:
+    checkability: STATED_MODEL
+    note: 'stage 1 inconclusive: TypeError: name should be a string, not Token'

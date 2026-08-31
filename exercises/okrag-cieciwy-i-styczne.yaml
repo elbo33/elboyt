@@ -1,0 +1,718 @@
+section: okrag-cieciwy-i-styczne
+name: 'Okrąg: cięciwy i styczne'
+scope: Radii, diameters, chords and tangent segments; the perpendicular from the centre to a chord, and
+  the tangent perpendicular to the radius, both used with the Pythagorean theorem.
+requirements:
+- VIII.1
+counts:
+  total: 16
+  DETERMINISTIC: 14
+  NOT_MACHINE_CHECKABLE: 2
+exercises:
+- id: g-th-00
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: obliczenie długości cięciwy
+  statement: Dany jest okrąg o środku O i promieniu 10 cm. W tym okręgu poprowadzono cięciwę AB, której
+    odległość od środka O jest równa 8 cm (odcinek OS jest prostopadły do AB, a punkt S leży na cięciwie
+    AB). Oblicz długość cięciwy AB. Zapisz obliczenia.
+  statement_latex: r = 10,\qquad k = 8,\qquad |AB| = 2\cdot\sqrt{10^{2}-8^{2}}
+  solution: |-
+    Odcinek OS poprowadzony ze środka okręgu prostopadle do cięciwy AB dzieli tę cięciwę na dwie równe części, więc S jest środkiem AB i |AS| = \frac{|AB|}{2}.
+    Trójkąt OSA jest prostokątny (kąt prosty przy S), jego przyprostokątne to |OS| = 8 i |AS|, a przeciwprostokątną jest promień |OA| = 10.
+    Z twierdzenia Pitagorasa: 8^{2} + |AS|^{2} = 10^{2}, czyli 64 + |AS|^{2} = 100, stąd |AS|^{2} = 36 i |AS| = 6.
+    Zatem |AB| = 2\cdot 6 = 12 cm.
+    Sprawdzenie: 12 < 2\cdot 10 = 20, więc wynik jest sensowny.
+  solution_steps:
+  - 'Zauważ, że prostopadła ze środka dzieli cięciwę na połowy: |AS| = |AB|/2.'
+  - W trójkącie prostokątnym OSA przeciwprostokątną jest promień r = 10, przyprostokątną k = 8.
+  - 'Z Pitagorasa: |AS|^2 = 100 - 64 = 36, więc |AS| = 6.'
+  - 'Podwój: |AB| = 2·6 = 12 cm.'
+  answer:
+    kind: NUMERIC
+    value: 12.0
+    latex: 12\ \text{cm}
+  checks:
+  - kind: evaluate
+    expr: 2\cdot\sqrt{10^{2}-8^{2}}
+  skills:
+  - prostopadła ze środka do cięciwy
+  - twierdzenie Pitagorasa
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 12.0 vs 12.0 (tol 1e-09)'
+- id: g-th-01
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: długość odcinka stycznego
+  statement: Punkt P leży na zewnątrz okręgu o środku O i promieniu 5. Odległość punktu P od środka okręgu
+    jest równa |OP| = 13. Z punktu P poprowadzono styczną do tego okręgu, a jej punkt styczności oznaczono
+    przez A. Oblicz długość odcinka stycznego PA. Zapisz obliczenia.
+  statement_latex: '|PA| = \sqrt{13^{2}-5^{2}}'
+  solution: |-
+    Styczna jest prostopadła do promienia poprowadzonego do punktu styczności, więc kąt OAP jest kątem prostym.
+    Trójkąt OAP jest prostokątny z kątem prostym przy A: przyprostokątne to |OA| = r = 5 oraz |PA|, a przeciwprostokątną jest |OP| = 13.
+    Z twierdzenia Pitagorasa: |PA|^{2} = 13^{2} - 5^{2} = 169 - 25 = 144, więc |PA| = 12.
+    Sprawdzenie: 12 < 13, czyli odcinek styczny jest krótszy od |OP| – zgadza się.
+  solution_steps:
+  - Narysuj promień OA do punktu styczności i zaznacz kąt prosty przy A.
+  - W trójkącie OAP przeciwprostokątną jest OP = 13, przyprostokątną OA = 5.
+  - 'Z Pitagorasa: |PA|^2 = 169 - 25 = 144.'
+  - '|PA| = 12.'
+  answer:
+    kind: NUMERIC
+    value: 12.0
+    latex: '12'
+  checks:
+  - kind: evaluate
+    expr: \sqrt{13^{2}-5^{2}}
+  skills:
+  - styczna prostopadła do promienia
+  - twierdzenie Pitagorasa
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 12.0 vs 12.0 (tol 1e-09)'
+- id: g-th-02
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: wyznaczanie promienia z cięciwy
+  statement: Cięciwa AB pewnego okręgu o środku O ma długość 30, a jej odległość od środka okręgu wynosi
+    8. Oblicz promień tego okręgu. Zapisz obliczenia.
+  statement_latex: r = \sqrt{8^{2}+\left(\frac{30}{2}\right)^{2}}
+  solution: |-
+    Prostopadła poprowadzona z O do cięciwy AB dzieli ją na połowy, więc połowa cięciwy ma długość \frac{30}{2} = 15.
+    Powstaje trójkąt prostokątny o przyprostokątnych 8 i 15 oraz przeciwprostokątnej r.
+    Z twierdzenia Pitagorasa: r^{2} = 8^{2} + 15^{2} = 64 + 225 = 289, więc r = 17.
+    Sprawdzenie: k = 8 < 17 = r oraz |AB| = 30 < 34 = 2r – warunki geometryczne są spełnione.
+  solution_steps:
+  - 'Połowa cięciwy: 30/2 = 15.'
+  - Trójkąt prostokątny o przyprostokątnych 8 i 15, przeciwprostokątna r.
+  - r^2 = 64 + 225 = 289.
+  - r = 17.
+  answer:
+    kind: NUMERIC
+    value: 17.0
+    latex: '17'
+  checks:
+  - kind: evaluate
+    expr: \sqrt{8^{2}+\left(\frac{30}{2}\right)^{2}}
+  skills:
+  - zależność promień – cięciwa – odległość
+  - twierdzenie Pitagorasa
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 17.0 vs 17.0 (tol 1e-09)'
+- id: g-ex-03
+  slot: EXERCISE
+  ramp_index: 1
+  difficulty: 2
+  exercise_type: dwie styczne z punktu zewnętrznego (deltoid)
+  statement: Dany jest okrąg o środku O i promieniu 7. Z punktu P, którego odległość od środka okręgu
+    jest równa |OP| = 25, poprowadzono dwie styczne do tego okręgu. Punkty styczności oznaczono przez
+    A i B. Oblicz długość odcinka stycznego PA oraz pole czworokąta OAPB. Zapisz obliczenia.
+  statement_latex: '|PA| = \sqrt{25^{2}-7^{2}},\qquad P_{OAPB} = 7\cdot |PA|'
+  solution: |-
+    Styczna jest prostopadła do promienia w punkcie styczności, więc trójkąt OAP ma kąt prosty przy A: przyprostokątne |OA| = 7 i |PA|, przeciwprostokątna |OP| = 25.
+    Z twierdzenia Pitagorasa: |PA|^{2} = 25^{2} - 7^{2} = 625 - 49 = 576, zatem |PA| = 24. Z równości odcinków stycznych |PB| = |PA| = 24.
+    Trójkąty OAP i OBP są przystające (bok–bok–bok), a każdy z nich ma pole \frac{1}{2}\cdot 7\cdot 24 = 84.
+    Czworokąt OAPB składa się z tych dwóch trójkątów, więc jego pole wynosi 2\cdot 84 = 168.
+  solution_steps:
+  - Zaznacz kąty proste przy punktach styczności A i B.
+  - 'Z Pitagorasa w trójkącie OAP: |PA|^2 = 625 - 49 = 576, |PA| = 24.'
+  - Z równości odcinków stycznych |PB| = 24, trójkąty OAP i OBP są przystające.
+  - 'Pole jednego trójkąta: (1/2)·7·24 = 84.'
+  - 'Pole czworokąta OAPB: 2·84 = 168.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: dlugosc_PA
+      answer:
+        kind: NUMERIC
+        value: 24.0
+        latex: '24'
+    - name: pole_OAPB
+      answer:
+        kind: NUMERIC
+        value: 168.0
+        latex: '168'
+  checks:
+  - kind: evaluate
+    expr: \sqrt{25^{2}-7^{2}}
+    part: dlugosc_PA
+  - kind: evaluate
+    expr: 7\cdot\sqrt{25^{2}-7^{2}}
+    part: pole_OAPB
+  skills:
+  - równość odcinków stycznych
+  - pole deltoidu
+  - twierdzenie Pitagorasa
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [dlugosc_PA] SymPy solved it fresh: 24.0 vs 24.0 (tol 1e-09)
+      ; [pole_OAPB] SymPy solved it fresh: 168.0 vs 168.0 (tol 1e-09)'
+- id: g-ex-04
+  slot: EXERCISE
+  ramp_index: 2
+  difficulty: 3
+  exercise_type: dwie cięciwy równoległe
+  statement: 'W okręgu o środku O i promieniu 25 poprowadzono dwie cięciwy równoległe: cięciwę AB o długości
+    48 oraz cięciwę CD o długości 14. Wyznacz wszystkie możliwe odległości między prostymi zawierającymi
+    te cięciwy, rozważając oba położenia cięciw względem środka okręgu. Zapisz obliczenia.'
+  statement_latex: k_{1} = \sqrt{25^{2}-\left(\frac{48}{2}\right)^{2}},\qquad k_{2} = \sqrt{25^{2}-\left(\frac{14}{2}\right)^{2}}
+  solution: |-
+    Odległość środka od cięciwy AB: połowa AB to 24, więc k_{1} = \sqrt{25^{2}-24^{2}} = \sqrt{625-576} = \sqrt{49} = 7.
+    Odległość środka od cięciwy CD: połowa CD to 7, więc k_{2} = \sqrt{25^{2}-7^{2}} = \sqrt{625-49} = \sqrt{576} = 24.
+    Przypadek 1 – cięciwy leżą po przeciwnych stronach środka: odległość między nimi wynosi k_{1}+k_{2} = 7+24 = 31.
+    Przypadek 2 – cięciwy leżą po tej samej stronie środka: odległość wynosi k_{2}-k_{1} = 24-7 = 17.
+    Oba wyniki są możliwe, bo 31 < 2r = 50.
+    Odpowiedź: 31 albo 17.
+  solution_steps:
+  - k1 = √(25² − 24²) = 7 (dla cięciwy 48).
+  - k2 = √(25² − 7²) = 24 (dla cięciwy 14).
+  - 'Cięciwy po przeciwnych stronach środka: k1 + k2 = 31.'
+  - 'Cięciwy po tej samej stronie środka: k2 − k1 = 17.'
+  - Podaj oba wyniki, bo treść nie rozstrzyga położenia.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: po_przeciwnych_stronach
+      answer:
+        kind: NUMERIC
+        value: 31.0
+        latex: '31'
+    - name: po_tej_samej_stronie
+      answer:
+        kind: NUMERIC
+        value: 17.0
+        latex: '17'
+  checks:
+  - kind: evaluate
+    expr: \sqrt{25^{2}-\left(\frac{48}{2}\right)^{2}}+\sqrt{25^{2}-\left(\frac{14}{2}\right)^{2}}
+    part: po_przeciwnych_stronach
+  - kind: evaluate
+    expr: \sqrt{25^{2}-\left(\frac{14}{2}\right)^{2}}-\sqrt{25^{2}-\left(\frac{48}{2}\right)^{2}}
+    part: po_tej_samej_stronie
+  skills:
+  - odległość środka od cięciwy
+  - analiza dwóch przypadków położenia
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [po_przeciwnych_stronach] SymPy solved it fresh: 31.0 vs 31.0
+      (tol 1e-09) ; [po_tej_samej_stronie] SymPy solved it fresh: 17.0 vs 17.0 (tol 1e-09)'
+- id: g-ex-05
+  slot: EXERCISE
+  ramp_index: 3
+  difficulty: 4
+  exercise_type: okręgi styczne i wspólna styczna
+  statement: 'Okrąg o środku O₁ i promieniu 12 oraz okrąg o środku O₂ i promieniu 3 są styczne zewnętrznie.
+    Prosta k jest wspólną styczną zewnętrzną tych okręgów (nie przechodzi między nimi): jest styczna do
+    pierwszego okręgu w punkcie A i do drugiego okręgu w punkcie B. Oblicz odległość środków |O₁O₂| oraz
+    długość odcinka AB. Zapisz obliczenia.'
+  statement_latex: '|O_1O_2| = 12+3,\qquad |AB| = \sqrt{\left(12+3\right)^{2}-\left(12-3\right)^{2}}'
+  solution: |-
+    Okręgi są styczne zewnętrznie, więc |O_1O_2| = r_1 + r_2 = 12 + 3 = 15.
+    Promienie O_1A i O_2B są prostopadłe do wspólnej stycznej k, więc są równoległe, a czworokąt ABO_2O_1 jest trapezem prostokątnym o podstawach |O_1A| = 12 i |O_2B| = 3 oraz ramieniu AB prostopadłym do obu podstaw.
+    Z punktu O_2 poprowadźmy odcinek równoległy do AB, przecinający odcinek O_1A w punkcie C. Wtedy |O_2C| = |AB|, |AC| = |O_2B| = 3, więc |O_1C| = 12 - 3 = 9, a trójkąt O_1CO_2 jest prostokątny przy C z przeciwprostokątną |O_1O_2| = 15.
+    Z twierdzenia Pitagorasa: |AB|^{2} = |O_2C|^{2} = 15^{2} - 9^{2} = 225 - 81 = 144, czyli |AB| = 12.
+    Odpowiedź: |O_1O_2| = 15, |AB| = 12.
+  solution_steps:
+  - 'Styczność zewnętrzna: |O1O2| = 12 + 3 = 15.'
+  - Promienie do punktów styczności są prostopadłe do prostej k, więc ABO2O1 to trapez prostokątny o podstawach
+    12 i 3.
+  - Poprowadź z O2 odcinek równoległy do AB; powstaje trójkąt prostokątny o przyprostokątnej 12 − 3 =
+    9 i przeciwprostokątnej 15.
+  - '|AB|² = 225 − 81 = 144.'
+  - '|AB| = 12.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: odleglosc_srodkow
+      answer:
+        kind: NUMERIC
+        value: 15.0
+        latex: '15'
+    - name: dlugosc_AB
+      answer:
+        kind: NUMERIC
+        value: 12.0
+        latex: '12'
+  checks:
+  - kind: evaluate
+    expr: 12+3
+    part: odleglosc_srodkow
+  - kind: evaluate
+    expr: \sqrt{\left(12+3\right)^{2}-\left(12-3\right)^{2}}
+    part: dlugosc_AB
+  skills:
+  - okręgi styczne zewnętrznie
+  - styczna prostopadła do promienia
+  - trapez prostokątny i Pitagoras
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [odleglosc_srodkow] SymPy solved it fresh: 15.0 vs 15.0 (tol
+      1e-09) ; [dlugosc_AB] SymPy solved it fresh: 12.0 vs 12.0 (tol 1e-09)'
+- id: g-ex-t00
+  slot: EXERCISE
+  ramp_index: 6
+  difficulty: 3
+  exercise_type: zadanie obliczeniowe z dwoma przypadkami
+  statement: 'W okręgu o promieniu 25 poprowadzono dwie cięciwy równoległe: cięciwę AB o długości 48 oraz
+    cięciwę CD o długości 14. Oblicz odległość między tymi cięciwami w przypadku, gdy leżą one po przeciwnych
+    stronach środka okręgu, oraz w przypadku, gdy leżą po tej samej stronie środka okręgu. Zapisz obliczenia.'
+  statement_latex: k_{1}=\sqrt{25^{2}-\left(\frac{48}{2}\right)^{2}},\qquad k_{2}=\sqrt{25^{2}-\left(\frac{14}{2}\right)^{2}}
+  solution: |-
+    Niech O będzie środkiem okręgu, r=25. Prostopadła poprowadzona ze środka do cięciwy dzieli ją na połowy, więc dla każdej cięciwy powstaje trójkąt prostokątny o przeciwprostokątnej r i przyprostokątnej równej połowie cięciwy.
+
+    Dla cięciwy AB: połowa cięciwy to \frac{48}{2}=24, zatem k_{1}=\sqrt{25^{2}-24^{2}}=\sqrt{625-576}=\sqrt{49}=7.
+
+    Dla cięciwy CD: połowa cięciwy to \frac{14}{2}=7, zatem k_{2}=\sqrt{25^{2}-7^{2}}=\sqrt{625-49}=\sqrt{576}=24.
+
+    Przypadek 1 – cięciwy po przeciwnych stronach środka: odległość między nimi wynosi k_{1}+k_{2}=7+24=31.
+
+    Przypadek 2 – cięciwy po tej samej stronie środka: odległość między nimi wynosi k_{2}-k_{1}=24-7=17.
+
+    Sprawdzenie sensowności: k_{1}<r oraz k_{2}<r, a 31<2r=50, więc oba położenia są możliwe.
+  solution_steps:
+  - Zauważ, że prostopadła ze środka do cięciwy dzieli ją na połowy, więc w trójkącie prostokątnym występuje
+    połowa cięciwy.
+  - 'Oblicz odległość środka od cięciwy AB: k_{1}=\sqrt{25^{2}-24^{2}}=7.'
+  - 'Oblicz odległość środka od cięciwy CD: k_{2}=\sqrt{25^{2}-7^{2}}=24.'
+  - 'Dla cięciw po przeciwnych stronach środka dodaj odległości: 7+24=31.'
+  - 'Dla cięciw po tej samej stronie środka odejmij odległości: 24-7=17.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: odleglosc_po_przeciwnych_stronach
+      answer:
+        kind: NUMERIC
+        value: 31.0
+    - name: odleglosc_po_tej_samej_stronie
+      answer:
+        kind: NUMERIC
+        value: 17.0
+  checks:
+  - kind: evaluate
+    expr: \sqrt{25^{2}-24^{2}}+\sqrt{25^{2}-7^{2}}
+    part: odleglosc_po_przeciwnych_stronach
+  - kind: evaluate
+    expr: \sqrt{25^{2}-7^{2}}-\sqrt{25^{2}-24^{2}}
+    part: odleglosc_po_tej_samej_stronie
+  skills:
+  - odległość środka okręgu od cięciwy
+  - twierdzenie Pitagorasa w okręgu
+  - analiza dwóch położeń cięciw równoległych
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [odleglosc_po_przeciwnych_stronach] SymPy solved it fresh:
+      31.0 vs 31.0 (tol 1e-09) ; [odleglosc_po_tej_samej_stronie] SymPy solved it fresh: 17.0 vs 17.0
+      (tol 1e-09)'
+- id: g-ex-t01
+  slot: EXERCISE
+  ramp_index: 7
+  difficulty: 4
+  exercise_type: zadanie obliczeniowe wieloetapowe
+  statement: Dany jest okrąg o środku O i promieniu 15. Prosta k jest styczna do tego okręgu w punkcie
+    A. Na prostej k obrano taki punkt P, że |PA| = 20. Odcinek OP przecina ten okrąg w punkcie K. Oblicz
+    długość odcinka PK oraz odległość punktu A od prostej OP. Zapisz obliczenia.
+  statement_latex: '|OP|=\sqrt{15^{2}+20^{2}},\qquad |PK|=|OP|-15,\qquad h=\frac{15\cdot 20}{|OP|}'
+  solution: |-
+    Styczna jest prostopadła do promienia poprowadzonego do punktu styczności, więc trójkąt OAP ma kąt prosty przy wierzchołku A, a odcinek OP jest jego przeciwprostokątną.
+
+    Z twierdzenia Pitagorasa: |OP|^{2}=|OA|^{2}+|PA|^{2}=15^{2}+20^{2}=225+400=625, zatem |OP|=25.
+
+    Punkt K leży na okręgu i na odcinku OP, więc |OK|=15 i |PK|=|OP|-|OK|=25-15=10.
+
+    Odległość punktu A od prostej OP to wysokość h trójkąta prostokątnego OAP opuszczona na przeciwprostokątną. Pole tego trójkąta obliczamy na dwa sposoby:
+    \frac{1}{2}\cdot 15\cdot 20=\frac{1}{2}\cdot 25\cdot h, czyli 150=12{,}5\cdot h, skąd h=\frac{15\cdot 20}{25}=12.
+
+    Odpowiedź: |PK| = 10, a odległość punktu A od prostej OP wynosi 12. (Sprawdzenie: |PA|=20<25=|OP|.)
+  solution_steps:
+  - 'Zaznacz kąt prosty przy punkcie styczności A: styczna jest prostopadła do promienia OA.'
+  - 'W trójkącie prostokątnym OAP oblicz przeciwprostokątną: |OP|=\sqrt{15^{2}+20^{2}}=25.'
+  - Zauważ, że |OK|=15 (promień), więc |PK|=25-15=10.
+  - 'Zapisz pole trójkąta OAP na dwa sposoby: \frac{1}{2}\cdot15\cdot20=\frac{1}{2}\cdot25\cdot h.'
+  - Wyznacz h=\frac{15\cdot20}{25}=12 – to odległość punktu A od prostej OP.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: PK
+      answer:
+        kind: NUMERIC
+        value: 10.0
+    - name: odleglosc_A_od_OP
+      answer:
+        kind: NUMERIC
+        value: 12.0
+  checks:
+  - kind: evaluate
+    expr: \sqrt{15^{2}+20^{2}}-15
+    part: PK
+  - kind: evaluate
+    expr: \frac{15\cdot 20}{\sqrt{15^{2}+20^{2}}}
+    part: odleglosc_A_od_OP
+  skills:
+  - styczna prostopadła do promienia
+  - twierdzenie Pitagorasa w trójkącie OAP
+  - obliczanie wysokości trójkąta prostokątnego z pola
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [PK] SymPy solved it fresh: 10.0 vs 10.0 (tol 1e-09) ; [odleglosc_A_od_OP]
+      SymPy solved it fresh: 12.0 vs 12.0 (tol 1e-09)'
+- id: g-cm-06
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: odległość środka od cięciwy
+  statement: 'W okręgu o środku O i promieniu 17 poprowadzono cięciwę AB o długości 16. Oblicz odległość
+    środka O od tej cięciwy. Uczeń zapisał: „k = \sqrt{17^{2}-16^{2}} = \sqrt{33}”. Wskaż błąd w tym rozumowaniu
+    i podaj poprawny wynik. Zapisz obliczenia.'
+  statement_latex: k = \sqrt{17^{2}-\left(\frac{16}{2}\right)^{2}}
+  solution: |-
+    Błędne rozumowanie: uczeń podstawił do twierdzenia Pitagorasa całą długość cięciwy i otrzymał k = \sqrt{17^{2}-16^{2}} = \sqrt{289-256} = \sqrt{33} \approx 5{,}74.
+    Dlaczego to źle: odcinek poprowadzony ze środka okręgu prostopadle do cięciwy dzieli ją na dwie równe części. Przyprostokątną trójkąta prostokątnego OSA jest więc połowa cięciwy \frac{|AB|}{2} = \frac{16}{2} = 8, a nie 16.
+    Poprawnie: k^{2} = 17^{2} - 8^{2} = 289 - 64 = 225, więc k = 15.
+    Sprawdzenie: k = 15 < 17 = r oraz |AB| = 16 < 34 = 2r – warunki geometryczne są spełnione.
+    (Uwaga: gdyby cięciwa była dłuższa od promienia, np. 24 przy r = 13, wyrażenie 13^{2}-24^{2} byłoby ujemne – to natychmiastowy sygnał, że wstawiono całą cięciwę zamiast jej połowy.)
+  solution_steps:
+  - 'Błąd: podstawienie całej cięciwy 16 zamiast jej połowy → k = √33.'
+  - 'Prostopadła ze środka dzieli cięciwę na połowy: |AS| = 16/2 = 8.'
+  - 'Poprawnie: k² = 17² − 8² = 225.'
+  - k = 15.
+  answer:
+    kind: NUMERIC
+    value: 15.0
+    latex: '15'
+  checks:
+  - kind: evaluate
+    expr: \sqrt{17^{2}-\left(\frac{16}{2}\right)^{2}}
+  skills:
+  - połowa cięciwy w trójkącie prostokątnym
+  - kontrola sensowności wyniku
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 15.0 vs 15.0 (tol 1e-09)'
+- id: g-cm-07
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: długość cięciwy przy danej średnicy
+  statement: 'Średnica okręgu o środku O jest równa 26. W tym okręgu poprowadzono cięciwę AB odległą od
+    środka o 5. Uczeń zapisał: „|AB| = 2\cdot\sqrt{26^{2}-5^{2}}”. Wskaż błąd w tym rozumowaniu i oblicz
+    poprawnie długość cięciwy AB. Zapisz obliczenia.'
+  statement_latex: '|AB| = 2\cdot\sqrt{\left(\frac{26}{2}\right)^{2}-5^{2}}'
+  solution: |-
+    Błędne rozumowanie: uczeń przyjął, że przeciwprostokątną trójkąta prostokątnego jest średnica, i otrzymał |AB| = 2\cdot\sqrt{676-25} = 2\sqrt{651} \approx 51{,}0.
+    Dlaczego to źle: w trójkącie utworzonym przez połowę cięciwy, odległość k i odcinek od środka do końca cięciwy przeciwprostokątną jest promień, czyli połowa średnicy. Ponadto otrzymana „cięciwa” 51 byłaby dłuższa od średnicy 26, co jest niemożliwe, bo najdłuższą cięciwą okręgu jest średnica.
+    Poprawnie: r = \frac{26}{2} = 13, więc \left(\frac{|AB|}{2}\right)^{2} = 13^{2}-5^{2} = 169-25 = 144, czyli \frac{|AB|}{2} = 12 i |AB| = 24.
+    Sprawdzenie: 24 < 26 = 2r – wynik jest sensowny.
+  solution_steps:
+  - 'Błąd: użycie średnicy 26 jako promienia w twierdzeniu Pitagorasa.'
+  - 'Zamień daną na promień: r = 26/2 = 13.'
+  - (|AB|/2)² = 13² − 5² = 144, więc |AB|/2 = 12.
+  - '|AB| = 24 (i 24 < 26 = 2r).'
+  answer:
+    kind: NUMERIC
+    value: 24.0
+    latex: '24'
+  checks:
+  - kind: evaluate
+    expr: 2\cdot\sqrt{\left(\frac{26}{2}\right)^{2}-5^{2}}
+  skills:
+  - zamiana średnicy na promień
+  - twierdzenie Pitagorasa
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 24.0 vs 24.0 (tol 1e-09)'
+- id: g-cm-08
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: odległość punktu zewnętrznego od środka
+  statement: 'Z punktu P leżącego na zewnątrz okręgu o środku O i promieniu 15 poprowadzono styczną, styczną
+    w punkcie A, przy czym |PA| = 8. Uczeń zapisał: „kąt prosty jest przy O, więc |OP| = \sqrt{15^{2}-8^{2}}
+    = \sqrt{161}”. Wskaż błąd w tym rozumowaniu i oblicz poprawnie odległość |OP|. Zapisz obliczenia.'
+  statement_latex: '|OP| = \sqrt{15^{2}+8^{2}}'
+  solution: |-
+    Błędne rozumowanie: uczeń umieścił kąt prosty w niewłaściwym wierzchołku (przy O) i potraktował |OP| jako przyprostokątną, otrzymując |OP| = \sqrt{225-64} = \sqrt{161} \approx 12{,}7.
+    Dlaczego to źle: kąt prosty występuje wyłącznie między styczną a promieniem poprowadzonym do punktu styczności, czyli w trójkącie OAP kąt prosty jest przy A. Zatem przyprostokątnymi są |OA| = 15 i |PA| = 8, a przeciwprostokątną jest |OP|. Wynik \sqrt{161} < 15 = r oznaczałby też, że punkt P leży wewnątrz koła – sprzeczność z założeniem.
+    Poprawnie: |OP|^{2} = 15^{2} + 8^{2} = 225 + 64 = 289, więc |OP| = 17.
+    Sprawdzenie: 17 > 15 = r, więc P rzeczywiście leży na zewnątrz okręgu.
+  solution_steps:
+  - 'Błąd: przyjęcie kąta prostego przy O i odejmowanie kwadratów → √161.'
+  - Kąt prosty jest przy punkcie styczności A; przeciwprostokątną jest OP.
+  - '|OP|² = 15² + 8² = 289.'
+  - '|OP| = 17 (i 17 > r = 15).'
+  answer:
+    kind: NUMERIC
+    value: 17.0
+    latex: '17'
+  checks:
+  - kind: evaluate
+    expr: \sqrt{15^{2}+8^{2}}
+  skills:
+  - styczna prostopadła do promienia
+  - rozpoznanie przeciwprostokątnej
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 17.0 vs 17.0 (tol 1e-09)'
+- id: g-cm-09
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: długość odcinka stycznego
+  statement: 'Punkt P jest odległy od środka O okręgu o promieniu 12 o |OP| = 20. Z punktu P poprowadzono
+    styczną do okręgu, styczną w punkcie A. Uczeń odpowiedział: „odcinek styczny ma długość 20, bo tyle
+    wynosi odległość punktu P od środka”. Wskaż błąd w tym rozumowaniu i oblicz poprawnie długość |PA|.
+    Zapisz obliczenia.'
+  statement_latex: '|PA| = \sqrt{20^{2}-12^{2}}'
+  solution: |-
+    Błędne rozumowanie: uczeń utożsamił odcinek styczny PA z odcinkiem OP i podał |PA| = 20.
+    Dlaczego to źle: PA i OP to dwa różne boki trójkąta prostokątnego OAP (kąt prosty przy punkcie styczności A). Odcinek OP jest przeciwprostokątną, a PA – przyprostokątną, więc zawsze |PA| < |OP|.
+    Poprawnie: |PA|^{2} = |OP|^{2} - r^{2} = 20^{2} - 12^{2} = 400 - 144 = 256, zatem |PA| = 16.
+    Sprawdzenie: 16 < 20, czyli odcinek styczny jest krótszy od odległości punktu od środka – zgodnie z oczekiwaniem.
+  solution_steps:
+  - 'Błąd: przyjęcie |PA| = |OP| = 20.'
+  - W trójkącie prostokątnym OAP kąt prosty jest przy A, OP to przeciwprostokątna.
+  - '|PA|² = 400 − 144 = 256.'
+  - '|PA| = 16 < 20.'
+  answer:
+    kind: NUMERIC
+    value: 16.0
+    latex: '16'
+  checks:
+  - kind: evaluate
+    expr: \sqrt{20^{2}-12^{2}}
+  skills:
+  - odcinek styczny a odległość od środka
+  - twierdzenie Pitagorasa
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 16.0 vs 16.0 (tol 1e-09)'
+- id: g-cm-10
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: cięciwy równoległe – dwa przypadki
+  statement: 'W okręgu o środku O i promieniu 10 poprowadzono dwie cięciwy równoległe: cięciwę AB o długości
+    16 oraz cięciwę CD o długości 12. Uczeń odpowiedział: „odległość między cięciwami wynosi 6 + 8 = 14”
+    i zakończył rozwiązanie. Wskaż, czego uczeń nie uwzględnił, i podaj wszystkie możliwe odległości między
+    tymi cięciwami. Zapisz obliczenia.'
+  statement_latex: k_{1} = \sqrt{10^{2}-\left(\frac{16}{2}\right)^{2}},\qquad k_{2} = \sqrt{10^{2}-\left(\frac{12}{2}\right)^{2}}
+  solution: |-
+    Obliczenia odległości od środka są poprawne: dla cięciwy AB mamy k_{1} = \sqrt{10^{2}-8^{2}} = \sqrt{100-64} = 6, a dla cięciwy CD k_{2} = \sqrt{10^{2}-6^{2}} = \sqrt{100-36} = 8.
+    Błędne rozumowanie: uczeń rozważył wyłącznie sytuację, w której cięciwy leżą po przeciwnych stronach środka, i podał tylko wynik k_{1}+k_{2} = 14.
+    Dlaczego to niepełne: dwie cięciwy równoległe mogą leżeć także po tej samej stronie środka okręgu. Wtedy odległość między nimi wynosi |k_{2}-k_{1}| = 8 - 6 = 2.
+    Treść zadania nie rozstrzyga położenia cięciw, więc należy podać oba wyniki: 14 albo 2.
+    Sprawdzenie: 14 < 2r = 20, więc oba przypadki są geometrycznie możliwe.
+  solution_steps:
+  - k1 = √(10² − 8²) = 6, k2 = √(10² − 6²) = 8.
+  - 'Błąd: uwzględnienie tylko przypadku cięciw po przeciwnych stronach środka (14).'
+  - 'Drugi przypadek – cięciwy po tej samej stronie środka: 8 − 6 = 2.'
+  - 'Odpowiedź pełna: 14 albo 2.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: po_przeciwnych_stronach
+      answer:
+        kind: NUMERIC
+        value: 14.0
+        latex: '14'
+    - name: po_tej_samej_stronie
+      answer:
+        kind: NUMERIC
+        value: 2.0
+        latex: '2'
+  checks:
+  - kind: evaluate
+    expr: \sqrt{10^{2}-\left(\frac{16}{2}\right)^{2}}+\sqrt{10^{2}-\left(\frac{12}{2}\right)^{2}}
+    part: po_przeciwnych_stronach
+  - kind: evaluate
+    expr: \sqrt{10^{2}-\left(\frac{12}{2}\right)^{2}}-\sqrt{10^{2}-\left(\frac{16}{2}\right)^{2}}
+    part: po_tej_samej_stronie
+  skills:
+  - odległość środka od cięciwy
+  - kompletność rozwiązania (dwa przypadki)
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [po_przeciwnych_stronach] SymPy solved it fresh: 14.0 vs 14.0
+      (tol 1e-09) ; [po_tej_samej_stronie] SymPy solved it fresh: 2.0 vs 2.0 (tol 1e-09)'
+- id: g-ch-t02
+  slot: CHALLENGE
+  ramp_index: 0
+  difficulty: 4
+  exercise_type: zadanie odwrotne – wyznaczanie promienia
+  statement: Dany jest okrąg o środku O. Punkty A i B leżą na tym okręgu, przy czym |AB| = 24. Punkt S
+    jest środkiem cięciwy AB. Prosta OS przecina ten okrąg w dwóch punktach; punkt C jest tym z nich,
+    dla którego punkt S leży między punktami O i C, przy czym |SC| = 8. Oblicz promień tego okręgu. Zapisz
+    obliczenia.
+  statement_latex: r^{2}=\left(r-8\right)^{2}+\left(\frac{24}{2}\right)^{2}
+  solution: |-
+    Oznaczmy promień okręgu przez r. Trójkąt OAB jest równoramienny (|OA|=|OB|=r), a OS jest w nim środkową poprowadzoną do podstawy AB, więc jest zarazem wysokością: OS \perp AB. Zatem |AS|=\frac{24}{2}=12, a trójkąt OSA jest prostokątny o kącie prostym przy S i przeciwprostokątnej OA = r.
+
+    Punkt C leży na okręgu, więc |OC| = r. Ponieważ S leży między O i C, mamy |OS| = |OC| - |SC| = r - 8.
+
+    Z twierdzenia Pitagorasa w trójkącie OSA:
+    r^{2}=\left(r-8\right)^{2}+12^{2}
+    r^{2}=r^{2}-16r+64+144
+    16r=208
+    r=13.
+
+    Sprawdzenie: |OS| = 13-8 = 5 oraz 5^{2}+12^{2}=169=13^{2}, a ponadto k=5<13=r i |AB|=24<2r=26. Promień okręgu wynosi 13.
+  solution_steps:
+  - 'Oznacz promień przez r i zauważ, że trójkąt OAB jest równoramienny, więc środkowa OS jest wysokością:
+    OS \perp AB.'
+  - Zapisz |AS| = \frac{24}{2} = 12.
+  - 'Wykorzystaj |OC| = r oraz położenie S między O i C: |OS| = r - 8.'
+  - 'Zapisz twierdzenie Pitagorasa w trójkącie OSA: r^{2}=\left(r-8\right)^{2}+12^{2}.'
+  - 'Rozwiąż równanie: 16r = 208, czyli r = 13, i sprawdź warunki k < r oraz |AB| < 2r.'
+  answer:
+    kind: NUMERIC
+    value: 13.0
+  checks:
+  - kind: solve_equation
+    expr: r^{2}=\left(r-8\right)^{2}+12^{2}
+    var: r
+  skills:
+  - prostopadła ze środka do cięciwy
+  - wprowadzenie niewiadomej i ułożenie równania
+  - twierdzenie Pitagorasa w okręgu
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 13.0 vs 13.0 (tol 1e-09)'
+- id: g-ch-t03
+  slot: CHALLENGE
+  ramp_index: 1
+  difficulty: 5
+  exercise_type: zadanie z analizą przypadków i eliminacją
+  statement: W pewnym okręgu poprowadzono dwie równoległe cięciwy o długościach 16 i 30. Odległość między
+    tymi cięciwami jest równa 23. Oblicz promień tego okręgu oraz uzasadnij, że przy podanych danych cięciwy
+    muszą leżeć po przeciwnych stronach środka okręgu. Zapisz obliczenia.
+  statement_latex: k_{1}=\sqrt{r^{2}-8^{2}},\qquad k_{2}=\sqrt{r^{2}-15^{2}},\qquad k_{1}^{2}-k_{2}^{2}=161
+  solution: |-
+    Niech r będzie promieniem okręgu, k_{1} – odległością środka od cięciwy długości 16, a k_{2} – odległością środka od cięciwy długości 30. Połowy cięciw wynoszą 8 i 15, więc
+    k_{1}=\sqrt{r^{2}-8^{2}},\qquad k_{2}=\sqrt{r^{2}-15^{2}},
+    przy czym k_{1}>k_{2} (krótsza cięciwa leży dalej od środka). Ponadto
+    k_{1}^{2}-k_{2}^{2}=\left(r^{2}-64\right)-\left(r^{2}-225\right)=161.
+
+    Przypadek 1 – cięciwy po tej samej stronie środka: wtedy k_{1}-k_{2}=23. Z równości \left(k_{1}-k_{2}\right)\left(k_{1}+k_{2}\right)=161 otrzymujemy 23\left(k_{1}+k_{2}\right)=161, czyli k_{1}+k_{2}=7. Ale wtedy k_{1}-k_{2}=23>7=k_{1}+k_{2}, skąd k_{2}<0 – sprzeczność. Ten przypadek jest niemożliwy.
+
+    Przypadek 2 – cięciwy po przeciwnych stronach środka: wtedy k_{1}+k_{2}=23, więc 23\left(k_{1}-k_{2}\right)=161, czyli k_{1}-k_{2}=7. Stąd k_{1}=15 oraz k_{2}=8.
+
+    Promień: r^{2}=k_{1}^{2}+8^{2}=15^{2}+8^{2}=225+64=289, czyli r=17. Sprawdzenie drugą cięciwą: r^{2}=k_{2}^{2}+15^{2}=64+225=289 – zgadza się, a przy tym k_{1}=15<17=r.
+
+    Odpowiedź: promień okręgu jest równy 17, a cięciwy leżą po przeciwnych stronach środka.
+  solution_steps:
+  - 'Oznacz promień r i odległości środka od cięciw: k_{1}=\sqrt{r^{2}-8^{2}}, k_{2}=\sqrt{r^{2}-15^{2}}.'
+  - Zauważ, że k_{1}^{2}-k_{2}^{2}=225-64=161.
+  - 'Rozważ przypadek cięciw po tej samej stronie środka: k_{1}-k_{2}=23 daje k_{1}+k_{2}=7, co jest sprzeczne
+    (k_{2}<0) – przypadek odrzucamy.'
+  - 'Rozważ przypadek cięciw po przeciwnych stronach środka: k_{1}+k_{2}=23 daje k_{1}-k_{2}=7, czyli
+    k_{1}=15, k_{2}=8.'
+  - 'Oblicz promień: r=\sqrt{15^{2}+8^{2}}=17 i sprawdź go dla drugiej cięciwy.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: promien
+      answer:
+        kind: NUMERIC
+        value: 17.0
+    - name: uzasadnienie_polozenia
+      answer:
+        kind: NOT_MACHINE_CHECKABLE
+        reason: 'Należy wykazać, że założenie o cięciwach po tej samej stronie środka prowadzi do sprzeczności:
+          z k_1-k_2=23 oraz k_1^2-k_2^2=161 wynika k_1+k_2=7, a wtedy k_1-k_2>k_1+k_2, czyli k_2<0 – niemożliwe.
+          Zatem cięciwy leżą po przeciwnych stronach środka.'
+  checks:
+  - kind: evaluate
+    expr: \sqrt{15^{2}+8^{2}}
+    var: r
+    part: promien
+  skills:
+  - cięciwy równoległe – dwa położenia względem środka
+  - układanie i przekształcanie równania z pierwiastkami
+  - eliminacja przypadku sprzecznego
+  - twierdzenie Pitagorasa w okręgu
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'part(s) need a human: uzasadnienie_polozenia · 1/1 other parts solved fresh'
+- id: g-ch-t04
+  slot: CHALLENGE
+  ramp_index: 2
+  difficulty: 5
+  exercise_type: modelowanie geometryczne – wzór, dziedzina i zadanie odwrotne
+  statement: |-
+    Dany jest okrąg o środku O i promieniu 10. Punkty A i B leżą na tym okręgu, a długość cięciwy AB oznaczamy przez x.
+    a) Wyznacz wzór na pole trójkąta OAB w zależności od x oraz podaj dziedzinę tego wzoru.
+    b) Wyznacz wszystkie długości cięciwy AB, dla których pole trójkąta OAB jest równe 48.
+    c) Rozstrzygnij, czy istnieje cięciwa AB dłuższa niż 18, dla której pole trójkąta OAB jest równe 48.
+    Zapisz obliczenia.
+  statement_latex: P\left(x\right)=\frac{1}{2}\cdot x\cdot\sqrt{10^{2}-\left(\frac{x}{2}\right)^{2}}=\frac{x}{4}\sqrt{400-x^{2}}
+  solution: |-
+    a) Niech S będzie środkiem cięciwy AB. Ponieważ trójkąt OAB jest równoramienny (|OA|=|OB|=10), odcinek OS jest wysokością tego trójkąta i OS \perp AB. W trójkącie prostokątnym OSA mamy |AS|=\frac{x}{2} oraz
+    |OS|=\sqrt{10^{2}-\left(\frac{x}{2}\right)^{2}}=\frac{1}{2}\sqrt{400-x^{2}}.
+    Pole trójkąta OAB (podstawa AB, wysokość OS):
+    P\left(x\right)=\frac{1}{2}\cdot x\cdot\frac{1}{2}\sqrt{400-x^{2}}=\frac{x}{4}\sqrt{400-x^{2}}.
+    Dziedzina: cięciwa musi mieć dodatnią długość i nie może być dłuższa od średnicy, a dla x=20 punkty O, A, B są współliniowe i trójkąt nie powstaje. Zatem x\in\left(0;20\right).
+
+    b) Rozwiązujemy równanie \frac{x}{4}\sqrt{400-x^{2}}=48, czyli x\sqrt{400-x^{2}}=192. Obie strony są dodatnie, więc po podniesieniu do kwadratu:
+    x^{2}\left(400-x^{2}\right)=36864.
+    Podstawiamy t=x^{2}\;(t>0):
+    t^{2}-400t+36864=0,\qquad \Delta=160000-147456=12544,\qquad \sqrt{\Delta}=112,
+    t=\frac{400-112}{2}=144\quad\text{lub}\quad t=\frac{400+112}{2}=256.
+    Stąd x=12 lub x=16 (wartości ujemne odrzucamy). Obie należą do dziedziny \left(0;20\right).
+    Sprawdzenie: dla x=12 wysokość wynosi \frac{1}{2}\sqrt{400-144}=8 i P=\frac{1}{2}\cdot12\cdot8=48; dla x=16 wysokość wynosi \frac{1}{2}\sqrt{400-256}=6 i P=\frac{1}{2}\cdot16\cdot6=48.
+
+    c) Z punktu b) jedynymi cięciwami dającymi pole 48 są cięciwy o długościach 12 i 16, a obie są krótsze niż 18. Zatem taka cięciwa nie istnieje – odpowiedź: nie.
+  solution_steps:
+  - Popro­wadź OS prostopadle do AB (S – środek cięciwy) i zapisz |AS|=\frac{x}{2}.
+  - 'Oblicz wysokość: |OS|=\sqrt{100-\frac{x^{2}}{4}}=\frac{1}{2}\sqrt{400-x^{2}}.'
+  - 'Złóż wzór na pole: P\left(x\right)=\frac{x}{4}\sqrt{400-x^{2}}, dziedzina x\in\left(0;20\right).'
+  - Ułóż równanie \frac{x}{4}\sqrt{400-x^{2}}=48 i doprowadź je do postaci x^{2}\left(400-x^{2}\right)=36864.
+  - 'Podstaw t=x^{2}, rozwiąż t^{2}-400t+36864=0: t=144 lub t=256, więc x=12 lub x=16; obie wartości należą
+    do dziedziny.'
+  - Porównaj otrzymane długości z warunkiem x>18 – żadna go nie spełnia, więc taka cięciwa nie istnieje.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wzor_pola
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{x}{4}\sqrt{400-x^{2}}
+    - name: dziedzina
+      answer:
+        kind: INTERVAL
+        lo: '0'
+        hi: '20'
+    - name: dlugosci_cieciwy
+      answer:
+        kind: SET
+        members:
+        - '12'
+        - '16'
+    - name: czy_istnieje_cieciwa_dluzsza_niz_18
+      answer:
+        kind: BOOLEAN
+        truth: false
+  checks:
+  - kind: solve_equation
+    expr: \frac{x}{4}\cdot\sqrt{400-x^{2}}=48
+    part: dlugosci_cieciwy
+  stated_model:
+    variable: x
+    objective_latex: P\left(x\right)=\frac{x}{4}\sqrt{400-x^{2}}
+    domain_lo: '0'
+    domain_hi: '20'
+    goal: value
+    constraint_used: x – długość cięciwy okręgu o promieniu 10, wysokość trójkąta OAB równa \frac{1}{2}\sqrt{400-x^{2}}
+  skills:
+  - budowanie wzoru na pole trójkąta OAB w zależności od cięciwy
+  - dziedzina wynikająca z warunków geometrycznych (0<x<2r)
+  - równanie dwukwadratowe
+  - sprawdzenie wykonalności warunku zewnętrznego
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''x'': ''P\\left(x\\right)=\\frac{x}{4}\\sqrt{400-x^{2}}'')
+      — human review'

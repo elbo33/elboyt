@@ -1,0 +1,886 @@
+section: wielokaty-foremne
+name: Wielokąty foremne
+scope: 'Regular polygons: interior and central angles, the circumscribed and inscribed circles, side and
+  apothem; using these to compute lengths and areas.'
+requirements:
+- VIII.3
+counts:
+  total: 16
+  DETERMINISTIC: 12
+  REFERENCE_CALL: 2
+  NOT_MACHINE_CHECKABLE: 2
+exercises:
+- id: g-th-00
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: kąty wielokąta foremnego
+  statement: Dany jest dziewięciokąt foremny. Oblicz miarę kąta środkowego opartego na jednym boku tego
+    wielokąta oraz miarę jego kąta wewnętrznego.
+  statement_latex: n=9,\qquad \beta=\frac{360^\circ}{9},\qquad \alpha=\frac{\left(9-2\right)\cdot 180^\circ}{9}
+  solution: |-
+    Liczba boków wynosi n = 9.
+    Kąt środkowy: promienie poprowadzone ze środka O do wszystkich wierzchołków dzielą kąt pełny na 9 równych części, więc
+    β = 360°/9 = 40°.
+    Kąt wewnętrzny: α = (9 − 2)·180°/9 = 1260°/9 = 140° (kontrola: α = 180° − β = 180° − 40° = 140°). ✓
+    Odpowiedź: kąt środkowy ma 40°, kąt wewnętrzny 140°.
+  solution_steps:
+  - 'Zapisz liczbę boków: n = 9.'
+  - 'Oblicz kąt środkowy: β = 360°/9 = 40°.'
+  - 'Oblicz kąt wewnętrzny: α = (9−2)·180°/9 = 140°.'
+  - 'Sprawdź: α = 180° − β = 140°. ✓'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: kat_srodkowy
+      answer:
+        kind: NUMERIC
+        value: 40.0
+    - name: kat_wewnetrzny
+      answer:
+        kind: NUMERIC
+        value: 140.0
+  checks:
+  - kind: evaluate
+    expr: \frac{360}{9}
+    part: kat_srodkowy
+  - kind: evaluate
+    expr: \frac{\left(9-2\right)\cdot 180}{9}
+    part: kat_wewnetrzny
+  skills:
+  - kąt środkowy n-kąta foremnego
+  - kąt wewnętrzny n-kąta foremnego
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [kat_srodkowy] SymPy solved it fresh: 40.0 vs 40.0 (tol 1e-09)
+      ; [kat_wewnetrzny] SymPy solved it fresh: 140.0 vs 140.0 (tol 1e-09)'
+- id: g-th-01
+  slot: THEORY_SUPPORT
+  ramp_index: 1
+  difficulty: 2
+  exercise_type: promienie okręgów w wielokącie foremnym
+  statement: Dany jest sześciokąt foremny o boku długości 8. Oblicz promień R okręgu opisanego na tym
+    sześciokącie oraz promień r okręgu wpisanego w ten sześciokąt (apotemę).
+  statement_latex: a=8,\qquad R=a,\qquad r=\frac{a\cdot\sqrt{3}}{2}
+  solution: |-
+    Kąt środkowy sześciokąta foremnego wynosi 360°/6 = 60°, więc trójkąt środkowy o ramionach R i podstawie a jest równoramienny z kątem 60° przy wierzchołku — czyli jest równoboczny.
+    Stąd R = a = 8.
+    Apotema r jest wysokością tego trójkąta równobocznego o boku 8:
+    r = (8·√3)/2 = 4√3.
+    Odpowiedź: R = 8, r = 4√3 ≈ 6,93 (zgodnie z regułą r < R).
+  solution_steps:
+  - 'Oblicz kąt środkowy: 360°/6 = 60°.'
+  - Zauważ, że trójkąt środkowy jest równoboczny, więc R = a = 8.
+  - 'Apotema to wysokość tego trójkąta: r = (8·√3)/2 = 4√3.'
+  - 'Sprawdź nierówność r < R: 4√3 ≈ 6,93 < 8. ✓'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: R
+      answer:
+        kind: NUMERIC
+        value: 8.0
+    - name: r
+      answer:
+        kind: SYMBOLIC
+        latex: 4\sqrt{3}
+  checks:
+  - kind: evaluate
+    expr: \frac{8\cdot\sqrt{3}}{2}
+    part: r
+  skills:
+  - sześciokąt foremny
+  - apotema
+  - okrąg opisany i wpisany
+  verification:
+    checkability: REFERENCE_CALL
+    note: '2 parts matched · det: [r] SymPy solved it fresh: 6.928203230275509 vs 6.928203230275509 (tol
+      1e-09)'
+- id: g-th-02
+  slot: THEORY_SUPPORT
+  ramp_index: 2
+  difficulty: 1
+  exercise_type: przekątne wielokąta
+  statement: Oblicz, ile przekątnych ma piętnastokąt foremny.
+  statement_latex: d=\frac{n\cdot\left(n-3\right)}{2},\qquad n=15
+  solution: |-
+    Z każdego z 15 wierzchołków wychodzi 15 − 3 = 12 przekątnych (pomijamy sam wierzchołek i dwóch jego sąsiadów). Każdą przekątną policzyliśmy dwukrotnie, więc
+    d = 15·12/2 = 180/2 = 90.
+    Odpowiedź: 90 przekątnych.
+  solution_steps:
+  - 'Zapisz wzór: d = n(n−3)/2.'
+  - 'Podstaw n = 15: d = 15·(15−3)/2.'
+  - 'Oblicz: d = 15·12/2 = 90.'
+  answer:
+    kind: NUMERIC
+    value: 90.0
+  checks:
+  - kind: evaluate
+    expr: \frac{15\cdot\left(15-3\right)}{2}
+  skills:
+  - liczba przekątnych wielokąta
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 90.0 vs 90.0 (tol 1e-09)'
+- id: g-ex-03
+  slot: EXERCISE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: wyznaczanie liczby boków
+  statement: Kąt wewnętrzny pewnego wielokąta foremnego ma miarę 144°. Wyznacz liczbę boków tego wielokąta,
+    sumę miar jego kątów wewnętrznych oraz liczbę jego przekątnych.
+  statement_latex: n=\frac{360^\circ}{180^\circ-144^\circ},\qquad S=\left(n-2\right)\cdot 180^\circ,\qquad
+    d=\frac{n\cdot\left(n-3\right)}{2}
+  solution: |-
+    Kąt zewnętrzny: 180° − 144° = 36°. W wielokącie foremnym kąt zewnętrzny równa się 360°/n, więc
+    360°/n = 36°  ⟹  n = 360°/36° = 10.
+    Wynik jest liczbą naturalną większą od 2, więc taki wielokąt istnieje — jest to dziesięciokąt foremny.
+    Suma kątów wewnętrznych: S = (10 − 2)·180° = 8·180° = 1440° (kontrola: 1440°/10 = 144° ✓).
+    Liczba przekątnych: d = 10·(10 − 3)/2 = 70/2 = 35.
+    Odpowiedź: n = 10, S = 1440°, 35 przekątnych.
+  solution_steps:
+  - 'Oblicz kąt zewnętrzny: 180° − 144° = 36°.'
+  - Z równania 360°/n = 36° wyznacz n = 10 i sprawdź, że jest to liczba naturalna ≥ 3.
+  - 'Oblicz sumę kątów: S = (10−2)·180° = 1440°.'
+  - 'Oblicz liczbę przekątnych: d = 10·7/2 = 35.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: liczba_bokow
+      answer:
+        kind: NUMERIC
+        value: 10.0
+    - name: suma_katow
+      answer:
+        kind: NUMERIC
+        value: 1440.0
+    - name: liczba_przekatnych
+      answer:
+        kind: NUMERIC
+        value: 35.0
+  checks:
+  - kind: evaluate
+    expr: \frac{360}{180-144}
+    var: n
+    part: liczba_bokow
+  - kind: evaluate
+    expr: \left(\frac{360}{180-144}-2\right)\cdot 180
+    var: n
+    part: suma_katow
+  - kind: evaluate
+    expr: \frac{10\cdot\left(10-3\right)}{2}
+    var: n
+    part: liczba_przekatnych
+  skills:
+  - kąt wewnętrzny i zewnętrzny
+  - suma kątów wielokąta
+  - liczba przekątnych
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [liczba_bokow] SymPy solved it fresh: 10.0 vs 10.0 (tol 1e-09)
+      ; [suma_katow] SymPy solved it fresh: 1440.0 vs 1440.0 (tol 1e-09) ; [liczba_przekatnych] SymPy
+      solved it fresh: 35.0 vs 35.0 (tol 1e-09)'
+- id: g-ex-04
+  slot: EXERCISE
+  ramp_index: 1
+  difficulty: 3
+  exercise_type: obliczenia w sześciokącie foremnym
+  statement: Promień okręgu wpisanego w sześciokąt foremny (apotema tego sześciokąta) ma długość 6. Oblicz
+    długość boku sześciokąta, jego obwód oraz jego pole. Wyniki podaj w postaci dokładnej.
+  statement_latex: r=6,\qquad r=\frac{a\cdot\sqrt{3}}{2},\qquad L=6\cdot a,\qquad P=\frac{1}{2}\cdot L\cdot
+    r
+  solution: |-
+    W sześciokącie foremnym apotema jest wysokością trójkąta środkowego, który jest równoboczny o boku a, więc
+    r = a√3/2 = 6  ⟹  a = 12/√3 = 12√3/3 = 4√3.
+    Obwód: L = 6a = 6·4√3 = 24√3.
+    Pole (jako suma 6 trójkątów o podstawie a i wysokości r):
+    P = ½·L·r = ½·24√3·6 = 72√3.
+    Kontrola wzorem P = 3a²√3/2 = 3·48·√3/2 = 72√3. ✓
+    Odpowiedź: a = 4√3, L = 24√3, P = 72√3.
+  solution_steps:
+  - 'Zapisz zależność apotemy i boku: r = a√3/2.'
+  - Z równania a√3/2 = 6 wyznacz a = 12/√3 = 4√3.
+  - 'Oblicz obwód: L = 6·4√3 = 24√3.'
+  - 'Oblicz pole: P = ½·L·r = ½·24√3·6 = 72√3.'
+  - Skontroluj wynik wzorem P = 3a²√3/2 = 72√3. ✓
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: bok
+      answer:
+        kind: SYMBOLIC
+        latex: 4\sqrt{3}
+    - name: obwod
+      answer:
+        kind: SYMBOLIC
+        latex: 24\sqrt{3}
+    - name: pole
+      answer:
+        kind: SYMBOLIC
+        latex: 72\sqrt{3}
+  checks:
+  - kind: evaluate
+    expr: \frac{2\cdot 6}{\sqrt{3}}
+    var: a
+    part: bok
+  - kind: evaluate
+    expr: 6\cdot\frac{2\cdot 6}{\sqrt{3}}
+    var: a
+    part: obwod
+  - kind: evaluate
+    expr: \frac{1}{2}\cdot\left(6\cdot\frac{2\cdot 6}{\sqrt{3}}\right)\cdot 6
+    var: a
+    part: pole
+  skills:
+  - apotema
+  - obwód wielokąta foremnego
+  - pole wielokąta foremnego
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [bok] SymPy solved it fresh: 6.928203230275509 vs 6.928203230275509
+      (tol 1e-09) ; [obwod] SymPy solved it fresh: 41.569219381653056 vs 41.569219381653056 (tol 1e-09)
+      ; [pole] SymPy solved it fresh: 124.70765814495917 vs 124.70765814495917 (tol 1e-09)'
+- id: g-ex-05
+  slot: EXERCISE
+  ramp_index: 2
+  difficulty: 4
+  exercise_type: wielokąt foremny wpisany w okrąg
+  statement: W okrąg o promieniu 6\sqrt{3} wpisano trójkąt równoboczny. Oblicz długość boku tego trójkąta,
+    jego pole oraz pole obszaru zawartego między okręgiem a trójkątem. Wyniki podaj w postaci dokładnej.
+  statement_latex: R=6\sqrt{3},\qquad R=\frac{a\cdot\sqrt{3}}{3},\qquad P_{\triangle}=\frac{a^{2}\cdot\sqrt{3}}{4},\qquad
+    P_{obszaru}=\pi\cdot R^{2}-P_{\triangle}
+  solution: |-
+    Dla trójkąta równobocznego o boku a promień okręgu opisanego wynosi R = a√3/3, zatem a = R√3.
+    a = 6√3·√3 = 6·3 = 18.
+    Pole trójkąta: P = a²√3/4 = 18²·√3/4 = 324√3/4 = 81√3.
+    Pole koła: P_koła = π·(6√3)² = π·108 = 108π.
+    Pole obszaru między okręgiem a trójkątem:
+    P_obszaru = 108π − 81√3 ≈ 339,29 − 140,30 ≈ 198,99.
+    Odpowiedź: a = 18, P = 81√3, pole obszaru = 108π − 81√3.
+  solution_steps:
+  - Skorzystaj ze wzoru R = a√3/3, czyli a = R√3.
+  - 'Podstaw R = 6√3: a = 6√3·√3 = 18.'
+  - 'Oblicz pole trójkąta: P = 18²·√3/4 = 81√3.'
+  - 'Oblicz pole koła: π·(6√3)² = 108π.'
+  - 'Odejmij pola: P_obszaru = 108π − 81√3.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: bok
+      answer:
+        kind: NUMERIC
+        value: 18.0
+    - name: pole_trojkata
+      answer:
+        kind: SYMBOLIC
+        latex: 81\sqrt{3}
+    - name: pole_obszaru
+      answer:
+        kind: SYMBOLIC
+        latex: 108\pi-81\sqrt{3}
+  checks:
+  - kind: evaluate
+    expr: 6\cdot\sqrt{3}\cdot\sqrt{3}
+    var: a
+    part: bok
+  - kind: evaluate
+    expr: \frac{\left(6\cdot\sqrt{3}\cdot\sqrt{3}\right)^{2}\cdot\sqrt{3}}{4}
+    var: a
+    part: pole_trojkata
+  - kind: evaluate
+    expr: \pi\cdot\left(6\cdot\sqrt{3}\right)^{2}-\frac{\left(6\cdot\sqrt{3}\cdot\sqrt{3}\right)^{2}\cdot\sqrt{3}}{4}
+    var: a
+    part: pole_obszaru
+  skills:
+  - trójkąt równoboczny wpisany w okrąg
+  - pole trójkąta równobocznego
+  - pole obszaru między figurami
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [bok] SymPy solved it fresh: 18.0 vs 18.0 (tol 1e-09) ; [pole_trojkata]
+      SymPy solved it fresh: 140.29611541307906 vs 140.29611541307906 (tol 1e-09) ; [pole_obszaru] SymPy
+      solved it fresh: 198.9958911746186 vs 198.9958911746186 (tol 1e-09)'
+- id: g-ex-t00
+  slot: EXERCISE
+  ramp_index: 6
+  difficulty: 3
+  exercise_type: kąty i przekątne wielokąta foremnego
+  statement: Kąt wewnętrzny pewnego wielokąta foremnego jest trzy razy większy od jego kąta środkowego.
+    Oblicz liczbę boków tego wielokąta, miarę jego kąta wewnętrznego oraz liczbę jego przekątnych.
+  statement_latex: \alpha = 3\cdot\beta,\quad \beta=\frac{360^\circ}{n},\quad \alpha=180^\circ-\frac{360^\circ}{n}
+  solution: |-
+    Niech n oznacza liczbę boków wielokąta foremnego. Kąt środkowy ma miarę \beta=\frac{360^\circ}{n}, a kąt wewnętrzny \alpha=180^\circ-\frac{360^\circ}{n}.
+    Z warunku zadania \alpha=3\cdot\beta, czyli
+    180^\circ-\frac{360^\circ}{n}=3\cdot\frac{360^\circ}{n}.
+    Stąd 180^\circ=4\cdot\frac{360^\circ}{n}, więc \frac{360^\circ}{n}=45^\circ i n=8.
+    Kąt wewnętrzny: \alpha=\frac{\left(8-2\right)\cdot 180^\circ}{8}=\frac{1080^\circ}{8}=135^\circ (kontrola: 3\cdot 45^\circ=135^\circ ✓).
+    Liczba przekątnych: d=\frac{n\left(n-3\right)}{2}=\frac{8\cdot 5}{2}=20.
+    Odpowiedź: ośmiokąt foremny, kąt wewnętrzny 135°, 20 przekątnych.
+  solution_steps:
+  - Oznacz liczbę boków przez n i zapisz \beta=\frac{360^\circ}{n} oraz \alpha=180^\circ-\frac{360^\circ}{n}.
+  - Ułóż równanie 180^\circ-\frac{360^\circ}{n}=3\cdot\frac{360^\circ}{n}.
+  - 'Rozwiąż: 180^\circ=4\cdot\frac{360^\circ}{n}, zatem n=8.'
+  - Oblicz kąt wewnętrzny \alpha=\frac{\left(8-2\right)\cdot 180^\circ}{8}=135^\circ.
+  - Oblicz liczbę przekątnych d=\frac{8\cdot\left(8-3\right)}{2}=20.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: n
+      answer:
+        kind: NUMERIC
+        value: 8.0
+    - name: kat_wewnetrzny
+      answer:
+        kind: NUMERIC
+        value: 135.0
+    - name: liczba_przekatnych
+      answer:
+        kind: NUMERIC
+        value: 20.0
+  checks:
+  - kind: solve_equation
+    expr: 180 - \frac{360}{n} - 3\cdot\frac{360}{n}
+    var: n
+    part: n
+  - kind: evaluate
+    expr: \frac{\left(8-2\right)\cdot 180}{8}
+    part: kat_wewnetrzny
+  - kind: evaluate
+    expr: \frac{8\cdot\left(8-3\right)}{2}
+    part: liczba_przekatnych
+  skills:
+  - kąt środkowy 360°/n
+  - kąt wewnętrzny (n−2)·180°/n
+  - wyznaczanie liczby boków z równania
+  - wzór na liczbę przekątnych
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [n] SymPy solved it fresh: 8.0 vs 8.0 (tol 1e-09) ; [kat_wewnetrzny]
+      SymPy solved it fresh: 135.0 vs 135.0 (tol 1e-09) ; [liczba_przekatnych] SymPy solved it fresh:
+      20.0 vs 20.0 (tol 1e-09)'
+- id: g-ex-t01
+  slot: EXERCISE
+  ramp_index: 7
+  difficulty: 4
+  exercise_type: wielokąt foremny a okrąg wpisany
+  statement: W trójkąt równoboczny wpisano okrąg o promieniu r = 4\sqrt{3}. Oblicz długość boku tego trójkąta,
+    jego pole oraz pole obszaru zawartego między trójkątem a kołem (czyli tę część trójkąta, która leży
+    poza kołem).
+  statement_latex: r=\frac{a\sqrt{3}}{6}=4\sqrt{3},\qquad P=\frac{a^{2}\sqrt{3}}{4},\qquad P_{obszaru}=P-\pi\cdot
+    r^{2}
+  solution: |-
+    Okrąg wpisany dotyka boków trójkąta, więc jego promień to apotema: r=\frac{a\sqrt{3}}{6}.
+    Z równania \frac{a\sqrt{3}}{6}=4\sqrt{3} otrzymujemy a\sqrt{3}=24\sqrt{3}, czyli a=24.
+    Pole trójkąta: P=\frac{a^{2}\sqrt{3}}{4}=\frac{24^{2}\sqrt{3}}{4}=\frac{576\sqrt{3}}{4}=144\sqrt{3}.
+    Pole koła: P_{k}=\pi\cdot r^{2}=\pi\cdot\left(4\sqrt{3}\right)^{2}=48\pi.
+    Pole obszaru między trójkątem a kołem: P-P_{k}=144\sqrt{3}-48\pi\approx 249{,}42-150{,}80\approx 98{,}62.
+    Odpowiedź: a = 24, P = 144\sqrt{3}, pole obszaru = 144\sqrt{3}-48\pi.
+  solution_steps:
+  - 'Zauważ, że promień okręgu wpisanego to apotema trójkąta równobocznego: r=\frac{a\sqrt{3}}{6}.'
+  - Rozwiąż równanie \frac{a\sqrt{3}}{6}=4\sqrt{3}, otrzymując a=24.
+  - 'Oblicz pole trójkąta: P=\frac{24^{2}\sqrt{3}}{4}=144\sqrt{3}.'
+  - 'Oblicz pole koła: \pi\cdot\left(4\sqrt{3}\right)^{2}=48\pi.'
+  - 'Odejmij pola: 144\sqrt{3}-48\pi.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: bok
+      answer:
+        kind: NUMERIC
+        value: 24.0
+    - name: pole_trojkata
+      answer:
+        kind: SYMBOLIC
+        latex: 144\sqrt{3}
+    - name: pole_obszaru
+      answer:
+        kind: SYMBOLIC
+        latex: 144\sqrt{3}-48\pi
+  checks:
+  - kind: solve_equation
+    expr: \frac{a\cdot\sqrt{3}}{6} - 4\sqrt{3}
+    var: a
+    part: bok
+  - kind: evaluate
+    expr: \frac{24^{2}\cdot\sqrt{3}}{4}
+    part: pole_trojkata
+  - kind: evaluate
+    expr: \frac{24^{2}\cdot\sqrt{3}}{4} - \pi\cdot\left(4\sqrt{3}\right)^{2}
+    part: pole_obszaru
+  skills:
+  - zależność r = a√3/6 w trójkącie równobocznym
+  - pole trójkąta równobocznego
+  - pole koła
+  - pole obszaru między figurami
+  - działania na pierwiastkach
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [bok] SymPy solved it fresh: 24.0 vs 24.0 (tol 1e-09) ; [pole_trojkata]
+      SymPy solved it fresh: 249.41531628991834 vs 249.41531628991834 (tol 1e-09) ; [pole_obszaru] SymPy
+      solved it fresh: 98.61886891760825 vs 98.61886891760825 (tol 1e-09)'
+- id: g-cm-06
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: rozpoznawanie wielokąta foremnego
+  statement: 'Adam twierdzi: „Romb o boku długości 5 i kącie ostrym 50° ma wszystkie boki równe, więc
+    jest czworokątem foremnym”. Rozstrzygnij, czy ten romb jest wielokątem foremnym, a następnie oblicz
+    pole czworokąta foremnego o obwodzie równym obwodowi tego rombu.'
+  statement_latex: L=4\cdot 5=20,\qquad a_{kw}=\frac{4\cdot 5}{4},\qquad P=\left(\frac{4\cdot 5}{4}\right)^{2}
+  solution: |-
+    BŁĘDNE ROZUMOWANIE (Adam): „Wszystkie cztery boki rombu mają długość 5, a wielokąt foremny to wielokąt o równych bokach, więc romb jest czworokątem foremnym”. Przy takim założeniu Adam nie zmienia figury i liczy pole rombu jako pole „czworokąta foremnego”, dostając 5² = 25 tylko dla kwadratu, a dla rombu 5·5·sin50° ≈ 19,15 — i twierdzi, że to pole czworokąta foremnego. To fałsz.
+
+    GDZIE JEST BŁĄD: definicja wymaga JEDNOCZEŚNIE równych boków i równych kątów wewnętrznych. Kąty rombu wynoszą 50°, 130°, 50°, 130° — nie są równe, więc romb foremny NIE jest. Jedynym czworokątem foremnym jest kwadrat (tylko w trójkącie równość boków pociąga równość kątów).
+
+    POPRAWNE ROZWIĄZANIE: romb nie jest wielokątem foremnym. Obwód rombu: L = 4·5 = 20. Czworokąt foremny o takim obwodzie to kwadrat o boku 20/4 = 5, więc jego pole wynosi P = 5² = 25.
+    Odpowiedź: romb nie jest foremny; szukane pole wynosi 25.
+  solution_steps:
+  - 'Sprawdź oba warunki definicji: boki rombu są równe, ale kąty (50° i 130°) nie są równe.'
+  - 'Wniosek: romb nie jest czworokątem foremnym — jedynym takim czworokątem jest kwadrat.'
+  - 'Oblicz obwód rombu: L = 4·5 = 20.'
+  - 'Bok kwadratu o tym obwodzie: 20/4 = 5.'
+  - 'Oblicz pole kwadratu: P = 5² = 25.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: czy_foremny
+      answer:
+        kind: BOOLEAN
+        truth: false
+    - name: pole
+      answer:
+        kind: NUMERIC
+        value: 25.0
+  checks:
+  - kind: evaluate
+    expr: \left(\frac{4\cdot 5}{4}\right)^{2}
+    var: a
+    part: pole
+  skills:
+  - definicja wielokąta foremnego
+  - pole kwadratu
+  verification:
+    checkability: REFERENCE_CALL
+    note: '2 parts matched · det: [pole] SymPy solved it fresh: 25.0 vs 25.0 (tol 1e-09)'
+- id: g-cm-07
+  slot: COMMON_MISTAKE
+  ramp_index: 1
+  difficulty: 3
+  exercise_type: okrąg wpisany i opisany
+  statement: Promień okręgu wpisanego w sześciokąt foremny ma długość 5\sqrt{3}. Oblicz długość boku tego
+    sześciokąta oraz pole koła opisanego na tym sześciokącie.
+  statement_latex: r=5\sqrt{3},\qquad r=\frac{a\cdot\sqrt{3}}{2},\qquad P_{ko\l{}a}=\pi\cdot R^{2}
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń bierze dany promień jako R (promień okręgu opisanego) i pisze „w sześciokącie a = R, więc a = 5√3”, a pole koła liczy jako π·(5√3)² = 75π. Oba wyniki są błędne, bo dany promień sięga do ŚRODKA boku, a nie do wierzchołka.
+
+    GDZIE JEST BŁĄD: r to apotema (okrąg wpisany, styczny do boków), R to promień okręgu opisanego (przechodzącego przez wierzchołki), przy czym r = R·cos(180°/6) = R·√3/2 < R. Wzór a = R dotyczy wyłącznie okręgu opisanego.
+
+    POPRAWNE ROZWIĄZANIE: z zależności r = a√3/2 mamy
+    5√3 = a√3/2  ⟹  a = 10√3/√3 = 10.
+    Dla sześciokąta foremnego R = a = 10, więc pole koła opisanego:
+    P = π·10² = 100π.
+    Kontrola: r = 10·√3/2 = 5√3. ✓
+    Odpowiedź: a = 10, pole koła opisanego = 100π.
+  solution_steps:
+  - Rozpoznaj, że dany promień to apotema r (okrąg styczny do boków).
+  - 'Zastosuj r = a√3/2 i rozwiąż: 5√3 = a√3/2, skąd a = 10.'
+  - Dla sześciokąta foremnego R = a = 10.
+  - 'Oblicz pole koła opisanego: P = π·10² = 100π.'
+  - 'Sprawdź: r = 10√3/2 = 5√3 < 10 = R. ✓'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: bok
+      answer:
+        kind: NUMERIC
+        value: 10.0
+    - name: pole_kola_opisanego
+      answer:
+        kind: SYMBOLIC
+        latex: 100\pi
+  checks:
+  - kind: evaluate
+    expr: \frac{2\cdot 5\cdot\sqrt{3}}{\sqrt{3}}
+    var: a
+    part: bok
+  - kind: evaluate
+    expr: \pi\cdot\left(\frac{2\cdot 5\cdot\sqrt{3}}{\sqrt{3}}\right)^{2}
+    var: a
+    part: pole_kola_opisanego
+  skills:
+  - rozróżnianie R i r
+  - sześciokąt foremny
+  - pole koła
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [bok] SymPy solved it fresh: 10.0 vs 10.0 (tol 1e-09) ; [pole_kola_opisanego]
+      SymPy solved it fresh: 314.1592653589793 vs 314.1592653589793 (tol 1e-09)'
+- id: g-cm-08
+  slot: COMMON_MISTAKE
+  ramp_index: 2
+  difficulty: 2
+  exercise_type: kąty w trójkącie środkowym
+  statement: Punkt O jest środkiem ośmiokąta foremnego ABCDEFGH (środkiem okręgu opisanego na nim). Oblicz
+    miarę kąta AOB, miarę kąta OAB (kąta przy podstawie trójkąta środkowego) oraz miarę kąta wewnętrznego
+    tego ośmiokąta.
+  statement_latex: n=8,\qquad \left|\angle AOB\right|=\frac{360^\circ}{8},\qquad \left|\angle OAB\right|=\frac{180^\circ-\frac{360^\circ}{8}}{2}
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: „Kąt wewnętrzny ośmiokąta foremnego ma 135°, więc trójkąt AOB ma przy wierzchołku O kąt 135°, a kąty przy podstawie po (180° − 135°)/2 = 22,5°”. Suma takich kątów środkowych dałaby 8·135° = 1080° zamiast 360° — sprzeczność.
+
+    GDZIE JEST BŁĄD: kąt środkowy i kąt wewnętrzny to dwa różne kąty. Kąt środkowy to 360°/n, bo n takich kątów wypełnia kąt pełny; kąt wewnętrzny to 180° − 360°/n.
+
+    POPRAWNE ROZWIĄZANIE:
+    |∠AOB| = 360°/8 = 45°.
+    Trójkąt AOB jest równoramienny (|OA| = |OB| = R), więc kąty przy podstawie:
+    |∠OAB| = (180° − 45°)/2 = 135°/2 = 67,5°.
+    Kąt wewnętrzny ośmiokąta: 180° − 45° = 135°; zauważ, że promień OA dzieli go na połowy: 2·67,5° = 135°. ✓
+    Kontrola: 8·45° = 360°. ✓
+    Odpowiedź: 45°, 67,5°, 135°.
+  solution_steps:
+  - 'Oblicz kąt środkowy: |∠AOB| = 360°/8 = 45°.'
+  - 'Wykorzystaj, że trójkąt AOB jest równoramienny: |∠OAB| = (180° − 45°)/2 = 67,5°.'
+  - 'Oblicz kąt wewnętrzny: 180° − 45° = 135°.'
+  - 'Sprawdź spójność: 2·67,5° = 135° oraz 8·45° = 360°. ✓'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: kat_AOB
+      answer:
+        kind: NUMERIC
+        value: 45.0
+    - name: kat_OAB
+      answer:
+        kind: NUMERIC
+        value: 67.5
+    - name: kat_wewnetrzny
+      answer:
+        kind: NUMERIC
+        value: 135.0
+  checks:
+  - kind: evaluate
+    expr: \frac{360}{8}
+    part: kat_AOB
+  - kind: evaluate
+    expr: \frac{180-\frac{360}{8}}{2}
+    part: kat_OAB
+  - kind: evaluate
+    expr: 180-\frac{360}{8}
+    part: kat_wewnetrzny
+  skills:
+  - kąt środkowy
+  - kąt wewnętrzny
+  - trójkąt środkowy
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [kat_AOB] SymPy solved it fresh: 45.0 vs 45.0 (tol 1e-09) ;
+      [kat_OAB] SymPy solved it fresh: 67.5 vs 67.5 (tol 1e-09) ; [kat_wewnetrzny] SymPy solved it fresh:
+      135.0 vs 135.0 (tol 1e-09)'
+- id: g-cm-09
+  slot: COMMON_MISTAKE
+  ramp_index: 3
+  difficulty: 3
+  exercise_type: suma kątów wielokąta
+  statement: Suma miar kątów wewnętrznych pewnego wielokąta foremnego jest równa 2520°. Wyznacz liczbę
+    boków tego wielokąta oraz miarę jego kąta wewnętrznego.
+  statement_latex: \left(n-2\right)\cdot 180^\circ=2520^\circ,\qquad \alpha=\frac{2520^\circ}{n}
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: „Suma kątów to n·180°, więc n = 2520°/180° = 14”, a następnie „kąt wewnętrzny to 2520°/(n − 2) = 2520°/12 = 210°”. Kąt wewnętrzny wielokąta wypukłego nie może mieć 210°, więc wynik jest niemożliwy.
+
+    GDZIE JEST BŁĄD: poprawny wzór to S = (n − 2)·180°, bo przekątne poprowadzone z jednego wierzchołka dzielą wielokąt na n − 2 trójkątów. Sumę dzielimy przez n (liczbę kątów), a nie przez n − 2.
+
+    POPRAWNE ROZWIĄZANIE:
+    (n − 2)·180° = 2520°  ⟹  n − 2 = 14  ⟹  n = 16.
+    Kąt wewnętrzny: α = 2520°/16 = 157,5° (kontrola: 180° − 360°/16 = 180° − 22,5° = 157,5°). ✓
+    Odpowiedź: szesnastokąt foremny, kąt wewnętrzny 157,5°.
+  solution_steps:
+  - 'Zapisz poprawny wzór: (n − 2)·180° = 2520°.'
+  - 'Rozwiąż równanie: n − 2 = 14, więc n = 16.'
+  - 'Oblicz kąt wewnętrzny: α = 2520°/16 = 157,5°.'
+  - 'Sprawdź: 180° − 360°/16 = 157,5°. ✓'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: liczba_bokow
+      answer:
+        kind: NUMERIC
+        value: 16.0
+    - name: kat_wewnetrzny
+      answer:
+        kind: NUMERIC
+        value: 157.5
+  checks:
+  - kind: solve_equation
+    expr: \left(n-2\right)\cdot 180=2520
+    var: n
+    part: liczba_bokow
+  - kind: evaluate
+    expr: \frac{2520}{16}
+    part: kat_wewnetrzny
+  skills:
+  - suma kątów wewnętrznych
+  - kąt wewnętrzny wielokąta foremnego
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [liczba_bokow] SymPy solved it fresh: 16.0 vs 16.0 (tol 1e-09)
+      ; [kat_wewnetrzny] SymPy solved it fresh: 157.5 vs 157.5 (tol 1e-09)'
+- id: g-cm-10
+  slot: COMMON_MISTAKE
+  ramp_index: 4
+  difficulty: 3
+  exercise_type: trójkąt równoboczny i jego okręgi
+  statement: Dany jest trójkąt równoboczny o boku długości 6\sqrt{3}. Oblicz wysokość tego trójkąta, promień
+    R okręgu opisanego na nim oraz promień r okręgu wpisanego w niego.
+  statement_latex: a=6\sqrt{3},\qquad h=\frac{a\cdot\sqrt{3}}{2},\qquad R=\frac{2}{3}\cdot h,\qquad r=\frac{1}{3}\cdot
+    h
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: „Środek trójkąta leży w połowie wysokości, więc R = r = h/2 = 9/2 = 4,5”. Wtedy okrąg opisany i wpisany miałyby ten sam promień, co jest niemożliwe — zawsze r < R.
+
+    GDZIE JEST BŁĄD: środek trójkąta równobocznego (punkt przecięcia wysokości) dzieli każdą wysokość w stosunku 2:1, licząc od wierzchołka. Stąd R = (2/3)h, r = (1/3)h, czyli R = 2r.
+
+    POPRAWNE ROZWIĄZANIE:
+    h = a√3/2 = 6√3·√3/2 = 18/2 = 9.
+    R = (2/3)·9 = 6,  r = (1/3)·9 = 3.
+    Kontrola wzorami: R = a√3/3 = 6√3·√3/3 = 6 ✓, r = a√3/6 = 18/6 = 3 ✓ oraz R = 2r ✓.
+    Odpowiedź: h = 9, R = 6, r = 3.
+  solution_steps:
+  - 'Oblicz wysokość: h = 6√3·√3/2 = 9.'
+  - 'Zastosuj podział wysokości w stosunku 2:1: R = (2/3)·9 = 6.'
+  - Oblicz r = (1/3)·9 = 3.
+  - 'Sprawdź: R = 2r oraz R = a√3/3 = 6, r = a√3/6 = 3. ✓'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wysokosc
+      answer:
+        kind: NUMERIC
+        value: 9.0
+    - name: R
+      answer:
+        kind: NUMERIC
+        value: 6.0
+    - name: r
+      answer:
+        kind: NUMERIC
+        value: 3.0
+  checks:
+  - kind: evaluate
+    expr: \frac{6\cdot\sqrt{3}\cdot\sqrt{3}}{2}
+    part: wysokosc
+  - kind: evaluate
+    expr: \frac{6\cdot\sqrt{3}\cdot\sqrt{3}}{3}
+    part: R
+  - kind: evaluate
+    expr: \frac{6\cdot\sqrt{3}\cdot\sqrt{3}}{6}
+    part: r
+  skills:
+  - wysokość trójkąta równobocznego
+  - R i r trójkąta równobocznego
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [wysokosc] SymPy solved it fresh: 9.0 vs 9.0 (tol 1e-09) ;
+      [R] SymPy solved it fresh: 6.0 vs 6.0 (tol 1e-09) ; [r] SymPy solved it fresh: 3.0 vs 3.0 (tol 1e-09)'
+- id: g-ch-t02
+  slot: CHALLENGE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: porównywanie wielokątów foremnych o równych obwodach
+  statement: Sześciokąt foremny i kwadrat mają równe obwody. Oblicz stosunek pola sześciokąta do pola
+    kwadratu oraz stosunek promienia okręgu opisanego na sześciokącie do promienia okręgu opisanego na
+    kwadracie. Wyniki podaj w postaci dokładnej (bez niewymierności w mianowniku).
+  statement_latex: L=6\cdot a=4\cdot s,\qquad \frac{P_{6}}{P_{4}}=\frac{\frac{3\sqrt{3}}{2}\cdot a^{2}}{s^{2}},\qquad
+    \frac{R_{6}}{R_{4}}=\frac{a}{\frac{s\sqrt{2}}{2}}
+  solution: |-
+    Oznaczmy przez L wspólny obwód obu figur (L > 0). Wtedy bok sześciokąta a=\frac{L}{6}, a bok kwadratu s=\frac{L}{4}.
+    Pole sześciokąta foremnego: P_{6}=\frac{3\cdot a^{2}\sqrt{3}}{2}=\frac{3\sqrt{3}}{2}\cdot\frac{L^{2}}{36}=\frac{L^{2}\sqrt{3}}{24}.
+    Pole kwadratu: P_{4}=s^{2}=\frac{L^{2}}{16}.
+    Stosunek pól: \frac{P_{6}}{P_{4}}=\frac{\frac{L^{2}\sqrt{3}}{24}}{\frac{L^{2}}{16}}=\frac{16\sqrt{3}}{24}=\frac{2\sqrt{3}}{3}\approx 1{,}15.
+    W sześciokącie foremnym R_{6}=a=\frac{L}{6}. W kwadracie R_{4}=\frac{s\sqrt{2}}{2}=\frac{L\sqrt{2}}{8}.
+    Stosunek promieni: \frac{R_{6}}{R_{4}}=\frac{\frac{L}{6}}{\frac{L\sqrt{2}}{8}}=\frac{8}{6\sqrt{2}}=\frac{4}{3\sqrt{2}}=\frac{4\sqrt{2}}{6}=\frac{2\sqrt{2}}{3}\approx 0{,}94.
+    Odpowiedź: \frac{P_{6}}{P_{4}}=\frac{2\sqrt{3}}{3}, \frac{R_{6}}{R_{4}}=\frac{2\sqrt{2}}{3}.
+  solution_steps:
+  - 'Wprowadź wspólny obwód L i wyraź boki: a=\frac{L}{6} (sześciokąt), s=\frac{L}{4} (kwadrat).'
+  - 'Oblicz pola: P_{6}=\frac{3\sqrt{3}}{2}\cdot\left(\frac{L}{6}\right)^{2}=\frac{L^{2}\sqrt{3}}{24}
+    oraz P_{4}=\left(\frac{L}{4}\right)^{2}=\frac{L^{2}}{16}.'
+  - 'Podziel pola: \frac{P_{6}}{P_{4}}=\frac{16\sqrt{3}}{24}=\frac{2\sqrt{3}}{3}.'
+  - 'Zapisz promienie okręgów opisanych: R_{6}=a=\frac{L}{6}, R_{4}=\frac{s\sqrt{2}}{2}=\frac{L\sqrt{2}}{8}.'
+  - 'Podziel promienie i usuń niewymierność: \frac{R_{6}}{R_{4}}=\frac{8}{6\sqrt{2}}=\frac{2\sqrt{2}}{3}.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: stosunek_pol
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{2\sqrt{3}}{3}
+    - name: stosunek_promieni
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{2\sqrt{2}}{3}
+  checks:
+  - kind: evaluate
+    expr: \frac{\frac{3\sqrt{3}}{2}\cdot\left(\frac{48}{6}\right)^{2}}{\left(\frac{48}{4}\right)^{2}}
+    part: stosunek_pol
+  - kind: evaluate
+    expr: \frac{\frac{48}{6}}{\frac{\left(\frac{48}{4}\right)\cdot\sqrt{2}}{2}}
+    part: stosunek_promieni
+  stated_model:
+    variable: L
+    objective_latex: \frac{P_{6}}{P_{4}}=\frac{\frac{3\sqrt{3}}{2}\cdot\left(\frac{L}{6}\right)^{2}}{\left(\frac{L}{4}\right)^{2}}
+    domain_lo: '0'
+    goal: value
+    constraint_used: 6\cdot a = 4\cdot s = L
+  skills:
+  - wprowadzenie własnej zmiennej (wspólny obwód)
+  - pole sześciokąta foremnego
+  - pole i promień okręgu opisanego kwadratu
+  - obliczanie stosunku wielkości
+  - usuwanie niewymierności z mianownika
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''L'': ''\\frac{P_{6}}{P_{4}}=\\frac{\\frac{3\\sqrt{3}}{2}\\cdot\\left(\\frac{L}{6}\\right)^{2}}{\\left(\\frac{L}{4}\\right)^{2}}'')
+      — human review'
+- id: g-ch-t03
+  slot: CHALLENGE
+  ramp_index: 1
+  difficulty: 4
+  exercise_type: zadanie odwrotne — liczba boków z liczby przekątnych
+  statement: Liczba przekątnych pewnego wielokąta foremnego jest o 25 większa od liczby jego boków. Oblicz,
+    ile boków ma ten wielokąt, jaka jest miara jego kąta wewnętrznego oraz ile wynosi suma miar wszystkich
+    jego kątów wewnętrznych.
+  statement_latex: \frac{n\cdot\left(n-3\right)}{2}=n+25
+  solution: |-
+    Niech n oznacza liczbę boków wielokąta, n \ge 3 i n jest liczbą naturalną. Liczba przekątnych wynosi \frac{n\cdot\left(n-3\right)}{2}, więc warunek zadania daje równanie
+    \frac{n\cdot\left(n-3\right)}{2}=n+25.
+    Mnożymy obie strony przez 2: n^{2}-3n=2n+50, czyli n^{2}-5n-50=0.
+    Wyróżnik: \Delta=\left(-5\right)^{2}-4\cdot 1\cdot\left(-50\right)=25+200=225, \sqrt{\Delta}=15.
+    Stąd n=\frac{5-15}{2}=-5 lub n=\frac{5+15}{2}=10.
+    Liczba boków musi być liczbą naturalną nie mniejszą niż 3, więc rozwiązanie n=-5 odrzucamy; zostaje n=10.
+    Sprawdzenie: \frac{10\cdot 7}{2}=35=10+25 ✓.
+    Kąt wewnętrzny: \alpha=\frac{\left(10-2\right)\cdot 180^\circ}{10}=144^\circ.
+    Suma kątów wewnętrznych: S=\left(10-2\right)\cdot 180^\circ=1440^\circ.
+    Odpowiedź: dziesięciokąt foremny, kąt wewnętrzny 144°, suma kątów 1440°.
+  solution_steps:
+  - Oznacz liczbę boków przez n (n naturalne, n \ge 3) i zapisz liczbę przekątnych jako \frac{n\cdot\left(n-3\right)}{2}.
+  - Ułóż równanie \frac{n\cdot\left(n-3\right)}{2}=n+25 i sprowadź je do postaci n^{2}-5n-50=0.
+  - Oblicz \Delta=225 i pierwiastki n=-5 oraz n=10.
+  - Odrzuć n=-5 (liczba boków musi być naturalna i nie mniejsza od 3); przyjmij n=10.
+  - Oblicz kąt wewnętrzny \alpha=\frac{\left(10-2\right)\cdot 180^\circ}{10}=144^\circ oraz sumę S=\left(10-2\right)\cdot
+    180^\circ=1440^\circ.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: n
+      answer:
+        kind: NUMERIC
+        value: 10.0
+    - name: kat_wewnetrzny
+      answer:
+        kind: NUMERIC
+        value: 144.0
+    - name: suma_katow
+      answer:
+        kind: NUMERIC
+        value: 1440.0
+  checks:
+  - kind: evaluate
+    expr: \frac{5+\sqrt{\left(-5\right)^{2}+4\cdot 50}}{2}
+    var: n
+    part: n
+  - kind: evaluate
+    expr: \frac{\left(10-2\right)\cdot 180}{10}
+    part: kat_wewnetrzny
+  - kind: evaluate
+    expr: \left(10-2\right)\cdot 180
+    part: suma_katow
+  skills:
+  - wzór na liczbę przekątnych d = n(n−3)/2
+  - układanie i rozwiązywanie równania kwadratowego
+  - odrzucanie rozwiązania sprzecznego z warunkami zadania
+  - kąt wewnętrzny i suma kątów wielokąta foremnego
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [n] SymPy solved it fresh: 10.0 vs 10.0 (tol 1e-09) ; [kat_wewnetrzny]
+      SymPy solved it fresh: 144.0 vs 144.0 (tol 1e-09) ; [suma_katow] SymPy solved it fresh: 1440.0 vs
+      1440.0 (tol 1e-09)'
+- id: g-ch-t04
+  slot: CHALLENGE
+  ramp_index: 2
+  difficulty: 5
+  exercise_type: modelowanie geometryczne z parametrem — sześciokąt z obciętego trójkąta
+  statement: |-
+    Dany jest trójkąt równoboczny ABC o boku długości 12. Przy każdym z wierzchołków A, B, C odcięto od niego trójkąt równoboczny o tej samej długości boku, przy czym każdy z odciętych trójkątów ma wierzchołek w odpowiednim wierzchołku trójkąta ABC, a jego dwa boki zawierają się w bokach trójkąta ABC. Po odcięciu trzech takich trójkątów z trójkąta ABC pozostaje sześciokąt, którego boki mają na przemian długość boku odciętego trójkąta oraz długość pozostałej części boku trójkąta ABC.
+    a) Oznaczając przez x długość boku odciętego trójkąta, wyznacz wzór na pole P powstałego sześciokąta w zależności od x i podaj dziedzinę tej zależności.
+    b) Wyznacz tę wartość x, dla której powstały sześciokąt jest sześciokątem foremnym, oblicz jego pole i rozstrzygnij, czy pole to stanowi więcej niż 65% pola trójkąta ABC.
+  statement_latex: P\left(x\right)=\frac{12^{2}\sqrt{3}}{4}-3\cdot\frac{x^{2}\sqrt{3}}{4}=36\sqrt{3}-\frac{3\sqrt{3}}{4}\cdot
+    x^{2}
+  solution: |-
+    a) Pole trójkąta ABC: P_{ABC}=\frac{12^{2}\sqrt{3}}{4}=36\sqrt{3}.
+    Każdy odcięty trójkąt jest równoboczny o boku x, więc ma pole \frac{x^{2}\sqrt{3}}{4}. Odcinamy trzy takie trójkąty, zatem
+    P\left(x\right)=36\sqrt{3}-3\cdot\frac{x^{2}\sqrt{3}}{4}=36\sqrt{3}-\frac{3\sqrt{3}}{4}\cdot x^{2}.
+    Dziedzina: musi być x>0 oraz pozostała część każdego boku musi być dodatnia, czyli 12-2x>0, skąd x<6. Zatem x\in\left(0;6\right).
+    b) Boki sześciokąta mają na przemian długości x oraz 12-2x, a wszystkie jego kąty wewnętrzne mają miarę 180^\circ-60^\circ=120^\circ. Sześciokąt jest więc foremny dokładnie wtedy, gdy wszystkie boki są równe:
+    12-2x=x \Rightarrow 3x=12 \Rightarrow x=4, przy czym 4\in\left(0;6\right) — warunek dziedziny jest spełniony.
+    Pole: P\left(4\right)=36\sqrt{3}-\frac{3\sqrt{3}}{4}\cdot 16=36\sqrt{3}-12\sqrt{3}=24\sqrt{3}.
+    (Kontrola wzorem na pole sześciokąta foremnego o boku 4: \frac{3\cdot 4^{2}\sqrt{3}}{2}=24\sqrt{3} ✓.)
+    Porównanie z progiem: \frac{24\sqrt{3}}{36\sqrt{3}}=\frac{2}{3}\approx 0{,}667=66{,}7\%>65\%.
+    Odpowiedź: P\left(x\right)=36\sqrt{3}-\frac{3\sqrt{3}}{4}x^{2} dla x\in\left(0;6\right); sześciokąt jest foremny dla x=4, jego pole wynosi 24\sqrt{3} i stanowi \frac{2}{3} pola trójkąta ABC, czyli więcej niż 65%.
+  solution_steps:
+  - 'Oblicz pole trójkąta wyjściowego: P_{ABC}=\frac{12^{2}\sqrt{3}}{4}=36\sqrt{3}.'
+  - 'Zapisz pole jednego odciętego trójkąta równobocznego o boku x: \frac{x^{2}\sqrt{3}}{4}, i odejmij
+    trzy takie pola: P\left(x\right)=36\sqrt{3}-\frac{3\sqrt{3}}{4}x^{2}.'
+  - Ustal dziedzinę z warunków x>0 i 12-2x>0, czyli x\in\left(0;6\right).
+  - Zauważ, że boki sześciokąta mają długości x oraz 12-2x, a kąty są równe 120^\circ; warunek foremności
+    to 12-2x=x, skąd x=4 (należy do dziedziny).
+  - 'Oblicz pole: P\left(4\right)=36\sqrt{3}-12\sqrt{3}=24\sqrt{3}.'
+  - 'Porównaj z progiem: \frac{24\sqrt{3}}{36\sqrt{3}}=\frac{2}{3}\approx 66{,}7\%>65\%, więc odpowiedź
+    brzmi: tak.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wzor_na_pole
+      answer:
+        kind: SYMBOLIC
+        latex: 36\sqrt{3}-\frac{3\sqrt{3}}{4}x^{2}
+    - name: dziedzina
+      answer:
+        kind: INTERVAL
+        lo: '0'
+        hi: '6'
+    - name: x_dla_foremnego
+      answer:
+        kind: NUMERIC
+        value: 4.0
+    - name: pole_szesciokata_foremnego
+      answer:
+        kind: SYMBOLIC
+        latex: 24\sqrt{3}
+    - name: czy_wiecej_niz_65_procent
+      answer:
+        kind: BOOLEAN
+        truth: true
+  checks:
+  - kind: simplify
+    expr: \frac{12^{2}\cdot\sqrt{3}}{4}-3\cdot\frac{x^{2}\cdot\sqrt{3}}{4}
+    part: wzor_na_pole
+  - kind: solve_equation
+    expr: 12-2\cdot x - x
+    part: x_dla_foremnego
+  - kind: evaluate
+    expr: 36\sqrt{3}-\frac{3\sqrt{3}}{4}\cdot 4^{2}
+    part: pole_szesciokata_foremnego
+  stated_model:
+    variable: x
+    objective_latex: P\left(x\right)=36\sqrt{3}-\frac{3\sqrt{3}}{4}\cdot x^{2}
+    domain_lo: '0'
+    domain_hi: '6'
+    goal: value
+    constraint_used: 12-2\cdot x = x \;\text{(warunek foremności sześciokąta)}
+  skills:
+  - wprowadzenie zmiennej i budowa wzoru na pole
+  - wyznaczanie dziedziny z warunków geometrycznych
+  - warunek foremności wielokąta
+  - pole trójkąta równobocznego i sześciokąta foremnego
+  - porównanie wyniku z zadanym progiem
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''x'': ''P\\left(x\\right)=36\\sqrt{3}-\\frac{3\\sqrt{3}}{4}\\cdot
+      x^{2}'') — human review'

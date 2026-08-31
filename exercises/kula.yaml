@@ -1,0 +1,764 @@
+section: kula
+name: Kula
+scope: Volume and surface area of a sphere; plane cross-sections; a sphere inscribed in or circumscribed
+  about a prism, pyramid, cylinder or cone.
+requirements:
+- X.5
+counts:
+  total: 16
+  DETERMINISTIC: 10
+  REFERENCE_CALL: 3
+  NOT_MACHINE_CHECKABLE: 3
+exercises:
+- id: g-th-00
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: obliczenie V i S kuli z danego promienia
+  statement: Kula ma promień R = 4 cm. Oblicz pole powierzchni tej kuli oraz jej objętość. Wyniki podaj
+    dokładnie (z liczbą \pi).
+  statement_latex: R = 4\ \text{cm},\qquad S = 4\pi R^{2},\qquad V = \frac{4}{3}\pi R^{3}
+  solution: |-
+    Krok 1. Pole powierzchni kuli liczymy ze wzoru S = 4\pi R^{2}. Podstawiamy R = 4: S = 4\pi\cdot 4^{2} = 4\pi\cdot 16 = 64\pi\ \text{cm}^{2}.
+    Krok 2. Objętość kuli liczymy ze wzoru V = \frac{4}{3}\pi R^{3}. Podstawiamy R = 4: V = \frac{4}{3}\pi\cdot 4^{3} = \frac{4}{3}\pi\cdot 64 = \frac{256}{3}\pi\ \text{cm}^{3}.
+    Krok 3. Kontrola jednostek: pole w cm^{2} (przy R^{2}), objętość w cm^{3} (przy R^{3}).
+    Odpowiedź: S = 64\pi\ \text{cm}^{2}, V = \frac{256}{3}\pi\ \text{cm}^{3}.
+  solution_steps:
+  - Zastosuj wzór S = 4\pi R^{2} dla R = 4.
+  - Oblicz S = 4\pi\cdot 16 = 64\pi\ \text{cm}^{2}.
+  - Zastosuj wzór V = \frac{4}{3}\pi R^{3} dla R = 4.
+  - Oblicz V = \frac{4}{3}\pi\cdot 64 = \frac{256}{3}\pi\ \text{cm}^{3}.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: pole powierzchni
+      answer:
+        kind: SYMBOLIC
+        latex: 64\pi
+    - name: objętość
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{256}{3}\pi
+  checks:
+  - kind: evaluate
+    expr: 4\cdot\pi\cdot 4^{2}
+    part: pole powierzchni
+  - kind: evaluate
+    expr: \frac{4}{3}\cdot\pi\cdot 4^{3}
+    part: objętość
+  skills:
+  - wzór na pole powierzchni kuli
+  - wzór na objętość kuli
+  - rachunek na potęgach
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [pole powierzchni] SymPy solved it fresh: 201.06192982974676
+      vs 201.06192982974676 (tol 1e-09) ; [objętość] SymPy solved it fresh: 268.08257310632905 vs 268.08257310632905
+      (tol 1e-09)'
+- id: g-th-01
+  slot: THEORY_SUPPORT
+  ramp_index: 1
+  difficulty: 1
+  exercise_type: wyznaczanie promienia z pola powierzchni
+  statement: Pole powierzchni kuli jest równe 100\pi\ \text{cm}^{2}. Oblicz promień tej kuli.
+  statement_latex: 4\pi R^{2} = 100\pi
+  solution: |-
+    Krok 1. Zapisujemy równanie ze wzoru na pole sfery: 4\pi R^{2} = 100\pi.
+    Krok 2. Dzielimy obie strony przez 4\pi: R^{2} = \frac{100\pi}{4\pi} = 25.
+    Krok 3. Ponieważ promień jest dodatni, R = \sqrt{25} = 5\ \text{cm}.
+    Odpowiedź: R = 5 cm.
+  solution_steps:
+  - Zapisz równanie 4\pi R^{2} = 100\pi.
+  - 'Podziel przez 4\pi: R^{2} = 25.'
+  - 'Weź pierwiastek dodatni: R = 5\ \text{cm}.'
+  answer:
+    kind: NUMERIC
+    value: 5.0
+  checks:
+  - kind: evaluate
+    expr: \sqrt{\frac{100\cdot\pi}{4\cdot\pi}}
+  skills:
+  - odwracanie wzoru S = 4\pi R^{2}
+  - pierwiastkowanie
+  verification:
+    checkability: REFERENCE_CALL
+    note: 5.0 vs 5.0 (tol 1e-09)
+- id: g-th-02
+  slot: THEORY_SUPPORT
+  ramp_index: 2
+  difficulty: 2
+  exercise_type: przekrój płaski kuli
+  statement: Kulę o środku O i promieniu R = 10 cm przecięto płaszczyzną, której odległość od środka O
+    jest równa d = 6 cm. Oblicz promień otrzymanego koła przekroju oraz jego pole.
+  statement_latex: r = \sqrt{R^{2}-d^{2}} = \sqrt{10^{2}-6^{2}},\qquad P = \pi r^{2}
+  solution: |-
+    Krok 1. Rozpatrujemy przekrój kuli płaszczyzną przechodzącą przez środek O i prostopadłą do danej płaszczyzny. Powstaje trójkąt prostokątny o przeciwprostokątnej R = 10 i przyprostokątnych d = 6 oraz r.
+    Krok 2. Z twierdzenia Pitagorasa: r^{2} = R^{2} - d^{2} = 100 - 36 = 64, więc r = 8 cm.
+    Krok 3. Pole koła przekroju: P = \pi r^{2} = \pi\cdot 64 = 64\pi\ \text{cm}^{2}.
+    Sprawdzenie: r = 8 < R = 10 — wynik sensowny.
+    Odpowiedź: r = 8 cm, P = 64\pi\ \text{cm}^{2}.
+  solution_steps:
+  - Zauważ trójkąt prostokątny o bokach R (przeciwprostokątna), d oraz r.
+  - Zapisz r^{2} = R^{2} - d^{2} = 100 - 36 = 64.
+  - Wyznacz r = 8\ \text{cm}.
+  - Oblicz pole przekroju P = \pi\cdot 8^{2} = 64\pi\ \text{cm}^{2}.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: promień przekroju
+      answer:
+        kind: NUMERIC
+        value: 8.0
+    - name: pole przekroju
+      answer:
+        kind: SYMBOLIC
+        latex: 64\pi
+  checks:
+  - kind: evaluate
+    expr: \sqrt{10^{2}-6^{2}}
+    part: promień przekroju
+  - kind: evaluate
+    expr: \pi\cdot\left(\sqrt{10^{2}-6^{2}}\right)^{2}
+    part: pole przekroju
+  skills:
+  - zależność R^{2} = d^{2} + r^{2}
+  - pole koła
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [promień przekroju] SymPy solved it fresh: 8.0 vs 8.0 (tol
+      1e-09) ; [pole przekroju] SymPy solved it fresh: 201.06192982974676 vs 201.06192982974676 (tol 1e-09)'
+- id: g-ex-03
+  slot: EXERCISE
+  ramp_index: 1
+  difficulty: 2
+  exercise_type: wyznaczanie R z objętości i obliczanie pola
+  statement: Objętość kuli jest równa 36\pi\ \text{cm}^{3}. Oblicz promień tej kuli, jej pole powierzchni
+    oraz pole koła wielkiego tej kuli. Zapisz obliczenia.
+  statement_latex: \frac{4}{3}\pi R^{3} = 36\pi
+  solution: |-
+    Krok 1. Ze wzoru na objętość: \frac{4}{3}\pi R^{3} = 36\pi.
+    Krok 2. Mnożymy obie strony przez \frac{3}{4\pi}: R^{3} = \frac{3\cdot 36\pi}{4\pi} = 27, zatem R = 3 cm.
+    Krok 3. Pole powierzchni kuli: S = 4\pi R^{2} = 4\pi\cdot 9 = 36\pi\ \text{cm}^{2}.
+    Krok 4. Koło wielkie to przekrój płaszczyzną przechodzącą przez środek, więc ma promień R = 3 i pole P = \pi\cdot 3^{2} = 9\pi\ \text{cm}^{2}.
+    Kontrola: pole sfery to dokładnie cztery pola koła wielkiego: 4\cdot 9\pi = 36\pi. Zgadza się.
+    Odpowiedź: R = 3 cm, S = 36\pi\ \text{cm}^{2}, P = 9\pi\ \text{cm}^{2}.
+  solution_steps:
+  - Zapisz równanie \frac{4}{3}\pi R^{3} = 36\pi.
+  - Wyznacz R^{3} = \frac{3\cdot 36\pi}{4\pi} = 27, czyli R = 3\ \text{cm}.
+  - Oblicz S = 4\pi\cdot 3^{2} = 36\pi\ \text{cm}^{2}.
+  - Oblicz pole koła wielkiego P = \pi\cdot 3^{2} = 9\pi\ \text{cm}^{2}.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: promień
+      answer:
+        kind: NUMERIC
+        value: 3.0
+    - name: pole powierzchni kuli
+      answer:
+        kind: SYMBOLIC
+        latex: 36\pi
+    - name: pole koła wielkiego
+      answer:
+        kind: SYMBOLIC
+        latex: 9\pi
+  checks:
+  - kind: evaluate
+    expr: \left(\frac{3\cdot 36\cdot\pi}{4\cdot\pi}\right)^{\frac{1}{3}}
+    part: promień
+  - kind: evaluate
+    expr: 4\cdot\pi\cdot 3^{2}
+    part: pole powierzchni kuli
+  - kind: evaluate
+    expr: \pi\cdot 3^{2}
+    part: pole koła wielkiego
+  skills:
+  - odwracanie wzoru na objętość kuli
+  - pole powierzchni kuli
+  - pole koła wielkiego
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [promień] SymPy solved it fresh: 3.0 vs 3.0 (tol 1e-09) ; [pole
+      powierzchni kuli] SymPy solved it fresh: 113.09733552923255 vs 113.09733552923255 (tol 1e-09) ;
+      [pole koła wielkiego] SymPy solved it fresh: 28.274333882308138 vs 28.274333882308138 (tol 1e-09)'
+- id: g-ex-04
+  slot: EXERCISE
+  ramp_index: 2
+  difficulty: 3
+  exercise_type: kula opisana na prostopadłościanie
+  statement: Dany jest prostopadłościan ABCDEFGH o krawędziach |AB| = 4, |BC| = 4 oraz |AE| = 7. Na tym
+    prostopadłościanie opisano kulę (wszystkie osiem wierzchołków leży na sferze). Oblicz promień tej
+    kuli, jej pole powierzchni oraz jej objętość. Zapisz obliczenia.
+  statement_latex: R = \frac{1}{2}\sqrt{4^{2}+4^{2}+7^{2}}
+  solution: |-
+    Krok 1. Środek kuli opisanej na prostopadłościanie jest środkiem jego przekątnej, a średnica kuli jest równa długości tej przekątnej.
+    Krok 2. Przekątna: d = \sqrt{4^{2}+4^{2}+7^{2}} = \sqrt{16+16+49} = \sqrt{81} = 9.
+    Krok 3. Promień kuli: R = \frac{d}{2} = \frac{9}{2} = 4{,}5.
+    Krok 4. Pole powierzchni kuli: S = 4\pi R^{2} = 4\pi\cdot\frac{81}{4} = 81\pi.
+    Krok 5. Objętość kuli: V = \frac{4}{3}\pi R^{3} = \frac{4}{3}\pi\cdot\frac{729}{8} = \frac{243}{2}\pi.
+    Odpowiedź: R = \frac{9}{2}, S = 81\pi, V = \frac{243}{2}\pi.
+  solution_steps:
+  - Zauważ, że średnica kuli opisanej to przekątna prostopadłościanu.
+  - 'Oblicz przekątną: \sqrt{4^{2}+4^{2}+7^{2}} = 9.'
+  - Wyznacz R = \frac{9}{2}.
+  - Oblicz S = 4\pi\cdot\left(\frac{9}{2}\right)^{2} = 81\pi.
+  - Oblicz V = \frac{4}{3}\pi\cdot\left(\frac{9}{2}\right)^{3} = \frac{243}{2}\pi.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: promień kuli
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{9}{2}
+    - name: pole powierzchni kuli
+      answer:
+        kind: SYMBOLIC
+        latex: 81\pi
+    - name: objętość kuli
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{243}{2}\pi
+  checks:
+  - kind: evaluate
+    expr: \frac{1}{2}\cdot\sqrt{4^{2}+4^{2}+7^{2}}
+    part: promień kuli
+  - kind: evaluate
+    expr: 4\cdot\pi\cdot\left(\frac{9}{2}\right)^{2}
+    part: pole powierzchni kuli
+  - kind: evaluate
+    expr: \frac{4}{3}\cdot\pi\cdot\left(\frac{9}{2}\right)^{3}
+    part: objętość kuli
+  skills:
+  - przekątna prostopadłościanu
+  - kula opisana na wielościanie
+  - objętość i pole kuli
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [promień kuli] SymPy solved it fresh: 4.5 vs 4.5 (tol 1e-09)
+      ; [pole powierzchni kuli] SymPy solved it fresh: 254.46900494077326 vs 254.46900494077326 (tol 1e-09)
+      ; [objętość kuli] SymPy solved it fresh: 381.7035074111599 vs 381.7035074111599 (tol 1e-09)'
+- id: g-ex-05
+  slot: EXERCISE
+  ramp_index: 3
+  difficulty: 4
+  exercise_type: kula wpisana w stożek z danym kątem nachylenia tworzącej
+  statement: Dany jest stożek o promieniu podstawy r = 9, którego tworząca jest nachylona do płaszczyzny
+    podstawy pod kątem 60^{\circ}. W ten stożek wpisano kulę (styczną do podstawy i do powierzchni bocznej).
+    Oblicz promień tej kuli, jej objętość oraz stosunek objętości kuli do objętości stożka. Zapisz obliczenia.
+  statement_latex: H = 9\cdot\mathrm{tg}\,60^{\circ},\qquad l = \frac{9}{\cos 60^{\circ}},\qquad R = \frac{r\cdot
+    H}{r+l}
+  solution: |-
+    Krok 1. Przekrój osiowy stożka to trójkąt równoramienny o podstawie 2r = 18 i kątach przy podstawie 60^{\circ}.
+    Krok 2. Wysokość stożka: H = r\cdot\mathrm{tg}\,60^{\circ} = 9\sqrt{3}. Tworząca: l = \frac{r}{\cos 60^{\circ}} = \frac{9}{\frac{1}{2}} = 18.
+    Krok 3. Kula wpisana w stożek daje w przekroju osiowym okrąg wpisany w ten trójkąt, więc R = \frac{r\cdot H}{r+l} = \frac{9\cdot 9\sqrt{3}}{9+18} = \frac{81\sqrt{3}}{27} = 3\sqrt{3}.
+    Krok 4. Objętość kuli: V_{k} = \frac{4}{3}\pi\left(3\sqrt{3}\right)^{3} = \frac{4}{3}\pi\cdot 81\sqrt{3} = 108\sqrt{3}\,\pi.
+    Krok 5. Objętość stożka: V_{s} = \frac{1}{3}\pi r^{2}H = \frac{1}{3}\pi\cdot 81\cdot 9\sqrt{3} = 243\sqrt{3}\,\pi.
+    Krok 6. Stosunek: \frac{V_{k}}{V_{s}} = \frac{108\sqrt{3}\,\pi}{243\sqrt{3}\,\pi} = \frac{4}{9}.
+    Odpowiedź: R = 3\sqrt{3}, V_{k} = 108\sqrt{3}\,\pi, kula stanowi \frac{4}{9} objętości stożka.
+  solution_steps:
+  - Wyznacz z kąta 60^{\circ} wysokość H = 9\sqrt{3} i tworzącą l = 18.
+  - Zastosuj wzór na promień kuli wpisanej w stożek R = \frac{r\cdot H}{r+l} = 3\sqrt{3}.
+  - Oblicz V_{k} = \frac{4}{3}\pi\left(3\sqrt{3}\right)^{3} = 108\sqrt{3}\,\pi.
+  - Oblicz V_{s} = \frac{1}{3}\pi\cdot 9^{2}\cdot 9\sqrt{3} = 243\sqrt{3}\,\pi.
+  - 'Utwórz iloraz i skróć: \frac{V_{k}}{V_{s}} = \frac{4}{9}.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: promień kuli wpisanej
+      answer:
+        kind: SYMBOLIC
+        latex: 3\sqrt{3}
+    - name: objętość kuli
+      answer:
+        kind: SYMBOLIC
+        latex: 108\sqrt{3}\pi
+    - name: stosunek objętości
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{4}{9}
+  checks:
+  - kind: evaluate
+    expr: \frac{9\cdot 9\cdot\sqrt{3}}{9+18}
+    part: promień kuli wpisanej
+  - kind: evaluate
+    expr: \frac{4}{3}\cdot\pi\cdot\left(3\cdot\sqrt{3}\right)^{3}
+    part: objętość kuli
+  - kind: evaluate
+    expr: \frac{\frac{4}{3}\cdot\pi\cdot\left(3\cdot\sqrt{3}\right)^{3}}{\frac{1}{3}\cdot\pi\cdot 9^{2}\cdot
+      9\cdot\sqrt{3}}
+    part: stosunek objętości
+  skills:
+  - trygonometria w przekroju osiowym
+  - kula wpisana w stożek
+  - porównywanie objętości
+  verification:
+    checkability: REFERENCE_CALL
+    note: 'could not compare: part disagrees: PARSE_ERROR: ''UnexpectedEOF: Unexpected end-of-input. Expected
+      one of: '''
+- id: g-ex-t00
+  slot: EXERCISE
+  ramp_index: 6
+  difficulty: 4
+  exercise_type: kula wpisana i opisana — stożek z danym kątem
+  statement: Dany jest stożek o promieniu podstawy r = 3, którego tworząca jest nachylona do płaszczyzny
+    podstawy pod kątem 60°. W ten stożek wpisano kulę, a na tym samym stożku opisano kulę. Oblicz promień
+    kuli wpisanej oraz promień kuli opisanej, a następnie oblicz, ile razy objętość kuli opisanej jest
+    większa od objętości kuli wpisanej. Zapisz obliczenia.
+  statement_latex: H = r\cdot \mathrm{tg}\,60^{\circ},\qquad l = \frac{r}{\cos 60^{\circ}},\qquad R_{w}
+    = \frac{r\cdot H}{r+l},\qquad R_{o} = \frac{l^{2}}{2\cdot H}
+  solution: |-
+    Krok 1. Przekrój osiowy stożka to trójkąt równoramienny o podstawie 2r = 6; kąt przy podstawie ma miarę 60°.
+    Z trójkąta prostokątnego utworzonego przez wysokość, promień podstawy i tworzącą:
+    H = r\cdot \mathrm{tg}\,60^{\circ} = 3\sqrt{3}, \qquad l = \frac{r}{\cos 60^{\circ}} = \frac{3}{\frac{1}{2}} = 6.
+    Krok 2. Kula wpisana w stożek daje w przekroju osiowym okrąg wpisany w ten trójkąt:
+    R_{w} = \frac{r\cdot H}{r+l} = \frac{3\cdot 3\sqrt{3}}{3+6} = \frac{9\sqrt{3}}{9} = \sqrt{3}.
+    Krok 3. Kula opisana na stożku: jej środek leży na osi stożka, a z równania R^{2} = r^{2}+\left(H-R\right)^{2} otrzymujemy
+    R_{o} = \frac{l^{2}}{2\cdot H} = \frac{36}{2\cdot 3\sqrt{3}} = \frac{36}{6\sqrt{3}} = \frac{6}{\sqrt{3}} = 2\sqrt{3}.
+    Krok 4. Obie bryły są kulami, więc są podobne w skali k = \frac{R_{o}}{R_{w}} = \frac{2\sqrt{3}}{\sqrt{3}} = 2, zatem stosunek objętości wynosi k^{3} = 8.
+    Odpowiedź: R_{w} = \sqrt{3}, R_{o} = 2\sqrt{3}, objętość kuli opisanej jest 8 razy większa.
+  solution_steps:
+  - Z kąta 60° wyznacz wysokość H = 3\sqrt{3} i tworzącą l = 6.
+  - Oblicz promień kuli wpisanej R_{w} = \frac{r\cdot H}{r+l} = \sqrt{3}.
+  - Oblicz promień kuli opisanej R_{o} = \frac{l^{2}}{2\cdot H} = 2\sqrt{3}.
+  - Wyznacz skalę k = 2 i stosunek objętości k^{3} = 8.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: R_wpisanej
+      answer:
+        kind: SYMBOLIC
+        latex: \sqrt{3}
+    - name: R_opisanej
+      answer:
+        kind: SYMBOLIC
+        latex: 2\sqrt{3}
+    - name: krotnosc_objetosci
+      answer:
+        kind: NUMERIC
+        value: 8.0
+  checks:
+  - kind: evaluate
+    expr: \frac{3\cdot 3\sqrt{3}}{3+6}
+    part: R_wpisanej
+  - kind: evaluate
+    expr: \frac{6^{2}}{2\cdot 3\sqrt{3}}
+    part: R_opisanej
+  - kind: evaluate
+    expr: \left(\frac{2\sqrt{3}}{\sqrt{3}}\right)^{3}
+    part: krotnosc_objetosci
+  skills:
+  - kula wpisana w stożek
+  - kula opisana na stożku
+  - trygonometria w przekroju osiowym
+  - skala podobieństwa kul
+  verification:
+    checkability: REFERENCE_CALL
+    note: 3 parts matched
+- id: g-ex-t01
+  slot: EXERCISE
+  ramp_index: 7
+  difficulty: 5
+  exercise_type: kula opisana i wpisana — ostrosłup prawidłowy czworokątny
+  statement: Dany jest ostrosłup prawidłowy czworokątny ABCDS o krawędzi podstawy a = 6 i wysokości H
+    = 4. Oblicz pole powierzchni kuli opisanej na tym ostrosłupie oraz objętość kuli wpisanej w ten ostrosłup.
+    Zapisz obliczenia.
+  statement_latex: R_{o} = \frac{b^{2}}{2\cdot H},\qquad R_{w} = \frac{\rho_{p}\cdot H}{\rho_{p}+m},\qquad
+    S = 4\pi R_{o}^{2},\qquad V = \frac{4}{3}\pi R_{w}^{3}
+  solution: |-
+    Krok 1. Podstawą jest kwadrat o boku 6. Promień okręgu opisanego na podstawie to połowa przekątnej:
+    R_{p} = \frac{6\sqrt{2}}{2} = 3\sqrt{2}, a promień okręgu wpisanego w podstawę \rho_{p} = \frac{6}{2} = 3.
+    Krok 2. Krawędź boczna: b^{2} = R_{p}^{2}+H^{2} = 18+16 = 34.
+    Krok 3. Środek kuli opisanej leży na wysokości ostrosłupa i spełnia R^{2} = R_{p}^{2}+\left(H-R\right)^{2}, skąd
+    R_{o} = \frac{b^{2}}{2\cdot H} = \frac{34}{2\cdot 4} = \frac{17}{4}.
+    Krok 4. Pole powierzchni kuli opisanej: S = 4\pi\left(\frac{17}{4}\right)^{2} = 4\pi\cdot\frac{289}{16} = \frac{289\pi}{4}.
+    Krok 5. Apotema (wysokość ściany bocznej): m = \sqrt{H^{2}+\rho_{p}^{2}} = \sqrt{16+9} = 5.
+    Krok 6. Przekrój ostrosłupa przez apotemy przeciwległych ścian to trójkąt równoramienny o podstawie 2\rho_{p} = 6 i wysokości H = 4; kula wpisana daje w nim okrąg wpisany:
+    R_{w} = \frac{\rho_{p}\cdot H}{\rho_{p}+m} = \frac{3\cdot 4}{3+5} = \frac{3}{2}.
+    Krok 7. Objętość kuli wpisanej: V = \frac{4}{3}\pi\left(\frac{3}{2}\right)^{3} = \frac{4}{3}\pi\cdot\frac{27}{8} = \frac{9\pi}{2}.
+    Odpowiedź: S = \frac{289\pi}{4}, V = \frac{9\pi}{2}.
+  solution_steps:
+  - Oblicz R_{p} = 3\sqrt{2} oraz \rho_{p} = 3 dla kwadratu o boku 6.
+  - Wyznacz b^{2} = R_{p}^{2}+H^{2} = 34 i R_{o} = \frac{b^{2}}{2\cdot H} = \frac{17}{4}.
+  - Policz S = 4\pi R_{o}^{2} = \frac{289\pi}{4}.
+  - Wyznacz apotemę m = \sqrt{H^{2}+\rho_{p}^{2}} = 5 oraz R_{w} = \frac{\rho_{p}\cdot H}{\rho_{p}+m}
+    = \frac{3}{2}.
+  - Policz V = \frac{4}{3}\pi R_{w}^{3} = \frac{9\pi}{2}.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: S_kuli_opisanej
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{289\pi}{4}
+    - name: V_kuli_wpisanej
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{9\pi}{2}
+  checks:
+  - kind: evaluate
+    expr: 4\pi\cdot\left(\frac{\left(3\sqrt{2}\right)^{2}+4^{2}}{2\cdot 4}\right)^{2}
+    part: S_kuli_opisanej
+  - kind: evaluate
+    expr: \frac{4}{3}\pi\cdot\left(\frac{3\cdot 4}{3+\sqrt{4^{2}+3^{2}}}\right)^{3}
+    part: V_kuli_wpisanej
+  skills:
+  - kula opisana na ostrosłupie prawidłowym
+  - kula wpisana w ostrosłup prawidłowy
+  - twierdzenie Pitagorasa w bryle
+  - pole sfery i objętość kuli
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [S_kuli_opisanej] SymPy solved it fresh: 226.98006922186255
+      vs 226.98006922186255 (tol 1e-09) ; [V_kuli_wpisanej] SymPy solved it fresh: 14.137166941154069
+      vs 14.137166941154069 (tol 1e-09)'
+- id: g-cm-06
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: 'demonstracja błędu: mylenie wzorów na pole i objętość kuli'
+  statement: 'Kula ma promień R = 6 cm. Uczeń policzył pole powierzchni tej kuli tak: S = \frac{4}{3}\pi\cdot
+    6^{2} = 48\pi\ \text{cm}^{2}. Wyjaśnij, na czym polega błąd, i podaj poprawne pole powierzchni tej
+    kuli.'
+  statement_latex: S = 4\pi R^{2},\qquad R = 6
+  solution: |-
+    Błędne rozumowanie: uczeń wziął współczynnik \frac{4}{3} ze wzoru na objętość i połączył go z kwadratem promienia ze wzoru na pole: S = \frac{4}{3}\pi\cdot 36 = 48\pi\ \text{cm}^{2}.
+    Dlaczego to źle: współczynnik \frac{4}{3} występuje wyłącznie we wzorze na objętość V = \frac{4}{3}\pi R^{3} (wielkość trójwymiarowa, potęga trzecia), natomiast pole sfery to S = 4\pi R^{2} (wielkość dwuwymiarowa, potęga druga). Mieszanie tych wzorów zaniża wynik trzykrotnie. Szybka kontrola: pole sfery to cztery pola koła wielkiego, a koło wielkie ma pole \pi\cdot 6^{2} = 36\pi, więc S musi być równe 4\cdot 36\pi.
+    Poprawne rozwiązanie: S = 4\pi R^{2} = 4\pi\cdot 6^{2} = 144\pi\ \text{cm}^{2}.
+    (Dla porównania objętość tej kuli to V = \frac{4}{3}\pi\cdot 6^{3} = 288\pi\ \text{cm}^{3} — inna wielkość i inna jednostka.)
+    Odpowiedź: S = 144\pi\ \text{cm}^{2}.
+  solution_steps:
+  - 'Wskaż błąd: użyto współczynnika \frac{4}{3} (z objętości) razem z R^{2} (z pola).'
+  - 'Przypomnij poprawne wzory: S = 4\pi R^{2}, V = \frac{4}{3}\pi R^{3}.'
+  - Oblicz poprawnie S = 4\pi\cdot 6^{2} = 144\pi\ \text{cm}^{2}.
+  - 'Sprawdź: 144\pi = 4\cdot 36\pi, czyli cztery pola koła wielkiego.'
+  answer:
+    kind: SYMBOLIC
+    latex: 144\pi
+  checks:
+  - kind: evaluate
+    expr: 4\cdot\pi\cdot 6^{2}
+  skills:
+  - wzór S = 4\pi R^{2}
+  - kontrola jednostek
+  - rozróżnianie wielkości 2D i 3D
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 452.3893421169302 vs 452.3893421169302 (tol 1e-09)'
+- id: g-cm-07
+  slot: COMMON_MISTAKE
+  ramp_index: 1
+  difficulty: 2
+  exercise_type: 'demonstracja błędu: średnica zamiast promienia'
+  statement: 'Kula ma średnicę równą 12 cm. Uczeń obliczył jej objętość tak: V = \frac{4}{3}\pi\cdot 12^{3}
+    = 2304\pi\ \text{cm}^{3}. Wskaż błąd w tym rozumowaniu i podaj poprawną objętość kuli.'
+  statement_latex: d = 12\ \text{cm},\qquad R = \frac{d}{2},\qquad V = \frac{4}{3}\pi R^{3}
+  solution: |-
+    Błędne rozumowanie: uczeń podstawił do wzoru daną z treści liczbę 12, czyli średnicę, otrzymując V = \frac{4}{3}\pi\cdot 1728 = 2304\pi\ \text{cm}^{3}.
+    Dlaczego to źle: we wzorze V = \frac{4}{3}\pi R^{3} występuje promień, a nie średnica. Podstawienie d zamiast R zawyża objętość aż 2^{3} = 8 razy (istotnie 2304\pi = 8\cdot 288\pi).
+    Poprawne rozwiązanie: najpierw R = \frac{d}{2} = \frac{12}{2} = 6\ \text{cm}, a następnie V = \frac{4}{3}\pi\cdot 6^{3} = \frac{4}{3}\pi\cdot 216 = 288\pi\ \text{cm}^{3}.
+    Odpowiedź: V = 288\pi\ \text{cm}^{3}.
+  solution_steps:
+  - Zauważ, że w treści podano średnicę, a we wzorze występuje promień.
+  - Zapisz osobno R = \frac{12}{2} = 6\ \text{cm}.
+  - Oblicz V = \frac{4}{3}\pi\cdot 6^{3} = 288\pi\ \text{cm}^{3}.
+  - 'Porównaj z błędnym wynikiem: był 8 razy za duży.'
+  answer:
+    kind: SYMBOLIC
+    latex: 288\pi
+  checks:
+  - kind: evaluate
+    expr: \frac{4}{3}\cdot\pi\cdot\left(\frac{12}{2}\right)^{3}
+  skills:
+  - zależność R = \frac{d}{2}
+  - objętość kuli
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 904.7786842338604 vs 904.7786842338604 (tol 1e-09)'
+- id: g-cm-08
+  slot: COMMON_MISTAKE
+  ramp_index: 2
+  difficulty: 2
+  exercise_type: 'demonstracja błędu: powierzchnia litej półkuli'
+  statement: 'Lita półkula (bryła powstała przez przecięcie kuli płaszczyzną przechodzącą przez jej środek)
+    ma promień R = 5 cm. Uczeń stwierdził: „pole powierzchni całkowitej półkuli to połowa pola kuli, czyli
+    2\pi\cdot 5^{2} = 50\pi\ \text{cm}^{2}”. Wyjaśnij błąd i oblicz poprawne pole powierzchni całkowitej
+    tej półkuli.'
+  statement_latex: S_{c} = 2\pi R^{2}+\pi R^{2} = 3\pi R^{2},\qquad R = 5
+  solution: |-
+    Błędne rozumowanie: uczeń policzył tylko połowę sfery: \frac{1}{2}\cdot 4\pi R^{2} = 2\pi\cdot 25 = 50\pi\ \text{cm}^{2}.
+    Dlaczego to źle: przecinając kulę płaszczyzną, otrzymujemy bryłę ograniczoną nie tylko zakrzywioną czaszą, ale również płaskim „denkiem” — kołem wielkim o promieniu R. Tego koła nie wolno pominąć w polu powierzchni całkowitej.
+    Poprawne rozwiązanie: S_{c} = \underbrace{2\pi R^{2}}_{\text{czasza}} + \underbrace{\pi R^{2}}_{\text{koło wielkie}} = 3\pi R^{2} = 3\pi\cdot 25 = 75\pi\ \text{cm}^{2}.
+    Uwaga: gdyby chodziło o samą czaszę (np. kopułę bez podłogi), poprawną odpowiedzią byłoby 50\pi\ \text{cm}^{2}.
+    Odpowiedź: S_{c} = 75\pi\ \text{cm}^{2}.
+  solution_steps:
+  - 'Wskaż błąd: pominięto płaską podstawę półkuli (koło wielkie).'
+  - Zapisz S_{c} = 2\pi R^{2} + \pi R^{2} = 3\pi R^{2}.
+  - 'Podstaw R = 5: S_{c} = 3\pi\cdot 25 = 75\pi\ \text{cm}^{2}.'
+  answer:
+    kind: SYMBOLIC
+    latex: 75\pi
+  checks:
+  - kind: evaluate
+    expr: 2\cdot\pi\cdot 5^{2}+\pi\cdot 5^{2}
+  skills:
+  - pole powierzchni półkuli
+  - rozróżnienie czaszy i podstawy
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 235.61944901923448 vs 235.61944901923448 (tol 1e-09)'
+- id: g-cm-09
+  slot: COMMON_MISTAKE
+  ramp_index: 3
+  difficulty: 2
+  exercise_type: 'demonstracja błędu: przekrój kuli o promieniu R'
+  statement: 'Kulę o promieniu R = 17 cm przecięto płaszczyzną odległą od środka kuli o d = 8 cm. Uczeń
+    zapisał: „przekrojem kuli jest koło o promieniu równym promieniowi kuli, więc pole przekroju wynosi
+    \pi\cdot 17^{2} = 289\pi\ \text{cm}^{2}”. Wyjaśnij błąd i oblicz poprawne pole tego przekroju.'
+  statement_latex: P = \pi\left(R^{2}-d^{2}\right) = \pi\left(17^{2}-8^{2}\right)
+  solution: |-
+    Błędne rozumowanie: uczeń przyjął, że każdy przekrój kuli płaszczyzną ma promień R, i policzył P = \pi\cdot 17^{2} = 289\pi\ \text{cm}^{2}.
+    Dlaczego to źle: promień R ma tylko koło wielkie, czyli przekrój płaszczyzną przechodzącą przez środek (d = 0). Gdy płaszczyzna jest odległa od środka o d > 0, to promień przekroju wyznaczamy z trójkąta prostokątnego o przeciwprostokątnej R i przyprostokątnych d oraz r: r = \sqrt{R^{2}-d^{2}} < R.
+    Poprawne rozwiązanie: r = \sqrt{17^{2}-8^{2}} = \sqrt{289-64} = \sqrt{225} = 15\ \text{cm}, więc P = \pi r^{2} = \pi\left(289-64\right) = 225\pi\ \text{cm}^{2}.
+    Odpowiedź: P = 225\pi\ \text{cm}^{2}.
+  solution_steps:
+  - 'Wskaż błąd: promień R ma tylko koło wielkie (d = 0).'
+  - Zastosuj r = \sqrt{R^{2}-d^{2}} = \sqrt{289-64} = 15\ \text{cm}.
+  - Oblicz P = \pi\cdot 15^{2} = 225\pi\ \text{cm}^{2}.
+  answer:
+    kind: SYMBOLIC
+    latex: 225\pi
+  checks:
+  - kind: evaluate
+    expr: \pi\cdot\left(17^{2}-8^{2}\right)
+  skills:
+  - zależność r = \sqrt{R^{2}-d^{2}}
+  - pole przekroju kuli
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 706.8583470577034 vs 706.8583470577034 (tol 1e-09)'
+- id: g-cm-10
+  slot: COMMON_MISTAKE
+  ramp_index: 4
+  difficulty: 3
+  exercise_type: 'demonstracja błędu: środek kuli opisanej na ostrosłupie'
+  statement: Dany jest ostrosłup prawidłowy czworokątny o krawędzi podstawy a = 6\sqrt{2} i wysokości
+    H = 8. Uczeń, licząc promień kuli opisanej na tym ostrosłupie, przyjął, że środek kuli dzieli wysokość
+    na połowy, i otrzymał R = \sqrt{6^{2}+4^{2}} = \sqrt{52} = 2\sqrt{13}. Wyjaśnij, dlaczego to rozumowanie
+    jest błędne, i oblicz poprawną wartość promienia kuli opisanej.
+  statement_latex: R^{2} = R_{p}^{2}+\left(H-R\right)^{2},\qquad R_{p} = 6,\ H = 8
+  solution: |-
+    Krok 0. Promień okręgu opisanego na podstawie: przekątna kwadratu ma długość a\sqrt{2} = 6\sqrt{2}\cdot\sqrt{2} = 12, więc R_{p} = 6.
+    Błędne rozumowanie: uczeń założył, że środek kuli opisanej leży w połowie wysokości (odległość od podstawy równa \frac{H}{2} = 4) i policzył R = \sqrt{R_{p}^{2}+\left(\frac{H}{2}\right)^{2}} = \sqrt{36+16} = 2\sqrt{13}\approx 7{,}21.
+    Dlaczego to źle: podział wysokości na połowy obowiązuje tylko dla brył z dwiema przystającymi, równoległymi podstawami (graniastosłup prosty, walec). W ostrosłupie środek kuli opisanej musi być jednakowo oddalony od wierzchołka ostrosłupa i od wierzchołków podstawy, a te punkty nie leżą symetrycznie względem połowy wysokości. Sprawdzenie: przy R = 2\sqrt{13} odległość środka od wierzchołka wynosiłaby H - \frac{H}{2} = 4 \ne 2\sqrt{13}, czyli wierzchołek nie leżałby na sferze.
+    Poprawne rozwiązanie: środek leży na wysokości w odległości H - R od podstawy, więc R^{2} = R_{p}^{2}+\left(H-R\right)^{2}, czyli R^{2} = 36 + 64 - 16R + R^{2}, stąd 16R = 100 oraz R = \frac{100}{16} = \frac{25}{4} = 6{,}25.
+    (Kontrola wzorem R = \frac{b^{2}}{2H}, gdzie b^{2} = R_{p}^{2}+H^{2} = 100: R = \frac{100}{16} = \frac{25}{4}.)
+    Odpowiedź: R = \frac{25}{4}.
+  solution_steps:
+  - Oblicz R_{p} = \frac{6\sqrt{2}\cdot\sqrt{2}}{2} = 6.
+  - 'Wskaż błąd: w ostrosłupie środek kuli opisanej nie leży w połowie wysokości.'
+  - Zapisz poprawne równanie R^{2} = 6^{2}+\left(8-R\right)^{2}.
+  - 'Rozwiąż: 16R = 100, czyli R = \frac{25}{4}.'
+  answer:
+    kind: SYMBOLIC
+    latex: \frac{25}{4}
+  checks:
+  - kind: solve_equation
+    expr: R^{2} = 6^{2}+\left(8-R\right)^{2}
+    var: R
+  skills:
+  - kula opisana na ostrosłupie prawidłowym
+  - twierdzenie Pitagorasa R^{2}=R_{p}^{2}+(H-R)^{2}
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: ''\\frac{25}{4}'' vs ''25/4'''
+- id: g-ch-t02
+  slot: CHALLENGE
+  ramp_index: 0
+  difficulty: 4
+  exercise_type: kula opisana na walcu — dane pośrednie o przekroju osiowym
+  statement: Walec jest wpisany w kulę w ten sposób, że okręgi obu jego podstaw leżą na sferze. Przekrój
+    osiowy tego walca jest prostokątem o obwodzie 28 i polu 48. Oblicz objętość tej kuli. Zapisz obliczenia.
+  statement_latex: 2\cdot\left(2r+H\right)=28,\qquad 2r\cdot H = 48,\qquad R = \frac{\sqrt{\left(2r\right)^{2}+H^{2}}}{2},\qquad
+    V = \frac{4}{3}\pi R^{3}
+  solution: |-
+    Krok 1. Przekrój osiowy walca to prostokąt o bokach 2r (średnica podstawy) i H (wysokość). Z warunków zadania:
+    2r+H = \frac{28}{2} = 14 \qquad \text{oraz} \qquad 2r\cdot H = 48.
+    Krok 2. Liczby 2r i H są rozwiązaniami równania t^{2}-14t+48=0. Wyróżnik \Delta = 196-192 = 4, więc t_{1} = \frac{14-2}{2} = 6 oraz t_{2} = \frac{14+2}{2} = 8. Zatem boki prostokąta mają długości 6 i 8 (w dowolnej kolejności).
+    Krok 3. Środek kuli opisanej leży w środku osi walca, czyli w środku tego prostokąta, i jest jednakowo odległy od jego wierzchołków — a te leżą na sferze. Promień kuli to połowa przekątnej prostokąta:
+    R = \frac{\sqrt{6^{2}+8^{2}}}{2} = \frac{10}{2} = 5.
+    (Obie możliwości przyporządkowania boków dają tę samą przekątną, więc wynik jest jednoznaczny.)
+    Krok 4. Objętość kuli: V = \frac{4}{3}\pi\cdot 5^{3} = \frac{500\pi}{3}.
+    Odpowiedź: V = \frac{500\pi}{3}.
+  solution_steps:
+  - 'Oznacz boki przekroju osiowego: 2r i H; z obwodu 2r+H=14, z pola 2r\cdot H=48.'
+  - Rozwiąż równanie t^{2}-14t+48=0 i otrzymaj boki 6 oraz 8.
+  - 'Zauważ, że promień kuli opisanej to połowa przekątnej przekroju osiowego: R = \frac{\sqrt{6^{2}+8^{2}}}{2}
+    = 5.'
+  - Oblicz V = \frac{4}{3}\pi\cdot 5^{3} = \frac{500\pi}{3}.
+  answer:
+    kind: SYMBOLIC
+    latex: \frac{500\pi}{3}
+  checks:
+  - kind: evaluate
+    expr: \frac{4}{3}\pi\cdot\left(\frac{\sqrt{6^{2}+8^{2}}}{2}\right)^{3}
+  stated_model:
+    variable: t
+    objective_latex: V = \frac{4}{3}\pi\left(\frac{\sqrt{\left(2r\right)^{2}+H^{2}}}{2}\right)^{3},\quad
+      2r+H=14,\ 2r\cdot H=48
+    goal: value
+    constraint_used: obwód przekroju osiowego 28 i pole 48; środek kuli w środku osi walca
+  skills:
+  - kula opisana na walcu
+  - układ równań (suma i iloczyn)
+  - twierdzenie Pitagorasa
+  - objętość kuli
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (PARSE_ERROR: "UnexpectedCharacters: No terminal
+      matches '','' in the current parser context, at line 1 col 88") — human review'
+- id: g-ch-t03
+  slot: CHALLENGE
+  ramp_index: 1
+  difficulty: 5
+  exercise_type: walec wpisany w kulę — układ równań z filtrem
+  statement: W kulę o promieniu 6 wpisano walec tak, że okręgi obu jego podstaw leżą na sferze. Wysokość
+    tego walca jest większa od średnicy jego podstawy, a pole powierzchni bocznej walca jest równe 48\sqrt{2}\pi.
+    Oblicz promień podstawy i wysokość tego walca oraz jego objętość. Zapisz obliczenia.
+  statement_latex: r^{2}+\left(\frac{H}{2}\right)^{2}=6^{2},\qquad 2\pi\cdot r\cdot H = 48\sqrt{2}\pi,\qquad
+    H > 2r
+  solution: |-
+    Krok 1. Środek kuli leży w środku osi walca. Odcinek łączący środek kuli z punktem okręgu podstawy ma długość 6, a jego rzuty to r oraz \frac{H}{2}, więc
+    r^{2}+\left(\frac{H}{2}\right)^{2} = 36.
+    Krok 2. Z pola powierzchni bocznej: 2\pi\cdot r\cdot H = 48\sqrt{2}\pi, czyli r\cdot H = 24\sqrt{2}, a po podniesieniu do kwadratu r^{2}\cdot H^{2} = 1152.
+    Krok 3. Podstawiamy u = \left(\frac{H}{2}\right)^{2}. Wtedy r^{2} = 36-u oraz H^{2} = 4u, więc
+    4u\cdot\left(36-u\right) = 1152, czyli u^{2}-36u+288 = 0.
+    \Delta = 1296-1152 = 144, \sqrt{\Delta} = 12, zatem u = \frac{36-12}{2} = 12 lub u = \frac{36+12}{2} = 24.
+    Krok 4. Dla u = 12: H = 2\sqrt{12} = 4\sqrt{3}\approx 6{,}93, r = \sqrt{36-12} = 2\sqrt{6}, więc 2r = 4\sqrt{6}\approx 9{,}80 > H — warunek H > 2r nie jest spełniony, odrzucamy.
+    Dla u = 24: H = 2\sqrt{24} = 4\sqrt{6}\approx 9{,}80, r = \sqrt{36-24} = 2\sqrt{3}, więc 2r = 4\sqrt{3}\approx 6{,}93 < H — warunek spełniony.
+    Krok 5. Objętość walca: V = \pi r^{2}H = \pi\cdot 12\cdot 4\sqrt{6} = 48\sqrt{6}\pi.
+    Odpowiedź: r = 2\sqrt{3}, H = 4\sqrt{6}, V = 48\sqrt{6}\pi.
+  solution_steps:
+  - 'Zapisz zależność z twierdzenia Pitagorasa dla walca wpisanego w kulę: r^{2}+\left(\frac{H}{2}\right)^{2}=36.'
+  - Z pola powierzchni bocznej otrzymaj r\cdot H = 24\sqrt{2}, czyli r^{2}H^{2}=1152.
+  - 'Podstaw u = \left(\frac{H}{2}\right)^{2} i rozwiąż u^{2}-36u+288=0: u = 12 lub u = 24.'
+  - 'Odrzuć u = 12 (wtedy H < 2r) i przyjmij u = 24: r = 2\sqrt{3}, H = 4\sqrt{6}.'
+  - Oblicz V = \pi r^{2}H = 48\sqrt{6}\pi.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: r
+      answer:
+        kind: SYMBOLIC
+        latex: 2\sqrt{3}
+    - name: H
+      answer:
+        kind: SYMBOLIC
+        latex: 4\sqrt{6}
+    - name: V_walca
+      answer:
+        kind: SYMBOLIC
+        latex: 48\sqrt{6}\pi
+  checks:
+  - kind: evaluate
+    expr: \sqrt{36-\frac{36+12}{2}}
+    part: r
+  - kind: evaluate
+    expr: 2\sqrt{\frac{36+12}{2}}
+    part: H
+  - kind: evaluate
+    expr: \pi\cdot\left(36-\frac{36+12}{2}\right)\cdot 2\sqrt{\frac{36+12}{2}}
+    part: V_walca
+  stated_model:
+    variable: u
+    objective_latex: u^{2}-36u+288 = 0,\quad u = \left(\frac{H}{2}\right)^{2},\quad r^{2}=36-u
+    domain_lo: '0'
+    domain_hi: '36'
+    goal: value
+    constraint_used: walec wpisany w kulę o promieniu 6, pole boczne 48\sqrt{2}\pi, warunek H > 2r
+  skills:
+  - walec wpisany w kulę
+  - twierdzenie Pitagorasa w bryle
+  - równanie dwukwadratowe
+  - odrzucenie rozwiązania sprzecznego z warunkiem
+  - objętość walca
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (PARSE_ERROR: "UnexpectedCharacters: No terminal
+      matches '','' in the current parser context, at line 1 col 18") — human review'
+- id: g-ch-t04
+  slot: CHALLENGE
+  ramp_index: 2
+  difficulty: 5
+  exercise_type: kula wpisana w stożek — wzór z parametrem, dziedzina i przypadek szczególny
+  statement: |-
+    Rozważamy stożki, których przekrój osiowy jest trójkątem równoramiennym o obwodzie 36.
+    a) Wyznacz wzór na promień kuli wpisanej w taki stożek w zależności od długości promienia podstawy stożka oraz podaj dziedzinę otrzymanej funkcji.
+    b) Oblicz objętość kuli wpisanej w ten spośród rozważanych stożków, którego przekrój osiowy jest trójkątem równobocznym; sprawdź, czy odpowiadająca mu wartość promienia podstawy należy do wyznaczonej dziedziny.
+    c) Wykaż, że wysokość każdego z rozważanych stożków jest mniejsza od 18.
+    Zapisz obliczenia.
+  statement_latex: 2x+2l = 36,\qquad H = \sqrt{l^{2}-x^{2}},\qquad R\left(x\right) = \frac{x\cdot H}{\frac{2x+2l}{2}}
+  solution: |-
+    Krok 1. Oznaczmy przez x promień podstawy stożka, a przez l jego tworzącą. Przekrój osiowy to trójkąt równoramienny o podstawie 2x i ramionach l, więc 2x+2l = 36, skąd l = 18-x.
+    Krok 2. Warunki geometryczne: x > 0 oraz (z nierówności trójkąta dla trójkąta równoramiennego) 2l > 2x, czyli 18-x > x, więc x < 9. Dziedziną jest przedział \left(0,\ 9\right).
+    Krok 3. Wysokość stożka: H = \sqrt{l^{2}-x^{2}} = \sqrt{\left(18-x\right)^{2}-x^{2}} = \sqrt{324-36x} = 6\sqrt{9-x}.
+    Krok 4. Kula wpisana w stożek daje w przekroju osiowym okrąg wpisany w ten trójkąt. Pole trójkąta P = \frac{1}{2}\cdot 2x\cdot H = x\cdot H, a połowa obwodu p = \frac{36}{2} = 18, więc
+    R\left(x\right) = \frac{P}{p} = \frac{x\cdot 6\sqrt{9-x}}{18} = \frac{x\sqrt{9-x}}{3}, \qquad x\in\left(0,\ 9\right).
+    Krok 5. b) Przekrój osiowy jest trójkątem równobocznym, gdy 2x = l, czyli 2x = 18-x, skąd x = 6. Sprawdzenie: 6\in\left(0,\ 9\right), więc taki stożek istnieje (jest to trójkąt o boku 12).
+    R = \frac{6\sqrt{9-6}}{3} = \frac{6\sqrt{3}}{3} = 2\sqrt{3}.
+    Objętość kuli: V = \frac{4}{3}\pi\left(2\sqrt{3}\right)^{3} = \frac{4}{3}\pi\cdot 8\cdot 3\sqrt{3} = 32\sqrt{3}\pi.
+    Krok 6. c) Dla każdego x\in\left(0,\ 9\right) mamy 9-x < 9, więc \sqrt{9-x} < 3, a zatem H = 6\sqrt{9-x} < 6\cdot 3 = 18. To kończy uzasadnienie.
+    Odpowiedź: R\left(x\right) = \frac{x\sqrt{9-x}}{3} dla x\in\left(0,\ 9\right); V = 32\sqrt{3}\pi.
+  solution_steps:
+  - Wprowadź x — promień podstawy; z obwodu przekroju osiowego wyznacz tworzącą l = 18-x.
+  - 'Ustal dziedzinę: x > 0 oraz l > x, czyli x\in\left(0,\ 9\right).'
+  - Oblicz wysokość H = \sqrt{\left(18-x\right)^{2}-x^{2}} = 6\sqrt{9-x}.
+  - 'Zastosuj R = \frac{P}{p} dla trójkąta osiowego: R\left(x\right) = \frac{x\cdot 6\sqrt{9-x}}{18} =
+    \frac{x\sqrt{9-x}}{3}.'
+  - Dla trójkąta równobocznego 2x = 18-x, czyli x = 6\in\left(0,\ 9\right); stąd R = 2\sqrt{3} i V = \frac{4}{3}\pi\left(2\sqrt{3}\right)^{3}
+    = 32\sqrt{3}\pi.
+  - 'Uzasadnij H < 18: z x > 0 wynika 9-x < 9, więc 6\sqrt{9-x} < 18.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wzor_R
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{x\sqrt{9-x}}{3}
+    - name: dziedzina
+      answer:
+        kind: INTERVAL
+        lo: '0'
+        hi: '9'
+    - name: V_kuli
+      answer:
+        kind: SYMBOLIC
+        latex: 32\sqrt{3}\pi
+    - name: uzasadnienie_H
+      answer:
+        kind: NOT_MACHINE_CHECKABLE
+        reason: Należy wykazać, że dla każdego x\in\left(0,9\right) zachodzi H = 6\sqrt{9-x} < 18, korzystając
+          z 9-x < 9, czyli \sqrt{9-x} < 3.
+  checks:
+  - kind: simplify
+    expr: \frac{x\cdot 6\sqrt{9-x}}{18}
+    part: wzor_R
+  - kind: evaluate
+    expr: \frac{4}{3}\pi\cdot\left(\frac{6\sqrt{9-6}}{3}\right)^{3}
+    part: V_kuli
+  stated_model:
+    variable: x
+    objective_latex: R\left(x\right) = \frac{x\sqrt{9-x}}{3}
+    domain_lo: '0'
+    domain_hi: '9'
+    goal: value
+    constraint_used: obwód przekroju osiowego równy 36, więc l = 18-x; nierówność trójkąta daje x < 9
+  skills:
+  - kula wpisana w stożek
+  - okrąg wpisany w trójkąt równoramienny
+  - wyznaczanie dziedziny z warunku geometrycznego
+  - objętość kuli
+  - uzasadnianie nierówności
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''x'': ''R\\left(x\\right)
+      = \\frac{x\\sqrt{9-x}}{3}'') — human review'

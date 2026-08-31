@@ -1,0 +1,802 @@
+section: twierdzenie-talesa
+name: Twierdzenie Talesa
+scope: 'Thales'' theorem and its converse: parallel lines cut proportional segments on two transversals;
+  using it to find unknown lengths, and the intercept theorem in a triangle.'
+requirements:
+- VIII.7
+counts:
+  total: 16
+  DETERMINISTIC: 10
+  NOT_MACHINE_CHECKABLE: 4
+  REFERENCE_CALL: 2
+exercises:
+- id: g-th-00
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: obliczenie długości z proporcji Talesa
+  statement: W trójkącie ABC punkt D leży na boku AB, a punkt E leży na boku AC, przy czym odcinek DE
+    jest równoległy do boku BC. Wiadomo, że |AD| = 6 cm, |DB| = 9 cm oraz |AE| = 8 cm. Oblicz długość
+    odcinka EC.
+  statement_latex: \frac{|AD|}{|DB|}=\frac{|AE|}{|EC|},\qquad \frac{6}{9}=\frac{8}{x}
+  solution: |-
+    Ponieważ DE ∥ BC, a punkty D i E leżą na bokach AB i AC kąta BAC po tej samej stronie wierzchołka A, z twierdzenia Talesa odcinki odcięte na ramionach tego kąta są proporcjonalne:
+    \frac{|AD|}{|DB|}=\frac{|AE|}{|EC|}.
+    Oznaczmy |EC| = x, x > 0. Podstawiamy dane:
+    \frac{6}{9}=\frac{8}{x}.
+    Mnożymy na krzyż: 6\cdot x = 9\cdot 8, czyli 6x = 72, stąd x = 12.
+    Sprawdzenie sensowności: 6 < 9 oraz 8 < 12 — na obu bokach punkt leży bliżej wierzchołka A.
+    Odpowiedź: |EC| = 12 cm.
+  solution_steps:
+  - Zauważ, że DE ∥ BC, więc zachodzi proporcja |AD|/|DB| = |AE|/|EC|.
+  - 'Oznacz |EC| = x, x > 0, i podstaw dane: 6/9 = 8/x.'
+  - 'Pomnóż na krzyż: 6x = 72.'
+  - 'Rozwiąż równanie: x = 12.'
+  - 'Zapisz odpowiedź z jednostką: |EC| = 12 cm.'
+  answer:
+    kind: NUMERIC
+    value: 12.0
+  checks:
+  - kind: solve_equation
+    expr: \frac{6}{9}=\frac{8}{x}
+  skills:
+  - zapisanie proporcji część:część
+  - mnożenie na krzyż
+  - twierdzenie Talesa w trójkącie
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 12.0 vs 12.0 (tol 1e-09)'
+- id: g-th-01
+  slot: THEORY_SUPPORT
+  ramp_index: 1
+  difficulty: 1
+  exercise_type: wiązka prostych równoległych przeciętych dwiema siecznymi
+  statement: Trzy proste równoległe k, l, m przecinają dwie sieczne. Pierwsza sieczna przecina proste
+    k, l, m odpowiednio w punktach A, B, C, a druga sieczna przecina te proste odpowiednio w punktach
+    A′, B′, C′ (punkty oznaczone tą samą literą leżą na tej samej prostej równoległej; B leży między A
+    i C, a B′ leży między A′ i C′). Wiadomo, że |AB| = 4, |BC| = 6 oraz |A′B′| = 5. Oblicz |B′C′|.
+  statement_latex: \frac{|AB|}{|BC|}=\frac{|A'B'|}{|B'C'|},\qquad \frac{4}{6}=\frac{5}{x}
+  solution: |-
+    Trzy proste równoległe przecinają dwie sieczne, więc z twierdzenia Talesa odcinki wyznaczone na jednej siecznej są proporcjonalne do odcinków odpowiadających im na drugiej siecznej:
+    \frac{|AB|}{|BC|}=\frac{|A'B'|}{|B'C'|}.
+    Niech |B′C′| = x, x > 0. Podstawiamy dane:
+    \frac{4}{6}=\frac{5}{x}.
+    Mnożymy na krzyż: 4x = 30, stąd x = 7{,}5.
+    Sprawdzenie: \frac{4}{6}=\frac{2}{3} oraz \frac{5}{7{,}5}=\frac{2}{3} — zgadza się.
+    Odpowiedź: |B′C′| = 7,5.
+  solution_steps:
+  - 'Ustal odcinki odpowiadające sobie: AB ↔ A′B′ oraz BC ↔ B′C′.'
+  - Zapisz proporcję |AB|/|BC| = |A′B′|/|B′C′| i oznacz |B′C′| = x.
+  - 'Podstaw dane: 4/6 = 5/x.'
+  - 'Pomnóż na krzyż: 4x = 30.'
+  - Wyznacz x = 7,5 i zapisz odpowiedź.
+  answer:
+    kind: NUMERIC
+    value: 7.5
+  checks:
+  - kind: solve_equation
+    expr: \frac{4}{6}=\frac{5}{x}
+  skills:
+  - twierdzenie Talesa dla wiązki prostych równoległych
+  - rozpoznanie odcinków odpowiadających sobie
+  - mnożenie na krzyż
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 7.5 vs 7.5 (tol 1e-09)'
+- id: g-th-02
+  slot: THEORY_SUPPORT
+  ramp_index: 2
+  difficulty: 1
+  exercise_type: linia środkowa trójkąta
+  statement: W trójkącie ABC punkt M jest środkiem boku AB, a punkt N jest środkiem boku AC. Bok BC ma
+    długość 13 cm. Oblicz długość odcinka MN.
+  statement_latex: '|MN|=\frac{1}{2}\cdot|BC|=\frac{1}{2}\cdot 13'
+  solution: |-
+    Odcinek MN łączy środki boków AB i AC, jest więc linią środkową trójkąta ABC. Z twierdzenia o linii środkowej (szczególny przypadek twierdzenia Talesa dla skali k = \frac{1}{2}) odcinek MN jest równoległy do boku BC i ma połowę jego długości:
+    |MN| = \frac{1}{2}\cdot|BC| = \frac{1}{2}\cdot 13 = 6{,}5.
+    Odpowiedź: |MN| = 6,5 cm.
+  solution_steps:
+  - Zauważ, że MN łączy środki dwóch boków, więc jest linią środkową trójkąta ABC.
+  - Zastosuj wzór |MN| = (1/2)·|BC|.
+  - Podstaw |BC| = 13 cm i oblicz |MN| = 6,5 cm.
+  answer:
+    kind: NUMERIC
+    value: 6.5
+  checks:
+  - kind: evaluate
+    expr: \frac{1}{2}\cdot 13
+  skills:
+  - twierdzenie o linii środkowej trójkąta
+  - szczególny przypadek konfiguracji Talesa
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 6.5 vs 6.5 (tol 1e-09)'
+- id: g-ex-03
+  slot: EXERCISE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: twierdzenie Talesa w kącie (dwie proste równoległe)
+  statement: Ramiona kąta o wierzchołku O przecięto dwiema prostymi równoległymi k oraz l. Prosta k przecina
+    jedno ramię kąta w punkcie A, a drugie ramię w punkcie B. Prosta l przecina te same ramiona odpowiednio
+    w punktach C oraz D, przy czym punkt A leży między O i C, a punkt B leży między O i D. Wiadomo, że
+    |OA| = 9, |AC| = 6 oraz |OB| = 12. Oblicz |OD| oraz |BD|.
+  statement_latex: \frac{|OA|}{|OC|}=\frac{|OB|}{|OD|},\qquad \frac{9}{15}=\frac{12}{x}
+  solution: |-
+    Proste k i l są równoległe i przecinają ramiona kąta o wierzchołku O, więc możemy zastosować twierdzenie Talesa. Punktem odniesienia jest wierzchołek O.
+    Najpierw liczymy całość na pierwszym ramieniu: |OC| = |OA| + |AC| = 9 + 6 = 15.
+    (1) Proporcja całość:całość dla wyznaczenia |OD| = x, x > 0:
+    \frac{|OA|}{|OC|}=\frac{|OB|}{|OD|},\quad \frac{9}{15}=\frac{12}{x}.
+    Mnożymy na krzyż: 9x = 15\cdot 12 = 180, stąd x = 20, czyli |OD| = 20.
+    (2) Stąd |BD| = |OD| - |OB| = 20 - 12 = 8.
+    Kontrola proporcją część:część: \frac{|OA|}{|AC|}=\frac{9}{6}=\frac{3}{2} oraz \frac{|OB|}{|BD|}=\frac{12}{8}=\frac{3}{2} — zgadza się.
+    Odpowiedź: |OD| = 20, |BD| = 8.
+  solution_steps:
+  - Oblicz |OC| = |OA| + |AC| = 9 + 6 = 15.
+  - 'Zapisz proporcję Talesa całość:całość: |OA|/|OC| = |OB|/|OD|.'
+  - 'Podstaw dane: 9/15 = 12/|OD| i pomnóż na krzyż: 9·|OD| = 180.'
+  - Wyznacz |OD| = 20.
+  - 'Oblicz |BD| = |OD| − |OB| = 20 − 12 = 8 (kontrola: 9/6 = 12/8).'
+  - 'Zapisz odpowiedź: |OD| = 20, |BD| = 8.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: OD
+      answer:
+        kind: NUMERIC
+        value: 20.0
+    - name: BD
+      answer:
+        kind: NUMERIC
+        value: 8.0
+  checks:
+  - kind: solve_equation
+    expr: \frac{9}{15}=\frac{12}{x}
+    part: OD
+  - kind: solve_equation
+    expr: \frac{9}{6}=\frac{12}{x}
+    part: BD
+  skills:
+  - proporcja całość:całość
+  - proporcja część:część
+  - rozwiązywanie równania liniowego z proporcji
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [OD] SymPy solved it fresh: 20.0 vs 20.0 (tol 1e-09) ; [BD]
+      SymPy solved it fresh: 8.0 vs 8.0 (tol 1e-09)'
+- id: g-ex-04
+  slot: EXERCISE
+  ramp_index: 1
+  difficulty: 3
+  exercise_type: niewiadoma w dwóch odcinkach + długość odcinka równoległego
+  statement: W trójkącie ABC prosta równoległa do boku BC przecina bok AB w punkcie D, a bok AC w punkcie
+    E. Wiadomo, że |AD| = x, |DB| = x + 3, |AE| = 4, |EC| = 10 oraz |BC| = 21. Oblicz x, długość boku
+    AB oraz długość odcinka DE.
+  statement_latex: \frac{x}{x+3}=\frac{4}{10},\qquad |DE|=\frac{|AD|}{|AB|}\cdot|BC|
+  solution: |-
+    Z założenia DE ∥ BC, a punkty D i E leżą na bokach AB i AC, więc z twierdzenia Talesa:
+    \frac{|AD|}{|DB|}=\frac{|AE|}{|EC|},\quad \frac{x}{x+3}=\frac{4}{10}=\frac{2}{5}.
+    Zakładamy x > 0, więc mianowniki są dodatnie. Mnożymy na krzyż:
+    5\cdot x = 2\cdot\left(x+3\right),\quad 5x = 2x + 6,\quad 3x = 6,\quad x = 2.
+    Stąd |AD| = 2, |DB| = 2 + 3 = 5, więc |AB| = 2 + 5 = 7.
+    Długość odcinka DE liczymy ze skali podobieństwa trójkątów ADE i ABC (kąt A wspólny, kąty odpowiadające przy prostych równoległych DE i BC równe):
+    k = \frac{|AD|}{|AB|} = \frac{2}{7},\quad |DE| = k\cdot|BC| = \frac{2}{7}\cdot 21 = 6.
+    Sprawdzenie: \frac{2}{5} = \frac{4}{10} ✓.
+    Odpowiedź: x = 2, |AB| = 7, |DE| = 6.
+  solution_steps:
+  - 'Zapisz proporcję Talesa: |AD|/|DB| = |AE|/|EC|, czyli x/(x+3) = 4/10.'
+  - 'Pomnóż na krzyż, pamiętając o nawiasie: 5x = 2·(x + 3).'
+  - 'Rozwiąż równanie: 5x = 2x + 6, 3x = 6, x = 2.'
+  - Oblicz |AB| = |AD| + |DB| = 2 + 5 = 7.
+  - 'Wyznacz skalę podobieństwa trójkątów ADE i ABC: k = |AD|/|AB| = 2/7 (stosunek CAŁYCH boków).'
+  - Oblicz |DE| = k·|BC| = (2/7)·21 = 6.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: x
+      answer:
+        kind: NUMERIC
+        value: 2.0
+    - name: AB
+      answer:
+        kind: NUMERIC
+        value: 7.0
+    - name: DE
+      answer:
+        kind: NUMERIC
+        value: 6.0
+  checks:
+  - kind: solve_equation
+    expr: \frac{x}{x+3}=\frac{4}{10}
+    part: x
+  - kind: evaluate
+    expr: 2+\left(2+3\right)
+    part: AB
+  - kind: evaluate
+    expr: \frac{2}{7}\cdot 21
+    part: DE
+  skills:
+  - proporcja z niewiadomą w dwóch odcinkach
+  - mnożenie na krzyż z nawiasem
+  - skala podobieństwa trójkątów
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [x] SymPy solved it fresh: 2.0 vs 2.0 (tol 1e-09) ; [AB] SymPy
+      solved it fresh: 7.0 vs 7.0 (tol 1e-09) ; [DE] SymPy solved it fresh: 6.0 vs 6.0 (tol 1e-09)'
+- id: g-ex-05
+  slot: EXERCISE
+  ramp_index: 2
+  difficulty: 4
+  exercise_type: konfiguracja motylka — przekątne trapezu
+  statement: W trapezie ABCD podstawy AB i CD są równoległe, przy czym |AB| = 15 cm oraz |CD| = 9 cm.
+    Przekątne AC i BD tego trapezu przecinają się w punkcie S. Przekątna BD ma długość 16 cm. Uzasadnij,
+    że trójkąty ABS i CDS są podobne, a następnie oblicz |BS| oraz |SD|.
+  statement_latex: \frac{|BS|}{|SD|}=\frac{|AB|}{|CD|}=\frac{15}{9},\qquad |BS|=\frac{5}{5+3}\cdot 16
+  solution: |-
+    Uzasadnienie podobieństwa. Kąty ASB i CSD są kątami wierzchołkowymi, więc są równe. Kąty ABS i CDS są kątami naprzemianległymi przy prostych równoległych AB i CD przeciętych sieczną BD, więc również są równe. Z cechy kąt-kąt trójkąty ABS i CDS są podobne, a więc odpowiadające sobie boki są proporcjonalne.
+    Obliczenia. Z podobieństwa:
+    \frac{|BS|}{|SD|}=\frac{|AB|}{|CD|}=\frac{15}{9}=\frac{5}{3}.
+    Punkt S dzieli przekątną BD w stosunku 5 : 3, a odcinek BD składa się z 5 + 3 = 8 równych części, zatem
+    |BS| = \frac{5}{5+3}\cdot|BD| = \frac{5}{8}\cdot 16 = 10\ \text{cm},
+    |SD| = \frac{3}{8}\cdot 16 = 6\ \text{cm}.
+    Sprawdzenie: 10 + 6 = 16 ✓ oraz \frac{10}{6}=\frac{5}{3} ✓.
+    Odpowiedź: |BS| = 10 cm, |SD| = 6 cm.
+  solution_steps:
+  - Zauważ, że AB ∥ CD, a przekątne AC i BD są siecznymi przecinającymi się w S (konfiguracja motylka).
+  - 'Uzasadnij podobieństwo: kąty ASB i CSD wierzchołkowe, kąty ABS i CDS naprzemianległe — cecha kąt-kąt.'
+  - Zapisz proporcję |BS|/|SD| = |AB|/|CD| = 15/9 = 5/3.
+  - 'Zamień stosunek część:część na część:całość: |BS| = 5/8 · |BD|, |SD| = 3/8 · |BD|.'
+  - 'Podstaw |BD| = 16 cm: |BS| = 10 cm, |SD| = 6 cm.'
+  - 'Sprawdź: 10 + 6 = 16 oraz 10/6 = 5/3.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: uzasadnienie podobieństwa
+      answer:
+        kind: NOT_MACHINE_CHECKABLE
+        reason: 'Uczeń musi uzasadnić podobieństwo trójkątów ABS i CDS: kąty ASB i CSD są wierzchołkowe
+          (równe), kąty ABS i CDS są naprzemianległe przy prostych równoległych AB i CD przeciętych sieczną
+          BD (równe), zatem z cechy kąt-kąt trójkąty są podobne.'
+    - name: BS
+      answer:
+        kind: NUMERIC
+        value: 10.0
+    - name: SD
+      answer:
+        kind: NUMERIC
+        value: 6.0
+  checks:
+  - kind: evaluate
+    expr: \frac{5}{5+3}\cdot 16
+    part: BS
+  - kind: evaluate
+    expr: \frac{3}{5+3}\cdot 16
+    part: SD
+  skills:
+  - uzasadnienie podobieństwa trójkątów
+  - podział odcinka w danym stosunku
+  - konfiguracja motylka
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'part(s) need a human: uzasadnienie podobieństwa · 2/2 other parts solved fresh'
+- id: g-ex-t00
+  slot: EXERCISE
+  ramp_index: 6
+  difficulty: 3
+  exercise_type: Obliczenie długości z proporcji Talesa i ze skali podobieństwa
+  statement: W trójkącie ABC punkt D leży na boku AB, a punkt E leży na boku AC, przy czym odcinek DE
+    jest równoległy do boku BC. Wiadomo, że |AD| = x, |DB| = x + 3, |AE| = 4, |EC| = 10 oraz |BC| = 21.
+    Oblicz x oraz długość odcinka DE.
+  statement_latex: \frac{x}{x+3}=\frac{4}{10},\qquad |DE|=\frac{|AD|}{|AB|}\cdot|BC|
+  solution: |-
+    Ponieważ DE ∥ BC, a punkty D i E leżą na ramionach kąta BAC po tej samej stronie wierzchołka A, to z twierdzenia Talesa odcinki odcięte na obu bokach są proporcjonalne:
+    \frac{|AD|}{|DB|}=\frac{|AE|}{|EC|}, czyli \frac{x}{x+3}=\frac{4}{10}=\frac{2}{5}, przy czym x > 0.
+    Mnożymy na krzyż: 5\cdot x = 2\cdot\left(x+3\right), stąd 5x = 2x + 6, czyli 3x = 6 i x = 2.
+    Zatem |AD| = 2, |DB| = 5, więc |AB| = 2 + 5 = 7.
+    Odcinek DE nie leży na siecznej, więc jego długość wyznaczamy ze skali podobieństwa trójkątów ADE i ABC (kąt A wspólny, kąty odpowiadające przy prostych równoległych równe):
+    k = \frac{|AD|}{|AB|} = \frac{2}{7} (stosunek CAŁYCH boków, nie części).
+    Stąd |DE| = k\cdot|BC| = \frac{2}{7}\cdot 21 = 6.
+    Sprawdzenie sensowności: \frac{2}{5}=\frac{4}{10} ✓ oraz |DE| = 6 < 21 = |BC| ✓.
+    Odpowiedź: x = 2 oraz |DE| = 6.
+  solution_steps:
+  - Z równoległości DE ∥ BC zapisz proporcję część:część \frac{|AD|}{|DB|}=\frac{|AE|}{|EC|}.
+  - 'Podstaw dane: \frac{x}{x+3}=\frac{2}{5}.'
+  - 'Pomnóż na krzyż: 5x = 2\left(x+3\right), skąd x = 2.'
+  - Oblicz |AB| = |AD| + |DB| = 2 + 5 = 7.
+  - Wyznacz skalę podobieństwa k = \frac{|AD|}{|AB|} = \frac{2}{7}.
+  - Oblicz |DE| = \frac{2}{7}\cdot 21 = 6.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: x
+      answer:
+        kind: NUMERIC
+        value: 2.0
+    - name: DE
+      answer:
+        kind: NUMERIC
+        value: 6.0
+  checks:
+  - kind: solve_equation
+    expr: \frac{x}{x+3}=\frac{4}{10}
+    part: x
+  - kind: evaluate
+    expr: \frac{2}{7}\cdot 21
+    part: DE
+  skills:
+  - zapisanie proporcji część:część
+  - rozwiązanie równania liniowego z proporcji
+  - obliczenie długości odcinka równoległego do boku trójkąta
+  - przejście część → całość
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [x] SymPy solved it fresh: 2.0 vs 2.0 (tol 1e-09) ; [DE] SymPy
+      solved it fresh: 6.0 vs 6.0 (tol 1e-09)'
+- id: g-ex-t01
+  slot: EXERCISE
+  ramp_index: 7
+  difficulty: 4
+  exercise_type: Konfiguracja motylka w trapezie – odcinek przez punkt przecięcia przekątnych
+  statement: W trapezie ABCD podstawy AB i CD są równoległe, |AB| = 20 oraz |CD| = 12. Przekątne AC i
+    BD przecinają się w punkcie S. Przez punkt S poprowadzono prostą równoległą do podstaw; przecina ona
+    ramię AD w punkcie P, a ramię BC w punkcie Q. Oblicz |PS| oraz |PQ|.
+  statement_latex: \frac{|DS|}{|SB|}=\frac{|CD|}{|AB|}=\frac{12}{20},\qquad \frac{|PS|}{|AB|}=\frac{|DS|}{|DB|}
+  solution: |-
+    Krok 1. Trójkąty ABS i CDS są podobne: kąty ASB i CSD są wierzchołkowe, a kąty BAS i DCS są naprzemianległe przy prostych równoległych AB i CD przeciętych sieczną AC. Zatem
+    \frac{|DS|}{|SB|}=\frac{|CD|}{|AB|}=\frac{12}{20}=\frac{3}{5}.
+    Krok 2. Punkt S dzieli przekątną DB w stosunku 3:5, więc odcinek DB składa się z 3+5 = 8 równych części i
+    \frac{|DS|}{|DB|}=\frac{3}{8}.
+    Krok 3. W trójkącie ABD punkt P leży na boku DA, punkt S na boku DB oraz PS ∥ AB. Z podobieństwa trójkątów DPS i DAB
+    \frac{|PS|}{|AB|}=\frac{|DS|}{|DB|}=\frac{3}{8}, czyli |PS| = 20\cdot\frac{3}{8}=7{,}5.
+    Krok 4. Analogicznie \frac{|CS|}{|SA|}=\frac{|CD|}{|AB|}=\frac{3}{5}, więc \frac{|CS|}{|CA|}=\frac{3}{8}, a w trójkącie ABC (Q na BC, S na AC, SQ ∥ AB) otrzymujemy |SQ| = 20\cdot\frac{3}{8}=7{,}5.
+    Zatem |PQ| = |PS| + |SQ| = 7{,}5 + 7{,}5 = 15.
+    Sprawdzenie: 12 < 15 < 20 — odcinek przechodzący przez S leży „między” podstawami ✓.
+    Odpowiedź: |PS| = 7,5 oraz |PQ| = 15.
+  solution_steps:
+  - Z podobieństwa trójkątów ABS i CDS zapisz \frac{|DS|}{|SB|}=\frac{|CD|}{|AB|}=\frac{3}{5}.
+  - 'Przejdź na proporcję część:całość: \frac{|DS|}{|DB|}=\frac{3}{8}.'
+  - W trójkącie ABD z PS ∥ AB oblicz |PS| = 20\cdot\frac{3}{8} = 7{,}5.
+  - Analogicznie w trójkącie ABC oblicz |SQ| = 20\cdot\frac{3}{8} = 7{,}5.
+  - 'Dodaj: |PQ| = 7{,}5 + 7{,}5 = 15.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: PS
+      answer:
+        kind: NUMERIC
+        value: 7.5
+    - name: PQ
+      answer:
+        kind: NUMERIC
+        value: 15.0
+  checks:
+  - kind: evaluate
+    expr: 20\cdot\frac{3}{8}
+    part: PS
+  - kind: evaluate
+    expr: \frac{2\cdot 20\cdot 12}{20+12}
+    part: PQ
+  skills:
+  - podobieństwo trójkątów przy przekątnych trapezu
+  - podział odcinka w danym stosunku
+  - twierdzenie o odcinku równoległym do boku trójkąta
+  - łączenie dwóch proporcji
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [PS] SymPy solved it fresh: 7.5 vs 7.5 (tol 1e-09) ; [PQ] SymPy
+      solved it fresh: 15.0 vs 15.0 (tol 1e-09)'
+- id: g-cm-06
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: 'błąd: mieszanie części z całością w proporcji'
+  statement: 'W trójkącie ABC punkt D leży na boku AB, a punkt E na boku AC, przy czym DE ∥ BC. Dane są
+    |AD| = 4, |DB| = 6 oraz |BC| = 25. Uczeń obliczył długość odcinka DE tak: „skoro DE ∥ BC, to \frac{|DE|}{|BC|}=\frac{|AD|}{|DB|}=\frac{4}{6}=\frac{2}{3},
+    więc |DE| = \frac{2}{3}\cdot 25 = \frac{50}{3}”. Wskaż błąd w tym rozumowaniu i oblicz poprawną długość
+    odcinka DE.'
+  statement_latex: '\text{błędnie: } |DE|=\frac{4}{6}\cdot 25;\qquad \text{poprawnie: } |DE|=\frac{4}{4+6}\cdot
+    25'
+  solution: |-
+    Rozumowanie ucznia (błędne). Uczeń przyrównał stosunek \frac{|DE|}{|BC|} do stosunku CZĘŚCI do CZĘŚCI na siecznej AB, czyli \frac{|AD|}{|DB|}=\frac{4}{6}=\frac{2}{3}, i otrzymał |DE| = \frac{2}{3}\cdot 25 = \frac{50}{3}\approx 16{,}7.
+    Gdzie tkwi błąd. Stosunek \frac{|AD|}{|DB|} dotyczy wyłącznie dwóch odcinków leżących NA tej samej siecznej i odpowiada mu \frac{|AE|}{|EC|} na drugiej siecznej. Odcinek DE nie leży na siecznej — jego długość wynika z podobieństwa trójkątów ADE i ABC, a skala tego podobieństwa to stosunek CAŁYCH boków.
+    Poprawne rozwiązanie. |AB| = |AD| + |DB| = 4 + 6 = 10, więc
+    k = \frac{|AD|}{|AB|} = \frac{4}{10} = \frac{2}{5},
+    |DE| = k\cdot|BC| = \frac{4}{4+6}\cdot 25 = \frac{2}{5}\cdot 25 = 10.
+    Odpowiedź: |DE| = 10 (uczeń otrzymał \frac{50}{3}, bo pomylił stosunek część:część ze stosunkiem całość:całość).
+  solution_steps:
+  - Zauważ, że uczeń użył stosunku |AD|/|DB| (część do części) tam, gdzie potrzebna jest skala podobieństwa.
+  - 'Wyjaśnij: |DE|/|BC| = |AD|/|AB| — stosunek CAŁYCH boków, bo trójkąty ADE i ABC są podobne.'
+  - Oblicz |AB| = 4 + 6 = 10 i skalę k = 4/10 = 2/5.
+  - Oblicz poprawnie |DE| = (2/5)·25 = 10 (zamiast błędnego 50/3).
+  answer:
+    kind: NUMERIC
+    value: 10.0
+  checks:
+  - kind: evaluate
+    expr: \frac{4}{4+6}\cdot 25
+  skills:
+  - skala podobieństwa jako stosunek całych boków
+  - odróżnianie proporcji część:część od całość:całość
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 10.0 vs 10.0 (tol 1e-09)'
+- id: g-cm-07
+  slot: COMMON_MISTAKE
+  ramp_index: 1
+  difficulty: 3
+  exercise_type: 'błąd: wnioskowanie o odcinkach leżących na prostych równoległych'
+  statement: 'Trzy proste równoległe k, l, m przecinają dwie sieczne: pierwszą w punktach A, B, C, a drugą
+    w punktach A′, B′, C′ (punkty oznaczone tą samą literą leżą na tej samej prostej równoległej, B leży
+    między A i C, a B′ między A′ i C′). Wiadomo, że |AB| = 6, |BC| = 9, |A′B′| = 8 oraz |AA′| = 5. Uczeń
+    napisał: „z twierdzenia Talesa \frac{|AA''|}{|BB''|}=\frac{|AB|}{|A''B''|}, więc |BB''| = \frac{20}{3}”.
+    Oceń to rozumowanie: podaj poprawną długość |B′C′| oraz rozstrzygnij, czy z podanych danych da się
+    wyznaczyć |BB′| (odpowiedź TAK/NIE).'
+  statement_latex: \frac{|AB|}{|BC|}=\frac{|A'B'|}{|B'C'|},\qquad \frac{6}{9}=\frac{8}{x}
+  solution: |-
+    Rozumowanie ucznia (błędne). Uczeń zastosował proporcję do odcinków AA′ i BB′, które leżą NA prostych równoległych k i l, i otrzymał |BB'| = \frac{|AB|\cdot ... }{}, konkretnie \frac{5}{|BB'|}=\frac{6}{8}, skąd |BB'| = \frac{40}{6}=\frac{20}{3}.
+    Gdzie tkwi błąd. Twierdzenie Talesa mówi wyłącznie o odcinkach wyznaczonych NA SIECZNYCH przez proste równoległe. O odcinkach AA′, BB′, CC′ leżących na prostych równoległych twierdzenie nie mówi nic — przy dowolnej wiązce równoległych ich długości nie są wyznaczone przez podane dane (sieczne mogą się rozchodzić lub zbiegać w różny sposób). Wynik \frac{20}{3} jest więc bezpodstawny.
+    Poprawne zastosowanie twierdzenia. Odcinkom AB i BC na pierwszej siecznej odpowiadają A′B′ i B′C′ na drugiej:
+    \frac{|AB|}{|BC|}=\frac{|A'B'|}{|B'C'|},\quad \frac{6}{9}=\frac{8}{x},\quad 6x = 72,\quad x = 12.
+    Odpowiedź: |B′C′| = 12, a długości |BB′| z podanych danych wyznaczyć NIE można.
+  solution_steps:
+  - Zauważ, że uczeń zastosował proporcję do odcinków AA′ i BB′ leżących na prostych równoległych.
+  - 'Wyjaśnij: twierdzenie Talesa dotyczy tylko odcinków wyznaczonych na siecznych — o AA′, BB′, CC′ nic
+    nie mówi.'
+  - 'Zapisz poprawną proporcję: |AB|/|BC| = |A′B′|/|B′C′|, czyli 6/9 = 8/x.'
+  - 'Rozwiąż: 6x = 72, x = 12, więc |B′C′| = 12.'
+  - 'Wniosek: |BB′| nie da się wyznaczyć z podanych danych — odpowiedź NIE.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: B'C'
+      answer:
+        kind: NUMERIC
+        value: 12.0
+    - name: czy można wyznaczyć BB'
+      answer:
+        kind: BOOLEAN
+        truth: false
+  checks:
+  - kind: solve_equation
+    expr: \frac{6}{9}=\frac{8}{x}
+    part: B'C'
+  skills:
+  - zakres twierdzenia Talesa
+  - wiązka prostych równoległych
+  - krytyczna ocena rozumowania
+  verification:
+    checkability: REFERENCE_CALL
+    note: '2 parts matched · det: [B''C''] SymPy solved it fresh: 12.0 vs 12.0 (tol 1e-09)'
+- id: g-cm-08
+  slot: COMMON_MISTAKE
+  ramp_index: 2
+  difficulty: 3
+  exercise_type: 'błąd: stosowanie Talesa bez założenia o równoległości'
+  statement: 'W trójkącie ABC punkt D leży na boku AB, a punkt E na boku AC, przy czym |AD| = 4, |DB|
+    = 5, |AE| = 6 oraz |EC| = 8. W treści zadania nie ma informacji o równoległości. Uczeń napisał: „odcinek
+    DE wygląda na równoległy do BC, więc z twierdzenia Talesa \frac{4}{5}=\frac{6}{|EC|}, skąd |EC| =
+    7{,}5 — a to nie zgadza się z danymi, więc w zadaniu jest błąd”. Wskaż błąd w rozumowaniu ucznia,
+    rozstrzygnij, czy DE ∥ BC (odpowiedź TAK/NIE), oraz podaj, jaką długość musiałby mieć odcinek EC,
+    aby DE było równoległe do BC.'
+  statement_latex: \frac{|AD|}{|DB|}=\frac{4}{5}=0{,}8,\qquad \frac{|AE|}{|EC|}=\frac{6}{8}=0{,}75
+  solution: |-
+    Rozumowanie ucznia (błędne). Uczeń przyjął równoległość tylko dlatego, że odcinki „wyglądają na równoległe”, i z twierdzenia Talesa policzył |EC| = 7,5, a rozbieżność z daną |EC| = 8 uznał za błąd w zadaniu.
+    Gdzie tkwi błąd. Równoległość jest ZAŁOŻENIEM twierdzenia Talesa — musi być dana w treści albo wcześniej udowodniona. Nie wolno jej zakładać z wyglądu rysunku. Tutaj mamy komplet czterech długości, więc równoległość można sprawdzić twierdzeniem odwrotnym.
+    Poprawne rozumowanie. Punkty D i E leżą na bokach AB i AC kąta BAC, po tej samej stronie wierzchołka A. Liczymy stosunki:
+    \frac{|AD|}{|DB|}=\frac{4}{5}=0{,}8,\qquad \frac{|AE|}{|EC|}=\frac{6}{8}=0{,}75.
+    Stosunki są różne, więc na mocy twierdzenia odwrotnego do twierdzenia Talesa odcinki DE i BC NIE są równoległe. Zadanie nie zawiera błędu — błędne było założenie ucznia.
+    Aby DE ∥ BC, musiałoby zachodzić \frac{4}{5}=\frac{6}{|EC|}, czyli 4\cdot|EC| = 30, |EC| = 7{,}5.
+    Odpowiedź: DE nie jest równoległe do BC; równoległość zachodziłaby przy |EC| = 7,5.
+  solution_steps:
+  - Zauważ, że uczeń przyjął równoległość z wyglądu rysunku, a to jest założenie twierdzenia Talesa.
+  - 'Sprawdź równoległość twierdzeniem odwrotnym: |AD|/|DB| = 4/5 = 0,8.'
+  - 'Oblicz drugi stosunek: |AE|/|EC| = 6/8 = 0,75.'
+  - 'Porównaj: 0,8 ≠ 0,75, więc DE nie jest równoległe do BC — odpowiedź NIE.'
+  - 'Wyznacz długość, przy której zachodziłaby równoległość: 4/5 = 6/x, 4x = 30, x = 7,5.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: czy DE || BC
+      answer:
+        kind: BOOLEAN
+        truth: false
+    - name: EC dla równoległości
+      answer:
+        kind: NUMERIC
+        value: 7.5
+  checks:
+  - kind: solve_equation
+    expr: \frac{4}{5}=\frac{6}{x}
+    part: EC dla równoległości
+  skills:
+  - twierdzenie odwrotne do twierdzenia Talesa
+  - sprawdzanie równoległości
+  - kontrola założeń
+  verification:
+    checkability: REFERENCE_CALL
+    note: '2 parts matched · det: [EC dla równoległości] SymPy solved it fresh: 7.5 vs 7.5 (tol 1e-09)'
+- id: g-cm-09
+  slot: COMMON_MISTAKE
+  ramp_index: 3
+  difficulty: 2
+  exercise_type: 'błąd: odwrotna kolejność odcinków po jednej stronie proporcji'
+  statement: W trójkącie ABC punkt D leży na boku AB, a punkt E na boku AC, przy czym DE ∥ BC. Dane są
+    |AD| = 3, |DB| = 7 oraz |AE| = 4,5. Uczeń zapisał proporcję \frac{|AD|}{|DB|}=\frac{|EC|}{|AE|} i
+    otrzymał |EC| = \frac{27}{14}. Wskaż błąd w tym zapisie i oblicz poprawną długość odcinka EC.
+  statement_latex: '\text{błędnie: }\frac{3}{7}=\frac{|EC|}{4{,}5};\qquad \text{poprawnie: }\frac{3}{7}=\frac{4{,}5}{|EC|}'
+  solution: |-
+    Rozumowanie ucznia (błędne). Uczeń zapisał \frac{3}{7}=\frac{|EC|}{4{,}5}, skąd 7\cdot|EC| = 3\cdot 4{,}5 = 13{,}5, czyli |EC| = \frac{27}{14}\approx 1{,}93. Wynik jest niedorzeczny: wyszłoby |EC| < |AE|, choć na boku AB odcinek dalszy od wierzchołka A (|DB| = 7) jest dłuższy od bliższego (|AD| = 3).
+    Gdzie tkwi błąd. W proporcji Talesa odcinki muszą sobie odpowiadać: w licznikach odcinki bliższe wierzchołka A (AD i AE), w mianownikach odcinki dalsze (DB i EC). Uczeń „odwrócił” tylko jeden ułamek. Wolno odwrócić obie strony jednocześnie: \frac{|DB|}{|AD|}=\frac{|EC|}{|AE|}.
+    Poprawne rozwiązanie. \frac{|AD|}{|DB|}=\frac{|AE|}{|EC|},\quad \frac{3}{7}=\frac{4{,}5}{x},\quad 3x = 31{,}5,\quad x = 10{,}5.
+    Sprawdzenie sensowności: 3 < 7 oraz 4,5 < 10,5 ✓.
+    Odpowiedź: |EC| = 10,5.
+  solution_steps:
+  - Zauważ, że uczeń odwrócił tylko jeden ułamek proporcji.
+  - 'Wyjaśnij zasadę: licznikom odpowiadają odcinki bliższe wierzchołka A (AD, AE), mianownikom dalsze
+    (DB, EC).'
+  - 'Zapisz poprawną proporcję: 3/7 = 4,5/x.'
+  - 'Pomnóż na krzyż: 3x = 31,5, stąd x = 10,5.'
+  - 'Sprawdź sensowność: 3 < 7 i 4,5 < 10,5 (błędny wynik 27/14 tej kontroli nie przechodzi).'
+  answer:
+    kind: NUMERIC
+    value: 10.5
+  checks:
+  - kind: solve_equation
+    expr: \frac{3}{7}=\frac{\frac{9}{2}}{x}
+  skills:
+  - dobór odcinków odpowiadających sobie
+  - kontrola sensowności wyniku
+  - mnożenie na krzyż
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 10.5 vs 10.5 (tol 1e-09)'
+- id: g-cm-10
+  slot: COMMON_MISTAKE
+  ramp_index: 4
+  difficulty: 2
+  exercise_type: 'błąd: brak dopełnienia przy danych w postaci stosunku'
+  statement: 'W trójkącie ABC punkt D leży na boku AB, a punkt E na boku AC, przy czym DE ∥ BC oraz |AD|
+    : |DB| = 3 : 5. Bok AC ma długość 24 cm. Uczeń napisał: „skoro |AD| : |DB| = 3 : 5, to |AE| = \frac{3}{5}\cdot|AC|
+    = \frac{3}{5}\cdot 24 = 14{,}4 cm”. Wskaż błąd w tym rozumowaniu oraz oblicz poprawne długości odcinków
+    AE i EC.'
+  statement_latex: '|AE|=\frac{3}{3+5}\cdot 24,\qquad |EC|=\frac{5}{3+5}\cdot 24'
+  solution: |-
+    Rozumowanie ucznia (błędne). Uczeń potraktował stosunek 3 : 5 jak stosunek części do CAŁOŚCI i policzył |AE| = \frac{3}{5}\cdot 24 = 14{,}4 cm.
+    Gdzie tkwi błąd. Zapis |AD| : |DB| = 3 : 5 oznacza stosunek CZĘŚCI DO CZĘŚCI. Przyjmijmy |AD| = 3t, |DB| = 5t; wtedy cały bok |AB| = 3t + 5t = 8t, więc |AD| : |AB| = 3 : 8, a nie 3 : 5. Trzeba dodać części, czyli uzupełnić proporcję do całości.
+    Poprawne rozwiązanie. Z twierdzenia Talesa (DE ∥ BC) punkt E dzieli bok AC w tym samym stosunku 3 : 5, zatem
+    |AE| = \frac{3}{3+5}\cdot|AC| = \frac{3}{8}\cdot 24 = 9\ \text{cm},
+    |EC| = \frac{5}{3+5}\cdot 24 = \frac{5}{8}\cdot 24 = 15\ \text{cm}.
+    Sprawdzenie: 9 + 15 = 24 ✓ oraz \frac{9}{15}=\frac{3}{5} ✓.
+    Odpowiedź: |AE| = 9 cm, |EC| = 15 cm (uczeń otrzymał 14,4 cm, bo pominął dopełnienie stosunku do całości).
+  solution_steps:
+  - 'Zauważ, że 3 : 5 to stosunek część:część, a uczeń użył go jako stosunku część:całość.'
+  - 'Wprowadź |AD| = 3t, |DB| = 5t, skąd |AB| = 8t, czyli |AD| : |AB| = 3 : 8.'
+  - 'Z twierdzenia Talesa punkt E dzieli AC w tym samym stosunku 3 : 5.'
+  - Oblicz |AE| = (3/8)·24 = 9 cm oraz |EC| = (5/8)·24 = 15 cm.
+  - 'Sprawdź: 9 + 15 = 24 oraz 9/15 = 3/5.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: AE
+      answer:
+        kind: NUMERIC
+        value: 9.0
+    - name: EC
+      answer:
+        kind: NUMERIC
+        value: 15.0
+  checks:
+  - kind: evaluate
+    expr: \frac{3}{3+5}\cdot 24
+    part: AE
+  - kind: evaluate
+    expr: \frac{5}{3+5}\cdot 24
+    part: EC
+  skills:
+  - przejście część:część → część:całość
+  - podział odcinka w stosunku m:n
+  - twierdzenie Talesa w trójkącie
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [AE] SymPy solved it fresh: 9.0 vs 9.0 (tol 1e-09) ; [EC] SymPy
+      solved it fresh: 15.0 vs 15.0 (tol 1e-09)'
+- id: g-ch-t02
+  slot: CHALLENGE
+  ramp_index: 0
+  difficulty: 4
+  exercise_type: Zadanie praktyczne – model dwóch prostych równoległych przeciętych siecznymi
+  statement: Na poziomym, płaskim placu stoi pionowa latarnia; żarówka umieszczona jest na jej szczycie.
+    W odległości 6 m od podstawy latarni, na tym samym placu, stoi pionowy słupek o wysokości 1,8 m. Światło
+    żarówki sprawia, że słupek rzuca cień o długości 3 m, leżący na prostej przechodzącej przez podstawę
+    latarni i podstawę słupka, po przeciwnej stronie słupka niż latarnia. Oblicz wysokość latarni.
+  statement_latex: \frac{1{,}8}{h}=\frac{3}{6+3}
+  solution: |-
+    Wprowadzamy model. Niech O będzie podstawą latarni, Ż — szczytem latarni (żarówką), S — podstawą słupka, N — szczytem słupka, a T — końcem cienia. Wszystkie punkty O, S, T leżą na jednej prostej (na ziemi), przy czym |OS| = 6 m oraz |ST| = 3 m, więc
+    |OT| = 6 + 3 = 9 m.
+    Słupek SN i latarnia OŻ są prostopadłe do ziemi, więc proste SN i OŻ są równoległe. Ramiona kąta o wierzchołku T (jedno ramię to prosta ziemi TO, drugie to promień światła TŻ przechodzący przez N) zostały przecięte dwiema prostymi równoległymi: SN i OŻ.
+    Z twierdzenia Talesa (w wersji w kącie o wierzchołku T):
+    \frac{|SN|}{|OŻ|}=\frac{|TS|}{|TO|}.
+    Oznaczmy wysokość latarni |OŻ| = h, h > 0. Wtedy
+    \frac{1{,}8}{h}=\frac{3}{9}=\frac{1}{3}.
+    Mnożąc na krzyż: h = 3\cdot 1{,}8 = 5{,}4.
+    Sprawdzenie sensowności: latarnia jest trzy razy dalej od końca cienia niż słupek, więc musi być trzy razy wyższa — 5,4 m > 1,8 m ✓.
+    Odpowiedź: latarnia ma wysokość 5,4 m.
+  solution_steps:
+  - 'Nazwij punkty: O — podstawa latarni, S — podstawa słupka, T — koniec cienia; zauważ, że O, S, T leżą
+    na jednej prostej.'
+  - 'Złóż odległość: |TO| = |TS| + |SO| = 3 + 6 = 9 m.'
+  - Zauważ, że słupek i latarnia są pionowe, więc odpowiednie odcinki leżą na prostych równoległych przecinających
+    ramiona kąta o wierzchołku T.
+  - Zapisz proporcję Talesa \frac{1{,}8}{h}=\frac{3}{9}.
+  - 'Rozwiąż: h = 3\cdot 1{,}8 = 5{,}4 m.'
+  answer:
+    kind: NUMERIC
+    value: 5.4
+  checks:
+  - kind: evaluate
+    expr: \frac{9}{5}\cdot\frac{6+3}{3}
+    var: h
+  stated_model:
+    variable: h
+    objective_latex: \frac{1{,}8}{h}=\frac{3}{6+3}
+    domain_lo: '0'
+    goal: value
+    constraint_used: Słupek i latarnia są pionowe (odcinki równoległe), promień światła przechodzi przez
+      szczyt słupka i koniec cienia T; |TO| = 9 m.
+  skills:
+  - zbudowanie modelu geometrycznego sytuacji praktycznej
+  - składanie odległości z części
+  - twierdzenie Talesa w wersji w kącie
+  - rozwiązanie proporcji
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''h'': ''\\frac{1{,}8}{h}=\\frac{3}{6+3}'')
+      — human review'
+- id: g-ch-t03
+  slot: CHALLENGE
+  ramp_index: 1
+  difficulty: 5
+  exercise_type: Trapez z przekątnymi – równanie kwadratowe i selekcja pierwiastka
+  statement: W trapezie ABCD podstawy AB i CD są równoległe, a przekątne AC i BD przecinają się w punkcie
+    S. Wiadomo, że |AB| = 12, |AC| = 15 oraz |AS| \cdot |SC| = 54. Ponadto podstawa AB jest dłuższa od
+    podstawy CD. Oblicz |AS| oraz długość podstawy CD.
+  statement_latex: x\cdot\left(15-x\right)=54,\qquad \frac{|AS|}{|SC|}=\frac{|AB|}{|CD|}
+  solution: |-
+    Krok 1 (wybór niewiadomej). Punkt S leży wewnątrz przekątnej AC, więc oznaczmy |AS| = x, gdzie 0 < x < 15. Wtedy |SC| = 15 - x.
+    Z warunku |AS|\cdot|SC| = 54 otrzymujemy
+    x\cdot\left(15-x\right)=54, czyli x^{2}-15x+54=0.
+    Δ = \left(-15\right)^{2}-4\cdot 1\cdot 54 = 225-216 = 9, \sqrt{\Delta}=3,
+    x_{1}=\frac{15-3}{2}=6, x_{2}=\frac{15+3}{2}=9.
+    Oba pierwiastki należą do przedziału (0, 15), więc trzeba je rozstrzygnąć warunkiem geometrycznym.
+    Krok 2 (odrzucenie pierwiastka). Trójkąty ABS i CDS są podobne (kąty ASB i CSD wierzchołkowe, kąty BAS i DCS naprzemianległe przy AB ∥ CD), więc
+    \frac{|AS|}{|SC|}=\frac{|AB|}{|CD|}.
+    Skoro |AB| > |CD|, to \frac{|AB|}{|CD|} > 1, a zatem |AS| > |SC|. Warunek ten spełnia tylko x = 9 (wtedy |SC| = 6); dla x = 6 mielibyśmy |AS| < |SC|, czyli AB krótsze od CD.
+    Zatem |AS| = 9, |SC| = 6.
+    Krok 3 (podstawa CD). Z proporcji \frac{9}{6}=\frac{12}{|CD|} mamy 9\cdot|CD| = 6\cdot 12 = 72, więc
+    |CD| = \frac{12\cdot 6}{9} = 8.
+    Sprawdzenie: 9 + 6 = 15 ✓, 9\cdot 6 = 54 ✓, \frac{9}{6}=\frac{12}{8}=1{,}5 ✓ oraz 12 > 8 ✓.
+    Odpowiedź: |AS| = 9, |CD| = 8.
+  solution_steps:
+  - Oznacz |AS| = x, wtedy |SC| = 15 - x, przy czym 0 < x < 15.
+  - Z warunku iloczynu zapisz równanie x\left(15-x\right)=54, czyli x^{2}-15x+54=0.
+  - Oblicz Δ = 9 i pierwiastki x = 6 oraz x = 9.
+  - 'Z podobieństwa trójkątów ABS i CDS: \frac{|AS|}{|SC|}=\frac{|AB|}{|CD|} > 1, więc |AS| > |SC| — odrzuć
+    x = 6 i przyjmij |AS| = 9, |SC| = 6.'
+  - Z proporcji \frac{9}{6}=\frac{12}{|CD|} wyznacz |CD| = \frac{12\cdot 6}{9} = 8.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: AS
+      answer:
+        kind: NUMERIC
+        value: 9.0
+    - name: CD
+      answer:
+        kind: NUMERIC
+        value: 8.0
+  checks:
+  - kind: evaluate
+    expr: \frac{15+\sqrt{15^{2}-4\cdot 54}}{2}
+    part: AS
+  - kind: evaluate
+    expr: \frac{12\cdot 6}{9}
+    part: CD
+  stated_model:
+    variable: x
+    objective_latex: x\cdot\left(15-x\right)=54
+    domain_lo: '0'
+    domain_hi: '15'
+    goal: value
+    constraint_used: x = |AS|, |SC| = 15 - x; warunek |AB| > |CD| wymusza |AS| > |SC|.
+  skills:
+  - wprowadzenie niewiadomej
+  - podobieństwo w konfiguracji motylka
+  - rozwiązanie równania kwadratowego
+  - odrzucenie pierwiastka na podstawie warunku geometrycznego
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''x'': ''x\\cdot\\left(15-x\\right)=54'')
+      — human review'
+- id: g-ch-t04
+  slot: CHALLENGE
+  ramp_index: 2
+  difficulty: 5
+  exercise_type: Prostokąt wpisany w trójkąt – wzór z dziedziną i optymalizacja z ograniczeniem
+  statement: W trójkącie ABC bok BC ma długość 12, a wysokość tego trójkąta poprowadzona z wierzchołka
+    A na bok BC ma długość 8. W trójkąt ABC wpisano prostokąt KLMN w taki sposób, że bok KL zawiera się
+    w boku BC, wierzchołek N leży na boku AB, wierzchołek M leży na boku AC, boki KN i LM są prostopadłe
+    do BC, a bok NM jest równoległy do BC. Przyjmij |KN| = x. a) Wyznacz wzór na pole P prostokąta KLMN
+    jako funkcję zmiennej x oraz podaj dziedzinę tej funkcji. b) Wiadomo dodatkowo, że ze względów technicznych
+    wysokość prostokąta nie może przekraczać 3, czyli x \leq 3. Oblicz, dla jakiej wartości x pole prostokąta
+    jest wtedy największe, i podaj to największe pole.
+  statement_latex: \frac{|NM|}{12}=\frac{8-x}{8},\qquad P\left(x\right)=x\cdot\left(12-\frac{3}{2}\cdot
+    x\right)
+  solution: |-
+    a) Niech AH będzie wysokością trójkąta ABC poprowadzoną z A na BC, |AH| = 8. Bok NM jest równoległy do BC, a punkty N i M leżą na bokach AB i AC, więc trójkąt ANM jest podobny do trójkąta ABC, a skala podobieństwa to stosunek odpowiednich wysokości.
+    Wysokość prostokąta wynosi x, więc odległość odcinka NM od wierzchołka A jest równa 8 - x. Stąd (twierdzenie Talesa / podobieństwo):
+    \frac{|NM|}{|BC|}=\frac{8-x}{8}, czyli |NM| = 12\cdot\frac{8-x}{8} = 12-\frac{3}{2}\cdot x.
+    Pole prostokąta:
+    P\left(x\right)=x\cdot\left(12-\frac{3}{2}\cdot x\right)=12x-\frac{3}{2}x^{2}.
+    Dziedzina: musi być x > 0 oraz |NM| > 0, czyli 12-\frac{3}{2}x > 0, tzn. x < 8. Zatem x \in \left(0,\ 8\right).
+    b) Funkcja P jest funkcją kwadratową o współczynniku a = -\frac{3}{2} < 0, więc jej wykresem jest parabola o ramionach skierowanych w dół. Pierwsza współrzędna wierzchołka:
+    x_{w}=\frac{-12}{2\cdot\left(-\frac{3}{2}\right)}=4.
+    Wierzchołek wypada poza dopuszczalny przedział, bo 4 > 3. Na przedziale \left(0,\ 4\right) funkcja P jest rosnąca, więc na przedziale \left(0,\ 3\right] największą wartość przyjmuje na jego prawym końcu, dla x = 3.
+    Wtedy |NM| = 12-\frac{3}{2}\cdot 3 = 7{,}5 oraz
+    P\left(3\right)=3\cdot 7{,}5 = 22{,}5.
+    Odpowiedź: a) P\left(x\right)=12x-\frac{3}{2}x^{2}, x \in \left(0,\ 8\right); b) największe pole równe 22,5 prostokąt ma dla x = 3.
+  solution_steps:
+  - Zauważ, że NM ∥ BC, więc trójkąt ANM jest podobny do ABC; odległość NM od A wynosi 8 - x.
+  - Z proporcji \frac{|NM|}{12}=\frac{8-x}{8} otrzymaj |NM| = 12-\frac{3}{2}x.
+  - 'Ułóż pole: P\left(x\right)=x\cdot\left(12-\frac{3}{2}x\right)=12x-\frac{3}{2}x^{2}.'
+  - 'Wyznacz dziedzinę z warunków x > 0 i 12-\frac{3}{2}x > 0: x \in \left(0,\ 8\right).'
+  - 'Oblicz pierwszą współrzędną wierzchołka paraboli: x_{w} = 4.'
+  - 'Sprawdź ograniczenie x \leq 3: wierzchołek jest niedopuszczalny, a P rośnie na (0, 4), więc maksimum
+    przypada dla x = 3.'
+  - Oblicz P\left(3\right)=3\cdot\left(12-\frac{3}{2}\cdot 3\right)=22{,}5.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wzor
+      answer:
+        kind: SYMBOLIC
+        latex: P\left(x\right)=12x-\frac{3}{2}x^{2}
+    - name: dziedzina
+      answer:
+        kind: INTERVAL
+        lo: '0'
+        hi: '8'
+    - name: x_max
+      answer:
+        kind: NUMERIC
+        value: 3.0
+    - name: P_max
+      answer:
+        kind: NUMERIC
+        value: 22.5
+  checks:
+  - kind: simplify
+    expr: x\cdot\left(12-\frac{3}{2}\cdot x\right)
+    part: wzor
+  - kind: evaluate
+    expr: \min\left(\frac{12}{2\cdot\frac{3}{2}},\ 3\right)
+    part: x_max
+  - kind: evaluate
+    expr: 3\cdot\left(12-\frac{3}{2}\cdot 3\right)
+    part: P_max
+  stated_model:
+    variable: x
+    objective_latex: P\left(x\right)=12x-\frac{3}{2}x^{2}
+    domain_lo: '0'
+    domain_hi: '3'
+    domain_hi_open: false
+    constraint_used: x = wysokość prostokąta; |NM| = 12\cdot\frac{8-x}{8} z twierdzenia Talesa; dodatkowe
+      ograniczenie techniczne x \leq 3.
+  skills:
+  - wprowadzenie zmiennej i modelu
+  - twierdzenie Talesa dla odcinka równoległego do boku
+  - ułożenie funkcji pola
+  - dziedzina wymuszona dodatniością
+  - wierzchołek paraboli i kontrola ograniczenia zewnętrznego
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''x'': ''P\\left(x\\right)=12x-\\frac{3}{2}x^{2}'')
+      — human review'

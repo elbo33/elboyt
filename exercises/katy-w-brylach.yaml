@@ -1,0 +1,836 @@
+section: katy-w-brylach
+name: Kąty w graniastosłupach, ostrosłupach, walcach i stożkach
+scope: Angles between edges, between edges and diagonals, and between faces in prisms and pyramids; angle
+  of a cone's aperture and related angles in cylinders and cones, and computing them.
+requirements:
+- X.3
+- X.4
+counts:
+  total: 16
+  DETERMINISTIC: 11
+  REFERENCE_CALL: 1
+  NOT_MACHINE_CHECKABLE: 4
+exercises:
+- id: g-th-00
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: obliczenie kąta nachylenia tworzącej stożka
+  statement: Dany jest stożek obrotowy, w którym promień podstawy ma długość r = 5, a wysokość stożka
+    ma długość h = 5. Oblicz miarę kąta nachylenia tworzącej tego stożka do płaszczyzny podstawy.
+  statement_latex: \operatorname{tg}\alpha=\frac{h}{r}=\frac{5}{5}
+  solution: Rzutem prostokątnym wierzchołka stożka na płaszczyznę podstawy jest środek koła podstawy,
+    więc rzutem tworzącej jest promień poprowadzony do jej spodka. Kąt α między tworzącą a tym promieniem
+    leży w trójkącie prostokątnym o przyprostokątnych r = 5 (przy kącie α) i h = 5 (naprzeciw kąta α).
+    Zatem \operatorname{tg}\alpha=\frac{5}{5}=1, czyli α = 45°.
+  solution_steps:
+  - Zauważ, że rzutem tworzącej na podstawę jest promień podstawy o długości r = 5.
+  - Wyodrębnij trójkąt prostokątny o przyprostokątnych r = 5 i h = 5 (połowa przekroju osiowego).
+  - Zapisz \operatorname{tg}\alpha=\frac{h}{r}=\frac{5}{5}=1.
+  - 'Odczytaj miarę kąta: α = 45°.'
+  answer:
+    kind: NUMERIC
+    value: 45.0
+    tol: 1.0e-06
+    latex: 45^\circ
+  checks:
+  - kind: evaluate
+    expr: \frac{180}{\pi}\cdot\arctan\left(\frac{5}{5}\right)
+  skills:
+  - kąt między prostą a płaszczyzną
+  - przekrój osiowy stożka
+  - funkcje trygonometryczne kąta ostrego
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 45.0 vs 45.0 (tol 1e-06)'
+- id: g-th-01
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: walec — przekrój osiowy i kąt tworzącej
+  statement: Dany jest walec obrotowy o promieniu podstawy r = 3 i wysokości H = 8. Oblicz długość przekątnej
+    przekroju osiowego tego walca oraz podaj miarę kąta, jaki tworząca walca tworzy z płaszczyzną podstawy.
+  statement_latex: d=\sqrt{\left(2\cdot 3\right)^2+8^2}
+  solution: Przekrój osiowy walca jest prostokątem o bokach 2r = 6 (średnica podstawy) i H = 8 (tworząca).
+    Z twierdzenia Pitagorasa przekątna tego prostokąta ma długość d=\sqrt{6^2+8^2}=\sqrt{36+64}=\sqrt{100}=10.
+    Tworząca walca obrotowego jest prostopadła do obu podstaw, więc kąt między tworzącą a płaszczyzną
+    podstawy ma miarę 90°.
+  solution_steps:
+  - Narysuj przekrój osiowy jako prostokąt o bokach 2r = 6 i H = 8.
+  - 'Zastosuj twierdzenie Pitagorasa: d=\sqrt{6^2+8^2}=10.'
+  - 'Przypomnij definicję walca obrotowego: tworząca jest prostopadła do podstaw.'
+  - Zapisz, że kąt tworzącej z płaszczyzną podstawy ma miarę 90°.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: przekątna przekroju osiowego
+      answer:
+        kind: NUMERIC
+        value: 10.0
+        tol: 1.0e-06
+        latex: '10'
+    - name: kąt tworzącej z podstawą
+      answer:
+        kind: NUMERIC
+        value: 90.0
+        tol: 1.0e-06
+        latex: 90^\circ
+  checks:
+  - kind: evaluate
+    expr: \sqrt{\left(2\cdot 3\right)^2+8^2}
+    part: przekątna przekroju osiowego
+  skills:
+  - przekrój osiowy walca
+  - twierdzenie Pitagorasa
+  - kąt tworzącej walca z podstawą
+  verification:
+    checkability: REFERENCE_CALL
+    note: 'could not compare: PARSE_ERROR: "UnexpectedCharacters: No terminal matches ''\\'' in the current
+      parser context, at line 1 col 4"'
+- id: g-th-02
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: kąt nachylenia ściany bocznej ostrosłupa
+  statement: Dany jest ostrosłup prawidłowy czworokątny, w którym krawędź podstawy ma długość a = 8, a
+    wysokość ostrosłupa ma długość H = 4\sqrt{3}. Oblicz miarę kąta, pod jakim ściana boczna tego ostrosłupa
+    jest nachylona do płaszczyzny podstawy.
+  statement_latex: \operatorname{tg}\beta=\frac{H}{\frac{a}{2}}=\frac{4\sqrt{3}}{\frac{8}{2}}
+  solution: Niech S będzie wierzchołkiem ostrosłupa, O — środkiem podstawy (spodkiem wysokości), a M —
+    środkiem krawędzi podstawy. Odcinek SM (apotema) jest prostopadły do krawędzi podstawy i odcinek OM
+    (o długości r = \frac{a}{2} = 4) też jest do niej prostopadły, więc kąt SMO jest kątem liniowym kąta
+    dwuściennego między ścianą boczną a podstawą. W trójkącie prostokątnym SOM mamy \operatorname{tg}\beta=\frac{H}{r}=\frac{4\sqrt{3}}{4}=\sqrt{3},
+    zatem β = 60°.
+  solution_steps:
+  - 'Wyznacz promień okręgu wpisanego w podstawę: r = \frac{a}{2} = 4.'
+  - 'Wskaż kąt liniowy: kąt SMO między apotemą SM a odcinkiem OM.'
+  - Zapisz \operatorname{tg}\beta=\frac{H}{r}=\frac{4\sqrt{3}}{4}=\sqrt{3}.
+  - 'Odczytaj: β = 60°.'
+  answer:
+    kind: NUMERIC
+    value: 60.0
+    tol: 1.0e-06
+    latex: 60^\circ
+  checks:
+  - kind: evaluate
+    expr: \frac{180}{\pi}\cdot\arctan\left(\frac{4\sqrt{3}}{\frac{8}{2}}\right)
+  skills:
+  - kąt dwuścienny
+  - apotema ostrosłupa
+  - promień okręgu wpisanego w podstawę
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 60.0 vs 60.0 (tol 1e-06)'
+- id: g-ex-03
+  slot: EXERCISE
+  ramp_index: 1
+  difficulty: 2
+  exercise_type: przekątna graniastosłupa i jej nachylenie do podstawy
+  statement: Dany jest graniastosłup prawidłowy czworokątny ABCDA'B'C'D', w którym podstawą jest kwadrat
+    ABCD o boku długości 5, a krawędź boczna AA' ma długość 5\sqrt{2} i jest prostopadła do płaszczyzny
+    podstawy. Oblicz długość przekątnej AC' tego graniastosłupa oraz miarę kąta, jaki przekątna AC' tworzy
+    z płaszczyzną podstawy ABCD.
+  statement_latex: AC'=\sqrt{5^2+5^2+\left(5\sqrt{2}\right)^2},\qquad \operatorname{tg}\alpha=\frac{5\sqrt{2}}{5\sqrt{2}}
+  solution: 'Przekątna podstawy: AC = 5\sqrt{2}. Ponieważ krawędź CC'' jest prostopadła do płaszczyzny
+    podstawy, rzutem punktu C'' na tę płaszczyznę jest punkt C, a rzutem odcinka AC'' jest odcinek AC.
+    Trójkąt ACC'' jest prostokątny o przyprostokątnych AC = 5\sqrt{2} i CC'' = 5\sqrt{2}, więc AC''=\sqrt{\left(5\sqrt{2}\right)^2+\left(5\sqrt{2}\right)^2}=\sqrt{50+50}=10,
+    co jest zgodne ze wzorem \sqrt{5^2+5^2+\left(5\sqrt{2}\right)^2}=10. Kąt α nachylenia przekątnej do
+    podstawy to kąt C''AC: \operatorname{tg}\alpha=\frac{CC''}{AC}=\frac{5\sqrt{2}}{5\sqrt{2}}=1, zatem
+    α = 45°.'
+  solution_steps:
+  - 'Oblicz przekątną podstawy: AC = 5\sqrt{2}.'
+  - Zauważ, że rzutem przekątnej AC' na podstawę jest przekątna AC (bo CC' ⟂ podstawa).
+  - 'Oblicz AC'' z twierdzenia Pitagorasa: AC''=\sqrt{5^2+5^2+\left(5\sqrt{2}\right)^2}=10.'
+  - Zapisz \operatorname{tg}\alpha=\frac{CC'}{AC}=\frac{5\sqrt{2}}{5\sqrt{2}}=1.
+  - 'Odczytaj miarę kąta: α = 45°.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: długość przekątnej AC'
+      answer:
+        kind: NUMERIC
+        value: 10.0
+        tol: 1.0e-06
+        latex: '10'
+    - name: kąt nachylenia do podstawy
+      answer:
+        kind: NUMERIC
+        value: 45.0
+        tol: 1.0e-06
+        latex: 45^\circ
+  checks:
+  - kind: evaluate
+    expr: \sqrt{5^2+5^2+\left(5\sqrt{2}\right)^2}
+    part: długość przekątnej AC'
+  - kind: evaluate
+    expr: \frac{180}{\pi}\cdot\arctan\left(\frac{5\sqrt{2}}{5\sqrt{2}}\right)
+    part: kąt nachylenia do podstawy
+  skills:
+  - przekątna graniastosłupa
+  - rzut prostokątny odcinka na płaszczyznę
+  - twierdzenie Pitagorasa
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [długość przekątnej AC''] SymPy solved it fresh: 10.0 vs 10.0
+      (tol 1e-06) ; [kąt nachylenia do podstawy] SymPy solved it fresh: 45.0 vs 45.0 (tol 1e-06)'
+- id: g-ex-04
+  slot: EXERCISE
+  ramp_index: 2
+  difficulty: 3
+  exercise_type: wyznaczanie wymiarów ostrosłupa z danego kąta
+  statement: W ostrosłupie prawidłowym czworokątnym ABCDS krawędź podstawy ma długość a = 12, a każda
+    ściana boczna jest nachylona do płaszczyzny podstawy pod kątem 60°. Oblicz wysokość tego ostrosłupa,
+    długość apotemy (wysokości ściany bocznej) oraz długość krawędzi bocznej.
+  statement_latex: \operatorname{tg}60^\circ=\frac{H}{\frac{12}{2}},\qquad \cos 60^\circ=\frac{\frac{12}{2}}{h_b},\qquad
+    b=\sqrt{H^2+\left(\frac{12\sqrt{2}}{2}\right)^2}
+  solution: 'Niech O będzie środkiem podstawy, a M — środkiem krawędzi AB. Wtedy r = OM = \frac{a}{2}
+    = 6 oraz R = OA = \frac{a\sqrt{2}}{2} = 6\sqrt{2}. Kąt SMO = 60° jest kątem nachylenia ściany bocznej
+    do podstawy, bo SM ⟂ AB i OM ⟂ AB. W trójkącie prostokątnym SOM: \operatorname{tg}60^\circ=\frac{H}{6},
+    więc H = 6\sqrt{3}. Apotema: \cos 60^\circ=\frac{6}{h_b}, więc h_b=\frac{6}{\frac{1}{2}}=12. Krawędź
+    boczna: w trójkącie prostokątnym SOA mamy b=\sqrt{H^2+R^2}=\sqrt{\left(6\sqrt{3}\right)^2+\left(6\sqrt{2}\right)^2}=\sqrt{108+72}=\sqrt{180}=6\sqrt{5}.'
+  solution_steps:
+  - Wyznacz r = \frac{a}{2} = 6 oraz R = \frac{a\sqrt{2}}{2} = 6\sqrt{2}.
+  - 'Wskaż kąt liniowy kąta dwuściennego: kąt SMO = 60° w trójkącie prostokątnym SOM.'
+  - Z \operatorname{tg}60^\circ=\frac{H}{6} oblicz H = 6\sqrt{3}.
+  - Z \cos 60^\circ=\frac{6}{h_b} oblicz h_b = 12.
+  - W trójkącie SOA oblicz b=\sqrt{\left(6\sqrt{3}\right)^2+\left(6\sqrt{2}\right)^2}=6\sqrt{5}.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wysokość ostrosłupa
+      answer:
+        kind: SYMBOLIC
+        latex: 6\sqrt{3}
+    - name: apotema
+      answer:
+        kind: NUMERIC
+        value: 12.0
+        tol: 1.0e-06
+        latex: '12'
+    - name: krawędź boczna
+      answer:
+        kind: SYMBOLIC
+        latex: 6\sqrt{5}
+  checks:
+  - kind: evaluate
+    expr: \frac{12}{2}\cdot\tan\left(\frac{\pi}{3}\right)
+    part: wysokość ostrosłupa
+  - kind: evaluate
+    expr: \frac{\frac{12}{2}}{\cos\left(\frac{\pi}{3}\right)}
+    part: apotema
+  - kind: evaluate
+    expr: \sqrt{\left(6\sqrt{3}\right)^2+\left(6\sqrt{2}\right)^2}
+    part: krawędź boczna
+  skills:
+  - kąt dwuścienny ściany bocznej z podstawą
+  - apotema
+  - krawędź boczna ostrosłupa prawidłowego
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [wysokość ostrosłupa] SymPy solved it fresh: 10.392304845413264
+      vs 10.392304845413264 (tol 1e-09) ; [apotema] SymPy solved it fresh: 12.0 vs 12.0 (tol 1e-06) ;
+      [krawędź boczna] SymPy solved it fresh: 13.416407864998739 vs 13.416407864998739 (tol 1e-09)'
+- id: g-ex-05
+  slot: EXERCISE
+  ramp_index: 3
+  difficulty: 4
+  exercise_type: porównanie kątów nachylenia w ostrosłupie prawidłowym
+  statement: W ostrosłupie prawidłowym czworokątnym ABCDS krawędź podstawy ma długość a = 6, a wysokość
+    ostrosłupa ma długość H = 3\sqrt{3}. Oblicz tangens kąta α nachylenia krawędzi bocznej do płaszczyzny
+    podstawy, oblicz miarę kąta β nachylenia ściany bocznej do płaszczyzny podstawy oraz uzasadnij, że
+    w tym ostrosłupie β > α.
+  statement_latex: \operatorname{tg}\alpha=\frac{3\sqrt{3}}{3\sqrt{2}},\qquad \operatorname{tg}\beta=\frac{3\sqrt{3}}{3}
+  solution: |-
+    Niech O będzie środkiem podstawy, a M — środkiem krawędzi AB. Wtedy R = OA = \frac{a\sqrt{2}}{2} = 3\sqrt{2} oraz r = OM = \frac{a}{2} = 3.
+    Kąt α jest kątem SAO w trójkącie prostokątnym SOA (rzutem krawędzi SA na podstawę jest odcinek OA), więc \operatorname{tg}\alpha=\frac{H}{R}=\frac{3\sqrt{3}}{3\sqrt{2}}=\frac{\sqrt{3}}{\sqrt{2}}=\frac{\sqrt{6}}{2}\approx 1{,}2247.
+    Kąt β jest kątem SMO w trójkącie prostokątnym SOM, więc \operatorname{tg}\beta=\frac{H}{r}=\frac{3\sqrt{3}}{3}=\sqrt{3}, czyli β = 60°.
+    Uzasadnienie: oba kąty są ostre, a funkcja tangens jest rosnąca dla kątów ostrych. Ponieważ r = 3 < 3\sqrt{2} = R oraz obie wysokości są tą samą liczbą H, mamy \operatorname{tg}\beta=\frac{H}{r}>\frac{H}{R}=\operatorname{tg}\alpha (bo \sqrt{3}>\frac{\sqrt{6}}{2}), a zatem β > α.
+  solution_steps:
+  - Oblicz R = \frac{a\sqrt{2}}{2} = 3\sqrt{2} oraz r = \frac{a}{2} = 3.
+  - Wskaż kąt α = ∠SAO i zapisz \operatorname{tg}\alpha=\frac{H}{R}=\frac{3\sqrt{3}}{3\sqrt{2}}=\frac{\sqrt{6}}{2}.
+  - Wskaż kąt β = ∠SMO (kąt liniowy kąta dwuściennego) i zapisz \operatorname{tg}\beta=\frac{H}{r}=\sqrt{3}.
+  - Odczytaj β = 60°.
+  - 'Porównaj: r < R, więc \frac{H}{r}>\frac{H}{R}, a ponieważ tangens jest rosnący dla kątów ostrych,
+    β > α.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: tangens kąta α
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{\sqrt{6}}{2}
+    - name: miara kąta β
+      answer:
+        kind: NUMERIC
+        value: 60.0
+        tol: 1.0e-06
+        latex: 60^\circ
+    - name: uzasadnienie nierówności β > α
+      answer:
+        kind: NOT_MACHINE_CHECKABLE
+        reason: Uczeń ma uzasadnić, że skoro r = 3 < R = 3\sqrt{2}, to \operatorname{tg}\beta=\frac{H}{r}>\frac{H}{R}=\operatorname{tg}\alpha,
+          a wobec rosnącej monotoniczności tangensa dla kątów ostrych wynika stąd β > α.
+  checks:
+  - kind: simplify
+    expr: \frac{3\sqrt{3}}{3\sqrt{2}}
+    part: tangens kąta α
+  - kind: evaluate
+    expr: \frac{180}{\pi}\cdot\arctan\left(\frac{3\sqrt{3}}{\frac{6}{2}}\right)
+    part: miara kąta β
+  skills:
+  - kąt nachylenia krawędzi bocznej
+  - kąt nachylenia ściany bocznej
+  - uzasadnianie nierówności między kątami
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'part(s) need a human: uzasadnienie nierówności β > α · 2/2 other parts solved fresh'
+- id: g-ex-t00
+  slot: EXERCISE
+  ramp_index: 6
+  difficulty: 4
+  exercise_type: obliczanie kątów w ostrosłupie prawidłowym trójkątnym
+  statement: W ostrosłupie prawidłowym trójkątnym ABCS podstawa ABC jest trójkątem równobocznym o boku
+    długości 12, a spodek wysokości ostrosłupa pokrywa się ze środkiem O tej podstawy. Ściana boczna jest
+    nachylona do płaszczyzny podstawy pod kątem 60°. Oblicz wysokość ostrosłupa, długość krawędzi bocznej
+    oraz tangens kąta nachylenia krawędzi bocznej do płaszczyzny podstawy.
+  statement_latex: a=12,\qquad \operatorname{tg}60^\circ=\frac{H}{r},\qquad r=\frac{a\cdot\sqrt{3}}{6},\qquad
+    R=\frac{a\cdot\sqrt{3}}{3}
+  solution: |-
+    W podstawie – trójkącie równobocznym o boku a = 12 – promień okręgu wpisanego wynosi r = \frac{12\cdot\sqrt{3}}{6} = 2\sqrt{3}, a promień okręgu opisanego R = \frac{12\cdot\sqrt{3}}{3} = 4\sqrt{3} (czyli R = 2r).
+
+    Kąt nachylenia ściany bocznej do podstawy to kąt między apotemą ostrosłupa a jej rzutem – odcinkiem OM o długości r (M jest środkiem krawędzi podstawy). W trójkącie prostokątnym SOM mamy \operatorname{tg}60^\circ = \frac{H}{r}, więc H = r\cdot\sqrt{3} = 2\sqrt{3}\cdot\sqrt{3} = 6.
+
+    Rzutem krawędzi bocznej SA na podstawę jest odcinek OA o długości R = 4\sqrt{3}. W trójkącie prostokątnym SOA: b = SA = \sqrt{H^{2}+R^{2}} = \sqrt{36+48} = \sqrt{84} = 2\sqrt{21}.
+
+    Kąt α nachylenia krawędzi bocznej do podstawy: \operatorname{tg}\alpha = \frac{H}{R} = \frac{6}{4\sqrt{3}} = \frac{\sqrt{3}}{2} \approx 0{,}8660, czyli α ≈ 40°54'.
+
+    Kontrola: \operatorname{tg}\beta = 2\cdot\operatorname{tg}\alpha, bo \sqrt{3} = 2\cdot\frac{\sqrt{3}}{2}. ✓ Ponadto β = 60° > α, zgodnie z regułą β > α.
+  solution_steps:
+  - 'Oblicz promienie podstawy: r = \frac{12\cdot\sqrt{3}}{6} = 2\sqrt{3}, R = \frac{12\cdot\sqrt{3}}{3}
+    = 4\sqrt{3}.'
+  - 'Zaznacz kąt dwuścienny: trójkąt prostokątny SOM o przyprostokątnych r i H.'
+  - Z zależności \operatorname{tg}60^\circ = \frac{H}{r} wyznacz H = 2\sqrt{3}\cdot\sqrt{3} = 6.
+  - W trójkącie prostokątnym SOA oblicz krawędź boczną b = \sqrt{6^{2}+\left(4\sqrt{3}\right)^{2}} = 2\sqrt{21}.
+  - Oblicz \operatorname{tg}\alpha = \frac{H}{R} = \frac{6}{4\sqrt{3}} = \frac{\sqrt{3}}{2} (α ≈ 40°54').
+  - 'Sprawdź zgodność: \operatorname{tg}\beta = 2\cdot\operatorname{tg}\alpha oraz β > α.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wysokosc_H
+      answer:
+        kind: NUMERIC
+        value: 6.0
+    - name: krawedz_boczna
+      answer:
+        kind: NUMERIC
+        value: 9.16515138991168
+        tol: 1.0e-06
+    - name: tg_alfa
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{\sqrt{3}}{2}
+  checks:
+  - kind: evaluate
+    expr: \frac{12\cdot\sqrt{3}}{6}\cdot\sqrt{3}
+    part: wysokosc_H
+  - kind: evaluate
+    expr: \sqrt{6^{2}+\left(\frac{12\cdot\sqrt{3}}{3}\right)^{2}}
+    part: krawedz_boczna
+  - kind: evaluate
+    expr: \frac{6}{\frac{12\cdot\sqrt{3}}{3}}
+    part: tg_alfa
+  skills:
+  - rozróżnianie promieni r i R w trójkącie równobocznym
+  - kąt dwuścienny ściana boczna–podstawa
+  - twierdzenie Pitagorasa w bryle
+  - tangens kąta ostrego
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [wysokosc_H] SymPy solved it fresh: 6.0 vs 6.0 (tol 1e-09)
+      ; [krawedz_boczna] SymPy solved it fresh: 9.16515138991168 vs 9.16515138991168 (tol 1e-06) ; [tg_alfa]
+      SymPy solved it fresh: 0.8660254037844386 vs 0.8660254037844386 (tol 1e-09)'
+- id: g-ex-t01
+  slot: EXERCISE
+  ramp_index: 7
+  difficulty: 5
+  exercise_type: kąty w ostrosłupie prawidłowym czworokątnym
+  statement: W ostrosłupie prawidłowym czworokątnym ABCDS podstawa ABCD jest kwadratem o boku długości
+    6, a spodek wysokości ostrosłupa pokrywa się ze środkiem O tego kwadratu. Kąt płaski przy wierzchołku
+    S, czyli kąt ASB między sąsiednimi krawędziami bocznymi, ma miarę 60°. Oblicz długość krawędzi bocznej,
+    wysokość ostrosłupa, miarę kąta nachylenia krawędzi bocznej do płaszczyzny podstawy oraz tangens kąta
+    nachylenia ściany bocznej do płaszczyzny podstawy.
+  statement_latex: \sin\frac{\gamma}{2}=\frac{\frac{a}{2}}{b},\qquad a=6,\ \gamma=60^\circ,\qquad \operatorname{tg}\alpha=\frac{H}{R},\qquad
+    \operatorname{tg}\beta=\frac{H}{r}
+  solution: |-
+    Ściana boczna ASB jest trójkątem równoramiennym o podstawie a = 6 i ramionach b. Z zależności \sin\frac{\gamma}{2} = \frac{\frac{a}{2}}{b} otrzymujemy \sin30^\circ = \frac{3}{b}, czyli \frac{1}{2} = \frac{3}{b}, więc b = 6. (Trójkąt równoramienny o kącie 60° między ramionami jest równoboczny.)
+
+    Rzutem krawędzi bocznej SA na podstawę jest odcinek OA o długości R = \frac{6\cdot\sqrt{2}}{2} = 3\sqrt{2}. Z twierdzenia Pitagorasa w trójkącie prostokątnym SOA: H = \sqrt{b^{2}-R^{2}} = \sqrt{36-18} = \sqrt{18} = 3\sqrt{2}.
+
+    Kąt α nachylenia krawędzi bocznej: \operatorname{tg}\alpha = \frac{H}{R} = \frac{3\sqrt{2}}{3\sqrt{2}} = 1, zatem α = 45°.
+
+    Kąt β nachylenia ściany bocznej mierzymy w trójkącie prostokątnym SOM (M — środek krawędzi AB), w którym OM = r = \frac{a}{2} = 3: \operatorname{tg}\beta = \frac{H}{r} = \frac{3\sqrt{2}}{3} = \sqrt{2} \approx 1{,}4142, czyli β ≈ 54°44'.
+
+    Kontrola: \operatorname{tg}\beta = \sqrt{2}\cdot\operatorname{tg}\alpha oraz β > α. ✓
+  solution_steps:
+  - 'Z kąta płaskiego przy wierzchołku: \sin30^\circ = \frac{3}{b}, stąd b = 6 (ściana boczna jest trójkątem
+    równobocznym).'
+  - 'Oblicz rzut krawędzi bocznej: R = \frac{6\cdot\sqrt{2}}{2} = 3\sqrt{2}.'
+  - 'Z Pitagorasa w trójkącie SOA: H = \sqrt{6^{2}-\left(3\sqrt{2}\right)^{2}} = 3\sqrt{2}.'
+  - Oblicz \operatorname{tg}\alpha = \frac{H}{R} = 1, więc α = 45°.
+  - 'Dla ściany bocznej użyj r = \frac{a}{2} = 3: \operatorname{tg}\beta = \frac{3\sqrt{2}}{3} = \sqrt{2}
+    (β ≈ 54°44'').'
+  - 'Sprawdź: \operatorname{tg}\beta = \sqrt{2}\cdot\operatorname{tg}\alpha, β > α.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: krawedz_boczna
+      answer:
+        kind: NUMERIC
+        value: 6.0
+    - name: wysokosc_H
+      answer:
+        kind: NUMERIC
+        value: 4.242640687119285
+        tol: 1.0e-06
+    - name: alfa_stopnie
+      answer:
+        kind: NUMERIC
+        value: 45.0
+        tol: 1.0e-06
+    - name: tg_beta
+      answer:
+        kind: SYMBOLIC
+        latex: \sqrt{2}
+  checks:
+  - kind: evaluate
+    expr: \frac{3}{\frac{1}{2}}
+    part: krawedz_boczna
+  - kind: evaluate
+    expr: \sqrt{6^{2}-\left(\frac{6\cdot\sqrt{2}}{2}\right)^{2}}
+    part: wysokosc_H
+  - kind: evaluate
+    expr: \frac{180}{\pi}\cdot\arctan\left(\frac{3\cdot\sqrt{2}}{3\cdot\sqrt{2}}\right)
+    part: alfa_stopnie
+  - kind: evaluate
+    expr: \frac{3\cdot\sqrt{2}}{3}
+    part: tg_beta
+  skills:
+  - kąt płaski przy wierzchołku ostrosłupa
+  - rozpoznanie trójkąta równobocznego
+  - kąt nachylenia krawędzi bocznej
+  - kąt dwuścienny ściana boczna–podstawa
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 4 parts solved fresh · det: [krawedz_boczna] SymPy solved it fresh: 6.0 vs 6.0 (tol 1e-09)
+      ; [wysokosc_H] SymPy solved it fresh: 4.242640687119285 vs 4.242640687119285 (tol 1e-06) ; [alfa_stopnie]
+      SymPy solved it fresh: 45.0 vs 45.0 (tol 1e-06) ; [tg_beta] SymPy solved it fresh: 1.4142135623730951
+      vs 1.4142135623730951 (tol 1e-09)'
+- id: g-cm-06
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: analiza błędu — rzut apotemy a rzut krawędzi bocznej
+  statement: 'W ostrosłupie prawidłowym czworokątnym ABCDS krawędź podstawy ma długość a = 10, a wysokość
+    ostrosłupa ma długość H = 5. Uczeń obliczył kąt β nachylenia ściany bocznej do płaszczyzny podstawy
+    tak: „rzutem jest połowa przekątnej podstawy, czyli \frac{10\sqrt{2}}{2}=5\sqrt{2}, więc \operatorname{tg}\beta=\frac{5}{5\sqrt{2}}=\frac{\sqrt{2}}{2}\approx
+    0{,}7071 i β ≈ 35°16′”. Wskaż błąd w tym rozumowaniu i podaj poprawną miarę kąta β.'
+  statement_latex: \operatorname{tg}\beta=\frac{H}{\frac{a}{2}}=\frac{5}{\frac{10}{2}}
+  solution: |-
+    Błędne rozumowanie: uczeń przyjął, że rzutem odcinka wyznaczającego kąt nachylenia ściany bocznej jest odcinek OA = R = \frac{a\sqrt{2}}{2}=5\sqrt{2}, i otrzymał \operatorname{tg}\beta=\frac{5}{5\sqrt{2}}=\frac{\sqrt{2}}{2}, czyli β ≈ 35°16′.
+    Na czym polega błąd: odcinek OA o długości R jest rzutem KRAWĘDZI BOCZNEJ, a nie apotemy; służy on do wyznaczenia kąta α nachylenia krawędzi bocznej. Kąt dwuścienny między ścianą boczną a podstawą mierzymy w trójkącie SOM, gdzie M jest środkiem krawędzi podstawy, bo dopiero SM i OM są prostopadłe do wspólnej krawędzi AB.
+    Poprawnie: r = OM = \frac{a}{2} = 5, więc \operatorname{tg}\beta=\frac{H}{r}=\frac{5}{5}=1, zatem β = 45°.
+    Kontrola: β = 45° > α ≈ 35°16′, zgodnie z zależnością \operatorname{tg}\beta=\sqrt{2}\cdot\operatorname{tg}\alpha.
+  solution_steps:
+  - 'Odtwórz błędne rachunki: \operatorname{tg}\beta=\frac{5}{5\sqrt{2}}=\frac{\sqrt{2}}{2}, β ≈ 35°16′.'
+  - 'Nazwij błąd: R = \frac{a\sqrt{2}}{2} jest rzutem krawędzi bocznej, a nie apotemy.'
+  - 'Poprawnie wskaż rzut apotemy: OM = r = \frac{a}{2} = 5.'
+  - Oblicz \operatorname{tg}\beta=\frac{5}{5}=1, czyli β = 45°.
+  - 'Sprawdź sensowność: β > α, bo r < R.'
+  answer:
+    kind: NUMERIC
+    value: 45.0
+    tol: 1.0e-06
+    latex: 45^\circ
+  checks:
+  - kind: evaluate
+    expr: \frac{180}{\pi}\cdot\arctan\left(\frac{5}{\frac{10}{2}}\right)
+  skills:
+  - kąt nachylenia ściany bocznej
+  - promień okręgu wpisanego r
+  - rozróżnianie r i R
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 45.0 vs 45.0 (tol 1e-06)'
+- id: g-cm-07
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: analiza błędu — zły kąt liniowy kąta dwuściennego
+  statement: 'W ostrosłupie prawidłowym czworokątnym ABCDS krawędź podstawy ma długość a = 4, a wysokość
+    ostrosłupa ma długość H = 2\sqrt{3}. Uczeń stwierdził: „kąt między ścianą boczną ABS a podstawą to
+    kąt SAB między krawędzią boczną SA a krawędzią podstawy AB”, i obliczył go z zależności \cos\sphericalangle
+    SAB=\frac{\frac{4}{2}}{2\sqrt{5}}\approx 0{,}4472, otrzymując około 63°26′. Wyjaśnij, dlaczego to
+    rozumowanie jest błędne, i oblicz poprawną miarę kąta nachylenia ściany bocznej do płaszczyzny podstawy.'
+  statement_latex: \operatorname{tg}\beta=\frac{H}{\frac{a}{2}}=\frac{2\sqrt{3}}{\frac{4}{2}}
+  solution: |-
+    Błędne rozumowanie: uczeń policzył kąt SAB między krawędzią boczną a krawędzią podstawy. Rzeczywiście R = \frac{4\sqrt{2}}{2}=2\sqrt{2}, więc krawędź boczna ma długość b=\sqrt{\left(2\sqrt{3}\right)^2+\left(2\sqrt{2}\right)^2}=\sqrt{12+8}=2\sqrt{5}, a \cos\sphericalangle SAB=\frac{2}{2\sqrt{5}}\approx 0{,}4472, czyli ∠SAB ≈ 63°26′ — ale to NIE jest kąt dwuścienny.
+    Na czym polega błąd: kąt dwuścienny mierzymy ramionami prostopadłymi do wspólnej krawędzi ścian. Krawędź SA nie jest prostopadła do AB, więc kąt SAB nie jest kątem liniowym.
+    Poprawnie: niech M będzie środkiem krawędzi AB, a O środkiem podstawy. Wtedy SM ⟂ AB (apotema) oraz OM ⟂ AB, więc kąt SMO jest szukanym kątem liniowym. W trójkącie prostokątnym SOM: r = OM = \frac{a}{2}=2, \operatorname{tg}\beta=\frac{2\sqrt{3}}{2}=\sqrt{3}, zatem β = 60°.
+  solution_steps:
+  - 'Odtwórz błąd: uczeń policzył kąt SAB ≈ 63°26′ między krawędzią boczną a krawędzią podstawy.'
+  - 'Wskaż przyczynę błędu: SA nie jest prostopadła do wspólnej krawędzi AB, więc ∠SAB nie jest kątem
+    liniowym kąta dwuściennego.'
+  - Wybierz M — środek AB; wtedy SM ⟂ AB i OM ⟂ AB, więc kątem liniowym jest ∠SMO.
+  - 'W trójkącie SOM: r = 2, \operatorname{tg}\beta=\frac{2\sqrt{3}}{2}=\sqrt{3}.'
+  - 'Odczytaj poprawną odpowiedź: β = 60°.'
+  answer:
+    kind: NUMERIC
+    value: 60.0
+    tol: 1.0e-06
+    latex: 60^\circ
+  checks:
+  - kind: evaluate
+    expr: \frac{180}{\pi}\cdot\arctan\left(\frac{2\sqrt{3}}{\frac{4}{2}}\right)
+  skills:
+  - kąt dwuścienny i jego kąt liniowy
+  - apotema ostrosłupa
+  - twierdzenie o trzech prostych prostopadłych
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 60.0 vs 60.0 (tol 1e-06)'
+- id: g-cm-08
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: analiza błędu — kąt rozwarcia a kąt tworzącej z osią
+  statement: 'Dany jest stożek obrotowy o promieniu podstawy r = 6 i wysokości h = 6\sqrt{3}. Uczeń zapisał:
+    „\operatorname{tg}(\text{kąta rozwarcia})=\frac{r}{h}=\frac{6}{6\sqrt{3}}=\frac{\sqrt{3}}{3}, więc
+    kąt rozwarcia stożka ma miarę 30°”. Wskaż błąd w tym rozumowaniu i oblicz poprawną miarę kąta rozwarcia
+    tego stożka.'
+  statement_latex: \operatorname{tg}\beta=\frac{6}{6\sqrt{3}},\qquad 2\beta=?
+  solution: |-
+    Błędne rozumowanie: uczeń obliczył \operatorname{tg}\beta=\frac{6}{6\sqrt{3}}=\frac{\sqrt{3}}{3} i otrzymaną wartość 30° nazwał kątem rozwarcia, otrzymując błędną odpowiedź 30°.
+    Na czym polega błąd: wysokość stożka dzieli trójkąt osiowy na dwa przystające trójkąty prostokątne, a kąt, dla którego \operatorname{tg}\beta=\frac{r}{h}, to kąt β między TWORZĄCĄ a OSIĄ stożka — czyli tylko połowa kąta przy wierzchołku przekroju osiowego.
+    Poprawnie: β = 30°, a kąt rozwarcia to cały kąt przy wierzchołku przekroju osiowego, czyli 2β = 2·30° = 60°.
+    Kontrola: kąt nachylenia tworzącej do podstawy to α = 90° − β = 60°, a 180° − 2α = 180° − 120° = 60°. ✓
+  solution_steps:
+  - 'Odtwórz błąd: uczeń utożsamił kąt rozwarcia z kątem między tworzącą a osią i podał 30°.'
+  - 'Wyjaśnij: \operatorname{tg}\beta=\frac{r}{h} dotyczy połowy trójkąta osiowego, czyli kąta tworzącej
+    z osią.'
+  - 'Oblicz β: \operatorname{tg}\beta=\frac{6}{6\sqrt{3}}=\frac{\sqrt{3}}{3}, więc β = 30°.'
+  - 'Podwój: kąt rozwarcia = 2β = 60°.'
+  - Sprawdź zależnością 2β = 180° − 2α, gdzie α = 60°.
+  answer:
+    kind: NUMERIC
+    value: 60.0
+    tol: 1.0e-06
+    latex: 60^\circ
+  checks:
+  - kind: evaluate
+    expr: 2\cdot\frac{180}{\pi}\cdot\arctan\left(\frac{6}{6\sqrt{3}}\right)
+  skills:
+  - kąt rozwarcia stożka
+  - przekrój osiowy stożka
+  - funkcje trygonometryczne kąta ostrego
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 60.0 vs 60.0 (tol 1e-06)'
+- id: g-cm-09
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: analiza błędu — nazwa „kąt rozwarcia” a kąt rozwarty
+  statement: 'W stożku obrotowym o promieniu podstawy r = 5 tworząca jest nachylona do płaszczyzny podstawy
+    pod kątem 60°. Uczeń napisał: „kąt rozwarcia = 180° − 2·60° = 60°, ale kąt rozwarcia musi być rozwarty,
+    więc odpowiedzią jest 120°”. Oceń to rozumowanie, podaj poprawną miarę kąta rozwarcia tego stożka
+    oraz oblicz jego wysokość.'
+  statement_latex: 2\beta=180^\circ-2\cdot 60^\circ,\qquad h=5\cdot\operatorname{tg}60^\circ
+  solution: |-
+    Błędne rozumowanie: uczeń poprawnie wyliczył 180° − 2·60° = 60°, ale odrzucił ten wynik, sądząc, że „kąt rozwarcia” z definicji musi być kątem rozwartym, i podał 120°.
+    Na czym polega błąd: nazwa „kąt rozwarcia” pochodzi od rozwarcia stożka, a nie od kąta rozwartego. Kąt rozwarcia może mieć dowolną miarę z przedziału (0°, 180°); tu przekrój osiowy jest trójkątem równobocznym o kącie 60° przy wierzchołku.
+    Poprawnie: α = 60° jest kątem przy podstawie trójkąta osiowego, więc kąt między tworzącą a osią to β = 90° − 60° = 30°, a kąt rozwarcia 2β = 60°.
+    Wysokość: w trójkącie prostokątnym o przyprostokątnych r = 5 i h zachodzi \operatorname{tg}60^\circ=\frac{h}{5}, więc h = 5\sqrt{3}.
+  solution_steps:
+  - 'Odtwórz błąd: uczeń odrzucił wynik 60°, bo uznał, że kąt rozwarcia musi być rozwarty, i podał 120°.'
+  - Wyjaśnij, że nazwa nie narzuca miary kąta — kąt rozwarcia należy do przedziału (0°, 180°).
+  - Oblicz β = 90° − 60° = 30°, więc kąt rozwarcia 2β = 60°.
+  - 'Oblicz wysokość: \operatorname{tg}60^\circ=\frac{h}{5}, więc h = 5\sqrt{3}.'
+  - Zauważ, że przekrój osiowy jest trójkątem równobocznym o boku 10 — potwierdza to wynik 60°.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: kąt rozwarcia
+      answer:
+        kind: NUMERIC
+        value: 60.0
+        tol: 1.0e-06
+        latex: 60^\circ
+    - name: wysokość stożka
+      answer:
+        kind: SYMBOLIC
+        latex: 5\sqrt{3}
+  checks:
+  - kind: evaluate
+    expr: 180-2\cdot 60
+    part: kąt rozwarcia
+  - kind: evaluate
+    expr: 5\cdot\tan\left(\frac{\pi}{3}\right)
+    part: wysokość stożka
+  skills:
+  - kąt rozwarcia stożka
+  - zależność 2β = 180° − 2α
+  - obliczanie wysokości stożka
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [kąt rozwarcia] SymPy solved it fresh: 60.0 vs 60.0 (tol 1e-06)
+      ; [wysokość stożka] SymPy solved it fresh: 8.660254037844387 vs 8.660254037844387 (tol 1e-09)'
+- id: g-cm-10
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: analiza błędu — pominięcie rzutu przekątnej na podstawę
+  statement: 'Dany jest prostopadłościan ABCDEFGH, w którym podstawa ABCD jest prostokątem o bokach AB
+    = 12 i BC = 9, a krawędź boczna AE ma długość 15 i jest prostopadła do płaszczyzny podstawy. Uczeń
+    obliczył kąt nachylenia przekątnej AG tego prostopadłościanu do płaszczyzny podstawy tak: „\operatorname{tg}\alpha=\frac{15}{12}=1{,}25,
+    więc α ≈ 51°20′”. Wskaż błąd w tym rozumowaniu i oblicz poprawną miarę kąta nachylenia przekątnej
+    AG do płaszczyzny podstawy.'
+  statement_latex: \operatorname{tg}\alpha=\frac{15}{\sqrt{12^2+9^2}}
+  solution: |-
+    Błędne rozumowanie: uczeń przyjął jako rzut przekątnej bryły krawędź podstawy AB = 12 i otrzymał \operatorname{tg}\alpha=\frac{15}{12}=1{,}25, czyli α ≈ 51°20′.
+    Na czym polega błąd: krawędź CG jest prostopadła do płaszczyzny podstawy, więc rzutem punktu G na podstawę jest punkt C, a rzutem przekątnej AG jest PRZEKĄTNA PODSTAWY AC, a nie krawędź AB. (Odcinek AB jest rzutem przekątnej ściany bocznej ABFE, co daje inny, większy kąt.)
+    Poprawnie: AC=\sqrt{12^2+9^2}=\sqrt{144+81}=\sqrt{225}=15. W trójkącie prostokątnym ACG mamy \operatorname{tg}\alpha=\frac{CG}{AC}=\frac{15}{15}=1, zatem α = 45°.
+  solution_steps:
+  - 'Odtwórz błąd: uczeń użył krawędzi AB = 12 jako rzutu przekątnej i otrzymał α ≈ 51°20′.'
+  - 'Nazwij błąd: rzutem przekątnej prostopadłościanu na podstawę jest przekątna podstawy AC.'
+  - Oblicz AC=\sqrt{12^2+9^2}=15.
+  - Zapisz \operatorname{tg}\alpha=\frac{15}{15}=1.
+  - 'Odczytaj poprawną miarę kąta: α = 45°.'
+  answer:
+    kind: NUMERIC
+    value: 45.0
+    tol: 1.0e-06
+    latex: 45^\circ
+  checks:
+  - kind: evaluate
+    expr: \frac{180}{\pi}\cdot\arctan\left(\frac{15}{\sqrt{12^2+9^2}}\right)
+  skills:
+  - rzut prostokątny odcinka na płaszczyznę
+  - przekątna prostopadłościanu
+  - funkcje trygonometryczne kąta ostrego
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 45.0 vs 45.0 (tol 1e-06)'
+- id: g-ch-t02
+  slot: CHALLENGE
+  ramp_index: 0
+  difficulty: 4
+  exercise_type: stożek — od objętości do kątów (zadanie odwrotne)
+  statement: Tworząca pewnego stożka obrotowego jest nachylona do płaszczyzny podstawy pod kątem 60°,
+    a objętość tego stożka jest równa 9\sqrt{3}\pi. Oblicz długość tworzącej tego stożka oraz miarę kąta
+    rozwarcia tego stożka.
+  statement_latex: V=\frac{1}{3}\cdot\pi\cdot r^{2}\cdot h=9\cdot\sqrt{3}\cdot\pi,\qquad \operatorname{tg}60^\circ=\frac{h}{r}
+  solution: |-
+    Oznaczmy przez r promień podstawy stożka (r > 0). Kąt nachylenia tworzącej do podstawy to kąt przy podstawie trójkąta osiowego, więc \operatorname{tg}60^\circ = \frac{h}{r}, skąd h = r\cdot\sqrt{3}.
+
+    Z warunku na objętość:
+    V = \frac{1}{3}\cdot\pi\cdot r^{2}\cdot r\cdot\sqrt{3} = \frac{\sqrt{3}}{3}\cdot\pi\cdot r^{3} = 9\cdot\sqrt{3}\cdot\pi,
+    zatem r^{3} = 27, czyli r = 3 (oraz h = 3\sqrt{3}).
+
+    Tworząca: l = \sqrt{r^{2}+h^{2}} = \sqrt{9+27} = \sqrt{36} = 6. (Można też krócej: \cos60^\circ = \frac{r}{l}, więc l = 2r = 6.)
+
+    Kąt między tworzącą a osią stożka: β = 90° − 60° = 30°, a kąt rozwarcia to CAŁY kąt przy wierzchołku przekroju osiowego, czyli 2β = 180° − 2·60° = 60°.
+
+    Odpowiedź: l = 6, kąt rozwarcia ma miarę 60° (przekrój osiowy jest trójkątem równobocznym o boku 6).
+  solution_steps:
+  - 'Wprowadź niewiadomą: r — promień podstawy, r > 0.'
+  - 'Z kąta nachylenia tworzącej: \operatorname{tg}60^\circ = \frac{h}{r}, więc h = r\cdot\sqrt{3}.'
+  - 'Podstaw do wzoru na objętość: \frac{1}{3}\cdot\pi\cdot r^{2}\cdot r\cdot\sqrt{3} = 9\cdot\sqrt{3}\cdot\pi,
+    stąd r^{3} = 27 i r = 3.'
+  - 'Oblicz tworzącą: l = \sqrt{3^{2}+\left(3\sqrt{3}\right)^{2}} = 6 (lub l = 2r).'
+  - 'Kąt rozwarcia: 2\beta = 180^\circ - 2\cdot 60^\circ = 60^\circ.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: tworzaca_l
+      answer:
+        kind: NUMERIC
+        value: 6.0
+    - name: kat_rozwarcia_stopnie
+      answer:
+        kind: NUMERIC
+        value: 60.0
+  checks:
+  - kind: solve_equation
+    expr: \frac{1}{3}\cdot\pi\cdot\left(\frac{l}{2}\right)^{2}\cdot\frac{l\cdot\sqrt{3}}{2}=9\cdot\sqrt{3}\cdot\pi
+    var: l
+    part: tworzaca_l
+  - kind: evaluate
+    expr: 180-2\cdot 60
+    part: kat_rozwarcia_stopnie
+  stated_model:
+    variable: r
+    objective_latex: V\left(r\right)=\frac{1}{3}\cdot\pi\cdot r^{2}\cdot r\cdot\sqrt{3}
+    domain_lo: '0'
+    goal: value
+    constraint_used: h=r\cdot\operatorname{tg}60^\circ,\ V=9\cdot\sqrt{3}\cdot\pi
+  skills:
+  - wprowadzenie zmiennej pomocniczej
+  - objętość stożka
+  - kąt tworzącej z podstawą
+  - kąt rozwarcia stożka
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (PARSE_ERROR: "UnexpectedCharacters: No terminal
+      matches ''\\'' in the current parser context, at line 1 col 41") — human review'
+- id: g-ch-t03
+  slot: CHALLENGE
+  ramp_index: 1
+  difficulty: 5
+  exercise_type: bryła obrotowa — wybór osi obrotu i filtr warunkiem na kąt
+  statement: Trójkąt prostokątny, w którym jedna z przyprostokątnych ma długość 6, a przeciwprostokątna
+    ma długość 10, obrócono wokół prostej zawierającej jedną z jego przyprostokątnych. Otrzymany stożek
+    obrotowy ma kąt rozwarcia większy od 90°. Oblicz objętość tego stożka oraz cosinus kąta nachylenia
+    tworzącej do płaszczyzny podstawy. Uzasadnij, że obrót wokół drugiej przyprostokątnej nie daje bryły
+    spełniającej warunki zadania.
+  statement_latex: a=6,\ c=10\ \Rightarrow\ b=\sqrt{10^{2}-6^{2}}=8,\qquad V=\frac{1}{3}\cdot\pi\cdot
+    r^{2}\cdot h,\qquad \operatorname{tg}\beta=\frac{r}{h}
+  solution: |-
+    Druga przyprostokątna ma długość \sqrt{10^{2}-6^{2}} = \sqrt{64} = 8.
+
+    Przy obrocie wokół prostej zawierającej przyprostokątną ta przyprostokątna staje się wysokością stożka, druga — promieniem podstawy, a przeciwprostokątna — tworzącą (zawsze l = 10).
+
+    Kąt rozwarcia to 2β, gdzie β jest kątem między tworzącą a osią i \operatorname{tg}\beta = \frac{r}{h}. Warunek 2β > 90° oznacza β > 45°, czyli \operatorname{tg}\beta > 1, a więc r > h.
+
+    Wariant I — oś zawiera przyprostokątną długości 6: h = 6, r = 8, wtedy \operatorname{tg}\beta = \frac{8}{6} = \frac{4}{3} > 1, więc β > 45° i kąt rozwarcia jest większy od 90°. Ten wariant spełnia warunki zadania.
+    Wariant II — oś zawiera przyprostokątną długości 8: h = 8, r = 6, wtedy \operatorname{tg}\beta = \frac{6}{8} = \frac{3}{4} < 1, więc β < 45° i kąt rozwarcia byłby mniejszy od 90°. Ten wariant odrzucamy.
+
+    Dla wariantu I:
+    V = \frac{1}{3}\cdot\pi\cdot 8^{2}\cdot 6 = 128\pi.
+    Kąt α nachylenia tworzącej do podstawy jest kątem przy podstawie trójkąta osiowego: \cos\alpha = \frac{r}{l} = \frac{8}{10} = \frac{4}{5} (α ≈ 36°52').
+
+    Odpowiedź: V = 128\pi, \cos\alpha = \frac{4}{5}.
+  solution_steps:
+  - 'Z twierdzenia Pitagorasa wyznacz drugą przyprostokątną: \sqrt{10^{2}-6^{2}} = 8.'
+  - Zauważ, że oś obrotu nie jest wskazana — rozważ oba możliwe obroty; w każdym l = 10.
+  - 'Zapisz warunek na kąt rozwarcia: 2\beta > 90^\circ \iff \operatorname{tg}\beta = \frac{r}{h} > 1
+    \iff r > h.'
+  - Odrzuć wariant h = 8, r = 6 (bo \frac{6}{8} < 1); przyjmij h = 6, r = 8.
+  - 'Oblicz objętość: V = \frac{1}{3}\cdot\pi\cdot 8^{2}\cdot 6 = 128\pi.'
+  - Oblicz \cos\alpha = \frac{r}{l} = \frac{8}{10} = \frac{4}{5}.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: objetosc
+      answer:
+        kind: NUMERIC
+        value: 402.1238596594935
+        tol: 1.0e-06
+    - name: cos_alfa
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{4}{5}
+    - name: uzasadnienie_wyboru_osi
+      answer:
+        kind: NOT_MACHINE_CHECKABLE
+        reason: Należy wykazać, że przy obrocie wokół przyprostokątnej długości 8 mamy r = 6, h = 8, więc
+          \operatorname{tg}\beta = \frac{6}{8} < 1, czyli \beta < 45^\circ i kąt rozwarcia 2\beta < 90^\circ
+          — warunek zadania nie jest spełniony.
+  checks:
+  - kind: evaluate
+    expr: \frac{1}{3}\cdot\pi\cdot 8^{2}\cdot 6
+    part: objetosc
+  - kind: evaluate
+    expr: \frac{8}{10}
+    part: cos_alfa
+  stated_model:
+    variable: r
+    objective_latex: V=\frac{1}{3}\cdot\pi\cdot r^{2}\cdot h,\quad \left(r,h\right)\in\left\{\left(8,6\right),\left(6,8\right)\right\}
+    goal: value
+    constraint_used: kąt rozwarcia 2\beta>90^\circ,\ \text{czyli } r>h
+  skills:
+  - obrót trójkąta prostokątnego wokół przyprostokątnej
+  - kąt rozwarcia stożka
+  - filtrowanie rozwiązania warunkiem
+  - objętość stożka
+  - cosinus kąta ostrego
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (NOT_MACHINE_CHECKABLE: ''set literal'') — human
+      review'
+- id: g-ch-t04
+  slot: CHALLENGE
+  ramp_index: 2
+  difficulty: 5
+  exercise_type: 'modelowanie: wzór na kąt w ostrosłupie z dziedziną i kontrolą ograniczenia'
+  statement: |-
+    Namiot ma kształt ostrosłupa prawidłowego czworokątnego ABCDS: podstawa ABCD jest kwadratem o boku długości 4 m, leżącym na poziomym podłożu, a wierzchołek S znajduje się nad środkiem O tego kwadratu. Wysokość namiotu, czyli długość odcinka SO, oznaczmy przez x (w metrach). Namiot ma stanąć w hali, w której nie może być wyższy niż 3,2 m.
+    a) Wyznacz wzór wyrażający tangens kąta α nachylenia krawędzi bocznej SA do płaszczyzny podstawy w zależności od x oraz podaj dziedzinę tak otrzymanej funkcji, uwzględniając warunki zadania.
+    b) Producent wymaga, aby ściana boczna namiotu była nachylona do płaszczyzny podłoża pod kątem nie mniejszym niż 60°. Wyznacz najmniejszą wysokość namiotu spełniającą to wymaganie i rozstrzygnij, czy w tej hali można ustawić namiot spełniający jednocześnie oba warunki.
+  statement_latex: \operatorname{tg}\alpha=\frac{x}{\frac{4\cdot\sqrt{2}}{2}},\qquad \operatorname{tg}\beta=\frac{x}{\frac{4}{2}}\ge\operatorname{tg}60^\circ=\sqrt{3}
+  solution: |-
+    a) Rzutem krawędzi bocznej SA na płaszczyznę podstawy jest odcinek OA, czyli połowa przekątnej kwadratu: R = \frac{4\cdot\sqrt{2}}{2} = 2\sqrt{2}. W trójkącie prostokątnym SOA (kąt prosty przy O):
+    \operatorname{tg}\alpha = \frac{SO}{OA} = \frac{x}{2\sqrt{2}} = \frac{x\cdot\sqrt{2}}{4}.
+    Wysokość musi być dodatnia i nie większa niż 3,2 m, więc dziedziną jest przedział \left(0;\ 3{,}2\right\rangle.
+
+    b) Kąt β nachylenia ściany bocznej do podstawy mierzymy w trójkącie prostokątnym SOM, gdzie M jest środkiem krawędzi AB, a OM = r = \frac{4}{2} = 2 (to rzut apotemy). Zatem \operatorname{tg}\beta = \frac{x}{2}.
+    Warunek β ≥ 60° oznacza \frac{x}{2} \ge \sqrt{3}, czyli x \ge 2\sqrt{3} \approx 3{,}46.
+    Najmniejsza wysokość spełniająca wymaganie producenta to 2\sqrt{3} m ≈ 3,46 m.
+
+    Ponieważ 2\sqrt{3} \approx 3{,}46 > 3{,}2, żadna wysokość z dziedziny \left(0;\ 3{,}2\right\rangle nie spełnia warunku producenta. Odpowiedź: nie, takiego namiotu nie da się ustawić w tej hali.
+
+    Uwaga: gdyby do kąta ściany bocznej użyć błędnie odcinka R = 2\sqrt{2} zamiast r = 2, otrzymalibyśmy x = 2\sqrt{6} \approx 4{,}90 — kąt ściany bocznej liczymy zawsze z promieniem okręgu wpisanego w podstawę.
+  solution_steps:
+  - 'Wyznacz rzut krawędzi bocznej na podstawę: R = OA = \frac{4\cdot\sqrt{2}}{2} = 2\sqrt{2}.'
+  - W trójkącie prostokątnym SOA zapisz \operatorname{tg}\alpha = \frac{x}{2\sqrt{2}} = \frac{x\cdot\sqrt{2}}{4}.
+  - 'Ustal dziedzinę z warunków zadania: x > 0 oraz x \le 3{,}2, czyli x \in \left(0;\ 3{,}2\right\rangle.'
+  - Dla ściany bocznej użyj r = \frac{4}{2} = 2 (rzut apotemy) i zapisz \operatorname{tg}\beta = \frac{x}{2}.
+  - 'Rozwiąż warunek \frac{x}{2} \ge \sqrt{3}: x \ge 2\sqrt{3}\ \text{m} \approx 3{,}46\ \text{m} — to
+    najmniejsza dopuszczalna wysokość.'
+  - 'Porównaj z ograniczeniem hali: 2\sqrt{3} > 3{,}2, więc obu warunków nie da się spełnić jednocześnie
+    — odpowiedź: nie.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wzor_tg_alfa
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{x\cdot\sqrt{2}}{4}
+    - name: dziedzina
+      answer:
+        kind: INTERVAL
+        lo: '0'
+        hi: '3.2'
+        hi_open: false
+    - name: najmniejsza_wysokosc
+      answer:
+        kind: NUMERIC
+        value: 3.4641016151377544
+        tol: 1.0e-06
+    - name: czy_mozliwe
+      answer:
+        kind: BOOLEAN
+        truth: false
+  checks:
+  - kind: simplify
+    expr: \frac{x}{\frac{4\cdot\sqrt{2}}{2}}
+    part: wzor_tg_alfa
+  - kind: solve_equation
+    expr: \frac{x}{2}=\sqrt{3}
+    part: najmniejsza_wysokosc
+  stated_model:
+    variable: x
+    objective_latex: \operatorname{tg}\alpha\left(x\right)=\frac{x\cdot\sqrt{2}}{4}
+    domain_lo: '0'
+    domain_hi: '3.2'
+    domain_hi_open: false
+    goal: value
+    constraint_used: x>0,\ x\le 3{,}2,\ \operatorname{tg}\beta=\frac{x}{2}\ge\sqrt{3}
+  skills:
+  - rozróżnianie r i R w ostrosłupie prawidłowym czworokątnym
+  - wzór funkcyjny i dziedzina
+  - nierówność z wartością tg 60°
+  - sprawdzenie warunku wykonalności
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (PARSE_ERROR: "UnexpectedCharacters: No terminal
+      matches ''\\'' in the current parser context, at line 1 col 1") — human review'

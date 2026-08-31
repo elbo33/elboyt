@@ -1,0 +1,834 @@
+section: jedynka-trygonometryczna
+name: Jedynka trygonometryczna i tangens jako sin/cos
+scope: The Pythagorean identity sin^2(a) + cos^2(a) = 1 and tan(a) = sin(a)/cos(a); recovering the remaining
+  trig values from one, and simplifying trigonometric expressions.
+requirements:
+- VII.2
+counts:
+  total: 16
+  DETERMINISTIC: 13
+  NOT_MACHINE_CHECKABLE: 3
+exercises:
+- id: g-th-00
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: obliczenie wartości funkcji z jedynki trygonometrycznej
+  statement: Kąt \alpha jest ostry oraz \sin\alpha = \frac{4}{5}. Oblicz \cos\alpha.
+  statement_latex: \sin^2\alpha+\cos^2\alpha=1,\qquad \sin\alpha=\frac{4}{5}
+  solution: |-
+    Korzystamy z jedynki trygonometrycznej: \sin^2\alpha+\cos^2\alpha=1.
+    Podstawiamy daną wartość: \left(\frac{4}{5}\right)^2+\cos^2\alpha=1, czyli \frac{16}{25}+\cos^2\alpha=1.
+    Stąd \cos^2\alpha=1-\frac{16}{25}=\frac{9}{25}.
+    Kąt \alpha jest ostry, więc \cos\alpha>0 i bierzemy pierwiastek dodatni: \cos\alpha=\frac{3}{5}.
+    Sprawdzenie: \left(\frac{4}{5}\right)^2+\left(\frac{3}{5}\right)^2=\frac{16}{25}+\frac{9}{25}=1.
+    Odpowiedź: \cos\alpha=\frac{3}{5}.
+  solution_steps:
+  - 'Zapisz jedynkę trygonometryczną: \sin^2\alpha+\cos^2\alpha=1.'
+  - 'Podstaw \sin\alpha=\frac{4}{5}: \frac{16}{25}+\cos^2\alpha=1.'
+  - Wyznacz \cos^2\alpha=\frac{9}{25}.
+  - Kąt ostry, więc \cos\alpha=\frac{3}{5} (znak plus).
+  answer:
+    kind: SYMBOLIC
+    latex: \frac{3}{5}
+  checks:
+  - kind: evaluate
+    expr: \sqrt{1-\left(\frac{4}{5}\right)^{2}}
+  skills:
+  - jedynka trygonometryczna
+  - wybór znaku pierwiastka dla kąta ostrego
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 0.6 vs 0.6 (tol 1e-09)'
+- id: g-th-01
+  slot: THEORY_SUPPORT
+  ramp_index: 1
+  difficulty: 1
+  exercise_type: upraszczanie wyrażenia trygonometrycznego
+  statement: Kąt \alpha jest ostry. Uprość wyrażenie W = \frac{1-\cos^{2}\alpha}{\sin\alpha}.
+  statement_latex: W=\frac{1-\cos^{2}\alpha}{\sin\alpha}
+  solution: |-
+    Dla kąta ostrego \sin\alpha>0, więc mianownik jest różny od zera i wyrażenie ma sens.
+    Z jedynki trygonometrycznej \sin^2\alpha+\cos^2\alpha=1 otrzymujemy 1-\cos^2\alpha=\sin^2\alpha.
+    Zatem W=\frac{\sin^{2}\alpha}{\sin\alpha}=\sin\alpha (skróciliśmy przez \sin\alpha\neq 0).
+    Sprawdzenie dla \alpha=30^\circ: \frac{1-\left(\frac{\sqrt3}{2}\right)^2}{\frac12}=\frac{\frac14}{\frac12}=\frac12=\sin 30^\circ.
+    Odpowiedź: W=\sin\alpha.
+  solution_steps:
+  - Zauważ, że dla kąta ostrego \sin\alpha\neq 0.
+  - Zastąp 1-\cos^{2}\alpha przez \sin^{2}\alpha.
+  - Skróć ułamek \frac{\sin^{2}\alpha}{\sin\alpha}=\sin\alpha.
+  answer:
+    kind: SYMBOLIC
+    latex: \sin\alpha
+  checks:
+  - kind: simplify
+    expr: \frac{1-\cos^{2}\alpha}{\sin\alpha}
+    var: \alpha
+  skills:
+  - zamiana 1-\cos^2\alpha na \sin^2\alpha
+  - skracanie ułamka
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: ''\\sin\\alpha'' vs ''sin(alpha)'''
+- id: g-th-02
+  slot: THEORY_SUPPORT
+  ramp_index: 2
+  difficulty: 1
+  exercise_type: zastosowanie definicji tangensa
+  statement: Kąt \alpha jest ostry, \sin\alpha = \frac{\sqrt{7}}{4} oraz \cos\alpha = \frac{3}{4}. Oblicz
+    \operatorname{tg}\alpha.
+  statement_latex: \operatorname{tg}\alpha=\frac{\sin\alpha}{\cos\alpha}=\frac{\frac{\sqrt{7}}{4}}{\frac{3}{4}}
+  solution: |-
+    Sprawdzamy, że dane są zgodne z jedynką: \left(\frac{\sqrt7}{4}\right)^2+\left(\frac34\right)^2=\frac{7}{16}+\frac{9}{16}=1.
+    Z definicji tangensa (\cos\alpha\neq 0):
+    \operatorname{tg}\alpha=\frac{\sin\alpha}{\cos\alpha}=\frac{\frac{\sqrt{7}}{4}}{\frac{3}{4}}=\frac{\sqrt{7}}{4}\cdot\frac{4}{3}=\frac{\sqrt{7}}{3}.
+    Odpowiedź: \operatorname{tg}\alpha=\frac{\sqrt{7}}{3}.
+  solution_steps:
+  - 'Zapisz definicję: \operatorname{tg}\alpha=\frac{\sin\alpha}{\cos\alpha} (sinus w liczniku).'
+  - Podstaw dane wartości.
+  - 'Wykonaj dzielenie ułamków: \frac{\sqrt{7}}{4}\cdot\frac{4}{3}=\frac{\sqrt{7}}{3}.'
+  answer:
+    kind: SYMBOLIC
+    latex: \frac{\sqrt{7}}{3}
+  checks:
+  - kind: evaluate
+    expr: \frac{\frac{\sqrt{7}}{4}}{\frac{3}{4}}
+  skills:
+  - tangens jako iloraz sinusa i cosinusa
+  - dzielenie ułamków
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 0.8819171036881969 vs 0.8819171036881969 (tol 1e-09)'
+- id: g-ex-03
+  slot: EXERCISE
+  ramp_index: 1
+  difficulty: 2
+  exercise_type: odtworzenie pozostałych wartości z danego cosinusa
+  statement: Kąt \alpha jest ostry oraz \cos\alpha = \frac{5}{13}. Oblicz \sin\alpha oraz \operatorname{tg}\alpha.
+  statement_latex: \cos\alpha=\frac{5}{13},\qquad \sin^{2}\alpha+\cos^{2}\alpha=1,\qquad \operatorname{tg}\alpha=\frac{\sin\alpha}{\cos\alpha}
+  solution: |-
+    Dana wartość jest sensowna, bo 0<\frac{5}{13}<1.
+    Z jedynki trygonometrycznej: \sin^{2}\alpha=1-\cos^{2}\alpha=1-\left(\frac{5}{13}\right)^{2}=1-\frac{25}{169}=\frac{144}{169}.
+    Kąt \alpha jest ostry, więc \sin\alpha>0 i \sin\alpha=\sqrt{\frac{144}{169}}=\frac{12}{13}.
+    Z definicji tangensa: \operatorname{tg}\alpha=\frac{\sin\alpha}{\cos\alpha}=\frac{\frac{12}{13}}{\frac{5}{13}}=\frac{12}{13}\cdot\frac{13}{5}=\frac{12}{5}.
+    Kontrola: to znany trójkąt 5-12-13.
+    Odpowiedź: \sin\alpha=\frac{12}{13}, \operatorname{tg}\alpha=\frac{12}{5}.
+  solution_steps:
+  - 'Sprawdź sensowność danej: 0<\cos\alpha<1.'
+  - 'Podstaw do jedynki: \sin^{2}\alpha=1-\frac{25}{169}=\frac{144}{169}.'
+  - 'Weź pierwiastek dodatni (kąt ostry): \sin\alpha=\frac{12}{13}.'
+  - Oblicz \operatorname{tg}\alpha=\frac{\frac{12}{13}}{\frac{5}{13}}=\frac{12}{5}.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: sin
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{12}{13}
+    - name: tg
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{12}{5}
+  checks:
+  - kind: evaluate
+    expr: \sqrt{1-\left(\frac{5}{13}\right)^{2}}
+    part: sin
+  - kind: evaluate
+    expr: \frac{\sqrt{1-\left(\frac{5}{13}\right)^{2}}}{\frac{5}{13}}
+    part: tg
+  skills:
+  - jedynka trygonometryczna
+  - definicja tangensa
+  - znak pierwiastka dla kąta ostrego
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [sin] SymPy solved it fresh: 0.9230769230769231 vs 0.9230769230769231
+      (tol 1e-09) ; [tg] SymPy solved it fresh: 2.4 vs 2.4 (tol 1e-09)'
+- id: g-ex-04
+  slot: EXERCISE
+  ramp_index: 2
+  difficulty: 3
+  exercise_type: odtworzenie sinusa i cosinusa z tangensa oraz obliczenie wartości wyrażenia
+  statement: Kąt \alpha jest ostry oraz \operatorname{tg}\alpha = \frac{3}{4}. Oblicz \sin\alpha, \cos\alpha
+    oraz wartość wyrażenia W = \frac{5\cdot\sin\alpha - 2\cdot\cos\alpha}{\sin\alpha + 4\cdot\cos\alpha}.
+  statement_latex: \operatorname{tg}\alpha=\frac{3}{4},\qquad W=\frac{5\cdot\sin\alpha-2\cdot\cos\alpha}{\sin\alpha+4\cdot\cos\alpha}
+  solution: |-
+    Z definicji tangensa \sin\alpha=\frac{3}{4}\cdot\cos\alpha. Wstawiamy do jedynki:
+    \left(\frac{3}{4}\cos\alpha\right)^{2}+\cos^{2}\alpha=1, czyli \frac{9}{16}\cos^{2}\alpha+\cos^{2}\alpha=1, więc \frac{25}{16}\cos^{2}\alpha=1.
+    Stąd \cos^{2}\alpha=\frac{16}{25}, a ponieważ kąt jest ostry, \cos\alpha=\frac{4}{5}.
+    Wtedy \sin\alpha=\frac{3}{4}\cdot\frac{4}{5}=\frac{3}{5}.
+    (Można też skorzystać z trójkąta o przyprostokątnych 3 i 4 oraz przeciwprostokątnej 5.)
+    Wartość wyrażenia najwygodniej policzyć, dzieląc licznik i mianownik przez \cos\alpha\neq 0:
+    W=\frac{5\operatorname{tg}\alpha-2}{\operatorname{tg}\alpha+4}=\frac{5\cdot\frac{3}{4}-2}{\frac{3}{4}+4}=\frac{\frac{15}{4}-2}{\frac{19}{4}}=\frac{\frac{7}{4}}{\frac{19}{4}}=\frac{7}{19}.
+    Kontrola liczbowa: licznik 5\cdot\frac{3}{5}-2\cdot\frac{4}{5}=\frac{7}{5}, mianownik \frac{3}{5}+4\cdot\frac{4}{5}=\frac{19}{5}, iloraz \frac{7}{19}.
+    Odpowiedź: \sin\alpha=\frac{3}{5}, \cos\alpha=\frac{4}{5}, W=\frac{7}{19}.
+  solution_steps:
+  - Zapisz \sin\alpha=\frac{3}{4}\cdot\cos\alpha.
+  - 'Wstaw do jedynki: \frac{25}{16}\cos^{2}\alpha=1, więc \cos^{2}\alpha=\frac{16}{25}.'
+  - 'Kąt ostry: \cos\alpha=\frac{4}{5}, stąd \sin\alpha=\frac{3}{5}.'
+  - 'Podziel licznik i mianownik W przez \cos\alpha: W=\frac{5\operatorname{tg}\alpha-2}{\operatorname{tg}\alpha+4}.'
+  - Podstaw \operatorname{tg}\alpha=\frac{3}{4} i oblicz W=\frac{7}{19}.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: sin
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{3}{5}
+    - name: cos
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{4}{5}
+    - name: W
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{7}{19}
+  checks:
+  - kind: evaluate
+    expr: \frac{\frac{3}{4}}{\sqrt{1+\left(\frac{3}{4}\right)^{2}}}
+    part: sin
+  - kind: evaluate
+    expr: \frac{1}{\sqrt{1+\left(\frac{3}{4}\right)^{2}}}
+    part: cos
+  - kind: evaluate
+    expr: \frac{5\cdot\frac{3}{5}-2\cdot\frac{4}{5}}{\frac{3}{5}+4\cdot\frac{4}{5}}
+    part: W
+  skills:
+  - metoda podstawienia \sin\alpha=t\cdot\cos\alpha
+  - jedynka trygonometryczna
+  - dzielenie licznika i mianownika przez \cos\alpha
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [sin] SymPy solved it fresh: 0.6 vs 0.6 (tol 1e-09) ; [cos]
+      SymPy solved it fresh: 0.8 vs 0.8 (tol 1e-09) ; [W] SymPy solved it fresh: 0.3684210526315789 vs
+      0.3684210526315789 (tol 1e-09)'
+- id: g-ex-05
+  slot: EXERCISE
+  ramp_index: 3
+  difficulty: 4
+  exercise_type: wyrażenia symetryczne z daną sumą \sin\alpha+\cos\alpha
+  statement: 'Kąt \alpha jest ostry oraz \sin\alpha + \cos\alpha = \frac{6}{5}. Oblicz: a) \sin\alpha\cdot\cos\alpha,
+    b) \left|\sin\alpha - \cos\alpha\right|, c) \sin^{3}\alpha + \cos^{3}\alpha.'
+  statement_latex: \sin\alpha+\cos\alpha=\frac{6}{5}
+  solution: |-
+    a) Podnosimy daną równość do kwadratu:
+    \left(\sin\alpha+\cos\alpha\right)^{2}=\left(\frac{6}{5}\right)^{2}=\frac{36}{25}.
+    Z drugiej strony \left(\sin\alpha+\cos\alpha\right)^{2}=\sin^{2}\alpha+2\sin\alpha\cos\alpha+\cos^{2}\alpha=1+2\sin\alpha\cos\alpha.
+    Zatem 1+2\sin\alpha\cos\alpha=\frac{36}{25}, czyli 2\sin\alpha\cos\alpha=\frac{11}{25} i \sin\alpha\cos\alpha=\frac{11}{50}.
+    b) \left(\sin\alpha-\cos\alpha\right)^{2}=1-2\sin\alpha\cos\alpha=1-\frac{11}{25}=\frac{14}{25}.
+    Ponieważ \sqrt{x^{2}}=|x|, mamy \left|\sin\alpha-\cos\alpha\right|=\sqrt{\frac{14}{25}}=\frac{\sqrt{14}}{5}.
+    c) Ze wzoru a^{3}+b^{3}=(a+b)\left(a^{2}-ab+b^{2}\right):
+    \sin^{3}\alpha+\cos^{3}\alpha=\left(\sin\alpha+\cos\alpha\right)\left(1-\sin\alpha\cos\alpha\right)=\frac{6}{5}\cdot\left(1-\frac{11}{50}\right)=\frac{6}{5}\cdot\frac{39}{50}=\frac{117}{125}.
+    Kontrola sensowności: dla kąta ostrego \sin\alpha+\cos\alpha\in(1;\sqrt{2}\,], a \frac{6}{5}=1{,}2 rzeczywiście należy do tego przedziału.
+    Odpowiedź: \sin\alpha\cos\alpha=\frac{11}{50}, \left|\sin\alpha-\cos\alpha\right|=\frac{\sqrt{14}}{5}, \sin^{3}\alpha+\cos^{3}\alpha=\frac{117}{125}.
+  solution_steps:
+  - 'Podnieś \sin\alpha+\cos\alpha=\frac{6}{5} do kwadratu i skorzystaj z jedynki: 1+2\sin\alpha\cos\alpha=\frac{36}{25}.'
+  - Wyznacz \sin\alpha\cos\alpha=\frac{11}{50}.
+  - 'Oblicz \left(\sin\alpha-\cos\alpha\right)^{2}=1-\frac{11}{25}=\frac{14}{25} i weź pierwiastek: \left|\sin\alpha-\cos\alpha\right|=\frac{\sqrt{14}}{5}.'
+  - 'Zastosuj a^{3}+b^{3}=(a+b)\left(1-\sin\alpha\cos\alpha\right): \sin^{3}\alpha+\cos^{3}\alpha=\frac{6}{5}\cdot\frac{39}{50}=\frac{117}{125}.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: iloczyn
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{11}{50}
+    - name: modul_roznicy
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{\sqrt{14}}{5}
+    - name: suma_szescianow
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{117}{125}
+  checks:
+  - kind: evaluate
+    expr: \frac{\left(\frac{6}{5}\right)^{2}-1}{2}
+    part: iloczyn
+  - kind: evaluate
+    expr: \sqrt{1-2\cdot\frac{11}{50}}
+    part: modul_roznicy
+  - kind: evaluate
+    expr: \frac{6}{5}\cdot\left(1-\frac{11}{50}\right)
+    part: suma_szescianow
+  skills:
+  - (\sin\alpha\pm\cos\alpha)^{2}=1\pm 2\sin\alpha\cos\alpha
+  - wzór na sumę sześcianów
+  - pierwiastek z kwadratu i wartość bezwzględna
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [iloczyn] SymPy solved it fresh: 0.22 vs 0.22 (tol 1e-09) ;
+      [modul_roznicy] SymPy solved it fresh: 0.7483314773547882 vs 0.7483314773547882 (tol 1e-09) ; [suma_szescianow]
+      SymPy solved it fresh: 0.9359999999999999 vs 0.9359999999999999 (tol 1e-09)'
+- id: g-ex-t00
+  slot: EXERCISE
+  ramp_index: 6
+  difficulty: 4
+  exercise_type: wyznaczanie sin, cos i tg z równania z funkcjami trygonometrycznymi
+  statement: Kąt α jest ostry i spełnia warunek \frac{2\cdot\sin\alpha + 3\cdot\cos\alpha}{\sin\alpha
+    - \cos\alpha} = 7. Oblicz tg α, a następnie sin α oraz cos α.
+  statement_latex: \frac{2\cdot\sin\alpha + 3\cdot\cos\alpha}{\sin\alpha - \cos\alpha} = 7
+  solution: |-
+    Ponieważ α jest kątem ostrym, to cos α > 0, więc licznik i mianownik ułamka możemy podzielić przez cos α (mianownik jest różny od zera na mocy warunku zadania). Otrzymujemy
+    \frac{2\cdot\frac{\sin\alpha}{\cos\alpha} + 3}{\frac{\sin\alpha}{\cos\alpha} - 1} = 7, czyli \frac{2\cdot\operatorname{tg}\alpha + 3}{\operatorname{tg}\alpha - 1} = 7.
+    Oznaczmy t = tg α. Wtedy 2t + 3 = 7\cdot\left(t - 1\right), czyli 2t + 3 = 7t - 7, stąd 5t = 10 i t = 2.
+    Zatem tg α = 2, czyli sin α = 2·cos α. Wstawiamy to do jedynki trygonometrycznej:
+    \left(2\cdot\cos\alpha\right)^{2} + \cos^{2}\alpha = 1, czyli 5\cdot\cos^{2}\alpha = 1, więc \cos^{2}\alpha = \frac{1}{5}.
+    Kąt α jest ostry, więc cos α > 0 i cos α = \frac{1}{\sqrt{5}} = \frac{\sqrt{5}}{5}, a sin α = 2·cos α = \frac{2\sqrt{5}}{5}.
+    Sprawdzenie: \left(\frac{2\sqrt5}{5}\right)^2 + \left(\frac{\sqrt5}{5}\right)^2 = \frac{4}{5} + \frac{1}{5} = 1.
+    Odpowiedź: tg α = 2, sin α = \frac{2\sqrt{5}}{5}, cos α = \frac{\sqrt{5}}{5}.
+  solution_steps:
+  - Zauważ, że dla kąta ostrego cos α ≠ 0, więc można podzielić licznik i mianownik przez cos α.
+  - Przekształć warunek do postaci \frac{2\cdot\operatorname{tg}\alpha + 3}{\operatorname{tg}\alpha -
+    1} = 7.
+  - Rozwiąż równanie 2t + 3 = 7(t − 1) i otrzymaj t = tg α = 2.
+  - 'Zapisz sin α = 2·cos α i wstaw do jedynki trygonometrycznej: 5cos²α = 1.'
+  - Wyznacz cos α = \frac{\sqrt5}{5} (znak plus, bo kąt ostry) oraz sin α = \frac{2\sqrt5}{5}.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: tg_alfa
+      answer:
+        kind: NUMERIC
+        value: 2.0
+    - name: sin_alfa
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{2\sqrt{5}}{5}
+    - name: cos_alfa
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{\sqrt{5}}{5}
+  checks:
+  - kind: solve_equation
+    expr: \frac{2\cdot x + 3}{x - 1} = 7
+    part: tg_alfa
+  - kind: evaluate
+    expr: \frac{2}{\sqrt{5}}
+    part: sin_alfa
+  - kind: evaluate
+    expr: \frac{1}{\sqrt{5}}
+    part: cos_alfa
+  skills:
+  - dzielenie licznika i mianownika przez cos α
+  - definicja tangensa jako sin/cos
+  - jedynka trygonometryczna
+  - usuwanie niewymierności z mianownika
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [tg_alfa] SymPy solved it fresh: 2.0 vs 2.0 (tol 1e-09) ; [sin_alfa]
+      SymPy solved it fresh: 0.8944271909999159 vs 0.8944271909999159 (tol 1e-09) ; [cos_alfa] SymPy solved
+      it fresh: 0.4472135954999579 vs 0.4472135954999579 (tol 1e-09)'
+- id: g-ex-t01
+  slot: EXERCISE
+  ramp_index: 7
+  difficulty: 5
+  exercise_type: wyrażenia symetryczne sin i cos
+  statement: 'Kąt α jest ostry i spełnia warunek \sin\alpha - \cos\alpha = \frac{1}{5}. Oblicz: a) sin
+    α · cos α, b) sin α + cos α, c) \sin^{3}\alpha - \cos^{3}\alpha.'
+  statement_latex: \sin\alpha - \cos\alpha = \frac{1}{5}
+  solution: |-
+    a) Podnosimy daną równość stronami do kwadratu:
+    \left(\sin\alpha - \cos\alpha\right)^{2} = \left(\frac{1}{5}\right)^{2} = \frac{1}{25}.
+    Z drugiej strony \left(\sin\alpha - \cos\alpha\right)^{2} = \sin^{2}\alpha - 2\cdot\sin\alpha\cdot\cos\alpha + \cos^{2}\alpha = 1 - 2\cdot\sin\alpha\cdot\cos\alpha.
+    Stąd 1 - 2\cdot\sin\alpha\cdot\cos\alpha = \frac{1}{25}, czyli 2\cdot\sin\alpha\cdot\cos\alpha = \frac{24}{25}, a więc \sin\alpha\cdot\cos\alpha = \frac{12}{25}.
+    b) \left(\sin\alpha + \cos\alpha\right)^{2} = 1 + 2\cdot\sin\alpha\cdot\cos\alpha = 1 + \frac{24}{25} = \frac{49}{25}.
+    Dla kąta ostrego sin α > 0 i cos α > 0, więc sin α + cos α > 0 i bierzemy pierwiastek dodatni: \sin\alpha + \cos\alpha = \frac{7}{5}.
+    c) Ze wzoru a³ − b³ = (a − b)(a² + ab + b²) oraz z jedynki:
+    \sin^{3}\alpha - \cos^{3}\alpha = \left(\sin\alpha - \cos\alpha\right)\cdot\left(1 + \sin\alpha\cdot\cos\alpha\right) = \frac{1}{5}\cdot\left(1 + \frac{12}{25}\right) = \frac{1}{5}\cdot\frac{37}{25} = \frac{37}{125}.
+    Kontrola: z sumy \frac{7}{5} i różnicy \frac{1}{5} wynika sin α = \frac{4}{5}, cos α = \frac{3}{5}; istotnie \frac{64}{125} - \frac{27}{125} = \frac{37}{125}.
+    Odpowiedź: sin α·cos α = \frac{12}{25}, sin α + cos α = \frac{7}{5}, sin³α − cos³α = \frac{37}{125}.
+  solution_steps:
+  - Podnieś równość sin α − cos α = 1/5 do kwadratu i skorzystaj z (sin α − cos α)² = 1 − 2 sin α cos
+    α.
+  - Wyznacz sin α·cos α = 12/25.
+  - 'Oblicz (sin α + cos α)² = 1 + 2 sin α cos α = 49/25 i weź pierwiastek dodatni, bo kąt jest ostry:
+    sin α + cos α = 7/5.'
+  - 'Zastosuj wzór a³ − b³ = (a − b)(a² + ab + b²) i jedynkę: sin³α − cos³α = (1/5)·(1 + 12/25).'
+  - Uprość wynik do 37/125 i sprawdź go, wyznaczając sin α = 4/5, cos α = 3/5.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: iloczyn
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{12}{25}
+    - name: suma
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{7}{5}
+    - name: roznica_szescianow
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{37}{125}
+  checks:
+  - kind: evaluate
+    expr: \frac{1 - \left(\frac{1}{5}\right)^{2}}{2}
+    part: iloczyn
+  - kind: evaluate
+    expr: \sqrt{1 + 2\cdot\frac{12}{25}}
+    part: suma
+  - kind: evaluate
+    expr: \frac{1}{5}\cdot\left(1 + \frac{12}{25}\right)
+    part: roznica_szescianow
+  skills:
+  - wzór (sin α − cos α)² = 1 − 2 sin α cos α
+  - jedynka trygonometryczna
+  - wzór na różnicę sześcianów
+  - kontrola sensowności wyniku dla kąta ostrego
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [iloczyn] SymPy solved it fresh: 0.48 vs 0.48 (tol 1e-09) ;
+      [suma] SymPy solved it fresh: 1.4 vs 1.4 (tol 1e-09) ; [roznica_szescianow] SymPy solved it fresh:
+      0.296 vs 0.296 (tol 1e-09)'
+- id: g-cm-06
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: obliczenie wartości wyrażenia z kątami szczególnymi
+  statement: Oblicz wartość wyrażenia W = 2\cdot\sin^{2}30^\circ + 3\cdot\cos^{2}30^\circ.
+  statement_latex: W=2\cdot\sin^{2}30^\circ+3\cdot\cos^{2}30^\circ
+  solution: |-
+    BŁĘDNE ROZUMOWANIE (typowy błąd):
+    Uczeń czyta \sin^{2}30^\circ jako \sin\left(2\cdot 30^\circ\right)=\sin 60^\circ=\frac{\sqrt{3}}{2} oraz \cos^{2}30^\circ jako \cos 60^\circ=\frac{1}{2} (albo jeszcze gorzej: jako \sin\left(30^{2}\right)=\sin 900^\circ). Wtedy otrzymuje
+    W=2\cdot\frac{\sqrt{3}}{2}+3\cdot\frac{1}{2}=\sqrt{3}+\frac{3}{2}\approx 3{,}23 — wynik BŁĘDNY.
+
+    DLACZEGO TO BŁĄD:
+    Zapis \sin^{2}\alpha to tylko skrót na \left(\sin\alpha\right)^{2}. Kąt się nie zmienia — potęgowana jest wartość funkcji. \sin^{2}30^\circ\neq\sin 60^\circ i \sin^{2}30^\circ\neq\sin\left(900^\circ\right).
+
+    POPRAWNE ROZWIĄZANIE:
+    \sin 30^\circ=\frac{1}{2}, więc \sin^{2}30^\circ=\left(\frac{1}{2}\right)^{2}=\frac{1}{4}.
+    \cos 30^\circ=\frac{\sqrt{3}}{2}, więc \cos^{2}30^\circ=\left(\frac{\sqrt{3}}{2}\right)^{2}=\frac{3}{4}.
+    W=2\cdot\frac{1}{4}+3\cdot\frac{3}{4}=\frac{1}{2}+\frac{9}{4}=\frac{11}{4}.
+    Kontrola: \sin^{2}30^\circ+\cos^{2}30^\circ=\frac{1}{4}+\frac{3}{4}=1 — zgodnie z jedynką trygonometryczną.
+    Odpowiedź: W=\frac{11}{4}=2{,}75.
+  solution_steps:
+  - 'Błąd: odczytanie \sin^{2}30^\circ jako \sin 60^\circ (lub \sin 900^\circ) i otrzymanie \sqrt{3}+\frac{3}{2}.'
+  - 'Korekta: \sin^{2}\alpha=\left(\sin\alpha\right)^{2} — najpierw wartość funkcji, potem kwadrat.'
+  - \sin^{2}30^\circ=\frac{1}{4}, \cos^{2}30^\circ=\frac{3}{4}.
+  - W=2\cdot\frac{1}{4}+3\cdot\frac{3}{4}=\frac{11}{4}.
+  answer:
+    kind: NUMERIC
+    value: 2.75
+  checks:
+  - kind: evaluate
+    expr: 2\cdot\left(\frac{1}{2}\right)^{2}+3\cdot\left(\frac{\sqrt{3}}{2}\right)^{2}
+  skills:
+  - zapis \sin^{2}\alpha jako (\sin\alpha)^{2}
+  - wartości funkcji dla 30^\circ
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 2.75 vs 2.75 (tol 1e-09)'
+- id: g-cm-07
+  slot: COMMON_MISTAKE
+  ramp_index: 1
+  difficulty: 2
+  exercise_type: odtworzenie cosinusa i tangensa z sinusa
+  statement: Kąt \alpha jest ostry oraz \sin\alpha = 0{,}6. Oblicz \cos\alpha oraz \operatorname{tg}\alpha.
+  statement_latex: \sin\alpha=0{,}6,\qquad \sin^{2}\alpha+\cos^{2}\alpha=1
+  solution: |-
+    BŁĘDNE ROZUMOWANIE (typowy błąd):
+    Uczeń zapisuje „jedynkę" bez kwadratów: \sin\alpha+\cos\alpha=1, skąd \cos\alpha=1-0{,}6=0{,}4 i dalej \operatorname{tg}\alpha=\frac{0{,}6}{0{,}4}=\frac{3}{2} — wyniki BŁĘDNE.
+
+    DLACZEGO TO BŁĄD:
+    Tożsamość dotyczy kwadratów: \sin^{2}\alpha+\cos^{2}\alpha=1. Sprawdźmy „wynik" 0{,}4: \left(0{,}6\right)^{2}+\left(0{,}4\right)^{2}=0{,}36+0{,}16=0{,}52\neq 1. Ponadto dla kąta ostrego zawsze \sin\alpha+\cos\alpha>1.
+
+    POPRAWNE ROZWIĄZANIE:
+    \cos^{2}\alpha=1-\sin^{2}\alpha=1-\left(0{,}6\right)^{2}=1-0{,}36=0{,}64.
+    Kąt \alpha jest ostry, więc \cos\alpha>0 i \cos\alpha=\sqrt{0{,}64}=0{,}8.
+    \operatorname{tg}\alpha=\frac{\sin\alpha}{\cos\alpha}=\frac{0{,}6}{0{,}8}=\frac{3}{4}=0{,}75.
+    Odpowiedź: \cos\alpha=0{,}8, \operatorname{tg}\alpha=\frac{3}{4}.
+  solution_steps:
+  - 'Błąd: użycie \sin\alpha+\cos\alpha=1 i otrzymanie \cos\alpha=0{,}4 oraz \operatorname{tg}\alpha=\frac{3}{2}.'
+  - 'Korekta: jedynka trygonometryczna dotyczy kwadratów, \sin^{2}\alpha+\cos^{2}\alpha=1.'
+  - \cos^{2}\alpha=1-0{,}36=0{,}64, więc \cos\alpha=0{,}8 (kąt ostry).
+  - \operatorname{tg}\alpha=\frac{0{,}6}{0{,}8}=\frac{3}{4}.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: cos
+      answer:
+        kind: NUMERIC
+        value: 0.8
+    - name: tg
+      answer:
+        kind: NUMERIC
+        value: 0.75
+  checks:
+  - kind: evaluate
+    expr: \sqrt{1-\left(\frac{6}{10}\right)^{2}}
+    part: cos
+  - kind: evaluate
+    expr: \frac{\frac{6}{10}}{\sqrt{1-\left(\frac{6}{10}\right)^{2}}}
+    part: tg
+  skills:
+  - jedynka trygonometryczna dotyczy kwadratów
+  - definicja tangensa
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [cos] SymPy solved it fresh: 0.8 vs 0.8 (tol 1e-09) ; [tg]
+      SymPy solved it fresh: 0.75 vs 0.75 (tol 1e-09)'
+- id: g-cm-08
+  slot: COMMON_MISTAKE
+  ramp_index: 2
+  difficulty: 2
+  exercise_type: obliczenie cosinusa z sinusa
+  statement: Kąt \alpha jest ostry oraz \sin\alpha = \frac{5}{13}. Oblicz \cos\alpha.
+  statement_latex: \cos\alpha=\sqrt{1-\sin^{2}\alpha},\qquad \sin\alpha=\frac{5}{13}
+  solution: |-
+    BŁĘDNE ROZUMOWANIE (typowy błąd):
+    Uczeń „rozdziela" pierwiastek na różnicę:
+    \cos\alpha=\sqrt{1-\sin^{2}\alpha}=\sqrt{1}-\sqrt{\sin^{2}\alpha}=1-\sin\alpha=1-\frac{5}{13}=\frac{8}{13} — wynik BŁĘDNY.
+
+    DLACZEGO TO BŁĄD:
+    Pierwiastek z różnicy nie jest różnicą pierwiastków: \sqrt{a-b}\neq\sqrt{a}-\sqrt{b}. Sprawdzenie: \left(\frac{5}{13}\right)^{2}+\left(\frac{8}{13}\right)^{2}=\frac{25+64}{169}=\frac{89}{169}\neq 1.
+
+    POPRAWNE ROZWIĄZANIE:
+    Najpierw obliczamy wyrażenie pod pierwiastkiem, a dopiero potem pierwiastkujemy:
+    \cos^{2}\alpha=1-\left(\frac{5}{13}\right)^{2}=1-\frac{25}{169}=\frac{144}{169}.
+    Kąt ostry, więc \cos\alpha=\sqrt{\frac{144}{169}}=\frac{12}{13}.
+    Sprawdzenie: \frac{25}{169}+\frac{144}{169}=1 — zgadza się.
+    Odpowiedź: \cos\alpha=\frac{12}{13}.
+  solution_steps:
+  - 'Błąd: \sqrt{1-\sin^{2}\alpha}=1-\sin\alpha i wynik \frac{8}{13}.'
+  - 'Korekta: \sqrt{a-b}\neq\sqrt{a}-\sqrt{b}; najpierw licz różnicę pod pierwiastkiem.'
+  - \cos^{2}\alpha=1-\frac{25}{169}=\frac{144}{169}.
+  - \cos\alpha=\frac{12}{13} (znak plus, bo kąt ostry).
+  answer:
+    kind: SYMBOLIC
+    latex: \frac{12}{13}
+  checks:
+  - kind: evaluate
+    expr: \sqrt{1-\left(\frac{5}{13}\right)^{2}}
+  skills:
+  - poprawne pierwiastkowanie \sqrt{1-\sin^{2}\alpha}
+  - jedynka trygonometryczna
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 0.9230769230769231 vs 0.9230769230769231 (tol 1e-09)'
+- id: g-cm-09
+  slot: COMMON_MISTAKE
+  ramp_index: 3
+  difficulty: 3
+  exercise_type: wyznaczanie wartości funkcji z równania z kwadratem
+  statement: Kąt \alpha jest ostry i spełnia warunek 4\cdot\cos^{2}\alpha = 1. Oblicz \cos\alpha oraz
+    \sin\alpha.
+  statement_latex: 4\cdot\cos^{2}\alpha=1
+  solution: |-
+    BŁĘDNE ROZUMOWANIE (typowy błąd):
+    Z równania \cos^{2}\alpha=\frac{1}{4} uczeń pisze automatycznie \cos\alpha=\pm\frac{1}{2} i podaje dwie odpowiedzi: \cos\alpha=\frac{1}{2} lub \cos\alpha=-\frac{1}{2}, a dalej „\sin\alpha=\pm\frac{\sqrt{3}}{2}" — odpowiedź BŁĘDNA (nadmiarowa).
+
+    DLACZEGO TO BŁĄD:
+    Rzeczywiście \sqrt{x^{2}}=|x|, ale w zadaniu jest dodatkowe założenie: kąt \alpha jest ostry, więc \cos\alpha>0 i \sin\alpha>0. Wartość ujemna nie spełnia warunków zadania i należy ją odrzucić. (Odwrotny błąd to gubienie modułu tam, gdzie znaku nie znamy — np. poprawnie jest \left|\sin\alpha-\cos\alpha\right|=\sqrt{1-2\sin\alpha\cos\alpha}.)
+
+    POPRAWNE ROZWIĄZANIE:
+    Z 4\cos^{2}\alpha=1 mamy \cos^{2}\alpha=\frac{1}{4}, a ponieważ \cos\alpha>0, to \cos\alpha=\frac{1}{2}.
+    Z jedynki: \sin^{2}\alpha=1-\frac{1}{4}=\frac{3}{4}, więc \sin\alpha=\frac{\sqrt{3}}{2} (znak plus).
+    Odpowiedź: \cos\alpha=\frac{1}{2}, \sin\alpha=\frac{\sqrt{3}}{2} (czyli \alpha=60^\circ).
+  solution_steps:
+  - 'Błąd: z \cos^{2}\alpha=\frac{1}{4} podanie dwóch wartości \cos\alpha=\pm\frac{1}{2}.'
+  - 'Korekta: \sqrt{x^{2}}=|x|, a dla kąta ostrego \cos\alpha>0, więc odrzucamy wartość ujemną.'
+  - \cos\alpha=\frac{1}{2}.
+  - Z jedynki \sin^{2}\alpha=\frac{3}{4}, stąd \sin\alpha=\frac{\sqrt{3}}{2}.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: cos
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{1}{2}
+    - name: sin
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{\sqrt{3}}{2}
+  checks:
+  - kind: evaluate
+    expr: \sqrt{\frac{1}{4}}
+    part: cos
+  - kind: evaluate
+    expr: \sqrt{1-\frac{1}{4}}
+    part: sin
+  skills:
+  - \sqrt{x^{2}}=|x|
+  - dodatniość funkcji dla kąta ostrego
+  - jedynka trygonometryczna
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [cos] SymPy solved it fresh: 0.5 vs 0.5 (tol 1e-09) ; [sin]
+      SymPy solved it fresh: 0.8660254037844386 vs 0.8660254037844386 (tol 1e-09)'
+- id: g-cm-10
+  slot: COMMON_MISTAKE
+  ramp_index: 4
+  difficulty: 2
+  exercise_type: obliczenie cosinusa i tangensa z sinusa
+  statement: Kąt \alpha jest ostry oraz \sin\alpha = \frac{1}{3}. Oblicz \cos\alpha oraz \operatorname{tg}\alpha.
+  statement_latex: \sin\alpha=\frac{1}{3},\qquad \operatorname{tg}\alpha=\frac{\sin\alpha}{\cos\alpha}
+  solution: |-
+    Najpierw cosinus (tu błędu nie ma): \cos^{2}\alpha=1-\left(\frac{1}{3}\right)^{2}=1-\frac{1}{9}=\frac{8}{9}, więc \cos\alpha=\sqrt{\frac{8}{9}}=\frac{2\sqrt{2}}{3} (kąt ostry).
+
+    BŁĘDNE ROZUMOWANIE (typowy błąd):
+    Uczeń zapisuje odwrócony wzór \operatorname{tg}\alpha=\frac{\cos\alpha}{\sin\alpha} i otrzymuje
+    \operatorname{tg}\alpha=\frac{\frac{2\sqrt{2}}{3}}{\frac{1}{3}}=2\sqrt{2}\approx 2{,}83 — wynik BŁĘDNY.
+
+    DLACZEGO TO BŁĄD:
+    Tangens to „naprzeciw przez przy", czyli \operatorname{tg}\alpha=\frac{\sin\alpha}{\cos\alpha} — sinus jest w liczniku. Kontrola na kącie znanym: \operatorname{tg}60^\circ=\sqrt{3}=\frac{\sin 60^\circ}{\cos 60^\circ}, natomiast \frac{\cos 60^\circ}{\sin 60^\circ}=\frac{\sqrt{3}}{3} — to inna liczba. Tu \sin\alpha<\cos\alpha, więc tangens musi być MNIEJSZY od 1, a 2\sqrt{2}>1.
+
+    POPRAWNE ROZWIĄZANIE:
+    \operatorname{tg}\alpha=\frac{\sin\alpha}{\cos\alpha}=\frac{\frac{1}{3}}{\frac{2\sqrt{2}}{3}}=\frac{1}{3}\cdot\frac{3}{2\sqrt{2}}=\frac{1}{2\sqrt{2}}=\frac{\sqrt{2}}{4}.
+    Odpowiedź: \cos\alpha=\frac{2\sqrt{2}}{3}, \operatorname{tg}\alpha=\frac{\sqrt{2}}{4}.
+  solution_steps:
+  - 'Z jedynki: \cos^{2}\alpha=\frac{8}{9}, więc \cos\alpha=\frac{2\sqrt{2}}{3}.'
+  - 'Błąd: użycie \operatorname{tg}\alpha=\frac{\cos\alpha}{\sin\alpha} i wynik 2\sqrt{2}.'
+  - 'Korekta: \operatorname{tg}\alpha=\frac{\sin\alpha}{\cos\alpha} — sinus w liczniku.'
+  - \operatorname{tg}\alpha=\frac{1}{2\sqrt{2}}=\frac{\sqrt{2}}{4}.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: cos
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{2\sqrt{2}}{3}
+    - name: tg
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{\sqrt{2}}{4}
+  checks:
+  - kind: evaluate
+    expr: \sqrt{1-\left(\frac{1}{3}\right)^{2}}
+    part: cos
+  - kind: evaluate
+    expr: \frac{\frac{1}{3}}{\sqrt{1-\left(\frac{1}{3}\right)^{2}}}
+    part: tg
+  skills:
+  - definicja tangensa \operatorname{tg}\alpha=\frac{\sin\alpha}{\cos\alpha}
+  - usuwanie niewymierności z mianownika
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [cos] SymPy solved it fresh: 0.9428090415820634 vs 0.9428090415820634
+      (tol 1e-09) ; [tg] SymPy solved it fresh: 0.3535533905932738 vs 0.3535533905932738 (tol 1e-09)'
+- id: g-ch-t02
+  slot: CHALLENGE
+  ramp_index: 0
+  difficulty: 4
+  exercise_type: interpretacja geometryczna sin i cos na okręgu jednostkowym
+  statement: W kartezjańskim układzie współrzędnych (x, y) punkt P leży w pierwszej ćwiartce na okręgu
+    o środku w punkcie O = (0, 0) i promieniu 1. Odległość punktu P od osi Ox jest trzy razy większa od
+    odległości punktu P od osi Oy. Przez α oznaczamy kąt ostry, jaki półprosta OP tworzy z dodatnią półosią
+    Ox. Oblicz sin α oraz cos α, a następnie wartość wyrażenia \sin\alpha + \cos\alpha.
+  statement_latex: \sin\alpha + \cos\alpha,\qquad P=\left(x,\ y\right),\ x^{2}+y^{2}=1,\ y = 3\cdot x
+  solution: |-
+    Niech P = (x, y), przy czym x > 0 i y > 0, bo punkt leży w pierwszej ćwiartce. Odległość P od osi Oy jest równa x, a odległość P od osi Ox jest równa y, więc warunek zadania daje y = 3·x.
+    Ponieważ |OP| = 1, to w trójkącie prostokątnym o wierzchołkach O, (x, 0) i P przyprostokątne mają długości x oraz y, a przeciwprostokątna długość 1. Zatem
+    \cos\alpha = \frac{x}{1} = x oraz \sin\alpha = \frac{y}{1} = y.
+    Z jedynki trygonometrycznej (równoważnie: z równania okręgu) x^{2} + y^{2} = 1, a po wstawieniu y = 3·x:
+    x^{2} + \left(3\cdot x\right)^{2} = 1, czyli 10\cdot x^{2} = 1, więc x^{2} = \frac{1}{10}.
+    Ponieważ x > 0, mamy x = \frac{1}{\sqrt{10}} = \frac{\sqrt{10}}{10}, a stąd y = \frac{3\sqrt{10}}{10}.
+    Zatem \cos\alpha = \frac{\sqrt{10}}{10}, \sin\alpha = \frac{3\sqrt{10}}{10} oraz
+    \sin\alpha + \cos\alpha = \frac{3\sqrt{10}}{10} + \frac{\sqrt{10}}{10} = \frac{4\sqrt{10}}{10} = \frac{2\sqrt{10}}{5}.
+    Kontrola: \left(\frac{3\sqrt{10}}{10}\right)^{2} + \left(\frac{\sqrt{10}}{10}\right)^{2} = \frac{9}{10} + \frac{1}{10} = 1, a wynik \frac{2\sqrt{10}}{5} \approx 1{,}26 należy do przedziału (1; \sqrt2\,], co jest zgodne z własnością sumy sinusa i cosinusa kąta ostrego.
+  solution_steps:
+  - Oznacz P = (x, y), x > 0, y > 0; odległość od osi Oy to x, a od osi Ox to y.
+  - Zapisz warunek zadania jako y = 3·x.
+  - Zauważ, że dla promienia długości 1 zachodzi cos α = x oraz sin α = y.
+  - Wstaw y = 3x do równania x² + y² = 1 i otrzymaj 10x² = 1, czyli x = \frac{\sqrt{10}}{10}.
+  - 'Wyznacz sin α = \frac{3\sqrt{10}}{10}, cos α = \frac{\sqrt{10}}{10} i dodaj: \frac{2\sqrt{10}}{5}.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: sin_alfa
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{3\sqrt{10}}{10}
+    - name: cos_alfa
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{\sqrt{10}}{10}
+    - name: suma
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{2\sqrt{10}}{5}
+  checks:
+  - kind: evaluate
+    expr: \frac{3}{\sqrt{10}}
+    part: sin_alfa
+  - kind: evaluate
+    expr: \frac{1}{\sqrt{10}}
+    part: cos_alfa
+  - kind: evaluate
+    expr: \frac{3}{\sqrt{10}} + \frac{1}{\sqrt{10}}
+    part: suma
+  stated_model:
+    variable: x
+    objective_latex: \sin\alpha + \cos\alpha = 3\cdot x + x,\ \text{gdzie } x = \cos\alpha,\ 10\cdot x^{2}
+      = 1
+    domain_lo: '0'
+    domain_hi: '1'
+    goal: value
+    constraint_used: x^{2}+\left(3\cdot x\right)^{2}=1
+  skills:
+  - odczytanie sin i cos jako współrzędnych punktu okręgu jednostkowego
+  - wprowadzenie własnej zmiennej
+  - jedynka trygonometryczna
+  - usuwanie niewymierności
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (NOT_MACHINE_CHECKABLE: ''prose inside the expression'')
+      — human review'
+- id: g-ch-t03
+  slot: CHALLENGE
+  ramp_index: 1
+  difficulty: 5
+  exercise_type: trójkąt prostokątny o przeciwprostokątnej 1 — wyrażenia symetryczne
+  statement: Odcinek AB o długości 1 jest przeciwprostokątną trójkąta prostokątnego ABC (kąt prosty przy
+    wierzchołku C). Suma długości przyprostokątnych tego trójkąta jest równa \frac{7}{5}. Oblicz długości
+    obu przyprostokątnych oraz tangens mniejszego z kątów ostrych tego trójkąta.
+  statement_latex: a + b = \frac{7}{5},\qquad a^{2} + b^{2} = 1
+  solution: |-
+    Oznaczmy przez a = |BC| i b = |AC| długości przyprostokątnych, a > 0, b > 0. Z twierdzenia Pitagorasa a^{2} + b^{2} = 1 (to ta sama zależność co jedynka trygonometryczna, bo przy przeciwprostokątnej długości 1 mamy a = \sin\alpha, b = \cos\alpha dla kąta α przy wierzchołku A).
+    Z warunku zadania a + b = \frac{7}{5}. Podnosimy tę równość do kwadratu:
+    \left(a + b\right)^{2} = a^{2} + 2\cdot a\cdot b + b^{2} = 1 + 2\cdot a\cdot b = \frac{49}{25},
+    zatem 2\cdot a\cdot b = \frac{24}{25}, czyli a\cdot b = \frac{12}{25}.
+    Liczby a i b są więc pierwiastkami równania
+    x^{2} - \frac{7}{5}\cdot x + \frac{12}{25} = 0.
+    Wyróżnik: \Delta = \left(\frac{7}{5}\right)^{2} - 4\cdot\frac{12}{25} = \frac{49}{25} - \frac{48}{25} = \frac{1}{25}, \sqrt{\Delta} = \frac{1}{5}.
+    Stąd x = \frac{\frac{7}{5} - \frac{1}{5}}{2} = \frac{3}{5} lub x = \frac{\frac{7}{5} + \frac{1}{5}}{2} = \frac{4}{5}.
+    Przyprostokątne mają więc długości \frac{3}{5} i \frac{4}{5} (obie dodatnie i mniejsze od 1 — zgodnie z tym, że przeciwprostokątna jest najdłuższym bokiem).
+    Mniejszy kąt ostry leży naprzeciw krótszej przyprostokątnej, czyli naprzeciw boku długości \frac{3}{5}. Zatem jego tangens to iloraz krótszej przyprostokątnej przez dłuższą:
+    \operatorname{tg} = \frac{\frac{3}{5}}{\frac{4}{5}} = \frac{3}{4}.
+    Odpowiedź: przyprostokątne mają długości \frac{3}{5} i \frac{4}{5}, a tangens mniejszego kąta ostrego jest równy \frac{3}{4}.
+  solution_steps:
+  - Oznacz przyprostokątne przez a i b; z twierdzenia Pitagorasa a² + b² = 1.
+  - 'Zapisz warunek a + b = 7/5 i podnieś go do kwadratu: 1 + 2ab = 49/25.'
+  - Wyznacz ab = 12/25, więc a i b są pierwiastkami równania x² − (7/5)x + 12/25 = 0.
+  - 'Rozwiąż to równanie: a, b ∈ {3/5, 4/5}.'
+  - 'Zauważ, że mniejszy kąt ostry leży naprzeciw krótszej przyprostokątnej, i oblicz jego tangens: (3/5)
+    : (4/5) = 3/4.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: przyprostokatne
+      answer:
+        kind: SET
+        members:
+        - \frac{3}{5}
+        - \frac{4}{5}
+    - name: tangens_mniejszego_kata
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{3}{4}
+  checks:
+  - kind: solve_equation
+    expr: x^{2} - \frac{7}{5}\cdot x + \frac{12}{25} = 0
+    part: przyprostokatne
+  - kind: evaluate
+    expr: \frac{\frac{3}{5}}{\frac{4}{5}}
+    part: tangens_mniejszego_kata
+  stated_model:
+    variable: a
+    objective_latex: a + b = \frac{7}{5},\quad a^{2} + b^{2} = 1,\quad \operatorname{tg} = \frac{\min\left(a,b\right)}{\max\left(a,b\right)}
+    domain_lo: '0'
+    domain_hi: '1'
+    goal: value
+    constraint_used: a^{2}+b^{2}=1
+  skills:
+  - wprowadzenie własnych oznaczeń długości boków
+  - wzór (a+b)² = a² + 2ab + b²
+  - twierdzenie Pitagorasa i jedynka trygonometryczna
+  - wybór właściwego kąta (filtr warunku bocznego)
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (PARSE_ERROR: "UnexpectedCharacters: No terminal
+      matches '','' in the current parser context, at line 1 col 20") — human review'
+- id: g-ch-t04
+  slot: CHALLENGE
+  ramp_index: 2
+  difficulty: 5
+  exercise_type: 'modelowanie: pole trójkąta jako funkcja tangensa'
+  statement: |-
+    W trójkącie prostokątnym ABC kąt przy wierzchołku C jest prosty, a przeciwprostokątna AB ma długość 10. Kąt ostry przy wierzchołku A ma miarę α. Przyjmij oznaczenie t = tg α.
+    a) Wyznacz wzór na pole P tego trójkąta w zależności od t i podaj dziedzinę tak otrzymanej funkcji.
+    b) Wiedząc, że pole tego trójkąta jest równe 24 oraz że α > 45°, oblicz t, a następnie sin α i cos α.
+  statement_latex: P\left(t\right) = \frac{50\cdot t}{1 + t^{2}},\qquad \frac{50\cdot t}{1 + t^{2}} =
+    24
+  solution: |-
+    a) Kąt α jest kątem ostrym przy wierzchołku A, a przeciwprostokątna AB ma długość 10, więc przyprostokątne mają długości
+    |BC| = 10\cdot\sin\alpha (naprzeciw kąta α) oraz |AC| = 10\cdot\cos\alpha.
+    Pole trójkąta prostokątnego to połowa iloczynu przyprostokątnych:
+    P = \frac{1}{2}\cdot 10\cdot\sin\alpha\cdot 10\cdot\cos\alpha = 50\cdot\sin\alpha\cdot\cos\alpha.
+    Wyrażamy sin α i cos α przez t = tg α: z sin α = t·cos α i jedynki trygonometrycznej mamy \cos^{2}\alpha\cdot\left(1 + t^{2}\right) = 1, czyli \cos\alpha = \frac{1}{\sqrt{1 + t^{2}}} oraz \sin\alpha = \frac{t}{\sqrt{1 + t^{2}}} (znak plus, bo kąt ostry). Zatem
+    \sin\alpha\cdot\cos\alpha = \frac{t}{1 + t^{2}}, a stąd
+    P\left(t\right) = \frac{50\cdot t}{1 + t^{2}}.
+    Dla kąta ostrego 0° < α < 90° tangens przyjmuje wszystkie wartości dodatnie, więc dziedziną jest przedział \left(0;\ +\infty\right).
+    b) Rozwiązujemy równanie \frac{50\cdot t}{1 + t^{2}} = 24. Mianownik 1 + t² jest dodatni, więc
+    50\cdot t = 24 + 24\cdot t^{2}, czyli 24\cdot t^{2} - 50\cdot t + 24 = 0, po podzieleniu przez 2: 12\cdot t^{2} - 25\cdot t + 12 = 0.
+    \Delta = \left(-25\right)^{2} - 4\cdot 12\cdot 12 = 625 - 576 = 49, \sqrt{\Delta} = 7.
+    t = \frac{25 - 7}{24} = \frac{3}{4} lub t = \frac{25 + 7}{24} = \frac{4}{3}. Oba należą do dziedziny (pole 24 jest osiągalne, bo największe możliwe pole to 50·sin α·cos α ≤ 25).
+    Warunek α > 45° oznacza tg α > tg 45° = 1, więc odrzucamy t = \frac{3}{4} i przyjmujemy t = \frac{4}{3}.
+    Wtedy \cos\alpha = \frac{1}{\sqrt{1 + \left(\frac{4}{3}\right)^{2}}} = \frac{1}{\frac{5}{3}} = \frac{3}{5} oraz \sin\alpha = \frac{4}{3}\cdot\frac{3}{5} = \frac{4}{5}.
+    Sprawdzenie: przyprostokątne mają wtedy długości 8 i 6, a pole \frac{1}{2}\cdot 8\cdot 6 = 24. Zgadza się.
+    Odpowiedź: P(t) = \frac{50\cdot t}{1 + t^{2}} dla t ∈ (0; +∞); t = \frac{4}{3}, sin α = \frac{4}{5}, cos α = \frac{3}{5}.
+  solution_steps:
+  - 'Zapisz długości przyprostokątnych: |BC| = 10 sin α, |AC| = 10 cos α.'
+  - 'Ułóż wzór na pole: P = 50·sin α·cos α.'
+  - 'Wyraź sin α i cos α przez t = tg α (z sin α = t cos α i jedynki): sin α cos α = t/(1+t²), więc P(t)
+    = 50t/(1+t²).'
+  - 'Podaj dziedzinę: t ∈ (0; +∞), bo α jest kątem ostrym.'
+  - Rozwiąż równanie 50t/(1+t²) = 24, czyli 12t² − 25t + 12 = 0; Δ = 49, t = 3/4 lub t = 4/3 (pole 24
+    jest osiągalne, bo P ≤ 25).
+  - Odrzuć t = 3/4, bo z α > 45° wynika tg α > 1; przyjmij t = 4/3.
+  - Oblicz cos α = 1/√(1+t²) = 3/5 oraz sin α = t·cos α = 4/5.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wzor_pola
+      answer:
+        kind: SYMBOLIC
+        latex: P\left(t\right) = \frac{50\cdot t}{1 + t^{2}}
+    - name: dziedzina
+      answer:
+        kind: INTERVAL
+        lo: '0'
+        hi: \infty
+    - name: t
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{4}{3}
+    - name: sin_alfa
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{4}{5}
+    - name: cos_alfa
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{3}{5}
+  checks:
+  - kind: simplify
+    expr: 50\cdot\frac{t}{1 + t^{2}}
+    var: t
+    part: wzor_pola
+  - kind: evaluate
+    expr: \frac{25 + \sqrt{625 - 4\cdot 12\cdot 12}}{2\cdot 12}
+    var: t
+    part: t
+  - kind: evaluate
+    expr: \frac{\frac{4}{3}}{\sqrt{1 + \left(\frac{4}{3}\right)^{2}}}
+    part: sin_alfa
+  - kind: evaluate
+    expr: \frac{1}{\sqrt{1 + \left(\frac{4}{3}\right)^{2}}}
+    part: cos_alfa
+  stated_model:
+    variable: t
+    objective_latex: P\left(t\right) = \frac{50\cdot t}{1 + t^{2}}
+    domain_lo: '0'
+    goal: value
+    constraint_used: t = \operatorname{tg}\alpha,\ |AB| = 10,\ \alpha > 45^\circ
+  skills:
+  - wyrażenie boków trójkąta przez sin i cos
+  - wzór sin α·cos α = tg α/(1 + tg²α)
+  - wyznaczanie dziedziny funkcji z warunku geometrycznego
+  - rozwiązywanie równania kwadratowego i odrzucanie rozwiązania sprzecznego z warunkiem
+  - ocena wykonalności (pole nie większe niż 25)
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''t'': ''P\\left(t\\right)
+      = \\frac{50\\cdot t}{1 + t^{2}}'') — human review'

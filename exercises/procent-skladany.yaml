@@ -1,0 +1,909 @@
+section: procent-skladany
+name: Procent składany, lokaty i modele wykładnicze
+scope: 'Powers and roots in practice: compound interest, deposit growth, loan cost, exponential decay;
+  setting up and reading a growth/decay model.'
+requirements:
+- I.8
+counts:
+  total: 16
+  DETERMINISTIC: 12
+  REFERENCE_CALL: 1
+  NOT_MACHINE_CHECKABLE: 2
+  STATED_MODEL: 1
+exercises:
+- id: g-th-00
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: obliczenie kapitału końcowego (procent składany)
+  statement: Klient wpłacił do banku 5000 zł na lokatę trzyletnią. Po każdym rocznym okresie oszczędzania
+    bank dolicza odsetki w wysokości 4% od kwoty bieżącego kapitału znajdującego się na lokacie (procent
+    składany). Oblicz kwotę zgromadzoną na tej lokacie po 3 latach oszczędzania (bez uwzględniania podatków).
+    Wynik podaj z dokładnością do 1 grosza.
+  statement_latex: K_{3}=5000\cdot\left(1+\frac{4}{100}\right)^{3}
+  solution: |-
+    Kapitał początkowy: K_0 = 5000 zł. Jednym okresem kapitalizacji jest rok, stopa jednego okresu to 4%, czyli 0,04. Czynnik wzrostu: q = 1 + 0,04 = 1,04. Liczba okresów: n = 3.
+    Model: K_3 = 5000·(1,04)^3.
+    (1,04)^2 = 1,0816, (1,04)^3 = 1,124864.
+    K_3 = 5000·1,124864 = 5624,32 zł.
+    Odpowiedź: po trzech latach na lokacie będzie 5624,32 zł.
+  solution_steps:
+  - 'Zapisz dane: K_0 = 5000 zł, stopa jednego okresu 4%, n = 3 lata.'
+  - 'Zamień procent na czynnik wzrostu: q = 1 + 4/100 = 1,04.'
+  - 'Zapisz model procentu składanego: K_3 = 5000·(1,04)^3.'
+  - Oblicz (1,04)^3 = 1,124864.
+  - 'Wykonaj mnożenie: 5000·1,124864 = 5624,32 zł.'
+  answer:
+    kind: NUMERIC
+    value: 5624.32
+    tol: 0.01
+    latex: 5624{,}32\ \text{zł}
+  checks:
+  - kind: evaluate
+    expr: 5000\cdot\left(1+\frac{4}{100}\right)^{3}
+  skills:
+  - zamiana procentu na czynnik wzrostu
+  - wzór K_n = K_0·q^n
+  - kapitalizacja roczna
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 5624.32 vs 5624.32 (tol 0.01)'
+- id: g-th-01
+  slot: THEORY_SUPPORT
+  ramp_index: 1
+  difficulty: 2
+  exercise_type: odczytanie parametrów modelu wykładniczego
+  statement: Wartość pewnej maszyny po n latach od zakupu (w złotych) opisuje wzór W\left(n\right)=60000\cdot\left(0{,}88\right)^{n},
+    gdzie n jest liczbą całkowitą nieujemną. Podaj wartość maszyny w chwili zakupu oraz oblicz, o ile
+    procent maleje wartość tej maszyny w ciągu jednego roku.
+  statement_latex: W\left(n\right)=60000\cdot\left(0{,}88\right)^{n}
+  solution: |-
+    Wartość początkową odczytujemy, podstawiając n = 0: W(0) = 60000·(0,88)^0 = 60000·1 = 60000 zł.
+    Czynnik jednego roku wynosi q = 0,88 i jest mniejszy od 1, więc wartość maleje. Zapiszmy q = 1 − p/100:
+    1 − p/100 = 0,88, zatem p/100 = 0,12, czyli p = 12.
+    Odpowiedź: maszyna kosztowała 60000 zł i co roku traci 12% swojej aktualnej wartości.
+  solution_steps:
+  - 'Podstaw n = 0, aby odczytać wartość początkową: W(0) = 60000 zł.'
+  - Zauważ, że czynnik q = 0,88 < 1, więc model opisuje spadek.
+  - Rozwiąż 1 − p/100 = 0,88, otrzymując p = 12.
+  - 'Sformułuj wniosek: co roku wartość maleje o 12% wartości aktualnej.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wartosc_poczatkowa
+      answer:
+        kind: NUMERIC
+        value: 60000.0
+        tol: 1.0e-06
+        latex: 60000\ \text{zł}
+    - name: roczny_spadek_procent
+      answer:
+        kind: NUMERIC
+        value: 12.0
+        tol: 1.0e-06
+        latex: 12\%
+  checks:
+  - kind: evaluate
+    expr: 60000\cdot\left(\frac{88}{100}\right)^{0}
+    var: n
+    part: wartosc_poczatkowa
+  - kind: evaluate
+    expr: \left(1-\frac{88}{100}\right)\cdot 100
+    var: p
+    part: roczny_spadek_procent
+  skills:
+  - interpretacja modelu W(n)=W_0·q^n
+  - odczyt procentu zmiany z czynnika
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [wartosc_poczatkowa] SymPy solved it fresh: 60000.0 vs 60000.0
+      (tol 1e-06) ; [roczny_spadek_procent] SymPy solved it fresh: 12.0 vs 12.0 (tol 1e-06)'
+- id: g-th-02
+  slot: THEORY_SUPPORT
+  ramp_index: 2
+  difficulty: 2
+  exercise_type: składanie dwóch zmian procentowych
+  statement: Cena pewnego towaru wynosiła 200 zł. Najpierw podniesiono ją o 10%, a następnie nową cenę
+    podniesiono jeszcze o 20%. Wyznacz czynnik, przez który została pomnożona cena początkowa w wyniku
+    obu podwyżek, oraz oblicz cenę towaru po obu podwyżkach.
+  statement_latex: q=\left(1+\frac{10}{100}\right)\cdot\left(1+\frac{20}{100}\right),\qquad C=200\cdot
+    q
+  solution: |-
+    Pierwsza podwyżka o 10% to mnożenie przez 1,1, druga podwyżka o 20% to mnożenie przez 1,2 (liczone od ceny już podwyższonej).
+    Łączny czynnik: q = 1,1·1,2 = 1,32.
+    Cena końcowa: C = 200·1,32 = 264 zł.
+    Odpowiedź: czynnik łączny to 1,32 (łączna podwyżka o 32%), cena końcowa 264 zł.
+  solution_steps:
+  - Zamień podwyżkę o 10% na czynnik 1,1.
+  - Zamień podwyżkę o 20% na czynnik 1,2.
+  - 'Pomnóż czynniki: q = 1,1·1,2 = 1,32.'
+  - 'Oblicz cenę końcową: 200·1,32 = 264 zł.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: czynnik
+      answer:
+        kind: NUMERIC
+        value: 1.32
+        tol: 1.0e-06
+        latex: 1{,}32
+    - name: cena_koncowa
+      answer:
+        kind: NUMERIC
+        value: 264.0
+        tol: 1.0e-06
+        latex: 264\ \text{zł}
+  checks:
+  - kind: evaluate
+    expr: \left(1+\frac{10}{100}\right)\cdot\left(1+\frac{20}{100}\right)
+    part: czynnik
+  - kind: evaluate
+    expr: 200\cdot\left(1+\frac{10}{100}\right)\cdot\left(1+\frac{20}{100}\right)
+    part: cena_koncowa
+  skills:
+  - zamiana zmiany procentowej na czynnik
+  - mnożenie czynników
+  - łączna zmiana procentowa
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [czynnik] SymPy solved it fresh: 1.32 vs 1.32 (tol 1e-06) ;
+      [cena_koncowa] SymPy solved it fresh: 264.0 vs 264.0 (tol 1e-06)'
+- id: g-ex-03
+  slot: EXERCISE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: lokata z kapitalizacją półroczną
+  statement: Pani Marta wpłaciła do banku 12000 zł na lokatę dwuletnią, oprocentowaną 6% w skali roku,
+    z kapitalizacją półroczną (odsetki dopisywane są do kapitału na koniec każdego półrocza). Oblicz kwotę
+    zgromadzoną na lokacie po dwóch latach oraz łączną wartość doliczonych odsetek (bez uwzględniania
+    podatków). Wyniki podaj z dokładnością do 1 grosza.
+  statement_latex: K=12000\cdot\left(1+\frac{3}{100}\right)^{4}
+  solution: |-
+    Jednym okresem kapitalizacji jest półrocze, więc stopa okresowa to 6% : 2 = 3%, czyli q = 1,03.
+    W dwóch latach są 4 półrocza, zatem n = 4.
+    K = 12000·(1,03)^4.
+    (1,03)^2 = 1,0609, (1,03)^4 = (1,0609)^2 = 1,12550881.
+    K = 12000·1,12550881 = 13506,10572 ≈ 13506,11 zł.
+    Odsetki: 13506,11 − 12000 = 1506,11 zł.
+    Odpowiedź: na lokacie będzie 13506,11 zł, a doliczone odsetki wyniosą 1506,11 zł.
+  solution_steps:
+  - 'Ustal długość jednego okresu kapitalizacji: półrocze.'
+  - 'Oblicz stopę okresową: 6% : 2 = 3%, czyli q = 1,03.'
+  - 'Oblicz liczbę okresów: 2 lata = 4 półrocza, n = 4.'
+  - 'Zapisz model: K = 12000·(1,03)^4 i oblicz (1,03)^4 = 1,12550881.'
+  - 'Oblicz kapitał: K ≈ 13506,11 zł.'
+  - 'Oblicz odsetki: K − 12000 ≈ 1506,11 zł.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: kapital_po_2_latach
+      answer:
+        kind: NUMERIC
+        value: 13506.11
+        tol: 0.01
+        latex: 13506{,}11\ \text{zł}
+    - name: odsetki
+      answer:
+        kind: NUMERIC
+        value: 1506.11
+        tol: 0.01
+        latex: 1506{,}11\ \text{zł}
+  checks:
+  - kind: evaluate
+    expr: 12000\cdot\left(1+\frac{3}{100}\right)^{4}
+    part: kapital_po_2_latach
+  - kind: evaluate
+    expr: 12000\cdot\left(1+\frac{3}{100}\right)^{4}-12000
+    part: odsetki
+  skills:
+  - stopa okresowa r/m
+  - liczba okresów mt
+  - obliczanie odsetek
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [kapital_po_2_latach] SymPy solved it fresh: 13506.11 vs 13506.10572
+      (tol 0.01) ; [odsetki] SymPy solved it fresh: 1506.11 vs 1506.10572 (tol 0.01)'
+- id: g-ex-04
+  slot: EXERCISE
+  ramp_index: 1
+  difficulty: 3
+  exercise_type: lokata z podatkiem od zysków kapitałowych
+  statement: Pan Jacek wpłacił do banku 15000 zł na lokatę trzyletnią, oprocentowaną 4% w skali roku,
+    z kapitalizacją roczną. Na koniec okresu oszczędzania bank pobiera 19% podatku od uzyskanych odsetek.
+    Oblicz kapitał brutto zgromadzony po trzech latach oraz kwotę, którą pan Jacek faktycznie otrzyma
+    z banku. Wyniki podaj z dokładnością do 1 grosza.
+  statement_latex: K_{3}=15000\cdot\left(1+\frac{4}{100}\right)^{3},\qquad K_{netto}=15000+0{,}81\cdot\left(K_{3}-15000\right)
+  solution: |-
+    Model: K_0 = 15000 zł, q = 1,04, n = 3.
+    K_3 = 15000·(1,04)^3 = 15000·1,124864 = 16872,96 zł (kapitał brutto).
+    Odsetki brutto: O = 16872,96 − 15000 = 1872,96 zł.
+    Podatek: 0,19·1872,96 = 355,8624 zł, odsetki netto: 0,81·1872,96 = 1517,0976 zł.
+    Kwota do wypłaty: 15000 + 1517,0976 = 16517,0976 ≈ 16517,10 zł.
+    Odpowiedź: kapitał brutto to 16872,96 zł, a do wypłaty pozostaje 16517,10 zł.
+  solution_steps:
+  - 'Zapisz model: K_3 = 15000·(1,04)^3.'
+  - Oblicz (1,04)^3 = 1,124864 i K_3 = 16872,96 zł.
+  - 'Oblicz odsetki brutto: 16872,96 − 15000 = 1872,96 zł.'
+  - 'Pomnóż odsetki przez 0,81 (potrącenie 19% podatku): 1517,0976 zł.'
+  - 'Dodaj odsetki netto do kapitału początkowego: 15000 + 1517,0976 ≈ 16517,10 zł.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: kapital_brutto
+      answer:
+        kind: NUMERIC
+        value: 16872.96
+        tol: 0.01
+        latex: 16872{,}96\ \text{zł}
+    - name: kwota_do_wyplaty
+      answer:
+        kind: NUMERIC
+        value: 16517.1
+        tol: 0.01
+        latex: 16517{,}10\ \text{zł}
+  checks:
+  - kind: evaluate
+    expr: 15000\cdot\left(1+\frac{4}{100}\right)^{3}
+    part: kapital_brutto
+  - kind: evaluate
+    expr: 15000+\frac{81}{100}\cdot\left(15000\cdot\left(1+\frac{4}{100}\right)^{3}-15000\right)
+    part: kwota_do_wyplaty
+  skills:
+  - procent składany
+  - podatek 19% od odsetek
+  - zaokrąglanie na końcu rachunku
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [kapital_brutto] SymPy solved it fresh: 16872.96 vs 16872.96
+      (tol 0.01) ; [kwota_do_wyplaty] SymPy solved it fresh: 16517.1 vs 16517.0976 (tol 0.01)'
+- id: g-ex-05
+  slot: EXERCISE
+  ramp_index: 2
+  difficulty: 4
+  exercise_type: wyznaczanie stopy i liczby okresów
+  statement: Pewien kapitał w wysokości 25000 zł ulokowano na lokacie z kapitalizacją roczną i stałym
+    oprocentowaniem. Po trzech latach oszczędzania na lokacie było 33275 zł (bez uwzględniania podatków).
+    a) Oblicz roczne oprocentowanie tej lokaty. b) Wyznacz najmniejszą liczbę pełnych lat oszczędzania,
+    po której kapitał na tej lokacie przekroczy 40000 zł. c) Oblicz kapitał po tylu latach, z dokładnością
+    do 1 grosza.
+  statement_latex: 25000\cdot q^{3}=33275,\qquad q=\sqrt[3]{\frac{33275}{25000}}
+  solution: |-
+    a) Model: 25000·q^3 = 33275, więc q^3 = 33275/25000 = 1,331.
+    q = ∛1,331 = 1,1, bo 1,1^3 = 1,331.
+    Zatem 1 + p/100 = 1,1, czyli p = 10. Oprocentowanie wynosi 10% w skali roku.
+    Sprawdzenie: 25000 → 27500 → 30250 → 33275. ✓
+    b) Szukamy najmniejszego n, dla którego 25000·(1,1)^n > 40000, czyli (1,1)^n > 1,6.
+    (1,1)^1 = 1,1; (1,1)^2 = 1,21; (1,1)^3 = 1,331; (1,1)^4 = 1,4641; (1,1)^5 = 1,61051 > 1,6.
+    Warunek po raz pierwszy zachodzi dla n = 5.
+    c) K_5 = 25000·1,61051 = 40262,75 zł (a po 4 latach było 36602,50 zł < 40000 zł).
+    Odpowiedź: a) 10% rocznie, b) po 5 latach, c) 40262,75 zł.
+  solution_steps:
+  - Zapisz równanie 25000·q^3 = 33275 i wyznacz q^3 = 1,331.
+  - 'Spierwiastkuj trzeciego stopnia: q = 1,1, więc p = 10%.'
+  - Zapisz nierówność 25000·(1,1)^n > 40000, czyli (1,1)^n > 1,6.
+  - 'Licz kolejne potęgi 1,1 aż do przekroczenia 1,6: (1,1)^4 = 1,4641 < 1,6, (1,1)^5 = 1,61051 > 1,6,
+    więc n = 5.'
+  - 'Oblicz kapitał po 5 latach: 25000·1,61051 = 40262,75 zł.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: oprocentowanie_procent
+      answer:
+        kind: NUMERIC
+        value: 10.0
+        tol: 1.0e-06
+        latex: 10\%
+    - name: liczba_lat
+      answer:
+        kind: NUMERIC
+        value: 5.0
+        latex: '5'
+    - name: kapital_po_tylu_latach
+      answer:
+        kind: NUMERIC
+        value: 40262.75
+        tol: 0.01
+        latex: 40262{,}75\ \text{zł}
+  checks:
+  - kind: evaluate
+    expr: \left(\sqrt[3]{\frac{33275}{25000}}-1\right)\cdot 100
+    var: q
+    part: oprocentowanie_procent
+  - kind: evaluate
+    expr: 25000\cdot\left(1+\frac{10}{100}\right)^{5}
+    part: kapital_po_tylu_latach
+  skills:
+  - pierwiastek n-tego stopnia w modelu K_0·q^n = K_n
+  - wyznaczanie liczby okresów
+  - obliczanie kapitału końcowego
+  verification:
+    checkability: REFERENCE_CALL
+    note: 'answer and reference disagree: part disagrees: 10.0 vs 0.1 (tol 1e-06)'
+- id: g-ex-t00
+  slot: EXERCISE
+  ramp_index: 6
+  difficulty: 3
+  exercise_type: lokata z kapitalizacją półroczną, podatek Belki, stopa efektywna
+  statement: Pani Marta wpłaciła do banku 20 000 zł na lokatę na 1,5 roku. Oprocentowanie lokaty wynosi
+    6% w skali roku, a kapitalizacja odsetek następuje co pół roku. Na koniec oszczędzania bank pobiera
+    jednorazowo 19% podatku od całości naliczonych odsetek. a) Oblicz kapitał na lokacie (bez podatku)
+    po 1,5 roku. b) Oblicz kwotę, którą pani Marta faktycznie otrzyma po potrąceniu podatku (z dokładnością
+    do 1 grosza). c) Oblicz efektywną roczną stopę procentową tej lokaty (w procentach, z dokładnością
+    do 0,01 punktu procentowego).
+  statement_latex: K = 20000\cdot\left(1+\frac{3}{100}\right)^{3}
+  solution: |-
+    Jeden okres kapitalizacji to pół roku, więc stopa jednego okresu wynosi \frac{6\%}{2}=3\%, czyli q = 1,03. W ciągu 1,5 roku mamy n = 3 okresy.
+    a) K_3 = 20000\cdot 1,03^{3} = 20000\cdot 1,092727 = 21854{,}54 zł.
+    b) Odsetki brutto: 21854,54 − 20000 = 1854,54 zł. Podatek: 0,19·1854,54 = 352,3626 zł, więc odsetki netto to 0,81·1854,54 = 1502,1774 zł ≈ 1502,18 zł. Do wypłaty: 20000 + 1502,18 = 21 502,18 zł.
+    c) Czynnik roczny: 1,03^{2} = 1,0609, zatem r_{ef} = 1,0609 − 1 = 0,0609 = 6,09%. Stopa efektywna jest o 0,09 p.p. wyższa od nominalnej.
+  solution_steps:
+  - 'Ustal okres kapitalizacji: pół roku, stopa okresu 6%:2 = 3%, więc q = 1,03.'
+  - 'Policz liczbę okresów: 1,5 roku = 3 półrocza, n = 3.'
+  - 'Kapitał brutto: 20000·1,03³ = 21 854,54 zł.'
+  - 'Odsetki brutto: 21 854,54 − 20 000 = 1854,54 zł.'
+  - 'Odsetki netto: 0,81·1854,54 = 1502,18 zł, do wypłaty 20 000 + 1502,18 = 21 502,18 zł.'
+  - 'Stopa efektywna: (1,03)² − 1 = 0,0609 = 6,09%.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: kapital_brutto
+      answer:
+        kind: NUMERIC
+        value: 21854.54
+        tol: 0.01
+    - name: kwota_po_podatku
+      answer:
+        kind: NUMERIC
+        value: 21502.18
+        tol: 0.01
+    - name: stopa_efektywna_proc
+      answer:
+        kind: NUMERIC
+        value: 6.09
+        tol: 0.01
+  checks:
+  - kind: evaluate
+    expr: 20000\cdot\left(1+\frac{3}{100}\right)^{3}
+    part: kapital_brutto
+  - kind: evaluate
+    expr: 20000+\frac{81}{100}\cdot\left(20000\cdot\left(1+\frac{3}{100}\right)^{3}-20000\right)
+    part: kwota_po_podatku
+  - kind: evaluate
+    expr: \left(\left(1+\frac{3}{100}\right)^{2}-1\right)\cdot 100
+    part: stopa_efektywna_proc
+  skills:
+  - model wykładniczy lokaty
+  - stopa okresowa r/m
+  - podatek 19% od odsetek
+  - efektywna stopa roczna
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [kapital_brutto] SymPy solved it fresh: 21854.54 vs 21854.54
+      (tol 0.01) ; [kwota_po_podatku] SymPy solved it fresh: 21502.18 vs 21502.1774 (tol 0.01) ; [stopa_efektywna_proc]
+      SymPy solved it fresh: 6.09 vs 6.09 (tol 0.01)'
+- id: g-ex-t01
+  slot: EXERCISE
+  ramp_index: 7
+  difficulty: 4
+  exercise_type: 'amortyzacja: wyznaczanie stopy pierwiastkiem i liczby okresów'
+  statement: Samochód dostawczy kupiono za 60 000 zł. Jego wartość maleje co roku o ten sam procent i
+    po dwóch latach od zakupu wynosiła 43 350 zł. a) O ile procent rocznie maleje wartość tego samochodu?
+    b) Oblicz wartość samochodu po 5 latach od zakupu (z dokładnością do 1 grosza). c) Po ilu pełnych
+    latach od zakupu wartość samochodu po raz pierwszy spadnie poniżej 20 000 zł?
+  statement_latex: 60000\cdot q^{2}=43350
+  solution: |-
+    Model: W(n) = 60000\cdot q^{n}, gdzie q = 1 − \frac{p}{100}.
+    a) 60000\cdot q^{2} = 43350, więc q^{2} = \frac{43350}{60000} = 0{,}7225, skąd q = \sqrt{0{,}7225} = 0{,}85 (bierzemy pierwiastek dodatni). Zatem 1 − \frac{p}{100} = 0{,}85, czyli p = 15. Wartość maleje o 15% rocznie. Sprawdzenie: 60000 → 51000 → 43350. ✓
+    b) W(5) = 60000\cdot 0{,}85^{5} = 60000\cdot 0{,}4437053125 = 26 622{,}32 zł (po zaokrągleniu do groszy).
+    c) Szukamy najmniejszego naturalnego n, dla którego 60000\cdot 0{,}85^{n} < 20000, czyli 0{,}85^{n} < \frac{1}{3}.
+    0,85⁵ ≈ 0,4437; 0,85⁶ ≈ 0,3771 (czyli 22 628,97 zł — wciąż powyżej); 0,85⁷ ≈ 0,3206 (19 234,58 zł < 20 000 zł).
+    Pierwszy raz warunek zachodzi dla n = 7 (logarytmicznie: n > \frac{\log\frac{1}{3}}{\log 0{,}85} ≈ 6{,}76).
+  solution_steps:
+  - Zapisz model W(n) = 60000·qⁿ i równanie 60000·q² = 43350.
+  - Wyznacz q² = 0,7225 i q = √0,7225 = 0,85.
+  - 'Odczytaj procent spadku: p = (1 − 0,85)·100% = 15%.'
+  - Oblicz W(5) = 60000·0,85⁵ = 26 622,32 zł.
+  - 'Rozwiąż 0,85ⁿ < 1/3 kolejnymi potęgami: 0,85⁶ ≈ 0,3771 (za dużo), 0,85⁷ ≈ 0,3206 (już mniej).'
+  - 'Odpowiedz: po 7 pełnych latach wartość spadnie poniżej 20 000 zł.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: procent_spadku
+      answer:
+        kind: NUMERIC
+        value: 15.0
+    - name: wartosc_po_5_latach
+      answer:
+        kind: NUMERIC
+        value: 26622.32
+        tol: 0.01
+    - name: liczba_lat
+      answer:
+        kind: NUMERIC
+        value: 7.0
+  checks:
+  - kind: evaluate
+    expr: \left(1-\sqrt{\frac{43350}{60000}}\right)\cdot 100
+    part: procent_spadku
+  - kind: evaluate
+    expr: 60000\cdot\left(\frac{85}{100}\right)^{5}
+    part: wartosc_po_5_latach
+  - kind: evaluate
+    expr: \left\lceil\frac{\log\left(\frac{1}{3}\right)}{\log\left(\frac{85}{100}\right)}\right\rceil
+    part: liczba_lat
+  skills:
+  - model zaniku wykładniczego
+  - wyznaczanie q pierwiastkiem n-tego stopnia
+  - wyznaczanie liczby okresów
+  - zaokrąglanie liczby pełnych okresów
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [procent_spadku] SymPy solved it fresh: 15.0 vs 15.0 (tol 1e-09)
+      ; [wartosc_po_5_latach] SymPy solved it fresh: 26622.32 vs 26622.31875 (tol 0.01) ; [liczba_lat]
+      SymPy solved it fresh: 7.0 vs 7.0 (tol 1e-09)'
+- id: g-cm-06
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: 'demonstracja błędu: dodawanie procentów zamiast mnożenia czynników'
+  statement: 'Uczeń rozwiązywał zadanie: „Klient wpłacił do banku 2000 zł na lokatę trzyletnią. Po każdym
+    rocznym okresie oszczędzania bank dolicza odsetki w wysokości 8% od kwoty bieżącego kapitału (procent
+    składany). Ile pieniędzy będzie na lokacie po 3 latach, bez uwzględniania podatków?”. Uczeń napisał:
+    „3·8% = 24%, więc kapitał wyniesie 2000·1,24 = 2480 zł”. Wskaż błąd w rozumowaniu ucznia i podaj poprawny
+    wynik z dokładnością do 1 grosza.'
+  statement_latex: K_{3}=2000\cdot\left(1+\frac{8}{100}\right)^{3}
+  solution: |-
+    BŁĘDNE ROZUMOWANIE UCZNIA: „W każdym roku dochodzi 8%, więc przez trzy lata dojdzie 8% + 8% + 8% = 24%. Zatem K = 2000·(1 + 0,24) = 2000·1,24 = 2480 zł.”
+    DLACZEGO TO ŹLE: dodawanie procentów oznaczałoby, że co roku odsetki liczone są ciągle od tej samej kwoty 2000 zł — to procent PROSTY. Przy kapitalizacji odsetki są dopisywane do kapitału i w następnym roku same przynoszą odsetki, więc zmiany procentowe się MNOŻĄ, a nie dodają.
+    POPRAWNIE: q = 1 + 8/100 = 1,08, n = 3.
+    K_3 = 2000·(1,08)^3 = 2000·1,259712 = 2519,42 zł (po zaokrągleniu do groszy).
+    Łączny wzrost to (1,08)^3 − 1 = 0,259712, czyli 25,97%, a nie 24%.
+    Różnica 2519,42 − 2480 = 39,42 zł to właśnie „odsetki od odsetek”.
+    Odpowiedź: po trzech latach na lokacie będzie 2519,42 zł.
+  solution_steps:
+  - 'Zidentyfikuj błąd: uczeń dodał procenty (8% + 8% + 8% = 24%), co odpowiada procentowi prostemu.'
+  - 'Przypomnij, że przy kapitalizacji odsetek czynniki wzrostu się mnożą: K_n = K_0·q^n.'
+  - Wyznacz q = 1,08 oraz n = 3.
+  - Oblicz (1,08)^3 = 1,259712 i K_3 = 2000·1,259712 = 2519,42 zł.
+  - Porównaj z błędnym wynikiem 2480 zł — różnica 39,42 zł to odsetki od odsetek.
+  answer:
+    kind: NUMERIC
+    value: 2519.42
+    tol: 0.01
+    latex: 2519{,}42\ \text{zł}
+  checks:
+  - kind: evaluate
+    expr: 2000\cdot\left(1+\frac{8}{100}\right)^{3}
+  skills:
+  - odróżnianie procentu prostego od składanego
+  - wzór K_n = K_0·q^n
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 2519.42 vs 2519.424 (tol 0.01)'
+- id: g-cm-07
+  slot: COMMON_MISTAKE
+  ramp_index: 1
+  difficulty: 2
+  exercise_type: 'demonstracja błędu: wzrost o p%, potem spadek o p%'
+  statement: Cena roweru wynosiła 1500 zł. Najpierw podniesiono ją o 20%, a po miesiącu nową cenę obniżono
+    o 20%. Kolega twierdzi, że rower kosztuje znowu 1500 zł, „bo raz w górę o 20% i raz w dół o 20%”.
+    Oceń to rozumowanie, oblicz aktualną cenę roweru oraz podaj, o ile procent jest ona niższa od ceny
+    początkowej.
+  statement_latex: C=1500\cdot\left(1+\frac{20}{100}\right)\cdot\left(1-\frac{20}{100}\right)
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: „+20% i −20% się znoszą, więc cena wraca do 1500 zł.”
+    DLACZEGO TO ŹLE: obie zmiany liczone są od RÓŻNYCH podstaw. Podwyżka 20% liczona jest od 1500 zł, ale obniżka 20% liczona jest już od ceny podwyższonej, czyli od większej kwoty — obniżka jest kwotowo większa niż podwyżka.
+    POPRAWNIE: podwyżka to mnożenie przez 1,2, obniżka to mnożenie przez 0,8.
+    Cena po podwyżce: 1500·1,2 = 1800 zł.
+    Cena po obniżce: 1800·0,8 = 1440 zł.
+    Łączny czynnik: 1,2·0,8 = 0,96, czyli cena stanowi 96% ceny początkowej, a zatem SPADŁA o 4%.
+    Odpowiedź: rower kosztuje 1440 zł, czyli o 4% mniej niż na początku.
+  solution_steps:
+  - 'Zidentyfikuj błąd: procenty liczone są od różnych podstaw, więc +20% i −20% się nie znoszą.'
+  - 'Zamień zmiany na czynniki: 1,2 oraz 0,8.'
+  - 'Pomnóż czynniki: 1,2·0,8 = 0,96.'
+  - 'Oblicz cenę końcową: 1500·0,96 = 1440 zł.'
+  - 'Odczytaj łączną zmianę: 1 − 0,96 = 0,04, czyli spadek o 4%.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: cena_koncowa
+      answer:
+        kind: NUMERIC
+        value: 1440.0
+        tol: 1.0e-06
+        latex: 1440\ \text{zł}
+    - name: spadek_procent
+      answer:
+        kind: NUMERIC
+        value: 4.0
+        tol: 1.0e-06
+        latex: 4\%
+  checks:
+  - kind: evaluate
+    expr: 1500\cdot\left(1+\frac{20}{100}\right)\cdot\left(1-\frac{20}{100}\right)
+    part: cena_koncowa
+  - kind: evaluate
+    expr: \left(1-\left(1+\frac{20}{100}\right)\cdot\left(1-\frac{20}{100}\right)\right)\cdot 100
+    part: spadek_procent
+  skills:
+  - składanie zmian procentowych
+  - podstawa procentu
+  - łączna zmiana procentowa
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [cena_koncowa] SymPy solved it fresh: 1440.0 vs 1440.0 (tol
+      1e-06) ; [spadek_procent] SymPy solved it fresh: 4.0 vs 4.0 (tol 1e-06)'
+- id: g-cm-08
+  slot: COMMON_MISTAKE
+  ramp_index: 2
+  difficulty: 2
+  exercise_type: 'demonstracja błędu: procent a punkt procentowy'
+  statement: 'Bank podniósł oprocentowanie lokaty rocznej z 2,5% na 4% w skali roku. Klient powiedział:
+    „oprocentowanie wzrosło o 1,5%”. Wyjaśnij, na czym polega nieścisłość w wypowiedzi klienta, a następnie
+    podaj: o ile punktów procentowych wzrosło oprocentowanie oraz o ile procent (względnie) wzrosło oprocentowanie.'
+  statement_latex: 4\%-2{,}5\%=1{,}5\ \text{p.p.},\qquad \frac{4-\frac{5}{2}}{\frac{5}{2}}\cdot 100\%=60\%
+  solution: |-
+    BŁĘDNE SFORMUŁOWANIE: „oprocentowanie wzrosło o 1,5%”.
+    DLACZEGO TO ŹLE: liczba 1,5 powstała z ODEJMOWANIA dwóch wielkości procentowych: 4% − 2,5%. Taka różnica jest wyrażona w PUNKTACH PROCENTOWYCH, a nie w procentach. Sformułowanie „wzrosło o 1,5%” oznaczałoby wzrost względny, czyli nową stawkę 2,5%·1,015 ≈ 2,54% — a to zupełnie co innego.
+    POPRAWNIE:
+    – różnica stawek: 4 − 2,5 = 1,5 punktu procentowego;
+    – zmiana względna: (4 − 2,5)/2,5 = 1,5/2,5 = 0,6, czyli oprocentowanie wzrosło o 60%.
+    Odpowiedź: oprocentowanie wzrosło o 1,5 punktu procentowego, czyli o 60% swojej poprzedniej wartości.
+  solution_steps:
+  - 'Zidentyfikuj błąd: różnicę dwóch wielkości procentowych podaje się w punktach procentowych.'
+  - 'Oblicz różnicę stawek: 4 − 2,5 = 1,5 p.p.'
+  - 'Oblicz zmianę względną: (4 − 2,5)/2,5 = 0,6.'
+  - 'Zamień na procenty: 0,6 = 60%.'
+  - 'Sformułuj poprawną odpowiedź: wzrost o 1,5 p.p., czyli o 60%.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: punkty_procentowe
+      answer:
+        kind: NUMERIC
+        value: 1.5
+        tol: 1.0e-06
+        latex: 1{,}5\ \text{p.p.}
+    - name: wzrost_wzgledny_procent
+      answer:
+        kind: NUMERIC
+        value: 60.0
+        tol: 1.0e-06
+        latex: 60\%
+  checks:
+  - kind: evaluate
+    expr: 4-\frac{5}{2}
+    part: punkty_procentowe
+  - kind: evaluate
+    expr: \frac{4-\frac{5}{2}}{\frac{5}{2}}\cdot 100
+    part: wzrost_wzgledny_procent
+  skills:
+  - punkt procentowy
+  - zmiana względna w procentach
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [punkty_procentowe] SymPy solved it fresh: 1.5 vs 1.5 (tol
+      1e-06) ; [wzrost_wzgledny_procent] SymPy solved it fresh: 60.0 vs 60.0 (tol 1e-06)'
+- id: g-cm-09
+  slot: COMMON_MISTAKE
+  ramp_index: 3
+  difficulty: 3
+  exercise_type: 'demonstracja błędu: brak podziału stopy rocznej przez liczbę kapitalizacji'
+  statement: Klient wpłacił do banku 20000 zł na lokatę dwuletnią, oprocentowaną 8% w skali roku, z kapitalizacją
+    kwartalną. Uczeń zapisał kapitał końcowy jako 20000\cdot\left(1{,}08\right)^{8}. Wyjaśnij, dlaczego
+    ten zapis jest błędny, i oblicz właściwą kwotę zgromadzoną na lokacie po dwóch latach (bez uwzględniania
+    podatków), z dokładnością do 1 grosza.
+  statement_latex: K=20000\cdot\left(1+\frac{2}{100}\right)^{8}
+  solution: |-
+    BŁĘDNE ROZUMOWANIE UCZNIA: „Kapitalizacja kwartalna przez 2 lata to 8 okresów, a oprocentowanie wynosi 8%, więc K = 20000·(1,08)^8 = 20000·1,85093 ≈ 37018,60 zł.”
+    DLACZEGO TO ŹLE: 8% to roczna stopa NOMINALNA. Skoro odsetki dopisywane są 4 razy w roku, to na jeden kwartał przypada stopa 8% : 4 = 2%. Do potęgi podnosimy czynnik odpowiadający stopie JEDNEGO OKRESU, a nie stopie rocznej. Uczeń policzył de facto 8% za każdy kwartał, czyli lokatę ośmioletnią.
+    POPRAWNIE: stopa kwartalna 2%, czyli q = 1,02; liczba okresów n = 4·2 = 8.
+    K = 20000·(1,02)^8.
+    (1,02)^2 = 1,0404; (1,02)^4 = 1,08243216; (1,02)^8 = 1,17165938…
+    K = 20000·1,17165938 ≈ 23433,19 zł.
+    Odpowiedź: na lokacie będzie 23433,19 zł.
+  solution_steps:
+  - 'Zidentyfikuj błąd: do potęgi podniesiono czynnik stopy rocznej zamiast kwartalnej.'
+  - 'Oblicz stopę jednego kwartału: 8% : 4 = 2%, czyli q = 1,02.'
+  - 'Oblicz liczbę okresów: n = 4·2 = 8 kwartałów.'
+  - 'Zapisz model: K = 20000·(1,02)^8 i oblicz (1,02)^8 ≈ 1,17165938.'
+  - 'Oblicz kapitał: K ≈ 23433,19 zł.'
+  answer:
+    kind: NUMERIC
+    value: 23433.19
+    tol: 0.01
+    latex: 23433{,}19\ \text{zł}
+  checks:
+  - kind: evaluate
+    expr: 20000\cdot\left(1+\frac{2}{100}\right)^{8}
+  skills:
+  - stopa okresowa r/m
+  - liczba okresów mt
+  - procent składany
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 23433.19 vs 23433.18762004531 (tol 0.01)'
+- id: g-cm-10
+  slot: COMMON_MISTAKE
+  ramp_index: 4
+  difficulty: 3
+  exercise_type: 'demonstracja błędu: podatek naliczony od całego kapitału'
+  statement: Pani Anna wpłaciła do banku 25000 zł na lokatę dwuletnią, oprocentowaną 4% w skali roku,
+    z kapitalizacją roczną. Na koniec bank pobiera 19% podatku od zysku. Uczeń obliczył kwotę do wypłaty
+    jako 0,81·27040 = 21902,40 zł. Wskaż błąd w tym rachunku, a następnie oblicz kwotę pobranego podatku
+    oraz kwotę, którą pani Anna otrzyma z banku.
+  statement_latex: K_{2}=25000\cdot\left(1+\frac{4}{100}\right)^{2},\qquad K_{netto}=25000+0{,}81\cdot\left(K_{2}-25000\right)
+  solution: |-
+    BŁĘDNE ROZUMOWANIE UCZNIA: „Na koncie jest 27040 zł, bank zabiera 19%, więc zostaje 0,81·27040 = 21902,40 zł.”
+    DLACZEGO TO ŹLE: podatek od zysków kapitałowych dotyczy WYŁĄCZNIE odsetek, a nie wpłaconego kapitału. Wynik ucznia jest mniejszy od kwoty wpłaconej (25000 zł), co od razu pokazuje absurd — lokata nie może przynieść straty.
+    POPRAWNIE: K_2 = 25000·(1,04)^2 = 25000·1,0816 = 27040 zł.
+    Odsetki brutto: 27040 − 25000 = 2040 zł.
+    Podatek: 0,19·2040 = 387,60 zł.
+    Odsetki netto: 2040 − 387,60 = 1652,40 zł.
+    Do wypłaty: 25000 + 1652,40 = 26652,40 zł.
+    Odpowiedź: podatek wynosi 387,60 zł, a pani Anna otrzyma 26652,40 zł.
+  solution_steps:
+  - 'Zidentyfikuj błąd: podatek naliczono od całego kapitału zamiast od samych odsetek.'
+  - 'Oblicz kapitał brutto: 25000·(1,04)^2 = 27040 zł.'
+  - 'Oblicz odsetki brutto: 27040 − 25000 = 2040 zł.'
+  - 'Oblicz podatek: 0,19·2040 = 387,60 zł.'
+  - 'Oblicz kwotę do wypłaty: 25000 + 2040 − 387,60 = 26652,40 zł.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: podatek
+      answer:
+        kind: NUMERIC
+        value: 387.6
+        tol: 0.01
+        latex: 387{,}60\ \text{zł}
+    - name: kwota_do_wyplaty
+      answer:
+        kind: NUMERIC
+        value: 26652.4
+        tol: 0.01
+        latex: 26652{,}40\ \text{zł}
+  checks:
+  - kind: evaluate
+    expr: \frac{19}{100}\cdot\left(25000\cdot\left(1+\frac{4}{100}\right)^{2}-25000\right)
+    part: podatek
+  - kind: evaluate
+    expr: 25000+\frac{81}{100}\cdot\left(25000\cdot\left(1+\frac{4}{100}\right)^{2}-25000\right)
+    part: kwota_do_wyplaty
+  skills:
+  - podatek 19% od odsetek
+  - procent składany
+  - kwota do wypłaty
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [podatek] SymPy solved it fresh: 387.6 vs 387.6 (tol 0.01)
+      ; [kwota_do_wyplaty] SymPy solved it fresh: 26652.4 vs 26652.4 (tol 0.01)'
+- id: g-ch-t02
+  slot: CHALLENGE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: składanie zmian procentowych z nieznaną wartością początkową
+  statement: Cenę roweru w sklepie najpierw podwyższono o 20%, a po miesiącu obniżono o 25%, przy czym
+    obniżka była liczona od ceny po podwyżce. Po obu zmianach rower jest o 96 zł tańszy niż przed podwyżką.
+    a) O ile procent łącznie zmieniła się cena roweru? b) Ile kosztował rower przed podwyżką? c) Ile rower
+    kosztuje po obu zmianach?
+  statement_latex: x-\frac{120}{100}\cdot\frac{75}{100}\cdot x = 96
+  solution: |-
+    Oznaczmy przez x cenę roweru przed podwyżką (w złotych), x > 0.
+    a) Podwyżka o 20% to mnożenie przez 1,20, obniżka o 25% to mnożenie przez 0,75. Łączny czynnik: 1,20·0,75 = 0,90. Ponieważ 0,90 = 1 − 0,10, cena łącznie spadła o 10% (a nie pozostała bez zmian ani nie spadła o 5%).
+    b) Po obu zmianach cena wynosi 0,9x, a jest ona o 96 zł mniejsza od x:
+    x − 0,9x = 96, czyli 0,1x = 96, więc x = 960.
+    Rower przed podwyżką kosztował 960 zł.
+    c) Cena po obu zmianach: 0,9·960 = 864 zł. Sprawdzenie: 960 → 960·1,2 = 1152 → 1152·0,75 = 864 oraz 960 − 864 = 96. ✓
+  solution_steps:
+  - 'Wprowadź niewiadomą: x — cena przed podwyżką, x > 0.'
+  - 'Zamień obie zmiany na czynniki: 1,20 oraz 0,75.'
+  - 'Pomnóż czynniki: 1,20·0,75 = 0,90 — łącznie cena spadła o 10%.'
+  - 'Zapisz warunek zadania: x − 0,9x = 96.'
+  - 'Rozwiąż: 0,1x = 96, x = 960 zł.'
+  - 'Oblicz cenę końcową: 0,9·960 = 864 zł i sprawdź różnicę 960 − 864 = 96 zł.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: laczny_spadek_proc
+      answer:
+        kind: NUMERIC
+        value: 10.0
+    - name: cena_poczatkowa
+      answer:
+        kind: NUMERIC
+        value: 960.0
+    - name: cena_koncowa
+      answer:
+        kind: NUMERIC
+        value: 864.0
+  checks:
+  - kind: evaluate
+    expr: \left(1-\frac{120}{100}\cdot\frac{75}{100}\right)\cdot 100
+    part: laczny_spadek_proc
+  - kind: solve_equation
+    expr: x-\frac{120}{100}\cdot\frac{75}{100}\cdot x = 96
+    part: cena_poczatkowa
+  - kind: evaluate
+    expr: \frac{120}{100}\cdot\frac{75}{100}\cdot 960
+    part: cena_koncowa
+  stated_model:
+    variable: x
+    objective_latex: x-\frac{120}{100}\cdot\frac{75}{100}\cdot x = 96
+    domain_lo: '0'
+    goal: value
+    constraint_used: cena po obu zmianach jest o 96 zł mniejsza od ceny początkowej
+  skills:
+  - składanie czynników zmiany procentowej
+  - wprowadzenie niewiadomej
+  - równanie liniowe z treści
+  - interpretacja łącznej zmiany procentowej
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''x'': ''x-\\frac{120}{100}\\cdot\\frac{75}{100}\\cdot
+      x = 96'') — human review'
+- id: g-ch-t03
+  slot: CHALLENGE
+  ramp_index: 1
+  difficulty: 4
+  exercise_type: 'odwrotne zadanie o lokacie: odsetki dwóch lat, wyznaczanie stopy, kapitału i czasu podwojenia'
+  statement: Pewną kwotę wpłacono do banku na lokatę o stałym oprocentowaniu p% w skali roku z kapitalizacją
+    roczną (bez uwzględniania podatków). Odsetki dopisane do lokaty na koniec drugiego roku były o 24
+    zł większe od odsetek dopisanych na koniec pierwszego roku, a łączne odsetki dopisane w ciągu tych
+    dwóch lat wyniosły 624 zł. a) Oblicz oprocentowanie p. b) Oblicz kwotę wpłaconą na lokatę. c) Po ilu
+    pełnych latach oszczędzania na tej lokacie kapitał po raz pierwszy przekroczy dwukrotność wpłaconej
+    kwoty?
+  statement_latex: K_0\cdot r + K_0\cdot r\cdot\left(1+r\right) = 624,\qquad K_0\cdot r^{2}=24
+  solution: |-
+    Niech K_0 będzie wpłaconą kwotą, a r = \frac{p}{100} roczną stopą (r > 0).
+    Odsetki pierwszego roku: O_1 = K_0 r. Kapitał po roku: K_0(1+r), więc odsetki drugiego roku: O_2 = K_0(1+r)r = K_0 r + K_0 r^{2}.
+    Z warunków zadania:
+    O_2 − O_1 = K_0 r^{2} = 24,
+    O_1 + O_2 = 2K_0 r + K_0 r^{2} = 624.
+    Z drugiego równania: 2K_0 r = 624 − 24 = 600, czyli K_0 r = 300.
+    a) Dzielimy: \frac{K_0 r^{2}}{K_0 r} = \frac{24}{300} = 0{,}08, więc r = 0,08, czyli p = 8%.
+    b) K_0 = \frac{300}{0{,}08} = 3750 zł.
+    Sprawdzenie: 3750·0,08 = 300 zł (I rok), 4050·0,08 = 324 zł (II rok); różnica 24 zł, suma 624 zł. ✓
+    c) Szukamy najmniejszego naturalnego n, dla którego 3750\cdot 1{,}08^{n} > 2\cdot 3750, czyli 1{,}08^{n} > 2.
+    1,08² = 1,1664; 1,08⁴ = 1,36048896; 1,08⁸ ≈ 1,850930; 1,08⁹ ≈ 1,999005 < 2 — jeszcze za mało!
+    1,08¹⁰ ≈ 2,158925 > 2.
+    Zatem dopiero po 10 pełnych latach kapitał przekroczy dwukrotność wpłaty (po 9 latach jest to 7496,27 zł < 7500 zł).
+  solution_steps:
+  - 'Wprowadź niewiadome: K_0 — wpłata, r = p/100 — stopa roczna.'
+  - 'Zapisz odsetki obu lat: O_1 = K_0·r, O_2 = K_0·r·(1+r).'
+  - 'Z warunków: K_0·r² = 24 oraz 2K_0·r + K_0·r² = 624.'
+  - Stąd 2K_0·r = 600, czyli K_0·r = 300.
+  - 'Podziel równania stronami: r = 24/300 = 0,08, czyli p = 8%.'
+  - Oblicz K_0 = 300/0,08 = 3750 zł i sprawdź warunki zadania.
+  - 'Rozwiąż 1,08ⁿ > 2: 1,08⁹ ≈ 1,999 < 2, 1,08¹⁰ ≈ 2,159 > 2, więc n = 10.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: oprocentowanie_p
+      answer:
+        kind: NUMERIC
+        value: 8.0
+    - name: wplacona_kwota
+      answer:
+        kind: NUMERIC
+        value: 3750.0
+    - name: liczba_lat
+      answer:
+        kind: NUMERIC
+        value: 10.0
+  checks:
+  - kind: evaluate
+    expr: \frac{24}{\frac{624-24}{2}}\cdot 100
+    part: oprocentowanie_p
+  - kind: evaluate
+    expr: \frac{\frac{624-24}{2}}{\frac{8}{100}}
+    part: wplacona_kwota
+  - kind: evaluate
+    expr: \left\lceil\frac{\log\left(2\right)}{\log\left(\frac{108}{100}\right)}\right\rceil
+    part: liczba_lat
+  stated_model:
+    variable: r
+    objective_latex: K_n = K_0\cdot\left(1+r\right)^{n}
+    domain_lo: '0'
+    goal: value
+    constraint_used: O_2-O_1=24 oraz O_1+O_2=624
+  skills:
+  - porównanie odsetek w kolejnych okresach
+  - wprowadzenie dwóch niewiadomych
+  - wyznaczanie stopy z warunku
+  - wyznaczanie liczby okresów i sprawdzenie n oraz n−1
+  verification:
+    checkability: STATED_MODEL
+    note: 'stage 1 inconclusive: TypeError: name should be a string, not Token'
+- id: g-ch-t04
+  slot: CHALLENGE
+  ramp_index: 2
+  difficulty: 5
+  exercise_type: 'model lokaty z podatkiem naliczanym co rok: wzór, dziedzina, wartość i porównanie z
+    rosnącą ceną'
+  statement: Pan Zieliński wpłacił do banku 40 000 zł na lokatę długoterminową o oprocentowaniu 5% w skali
+    roku z kapitalizacją roczną. Na koniec każdego roku bank nalicza odsetki, potrąca od nich 19% podatku
+    i dopiero pozostałą część dopisuje do kapitału. a) Zapisz wzór funkcji K(n) opisującej kwotę na lokacie
+    po n pełnych latach oszczędzania i podaj, dla jakich n ten wzór ma sens. b) Oblicz kwotę na lokacie
+    po 3 latach oszczędzania (z dokładnością do 1 grosza). c) Pan Zieliński chce kupić samochód, który
+    dzisiaj kosztuje 46 000 zł, a jego cena rośnie o 2% rocznie. Oblicz kwotę na lokacie po 4 latach oraz
+    cenę samochodu po 4 latach (obie z dokładnością do 1 grosza) i rozstrzygnij, czy zgromadzony kapitał
+    wystarczy wtedy na zakup tego samochodu.
+  statement_latex: K(n) = 40000\cdot\left(1+\frac{81}{100}\cdot\frac{5}{100}\right)^{n}
+  solution: |-
+    a) W jednym roku odsetki brutto wynoszą 5% kapitału, ale do kapitału bank dopisuje tylko 81% tej kwoty, czyli 0{,}81\cdot 5\% = 4{,}05\%. Stopa netto jednego okresu to 0,0405, więc czynnik roczny q = 1{,}0405 i
+    K(n) = 40000\cdot\left(1{,}0405\right)^{n}.
+    Wzór ma sens dla n będących liczbami całkowitymi nieujemnymi (odsetki dopisywane są tylko na koniec pełnego roku), czyli n \in \mathbb{N}.
+    b) K(3) = 40000\cdot 1{,}0405^{3}. Kolejno: 1,0405² = 1,08264025; 1,0405³ = 1,12648718; K(3) = 40000·1,12648718 = 45 059,49 zł.
+    c) K(4) = 40000\cdot 1{,}0405^{4} = 40000\cdot 1{,}17210991 = 46 884,40 zł.
+    Cena samochodu rośnie wykładniczo: C(4) = 46000\cdot 1{,}02^{4} = 46000\cdot 1{,}08243216 = 49 791,88 zł.
+    Porównanie: 46 884,40 zł < 49 791,88 zł, brakuje 2907,48 zł.
+    Odpowiedź: kapitał po 4 latach NIE wystarczy na zakup tego samochodu.
+  solution_steps:
+  - 'Zauważ, że podatek potrącany jest co roku: efektywna stopa jednego roku to 0,81·5% = 4,05%.'
+  - 'Zapisz model: K(n) = 40000·(1,0405)ⁿ, n ∈ N (odsetki dopisywane na koniec pełnego roku).'
+  - Oblicz 1,0405³ = 1,12648718 i K(3) = 45 059,49 zł.
+  - Oblicz 1,0405⁴ = 1,17210991 i K(4) = 46 884,40 zł.
+  - 'Zbuduj model ceny: C(n) = 46000·1,02ⁿ, więc C(4) = 46000·1,08243216 = 49 791,88 zł.'
+  - 'Porównaj obie kwoty: 46 884,40 < 49 791,88 — kapitał nie wystarczy (brakuje 2907,48 zł).'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wzor_K
+      answer:
+        kind: SYMBOLIC
+        latex: K(n)=40000\cdot\left(1{,}0405\right)^{n}
+    - name: dziedzina
+      answer:
+        kind: SYMBOLIC
+        latex: n \in \mathbb{N}
+    - name: kapital_po_3_latach
+      answer:
+        kind: NUMERIC
+        value: 45059.49
+        tol: 0.01
+    - name: kapital_po_4_latach
+      answer:
+        kind: NUMERIC
+        value: 46884.4
+        tol: 0.01
+    - name: cena_po_4_latach
+      answer:
+        kind: NUMERIC
+        value: 49791.88
+        tol: 0.01
+    - name: czy_wystarczy
+      answer:
+        kind: BOOLEAN
+        truth: false
+  checks:
+  - kind: evaluate
+    expr: 40000\cdot\left(1+\frac{81}{100}\cdot\frac{5}{100}\right)^{3}
+    var: n
+    part: kapital_po_3_latach
+  - kind: evaluate
+    expr: 40000\cdot\left(1+\frac{81}{100}\cdot\frac{5}{100}\right)^{4}
+    var: n
+    part: kapital_po_4_latach
+  - kind: evaluate
+    expr: 46000\cdot\left(1+\frac{2}{100}\right)^{4}
+    var: n
+    part: cena_po_4_latach
+  stated_model:
+    variable: n
+    objective_latex: K(n)=40000\cdot\left(1+\frac{81}{100}\cdot\frac{5}{100}\right)^{n}
+    domain_lo: '0'
+    domain_lo_open: false
+    goal: value
+    constraint_used: podatek 19% potrącany od odsetek każdego roku przed ich dopisaniem; n całkowite
+  skills:
+  - budowa modelu wykładniczego z opisu
+  - stopa netto 0,81·p
+  - obliczanie kapitału po n latach
+  - porównanie dwóch modeli wykładniczych
+  - wniosek o wystarczalności kwoty
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (AMBIGUOUS: ''parser returned an unresolved ambiguity
+      (_ambig)'') — human review'

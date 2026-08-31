@@ -1,0 +1,738 @@
+section: wycinek-kola-luk
+name: Wycinek koła i długość łuku
+scope: Area of a circular sector and length of an arc from the central angle.
+requirements:
+- VIII.6
+counts:
+  total: 16
+  DETERMINISTIC: 11
+  REFERENCE_CALL: 2
+  NOT_MACHINE_CHECKABLE: 3
+exercises:
+- id: g-th-00
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: obliczenie długości łuku
+  statement: Punkty A i B leżą na okręgu o środku O i promieniu r = 9 cm, a kąt środkowy AOB ma miarę
+    40°. Oblicz długość krótszego łuku AB. Wynik podaj w postaci dokładnej (z liczbą π).
+  statement_latex: l=\frac{40^\circ}{360^\circ}\cdot 2\cdot\pi\cdot 9
+  solution: 'Łuk AB odpowiada kątowi środkowemu 40°, więc stanowi taką część okręgu, jaką część kąta pełnego
+    stanowi 40°: \frac{40^\circ}{360^\circ}=\frac{1}{9}. Obwód całego okręgu wynosi 2\cdot\pi\cdot 9=18\pi
+    cm. Zatem l=\frac{1}{9}\cdot 18\pi=2\pi cm ≈ 6{,}28 cm. Kontrola: 2\pi\le 18\pi, jednostka liniowa
+    – wynik sensowny.'
+  solution_steps:
+  - 'Wyznacz ułamek koła: \frac{40^\circ}{360^\circ}=\frac{1}{9}.'
+  - 'Oblicz obwód całego okręgu: 2\cdot\pi\cdot 9=18\pi cm.'
+  - 'Pomnóż obwód przez ułamek: l=\frac{1}{9}\cdot 18\pi=2\pi cm.'
+  - Sprawdź jednostkę (cm) i warunek l\le 2\pi r.
+  answer:
+    kind: SYMBOLIC
+    latex: 2\pi
+  checks:
+  - kind: evaluate
+    expr: \frac{40}{360}\cdot 2\cdot\pi\cdot 9
+  skills:
+  - długość łuku
+  - ułamek α/360°
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 6.283185307179586 vs 6.283185307179586 (tol 1e-09)'
+- id: g-th-01
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: obliczenie pola wycinka
+  statement: W kole o środku O i promieniu r = 10 cm poprowadzono promienie OA i OB tak, że kąt środkowy
+    AOB ma miarę 72°. Oblicz pole wycinka koła ograniczonego promieniami OA i OB oraz krótszym łukiem
+    AB. Wynik podaj w postaci dokładnej (z liczbą π).
+  statement_latex: P_w=\frac{72^\circ}{360^\circ}\cdot\pi\cdot 10^2
+  solution: 'Ułamek koła: \frac{72^\circ}{360^\circ}=\frac{1}{5}. Pole całego koła: \pi\cdot 10^2=100\pi
+    cm^2. Pole wycinka: P_w=\frac{1}{5}\cdot 100\pi=20\pi cm^2 ≈ 62{,}8 cm^2. Kontrola: 20\pi\le 100\pi,
+    jednostka kwadratowa – wynik sensowny.'
+  solution_steps:
+  - 'Wyznacz ułamek koła: \frac{72^\circ}{360^\circ}=\frac{1}{5}.'
+  - 'Oblicz pole całego koła: \pi\cdot 10^2=100\pi cm^2.'
+  - 'Pomnóż pole koła przez ułamek: P_w=\frac{1}{5}\cdot 100\pi=20\pi cm^2.'
+  - Sprawdź jednostkę pola (cm^2) i warunek P_w\le\pi r^2.
+  answer:
+    kind: SYMBOLIC
+    latex: 20\pi
+  checks:
+  - kind: evaluate
+    expr: \frac{72}{360}\cdot\pi\cdot 10^{2}
+  skills:
+  - pole wycinka koła
+  - ułamek α/360°
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 62.83185307179586 vs 62.83185307179586 (tol 1e-09)'
+- id: g-th-02
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: procent koła a kąt środkowy
+  statement: Na diagramie kołowym pewien wycinek koła obrazuje 15% wszystkich danych, czyli jego pole
+    stanowi 15% pola całego koła. Oblicz miarę kąta środkowego tego wycinka.
+  statement_latex: \alpha=\frac{15}{100}\cdot 360^\circ
+  solution: 'Pole wycinka jest wprost proporcjonalne do kąta środkowego, więc wycinkowi o polu równym
+    15% pola koła odpowiada kąt równy 15% kąta pełnego: \alpha=\frac{15}{100}\cdot 360^\circ=54^\circ.
+    Kontrola: 0^\circ<54^\circ\le 360^\circ, a 54^\circ to nieco mniej niż 60^\circ, czyli nieco mniej
+    niż \frac{1}{6} koła – zgadza się z 15%.'
+  solution_steps:
+  - 'Zapisz proporcję: pełnemu kątowi 360^\circ odpowiada 100% koła, a szukanemu kątowi \alpha odpowiada
+    15%.'
+  - Stąd \frac{\alpha}{360^\circ}=\frac{15}{100}.
+  - Oblicz \alpha=\frac{15}{100}\cdot 360^\circ=54^\circ.
+  - 'Sprawdź sensowność: 0^\circ<\alpha\le 360^\circ.'
+  answer:
+    kind: NUMERIC
+    value: 54.0
+  checks:
+  - kind: evaluate
+    expr: \frac{15}{100}\cdot 360
+  skills:
+  - zamiana procentu koła na kąt środkowy
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 54.0 vs 54.0 (tol 1e-09)'
+- id: g-ex-03
+  slot: EXERCISE
+  ramp_index: 1
+  difficulty: 2
+  exercise_type: łuk, pole i obwód wycinka
+  statement: 'Punkty A i B leżą na okręgu o środku O i promieniu r = 12 cm, przy czym kąt środkowy AOB
+    ma miarę 150°. Rozpatrujemy wycinek koła ograniczony promieniami OA i OB oraz łukiem AB odpowiadającym
+    kątowi 150°. Oblicz: a) długość łuku AB, b) pole tego wycinka, c) obwód tego wycinka. Wyniki podaj
+    w postaci dokładnej.'
+  statement_latex: l=\frac{150^\circ}{360^\circ}\cdot 2\cdot\pi\cdot 12,\qquad P_w=\frac{150^\circ}{360^\circ}\cdot\pi\cdot
+    12^2,\qquad Ob=l+2\cdot 12
+  solution: |-
+    Ułamek koła: \frac{150^\circ}{360^\circ}=\frac{5}{12}.
+    a) l=\frac{5}{12}\cdot 2\cdot\pi\cdot 12=\frac{5}{12}\cdot 24\pi=10\pi cm.
+    b) P_w=\frac{5}{12}\cdot\pi\cdot 12^2=\frac{5}{12}\cdot 144\pi=60\pi cm^2.
+    c) Brzeg wycinka tworzą łuk i dwa promienie: Ob=l+2r=10\pi+2\cdot 12=10\pi+24 cm ≈ 55{,}4 cm. Składników 10\pi i 24 nie łączymy w jeden wyraz.
+    Kontrola wzorem P_w=\frac{1}{2}\cdot l\cdot r: \frac{1}{2}\cdot 10\pi\cdot 12=60\pi ✓.
+  solution_steps:
+  - 'Wyznacz ułamek koła: \frac{150^\circ}{360^\circ}=\frac{5}{12}.'
+  - 'Oblicz długość łuku: l=\frac{5}{12}\cdot 24\pi=10\pi cm.'
+  - 'Oblicz pole wycinka: P_w=\frac{5}{12}\cdot 144\pi=60\pi cm^2.'
+  - 'Oblicz obwód wycinka: Ob=l+2r=10\pi+24 cm.'
+  - Sprawdź wynik wzorem P_w=\frac{1}{2}\cdot l\cdot r.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: dlugosc_luku
+      answer:
+        kind: SYMBOLIC
+        latex: 10\pi
+    - name: pole_wycinka
+      answer:
+        kind: SYMBOLIC
+        latex: 60\pi
+    - name: obwod_wycinka
+      answer:
+        kind: SYMBOLIC
+        latex: 10\pi+24
+  checks:
+  - kind: evaluate
+    expr: \frac{150}{360}\cdot 2\cdot\pi\cdot 12
+    part: dlugosc_luku
+  - kind: evaluate
+    expr: \frac{150}{360}\cdot\pi\cdot 12^{2}
+    part: pole_wycinka
+  - kind: evaluate
+    expr: \frac{150}{360}\cdot 2\cdot\pi\cdot 12+2\cdot 12
+    part: obwod_wycinka
+  skills:
+  - długość łuku
+  - pole wycinka
+  - obwód wycinka
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [dlugosc_luku] SymPy solved it fresh: 31.41592653589793 vs
+      31.41592653589793 (tol 1e-09) ; [pole_wycinka] SymPy solved it fresh: 188.4955592153876 vs 188.4955592153876
+      (tol 1e-09) ; [obwod_wycinka] SymPy solved it fresh: 55.41592653589793 vs 55.41592653589793 (tol
+      1e-09)'
+- id: g-ex-04
+  slot: EXERCISE
+  ramp_index: 2
+  difficulty: 3
+  exercise_type: wyznaczanie kąta z pola wycinka
+  statement: Wycinek koła o promieniu r = 8 ma pole równe 24π. Wyznacz miarę kąta środkowego tego wycinka
+    oraz długość ograniczającego go łuku.
+  statement_latex: 24\pi=\frac{\alpha}{360^\circ}\cdot\pi\cdot 8^2
+  solution: |-
+    Pole całego koła: \pi\cdot 8^2=64\pi.
+    Ułamek koła: k=\frac{24\pi}{64\pi}=\frac{3}{8}.
+    Kąt środkowy: \alpha=\frac{3}{8}\cdot 360^\circ=135^\circ (warunek 0^\circ<\alpha\le 360^\circ spełniony).
+    Długość łuku: l=\frac{3}{8}\cdot 2\cdot\pi\cdot 8=\frac{3}{8}\cdot 16\pi=6\pi.
+    Kontrola: P_w=\frac{1}{2}\cdot l\cdot r=\frac{1}{2}\cdot 6\pi\cdot 8=24\pi ✓.
+  solution_steps:
+  - Zapisz równanie 24\pi=\frac{\alpha}{360^\circ}\cdot\pi\cdot 8^{2}.
+  - 'Podziel obie strony przez \pi\cdot 64: \frac{\alpha}{360^\circ}=\frac{24}{64}=\frac{3}{8}.'
+  - Oblicz \alpha=\frac{3}{8}\cdot 360^\circ=135^\circ.
+  - 'Oblicz długość łuku: l=\frac{3}{8}\cdot 2\cdot\pi\cdot 8=6\pi.'
+  - Sprawdź wynik zależnością P_w=\frac{1}{2}\cdot l\cdot r.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: kat_srodkowy
+      answer:
+        kind: NUMERIC
+        value: 135.0
+    - name: dlugosc_luku
+      answer:
+        kind: SYMBOLIC
+        latex: 6\pi
+  checks:
+  - kind: evaluate
+    expr: \frac{24\cdot\pi}{\pi\cdot 8^{2}}\cdot 360
+    part: kat_srodkowy
+  - kind: evaluate
+    expr: \frac{24\cdot\pi}{\pi\cdot 8^{2}}\cdot 2\cdot\pi\cdot 8
+    part: dlugosc_luku
+  skills:
+  - przekształcanie wzoru na pole wycinka
+  - długość łuku
+  - kontrola wzorem P=½lr
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [kat_srodkowy] SymPy solved it fresh: 135.0 vs 135.0 (tol 1e-09)
+      ; [dlugosc_luku] SymPy solved it fresh: 18.84955592153876 vs 18.84955592153876 (tol 1e-09)'
+- id: g-ex-05
+  slot: EXERCISE
+  ramp_index: 3
+  difficulty: 4
+  exercise_type: figura złożona z wycinków (fragment pierścienia)
+  statement: 'Dane są dwa okręgi współśrodkowe o wspólnym środku O i promieniach 3 cm oraz 9 cm. Z pierścienia
+    zawartego między tymi okręgami wycięto fragment odpowiadający kątowi środkowemu o mierze 120°; brzeg
+    tego fragmentu tworzą: łuk większego okręgu, łuk mniejszego okręgu oraz dwa odcinki leżące na ramionach
+    kąta i łączące końce tych łuków. Oblicz pole oraz obwód tego fragmentu pierścienia. Wyniki podaj w
+    postaci dokładnej.'
+  statement_latex: P=\frac{120^\circ}{360^\circ}\cdot\left(\pi\cdot 9^2-\pi\cdot 3^2\right),\qquad Ob=\frac{120^\circ}{360^\circ}\cdot
+    2\cdot\pi\cdot 9+\frac{120^\circ}{360^\circ}\cdot 2\cdot\pi\cdot 3+2\cdot\left(9-3\right)
+  solution: |-
+    Ułamek koła: \frac{120^\circ}{360^\circ}=\frac{1}{3}.
+    Pole pierścienia: \pi\cdot 9^2-\pi\cdot 3^2=81\pi-9\pi=72\pi cm^2.
+    Pole fragmentu: P=\frac{1}{3}\cdot 72\pi=24\pi cm^2 ≈ 75{,}4 cm^2.
+    Obwód: łuk zewnętrzny \frac{1}{3}\cdot 2\cdot\pi\cdot 9=6\pi cm, łuk wewnętrzny \frac{1}{3}\cdot 2\cdot\pi\cdot 3=2\pi cm, dwa odcinki o długości 9-3=6 cm każdy.
+    Ob=6\pi+2\pi+2\cdot 6=8\pi+12 cm ≈ 37{,}1 cm.
+    Składników z \pi i bez \pi nie łączymy w jeden wyraz.
+  solution_steps:
+  - 'Wyznacz ułamek koła: \frac{120^\circ}{360^\circ}=\frac{1}{3}.'
+  - 'Oblicz pole pierścienia: \pi\cdot 9^{2}-\pi\cdot 3^{2}=72\pi cm^2.'
+  - 'Pole fragmentu: P=\frac{1}{3}\cdot 72\pi=24\pi cm^2.'
+  - 'Oblicz długości obu łuków: 6\pi cm i 2\pi cm.'
+  - 'Dodaj dwa odcinki o długości 9-3=6 cm: Ob=6\pi+2\pi+12=8\pi+12 cm.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: pole
+      answer:
+        kind: SYMBOLIC
+        latex: 24\pi
+    - name: obwod
+      answer:
+        kind: SYMBOLIC
+        latex: 8\pi+12
+  checks:
+  - kind: evaluate
+    expr: \frac{120}{360}\cdot\left(\pi\cdot 9^{2}-\pi\cdot 3^{2}\right)
+    part: pole
+  - kind: evaluate
+    expr: \frac{120}{360}\cdot 2\cdot\pi\cdot 9+\frac{120}{360}\cdot 2\cdot\pi\cdot 3+2\cdot\left(9-3\right)
+    part: obwod
+  skills:
+  - pole wycinka
+  - pole pierścienia
+  - obwód figury złożonej
+  - rozdzielanie składników z π i bez π
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [pole] SymPy solved it fresh: 75.39822368615503 vs 75.39822368615503
+      (tol 1e-09) ; [obwod] SymPy solved it fresh: 37.132741228718345 vs 37.132741228718345 (tol 1e-09)'
+- id: g-ex-t00
+  slot: EXERCISE
+  ramp_index: 6
+  difficulty: 3
+  exercise_type: wyznaczanie promienia i pola z obwodu wycinka
+  statement: Obwód wycinka koła o kącie środkowym 72^\circ (czyli suma długości łuku i dwóch promieni)
+    jest równy 4\pi + 20. Oblicz promień koła oraz pole tego wycinka.
+  statement_latex: \frac{72^\circ}{360^\circ}\cdot 2\cdot \pi \cdot r + 2\cdot r = 4\pi + 20
+  solution: |-
+    Ułamek koła: \frac{72^\circ}{360^\circ}=\frac{1}{5}.
+    Długość łuku: l=\frac{1}{5}\cdot 2\pi r=\frac{2\pi r}{5}.
+    Obwód wycinka: Ob=l+2r=\frac{2\pi r}{5}+2r.
+    Z warunku zadania \frac{2\pi r}{5}+2r=4\pi+20. Po lewej i po prawej stronie porównujemy osobno składniki z \pi i osobno bez \pi (są to wyrazy niepodobne):
+    \frac{2\pi r}{5}=4\pi \Rightarrow r=10, oraz 2r=20 \Rightarrow r=10 — oba warunki dają ten sam promień, więc r=10.
+    Pole wycinka: P_w=\frac{1}{5}\cdot \pi\cdot 10^2=\frac{1}{5}\cdot 100\pi=20\pi.
+    Kontrola wzorem P_w=\frac{1}{2}lr: l=\frac{1}{5}\cdot 2\pi\cdot 10=4\pi, więc \frac{1}{2}\cdot 4\pi\cdot 10=20\pi ✓.
+  solution_steps:
+  - 'Oblicz ułamek koła: 72°/360° = 1/5.'
+  - Zapisz długość łuku l = (1/5)·2πr = 2πr/5.
+  - Zapisz obwód wycinka Ob = l + 2r i przyrównaj do 4π + 20.
+  - 'Porównaj osobno składniki z π i bez π: 2πr/5 = 4π oraz 2r = 20.'
+  - Wyznacz r = 10.
+  - Oblicz pole P = (1/5)·π·10² = 20π i sprawdź wynik wzorem P = ½·l·r.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: promien
+      answer:
+        kind: NUMERIC
+        value: 10.0
+    - name: pole_wycinka
+      answer:
+        kind: SYMBOLIC
+        latex: 20\pi
+  checks:
+  - kind: solve_equation
+    expr: \frac{72}{360}\cdot 2\cdot \pi \cdot r + 2\cdot r = 4\cdot \pi + 20
+    var: r
+    part: promien
+  - kind: evaluate
+    expr: \frac{72}{360}\cdot \pi \cdot 10^{2}
+    part: pole_wycinka
+  skills:
+  - obwód wycinka koła
+  - rozdzielanie składników z π i bez π
+  - przekształcanie wzoru na długość łuku
+  - pole wycinka koła
+  verification:
+    checkability: REFERENCE_CALL
+    note: 2 parts matched
+- id: g-ex-t01
+  slot: EXERCISE
+  ramp_index: 7
+  difficulty: 4
+  exercise_type: pole i obwód figury złożonej (fragment pierścienia)
+  statement: 'Dane są dwa okręgi współśrodkowe o wspólnym środku O i promieniach 5 cm oraz 8 cm. Ramiona
+    kąta środkowego o wierzchołku O i mierze 120^\circ wycinają z pierścienia ograniczonego tymi okręgami
+    figurę F. Brzeg figury F tworzą: łuk okręgu o promieniu 8 cm, łuk okręgu o promieniu 5 cm oraz dwa
+    odcinki zawarte w ramionach tego kąta, każdy o końcach leżących na obu okręgach. Oblicz pole oraz
+    obwód figury F.'
+  statement_latex: P=\frac{120^\circ}{360^\circ}\cdot\left(\pi\cdot 8^{2}-\pi\cdot 5^{2}\right),\qquad
+    Ob=\frac{120^\circ}{360^\circ}\cdot 2\pi\cdot 8+\frac{120^\circ}{360^\circ}\cdot 2\pi\cdot 5+2\cdot\left(8-5\right)
+  solution: |-
+    Ułamek koła: \frac{120^\circ}{360^\circ}=\frac{1}{3}.
+    Pole figury F to \frac{1}{3} pola pierścienia:
+    P=\frac{1}{3}\left(\pi\cdot 8^2-\pi\cdot 5^2\right)=\frac{1}{3}\left(64\pi-25\pi\right)=\frac{1}{3}\cdot 39\pi=13\pi\ \text{cm}^2\approx 40{,}8\ \text{cm}^2.
+    Obwód: idziemy po brzegu figury — łuk zewnętrzny, odcinek, łuk wewnętrzny, drugi odcinek.
+    Łuk zewnętrzny: \frac{1}{3}\cdot 2\pi\cdot 8=\frac{16\pi}{3}.
+    Łuk wewnętrzny: \frac{1}{3}\cdot 2\pi\cdot 5=\frac{10\pi}{3}.
+    Każdy z dwóch odcinków ma długość 8-5=3.
+    Ob=\frac{16\pi}{3}+\frac{10\pi}{3}+2\cdot 3=\frac{26\pi}{3}+6\ \text{cm}\approx 33{,}2\ \text{cm}.
+    Składników z \pi i bez \pi nie łączymy w jeden.
+  solution_steps:
+  - 'Zapisz ułamek koła: 120°/360° = 1/3.'
+  - 'Oblicz pole pierścienia: π·8² − π·5² = 39π.'
+  - 'Pole figury: P = (1/3)·39π = 13π cm².'
+  - Oblicz łuk zewnętrzny (1/3)·2π·8 = 16π/3 i wewnętrzny (1/3)·2π·5 = 10π/3.
+  - Dodaj dwa odcinki o długości 8 − 5 = 3.
+  - 'Obwód: Ob = 16π/3 + 10π/3 + 6 = 26π/3 + 6 cm.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: pole
+      answer:
+        kind: SYMBOLIC
+        latex: 13\pi
+    - name: obwod
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{26\pi}{3}+6
+  checks:
+  - kind: evaluate
+    expr: \frac{120}{360}\cdot\left(\pi\cdot 8^{2}-\pi\cdot 5^{2}\right)
+    part: pole
+  - kind: evaluate
+    expr: \frac{120}{360}\cdot 2\cdot \pi\cdot 8+\frac{120}{360}\cdot 2\cdot \pi\cdot 5+2\cdot\left(8-5\right)
+    part: obwod
+  skills:
+  - pole wycinka koła
+  - długość łuku
+  - pole i obwód figury złożonej
+  - analiza brzegu figury
+  verification:
+    checkability: REFERENCE_CALL
+    note: 'answer and reference disagree: part disagrees: ''13\\pi'' vs ''13\\pi\\ \\text{cm}^2'' (as
+      text)'
+- id: g-cm-06
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: wykrycie błędu – pominięcie ułamka α/360°
+  statement: 'Uczeń miał obliczyć pole wycinka koła o promieniu r = 6 cm, wyznaczonego przez kąt środkowy
+    o mierze 45°. Zapisał: „P = \pi\cdot 6^2 = 36\pi cm^2”. Wyjaśnij, na czym polega błąd, i podaj poprawne
+    pole tego wycinka.'
+  statement_latex: P_w=\frac{45^\circ}{360^\circ}\cdot\pi\cdot 6^2
+  solution: |-
+    Błędne rozumowanie: uczeń użył wzoru na pole całego koła P=\pi r^2=\pi\cdot 6^2=36\pi cm^2 i całkowicie pominął kąt środkowy – dostał 36\pi cm^2, czyli pole CAŁEGO koła, a nie jego kawałka.
+    Dlaczego to źle: wycinek to tylko część koła; jaką część, mówi ułamek \frac{\alpha}{360^\circ}. Tu \frac{45^\circ}{360^\circ}=\frac{1}{8}, więc wynik musi być ośmiokrotnie mniejszy od pola koła.
+    Poprawnie: P_w=\frac{1}{8}\cdot\pi\cdot 6^2=\frac{1}{8}\cdot 36\pi=\frac{9\pi}{2}=4{,}5\pi cm^2 ≈ 14{,}1 cm^2.
+    Kontrola: 4{,}5\pi\le 36\pi ✓; dla \alpha=360^\circ wzór dałby całe koło 36\pi.
+  solution_steps:
+  - Zauważ, że zapis \pi\cdot 6^{2} to pole całego koła, a nie wycinka.
+  - 'Wyznacz ułamek koła: \frac{45^\circ}{360^\circ}=\frac{1}{8}.'
+  - 'Pomnóż pole koła przez ten ułamek: P_w=\frac{1}{8}\cdot 36\pi=\frac{9\pi}{2} cm^2.'
+  - 'Sprawdź: P_w\le\pi r^{2}.'
+  answer:
+    kind: SYMBOLIC
+    latex: \frac{9\pi}{2}
+  checks:
+  - kind: evaluate
+    expr: \frac{45}{360}\cdot\pi\cdot 6^{2}
+  skills:
+  - pole wycinka koła
+  - ułamek α/360°
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 14.137166941154069 vs 14.137166941154069 (tol 1e-09)'
+- id: g-cm-07
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: wykrycie błędu – promień a średnica
+  statement: 'Okrąg ma średnicę d = 20 cm. Uczeń obliczał długość łuku odpowiadającego kątowi środkowemu
+    o mierze 72° i zapisał: „l = \frac{72^\circ}{360^\circ}\cdot 2\cdot\pi\cdot 20 = 8\pi cm”. Wskaż błąd
+    i podaj poprawną długość tego łuku.'
+  statement_latex: l=\frac{72^\circ}{360^\circ}\cdot 2\cdot\pi\cdot\frac{20}{2}
+  solution: |-
+    Błędne rozumowanie: uczeń podstawił do wzoru średnicę zamiast promienia, czyli przyjął r=20, i otrzymał l=\frac{1}{5}\cdot 40\pi=8\pi cm. Ten wynik jest dwa razy za duży.
+    Dlaczego to źle: we wzorach 2\pi r, \pi r^2 oraz l=\frac{\alpha}{360^\circ}\cdot 2\pi r występuje promień, a nie średnica.
+    Poprawnie: r=\frac{d}{2}=\frac{20}{2}=10 cm, ułamek \frac{72^\circ}{360^\circ}=\frac{1}{5}, więc l=\frac{1}{5}\cdot 2\cdot\pi\cdot 10=\frac{1}{5}\cdot 20\pi=4\pi cm ≈ 12{,}6 cm.
+    Kontrola: 4\pi\le 20\pi ✓.
+  solution_steps:
+  - Zauważ, że 20 cm to średnica, a wzór wymaga promienia.
+  - Przelicz r=\frac{20}{2}=10 cm.
+  - 'Wyznacz ułamek koła: \frac{72^\circ}{360^\circ}=\frac{1}{5}.'
+  - Oblicz l=\frac{1}{5}\cdot 2\cdot\pi\cdot 10=4\pi cm.
+  answer:
+    kind: SYMBOLIC
+    latex: 4\pi
+  checks:
+  - kind: evaluate
+    expr: \frac{72}{360}\cdot 2\cdot\pi\cdot\frac{20}{2}
+  skills:
+  - długość łuku
+  - przeliczanie średnicy na promień
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 12.566370614359172 vs 12.566370614359172 (tol 1e-09)'
+- id: g-cm-08
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: wykrycie błędu – mylenie wzorów na łuk i na pole
+  statement: 'W okręgu o promieniu r = 8 cm dany jest łuk odpowiadający kątowi środkowemu o mierze 135°.
+    Uczeń obliczył jego długość tak: „l = \frac{135^\circ}{360^\circ}\cdot\pi\cdot 8^2 = 24\pi cm”. Wyjaśnij,
+    jaki wzór uczeń pomylił, i podaj poprawną długość łuku.'
+  statement_latex: l=\frac{135^\circ}{360^\circ}\cdot 2\cdot\pi\cdot 8
+  solution: |-
+    Błędne rozumowanie: uczeń użył wzoru na POLE wycinka \frac{\alpha}{360^\circ}\cdot\pi r^2 i otrzymał 24\pi. Liczba 24\pi jest polem wycinka (w cm^2), a nie długością łuku – widać to po jednostce: \pi r^2 daje wielkość kwadratową.
+    Dlaczego to źle: długość łuku pochodzi od obwodu okręgu 2\pi r, a nie od pola \pi r^2.
+    Poprawnie: \frac{135^\circ}{360^\circ}=\frac{3}{8}, więc l=\frac{3}{8}\cdot 2\cdot\pi\cdot 8=\frac{3}{8}\cdot 16\pi=6\pi cm ≈ 18{,}8 cm.
+    Kontrola: P_w=\frac{1}{2}\cdot l\cdot r=\frac{1}{2}\cdot 6\pi\cdot 8=24\pi cm^2 – to właśnie ta liczba, którą uczeń podał jako „długość”.
+  solution_steps:
+  - Rozpoznaj, że wyrażenie \frac{\alpha}{360^\circ}\cdot\pi r^{2} to wzór na pole wycinka.
+  - 'Do długości łuku użyj obwodu: l=\frac{\alpha}{360^\circ}\cdot 2\pi r.'
+  - 'Wyznacz ułamek: \frac{135^\circ}{360^\circ}=\frac{3}{8}.'
+  - Oblicz l=\frac{3}{8}\cdot 16\pi=6\pi cm i sprawdź jednostkę liniową.
+  answer:
+    kind: SYMBOLIC
+    latex: 6\pi
+  checks:
+  - kind: evaluate
+    expr: \frac{135}{360}\cdot 2\cdot\pi\cdot 8
+  skills:
+  - długość łuku
+  - rozróżnianie wzorów
+  - kontrola jednostek
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 18.84955592153876 vs 18.84955592153876 (tol 1e-09)'
+- id: g-cm-09
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: wykrycie błędu – obwód wycinka
+  statement: Wycinek koła o promieniu r = 5 cm wyznaczony jest przez kąt środkowy o mierze 216° (brzeg
+    wycinka tworzą dwa promienie i łuk odpowiadający kątowi 216°). Uczeń podał, że obwód tego wycinka
+    jest równy 6π cm. Wyjaśnij, dlaczego to nieprawda, i oblicz poprawny obwód wycinka.
+  statement_latex: Ob=\frac{216^\circ}{360^\circ}\cdot 2\cdot\pi\cdot 5+2\cdot 5
+  solution: |-
+    Błędne rozumowanie: uczeń obliczył jedynie długość łuku: \frac{216^\circ}{360^\circ}=\frac{3}{5}, l=\frac{3}{5}\cdot 2\cdot\pi\cdot 5=\frac{3}{5}\cdot 10\pi=6\pi cm, i uznał ją za obwód wycinka.
+    Dlaczego to źle: idąc palcem po brzegu wycinka, przechodzimy promień, potem łuk, potem drugi promień. Sam łuk to tylko część konturu.
+    Poprawnie: Ob=l+2r=6\pi+2\cdot 5=6\pi+10 cm ≈ 28{,}8 cm.
+    Uwaga: składników 6\pi i 10 nie wolno łączyć w jeden wyraz.
+  solution_steps:
+  - 'Oblicz długość łuku: \frac{216^\circ}{360^\circ}=\frac{3}{5}, l=\frac{3}{5}\cdot 10\pi=6\pi cm.'
+  - Zauważ, że brzeg wycinka to łuk i dwa promienie.
+  - 'Dodaj promienie: Ob=l+2r=6\pi+10 cm.'
+  - Zostaw wynik w postaci sumy 6\pi+10 lub podaj przybliżenie ≈ 28,8 cm.
+  answer:
+    kind: SYMBOLIC
+    latex: 6\pi+10
+  checks:
+  - kind: evaluate
+    expr: \frac{216}{360}\cdot 2\cdot\pi\cdot 5+2\cdot 5
+  skills:
+  - obwód wycinka
+  - długość łuku
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 28.84955592153876 vs 28.84955592153876 (tol 1e-09)'
+- id: g-cm-10
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: wykrycie błędu – dodawanie składników z π i bez π
+  statement: 'Ćwiartka koła o promieniu r = 4 cm to wycinek o kącie środkowym 90°, ograniczony dwoma prostopadłymi
+    promieniami i łukiem. Uczeń obliczył obwód tego wycinka i zapisał: „Ob = 2\pi + 8 = 10\pi cm ≈ 31{,}4
+    cm”. Wskaż błąd i podaj poprawny obwód w postaci dokładnej oraz jego przybliżenie z dokładnością do
+    0,01 cm (przyjmij π ≈ 3,14).'
+  statement_latex: Ob=\frac{90^\circ}{360^\circ}\cdot 2\cdot\pi\cdot 4+2\cdot 4
+  solution: |-
+    Rachunki wstępne są dobre: \frac{90^\circ}{360^\circ}=\frac{1}{4}, l=\frac{1}{4}\cdot 2\cdot\pi\cdot 4=2\pi cm, więc Ob=2\pi+2\cdot 4=2\pi+8 cm.
+    Błędne rozumowanie: uczeń „dodał” 2\pi i 8, otrzymując 10\pi, tak jakby liczba 8 była wielokrotnością \pi. To wyrazy niepodobne: 2\pi\approx 6{,}28, a 10\pi\approx 31{,}4 – wynik ucznia jest ponad dwa razy za duży.
+    Poprawnie: obwód pozostaje w postaci 2\pi+8 cm, a jego przybliżenie to 2\cdot 3{,}14+8=6{,}28+8=14{,}28 cm.
+  solution_steps:
+  - 'Oblicz długość łuku: l=\frac{1}{4}\cdot 2\cdot\pi\cdot 4=2\pi cm.'
+  - 'Dodaj dwa promienie: Ob=2\pi+8 cm.'
+  - Zauważ, że 2\pi i 8 to wyrazy niepodobne – nie można ich połączyć w 10\pi ani w 10.
+  - 'Podaj przybliżenie: 2\cdot 3{,}14+8=14{,}28 cm.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: obwod_dokladnie
+      answer:
+        kind: SYMBOLIC
+        latex: 2\pi+8
+    - name: obwod_przyblizenie
+      answer:
+        kind: NUMERIC
+        value: 14.28
+        tol: 0.005
+  checks:
+  - kind: evaluate
+    expr: \frac{90}{360}\cdot 2\cdot\pi\cdot 4+2\cdot 4
+    part: obwod_dokladnie
+  - kind: evaluate
+    expr: 2\cdot 3{,}14+8
+    part: obwod_przyblizenie
+  skills:
+  - obwód wycinka
+  - działania na wyrażeniach z π
+  - przybliżanie wyniku
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [obwod_dokladnie] SymPy solved it fresh: 14.283185307179586
+      vs 14.283185307179586 (tol 1e-09) ; [obwod_przyblizenie] SymPy solved it fresh: 14.28 vs 14.28 (tol
+      0.005)'
+- id: g-ch-t02
+  slot: CHALLENGE
+  ramp_index: 0
+  difficulty: 4
+  exercise_type: podział koła w danym stosunku kątów
+  statement: 'W kole o środku O i promieniu 18 cm poprowadzono trzy promienie OA, OB oraz OC, które dzielą
+    to koło na trzy wycinki. Miary kątów środkowych tych wycinków pozostają w stosunku 2 : 3 : 7. Oblicz
+    obwód największego z tych wycinków oraz pole najmniejszego z nich.'
+  statement_latex: 2\cdot x+3\cdot x+7\cdot x=360^\circ
+  solution: |-
+    Miary kątów zapisujemy jako 2x, 3x, 7x (zmiennej nie ma w treści — trzeba ją wprowadzić). Kąty trzech wycinków tworzą kąt pełny:
+    2x+3x+7x=360^\circ,\quad 12x=360^\circ,\quad x=30^\circ.
+    Zatem kąty mają miary 60^\circ, 90^\circ oraz 210^\circ.
+    Największy wycinek odpowiada kątowi 210^\circ. Jego łuk:
+    l=\frac{210^\circ}{360^\circ}\cdot 2\pi\cdot 18=\frac{7}{12}\cdot 36\pi=21\pi\ \text{cm}.
+    Obwód tego wycinka to łuk i dwa promienie:
+    Ob=21\pi+2\cdot 18=21\pi+36\ \text{cm}\approx 101{,}97\ \text{cm}.
+    Najmniejszy wycinek odpowiada kątowi 60^\circ:
+    P=\frac{60^\circ}{360^\circ}\cdot\pi\cdot 18^{2}=\frac{1}{6}\cdot 324\pi=54\pi\ \text{cm}^2\approx 169{,}6\ \text{cm}^2.
+    Kontrola: 21\pi\le 2\pi\cdot 18=36\pi ✓ oraz 54\pi\le \pi\cdot 18^2=324\pi ✓.
+  solution_steps:
+  - Oznacz miary kątów przez 2x, 3x, 7x.
+  - Zapisz równanie 2x + 3x + 7x = 360° i wyznacz x = 30°.
+  - 'Podaj miary kątów: 60°, 90°, 210°.'
+  - Dla największego wycinka (210°) oblicz łuk l = (210/360)·2π·18 = 21π.
+  - 'Dodaj dwa promienie: Ob = 21π + 36 cm.'
+  - Dla najmniejszego wycinka (60°) oblicz pole P = (1/6)·π·18² = 54π cm².
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: obwod_najwiekszego
+      answer:
+        kind: SYMBOLIC
+        latex: 21\pi+36
+    - name: pole_najmniejszego
+      answer:
+        kind: SYMBOLIC
+        latex: 54\pi
+  checks:
+  - kind: evaluate
+    expr: \frac{210}{360}\cdot 2\cdot \pi\cdot 18+2\cdot 18
+    part: obwod_najwiekszego
+  - kind: evaluate
+    expr: \frac{60}{360}\cdot \pi\cdot 18^{2}
+    part: pole_najmniejszego
+  stated_model:
+    variable: x
+    objective_latex: 2\cdot x+3\cdot x+7\cdot x=360
+    goal: value
+    constraint_used: kąty trzech wycinków tworzą kąt pełny 360^\circ
+  skills:
+  - wprowadzenie zmiennej pomocniczej
+  - podział kąta pełnego w danym stosunku
+  - długość łuku
+  - obwód wycinka
+  - pole wycinka
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''x'': ''2\\cdot
+      x+3\\cdot x+7\\cdot x=360'') — human review'
+- id: g-ch-t03
+  slot: CHALLENGE
+  ramp_index: 1
+  difficulty: 5
+  exercise_type: zadanie odwrotne z filtrowaniem pierwiastka
+  statement: Z drutu o długości 20 cm wygięto — bez odpadu i bez zakładek — cały brzeg pewnego wycinka
+    koła, czyli dwa promienie i łuk. Pole tego wycinka jest równe 16 \text{ cm}^2. Wyznacz promień koła
+    oraz długość łuku tego wycinka. Uzasadnij, że drugie rozwiązanie otrzymanego równania nie opisuje
+    żadnego wycinka koła.
+  statement_latex: \begin{cases}2\cdot r+l=20\\ \frac{1}{2}\cdot l\cdot r=16\end{cases}
+  solution: |-
+    Oznaczmy przez r promień, a przez l długość łuku (zmiennych nie ma w treści).
+    Brzeg wycinka: 2r+l=20, więc l=20-2r, przy czym r>0 i l>0, czyli r\in\left(0;10\right).
+    Pole wycinka wygodnie liczymy wzorem P_w=\frac{1}{2}\cdot l\cdot r:
+    \frac{1}{2}\cdot\left(20-2r\right)\cdot r=16\quad\Rightarrow\quad 10r-r^{2}=16\quad\Rightarrow\quad r^{2}-10r+16=0.
+    \Delta=100-64=36,\ \sqrt{\Delta}=6, stąd r_1=\frac{10-6}{2}=2 lub r_2=\frac{10+6}{2}=8.
+    Sprawdzamy warunek istnienia wycinka: łuk nie może być dłuższy niż cały okrąg, czyli l\le 2\pi r.
+    Dla r=2 mamy l=20-2\cdot 2=16, a 2\pi\cdot 2=4\pi\approx 12{,}57<16 — łuk byłby dłuższy od całego okręgu (kąt środkowy przekroczyłby 360^\circ), więc taki wycinek nie istnieje. Odrzucamy r=2.
+    Dla r=8 mamy l=20-2\cdot 8=4, a 2\pi\cdot 8=16\pi\approx 50{,}3>4 ✓.
+    Odpowiedź: r=8 cm, l=4 cm (kąt środkowy: \alpha=\frac{4}{16\pi}\cdot 360^\circ=\frac{90^\circ}{\pi}\approx 28{,}6^\circ).
+    Kontrola pola: \frac{1}{2}\cdot 4\cdot 8=16 ✓.
+  solution_steps:
+  - 'Wprowadź oznaczenia: r — promień, l — długość łuku.'
+  - Z warunku o drucie zapisz 2r + l = 20, czyli l = 20 − 2r, gdzie 0 < r < 10.
+  - 'Zapisz pole wzorem P = ½·l·r i podstaw: ½·(20 − 2r)·r = 16.'
+  - 'Doprowadź do równania r² − 10r + 16 = 0 i rozwiąż: r = 2 lub r = 8.'
+  - 'Sprawdź warunek l ≤ 2πr: dla r = 2 jest l = 16 > 4π, więc ten przypadek odrzucamy.'
+  - Dla r = 8 otrzymujemy l = 4 i warunek jest spełniony; podaj odpowiedź.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: promien
+      answer:
+        kind: NUMERIC
+        value: 8.0
+    - name: dlugosc_luku
+      answer:
+        kind: NUMERIC
+        value: 4.0
+    - name: uzasadnienie_odrzucenia
+      answer:
+        kind: NOT_MACHINE_CHECKABLE
+        reason: Należy wykazać, że dla r = 2 długość łuku l = 16 przekracza obwód całego okręgu 2π·2 =
+          4π ≈ 12,57, więc kąt środkowy musiałby być większy od 360° — taki wycinek nie istnieje i rozwiązanie
+          r = 2 odrzucamy.
+  checks:
+  - kind: evaluate
+    expr: \frac{10+\sqrt{10^{2}-4\cdot 16}}{2}
+    var: r
+    part: promien
+  - kind: evaluate
+    expr: 20-2\cdot 8
+    var: r
+    part: dlugosc_luku
+  stated_model:
+    variable: r
+    objective_latex: \frac{1}{2}\cdot r\cdot\left(20-2\cdot r\right)=16
+    domain_lo: '0'
+    domain_hi: '10'
+    goal: value
+    constraint_used: 2\cdot r+l=20,\ l\le 2\pi r,\ r>0
+  skills:
+  - obwód wycinka
+  - zależność P = ½·l·r
+  - układanie i rozwiązywanie równania kwadratowego
+  - odrzucanie rozwiązania sprzecznego z warunkiem l ≤ 2πr
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''r'': ''\\frac{1}{2}\\cdot
+      r\\cdot\\left(20-2\\cdot r\\right)=16'') — human review'
+- id: g-ch-t04
+  slot: CHALLENGE
+  ramp_index: 2
+  difficulty: 5
+  exercise_type: optymalizacja pola wycinka z ograniczeniem zewnętrznym
+  statement: |-
+    Rabata w ogrodzie ma mieć kształt wycinka koła, którego brzeg tworzą dwa promienie i łuk. Cały brzeg rabaty trzeba obłożyć obrzeżem — mamy do dyspozycji taśmę o długości 24 m i musimy zużyć ją w całości. Promień rabaty oznaczmy przez x (w metrach).
+    a) Zapisz pole P rabaty jako funkcję zmiennej x i podaj dziedzinę tej funkcji, przyjmując, że promień i długość łuku muszą być dodatnie.
+    b) Ze względu na kształt działki promień rabaty nie może być większy niż 5 m. Oblicz największe pole rabaty możliwe w tych warunkach oraz długość łuku rabaty o tym polu.
+  statement_latex: P\left(x\right)=\frac{1}{2}\cdot x\cdot\left(24-2\cdot x\right)=12\cdot x-x^{2}
+  solution: |-
+    a) Brzeg wycinka to dwa promienie i łuk, więc 2x+l=24, czyli l=24-2x.
+    Pole wycinka liczymy wzorem P_w=\frac{1}{2}\cdot l\cdot x:
+    P\left(x\right)=\frac{1}{2}\cdot\left(24-2x\right)\cdot x=12x-x^{2}.
+    Dziedzina: x>0 oraz l=24-2x>0, czyli x<12. Zatem x\in\left(0;12\right).
+    b) Funkcja P\left(x\right)=-x^{2}+12x jest funkcją kwadratową o ujemnym współczynniku przy x^{2}; jej wierzchołek ma pierwszą współrzędną
+    x_{w}=\frac{-12}{2\cdot\left(-1\right)}=6.
+    Wartość x_{w}=6 nie jest dopuszczalna, bo promień nie może przekroczyć 5 m. Na przedziale \left(0;6\right] funkcja jest rosnąca, więc na przedziale \left(0;5\right] największą wartość przyjmuje dla x=5:
+    P\left(5\right)=12\cdot 5-5^{2}=60-25=35\ \text{m}^2.
+    Długość łuku: l=24-2\cdot 5=14\ \text{m}.
+    Sprawdzenie wykonalności: łuk musi spełniać l\le 2\pi x, a 14\le 2\pi\cdot 5=10\pi\approx 31{,}4 ✓ (kąt środkowy \alpha=\frac{14}{10\pi}\cdot 360^\circ\approx 160^\circ).
+    Odpowiedź: największe pole to 35 m² przy promieniu 5 m i łuku długości 14 m.
+  solution_steps:
+  - 'Z warunku na obrzeże: 2x + l = 24, więc l = 24 − 2x.'
+  - Zapisz pole wzorem P = ½·l·x, czyli P(x) = ½·x·(24 − 2x) = 12x − x².
+  - 'Wyznacz dziedzinę z warunków x > 0 i 24 − 2x > 0: x ∈ (0; 12).'
+  - 'Znajdź wierzchołek paraboli: x_w = 6 — leży poza dopuszczalnym zakresem x ≤ 5.'
+  - Zauważ, że P jest rosnąca na (0; 6], więc na (0; 5] największa wartość jest dla x = 5.
+  - Oblicz P(5) = 35 m² oraz l = 24 − 10 = 14 m i sprawdź warunek l ≤ 2πx.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wzor_pola
+      answer:
+        kind: SYMBOLIC
+        latex: 12\cdot x-x^{2}
+    - name: dziedzina
+      answer:
+        kind: INTERVAL
+        lo: '0'
+        hi: '12'
+    - name: najwieksze_pole
+      answer:
+        kind: NUMERIC
+        value: 35.0
+    - name: dlugosc_luku
+      answer:
+        kind: NUMERIC
+        value: 14.0
+  checks:
+  - kind: simplify
+    expr: \frac{1}{2}\cdot x\cdot\left(24-2\cdot x\right)
+    part: wzor_pola
+  - kind: evaluate
+    expr: 12\cdot 5-5^{2}
+    part: najwieksze_pole
+  - kind: evaluate
+    expr: 24-2\cdot 5
+    part: dlugosc_luku
+  stated_model:
+    variable: x
+    objective_latex: P\left(x\right)=12\cdot x-x^{2}
+    domain_lo: '0'
+    domain_hi: '5'
+    domain_hi_open: false
+    constraint_used: 2\cdot x+l=24,\ x\le 5
+  skills:
+  - układanie funkcji z warunku na obwód
+  - dziedzina wynikająca z warunków geometrycznych
+  - wierzchołek paraboli
+  - monotoniczność funkcji kwadratowej na przedziale
+  - kontrola wykonalności rozwiązania
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''x'': ''P\\left(x\\right)=12\\cdot
+      x-x^{2}'') — human review'

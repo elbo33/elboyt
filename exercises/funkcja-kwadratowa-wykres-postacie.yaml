@@ -1,0 +1,817 @@
+section: funkcja-kwadratowa-wykres-postacie
+name: 'Funkcja kwadratowa: wykres, postacie i wyznaczanie wzoru'
+scope: Sketching y = ax^2 + bx + c; interpreting coefficients in general, vertex and factored form; finding
+  the formula from given information or a graph.
+requirements:
+- V.7
+- V.8
+- V.9
+counts:
+  total: 16
+  REFERENCE_CALL: 9
+  DETERMINISTIC: 4
+  NOT_MACHINE_CHECKABLE: 3
+exercises:
+- id: g-th-00
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: odczyt z postaci kanonicznej
+  statement: Funkcja kwadratowa f jest określona wzorem f(x)=3\left(x-4\right)^{2}-7. Podaj współrzędne
+    wierzchołka paraboli, która jest wykresem funkcji f, oraz zbiór wartości funkcji f.
+  statement_latex: f(x)=3\left(x-4\right)^{2}-7
+  solution: |-
+    Wzór jest zapisany w postaci kanonicznej f(x)=a\left(x-p\right)^{2}+q. Porównujemy: a=3, p=4, q=-7, zatem wierzchołkiem jest punkt W=(4,\,-7).
+    Ponieważ a=3>0, ramiona paraboli są skierowane w górę, więc funkcja przyjmuje wartość najmniejszą równą q=-7 (w wierzchołku).
+    Zbiór wartości: ZW=\langle -7,\,+\infty).
+  solution_steps:
+  - Rozpoznaj postać kanoniczną f(x)=a(x-p)^2+q.
+  - Odczytaj a=3, p=4, q=-7, czyli W=(4,-7).
+  - Ponieważ a>0, ramiona skierowane w górę, wartość najmniejsza to q=-7.
+  - Zapisz ZW=\langle -7,+\infty).
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wierzcholek
+      answer:
+        kind: TUPLE
+        items:
+        - '4'
+        - '-7'
+    - name: zbior_wartosci
+      answer:
+        kind: INTERVAL
+        lo: '-7'
+        hi: \infty
+        lo_open: false
+  skills:
+  - odczytywanie p i q z postaci kanonicznej
+  - zbiór wartości funkcji kwadratowej
+  verification:
+    checkability: REFERENCE_CALL
+    note: 2 parts matched
+- id: g-th-01
+  slot: THEORY_SUPPORT
+  ramp_index: 1
+  difficulty: 1
+  exercise_type: odczyt z postaci iloczynowej
+  statement: Funkcja kwadratowa f jest określona wzorem f(x)=-2\left(x+3\right)\left(x-1\right). Podaj
+    miejsca zerowe funkcji f oraz pierwszą współrzędną p wierzchołka paraboli będącej wykresem funkcji
+    f.
+  statement_latex: f(x)=-2\left(x+3\right)\left(x-1\right)
+  solution: |-
+    Iloczyn jest równy zeru, gdy któryś z czynników jest równy zeru: x+3=0 lub x-1=0, czyli x=-3 lub x=1. Miejsca zerowe to -3 oraz 1.
+    Oś symetrii przechodzi w połowie odległości między miejscami zerowymi: p=\frac{-3+1}{2}=-1.
+    Sprawdzenie: f(-3)=-2\cdot 0\cdot(-4)=0 oraz f(1)=-2\cdot 4\cdot 0=0.
+  solution_steps:
+  - 'Przyrównaj każdy nawias do zera: x+3=0 oraz x-1=0.'
+  - Odczytaj miejsca zerowe x_1=-3, x_2=1.
+  - Oblicz p=\frac{x_1+x_2}{2}=\frac{-3+1}{2}=-1.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: miejsca_zerowe
+      answer:
+        kind: SET
+        members:
+        - '-3'
+        - '1'
+    - name: p
+      answer:
+        kind: NUMERIC
+        value: -1.0
+  checks:
+  - kind: evaluate
+    expr: \frac{-3+1}{2}
+    part: p
+  skills:
+  - odczytywanie miejsc zerowych z postaci iloczynowej
+  - oś symetrii z miejsc zerowych
+  verification:
+    checkability: REFERENCE_CALL
+    note: '2 parts matched · det: [p] SymPy solved it fresh: -1.0 vs -1.0 (tol 1e-09)'
+- id: g-th-02
+  slot: THEORY_SUPPORT
+  ramp_index: 2
+  difficulty: 2
+  exercise_type: obliczenie wyróżnika
+  statement: Funkcja kwadratowa f jest określona wzorem f(x)=x^{2}-6x+5. Oblicz wyróżnik \Delta trójmianu
+    kwadratowego f oraz podaj liczbę punktów wspólnych wykresu funkcji f z osią Ox.
+  statement_latex: f(x)=x^{2}-6x+5,\qquad \Delta=b^{2}-4\cdot a\cdot c
+  solution: |-
+    Odczytujemy współczynniki: a=1, b=-6, c=5.
+    \Delta=\left(-6\right)^{2}-4\cdot 1\cdot 5=36-20=16.
+    Ponieważ \Delta=16>0, trójmian ma dwa miejsca zerowe, więc parabola przecina oś Ox w dwóch punktach.
+  solution_steps:
+  - Odczytaj a=1, b=-6, c=5.
+  - Podstaw do wzoru \Delta=b^2-4ac.
+  - Oblicz \Delta=36-20=16.
+  - Z \Delta>0 wynika, że są dwa punkty wspólne z osią Ox.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: delta
+      answer:
+        kind: NUMERIC
+        value: 16.0
+    - name: liczba_punktow_wspolnych_z_Ox
+      answer:
+        kind: NUMERIC
+        value: 2.0
+  checks:
+  - kind: evaluate
+    expr: \left(-6\right)^{2}-4\cdot 1\cdot 5
+    part: delta
+  skills:
+  - obliczanie delty
+  - wnioskowanie o liczbie miejsc zerowych
+  verification:
+    checkability: REFERENCE_CALL
+    note: '2 parts matched · det: [delta] SymPy solved it fresh: 16.0 vs 16.0 (tol 1e-09)'
+- id: g-ex-03
+  slot: EXERCISE
+  ramp_index: 1
+  difficulty: 2
+  exercise_type: zamiana postaci ogólnej na kanoniczną
+  statement: Funkcja kwadratowa f jest określona wzorem f(x)=x^{2}+6x+5. Zapisz wzór funkcji f w postaci
+    kanonicznej, podaj współrzędne wierzchołka paraboli będącej wykresem funkcji f oraz zbiór wartości
+    funkcji f. Zapisz obliczenia.
+  statement_latex: f(x)=x^{2}+6x+5
+  solution: |-
+    Współczynniki: a=1, b=6, c=5.
+    p=\frac{-b}{2\cdot a}=\frac{-6}{2\cdot 1}=-3,\qquad q=f(-3)=\left(-3\right)^{2}+6\cdot\left(-3\right)+5=9-18+5=-4.
+    Zatem W=(-3,\,-4), a postać kanoniczna to f(x)=\left(x+3\right)^{2}-4.
+    Kontrola: \left(x+3\right)^{2}-4=x^{2}+6x+9-4=x^{2}+6x+5 ✔
+    Ponieważ a=1>0, ramiona są skierowane w górę i wartość najmniejsza wynosi q=-4, więc ZW=\langle -4,\,+\infty).
+  solution_steps:
+  - Odczytaj a=1, b=6, c=5.
+  - Oblicz p=\frac{-6}{2\cdot 1}=-3.
+  - Oblicz q=f(-3)=9-18+5=-4.
+  - Zapisz f(x)=\left(x+3\right)^{2}-4 i sprawdź przez wymnożenie.
+  - Z a>0 odczytaj ZW=\langle -4,+\infty).
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: postac_kanoniczna
+      answer:
+        kind: SYMBOLIC
+        latex: \left(x+3\right)^{2}-4
+    - name: wierzcholek
+      answer:
+        kind: TUPLE
+        items:
+        - '-3'
+        - '-4'
+    - name: zbior_wartosci
+      answer:
+        kind: INTERVAL
+        lo: '-4'
+        hi: \infty
+        lo_open: false
+  checks:
+  - kind: simplify
+    expr: x^{2}+6x+5
+    part: postac_kanoniczna
+  skills:
+  - obliczanie współrzędnych wierzchołka
+  - zapisywanie postaci kanonicznej
+  - zbiór wartości
+  verification:
+    checkability: REFERENCE_CALL
+    note: 'could not compare: part disagrees: AMBIGUOUS: ''parser returned an unresolved ambiguity (_ambig)'''
+- id: g-ex-04
+  slot: EXERCISE
+  ramp_index: 2
+  difficulty: 3
+  exercise_type: wyznaczanie wzoru z wierzchołka i punktu
+  statement: W kartezjańskim układzie współrzędnych (x,\ y) wykresem funkcji kwadratowej f jest parabola
+    o wierzchołku w punkcie W=(-2,\ -8). Parabola ta przecina oś Oy w punkcie o współrzędnych (0,\ 4).
+    Oblicz współczynnik a, wyznacz wzór funkcji f w postaci ogólnej oraz podaj zbiór wartości funkcji
+    f. Zapisz obliczenia.
+  statement_latex: f(x)=a\left(x+2\right)^{2}-8,\qquad f(0)=4
+  solution: |-
+    Skoro znamy wierzchołek W=(-2,-8), zapisujemy postać kanoniczną: f(x)=a\left(x+2\right)^{2}-8.
+    Punkt (0,\,4) należy do wykresu, więc a\cdot\left(0+2\right)^{2}-8=4, czyli 4a=12, stąd a=3.
+    Postać ogólna: f(x)=3\left(x+2\right)^{2}-8=3\left(x^{2}+4x+4\right)-8=3x^{2}+12x+12-8=3x^{2}+12x+4.
+    Sprawdzenie: f(0)=4 ✔ oraz p=\frac{-12}{2\cdot 3}=-2 ✔.
+    Ponieważ a=3>0, wartość najmniejsza to q=-8, zatem ZW=\langle -8,\,+\infty).
+  solution_steps:
+  - Zapisz f(x)=a\left(x+2\right)^{2}-8.
+  - 'Podstaw punkt (0,4): a\cdot\left(0+2\right)^{2}-8=4.'
+  - 'Rozwiąż równanie: 4a=12, a=3.'
+  - 'Rozwiń: f(x)=3x^{2}+12x+4.'
+  - Z a>0 i q=-8 zapisz ZW=\langle -8,+\infty).
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: a
+      answer:
+        kind: NUMERIC
+        value: 3.0
+    - name: postac_ogolna
+      answer:
+        kind: SYMBOLIC
+        latex: 3x^{2}+12x+4
+    - name: zbior_wartosci
+      answer:
+        kind: INTERVAL
+        lo: '-8'
+        hi: \infty
+        lo_open: false
+  checks:
+  - kind: solve_equation
+    expr: a\cdot\left(0+2\right)^{2}-8=4
+    var: a
+    part: a
+  - kind: simplify
+    expr: 3\cdot\left(x+2\right)^{2}-8
+    part: postac_ogolna
+  skills:
+  - układanie równania z jedną niewiadomą a
+  - zamiana postaci kanonicznej na ogólną
+  - zbiór wartości
+  verification:
+    checkability: REFERENCE_CALL
+    note: 3 parts matched
+- id: g-ex-05
+  slot: EXERCISE
+  ramp_index: 3
+  difficulty: 4
+  exercise_type: wyznaczanie wzoru z miejsc zerowych i wartości najmniejszej
+  statement: Miejscami zerowymi funkcji kwadratowej f są liczby x_{1}=-3 oraz x_{2}=5, a wartość najmniejsza
+    funkcji f jest równa -8. Oblicz współczynnik a, zapisz wzór funkcji f w postaci kanonicznej i w postaci
+    ogólnej oraz podaj przedział, w którym funkcja f jest rosnąca. Zapisz obliczenia.
+  statement_latex: f(x)=a\left(x+3\right)\left(x-5\right),\qquad q=-8
+  solution: |-
+    Funkcja ma wartość najmniejszą, więc a>0. Znamy miejsca zerowe, zatem f(x)=a\left(x+3\right)\left(x-5\right).
+    Oś symetrii przechodzi w połowie między miejscami zerowymi: p=\frac{-3+5}{2}=1, a wartość najmniejsza to q=-8, więc wierzchołek to W=(1,\,-8) i f(x)=a\left(x-1\right)^{2}-8.
+    Podstawiamy miejsce zerowe x=-3: a\cdot\left(-3-1\right)^{2}-8=0, czyli 16a=8, stąd a=\frac{1}{2} (istotnie a>0 ✔).
+    Postać kanoniczna: f(x)=\frac{1}{2}\left(x-1\right)^{2}-8.
+    Postać ogólna: f(x)=\frac{1}{2}\left(x^{2}-2x+1\right)-8=\frac{1}{2}x^{2}-x+\frac{1}{2}-8=\frac{1}{2}x^{2}-x-\frac{15}{2}.
+    Sprawdzenie: f(5)=\frac{25}{2}-5-\frac{15}{2}=0 ✔.
+    Ponieważ a>0, funkcja maleje w (-\infty,\,1\rangle i rośnie w \langle 1,\,+\infty).
+  solution_steps:
+  - Zauważ, że a>0 (istnieje wartość najmniejsza) i zapisz f(x)=a\left(x+3\right)\left(x-5\right).
+  - Oblicz p=\frac{-3+5}{2}=1, więc W=(1,-8) i f(x)=a\left(x-1\right)^{2}-8.
+  - 'Podstaw x=-3: a\cdot\left(-3-1\right)^{2}-8=0, stąd a=\frac{1}{2}.'
+  - Zapisz postać kanoniczną f(x)=\frac{1}{2}\left(x-1\right)^{2}-8.
+  - Rozwiń do postaci ogólnej f(x)=\frac{1}{2}x^{2}-x-\frac{15}{2}.
+  - 'Podaj przedział monotoniczności: funkcja rośnie w \langle 1,+\infty).'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: a
+      answer:
+        kind: NUMERIC
+        value: 0.5
+    - name: postac_kanoniczna
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{1}{2}\left(x-1\right)^{2}-8
+    - name: postac_ogolna
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{1}{2}x^{2}-x-\frac{15}{2}
+    - name: przedzial_rosnacosci
+      answer:
+        kind: INTERVAL
+        lo: '1'
+        hi: \infty
+        lo_open: false
+  checks:
+  - kind: solve_equation
+    expr: a\cdot\left(-3-1\right)^{2}-8=0
+    var: a
+    part: a
+  - kind: simplify
+    expr: \frac{1}{2}\cdot\left(x+3\right)\cdot\left(x-5\right)
+    part: postac_kanoniczna
+  - kind: simplify
+    expr: \frac{1}{2}\cdot\left(x-1\right)^{2}-8
+    part: postac_ogolna
+  skills:
+  - oś symetrii z miejsc zerowych
+  - wyznaczanie a
+  - postać kanoniczna i ogólna
+  - przedziały monotoniczności
+  verification:
+    checkability: DETERMINISTIC
+    note: '[a] SymPy solved it fresh: 0.5 vs 0.5 (tol 1e-09) ; [postac_kanoniczna] SymPy solved it fresh
+      and disagrees: ''\\frac{1}{2}\\left(x-1\\right)^{2}-8'' vs ''(x - 5)*(x + 3)/2'' (as text)'
+- id: g-ex-t00
+  slot: EXERCISE
+  ramp_index: 6
+  difficulty: 4
+  exercise_type: wyznaczanie wzoru funkcji kwadratowej z wierzchołka i punktu
+  statement: Funkcja kwadratowa f przyjmuje wartość najmniejszą równą (-8) dla argumentu x = 1. Wykres
+    funkcji f przecina oś Oy układu współrzędnych w punkcie o współrzędnych (0, -6). Wyznacz wzór funkcji
+    f w postaci ogólnej oraz w postaci iloczynowej, a także podaj zbiór wartości funkcji f. Zapisz obliczenia.
+  statement_latex: f\left(x\right)=a\cdot\left(x-1\right)^{2}-8,\qquad f\left(0\right)=-6
+  solution: |-
+    Funkcja przyjmuje wartość najmniejszą, więc a > 0, a wierzchołek paraboli ma współrzędne W = (1, -8). Zapisujemy postać kanoniczną:
+    f(x) = a\cdot(x-1)^2 - 8.
+    Punkt (0, -6) należy do wykresu, więc f(0) = -6:
+    -6 = a\cdot(0-1)^2 - 8, czyli -6 = a - 8, stąd a = 2 (istotnie a > 0 ✔).
+    Postać kanoniczna: f(x) = 2\cdot(x-1)^2 - 8.
+    Postać ogólna: f(x) = 2\cdot(x^2 - 2x + 1) - 8 = 2x^2 - 4x + 2 - 8 = 2x^2 - 4x - 6.
+    Miejsca zerowe: 2(x-1)^2 - 8 = 0 ⟺ (x-1)^2 = 4 ⟺ x - 1 = 2 lub x - 1 = -2, czyli x = 3 lub x = -1.
+    Postać iloczynowa (pamiętamy o współczynniku a): f(x) = 2\cdot(x+1)\cdot(x-3). Sprawdzenie: 2(x^2-2x-3) = 2x^2-4x-6 ✔.
+    Ramiona skierowane w górę, q = -8, więc ZW = ⟨-8, +∞).
+  solution_steps:
+  - Z wartości najmniejszej odczytujemy wierzchołek W = (1, -8) i zapisujemy f(x) = a(x-1)^2 - 8.
+  - 'Podstawiamy punkt (0, -6): -6 = a - 8, więc a = 2.'
+  - 'Rozwijamy kwadrat: f(x) = 2x^2 - 4x - 6 (postać ogólna).'
+  - Rozwiązujemy (x-1)^2 = 4 i otrzymujemy miejsca zerowe x = -1 oraz x = 3.
+  - 'Zapisujemy postać iloczynową z współczynnikiem a: f(x) = 2(x+1)(x-3).'
+  - Ponieważ a > 0 i q = -8, zbiorem wartości jest przedział ⟨-8, +∞).
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: postac_ogolna
+      answer:
+        kind: SYMBOLIC
+        latex: 2x^{2}-4x-6
+    - name: postac_iloczynowa
+      answer:
+        kind: SYMBOLIC
+        latex: 2\left(x+1\right)\left(x-3\right)
+    - name: zbior_wartosci
+      answer:
+        kind: INTERVAL
+        lo: '-8'
+        lo_open: false
+  checks:
+  - kind: simplify
+    expr: 2\cdot\left(x-1\right)^{2}-8
+    part: postac_ogolna
+  - kind: simplify
+    expr: 2\cdot\left(x+1\right)\cdot\left(x-3\right)
+    part: postac_iloczynowa
+  skills:
+  - postać kanoniczna
+  - postać ogólna
+  - postać iloczynowa
+  - zbiór wartości
+  - miejsca zerowe
+  verification:
+    checkability: REFERENCE_CALL
+    note: 'answer and reference disagree: part disagrees: ''2x^{2}-4x-6'' vs ''f(x)=2x^2-4x-6'' (as text)'
+- id: g-ex-t01
+  slot: EXERCISE
+  ramp_index: 7
+  difficulty: 4
+  exercise_type: wyznaczanie wzoru z trzech punktów i rozstrzygnięcie o postaci iloczynowej
+  statement: Do wykresu funkcji kwadratowej f należą punkty A = (0, 3), B = (2, 3) oraz C = (-1, 9). Wyznacz
+    wzór funkcji f w postaci kanonicznej i w postaci ogólnej, oblicz wyróżnik Δ trójmianu f oraz rozstrzygnij,
+    czy funkcja f ma postać iloczynową. Zapisz obliczenia.
+  statement_latex: f\left(0\right)=3,\qquad f\left(2\right)=3,\qquad f\left(-1\right)=9
+  solution: |-
+    Punkty A i B mają tę samą rzędną, więc oś symetrii paraboli przechodzi w połowie odległości między nimi:
+    p = \frac{0+2}{2} = 1.
+    Zapisujemy postać kanoniczną f(x) = a\cdot(x-1)^2 + q i podstawiamy dwa punkty:
+    f(0) = 3: a\cdot(0-1)^2 + q = 3, czyli a + q = 3,
+    f(-1) = 9: a\cdot(-1-1)^2 + q = 9, czyli 4a + q = 9.
+    Odejmując stronami: 3a = 6, więc a = 2 oraz q = 1.
+    Postać kanoniczna: f(x) = 2\cdot(x-1)^2 + 1. Sprawdzenie: f(2) = 2\cdot 1 + 1 = 3 ✔.
+    Postać ogólna: f(x) = 2\cdot(x^2 - 2x + 1) + 1 = 2x^2 - 4x + 3.
+    Wyróżnik: Δ = (-4)^2 - 4\cdot 2\cdot 3 = 16 - 24 = -8.
+    Δ < 0, więc funkcja nie ma miejsc zerowych — postać iloczynowa nie istnieje (parabola o ramionach skierowanych w górę leży w całości nad osią Ox).
+  solution_steps:
+  - Zauważamy, że f(0) = f(2) = 3, więc p = (0+2)/2 = 1.
+  - 'Zapisujemy f(x) = a(x-1)^2 + q i podstawiamy punkty A oraz C: a + q = 3 i 4a + q = 9.'
+  - 'Rozwiązujemy układ: 3a = 6, a = 2, q = 1; postać kanoniczna f(x) = 2(x-1)^2 + 1.'
+  - 'Rozwijamy: f(x) = 2x^2 - 4x + 3.'
+  - Obliczamy Δ = (-4)^2 - 4·2·3 = -8.
+  - 'Ponieważ Δ < 0, zapisujemy: postać iloczynowa nie istnieje.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: postac_kanoniczna
+      answer:
+        kind: SYMBOLIC
+        latex: 2\left(x-1\right)^{2}+1
+    - name: postac_ogolna
+      answer:
+        kind: SYMBOLIC
+        latex: 2x^{2}-4x+3
+    - name: delta
+      answer:
+        kind: NUMERIC
+        value: -8.0
+    - name: postac_iloczynowa
+      answer:
+        kind: SYMBOLIC
+        latex: nie istnieje
+  checks:
+  - kind: simplify
+    expr: 2\cdot\left(x-1\right)^{2}+1
+    part: postac_ogolna
+  - kind: evaluate
+    expr: \left(-4\right)^{2}-4\cdot 2\cdot 3
+    part: delta
+  skills:
+  - oś symetrii z dwóch punktów o równych rzędnych
+  - układ równań
+  - postać kanoniczna
+  - wyróżnik
+  - istnienie postaci iloczynowej
+  verification:
+    checkability: REFERENCE_CALL
+    note: 'answer and reference disagree: part disagrees: ''2\\left(x-1\\right)^{2}+1'' vs ''f(x)=2(x-1)^2+1''
+      (as text)'
+- id: g-cm-06
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: wykrycie błędu — znaki p i q
+  statement: Funkcja kwadratowa f jest określona wzorem f(x)=2\left(x+3\right)^{2}-5. Uczeń stwierdził,
+    że wierzchołkiem paraboli będącej wykresem funkcji f jest punkt (3,\ -5). Wyjaśnij, na czym polega
+    błąd ucznia, i podaj poprawne współrzędne wierzchołka.
+  statement_latex: f(x)=2\left(x+3\right)^{2}-5
+  solution: |-
+    Błędne rozumowanie ucznia: „w nawiasie stoi +3, więc p=3” — uczeń odczytuje liczbę z nawiasu bez zmiany znaku i otrzymuje wierzchołek (3,\,-5).
+    Dlaczego to źle: wzorcem jest f(x)=a\left(x-p\right)^{2}+q, a nasz nawias to x+3=x-\left(-3\right), więc p=-3, a nie 3.
+    Poprawnie: a=2, p=-3, q=-5, zatem W=(-3,\,-5).
+    Kontrola: f(-3)=2\cdot\left(-3+3\right)^{2}-5=-5, czyli w punkcie x=-3 funkcja przyjmuje wartość najmniejszą -5 (bo a=2>0). Natomiast f(3)=2\cdot 36-5=67\neq -5, więc punkt (3,-5) nie leży nawet na wykresie.
+  solution_steps:
+  - 'Błąd: odczytanie p=3 wprost z nawiasu (x+3).'
+  - 'Porównaj wzór ze wzorcem a\left(x-p\right)^{2}+q: x+3=x-\left(-3\right), więc p=-3.'
+  - Odczytaj q=-5.
+  - 'Zapisz W=(-3,-5) i sprawdź: f(-3)=-5.'
+  answer:
+    kind: TUPLE
+    items:
+    - '-3'
+    - '-5'
+  skills:
+  - odczytywanie wierzchołka z postaci kanonicznej
+  - kontrola przez obliczenie f(p)
+  verification:
+    checkability: REFERENCE_CALL
+    note: 2 components matched
+- id: g-cm-07
+  slot: COMMON_MISTAKE
+  ramp_index: 1
+  difficulty: 3
+  exercise_type: wykrycie błędu — minus we wzorach na wierzchołek
+  statement: Funkcja kwadratowa f jest określona wzorem f(x)=2x^{2}-12x+5. Uczeń obliczył pierwszą współrzędną
+    wierzchołka jako p=\frac{b}{2\cdot a}=\frac{-12}{2\cdot 2}=-3. Wyjaśnij, na czym polega błąd ucznia,
+    oraz oblicz poprawne wartości p i q.
+  statement_latex: f(x)=2x^{2}-12x+5,\qquad p=\frac{-b}{2\cdot a}
+  solution: |-
+    Błędne rozumowanie ucznia: pominął minus we wzorze i policzył p=\frac{b}{2a}=\frac{-12}{4}=-3, a dalej q=f(-3)=18+36+5=59, czyli otrzymał W=(-3,\,59).
+    Dlaczego to źle: poprawny wzór to p=\frac{-b}{2\cdot a}. Tu a=2, b=-12, więc p=\frac{-\left(-12\right)}{2\cdot 2}=\frac{12}{4}=3.
+    q=f(3)=2\cdot 3^{2}-12\cdot 3+5=18-36+5=-13.
+    Kontrola wzorem z deltą: \Delta=\left(-12\right)^{2}-4\cdot 2\cdot 5=144-40=104, q=\frac{-104}{4\cdot 2}=-13 ✔.
+    Poprawnie W=(3,\,-13); ponieważ a>0, to -13 jest wartością najmniejszą funkcji, a liczba 59 nie mogłaby nią być.
+  solution_steps:
+  - 'Błąd: użycie wzoru p=\frac{b}{2a} zamiast p=\frac{-b}{2a}.'
+  - Odczytaj a=2, b=-12, c=5.
+  - Oblicz p=\frac{-\left(-12\right)}{2\cdot 2}=3.
+  - Oblicz q=f(3)=18-36+5=-13.
+  - Sprawdź q=\frac{-\Delta}{4a}=\frac{-104}{8}=-13.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: p
+      answer:
+        kind: NUMERIC
+        value: 3.0
+    - name: q
+      answer:
+        kind: NUMERIC
+        value: -13.0
+  checks:
+  - kind: evaluate
+    expr: \frac{-\left(-12\right)}{2\cdot 2}
+    part: p
+  - kind: evaluate
+    expr: 2\cdot 3^{2}-12\cdot 3+5
+    part: q
+  skills:
+  - stosowanie wzorów p=-b/(2a), q=f(p)
+  - kontrola wyniku
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [p] SymPy solved it fresh: 3.0 vs 3.0 (tol 1e-09) ; [q] SymPy
+      solved it fresh: -13.0 vs -13.0 (tol 1e-09)'
+- id: g-cm-08
+  slot: COMMON_MISTAKE
+  ramp_index: 2
+  difficulty: 2
+  exercise_type: wykrycie błędu — brak współczynnika a
+  statement: Funkcja kwadratowa f jest określona wzorem f(x)=3x^{2}-12x+9. Uczeń wyznaczył miejsca zerowe
+    1 i 3, a następnie zapisał postać iloczynową jako f(x)=\left(x-1\right)\left(x-3\right). Wyjaśnij,
+    na czym polega błąd ucznia, i zapisz poprawną postać iloczynową funkcji f.
+  statement_latex: f(x)=3x^{2}-12x+9
+  solution: |-
+    Błędne rozumowanie ucznia: „skoro zerami są 1 i 3, to f(x)=\left(x-1\right)\left(x-3\right)”.
+    Dlaczego to źle: wymnóżmy zapis ucznia: \left(x-1\right)\left(x-3\right)=x^{2}-4x+3, a to zupełnie inna funkcja niż 3x^{2}-12x+9 (np. dla x=0 dostajemy 3 zamiast 9).
+    Poprawnie: postać iloczynowa to f(x)=a\left(x-x_{1}\right)\left(x-x_{2}\right), a tutaj a=3, więc f(x)=3\left(x-1\right)\left(x-3\right).
+    Kontrola: 3\left(x^{2}-4x+3\right)=3x^{2}-12x+9 ✔ (miejsca zerowe 1 i 3 są odczytane dobrze — braknie tylko czynnika a).
+  solution_steps:
+  - 'Błąd: pominięcie współczynnika a w postaci iloczynowej.'
+  - 'Sprawdź zapis ucznia: \left(x-1\right)\left(x-3\right)=x^{2}-4x+3\neq 3x^{2}-12x+9.'
+  - Odczytaj a=3 z postaci ogólnej.
+  - Zapisz f(x)=3\left(x-1\right)\left(x-3\right) i sprawdź przez wymnożenie.
+  answer:
+    kind: SYMBOLIC
+    latex: 3\left(x-1\right)\left(x-3\right)
+  checks:
+  - kind: simplify
+    expr: 3x^{2}-12x+9
+  skills:
+  - zapisywanie postaci iloczynowej
+  - kontrola przez wymnożenie
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: ''3\\left(x-1\\right)\\left(x-3\\right)'' vs ''3*x**2 - 12*x
+      + 9'''
+- id: g-cm-09
+  slot: COMMON_MISTAKE
+  ramp_index: 3
+  difficulty: 3
+  exercise_type: wykrycie błędu — postać iloczynowa przy Δ<0
+  statement: 'Funkcja kwadratowa f jest określona wzorem f(x)=2x^{2}-4x+5. Uczeń napisał: „każdą funkcję
+    kwadratową można zapisać w postaci iloczynowej, więc f(x)=2\left(x-x_{1}\right)\left(x-x_{2}\right)
+    dla pewnych liczb x_{1}, x_{2}”. Oblicz wyróżnik \Delta, rozstrzygnij, czy postać iloczynowa funkcji
+    f istnieje, i zapisz wzór funkcji f w postaci kanonicznej.'
+  statement_latex: f(x)=2x^{2}-4x+5,\qquad \Delta=b^{2}-4\cdot a\cdot c
+  solution: |-
+    Błędne rozumowanie ucznia: myli postać kanoniczną (która istnieje zawsze) z iloczynową i „na siłę” szuka miejsc zerowych.
+    Liczymy: a=2, b=-4, c=5, więc \Delta=\left(-4\right)^{2}-4\cdot 2\cdot 5=16-40=-24.
+    Ponieważ \Delta=-24<0, funkcja f nie ma miejsc zerowych, a zatem postać iloczynowa nie istnieje — tak właśnie trzeba zapisać w odpowiedzi. Wykres oczywiście istnieje: parabola o ramionach skierowanych w górę, leżąca w całości nad osią Ox.
+    Postać kanoniczna istnieje zawsze: p=\frac{-\left(-4\right)}{2\cdot 2}=1, q=f(1)=2-4+5=3, więc f(x)=2\left(x-1\right)^{2}+3.
+    Kontrola: 2\left(x^{2}-2x+1\right)+3=2x^{2}-4x+5 ✔.
+  solution_steps:
+  - 'Błąd: przekonanie, że postać iloczynowa istnieje zawsze.'
+  - Oblicz \Delta=\left(-4\right)^{2}-4\cdot 2\cdot 5=-24.
+  - Z \Delta<0 wynika brak miejsc zerowych, więc postać iloczynowa nie istnieje.
+  - Oblicz p=1 oraz q=f(1)=3.
+  - Zapisz f(x)=2\left(x-1\right)^{2}+3.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: delta
+      answer:
+        kind: NUMERIC
+        value: -24.0
+    - name: czy_istnieje_postac_iloczynowa
+      answer:
+        kind: BOOLEAN
+        truth: false
+    - name: postac_kanoniczna
+      answer:
+        kind: SYMBOLIC
+        latex: 2\left(x-1\right)^{2}+3
+  checks:
+  - kind: evaluate
+    expr: \left(-4\right)^{2}-4\cdot 2\cdot 5
+    part: delta
+  - kind: simplify
+    expr: 2x^{2}-4x+5
+    part: postac_kanoniczna
+  skills:
+  - obliczanie delty
+  - uzasadnianie nieistnienia postaci iloczynowej
+  - postać kanoniczna
+  verification:
+    checkability: REFERENCE_CALL
+    note: 'could not compare: part disagrees: AMBIGUOUS: ''parser returned an unresolved ambiguity (_ambig)'''
+- id: g-cm-10
+  slot: COMMON_MISTAKE
+  ramp_index: 4
+  difficulty: 2
+  exercise_type: wykrycie błędu — znaki miejsc zerowych
+  statement: Funkcja kwadratowa f jest określona wzorem f(x)=-4\left(x+7\right)\left(x-3\right). Uczeń
+    stwierdził, że miejscami zerowymi funkcji f są liczby 7 oraz -3. Wyjaśnij, na czym polega błąd ucznia,
+    podaj poprawne miejsca zerowe funkcji f oraz pierwszą współrzędną p wierzchołka jej wykresu.
+  statement_latex: f(x)=-4\left(x+7\right)\left(x-3\right)
+  solution: |-
+    Błędne rozumowanie ucznia: przepisał liczby z nawiasów bez zmiany znaku i otrzymał zera 7 i -3.
+    Dlaczego to źle: miejsce zerowe to liczba, która zeruje nawias. Sprawdźmy propozycję ucznia: f(7)=-4\cdot 14\cdot 4=-224\neq 0.
+    Poprawnie: x+7=0 daje x=-7, a x-3=0 daje x=3. Miejsca zerowe to -7 oraz 3.
+    Kontrola: f(-7)=-4\cdot 0\cdot\left(-10\right)=0 ✔, f(3)=-4\cdot 10\cdot 0=0 ✔.
+    Pierwsza współrzędna wierzchołka: p=\frac{-7+3}{2}=-2.
+  solution_steps:
+  - 'Błąd: odczytanie zer wprost z nawiasów bez zmiany znaku.'
+  - 'Sprawdź: f(7)=-224\neq 0.'
+  - 'Rozwiąż x+7=0 oraz x-3=0: x=-7 i x=3.'
+  - Oblicz p=\frac{-7+3}{2}=-2.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: miejsca_zerowe
+      answer:
+        kind: SET
+        members:
+        - '-7'
+        - '3'
+    - name: p
+      answer:
+        kind: NUMERIC
+        value: -2.0
+  checks:
+  - kind: solve_equation
+    expr: -4\cdot\left(x+7\right)\cdot\left(x-3\right)=0
+    part: miejsca_zerowe
+  - kind: evaluate
+    expr: \frac{-7+3}{2}
+    part: p
+  skills:
+  - odczytywanie miejsc zerowych z postaci iloczynowej
+  - oś symetrii paraboli
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [miejsca_zerowe] SymPy solved it fresh: 2 members matched ;
+      [p] SymPy solved it fresh: -2.0 vs -2.0 (tol 1e-09)'
+- id: g-ch-t02
+  slot: CHALLENGE
+  ramp_index: 0
+  difficulty: 4
+  exercise_type: modelowanie kwadratowe — największe pole
+  statement: W trójkącie prostokątnym suma długości jednej przyprostokątnej i podwojonej długości drugiej
+    przyprostokątnej jest równa 20 cm. Oblicz największe możliwe pole takiego trójkąta. Zapisz obliczenia.
+  statement_latex: P\left(x\right)=\frac{1}{2}\cdot x\cdot\frac{20-x}{2}=\frac{20x-x^{2}}{4}
+  solution: |-
+    Oznaczmy przez x (w centymetrach) długość tej przyprostokątnej, która występuje w warunku pojedynczo, a przez y długość drugiej przyprostokątnej. Wtedy
+    x + 2y = 20, czyli y = \frac{20-x}{2}.
+    Długości boków są dodatnie: x > 0 oraz \frac{20-x}{2} > 0, czyli x < 20. Zatem x ∈ (0, 20).
+    Pole trójkąta prostokątnego to połowa iloczynu przyprostokątnych:
+    P(x) = \frac{1}{2}\cdot x\cdot\frac{20-x}{2} = \frac{20x-x^{2}}{4} = -\frac{1}{4}x^{2} + 5x.
+    Jest to funkcja kwadratowa o współczynniku a = -\frac{1}{4} < 0, więc największą wartość przyjmuje w wierzchołku:
+    p = \frac{-5}{2\cdot\left(-\frac{1}{4}\right)} = 10, a 10 ∈ (0, 20).
+    Wtedy y = \frac{20-10}{2} = 5 oraz
+    P(10) = \frac{20\cdot 10 - 10^{2}}{4} = \frac{100}{4} = 25.
+    Największe możliwe pole tego trójkąta jest równe 25 cm² (przyprostokątne mają wtedy długości 10 cm i 5 cm).
+  solution_steps:
+  - 'Wprowadzamy zmienne: x i y — długości przyprostokątnych, przy czym x + 2y = 20.'
+  - 'Wyznaczamy y = (20 - x)/2 i ustalamy dziedzinę: x ∈ (0, 20).'
+  - 'Układamy wzór na pole: P(x) = (1/2)·x·(20-x)/2 = (20x - x²)/4.'
+  - 'Zauważamy, że a = -1/4 < 0, więc wartość największa jest w wierzchołku: p = 10 ∈ (0, 20).'
+  - Obliczamy P(10) = 100/4 = 25.
+  - 'Odpowiedź: największe pole wynosi 25 cm².'
+  answer:
+    kind: NUMERIC
+    value: 25.0
+  checks:
+  - kind: evaluate
+    expr: \frac{20\cdot 10-10^{2}}{4}
+  stated_model:
+    variable: x
+    objective_latex: P\left(x\right)=\frac{20x-x^{2}}{4}
+    domain_lo: '0'
+    domain_hi: '20'
+    constraint_used: x+2y=20,\ x>0,\ y>0
+  skills:
+  - wprowadzenie zmiennej
+  - układanie wzoru funkcji kwadratowej
+  - wierzchołek paraboli
+  - wartość największa
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''x'': ''P\\left(x\\right)=\\frac{20x-x^{2}}{4}'')
+      — human review'
+- id: g-ch-t03
+  slot: CHALLENGE
+  ramp_index: 1
+  difficulty: 5
+  exercise_type: modelowanie kwadratowe z ograniczeniem zawężającym dziedzinę
+  statement: Obwód pewnego prostokąta jest równy 40 cm, a jeden z jego boków jest co najmniej o 4 cm dłuższy
+    od drugiego boku. Oblicz największe możliwe pole takiego prostokąta oraz podaj długości boków prostokąta,
+    który ma to pole. Zapisz obliczenia.
+  statement_latex: P\left(x\right)=x\cdot\left(20-x\right),\qquad x-\left(20-x\right)\geq 4
+  solution: |-
+    Niech x (w centymetrach) oznacza długość dłuższego boku prostokąta, a y — długość krótszego boku. Z obwodu:
+    2x + 2y = 40, więc y = 20 - x.
+    Warunek „jeden bok jest co najmniej o 4 cm dłuższy od drugiego” zapisujemy jako
+    x - (20 - x) ≥ 4, czyli 2x ≥ 24, stąd x ≥ 12.
+    Ponadto y > 0, czyli x < 20. Dziedzina: x ∈ ⟨12, 20).
+    Pole: P(x) = x·(20 - x) = -x² + 20x — funkcja kwadratowa o a = -1 < 0, o wierzchołku dla
+    p = \frac{-20}{2\cdot(-1)} = 10.
+    Ale 10 ∉ ⟨12, 20), więc wartości 100 nie da się osiągnąć. Dla a < 0 funkcja maleje w przedziale ⟨10, +∞), a więc maleje w całej dziedzinie ⟨12, 20). Największą wartość przyjmuje zatem na lewym końcu, dla x = 12:
+    P(12) = 12·(20 - 12) = 12·8 = 96.
+    Wtedy y = 8, a warunek 12 - 8 = 4 ≥ 4 jest spełniony ✔.
+    Największe możliwe pole wynosi 96 cm², a boki mają długości 12 cm i 8 cm.
+  solution_steps:
+  - Oznaczamy dłuższy bok przez x, krótszy przez y i z obwodu otrzymujemy y = 20 - x.
+  - Zapisujemy warunek x - (20 - x) ≥ 4, czyli x ≥ 12, oraz y > 0, czyli x < 20; dziedzina to ⟨12, 20).
+  - 'Układamy funkcję pola: P(x) = x(20 - x) = -x² + 20x.'
+  - Obliczamy p = 10 i stwierdzamy, że wierzchołek leży poza dziedziną.
+  - Ponieważ P maleje w ⟨10, +∞), największa wartość jest dla x = 12.
+  - 'Obliczamy P(12) = 96 i podajemy boki: 12 cm oraz 8 cm.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: pole
+      answer:
+        kind: NUMERIC
+        value: 96.0
+    - name: boki
+      answer:
+        kind: TUPLE
+        items:
+        - '12'
+        - '8'
+  checks:
+  - kind: evaluate
+    expr: 12\cdot\left(20-12\right)
+    part: pole
+  stated_model:
+    variable: x
+    objective_latex: P\left(x\right)=x\cdot\left(20-x\right)
+    domain_lo: '12'
+    domain_hi: '20'
+    domain_lo_open: false
+    constraint_used: 2x+2y=40,\ x-y\geq 4,\ y>0
+  skills:
+  - wprowadzenie zmiennej
+  - układanie funkcji kwadratowej
+  - monotoniczność funkcji kwadratowej
+  - sprawdzenie wierzchołka względem ograniczenia
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''x'': ''P\\left(x\\right)=x\\cdot\\left(20-x\\right)'')
+      — human review'
+- id: g-ch-t04
+  slot: CHALLENGE
+  ramp_index: 2
+  difficulty: 5
+  exercise_type: 'modelowanie kwadratowe: wzór i dziedzina oraz optymalizacja z ograniczeniem zewnętrznym'
+  statement: Rolnik chce ogrodzić prostokątny wybieg dla kóz. Jeden bok wybiegu ma w całości przylegać
+    do prostej ściany stodoły i tego boku nie trzeba grodzić. Wybieg ma być dodatkowo przedzielony na
+    dwie części płotem równoległym do ściany stodoły. Rolnik ma do dyspozycji dokładnie 60 m siatki, którą
+    zużyje w całości na pozostałe trzy odcinki ogrodzenia oraz na płot dzielący. Ściana stodoły ma długość
+    12 m, więc bok wybiegu przylegający do ściany nie może być dłuższy niż 12 m. a) Wyznacz wzór funkcji
+    opisującej pole wybiegu w zależności od długości boku prostopadłego do ściany stodoły oraz podaj dziedzinę
+    tej funkcji. b) Oblicz wymiary wybiegu o największym polu i to pole.
+  statement_latex: 2x+2y=60,\qquad P\left(x\right)=x\cdot\left(30-x\right),\qquad 0<y\leq 12
+  solution: |-
+    Oznaczmy przez x (w metrach) długość boku prostopadłego do ściany stodoły, a przez y długość boku przylegającego do ściany.
+    Siatka idzie na: dwa boki prostopadłe do ściany (2x), bok równoległy do ściany po przeciwnej stronie (y) oraz płot dzielący, równoległy do ściany, o długości y. Zatem
+    2x + y + y = 60, czyli 2x + 2y = 60, stąd y = 30 - x.
+    Warunki: x > 0 oraz 0 < y ≤ 12, czyli 0 < 30 - x ≤ 12, co daje 18 ≤ x < 30.
+    Dziedzina: x ∈ ⟨18, 30).
+    Pole wybiegu:
+    P(x) = x·y = x·(30 - x) = -x² + 30x.
+    Jest to funkcja kwadratowa o a = -1 < 0; jej wierzchołek ma pierwszą współrzędną
+    p = \frac{-30}{2\cdot(-1)} = 15.
+    Liczba 15 nie należy do dziedziny ⟨18, 30), więc sprawdzamy monotoniczność: dla a < 0 funkcja maleje w ⟨15, +∞), a więc maleje w całej dziedzinie. Największą wartość przyjmuje dla x = 18:
+    P(18) = 18·(30 - 18) = 18·12 = 216.
+    Wtedy y = 12 m — ściana stodoły wystarcza (y ≤ 12 ✔).
+    Odpowiedź: P(x) = 30x - x² dla x ∈ ⟨18, 30); wybieg o największym polu ma wymiary 18 m × 12 m, a jego pole wynosi 216 m².
+  solution_steps:
+  - Wprowadzamy x — bok prostopadły do ściany, y — bok przylegający do ściany.
+  - 'Zapisujemy bilans siatki: 2x + y + y = 60, stąd y = 30 - x.'
+  - Uwzględniamy warunki x > 0 oraz 0 < 30 - x ≤ 12, otrzymując dziedzinę ⟨18, 30).
+  - 'Układamy wzór pola: P(x) = x(30 - x) = -x² + 30x.'
+  - Obliczamy p = 15 i stwierdzamy, że wierzchołek leży poza dziedziną; funkcja maleje w ⟨18, 30).
+  - 'Największe pole jest dla x = 18: P(18) = 216, a wtedy y = 12.'
+  - 'Odpowiedź: wymiary 18 m i 12 m, pole 216 m².'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wzor_funkcji
+      answer:
+        kind: SYMBOLIC
+        latex: 30x-x^{2}
+    - name: dziedzina
+      answer:
+        kind: INTERVAL
+        lo: '18'
+        hi: '30'
+        lo_open: false
+    - name: wymiary
+      answer:
+        kind: TUPLE
+        items:
+        - '18'
+        - '12'
+    - name: pole
+      answer:
+        kind: NUMERIC
+        value: 216.0
+  checks:
+  - kind: simplify
+    expr: x\cdot\left(30-x\right)
+    part: wzor_funkcji
+  - kind: evaluate
+    expr: 18\cdot\left(30-18\right)
+    part: pole
+  stated_model:
+    variable: x
+    objective_latex: P\left(x\right)=x\cdot\left(30-x\right)
+    domain_lo: '18'
+    domain_hi: '30'
+    domain_lo_open: false
+    constraint_used: 2x+2y=60,\ 0<y\leq 12
+  skills:
+  - wprowadzenie zmiennej
+  - układanie funkcji kwadratowej z warunku geometrycznego
+  - wyznaczanie dziedziny
+  - wierzchołek i monotoniczność
+  - sprawdzenie wykonalności
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''x'': ''P\\left(x\\right)=x\\cdot\\left(30-x\\right)'')
+      — human review'

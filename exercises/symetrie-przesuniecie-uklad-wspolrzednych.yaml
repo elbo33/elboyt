@@ -1,0 +1,932 @@
+section: symetrie-przesuniecie-uklad-wspolrzednych
+name: Symetrie i przesunięcie w układzie współrzędnych
+scope: Images of circles and polygons under axis symmetries, central symmetry about the origin, and translation
+  by a vector.
+requirements:
+- IX.5
+counts:
+  total: 16
+  REFERENCE_CALL: 15
+  NOT_MACHINE_CHECKABLE: 1
+exercises:
+- id: g-th-00
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: obraz punktu w symetriach
+  statement: 'W kartezjańskim układzie współrzędnych (x, y) dany jest punkt A = (7, -3). Wyznacz współrzędne
+    obrazów punktu A: punktu A_1 w symetrii względem osi Ox, punktu A_2 w symetrii względem osi Oy oraz
+    punktu A_3 w symetrii środkowej względem początku układu współrzędnych O = (0, 0).'
+  statement_latex: A=\left(7,\;-3\right),\qquad S_{Ox}\left(x,\;y\right)=\left(x,\;-y\right),\quad S_{Oy}\left(x,\;y\right)=\left(-x,\;y\right),\quad
+    S_{O}\left(x,\;y\right)=\left(-x,\;-y\right)
+  solution: |-
+    Symetria względem osi Ox zmienia znak drugiej współrzędnej, a pierwszą pozostawia bez zmian: A_1 = (7, 3).
+    Symetria względem osi Oy zmienia znak pierwszej współrzędnej: A_2 = (-7, -3).
+    Symetria środkowa względem O zmienia znaki obu współrzędnych: A_3 = (-7, 3).
+    Kontrola: punkt A leży w IV ćwiartce, więc jego obraz w S_Ox leży w I ćwiartce, obraz w S_Oy w III ćwiartce, a obraz w S_O w II ćwiartce — zgadza się.
+  solution_steps:
+  - 'Zapisz współrzędne punktu: A = (7, -3).'
+  - 'Zastosuj wzór S_Ox(x, y) = (x, -y): A_1 = (7, 3).'
+  - 'Zastosuj wzór S_Oy(x, y) = (-x, y): A_2 = (-7, -3).'
+  - 'Zastosuj wzór S_O(x, y) = (-x, -y): A_3 = (-7, 3).'
+  - Sprawdź położenie obrazów w ćwiartkach układu.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: A_1 (symetria wzgledem Ox)
+      answer:
+        kind: TUPLE
+        items:
+        - '7'
+        - '3'
+    - name: A_2 (symetria wzgledem Oy)
+      answer:
+        kind: TUPLE
+        items:
+        - '-7'
+        - '-3'
+    - name: A_3 (symetria srodkowa wzgledem O)
+      answer:
+        kind: TUPLE
+        items:
+        - '-7'
+        - '3'
+  skills:
+  - symetria względem osi Ox
+  - symetria względem osi Oy
+  - symetria środkowa względem O
+  verification:
+    checkability: REFERENCE_CALL
+    note: 3 parts matched
+- id: g-th-01
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: obraz okręgu w przesunięciu
+  statement: W kartezjańskim układzie współrzędnych (x, y) dany jest okrąg o o równaniu \left(x-4\right)^2+\left(y+1\right)^2=16.
+    Okrąg o przesunięto o wektor \vec{u}=\left[-2,\;5\right]. Podaj współrzędne środka otrzymanego okręgu
+    o', jego promień oraz równanie okręgu o'.
+  statement_latex: \left(x-4\right)^2+\left(y+1\right)^2=16,\qquad \vec{u}=\left[-2,\;5\right],\qquad
+    T_{\vec{u}}\left(x,\;y\right)=\left(x-2,\;y+5\right)
+  solution: |-
+    Z równania (x - 4)^2 + (y + 1)^2 = 16 odczytujemy środek S = (4, -1) (bo (y + 1)^2 = (y - (-1))^2) oraz promień r = \sqrt{16} = 4.
+    Przesunięcie o wektor [-2, 5] daje środek S' = (4 + (-2), -1 + 5) = (2, 4).
+    Przesunięcie jest izometrią, więc promień się nie zmienia: r = 4.
+    Równanie obrazu: (x - 2)^2 + (y - 4)^2 = 16.
+  solution_steps:
+  - Odczytaj z równania środek S = (4, -1) i promień r = \sqrt{16} = 4.
+  - 'Przekształć środek: S'' = (4 - 2, -1 + 5) = (2, 4).'
+  - Zauważ, że przesunięcie jest izometrią, więc promień pozostaje równy 4.
+  - 'Zapisz równanie obrazu: (x - 2)^2 + (y - 4)^2 = 16.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: srodek obrazu
+      answer:
+        kind: TUPLE
+        items:
+        - '2'
+        - '4'
+    - name: promien
+      answer:
+        kind: NUMERIC
+        value: 4.0
+    - name: rownanie obrazu
+      answer:
+        kind: SYMBOLIC
+        latex: \left(x-2\right)^2+\left(y-4\right)^2=16
+  checks:
+  - kind: evaluate
+    expr: \sqrt{16}
+    part: promien
+  skills:
+  - odczytywanie środka i promienia z równania okręgu
+  - przesunięcie o wektor
+  - równanie obrazu okręgu
+  verification:
+    checkability: REFERENCE_CALL
+    note: '3 parts matched · det: [promien] SymPy solved it fresh: 4.0 vs 4.0 (tol 1e-09)'
+- id: g-th-02
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: wektor przesunięcia z pary punkt-obraz
+  statement: Pewne przesunięcie przeprowadza punkt A = (-5, 2) na punkt A' = (1, -4). Wyznacz współrzędne
+    wektora \vec{u} tego przesunięcia oraz jego długość.
+  statement_latex: \vec{u}=\vec{AA'}=\left[1-\left(-5\right),\;-4-2\right],\qquad \left|\vec{u}\right|=\sqrt{a^2+b^2}
+  solution: |-
+    Współrzędne wektora liczymy jako 'koniec minus początek':
+    \vec{u} = \vec{AA'} = [1 - (-5), -4 - 2] = [6, -6].
+    Długość wektora: |\vec{u}| = \sqrt{6^2 + (-6)^2} = \sqrt{36 + 36} = \sqrt{72} = 6\sqrt{2}.
+    Kontrola: (-5 + 6, 2 - 6) = (1, -4) = A' — zgadza się.
+  solution_steps:
+  - 'Zastosuj wzór na współrzędne wektora: \vec{AA''} = [x_{A''} - x_A, y_{A''} - y_A].'
+  - 'Oblicz: \vec{u} = [1 - (-5), -4 - 2] = [6, -6].'
+  - 'Oblicz długość: |\vec{u}| = \sqrt{6^2 + (-6)^2} = \sqrt{72} = 6\sqrt{2}.'
+  - 'Sprawdź: przesunięcie punktu A o wektor [6, -6] daje punkt (1, -4).'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wektor u
+      answer:
+        kind: TUPLE
+        items:
+        - '6'
+        - '-6'
+    - name: dlugosc wektora
+      answer:
+        kind: SYMBOLIC
+        latex: 6\sqrt{2}
+  checks:
+  - kind: evaluate
+    expr: \sqrt{6^2+\left(-6\right)^2}
+    part: dlugosc wektora
+  skills:
+  - współrzędne wektora
+  - długość wektora
+  - przesunięcie o wektor
+  verification:
+    checkability: REFERENCE_CALL
+    note: '2 parts matched · det: [dlugosc wektora] SymPy solved it fresh: 8.48528137423857 vs 8.48528137423857
+      (tol 1e-09)'
+- id: g-ex-03
+  slot: EXERCISE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: obraz wielokąta w symetrii osiowej
+  statement: W kartezjańskim układzie współrzędnych (x, y) dany jest trójkąt prostokątny ABC o wierzchołkach
+    A = (-4, 1), B = (-1, 1), C = (-1, 5). Wyznacz współrzędne wierzchołków trójkąta A'B'C', który jest
+    obrazem trójkąta ABC w symetrii względem osi Oy, a następnie oblicz obwód i pole trójkąta A'B'C'.
+  statement_latex: A=\left(-4,\;1\right),\; B=\left(-1,\;1\right),\; C=\left(-1,\;5\right),\qquad S_{Oy}\left(x,\;y\right)=\left(-x,\;y\right)
+  solution: |-
+    Symetria względem osi Oy zmienia znak pierwszej współrzędnej, drugą pozostawia:
+    A' = (4, 1), B' = (1, 1), C' = (1, 5).
+    Obrazem trójkąta ABC jest trójkąt A'B'C' o tych wierzchołkach (bok AB przechodzi na A'B' itd.).
+    Długości boków trójkąta wyjściowego: |AB| = |-1 - (-4)| = 3 (bok poziomy), |BC| = |5 - 1| = 4 (bok pionowy), kąt przy B jest prosty, więc |AC| = \sqrt{3^2 + 4^2} = 5.
+    Symetria osiowa jest izometrią, więc boki obrazu mają te same długości: |A'B'| = 3, |B'C'| = 4, |A'C'| = 5.
+    Obwód: 3 + 4 + 5 = 12.
+    Pole: \frac{1}{2}\cdot 3\cdot 4 = 6.
+  solution_steps:
+  - Zastosuj wzór S_Oy(x, y) = (-x, y) do każdego wierzchołka.
+  - 'Zapisz obrazy: A'' = (4, 1), B'' = (1, 1), C'' = (1, 5).'
+  - 'Oblicz długości boków: |A''B''| = 3, |B''C''| = 4, |A''C''| = \sqrt{3^2 + 4^2} = 5.'
+  - 'Oblicz obwód: 3 + 4 + 5 = 12.'
+  - 'Oblicz pole trójkąta prostokątnego: \frac{1}{2}\cdot 3\cdot 4 = 6.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: A'
+      answer:
+        kind: TUPLE
+        items:
+        - '4'
+        - '1'
+    - name: B'
+      answer:
+        kind: TUPLE
+        items:
+        - '1'
+        - '1'
+    - name: C'
+      answer:
+        kind: TUPLE
+        items:
+        - '1'
+        - '5'
+    - name: obwod
+      answer:
+        kind: NUMERIC
+        value: 12.0
+    - name: pole
+      answer:
+        kind: NUMERIC
+        value: 6.0
+  checks:
+  - kind: evaluate
+    expr: 3+4+\sqrt{3^2+4^2}
+    part: obwod
+  - kind: evaluate
+    expr: \frac{1}{2}\cdot 3\cdot 4
+    part: pole
+  skills:
+  - symetria względem osi Oy
+  - obraz wielokąta
+  - obwód i pole trójkąta
+  - izometria
+  verification:
+    checkability: REFERENCE_CALL
+    note: '5 parts matched · det: [obwod] SymPy solved it fresh: 12.0 vs 12.0 (tol 1e-09) ; [pole] SymPy
+      solved it fresh: 6.0 vs 6.0 (tol 1e-09)'
+- id: g-ex-04
+  slot: EXERCISE
+  ramp_index: 1
+  difficulty: 3
+  exercise_type: obraz okręgu danego w postaci rozwiniętej
+  statement: W kartezjańskim układzie współrzędnych (x, y) dany jest okrąg o o równaniu x^2+y^2+8x-6y+9=0.
+    a) Wyznacz środek i promień okręgu o. b) Wyznacz równanie okręgu o', który jest obrazem okręgu o w
+    symetrii względem osi Ox. c) Rozstrzygnij, czy okrąg o' jest styczny do osi Oy, i uzasadnij odpowiedź.
+  statement_latex: x^2+y^2+8x-6y+9=0,\qquad S_{Ox}\left(x,\;y\right)=\left(x,\;-y\right)
+  solution: |-
+    a) Grupujemy wyrazy: (x^2 + 8x) + (y^2 - 6y) = -9. Uzupełniamy do kwadratów: x^2 + 8x = (x + 4)^2 - 16 oraz y^2 - 6y = (y - 3)^2 - 9. Stąd (x + 4)^2 - 16 + (y - 3)^2 - 9 = -9, czyli (x + 4)^2 + (y - 3)^2 = 16. Środek S = (-4, 3), promień r = \sqrt{16} = 4.
+    b) Symetria względem osi Ox zmienia znak drugiej współrzędnej środka: S' = (-4, -3). Promień pozostaje równy 4 (izometria). Równanie obrazu: (x + 4)^2 + (y + 3)^2 = 16.
+    c) Odległość środka S' = (-4, -3) od osi Oy wynosi |-4| = 4 i jest równa promieniowi okręgu o'. Zatem okrąg o' jest styczny do osi Oy.
+  solution_steps:
+  - 'Pogrupuj wyrazy z x i z y, liczbę przenieś na prawą stronę: (x^2 + 8x) + (y^2 - 6y) = -9.'
+  - 'Uzupełnij do pełnych kwadratów i zapisz postać kanoniczną: (x + 4)^2 + (y - 3)^2 = 16.'
+  - Odczytaj środek S = (-4, 3) i promień r = \sqrt{16} = 4.
+  - 'Wyznacz obraz środka w S_Ox: S'' = (-4, -3); promień się nie zmienia.'
+  - 'Zapisz równanie obrazu: (x + 4)^2 + (y + 3)^2 = 16.'
+  - Porównaj odległość środka S' od osi Oy, równą |-4| = 4, z promieniem 4 — są równe, więc okrąg jest
+    styczny do osi Oy.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: srodek okregu o
+      answer:
+        kind: TUPLE
+        items:
+        - '-4'
+        - '3'
+    - name: promien okregu o
+      answer:
+        kind: NUMERIC
+        value: 4.0
+    - name: rownanie obrazu
+      answer:
+        kind: SYMBOLIC
+        latex: \left(x+4\right)^2+\left(y+3\right)^2=16
+    - name: czy o' jest styczny do Oy
+      answer:
+        kind: BOOLEAN
+        truth: true
+    - name: uzasadnienie
+      answer:
+        kind: NOT_MACHINE_CHECKABLE
+        reason: Uczeń musi uzasadnić, że odległość środka obrazu (-4, -3) od osi Oy wynosi |-4| = 4 i
+          jest równa promieniowi 4, co jest warunkiem styczności okręgu do prostej.
+  checks:
+  - kind: evaluate
+    expr: \sqrt{\left(-4\right)^2+3^2-9}
+    part: promien okregu o
+  skills:
+  - sprowadzanie równania okręgu do postaci kanonicznej
+  - symetria względem osi Ox
+  - styczność okręgu do osi układu
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'part(s) need a human: uzasadnienie · 1/4 other parts solved fresh'
+- id: g-ex-05
+  slot: EXERCISE
+  ramp_index: 2
+  difficulty: 4
+  exercise_type: złożenie przekształceń i warunek styczności
+  statement: 'W kartezjańskim układzie współrzędnych (x, y) dany jest okrąg o o równaniu \left(x-5\right)^2+\left(y+4\right)^2=9.
+    a) Wyznacz równanie okręgu, który powstaje z okręgu o przez złożenie przekształceń: najpierw symetria
+    względem osi Ox, a potem przesunięcie o wektor \vec{v}=\left[-2,\;3\right]. b) Wyznacz wszystkie liczby
+    p, dla których obraz okręgu o w przesunięciu o wektor \vec{u}=\left[p,\;0\right] jest styczny do osi
+    Oy.'
+  statement_latex: \left(x-5\right)^2+\left(y+4\right)^2=9,\qquad \vec{v}=\left[-2,\;3\right],\qquad \vec{u}=\left[p,\;0\right]
+  solution: |-
+    Z równania odczytujemy środek S = (5, -4) i promień r = \sqrt{9} = 3.
+    a) Najpierw symetria względem osi Ox: S_1 = (5, 4). Następnie przesunięcie o [-2, 3]: S_2 = (5 - 2, 4 + 3) = (3, 7). Promień w obu krokach się nie zmienia (izometrie), więc szukane równanie to (x - 3)^2 + (y - 7)^2 = 9.
+    b) Po przesunięciu o wektor [p, 0] środek ma współrzędne S' = (5 + p, -4), a promień nadal wynosi 3. Okrąg jest styczny do osi Oy dokładnie wtedy, gdy odległość środka od tej osi równa się promieniowi: |5 + p| = 3, czyli (5 + p)^2 = 9.
+    Stąd 5 + p = 3 lub 5 + p = -3, czyli p = -2 lub p = -8.
+    Sprawdzenie: dla p = -2 środek to (3, -4) i odległość od Oy wynosi 3; dla p = -8 środek to (-3, -4) i odległość od Oy również wynosi 3.
+  solution_steps:
+  - Odczytaj z równania środek S = (5, -4) i promień r = 3.
+  - 'Wykonaj pierwsze przekształcenie: S_Ox(5, -4) = (5, 4).'
+  - 'Wykonaj drugie przekształcenie: przesunięcie o [-2, 3] daje (3, 7).'
+  - 'Zapisz równanie obrazu: (x - 3)^2 + (y - 7)^2 = 9.'
+  - 'Dla przesunięcia o [p, 0] zapisz środek obrazu: (5 + p, -4).'
+  - 'Zapisz warunek styczności do osi Oy: |5 + p| = 3, czyli (5 + p)^2 = 9.'
+  - 'Rozwiąż równanie: p = -2 lub p = -8.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: rownanie obrazu w zlozeniu
+      answer:
+        kind: SYMBOLIC
+        latex: \left(x-3\right)^2+\left(y-7\right)^2=9
+    - name: wartosci p
+      answer:
+        kind: SET
+        members:
+        - '-2'
+        - '-8'
+  checks:
+  - kind: solve_equation
+    expr: \left(5+p\right)^2=9
+    var: p
+    part: wartosci p
+  skills:
+  - złożenie symetrii i przesunięcia
+  - obraz okręgu
+  - warunek styczności do osi
+  - równanie z wartością bezwzględną
+  verification:
+    checkability: REFERENCE_CALL
+    note: '2 parts matched · det: [wartosci p] SymPy solved it fresh: 2 members matched'
+- id: g-ex-t00
+  slot: EXERCISE
+  ramp_index: 6
+  difficulty: 3
+  exercise_type: obraz okręgu w przekształceniu, postać kanoniczna, warunek styczności
+  statement: |-
+    W kartezjańskim układzie współrzędnych (x,\ y) dany jest okrąg o o równaniu x^{2}+y^{2}+8\cdot x-6\cdot y-11=0.
+    a) Wyznacz środek i promień okręgu o.
+    b) Wyznacz równanie obrazu okręgu o w symetrii środkowej względem początku układu współrzędnych.
+    c) Wyznacz wszystkie wartości p, dla których obraz okręgu o w przesunięciu o wektor \vec{u}=[p,\ 0] jest styczny do osi Oy.
+  statement_latex: x^{2}+y^{2}+8\cdot x-6\cdot y-11=0
+  solution: |-
+    a) Grupujemy wyrazy i uzupełniamy do kwadratów:
+    \left(x^{2}+8\cdot x\right)+\left(y^{2}-6\cdot y\right)=11,
+    x^{2}+8\cdot x=\left(x+4\right)^{2}-16,\qquad y^{2}-6\cdot y=\left(y-3\right)^{2}-9.
+    Stąd \left(x+4\right)^{2}-16+\left(y-3\right)^{2}-9=11, czyli \left(x+4\right)^{2}+\left(y-3\right)^{2}=36.
+    Środek S=\left(-4,\ 3\right), promień r=\sqrt{36}=6.
+
+    b) Symetria środkowa względem O zmienia znaki obu współrzędnych środka: S'=\left(4,\ -3\right). Promień się nie zmienia (izometria), więc obraz ma równanie \left(x-4\right)^{2}+\left(y+3\right)^{2}=36.
+
+    c) Po przesunięciu o \vec{u}=[p,\ 0] środek to S''=\left(-4+p,\ 3\right), a promień nadal wynosi 6. Okrąg jest styczny do osi Oy wtedy i tylko wtedy, gdy odległość środka od tej osi równa się promieniowi, czyli \left|-4+p\right|=6.
+    Stąd p-4=6 lub p-4=-6, czyli p=10 albo p=-2.
+    Sprawdzenie: dla p=10 środek to \left(6,\ 3\right) (styczność z prawej strony), dla p=-2 środek to \left(-6,\ 3\right) (styczność z lewej strony).
+  solution_steps:
+  - 'Pogrupuj wyrazy z x i z y, liczbę przenieś na prawą stronę: \left(x^{2}+8\cdot x\right)+\left(y^{2}-6\cdot
+    y\right)=11.'
+  - 'Uzupełnij do kwadratów i zapisz postać kanoniczną: \left(x+4\right)^{2}+\left(y-3\right)^{2}=36.'
+  - Odczytaj środek S=\left(-4,\ 3\right) i promień r=6.
+  - 'Zastosuj S_{O} do środka: S''=\left(4,\ -3\right), promień bez zmian; zapisz \left(x-4\right)^{2}+\left(y+3\right)^{2}=36.'
+  - Po przesunięciu o [p,\ 0] środek ma współrzędne \left(-4+p,\ 3\right).
+  - 'Zapisz warunek styczności do osi Oy: \left|p-4\right|=6 i rozwiąż: p=10 lub p=-2.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: srodek
+      answer:
+        kind: TUPLE
+        items:
+        - '-4'
+        - '3'
+    - name: promien
+      answer:
+        kind: NUMERIC
+        value: 6.0
+    - name: rownanie_obrazu_w_S_O
+      answer:
+        kind: SYMBOLIC
+        latex: \left(x-4\right)^{2}+\left(y+3\right)^{2}=36
+    - name: wartosci_p
+      answer:
+        kind: SET
+        members:
+        - '10'
+        - '-2'
+  checks:
+  - kind: evaluate
+    expr: \sqrt{11+16+9}
+    part: promien
+  - kind: solve_equation
+    expr: \left|p-4\right|=6
+    var: p
+    part: wartosci_p
+  skills:
+  - sprowadzanie równania okręgu do postaci kanonicznej
+  - odczytywanie środka i promienia okręgu
+  - wyznaczanie obrazu okręgu w symetrii środkowej względem O
+  - warunek styczności okręgu do osi układu
+  - rozwiązywanie równania z wartością bezwzględną
+  verification:
+    checkability: REFERENCE_CALL
+    note: 'could not compare: reference produced 3 outputs, answer has 4'
+- id: g-ex-t01
+  slot: EXERCISE
+  ramp_index: 7
+  difficulty: 4
+  exercise_type: złożenie przesunięcia i symetrii osiowej dla wielokąta
+  statement: |-
+    Przesunięcie T przeprowadza punkt P=\left(4,\ -2\right) na punkt P'=\left(-1,\ 3\right). W kartezjańskim układzie współrzędnych (x,\ y) dany jest trójkąt ABC o wierzchołkach A=\left(-3,\ 1\right), B=\left(2,\ 1\right), C=\left(-3,\ 5\right). Trójkąt ABC przekształcono najpierw w przesunięciu T, a otrzymany trójkąt A'B'C' odbito symetrycznie względem osi Ox, otrzymując trójkąt A''B''C''.
+    a) Wyznacz współrzędne wektora przesunięcia T.
+    b) Wyznacz współrzędne wierzchołków A'', B'', C''.
+    c) Oblicz pole trójkąta A''B''C''.
+  statement_latex: \vec{u}=\left[x_{P'}-x_{P},\ y_{P'}-y_{P}\right]
+  solution: |-
+    a) Współrzędne wektora liczymy jako „koniec minus początek”:
+    \vec{u}=\vec{PP'}=\left[-1-4,\ 3-\left(-2\right)\right]=\left[-5,\ 5\right].
+
+    b) Najpierw przesunięcie o \left[-5,\ 5\right] (do każdej pierwszej współrzędnej dodajemy -5, do drugiej 5):
+    A'=\left(-3-5,\ 1+5\right)=\left(-8,\ 6\right),\quad B'=\left(2-5,\ 1+5\right)=\left(-3,\ 6\right),\quad C'=\left(-3-5,\ 5+5\right)=\left(-8,\ 10\right).
+    Następnie symetria względem osi Ox (zmiana znaku drugiej współrzędnej):
+    A''=\left(-8,\ -6\right),\quad B''=\left(-3,\ -6\right),\quad C''=\left(-8,\ -10\right).
+
+    c) Bok A''B'' jest poziomy: \left|A''B''\right|=\left|-3-\left(-8\right)\right|=5. Bok A''C'' jest pionowy: \left|A''C''\right|=\left|-10-\left(-6\right)\right|=4. Kąt przy wierzchołku A'' jest prosty, więc
+    P=\frac{1}{2}\cdot 5\cdot 4=10.
+    Kontrola: trójkąt ABC ma przyprostokątne 5 i 4, więc jego pole też wynosi 10 — oba przekształcenia są izometriami.
+  solution_steps:
+  - 'Oblicz wektor przesunięcia: \vec{u}=\vec{PP''}=\left[-1-4,\ 3-\left(-2\right)\right]=\left[-5,\ 5\right].'
+  - 'Zastosuj przesunięcie do każdego wierzchołka: A''=\left(-8,\ 6\right), B''=\left(-3,\ 6\right), C''=\left(-8,\
+    10\right).'
+  - 'Zastosuj symetrię względem osi Ox do punktów A'', B'', C'': zmień znak drugiej współrzędnej.'
+  - 'Zapisz wierzchołki obrazu: A''''=\left(-8,\ -6\right), B''''=\left(-3,\ -6\right), C''''=\left(-8,\
+    -10\right).'
+  - 'Wyznacz długości przyprostokątnych: \left|A''''B''''\right|=5, \left|A''''C''''\right|=4.'
+  - 'Oblicz pole: P=\frac{1}{2}\cdot 5\cdot 4=10.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wektor_u
+      answer:
+        kind: TUPLE
+        items:
+        - '-5'
+        - '5'
+    - name: A2_x
+      answer:
+        kind: NUMERIC
+        value: -8.0
+    - name: A2_y
+      answer:
+        kind: NUMERIC
+        value: -6.0
+    - name: B2_x
+      answer:
+        kind: NUMERIC
+        value: -3.0
+    - name: B2_y
+      answer:
+        kind: NUMERIC
+        value: -6.0
+    - name: C2_x
+      answer:
+        kind: NUMERIC
+        value: -8.0
+    - name: C2_y
+      answer:
+        kind: NUMERIC
+        value: -10.0
+    - name: pole
+      answer:
+        kind: NUMERIC
+        value: 10.0
+  checks:
+  - kind: evaluate
+    expr: -3+\left(-5\right)
+    part: A2_x
+  - kind: evaluate
+    expr: \left(1+5\right)\cdot\left(-1\right)
+    part: A2_y
+  - kind: evaluate
+    expr: 2+\left(-5\right)
+    part: B2_x
+  - kind: evaluate
+    expr: \left(1+5\right)\cdot\left(-1\right)
+    part: B2_y
+  - kind: evaluate
+    expr: -3+\left(-5\right)
+    part: C2_x
+  - kind: evaluate
+    expr: \left(5+5\right)\cdot\left(-1\right)
+    part: C2_y
+  - kind: evaluate
+    expr: \frac{1}{2}\cdot 5\cdot 4
+    part: pole
+  skills:
+  - wyznaczanie wektora przesunięcia z pary punkt–obraz
+  - wyznaczanie obrazu wielokąta
+  - składanie przekształceń z zachowaniem kolejności
+  - obliczanie pola trójkąta prostokątnego z współrzędnych
+  verification:
+    checkability: REFERENCE_CALL
+    note: 'could not compare: reference produced 3 outputs, answer has 8'
+- id: g-cm-06
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: 'błąd: zamiana ról współrzędnych w symetrii osiowej'
+  statement: 'Dany jest punkt B = (-6, 5). Wyznacz współrzędne punktu B_1 — obrazu punktu B w symetrii
+    względem osi Ox, oraz punktu B_2 — obrazu punktu B w symetrii względem osi Oy. Uczeń zapisał: „symetria
+    względem osi Ox dotyczy zmiennej x, więc zmieniam znak pierwszej współrzędnej i B_1 = (6, 5)”. Wskaż
+    błąd w tym rozumowaniu i podaj poprawne współrzędne.'
+  statement_latex: B=\left(-6,\;5\right),\qquad S_{Ox}\left(x,\;y\right)=\left(x,\;-y\right),\qquad S_{Oy}\left(x,\;y\right)=\left(-x,\;y\right)
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: „Nazwa 'symetria względem osi Ox' zawiera literę x, więc zmieniam znak współrzędnej x”: B_1 = (6, 5). Tak samo dla osi Oy uczeń zmieniłby y i otrzymał B_2 = (-6, -5). Oba wyniki są zamienione miejscami.
+    DLACZEGO TO JEST BŁĄD: oś Ox jest 'lustrem' poziomym, więc punkt odbija się w pionie — w dół lub w górę. Test kontrolny: punkty leżące na osi symetrii muszą pozostać nieruchome. Dla punktu (3, 0), leżącego na osi Ox, błędny wzór (x, y) → (-x, y) daje (-3, 0), a to inny punkt — sprzeczność. Poprawny wzór (x, y) → (x, -y) daje (3, 0), czyli ten sam punkt.
+    POPRAWNE ROZWIĄZANIE: S_Ox(-6, 5) = (-6, -5), więc B_1 = (-6, -5). S_Oy(-6, 5) = (6, 5), więc B_2 = (6, 5).
+    Kontrola: B leży w II ćwiartce, więc odbicie względem Ox przenosi go do III ćwiartki, a odbicie względem Oy — do I ćwiartki.
+  solution_steps:
+  - 'Zapisz błędny tok rozumowania: zmiana znaku x przy symetrii względem Ox daje B_1 = (6, 5).'
+  - Sprawdź ten wzór na punkcie leżącym na osi Ox, np. (3, 0) — powinien pozostać nieruchomy, a błędny
+    wzór daje (-3, 0).
+  - 'Zapisz poprawne wzory: S_Ox(x, y) = (x, -y), S_Oy(x, y) = (-x, y).'
+  - 'Oblicz poprawnie: B_1 = (-6, -5), B_2 = (6, 5).'
+  - Skontroluj wynik przez ćwiartki układu.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: B_1 (symetria wzgledem Ox)
+      answer:
+        kind: TUPLE
+        items:
+        - '-6'
+        - '-5'
+    - name: B_2 (symetria wzgledem Oy)
+      answer:
+        kind: TUPLE
+        items:
+        - '6'
+        - '5'
+  skills:
+  - symetria względem osi Ox
+  - symetria względem osi Oy
+  - punkty stałe symetrii osiowej
+  verification:
+    checkability: REFERENCE_CALL
+    note: 2 parts matched
+- id: g-cm-07
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: 'błąd: zmiana promienia okręgu przy przekształceniu'
+  statement: 'Dany jest okrąg o o równaniu \left(x-2\right)^2+\left(y-6\right)^2=25. Uczeń wyznaczał równanie
+    obrazu tego okręgu w symetrii środkowej względem początku układu współrzędnych i zapisał: „skoro zmieniam
+    znaki obu współrzędnych środka, to zmieniam też znak prawej strony i otrzymuję \left(x+2\right)^2+\left(y+6\right)^2=-25”.
+    Wskaż błąd i podaj poprawne równanie obrazu oraz jego promień.'
+  statement_latex: \left(x-2\right)^2+\left(y-6\right)^2=25,\qquad S_{O}\left(x,\;y\right)=\left(-x,\;-y\right)
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń zmienia znaki nie tylko przy współrzędnych środka, lecz także po prawej stronie równania i otrzymuje (x + 2)^2 + (y + 6)^2 = -25.
+    DLACZEGO TO JEST BŁĄD: lewa strona równania jest sumą kwadratów, więc nigdy nie jest ujemna — równanie (x + 2)^2 + (y + 6)^2 = -25 nie opisuje żadnego zbioru punktów, a przecież obrazem okręgu w izometrii musi być okrąg. Symetria środkowa zachowuje wszystkie odległości, więc promień obrazu jest równy promieniowi oryginału.
+    POPRAWNE ROZWIĄZANIE: środek okręgu o to S = (2, 6), promień r = \sqrt{25} = 5. W symetrii środkowej względem O środek przechodzi na S' = (-2, -6), a promień pozostaje równy 5. Równanie obrazu: (x + 2)^2 + (y + 6)^2 = 25.
+  solution_steps:
+  - 'Zapisz błędne równanie ucznia: (x + 2)^2 + (y + 6)^2 = -25.'
+  - Zauważ, że suma kwadratów nie może być ujemna — takie równanie nie opisuje okręgu.
+  - Przypomnij, że symetria środkowa jest izometrią, więc promień się nie zmienia.
+  - Odczytaj środek S = (2, 6) i promień r = \sqrt{25} = 5.
+  - 'Przekształć środek: S'' = (-2, -6) i zapisz poprawne równanie (x + 2)^2 + (y + 6)^2 = 25.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: rownanie obrazu
+      answer:
+        kind: SYMBOLIC
+        latex: \left(x+2\right)^2+\left(y+6\right)^2=25
+    - name: promien obrazu
+      answer:
+        kind: NUMERIC
+        value: 5.0
+  checks:
+  - kind: evaluate
+    expr: \sqrt{25}
+    part: promien obrazu
+  skills:
+  - symetria środkowa względem O
+  - równanie obrazu okręgu
+  - izometria zachowuje promień
+  verification:
+    checkability: REFERENCE_CALL
+    note: '2 parts matched · det: [promien obrazu] SymPy solved it fresh: 5.0 vs 5.0 (tol 1e-09)'
+- id: g-cm-08
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: 'błąd: znak przy odczytywaniu środka okręgu'
+  statement: 'Dany jest okrąg o o równaniu \left(x+7\right)^2+\left(y-3\right)^2=36. Uczeń zapisał: „środkiem
+    tego okręgu jest punkt (7, -3)”. Wskaż błąd, podaj poprawne współrzędne środka i promień okręgu o
+    oraz wyznacz równanie obrazu okręgu o w symetrii względem osi Oy.'
+  statement_latex: \left(x+7\right)^2+\left(y-3\right)^2=36,\qquad S_{Oy}\left(x,\;y\right)=\left(-x,\;y\right)
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń przepisuje liczby z nawiasów, zmieniając ich znaki 'na odwrót niż trzeba', i otrzymuje środek (7, -3). Wtedy obrazem w symetrii względem Oy byłby okrąg o środku (-7, -3), czyli równanie (x + 7)^2 + (y + 3)^2 = 36 — wynik błędny.
+    DLACZEGO TO JEST BŁĄD: postać kanoniczna to (x - a)^2 + (y - b)^2 = r^2 i środkiem jest punkt (a, b). Trzeba więc zapisać (x + 7)^2 = (x - (-7))^2, skąd a = -7, oraz (y - 3)^2, skąd b = 3.
+    POPRAWNE ROZWIĄZANIE: środek S = (-7, 3), promień r = \sqrt{36} = 6. W symetrii względem osi Oy zmienia się znak pierwszej współrzędnej: S' = (7, 3), promień pozostaje 6. Równanie obrazu: (x - 7)^2 + (y - 3)^2 = 36.
+  solution_steps:
+  - 'Zapisz błędny odczyt środka: (7, -3) i wynikające z niego błędne równanie obrazu (x + 7)^2 + (y +
+    3)^2 = 36.'
+  - Przepisz równanie w postaci (x - (-7))^2 + (y - 3)^2 = 36.
+  - Odczytaj poprawnie środek S = (-7, 3) i promień r = \sqrt{36} = 6.
+  - 'Wyznacz obraz środka w S_Oy: S'' = (7, 3).'
+  - 'Zapisz równanie obrazu: (x - 7)^2 + (y - 3)^2 = 36.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: srodek okregu o
+      answer:
+        kind: TUPLE
+        items:
+        - '-7'
+        - '3'
+    - name: promien okregu o
+      answer:
+        kind: NUMERIC
+        value: 6.0
+    - name: rownanie obrazu
+      answer:
+        kind: SYMBOLIC
+        latex: \left(x-7\right)^2+\left(y-3\right)^2=36
+  checks:
+  - kind: evaluate
+    expr: \sqrt{36}
+    part: promien okregu o
+  skills:
+  - odczytywanie środka z postaci kanonicznej
+  - symetria względem osi Oy
+  - równanie obrazu okręgu
+  verification:
+    checkability: REFERENCE_CALL
+    note: '3 parts matched · det: [promien okregu o] SymPy solved it fresh: 6.0 vs 6.0 (tol 1e-09)'
+- id: g-cm-09
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: 'błąd: mylenie symetrii środkowej z osiową'
+  statement: W kartezjańskim układzie współrzędnych (x, y) dany jest trójkąt ABC o wierzchołkach A = (2,
+    1), B = (6, 3), C = (3, 5). Wyznacz współrzędne wierzchołków trójkąta A'B'C', będącego obrazem trójkąta
+    ABC w symetrii środkowej względem początku układu współrzędnych. Uczeń stwierdził, że „symetria środkowa
+    to po prostu lustrzane odbicie, takie jak symetria względem osi Oy”, i podał A' = (-2, 1), B' = (-6,
+    3), C' = (-3, 5). Wskaż błąd, podaj poprawne współrzędne i rozstrzygnij, czy obraz trójkąta ABC w
+    symetrii środkowej względem O jest tym samym trójkątem, co jego obraz w symetrii względem osi Oy.
+  statement_latex: A=\left(2,\;1\right),\; B=\left(6,\;3\right),\; C=\left(3,\;5\right),\qquad S_{O}\left(x,\;y\right)=\left(-x,\;-y\right)
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń traktuje symetrię środkową jak jedno odbicie lustrzane i zmienia znak tylko pierwszej współrzędnej, otrzymując (-2, 1), (-6, 3), (-3, 5). Są to jednak obrazy w symetrii względem osi Oy, a nie w symetrii środkowej.
+    DLACZEGO TO JEST BŁĄD: symetria środkowa względem O to złożenie dwóch symetrii osiowych (względem Ox i Oy), czyli obrót o 180^\circ. Zmieniają się znaki obu współrzędnych. Symetria środkowa zachowuje orientację figury, natomiast pojedyncza symetria osiowa ją odwraca — trójkąt i jego obraz w S_O są 'obrócone', a nie 'odbite'.
+    POPRAWNE ROZWIĄZANIE: S_O(x, y) = (-x, -y), więc A' = (-2, -1), B' = (-6, -3), C' = (-3, -5).
+    Porównanie: obraz w symetrii względem osi Oy ma wierzchołki (-2, 1), (-6, 3), (-3, 5) i leży w II ćwiartce, natomiast obraz w S_O leży w III ćwiartce. Zbiory wierzchołków są różne, więc nie jest to ten sam trójkąt — odpowiedź: NIE.
+  solution_steps:
+  - 'Zapisz błędne współrzędne podane przez ucznia: (-2, 1), (-6, 3), (-3, 5) — to obrazy w symetrii względem
+    osi Oy.'
+  - 'Przypomnij wzór symetrii środkowej: S_O(x, y) = (-x, -y) — zmieniają się znaki obu współrzędnych.'
+  - 'Oblicz poprawne obrazy: A'' = (-2, -1), B'' = (-6, -3), C'' = (-3, -5).'
+  - 'Porównaj oba zbiory wierzchołków: leżą w różnych ćwiartkach, więc figury są różne.'
+  - Zauważ, że S_O zachowuje orientację (obrót o 180 stopni), a symetria osiowa ją odwraca.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: A'
+      answer:
+        kind: TUPLE
+        items:
+        - '-2'
+        - '-1'
+    - name: B'
+      answer:
+        kind: TUPLE
+        items:
+        - '-6'
+        - '-3'
+    - name: C'
+      answer:
+        kind: TUPLE
+        items:
+        - '-3'
+        - '-5'
+    - name: czy obrazy w S_O i S_Oy sa tym samym trojkatem
+      answer:
+        kind: BOOLEAN
+        truth: false
+  skills:
+  - symetria środkowa względem O
+  - symetria względem osi Oy
+  - obraz wielokąta
+  - orientacja figury
+  verification:
+    checkability: REFERENCE_CALL
+    note: 4 parts matched
+- id: g-cm-10
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: 'błąd: nieprzemienność złożenia przesunięcia i symetrii'
+  statement: Dany jest punkt P = (-3, 4) oraz wektor \vec{u}=\left[2,\;-5\right]. Wyznacz współrzędne
+    punktu P_1, który powstaje z punktu P przez przesunięcie o wektor \vec{u}, a następnie odbicie w symetrii
+    względem osi Ox, oraz współrzędne punktu P_2, który powstaje z punktu P przez odbicie w symetrii względem
+    osi Ox, a następnie przesunięcie o wektor \vec{u}. Uczeń twierdzi, że kolejność nie ma znaczenia,
+    więc P_1 = P_2. Rozstrzygnij, czy ma rację.
+  statement_latex: P=\left(-3,\;4\right),\quad \vec{u}=\left[2,\;-5\right],\qquad T_{\vec{u}}\left(x,\;y\right)=\left(x+2,\;y-5\right),\quad
+    S_{Ox}\left(x,\;y\right)=\left(x,\;-y\right)
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: „skoro oba przekształcenia są izometriami, to wynik nie zależy od kolejności, więc wystarczy policzyć jeden przypadek i przepisać go jako drugi”.
+    DLACZEGO TO JEST BŁĄD: złożenie przekształceń na ogół nie jest przemienne. Symetria względem Ox zmienia znak drugiej współrzędnej, a więc odbija także tę część, która pochodzi z przesunięcia — inaczej, gdy przesunięcie wykonamy po odbiciu.
+    POPRAWNE ROZWIĄZANIE:
+    Droga 1 (najpierw przesunięcie): T_{\vec{u}}(-3, 4) = (-3 + 2, 4 - 5) = (-1, -1); następnie S_Ox(-1, -1) = (-1, 1). Zatem P_1 = (-1, 1).
+    Droga 2 (najpierw symetria): S_Ox(-3, 4) = (-3, -4); następnie T_{\vec{u}}(-3, -4) = (-3 + 2, -4 - 5) = (-1, -9). Zatem P_2 = (-1, -9).
+    Punkty P_1 = (-1, 1) i P_2 = (-1, -9) są różne, więc uczeń nie ma racji — kolejność wykonywania przekształceń jest istotna.
+  solution_steps:
+  - 'Zapisz twierdzenie ucznia: P_1 = P_2 (kolejność bez znaczenia).'
+  - 'Droga 1: przesuń P o wektor [2, -5]: (-1, -1); potem odbij względem Ox: P_1 = (-1, 1).'
+  - 'Droga 2: odbij P względem Ox: (-3, -4); potem przesuń o [2, -5]: P_2 = (-1, -9).'
+  - 'Porównaj wyniki: (-1, 1) \neq (-1, -9).'
+  - 'Wniosek: złożenie przesunięcia i symetrii nie jest przemienne — uczeń nie ma racji.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: P_1 (najpierw przesuniecie, potem S_Ox)
+      answer:
+        kind: TUPLE
+        items:
+        - '-1'
+        - '1'
+    - name: P_2 (najpierw S_Ox, potem przesuniecie)
+      answer:
+        kind: TUPLE
+        items:
+        - '-1'
+        - '-9'
+    - name: czy uczen ma racje
+      answer:
+        kind: BOOLEAN
+        truth: false
+  skills:
+  - złożenie przekształceń
+  - kolejność przekształceń
+  - przesunięcie o wektor
+  - symetria względem osi Ox
+  verification:
+    checkability: REFERENCE_CALL
+    note: 3 parts matched
+- id: g-ch-t02
+  slot: CHALLENGE
+  ramp_index: 0
+  difficulty: 4
+  exercise_type: 'zadanie odwrotne: figura wyjściowa z danego obrazu'
+  statement: W kartezjańskim układzie współrzędnych (x,\ y) okrąg o' o równaniu x^{2}+y^{2}+6\cdot x-8\cdot
+    y+9=0 jest obrazem pewnego okręgu o w symetrii względem osi Oy. Zapisz równanie okręgu o w postaci
+    kanonicznej oraz oblicz odległość środka okręgu o od początku układu współrzędnych.
+  statement_latex: x^{2}+y^{2}+6\cdot x-8\cdot y+9=0
+  solution: |-
+    Najpierw sprowadzamy równanie okręgu o' do postaci kanonicznej:
+    \left(x^{2}+6\cdot x\right)+\left(y^{2}-8\cdot y\right)=-9,
+    x^{2}+6\cdot x=\left(x+3\right)^{2}-9,\qquad y^{2}-8\cdot y=\left(y-4\right)^{2}-16,
+    więc \left(x+3\right)^{2}+\left(y-4\right)^{2}=-9+9+16=16.
+    Okrąg o' ma zatem środek S'=\left(-3,\ 4\right) i promień r=\sqrt{16}=4.
+
+    Symetria względem osi Oy jest przekształceniem odwrotnym do samej siebie, więc środek okręgu o jest obrazem punktu S' w tej symetrii: S=\left(3,\ 4\right). Promień nie zmienia się (izometria), czyli r=4 i
+    o:\ \left(x-3\right)^{2}+\left(y-4\right)^{2}=16.
+    Sprawdzenie: obrazem okręgu o w symetrii względem Oy jest okrąg o środku \left(-3,\ 4\right) i promieniu 4 — zgadza się z o'.
+
+    Odległość środka S=\left(3,\ 4\right) od punktu O=\left(0,\ 0\right):
+    \left|OS\right|=\sqrt{3^{2}+4^{2}}=\sqrt{25}=5.
+  solution_steps:
+  - 'Uzupełnij równanie okręgu o'' do kwadratów: \left(x+3\right)^{2}+\left(y-4\right)^{2}=16.'
+  - Odczytaj środek S'=\left(-3,\ 4\right) i promień r=4 okręgu o'.
+  - 'Zauważ, że aby wrócić do okręgu o, wystarczy ponownie zastosować symetrię względem Oy: S=\left(3,\
+    4\right).'
+  - 'Zapisz równanie okręgu o: \left(x-3\right)^{2}+\left(y-4\right)^{2}=16 (promień bez zmian, bo symetria
+    jest izometrią).'
+  - 'Oblicz odległość: \left|OS\right|=\sqrt{3^{2}+4^{2}}=5.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: rownanie_okregu_o
+      answer:
+        kind: SYMBOLIC
+        latex: \left(x-3\right)^{2}+\left(y-4\right)^{2}=16
+    - name: odleglosc_srodka_od_O
+      answer:
+        kind: NUMERIC
+        value: 5.0
+  checks:
+  - kind: evaluate
+    expr: \sqrt{3^{2}+4^{2}}
+    part: odleglosc_srodka_od_O
+  skills:
+  - sprowadzanie równania okręgu do postaci kanonicznej
+  - odwracanie symetrii osiowej (wyznaczanie oryginału)
+  - obliczanie odległości punktu od początku układu
+  verification:
+    checkability: REFERENCE_CALL
+    note: 2 parts matched
+- id: g-ch-t03
+  slot: CHALLENGE
+  ramp_index: 1
+  difficulty: 4
+  exercise_type: przesunięcie okręgu z warunkiem styczności i warunkiem położenia
+  statement: W kartezjańskim układzie współrzędnych (x,\ y) okrąg o ma środek w punkcie S=\left(-5,\ 2\right)
+    i jest styczny do prostej o równaniu x=-2. Okrąg o przesunięto o wektor \vec{u}=\left[p,\ 2\cdot p\right],
+    gdzie p jest liczbą rzeczywistą, i otrzymano okrąg o'. Okrąg o' jest styczny do osi Oy i zawiera się
+    w półpłaszczyźnie określonej nierównością x\leq 0. Wyznacz p, zapisz równanie okręgu o' oraz oblicz
+    długość wektora \vec{u}.
+  statement_latex: \vec{u}=\left[p,\ 2\cdot p\right],\qquad S=\left(-5,\ 2\right)
+  solution: |-
+    Promień okręgu o to odległość środka S=\left(-5,\ 2\right) od prostej x=-2:
+    r=\left|-2-\left(-5\right)\right|=3.
+
+    Po przesunięciu o \vec{u}=\left[p,\ 2\cdot p\right] środek okręgu o' ma współrzędne
+    S'=\left(-5+p,\ 2+2\cdot p\right), a promień nadal wynosi 3 (przesunięcie jest izometrią).
+
+    Styczność do osi Oy oznacza, że odległość środka S' od tej osi jest równa promieniowi:
+    \left|-5+p\right|=3, czyli p-5=3 lub p-5=-3, a więc p=8 albo p=2.
+
+    Sprawdzamy warunek położenia. Dla p=8 środek to \left(3,\ 18\right) i okrąg leży w półpłaszczyźnie x\geq 0 — nie spełnia warunku x\leq 0. Dla p=2 środek to \left(-3,\ 6\right); największa pierwsza współrzędna punktu tego okręgu to -3+3=0, więc cały okrąg zawiera się w półpłaszczyźnie x\leq 0. Zatem p=2.
+
+    Równanie okręgu o': \left(x+3\right)^{2}+\left(y-6\right)^{2}=9.
+
+    Długość wektora \vec{u}=\left[2,\ 4\right]:
+    \left|\vec{u}\right|=\sqrt{2^{2}+4^{2}}=\sqrt{20}=2\cdot\sqrt{5}.
+  solution_steps:
+  - 'Z warunku styczności okręgu o do prostej x=-2 wyznacz promień: r=\left|-2-\left(-5\right)\right|=3.'
+  - 'Zapisz środek obrazu po przesunięciu: S''=\left(-5+p,\ 2+2\cdot p\right), promień bez zmian r=3.'
+  - 'Zapisz warunek styczności obrazu do osi Oy: \left|p-5\right|=3, stąd p=8 lub p=2.'
+  - Odrzuć p=8 (środek \left(3,\ 18\right), okrąg leży po prawej stronie osi Oy) i przyjmij p=2, bo wtedy
+    S'=\left(-3,\ 6\right) i cały okrąg spełnia x\leq 0.
+  - 'Zapisz równanie obrazu: \left(x+3\right)^{2}+\left(y-6\right)^{2}=9.'
+  - 'Oblicz długość wektora \vec{u}=\left[2,\ 4\right]: \left|\vec{u}\right|=\sqrt{2^{2}+4^{2}}=2\cdot\sqrt{5}.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: p
+      answer:
+        kind: NUMERIC
+        value: 2.0
+    - name: rownanie_okregu_o_prim
+      answer:
+        kind: SYMBOLIC
+        latex: \left(x+3\right)^{2}+\left(y-6\right)^{2}=9
+    - name: dlugosc_wektora
+      answer:
+        kind: SYMBOLIC
+        latex: 2\cdot\sqrt{5}
+  checks:
+  - kind: evaluate
+    expr: -3-\left(-5\right)
+    var: p
+    part: p
+  - kind: evaluate
+    expr: \sqrt{2^{2}+4^{2}}
+    part: dlugosc_wektora
+  skills:
+  - wyznaczanie promienia z warunku styczności do prostej pionowej
+  - obraz okręgu w przesunięciu o wektor
+  - warunek styczności obrazu do osi Oy
+  - odrzucanie rozwiązania niespełniającego warunku położenia
+  - długość wektora
+  verification:
+    checkability: REFERENCE_CALL
+    note: 3 parts matched
+- id: g-ch-t04
+  slot: CHALLENGE
+  ramp_index: 2
+  difficulty: 5
+  exercise_type: 'łańcuch: środek odcinka, promień, symetria osiowa, przesunięcie ze stycznością i kontrolą
+    położenia'
+  statement: |-
+    W kartezjańskim układzie współrzędnych (x,\ y) dane są punkty A=\left(-2,\ -1\right) oraz B=\left(6,\ 5\right). Punkt S jest środkiem odcinka AB. Okrąg o ma środek S i przechodzi przez punkt A.
+    a) Wyznacz równanie okręgu o' będącego obrazem okręgu o w symetrii względem osi Ox.
+    b) Okrąg o'' jest obrazem okręgu o' w przesunięciu o wektor \vec{u}=\left[m,\ 0\right]. Wyznacz wszystkie wartości m, dla których okrąg o'' jest styczny do osi Oy, a następnie wskaż tę wartość m, dla której okrąg o'' zawiera się w półpłaszczyźnie określonej nierównością x\geq 0.
+  statement_latex: A=\left(-2,\ -1\right),\quad B=\left(6,\ 5\right),\quad \vec{u}=\left[m,\ 0\right]
+  solution: |-
+    Środek odcinka AB:
+    S=\left(\frac{-2+6}{2},\ \frac{-1+5}{2}\right)=\left(2,\ 2\right).
+
+    Promień okręgu o to odległość \left|SA\right|:
+    r=\sqrt{\left(2-\left(-2\right)\right)^{2}+\left(2-\left(-1\right)\right)^{2}}=\sqrt{16+9}=5.
+    Zatem o:\ \left(x-2\right)^{2}+\left(y-2\right)^{2}=25.
+
+    a) Symetria względem osi Ox zmienia znak drugiej współrzędnej środka: S'=\left(2,\ -2\right); promień pozostaje równy 5. Stąd
+    o':\ \left(x-2\right)^{2}+\left(y+2\right)^{2}=25.
+
+    b) Po przesunięciu o \vec{u}=\left[m,\ 0\right] środek okręgu o'' to S''=\left(2+m,\ -2\right), promień nadal 5. Okrąg o'' jest styczny do osi Oy wtedy i tylko wtedy, gdy odległość środka od tej osi równa się promieniowi:
+    \left|2+m\right|=5, czyli 2+m=5 lub 2+m=-5, a więc m=3 albo m=-7.
+
+    Kontrola położenia: dla m=3 środek to \left(5,\ -2\right); najmniejsza pierwsza współrzędna punktu okręgu wynosi 5-5=0, więc cały okrąg leży w półpłaszczyźnie x\geq 0. Dla m=-7 środek to \left(-5,\ -2\right) i okrąg leży w półpłaszczyźnie x\leq 0, więc ta wartość nie spełnia warunku.
+    Szukana wartość to m=3 (wtedy o'':\ \left(x-5\right)^{2}+\left(y+2\right)^{2}=25).
+  solution_steps:
+  - 'Wyznacz środek odcinka AB: S=\left(\frac{-2+6}{2},\ \frac{-1+5}{2}\right)=\left(2,\ 2\right).'
+  - Oblicz promień jako odległość \left|SA\right|=\sqrt{4^{2}+3^{2}}=5 i zapisz o:\ \left(x-2\right)^{2}+\left(y-2\right)^{2}=25.
+  - 'Zastosuj symetrię względem Ox do środka: S''=\left(2,\ -2\right); promień bez zmian.'
+  - 'Zapisz równanie obrazu: o'':\ \left(x-2\right)^{2}+\left(y+2\right)^{2}=25.'
+  - 'Zapisz środek po przesunięciu: S''''=\left(2+m,\ -2\right) i warunek styczności do osi Oy: \left|2+m\right|=5.'
+  - 'Rozwiąż równanie: m=3 lub m=-7.'
+  - 'Sprawdź warunek położenia: dla m=3 najmniejsza pierwsza współrzędna punktu okręgu to 5-5=0, więc
+    okrąg zawiera się w półpłaszczyźnie x\geq 0; wartość m=-7 odrzucamy.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: rownanie_okregu_o_prim
+      answer:
+        kind: SYMBOLIC
+        latex: \left(x-2\right)^{2}+\left(y+2\right)^{2}=25
+    - name: wartosci_m_stycznosc
+      answer:
+        kind: SET
+        members:
+        - '3'
+        - '-7'
+    - name: m_polplaszczyzna
+      answer:
+        kind: NUMERIC
+        value: 3.0
+  checks:
+  - kind: solve_equation
+    expr: \left|2+m\right|=5
+    var: m
+    part: wartosci_m_stycznosc
+  - kind: evaluate
+    expr: 5-2
+    var: m
+    part: m_polplaszczyzna
+  skills:
+  - wyznaczanie środka odcinka
+  - obliczanie odległości punktów
+  - obraz okręgu w symetrii względem osi Ox
+  - obraz okręgu w przesunięciu o wektor
+  - warunek styczności okręgu do osi Oy
+  - sprawdzanie warunku położenia w półpłaszczyźnie
+  verification:
+    checkability: REFERENCE_CALL
+    note: 3 parts matched

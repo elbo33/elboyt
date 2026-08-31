@@ -1,0 +1,828 @@
+section: bryly-podobne
+name: Bryły podobne
+scope: 'Similar solids: the ratio of surface areas is the square, and the ratio of volumes the cube, of
+  the linear scale factor; problems that use this.'
+requirements:
+- X.6
+counts:
+  total: 16
+  DETERMINISTIC: 12
+  NOT_MACHINE_CHECKABLE: 2
+  REFERENCE_CALL: 1
+  STATED_MODEL: 1
+exercises:
+- id: g-th-00
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: obliczenie pola bryły podobnej przy danej skali
+  statement: Ostrosłupy P i Q są podobne, przy czym skala podobieństwa przejścia od ostrosłupa P do ostrosłupa
+    Q jest równa k = 3. Pole powierzchni całkowitej ostrosłupa P jest równe 7 cm². Oblicz pole powierzchni
+    całkowitej ostrosłupa Q.
+  statement_latex: k=3,\qquad P_{P}=7\ \text{cm}^{2},\qquad P_{Q}=k^{2}\cdot P_{P}=3^{2}\cdot 7
+  solution: |-
+    Pole powierzchni jest wielkością dwuwymiarową, więc przy podobieństwie w skali k mnoży się przez k².
+    Zatem P_Q = k²·P_P = 3²·7 = 9·7 = 63 (cm²).
+    Kontrola sensowności: k = 3 > 1, czyli ostrosłup Q jest większy, więc jego pole musi być większe od 7 cm² — zgadza się.
+    Odpowiedź: pole powierzchni całkowitej ostrosłupa Q jest równe 63 cm².
+  solution_steps:
+  - 'Zauważ, że pole powierzchni skaluje się z kwadratem skali: P'' = k²·P.'
+  - 'Podstaw k = 3 oraz P = 7 cm²: P'' = 3²·7.'
+  - 'Oblicz: P'' = 9·7 = 63 cm².'
+  - 'Sprawdź sensowność: k > 1, więc wynik jest większy od pola wyjściowego.'
+  answer:
+    kind: NUMERIC
+    value: 63.0
+    latex: 63\ \text{cm}^{2}
+  checks:
+  - kind: evaluate
+    expr: 3^{2}\cdot 7
+  skills:
+  - stosowanie zależności P' = k^2 P
+  - odczytanie kierunku skali
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 63.0 vs 63.0 (tol 1e-09)'
+- id: g-th-01
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: wyznaczanie skali z objętości
+  statement: Dwie kule mają objętości równe odpowiednio 24 cm³ oraz 81 cm³. Wiadomo, że dowolne dwie kule
+    są podobne. Oblicz skalę podobieństwa przejścia od kuli mniejszej do kuli większej, czyli stosunek
+    promienia kuli mniejszej do promienia kuli większej.
+  statement_latex: k=\sqrt[3]{\frac{V_{1}}{V_{2}}}=\sqrt[3]{\frac{24}{81}}
+  solution: |-
+    Dowolne dwie kule są podobne, więc możemy korzystać z zależności V₁/V₂ = k³.
+    Stosunek objętości: V₁/V₂ = 24/81 = 8/27.
+    Skala liniowa: k = ∛(8/27) = 2/3.
+    Odpowiedź: stosunek promieni (mniejsza do większej) wynosi k = 2/3.
+  solution_steps:
+  - 'Zapisz stosunek objętości: \frac{24}{81}=\frac{8}{27}.'
+  - Skorzystaj ze wzoru k = \sqrt[3]{\frac{V_{1}}{V_{2}}}.
+  - 'Oblicz pierwiastek sześcienny: k=\sqrt[3]{\frac{8}{27}}=\frac{2}{3}.'
+  - 'Zinterpretuj: promień mniejszej kuli stanowi \frac{2}{3} promienia większej.'
+  answer:
+    kind: SYMBOLIC
+    latex: \frac{2}{3}
+  checks:
+  - kind: evaluate
+    expr: \sqrt[3]{\frac{24}{81}}
+  skills:
+  - wyznaczanie skali ze stosunku objętości
+  - pierwiastek sześcienny z ułamka
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 0.6666666666666666 vs 0.6666666666666666 (tol 1e-09)'
+- id: g-th-02
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: skala i stosunek objętości sześcianów
+  statement: Krawędź pierwszego sześcianu ma długość 3 cm, a krawędź drugiego sześcianu ma długość 12
+    cm. Dowolne dwa sześciany są podobne. Podaj skalę podobieństwa przejścia od pierwszego sześcianu do
+    drugiego oraz oblicz, ile razy objętość drugiego sześcianu jest większa od objętości pierwszego.
+  statement_latex: k=\frac{12}{3},\qquad \frac{V_{2}}{V_{1}}=k^{3}=\left(\frac{12}{3}\right)^{3}
+  solution: |-
+    Skala podobieństwa to stosunek odpowiadających sobie odcinków: k = 12/3 = 4.
+    Objętość jest wielkością trójwymiarową, więc V₂/V₁ = k³ = 4³ = 64.
+    Odpowiedź: k = 4, objętość drugiego sześcianu jest 64 razy większa.
+  solution_steps:
+  - 'Wyznacz skalę jako stosunek krawędzi: k=\frac{12}{3}=4.'
+  - Zastosuj zależność \frac{V_{2}}{V_{1}}=k^{3}.
+  - Oblicz 4^{3}=64.
+  - 'Zapisz odpowiedź: k = 4, objętość rośnie 64-krotnie.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: skala
+      answer:
+        kind: NUMERIC
+        value: 4.0
+        latex: k=4
+    - name: stosunek objętości
+      answer:
+        kind: NUMERIC
+        value: 64.0
+        latex: '64'
+  checks:
+  - kind: evaluate
+    expr: \frac{12}{3}
+    part: skala
+  - kind: evaluate
+    expr: \left(\frac{12}{3}\right)^{3}
+    part: stosunek objętości
+  skills:
+  - wyznaczanie skali z długości krawędzi
+  - stosunek objętości równy k^3
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [skala] SymPy solved it fresh: 4.0 vs 4.0 (tol 1e-09) ; [stosunek
+      objętości] SymPy solved it fresh: 64.0 vs 64.0 (tol 1e-09)'
+- id: g-ex-03
+  slot: EXERCISE
+  ramp_index: 1
+  difficulty: 2
+  exercise_type: pole i objętość bryły podobnej
+  statement: Graniastosłupy G₁ i G₂ są podobne. Krawędź podstawy graniastosłupa G₁ ma długość 6 cm, a
+    odpowiadająca jej krawędź podstawy graniastosłupa G₂ ma długość 9 cm. Pole powierzchni całkowitej
+    graniastosłupa G₁ jest równe 48 cm², a jego objętość jest równa 40 cm³. Oblicz pole powierzchni całkowitej
+    oraz objętość graniastosłupa G₂.
+  statement_latex: k=\frac{9}{6}=\frac{3}{2},\qquad P_{2}=k^{2}\cdot 48,\qquad V_{2}=k^{3}\cdot 40
+  solution: |-
+    Skala przejścia G₁ → G₂: k = 9/6 = 3/2 (powiększenie, bo k > 1).
+    Pole: P₂ = k²·P₁ = (3/2)²·48 = (9/4)·48 = 108 (cm²).
+    Objętość: V₂ = k³·V₁ = (3/2)³·40 = (27/8)·40 = 135 (cm³).
+    Kontrola: k > 1, więc obie wielkości wzrosły — zgadza się.
+    Odpowiedź: P₂ = 108 cm², V₂ = 135 cm³.
+  solution_steps:
+  - 'Wyznacz skalę podobieństwa: k=\frac{9}{6}=\frac{3}{2}.'
+  - Do pola zastosuj P_{2}=k^{2}\cdot P_{1}=\left(\frac{3}{2}\right)^{2}\cdot 48=108\ \text{cm}^{2}.
+  - Do objętości zastosuj V_{2}=k^{3}\cdot V_{1}=\left(\frac{3}{2}\right)^{3}\cdot 40=135\ \text{cm}^{3}.
+  - Sprawdź sensowność wyników (k > 1, więc obie wartości większe).
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: pole powierzchni G2
+      answer:
+        kind: NUMERIC
+        value: 108.0
+        latex: 108\ \text{cm}^{2}
+    - name: objętość G2
+      answer:
+        kind: NUMERIC
+        value: 135.0
+        latex: 135\ \text{cm}^{3}
+  checks:
+  - kind: evaluate
+    expr: \left(\frac{9}{6}\right)^{2}\cdot 48
+    part: pole powierzchni G2
+  - kind: evaluate
+    expr: \left(\frac{9}{6}\right)^{3}\cdot 40
+    part: objętość G2
+  skills:
+  - wyznaczanie skali z krawędzi
+  - P' = k^2 P
+  - V' = k^3 V
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [pole powierzchni G2] SymPy solved it fresh: 108.0 vs 108.0
+      (tol 1e-09) ; [objętość G2] SymPy solved it fresh: 135.0 vs 135.0 (tol 1e-09)'
+- id: g-ex-04
+  slot: EXERCISE
+  ramp_index: 2
+  difficulty: 3
+  exercise_type: przekrój stożka równoległy do podstawy
+  statement: 'Stożek ma wysokość 15 cm i objętość 250 cm³. Stożek ten przecięto płaszczyzną równoległą
+    do podstawy, w odległości 9 cm od wierzchołka. W ten sposób powstały: mały stożek przy wierzchołku
+    oraz stożek ścięty. Oblicz objętość małego stożka, objętość stożka ściętego oraz stosunek objętości
+    małego stożka do objętości stożka ściętego.'
+  statement_latex: k=\frac{9}{15}=\frac{3}{5},\qquad V_{\text{mały}}=k^{3}\cdot 250,\qquad V_{\text{ścięty}}=250-V_{\text{mały}}
+  solution: |-
+    Płaszczyzna równoległa do podstawy odcina przy wierzchołku stożek podobny do całego stożka.
+    Skala podobieństwa: k = 9/15 = 3/5.
+    Objętość małego stożka: V_mały = k³·V = (3/5)³·250 = (27/125)·250 = 54 (cm³).
+    Objętość stożka ściętego: V_ścięty = 250 − 54 = 196 (cm³) — równoważnie (1 − 27/125)·250 = (98/125)·250 = 196.
+    Stosunek: V_mały : V_ścięty = 54 : 196 = 27 : 98.
+    Odpowiedź: 54 cm³, 196 cm³ oraz stosunek 27 : 98.
+  solution_steps:
+  - Zauważ, że mały stożek przy wierzchołku jest podobny do całego stożka.
+  - 'Wyznacz skalę z wysokości: k=\frac{9}{15}=\frac{3}{5}.'
+  - 'Oblicz objętość małego stożka: V=\left(\frac{3}{5}\right)^{3}\cdot 250=54\ \text{cm}^{3}.'
+  - 'Oblicz objętość stożka ściętego jako różnicę: 250-54=196\ \text{cm}^{3}.'
+  - 'Zapisz i skróć stosunek: \frac{54}{196}=\frac{27}{98}.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: objętość małego stożka
+      answer:
+        kind: NUMERIC
+        value: 54.0
+        latex: 54\ \text{cm}^{3}
+    - name: objętość stożka ściętego
+      answer:
+        kind: NUMERIC
+        value: 196.0
+        latex: 196\ \text{cm}^{3}
+    - name: stosunek objętości
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{27}{98}
+  checks:
+  - kind: evaluate
+    expr: \left(\frac{9}{15}\right)^{3}\cdot 250
+    part: objętość małego stożka
+  - kind: evaluate
+    expr: 250-\left(\frac{9}{15}\right)^{3}\cdot 250
+    part: objętość stożka ściętego
+  - kind: evaluate
+    expr: \frac{54}{196}
+    part: stosunek objętości
+  skills:
+  - skala z wysokości odciętej bryły
+  - V' = k^3 V
+  - objętość bryły ściętej jako różnica
+  - stosunek objętości
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [objętość małego stożka] SymPy solved it fresh: 54.0 vs 54.0
+      (tol 1e-09) ; [objętość stożka ściętego] SymPy solved it fresh: 196.0 vs 196.0 (tol 1e-09) ; [stosunek
+      objętości] SymPy solved it fresh: 0.2755102040816326 vs 0.2755102040816326 (tol 1e-09)'
+- id: g-ex-05
+  slot: EXERCISE
+  ramp_index: 3
+  difficulty: 4
+  exercise_type: skala z pól plus warunek na różnicę objętości
+  statement: 'Ostrosłupy prawidłowe czworokątne F₁ i F₂ są podobne, przy czym ostrosłup F₁ jest mniejszy.
+    Stosunek pola powierzchni całkowitej ostrosłupa F₁ do pola powierzchni całkowitej ostrosłupa F₂ jest
+    równy 9 : 16. Różnica objętości ostrosłupa F₂ i ostrosłupa F₁ jest równa 259 cm³. a) Uzasadnij, że
+    skala podobieństwa przejścia od ostrosłupa F₁ do ostrosłupa F₂ jest równa 4/3. b) Oblicz objętość
+    ostrosłupa F₁. c) Oblicz objętość ostrosłupa F₂.'
+  statement_latex: \frac{P_{1}}{P_{2}}=\frac{9}{16},\qquad k=\sqrt{\frac{16}{9}}=\frac{4}{3},\qquad V_{2}-V_{1}=259
+  solution: |-
+    a) Dla brył podobnych stosunek pól powierzchni jest równy kwadratowi skali. Przy przejściu F₁ → F₂ mamy P₂/P₁ = 16/9 = k², a ponieważ k > 0, to k = √(16/9) = 4/3.
+    b) i c) Stosunek objętości: V₂/V₁ = k³ = (4/3)³ = 64/27. Zapiszmy V₁ = 27x, V₂ = 64x, gdzie x > 0.
+    Z warunku V₂ − V₁ = 259 otrzymujemy 64x − 27x = 259, czyli 37x = 259, stąd x = 7.
+    Zatem V₁ = 27·7 = 189 cm³, V₂ = 64·7 = 448 cm³.
+    Sprawdzenie: 448 − 189 = 259 ✓ oraz 189/448 = 27/64 ✓.
+    Odpowiedź: V₁ = 189 cm³, V₂ = 448 cm³.
+  solution_steps:
+  - Z zależności \frac{P_{2}}{P_{1}}=k^{2} wyznacz k=\sqrt{\frac{16}{9}}=\frac{4}{3} (uzasadnienie punktu
+    a).
+  - 'Oblicz stosunek objętości: \frac{V_{2}}{V_{1}}=k^{3}=\frac{64}{27}.'
+  - Wprowadź oznaczenia V_{1}=27x, V_{2}=64x.
+  - 'Ułóż równanie 64x-27x=259 i rozwiąż: 37x=259, x=7.'
+  - Oblicz V_{1}=27\cdot 7=189\ \text{cm}^{3} oraz V_{2}=64\cdot 7=448\ \text{cm}^{3}.
+  - 'Sprawdź warunek zadania: 448-189=259.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: a) uzasadnienie skali
+      answer:
+        kind: NOT_MACHINE_CHECKABLE
+        reason: Uczeń musi uzasadnić, że ze stosunku pól powierzchni P2:P1 = 16:9 wynika k² = 16/9, a
+          więc (przy k > 0) k = 4/3.
+    - name: b) objętość F1
+      answer:
+        kind: NUMERIC
+        value: 189.0
+        latex: 189\ \text{cm}^{3}
+    - name: c) objętość F2
+      answer:
+        kind: NUMERIC
+        value: 448.0
+        latex: 448\ \text{cm}^{3}
+  checks:
+  - kind: evaluate
+    expr: 27\cdot\frac{259}{37}
+    part: b) objętość F1
+  - kind: evaluate
+    expr: 64\cdot\frac{259}{37}
+    part: c) objętość F2
+  skills:
+  - k = sqrt(P'/P)
+  - stosunek objętości k^3
+  - układanie i rozwiązywanie równania liniowego
+  - uzasadnianie
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'part(s) need a human: a) uzasadnienie skali · 2/2 other parts solved fresh'
+- id: g-ex-t00
+  slot: EXERCISE
+  ramp_index: 6
+  difficulty: 4
+  exercise_type: Skala z pól, stosunek objętości, równanie z warunkiem dodatkowym
+  statement: Dwa walce są podobne. Stosunek pola powierzchni całkowitej walca mniejszego do pola powierzchni
+    całkowitej walca większego jest równy \(9:25\). Objętość walca większego jest o \(392\ \mathrm{cm}^{3}\)
+    większa od objętości walca mniejszego. Wyznacz skalę podobieństwa \(k\) (przejście od walca mniejszego
+    do większego) oraz oblicz objętość każdego z tych walców.
+  statement_latex: \frac{P_{1}}{P_{2}}=\frac{9}{25},\qquad V_{2}-V_{1}=392\ \mathrm{cm}^{3},\qquad k=\sqrt{\frac{25}{9}}
+  solution: |-
+    Ze wzoru na stosunek pól brył podobnych mamy \(\frac{P_{2}}{P_{1}}=k^{2}=\frac{25}{9}\), więc \(k=\sqrt{\frac{25}{9}}=\frac{5}{3}\) (bierzemy wartość dodatnią). Skala przejścia od walca mniejszego do większego to \(k=\frac{5}{3}>1\), co jest zgodne z tym, że drugi walec jest większy.
+    Stosunek objętości: \(\frac{V_{2}}{V_{1}}=k^{3}=\left(\frac{5}{3}\right)^{3}=\frac{125}{27}\).
+    Oznaczmy \(V_{1}=27x\) oraz \(V_{2}=125x\), gdzie \(x>0\).
+    Z warunku zadania: \(125x-27x=392\), czyli \(98x=392\), stąd \(x=4\).
+    Zatem \(V_{1}=27\cdot 4=108\ \mathrm{cm}^{3}\) oraz \(V_{2}=125\cdot 4=500\ \mathrm{cm}^{3}\).
+    Sprawdzenie: \(500-108=392\) ✓ oraz \(\frac{108}{500}=\frac{27}{125}\) ✓.
+    Odpowiedź: \(k=\frac{5}{3}\), objętości wynoszą \(108\ \mathrm{cm}^{3}\) i \(500\ \mathrm{cm}^{3}\).
+  solution_steps:
+  - Z \frac{P_{2}}{P_{1}}=k^{2}=\frac{25}{9} wyznacz k=\frac{5}{3}.
+  - 'Oblicz stosunek objętości: k^{3}=\frac{125}{27}.'
+  - Wprowadź oznaczenia V_{1}=27x, V_{2}=125x, x>0.
+  - 'Ułóż równanie 125x-27x=392 i rozwiąż: x=4.'
+  - Oblicz V_{1}=108\ \mathrm{cm}^{3} i V_{2}=500\ \mathrm{cm}^{3} oraz sprawdź warunki zadania.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: k
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{5}{3}
+    - name: V_mniejszego
+      answer:
+        kind: NUMERIC
+        value: 108.0
+    - name: V_wiekszego
+      answer:
+        kind: NUMERIC
+        value: 500.0
+  checks:
+  - kind: evaluate
+    expr: \sqrt{\frac{25}{9}}
+    part: k
+  - kind: evaluate
+    expr: 27 \cdot \frac{392}{125 - 27}
+    part: V_mniejszego
+  - kind: evaluate
+    expr: 125 \cdot \frac{392}{125 - 27}
+    part: V_wiekszego
+  skills:
+  - wyznaczanie skali podobieństwa z stosunku pól
+  - stosunek objętości k^3
+  - układanie i rozwiązywanie prostego równania z warunkiem na różnicę objętości
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [k] SymPy solved it fresh: 1.6666666666666667 vs 1.6666666666666667
+      (tol 1e-09) ; [V_mniejszego] SymPy solved it fresh: 108.0 vs 108.0 (tol 1e-09) ; [V_wiekszego] SymPy
+      solved it fresh: 500.0 vs 500.0 (tol 1e-09)'
+- id: g-ex-t01
+  slot: EXERCISE
+  ramp_index: 7
+  difficulty: 5
+  exercise_type: Masa brył podobnych, skala z objętości, pole powierzchni
+  statement: Dwa ostrosłupy prawidłowe czworokątne są podobne i zostały wykonane z tego samego jednorodnego
+    materiału. Masa mniejszego ostrosłupa jest równa \(24\ \mathrm{g}\), a masa większego \(81\ \mathrm{g}\).
+    Krawędź podstawy mniejszego ostrosłupa ma długość \(4\ \mathrm{cm}\), a jego pole powierzchni całkowitej
+    jest równe \(60\ \mathrm{cm}^{2}\). Oblicz długość krawędzi podstawy większego ostrosłupa oraz jego
+    pole powierzchni całkowitej.
+  statement_latex: \frac{m'}{m}=k^{3}=\frac{81}{24},\qquad a'=k\cdot 4\ \mathrm{cm},\qquad P'=k^{2}\cdot
+    60\ \mathrm{cm}^{2}
+  solution: |-
+    Bryły są z tego samego materiału, więc ich masy są proporcjonalne do objętości: \(\frac{m'}{m}=\frac{V'}{V}=k^{3}\).
+    Stąd \(k^{3}=\frac{81}{24}=\frac{27}{8}\), więc \(k=\sqrt[3]{\frac{27}{8}}=\frac{3}{2}\).
+    Krawędź podstawy jest wielkością liniową, więc mnożymy ją przez \(k\): \(a'=\frac{3}{2}\cdot 4=6\ \mathrm{cm}\).
+    Pole powierzchni całkowitej mnożymy przez \(k^{2}\): \(P'=\left(\frac{3}{2}\right)^{2}\cdot 60=\frac{9}{4}\cdot 60=135\ \mathrm{cm}^{2}\).
+    Kontrola sensowności: \(k>1\), więc zarówno krawędź, jak i pole większego ostrosłupa są większe — zgadza się.
+    Odpowiedź: krawędź podstawy większego ostrosłupa ma długość \(6\ \mathrm{cm}\), a jego pole powierzchni całkowitej wynosi \(135\ \mathrm{cm}^{2}\).
+  solution_steps:
+  - Zauważ, że przy tym samym materiale \frac{m'}{m}=\frac{V'}{V}=k^{3}.
+  - Oblicz k^{3}=\frac{81}{24}=\frac{27}{8}, a następnie k=\frac{3}{2}.
+  - 'Krawędź podstawy: a''=k\cdot 4=6\ \mathrm{cm}.'
+  - 'Pole powierzchni całkowitej: P''=k^{2}\cdot 60=\frac{9}{4}\cdot 60=135\ \mathrm{cm}^{2}.'
+  - Sprawdź sensowność wyników (k>1, więc obie wielkości rosną).
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: krawedz_wiekszego
+      answer:
+        kind: NUMERIC
+        value: 6.0
+    - name: pole_wiekszego
+      answer:
+        kind: NUMERIC
+        value: 135.0
+  checks:
+  - kind: evaluate
+    expr: 4 \cdot \left(\frac{81}{24}\right)^{\frac{1}{3}}
+    part: krawedz_wiekszego
+  - kind: evaluate
+    expr: 60 \cdot \left(\frac{81}{24}\right)^{\frac{2}{3}}
+    part: pole_wiekszego
+  skills:
+  - masa jako wielkość proporcjonalna do objętości (k^3)
+  - wyznaczanie skali z stosunku objętości
+  - skalowanie wielkości liniowej (k) i pola (k^2)
+  - odróżnianie wykładników skali
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [krawedz_wiekszego] SymPy solved it fresh: 6.0 vs 6.0 (tol
+      1e-09) ; [pole_wiekszego] SymPy solved it fresh: 135.0 vs 135.0 (tol 1e-09)'
+- id: g-cm-06
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: 'demonstracja błędu: objętość mnożona przez k zamiast k^3'
+  statement: 'Krawędź sześcianu zwiększono trzykrotnie. Objętość sześcianu wyjściowego jest równa 20 cm³.
+    Pewien uczeń zapisał: «Sześcian jest 3 razy większy, więc jego objętość jest równa 3 · 20 = 60 cm³».
+    Wskaż błąd w tym rozumowaniu i oblicz poprawnie objętość powiększonego sześcianu.'
+  statement_latex: k=3,\qquad V'=k^{3}\cdot V=3^{3}\cdot 20
+  solution: |-
+    Błędne rozumowanie: uczeń przyjął, że skoro wymiary są 3 razy większe, to objętość też jest 3 razy większa, i otrzymał V' = 3·20 = 60 cm³.
+    Gdzie tkwi błąd: skala k = 3 dotyczy wyłącznie wielkości LINIOWYCH (krawędź, wysokość, przekątna). Objętość powstaje z iloczynu trzech wymiarów, więc mnoży się przez k·k·k = k³.
+    Poprawne rozwiązanie: V' = k³·V = 3³·20 = 27·20 = 540 cm³.
+    Szybkie sprawdzenie na liczbach: gdyby krawędź wynosiła 1 cm (V = 1 cm³), po potrojeniu mielibyśmy krawędź 3 cm i V = 27 cm³, a nie 3 cm³.
+    Odpowiedź: objętość powiększonego sześcianu jest równa 540 cm³.
+  solution_steps:
+  - 'Odtwórz błędne rozumowanie: V''=3\cdot 20=60\ \text{cm}^{3}.'
+  - 'Nazwij błąd: skala k odnosi się do długości, a nie do objętości.'
+  - Zastosuj poprawny wzór V'=k^{3}\cdot V.
+  - 'Oblicz: V''=3^{3}\cdot 20=540\ \text{cm}^{3}.'
+  - Zweryfikuj na przykładzie sześcianu o krawędzi 1 cm i 3 cm (1 cm³ i 27 cm³).
+  answer:
+    kind: NUMERIC
+    value: 540.0
+    latex: 540\ \text{cm}^{3}
+  checks:
+  - kind: evaluate
+    expr: 3^{3}\cdot 20
+  skills:
+  - V' = k^3 V
+  - rozpoznanie błędu w cudzym rozumowaniu
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 540.0 vs 540.0 (tol 1e-09)'
+- id: g-cm-07
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: 'demonstracja błędu: zamiana wykładników k^2 i k^3'
+  statement: 'Stożki S₁ i S₂ są podobne. Promień podstawy stożka S₁ jest równy 3 cm, a promień podstawy
+    stożka S₂ jest równy 6 cm. Pole powierzchni całkowitej stożka S₁ jest równe 45 cm², a jego objętość
+    jest równa 28 cm³. Pewien uczeń zapisał: «Skala k = 2, więc pole powierzchni całkowitej stożka S₂
+    jest równe 2³ · 45 = 360 cm², a jego objętość jest równa 2² · 28 = 112 cm³». Wskaż błąd w tym rozumowaniu
+    i oblicz poprawnie pole powierzchni całkowitej oraz objętość stożka S₂.'
+  statement_latex: k=\frac{6}{3}=2,\qquad P_{2}=k^{2}\cdot 45,\qquad V_{2}=k^{3}\cdot 28
+  solution: |-
+    Błędne rozumowanie: uczeń poprawnie wyznaczył skalę k = 6/3 = 2, ale zamienił wykładniki i otrzymał P₂ = 2³·45 = 360 cm² oraz V₂ = 2²·28 = 112 cm³.
+    Gdzie tkwi błąd: wykładnik przy skali odpowiada wymiarowi wielkości — podpowiada go jednostka. Pole mierzymy w cm² (dwa wymiary), więc P' = k²·P; objętość w cm³ (trzy wymiary), więc V' = k³·V.
+    Poprawne rozwiązanie:
+    P₂ = k²·P₁ = 2²·45 = 4·45 = 180 cm²,
+    V₂ = k³·V₁ = 2³·28 = 8·28 = 224 cm³.
+    Odpowiedź: P₂ = 180 cm², V₂ = 224 cm³.
+  solution_steps:
+  - 'Wyznacz skalę: k=\frac{6}{3}=2.'
+  - 'Odtwórz błąd ucznia: P=2^{3}\cdot 45=360, V=2^{2}\cdot 28=112 — zamienione wykładniki.'
+  - 'Przypomnij regułę: cm² \rightarrow k^{2}, cm³ \rightarrow k^{3}.'
+  - 'Oblicz poprawnie pole: P_{2}=2^{2}\cdot 45=180\ \text{cm}^{2}.'
+  - 'Oblicz poprawnie objętość: V_{2}=2^{3}\cdot 28=224\ \text{cm}^{3}.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: pole powierzchni S2
+      answer:
+        kind: NUMERIC
+        value: 180.0
+        latex: 180\ \text{cm}^{2}
+    - name: objętość S2
+      answer:
+        kind: NUMERIC
+        value: 224.0
+        latex: 224\ \text{cm}^{3}
+  checks:
+  - kind: evaluate
+    expr: \left(\frac{6}{3}\right)^{2}\cdot 45
+    part: pole powierzchni S2
+  - kind: evaluate
+    expr: \left(\frac{6}{3}\right)^{3}\cdot 28
+    part: objętość S2
+  skills:
+  - dobór wykładnika do wielkości (pole a objętość)
+  - P' = k^2 P
+  - V' = k^3 V
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [pole powierzchni S2] SymPy solved it fresh: 180.0 vs 180.0
+      (tol 1e-09) ; [objętość S2] SymPy solved it fresh: 224.0 vs 224.0 (tol 1e-09)'
+- id: g-cm-08
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: 'demonstracja błędu: stosunek objętości brany za skalę'
+  statement: 'Ostrosłupy W₁ i W₂ są podobne. Objętość ostrosłupa W₁ jest równa 54 cm³, a objętość ostrosłupa
+    W₂ jest równa 128 cm³. Pole powierzchni całkowitej ostrosłupa W₁ jest równe 63 cm². Pewien uczeń zapisał:
+    «Objętości mają się jak 128 : 54, więc skala wynosi k = 128/54 = 64/27, zatem pole powierzchni całkowitej
+    ostrosłupa W₂ jest równe (64/27)² · 63 cm²». Wskaż błąd w tym rozumowaniu i oblicz poprawnie pole
+    powierzchni całkowitej ostrosłupa W₂.'
+  statement_latex: k=\sqrt[3]{\frac{128}{54}}=\frac{4}{3},\qquad P_{2}=k^{2}\cdot 63
+  solution: |-
+    Błędne rozumowanie: uczeń wziął stosunek objętości wprost za skalę: k = 128/54 = 64/27, a następnie policzył P₂ = (64/27)²·63 ≈ 354 cm².
+    Gdzie tkwi błąd: stosunek objętości to nie skala, lecz k³. Skalę odzyskujemy pierwiastkiem sześciennym.
+    Poprawne rozwiązanie:
+    k³ = V₂/V₁ = 128/54 = 64/27, więc k = ∛(64/27) = 4/3.
+    Stąd P₂ = k²·P₁ = (4/3)²·63 = (16/9)·63 = 112 cm².
+    Odpowiedź: pole powierzchni całkowitej ostrosłupa W₂ jest równe 112 cm².
+  solution_steps:
+  - 'Odtwórz błąd: przyjęcie k=\frac{128}{54} zamiast k^{3}=\frac{128}{54}.'
+  - 'Zapisz poprawnie: k^{3}=\frac{128}{54}=\frac{64}{27}.'
+  - 'Wyznacz skalę: k=\sqrt[3]{\frac{64}{27}}=\frac{4}{3}.'
+  - 'Oblicz pole: P_{2}=\left(\frac{4}{3}\right)^{2}\cdot 63=112\ \text{cm}^{2}.'
+  answer:
+    kind: NUMERIC
+    value: 112.0
+    latex: 112\ \text{cm}^{2}
+  checks:
+  - kind: evaluate
+    expr: 63\cdot\left(\frac{128}{54}\right)^{\frac{2}{3}}
+  skills:
+  - k = \sqrt[3]{V'/V}
+  - P' = k^2 P
+  - krytyczna analiza rozwiązania
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 112.0 vs 112.0 (tol 1e-09)'
+- id: g-cm-09
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: 'demonstracja błędu: bezpodstawne założenie podobieństwa'
+  statement: 'Dane są dwa walce: walec A o promieniu podstawy 2 cm i wysokości 6 cm oraz walec B o promieniu
+    podstawy 4 cm i wysokości 9 cm. Objętość walca A jest równa 24π cm³. Pewien uczeń zapisał: «Obie bryły
+    to walce, więc są podobne w skali k = 2, zatem objętość walca B jest równa 2³ · 24π = 192π cm³». Rozstrzygnij,
+    czy te walce są podobne, i oblicz objętość walca B.'
+  statement_latex: \frac{2}{4}=\frac{1}{2},\qquad \frac{6}{9}=\frac{2}{3},\qquad V_{B}=\pi\cdot 4^{2}\cdot
+    9
+  solution: |-
+    Błędne rozumowanie: uczeń uznał, że dwie bryły tego samego rodzaju (dwa walce) są automatycznie podobne, wziął k = 4/2 = 2 i otrzymał V_B = 8·24π = 192π cm³.
+    Gdzie tkwi błąd: walce są podobne tylko wtedy, gdy ich wymiary są proporcjonalne, czyli gdy r_A/r_B = h_A/h_B.
+    Sprawdzenie: r_A/r_B = 2/4 = 1/2, natomiast h_A/h_B = 6/9 = 2/3. Ponieważ 1/2 ≠ 2/3, walce NIE są podobne i wzoru V' = k³V użyć nie wolno.
+    Poprawne rozwiązanie: objętość liczymy bezpośrednio ze wzoru na objętość walca:
+    V_B = π·r²·h = π·4²·9 = π·16·9 = 144π cm³.
+    (Automatycznie podobne są tylko np. dowolne dwie kule lub dwa sześciany.)
+    Odpowiedź: walce nie są podobne, V_B = 144π cm³.
+  solution_steps:
+  - 'Wypisz odpowiadające sobie wymiary: r_{A}=2, h_{A}=6 oraz r_{B}=4, h_{B}=9.'
+  - 'Porównaj stosunki: \frac{2}{4}=\frac{1}{2} oraz \frac{6}{9}=\frac{2}{3}.'
+  - Stwierdź, że stosunki są różne, więc walce nie są podobne — wzory k^{2}, k^{3} nie obowiązują.
+  - 'Policz objętość walca B bezpośrednio: V_{B}=\pi\cdot 4^{2}\cdot 9=144\pi\ \text{cm}^{3}.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: czy walce są podobne
+      answer:
+        kind: BOOLEAN
+        latex: \text{nie}
+        truth: false
+    - name: objętość walca B
+      answer:
+        kind: SYMBOLIC
+        latex: 144\pi
+  checks:
+  - kind: evaluate
+    expr: \pi\cdot 4^{2}\cdot 9
+    part: objętość walca B
+  skills:
+  - sprawdzanie warunku podobieństwa walców r1/r2 = h1/h2
+  - obliczanie objętości walca
+  verification:
+    checkability: REFERENCE_CALL
+    note: 'could not compare: part disagrees: PARSE_ERROR: "UnexpectedCharacters: No terminal matches
+      ''\\'' in the current parser context, at line 1 col 17"'
+- id: g-cm-10
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: 'demonstracja błędu: liniowe dodawanie procentów przy skalowaniu'
+  statement: 'Każdą krawędź pewnego prostopadłościanu zwiększono o 30%. Pewien uczeń zapisał: «Pole powierzchni
+    całkowitej wzrosło o 2 · 30% = 60%, a objętość o 3 · 30% = 90%». Wskaż błąd w tym rozumowaniu i oblicz,
+    o ile procent naprawdę wzrosło pole powierzchni całkowitej, a o ile procent objętość tego prostopadłościanu.'
+  statement_latex: k=1+\frac{30}{100}=\frac{13}{10},\qquad \Delta P\%=\left(k^{2}-1\right)\cdot 100\%,\qquad
+    \Delta V\%=\left(k^{3}-1\right)\cdot 100\%
+  solution: |-
+    Błędne rozumowanie: uczeń pomnożył procent przez wymiar i otrzymał 60% dla pola i 90% dla objętości.
+    Gdzie tkwi błąd: procenty przy skalowaniu nie dodają się liniowo — mnożą się skale. Zwiększenie każdego wymiaru o 30% to podobieństwo w skali k = 1 + 0,30 = 1,3.
+    Poprawne rozwiązanie:
+    Pole: k² = 1,3² = 1,69, więc wzrost wynosi (1,69 − 1)·100% = 69%.
+    Objętość: k³ = 1,3³ = 2,197, więc wzrost wynosi (2,197 − 1)·100% = 119,7%.
+    Zwróć uwagę, że objętość jest 2,197 razy większa — to znaczy wzrosła o 119,7%, a nie o 219,7%.
+    Odpowiedź: pole wzrosło o 69%, a objętość o 119,7%.
+  solution_steps:
+  - 'Zapisz skalę: k=1+\frac{30}{100}=1{,}3.'
+  - 'Nazwij błąd: procentów nie mnoży się przez wymiar; trzeba potęgować skalę.'
+  - 'Pole: \left(1{,}3^{2}-1\right)\cdot 100\%=\left(1{,}69-1\right)\cdot 100\%=69\%.'
+  - 'Objętość: \left(1{,}3^{3}-1\right)\cdot 100\%=\left(2{,}197-1\right)\cdot 100\%=119{,}7\%.'
+  - Pamiętaj o odjęciu 1 przed przeliczeniem na przyrost procentowy.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wzrost pola w procentach
+      answer:
+        kind: NUMERIC
+        value: 69.0
+        latex: 69\%
+    - name: wzrost objętości w procentach
+      answer:
+        kind: NUMERIC
+        value: 119.7
+        latex: 119{,}7\%
+  checks:
+  - kind: evaluate
+    expr: \left(\left(\frac{13}{10}\right)^{2}-1\right)\cdot 100
+    part: wzrost pola w procentach
+  - kind: evaluate
+    expr: \left(\left(\frac{13}{10}\right)^{3}-1\right)\cdot 100
+    part: wzrost objętości w procentach
+  skills:
+  - skala k = 1 + p/100
+  - procentowy przyrost pola (k^2 - 1)
+  - procentowy przyrost objętości (k^3 - 1)
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [wzrost pola w procentach] SymPy solved it fresh: 69.0 vs 69.0
+      (tol 1e-09) ; [wzrost objętości w procentach] SymPy solved it fresh: 119.7 vs 119.7 (tol 1e-09)'
+- id: g-ch-t02
+  slot: CHALLENGE
+  ramp_index: 0
+  difficulty: 4
+  exercise_type: 'Zadanie kontekstowe: poziom cieczy w naczyniu stożkowym, odwrócenie zależności V''=k^3
+    V'
+  statement: Naczynie ma kształt stożka o wysokości \(30\ \mathrm{cm}\), ustawionego wierzchołkiem w dół;
+    podstawa stożka jest poziomym otworem u góry naczynia. Do naczynia wlano wodę, która wypełniła \(\frac{8}{27}\)
+    jego pojemności; powierzchnia wody jest równoległa do podstawy naczynia. Oblicz wysokość słupa wody
+    w naczyniu oraz odległość powierzchni wody od górnego brzegu naczynia.
+  statement_latex: \left(\frac{h}{30}\right)^{3}=\frac{8}{27}
+  solution: |-
+    Powierzchnia wody jest równoległa do podstawy, więc woda wypełnia stożek podobny do całego naczynia (wierzchołek obu stożków jest wspólny — to dolny wierzchołek naczynia).
+    Niech \(h\) oznacza wysokość słupa wody, a \(k=\frac{h}{30}\) — skalę podobieństwa stożka wody do naczynia.
+    Z zależności między objętościami brył podobnych: \(k^{3}=\frac{V_{\text{wody}}}{V_{\text{naczynia}}}=\frac{8}{27}\).
+    Stąd \(k=\sqrt[3]{\frac{8}{27}}=\frac{2}{3}\).
+    Wysokość słupa wody: \(h=k\cdot 30=\frac{2}{3}\cdot 30=20\ \mathrm{cm}\).
+    Odległość powierzchni wody od górnego brzegu naczynia: \(30-20=10\ \mathrm{cm}\).
+    Uwaga: wysokość słupa wody nie jest równa \(\frac{8}{27}\cdot 30\) — stosunek objętości trzeba najpierw zamienić na skalę liniową przez pierwiastek sześcienny.
+    Odpowiedź: \(20\ \mathrm{cm}\) oraz \(10\ \mathrm{cm}\).
+  solution_steps:
+  - Zauważ, że woda tworzy stożek podobny do naczynia (przekrój równoległy do podstawy).
+  - Oznacz wysokość słupa wody przez h i zapisz skalę k=\frac{h}{30}.
+  - Zapisz k^{3}=\frac{8}{27} i wyznacz k=\frac{2}{3}.
+  - Oblicz h=\frac{2}{3}\cdot 30=20\ \mathrm{cm}.
+  - 'Oblicz odległość do brzegu: 30-20=10\ \mathrm{cm}.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wysokosc_slupa_wody
+      answer:
+        kind: NUMERIC
+        value: 20.0
+    - name: odleglosc_od_brzegu
+      answer:
+        kind: NUMERIC
+        value: 10.0
+  checks:
+  - kind: evaluate
+    expr: 30 \cdot \left(\frac{8}{27}\right)^{\frac{1}{3}}
+    part: wysokosc_slupa_wody
+  - kind: evaluate
+    expr: 30 - 30 \cdot \left(\frac{8}{27}\right)^{\frac{1}{3}}
+    part: odleglosc_od_brzegu
+  stated_model:
+    variable: h
+    objective_latex: V\left(h\right)=\left(\frac{h}{30}\right)^{3}\cdot V_{\text{naczynia}}
+    domain_lo: '0'
+    domain_hi: '30'
+    domain_hi_open: false
+    goal: value
+    constraint_used: V\left(h\right)=\frac{8}{27}\cdot V_{\text{naczynia}}
+  skills:
+  - rozpoznanie brył podobnych w opisie sytuacji
+  - wyznaczanie skali z stosunku objętości
+  - skalowanie wielkości liniowej
+  - interpretacja wyniku w kontekście
+  verification:
+    checkability: STATED_MODEL
+    note: 'stage 1 inconclusive: TypeError: name should be a string, not Token'
+- id: g-ch-t03
+  slot: CHALLENGE
+  ramp_index: 1
+  difficulty: 5
+  exercise_type: 'Modelowanie: dwa sześciany, masa i suma krawędzi, układ równań symetrycznych'
+  statement: Dwa klocki mają kształt sześcianów i są wykonane z tego samego jednorodnego drewna o gęstości
+    \(0{,}8\ \frac{\mathrm{g}}{\mathrm{cm}^{3}}\). Łączna masa obu klocków jest równa \(121{,}6\ \mathrm{g}\),
+    a suma długości wszystkich krawędzi obu klocków wynosi \(96\ \mathrm{cm}\). Oblicz długości krawędzi
+    obu klocków oraz stosunek pola powierzchni całkowitej klocka większego do pola powierzchni całkowitej
+    klocka mniejszego.
+  statement_latex: \begin{cases} a^{3}+b^{3}=\frac{121{,}6}{0{,}8} \\ 12\cdot a+12\cdot b=96 \end{cases}
+  solution: |-
+    Oznaczmy przez \(a\) i \(b\) długości krawędzi klocków (w centymetrach), przy czym \(a<b\), \(a>0\), \(b>0\).
+    Łączna objętość drewna: \(V=\frac{121{,}6}{0{,}8}=152\ \mathrm{cm}^{3}\), zatem \(a^{3}+b^{3}=152\).
+    Suma długości wszystkich krawędzi: \(12a+12b=96\), czyli \(a+b=8\).
+    Korzystamy z tożsamości \(\left(a+b\right)^{3}=a^{3}+b^{3}+3ab\left(a+b\right)\):
+    \(512=152+3ab\cdot 8\), stąd \(24ab=360\), czyli \(ab=15\).
+    Liczby \(a\) i \(b\) są więc pierwiastkami równania \(t^{2}-8t+15=0\). Wyróżnik \(\Delta=64-60=4\), \(\sqrt{\Delta}=2\), zatem \(t_{1}=\frac{8-2}{2}=3\), \(t_{2}=\frac{8+2}{2}=5\). Oba pierwiastki są dodatnie, więc krawędź mniejszego klocka ma \(3\ \mathrm{cm}\), a większego \(5\ \mathrm{cm}\).
+    Dowolne dwa sześciany są podobne, a skala podobieństwa (większy do mniejszego) wynosi \(k=\frac{5}{3}\).
+    Stosunek pól powierzchni całkowitych: \(\frac{P_{\text{w}}}{P_{\text{m}}}=k^{2}=\left(\frac{5}{3}\right)^{2}=\frac{25}{9}\).
+    Sprawdzenie: \(3^{3}+5^{3}=27+125=152\) ✓, \(12\cdot\left(3+5\right)=96\) ✓.
+    Odpowiedź: krawędzie mają długości \(3\ \mathrm{cm}\) i \(5\ \mathrm{cm}\), a stosunek pól wynosi \(\frac{25}{9}\) (czyli \(25:9\)).
+  solution_steps:
+  - Wprowadź zmienne a<b — długości krawędzi sześcianów.
+  - 'Zamień masę na objętość: \frac{121{,}6}{0{,}8}=152, więc a^{3}+b^{3}=152.'
+  - Z sumy krawędzi 12a+12b=96 otrzymaj a+b=8.
+  - Z tożsamości \left(a+b\right)^{3}=a^{3}+b^{3}+3ab\left(a+b\right) wyznacz ab=15.
+  - 'Rozwiąż t^{2}-8t+15=0: t=3 lub t=5; mniejszy klocek ma krawędź 3 cm, większy 5 cm.'
+  - Sześciany są podobne w skali k=\frac{5}{3}, więc \frac{P_{\text{w}}}{P_{\text{m}}}=k^{2}=\frac{25}{9}.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: krawedz_mniejszego
+      answer:
+        kind: NUMERIC
+        value: 3.0
+    - name: krawedz_wiekszego
+      answer:
+        kind: NUMERIC
+        value: 5.0
+    - name: stosunek_pol
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{25}{9}
+  checks:
+  - kind: evaluate
+    expr: \frac{8 - \sqrt{64 - 4 \cdot 15}}{2}
+    var: t
+    part: krawedz_mniejszego
+  - kind: evaluate
+    expr: \frac{8 + \sqrt{64 - 4 \cdot 15}}{2}
+    var: t
+    part: krawedz_wiekszego
+  - kind: evaluate
+    expr: \left(\frac{5}{3}\right)^{2}
+    part: stosunek_pol
+  skills:
+  - wprowadzenie własnych zmiennych
+  - przeliczenie masy na objętość przy danej gęstości
+  - układanie i rozwiązywanie układu równań z sumą sześcianów
+  - wybór właściwego pierwiastka
+  - stosunek pól brył podobnych k^2
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [krawedz_mniejszego] SymPy solved it fresh: 3.0 vs 3.0 (tol
+      1e-09) ; [krawedz_wiekszego] SymPy solved it fresh: 5.0 vs 5.0 (tol 1e-09) ; [stosunek_pol] SymPy
+      solved it fresh: 2.7777777777777777 vs 2.7777777777777777 (tol 1e-09)'
+- id: g-ch-t04
+  slot: CHALLENGE
+  ramp_index: 2
+  difficulty: 5
+  exercise_type: 'Dwuczęściowe zadanie modelowe: wzór z dziedziną, obliczenie poziomu cieczy, sprawdzenie
+    pojemności'
+  statement: Naczynie ma kształt stożka o promieniu podstawy \(6\ \mathrm{cm}\) i wysokości \(18\ \mathrm{cm}\),
+    ustawionego wierzchołkiem w dół (podstawa stożka jest poziomym otworem u góry naczynia). Wlewana woda
+    tworzy w naczyniu stożek o wierzchołku w dolnym wierzchołku naczynia, którego górna powierzchnia jest
+    równoległa do podstawy. a) Wyznacz wzór opisujący objętość wody w naczyniu w zależności od wysokości
+    słupa wody i podaj dziedzinę tej zależności. b) Do pustego naczynia wlano \(64\pi\ \mathrm{cm}^{3}\)
+    wody. Oblicz wysokość słupa wody oraz rozstrzygnij, czy do naczynia można dolać jeszcze \(150\pi\
+    \mathrm{cm}^{3}\) wody bez jej przelania.
+  statement_latex: V\left(x\right)=\frac{1}{3}\cdot\pi\cdot\left(\frac{x}{3}\right)^{2}\cdot x=\frac{\pi\cdot
+    x^{3}}{27}
+  solution: |-
+    a) Oznaczmy przez \(x\) wysokość słupa wody (w centymetrach). Powierzchnia wody jest równoległa do podstawy, więc stożek wody jest podobny do całego naczynia w skali \(k=\frac{x}{18}\).
+    Promień powierzchni wody: \(r=k\cdot 6=\frac{6x}{18}=\frac{x}{3}\).
+    Objętość wody: \(V\left(x\right)=\frac{1}{3}\cdot\pi\cdot r^{2}\cdot x=\frac{1}{3}\cdot\pi\cdot\left(\frac{x}{3}\right)^{2}\cdot x=\frac{\pi\cdot x^{3}}{27}\).
+    Słup wody musi mieć dodatnią wysokość i nie może przekroczyć wysokości naczynia, zatem dziedziną jest przedział \(\left(0;\,18\right\rangle\).
+    (Sprawdzenie: dla \(x=18\) otrzymujemy pojemność naczynia \(V=\frac{\pi\cdot 18^{3}}{27}=216\pi\ \mathrm{cm}^{3}\), zgodnie ze wzorem \(\frac{1}{3}\pi\cdot 6^{2}\cdot 18\).)
+    b) Rozwiązujemy równanie \(\frac{\pi\cdot x^{3}}{27}=64\pi\), czyli \(x^{3}=27\cdot 64=1728\), skąd \(x=12\). Wartość \(12\) należy do dziedziny, więc wysokość słupa wody wynosi \(12\ \mathrm{cm}\).
+    Pojemność naczynia to \(216\pi\ \mathrm{cm}^{3}\), a w naczyniu jest już \(64\pi\ \mathrm{cm}^{3}\) wody, więc wolne miejsce to \(216\pi-64\pi=152\pi\ \mathrm{cm}^{3}\).
+    Ponieważ \(150\pi<152\pi\), dolanie \(150\pi\ \mathrm{cm}^{3}\) wody jest możliwe — woda się nie przeleje.
+    Odpowiedź: \(V\left(x\right)=\frac{\pi\cdot x^{3}}{27}\) dla \(x\in\left(0;\,18\right\rangle\); wysokość słupa wody wynosi \(12\ \mathrm{cm}\), a wodę można dolać (tak).
+  solution_steps:
+  - Wprowadź zmienną x — wysokość słupa wody.
+  - Zauważ podobieństwo stożka wody i naczynia oraz zapisz skalę k=\frac{x}{18}.
+  - Wyznacz promień powierzchni wody r=6\cdot\frac{x}{18}=\frac{x}{3}.
+  - Zapisz i uprość wzór V\left(x\right)=\frac{1}{3}\cdot\pi\cdot\left(\frac{x}{3}\right)^{2}\cdot x=\frac{\pi\cdot
+    x^{3}}{27}, podaj dziedzinę \left(0;18\right\rangle.
+  - 'Rozwiąż \frac{\pi\cdot x^{3}}{27}=64\pi: x^{3}=1728, x=12 (wartość z dziedziny).'
+  - Oblicz pojemność naczynia 216\pi\ \mathrm{cm}^{3} i wolne miejsce 216\pi-64\pi=152\pi\ \mathrm{cm}^{3};
+    ponieważ 150\pi<152\pi, dolanie jest możliwe.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wzor
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{\pi \cdot x^{3}}{27}
+    - name: dziedzina
+      answer:
+        kind: INTERVAL
+        lo: '0'
+        hi: '18'
+        hi_open: false
+    - name: wysokosc_slupa_wody
+      answer:
+        kind: NUMERIC
+        value: 12.0
+    - name: czy_mozna_dolac
+      answer:
+        kind: BOOLEAN
+        truth: true
+  checks:
+  - kind: simplify
+    expr: \frac{1}{3} \cdot \pi \cdot \left(\frac{x}{3}\right)^{2} \cdot x
+    part: wzor
+  - kind: evaluate
+    expr: \left(27 \cdot 64\right)^{\frac{1}{3}}
+    part: wysokosc_slupa_wody
+  stated_model:
+    variable: x
+    objective_latex: V\left(x\right)=\frac{\pi \cdot x^{3}}{27}
+    domain_lo: '0'
+    domain_hi: '18'
+    domain_hi_open: false
+    goal: value
+    constraint_used: r=6\cdot\frac{x}{18}=\frac{x}{3} (podobieństwo stożka wody do naczynia)
+  skills:
+  - wprowadzenie zmiennej i budowa wzoru funkcji
+  - podobieństwo przy przekroju równoległym do podstawy
+  - wyznaczanie dziedziny z warunków geometrycznych
+  - rozwiązanie równania z niewiadomą w trzeciej potędze
+  - sprawdzenie warunku wykonalności (pojemność naczynia)
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''x'': ''V\\left(x\\right)=\\frac{\\pi
+      \\cdot x^{3}}{27}'') — human review'

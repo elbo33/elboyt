@@ -1,0 +1,767 @@
+section: prawdopodobienstwo-klasyczne
+name: Prawdopodobieństwo w modelu klasycznym
+scope: Equally likely outcomes; favourable versus all outcomes; complementary events.
+requirements:
+- XII.1
+counts:
+  total: 16
+  DETERMINISTIC: 13
+  NOT_MACHINE_CHECKABLE: 2
+  STATED_MODEL: 1
+exercises:
+- id: g-th-00
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: obliczenie prawdopodobieństwa w modelu klasycznym
+  statement: Rzucamy jeden raz symetryczną sześcienną kostką do gry, która na każdej ściance ma inną liczbę
+    oczek — od jednego oczka do sześciu oczek. Zdarzenie A polega na tym, że wypadła liczba oczek podzielna
+    przez 3. Oblicz prawdopodobieństwo zdarzenia A oraz prawdopodobieństwo zdarzenia przeciwnego A'. Zapisz
+    obliczenia.
+  statement_latex: P(A)=\frac{|A|}{|\Omega|},\qquad P(A')=1-P(A)
+  solution: |-
+    Kostka jest symetryczna, więc stosujemy model klasyczny. Zbiorem wszystkich zdarzeń elementarnych jest \Omega=\{1,2,3,4,5,6\}, zatem |\Omega|=6.
+    Zdarzeniu A sprzyjają te wyniki, które są podzielne przez 3: A=\{3,6\}, więc |A|=2.
+    Stąd P(A)=\frac{2}{6}=\frac{1}{3}.
+    Zdarzenie przeciwne A' to „wypadła liczba oczek niepodzielna przez 3”, czyli A'=\{1,2,4,5\}, |A'|=4, więc P(A')=\frac{4}{6}=\frac{2}{3}. Zgadza się to ze wzorem P(A')=1-\frac{1}{3}=\frac{2}{3}.
+  solution_steps:
+  - 'Ustalamy zbiór wszystkich zdarzeń elementarnych: \Omega=\{1,2,3,4,5,6\}, |\Omega|=6.'
+  - 'Wypisujemy zdarzenia sprzyjające: A=\{3,6\}, |A|=2.'
+  - Obliczamy P(A)=\frac{2}{6}=\frac{1}{3}.
+  - Wyznaczamy zdarzenie przeciwne A'=\{1,2,4,5\}, |A'|=4, więc P(A')=\frac{4}{6}=\frac{2}{3}.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: P(A)
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{1}{3}
+    - name: P(A')
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{2}{3}
+  checks:
+  - kind: evaluate
+    expr: \frac{2}{6}
+    part: P(A)
+  - kind: evaluate
+    expr: 1-\frac{2}{6}
+    part: P(A')
+  skills:
+  - wyznaczanie zbioru \Omega
+  - zliczanie zdarzeń sprzyjających
+  - wzór P(A)=|A|/|\Omega|
+  - zdarzenie przeciwne
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [P(A)] SymPy solved it fresh: 0.3333333333333333 vs 0.3333333333333333
+      (tol 1e-09) ; [P(A'')] SymPy solved it fresh: 0.6666666666666666 vs 0.6666666666666666 (tol 1e-09)'
+- id: g-th-01
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: obliczenie prawdopodobieństwa w modelu klasycznym
+  statement: W pudełku znajduje się 5 kul zielonych, 7 kul niebieskich i 8 kul czerwonych. Kule różnią
+    się wyłącznie kolorem. Z pudełka losujemy jedną kulę. Oblicz prawdopodobieństwo zdarzenia polegającego
+    na tym, że wylosowana kula jest niebieska. Zapisz obliczenia.
+  statement_latex: P(A)=\frac{7}{5+7+8}
+  solution: |-
+    Wszystkich kul jest 5+7+8=20, a losowanie odbywa się na chybił trafił, więc każda kula może być wylosowana z takim samym prawdopodobieństwem: |\Omega|=20.
+    Zdarzeniu A („wylosowano kulę niebieską”) sprzyja 7 wyników, czyli |A|=7.
+    Zatem P(A)=\frac{7}{20}=0{,}35.
+    Wynik należy do przedziału [0,1], więc jest sensowny.
+  solution_steps:
+  - 'Obliczamy liczbę wszystkich kul: |\Omega|=5+7+8=20.'
+  - 'Liczba kul niebieskich: |A|=7.'
+  - P(A)=\frac{7}{20}=0{,}35.
+  answer:
+    kind: SYMBOLIC
+    latex: \frac{7}{20}
+  checks:
+  - kind: evaluate
+    expr: \frac{7}{5+7+8}
+  skills:
+  - model klasyczny
+  - zliczanie zdarzeń sprzyjających
+  - skracanie ułamka
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 0.35 vs 0.35 (tol 1e-09)'
+- id: g-th-02
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: obliczenie prawdopodobieństwa w modelu klasycznym
+  statement: Ze zbioru liczb \left\{11,\ 12,\ 13,\ \ldots,\ 30\right\} losujemy jedną liczbę. Wylosowanie
+    każdej liczby z tego zbioru jest jednakowo prawdopodobne. Oblicz prawdopodobieństwo zdarzenia A polegającego
+    na tym, że wylosowana liczba jest podzielna przez 4. Zapisz obliczenia.
+  statement_latex: P(A)=\frac{|A|}{|\Omega|}=\frac{5}{20}
+  solution: |-
+    Zbiór \Omega składa się z kolejnych liczb naturalnych od 11 do 30, więc |\Omega|=30-11+1=20.
+    Liczby z tego zbioru podzielne przez 4 to: 12, 16, 20, 24, 28. Zatem |A|=5.
+    Stąd P(A)=\frac{5}{20}=\frac{1}{4}.
+  solution_steps:
+  - Obliczamy |\Omega|=30-11+1=20.
+  - 'Wypisujemy liczby sprzyjające: 12, 16, 20, 24, 28, więc |A|=5.'
+  - P(A)=\frac{5}{20}=\frac{1}{4}.
+  answer:
+    kind: SYMBOLIC
+    latex: \frac{1}{4}
+  checks:
+  - kind: evaluate
+    expr: \frac{5}{30-11+1}
+  skills:
+  - zliczanie elementów zbioru liczb
+  - zliczanie wielokrotności
+  - wzór P(A)=|A|/|\Omega|
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 0.25 vs 0.25 (tol 1e-09)'
+- id: g-ex-03
+  slot: EXERCISE
+  ramp_index: 1
+  difficulty: 2
+  exercise_type: prawdopodobieństwo przy dwóch rzutach kostką
+  statement: Doświadczenie losowe polega na dwukrotnym rzucie symetryczną sześcienną kostką do gry, która
+    na każdej ściance ma inną liczbę oczek — od jednego oczka do sześciu oczek. Wynik zapisujemy jako
+    parę uporządkowaną (a, b), gdzie a to liczba oczek w pierwszym rzucie, a b — w drugim. Oblicz prawdopodobieństwo
+    zdarzenia A polegającego na tym, że suma wyrzuconych oczek jest równa 9, oraz prawdopodobieństwo zdarzenia
+    B polegającego na tym, że iloczyn wyrzuconych oczek jest liczbą nieparzystą. Zapisz obliczenia.
+  statement_latex: '|\Omega|=6\cdot 6=36,\qquad P(A)=\frac{4}{36},\qquad P(B)=\frac{9}{36}'
+  solution: |-
+    Wyniki zapisujemy jako pary uporządkowane, dzięki czemu wszystkie zdarzenia elementarne są jednakowo prawdopodobne. Z reguły mnożenia |\Omega|=6\cdot 6=36.
+    Zdarzenie A: a+b=9. Sprzyjające pary to (3,6), (4,5), (5,4), (6,3) — zatem |A|=4 i P(A)=\frac{4}{36}=\frac{1}{9}.
+    Zdarzenie B: iloczyn a\cdot b jest nieparzysty dokładnie wtedy, gdy obie liczby są nieparzyste, czyli a\in\{1,3,5\} i b\in\{1,3,5\}. Z reguły mnożenia |B|=3\cdot 3=9, więc P(B)=\frac{9}{36}=\frac{1}{4}.
+    Oba wyniki należą do przedziału [0,1].
+  solution_steps:
+  - 'Przyjmujemy \Omega jako zbiór par uporządkowanych: |\Omega|=6\cdot 6=36.'
+  - 'Wypisujemy pary o sumie 9: (3,6), (4,5), (5,4), (6,3), więc |A|=4.'
+  - P(A)=\frac{4}{36}=\frac{1}{9}.
+  - 'Iloczyn jest nieparzysty, gdy obie liczby są nieparzyste: |B|=3\cdot 3=9.'
+  - P(B)=\frac{9}{36}=\frac{1}{4}.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: P(A)
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{1}{9}
+    - name: P(B)
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{1}{4}
+  checks:
+  - kind: evaluate
+    expr: \frac{4}{6\cdot 6}
+    part: P(A)
+  - kind: evaluate
+    expr: \frac{3\cdot 3}{6\cdot 6}
+    part: P(B)
+  skills:
+  - tabela wyników 6x6
+  - reguła mnożenia
+  - zliczanie par o zadanej sumie
+  - zliczanie par o zadanym iloczynie
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [P(A)] SymPy solved it fresh: 0.1111111111111111 vs 0.1111111111111111
+      (tol 1e-09) ; [P(B)] SymPy solved it fresh: 0.25 vs 0.25 (tol 1e-09)'
+- id: g-ex-04
+  slot: EXERCISE
+  ramp_index: 2
+  difficulty: 3
+  exercise_type: losowanie ze zwracaniem, tworzenie liczby dwucyfrowej
+  statement: Dany jest zbiór cyfr C = \left\{1,\ 2,\ 3,\ 4,\ 5\right\}. Ze zbioru C losujemy ze zwracaniem
+    kolejno dwa razy po jednej cyfrze, a następnie tworzymy liczbę dwucyfrową w ten sposób, że cyfra wylosowana
+    jako pierwsza jest cyfrą dziesiątek, a cyfra wylosowana jako druga — cyfrą jedności tej liczby. Oblicz
+    prawdopodobieństwo zdarzenia A polegającego na tym, że otrzymana liczba dwucyfrowa jest podzielna
+    przez 4, oraz prawdopodobieństwo zdarzenia B polegającego na tym, że obie cyfry otrzymanej liczby
+    są różne. Zapisz obliczenia.
+  statement_latex: '|\Omega|=5\cdot 5=25,\qquad P(A)=\frac{5}{25},\qquad P(B)=\frac{20}{25}'
+  solution: |-
+    Losujemy ze zwracaniem, wyniki zapisujemy w kolejności losowania, więc z reguły mnożenia |\Omega|=5\cdot 5=25 i każdy wynik jest jednakowo prawdopodobny.
+    Zdarzenie A: liczba dwucyfrowa podzielna przez 4. Sprawdzamy kolejno liczby o cyfrach ze zbioru C: 12, 24, 32, 44, 52 — i tylko te są podzielne przez 4. Zatem |A|=5 oraz P(A)=\frac{5}{25}=\frac{1}{5}.
+    Zdarzenie B: obie cyfry różne. Zdarzeniem przeciwnym B' jest „obie cyfry jednakowe”: 11, 22, 33, 44, 55, czyli |B'|=5. Stąd |B|=25-5=20 i P(B)=\frac{20}{25}=\frac{4}{5}.
+  solution_steps:
+  - Z reguły mnożenia |\Omega|=5\cdot 5=25.
+  - 'Wypisujemy liczby podzielne przez 4 o obu cyfrach ze zbioru C: 12, 24, 32, 44, 52, więc |A|=5.'
+  - P(A)=\frac{5}{25}=\frac{1}{5}.
+  - 'Zdarzenie przeciwne do B to „obie cyfry jednakowe”: 11, 22, 33, 44, 55, czyli |B''|=5.'
+  - P(B)=1-\frac{5}{25}=\frac{20}{25}=\frac{4}{5}.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: P(A)
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{1}{5}
+    - name: P(B)
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{4}{5}
+  checks:
+  - kind: evaluate
+    expr: \frac{5}{5\cdot 5}
+    part: P(A)
+  - kind: evaluate
+    expr: 1-\frac{5}{5\cdot 5}
+    part: P(B)
+  skills:
+  - reguła mnożenia
+  - losowanie ze zwracaniem
+  - cecha podzielności przez 4
+  - zdarzenie przeciwne
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [P(A)] SymPy solved it fresh: 0.2 vs 0.2 (tol 1e-09) ; [P(B)]
+      SymPy solved it fresh: 0.8 vs 0.8 (tol 1e-09)'
+- id: g-ex-05
+  slot: EXERCISE
+  ramp_index: 3
+  difficulty: 4
+  exercise_type: losowanie dwóch kul bez zwracania
+  statement: 'W urnie znajduje się 12 kul: 4 kule białe, 5 kul czarnych i 3 kule zielone. Kule różnią
+    się wyłącznie kolorem. Z urny losujemy jednocześnie dwie kule. Oblicz prawdopodobieństwo zdarzenia
+    A polegającego na tym, że obie wylosowane kule są tego samego koloru, oraz prawdopodobieństwo zdarzenia
+    B polegającego na tym, że wśród wylosowanych kul jest co najmniej jedna kula zielona. Zapisz obliczenia.'
+  statement_latex: '|\Omega|=\frac{12\cdot 11}{2}=66,\qquad P(A)=\frac{19}{66},\qquad P(B)=1-\frac{\frac{9\cdot
+    8}{2}}{66}'
+  solution: |-
+    Losujemy jednocześnie, więc kolejność nie jest istotna: \Omega to zbiór dwuelementowych podzbiorów zbioru 12 kul, czyli |\Omega|=\frac{12\cdot 11}{2}=66.
+    Zdarzenie A: obie kule tego samego koloru. Par białych jest \frac{4\cdot 3}{2}=6, par czarnych \frac{5\cdot 4}{2}=10, par zielonych \frac{3\cdot 2}{2}=3. Te przypadki wykluczają się, więc |A|=6+10+3=19 oraz P(A)=\frac{19}{66}.
+    Zdarzenie B: co najmniej jedna kula zielona. Wygodnie użyć zdarzenia przeciwnego B': „ani jedna kula nie jest zielona”, czyli obie kule wybrano spośród 9 kul niezielonych: |B'|=\frac{9\cdot 8}{2}=36, więc P(B')=\frac{36}{66}=\frac{6}{11}.
+    Stąd P(B)=1-\frac{6}{11}=\frac{5}{11}.
+    Oba wyniki należą do przedziału [0,1].
+  solution_steps:
+  - 'Przyjmujemy model bez kolejności: |\Omega|=\frac{12\cdot 11}{2}=66.'
+  - 'Liczymy pary jednokolorowe: \frac{4\cdot 3}{2}+\frac{5\cdot 4}{2}+\frac{3\cdot 2}{2}=6+10+3=19.'
+  - P(A)=\frac{19}{66}.
+  - 'Zdarzenie przeciwne do B: obie kule spośród 9 niezielonych, |B''|=\frac{9\cdot 8}{2}=36.'
+  - P(B)=1-\frac{36}{66}=\frac{5}{11}.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: P(A)
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{19}{66}
+    - name: P(B)
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{5}{11}
+  checks:
+  - kind: evaluate
+    expr: \frac{\frac{4\cdot 3}{2}+\frac{5\cdot 4}{2}+\frac{3\cdot 2}{2}}{\frac{12\cdot 11}{2}}
+    part: P(A)
+  - kind: evaluate
+    expr: 1-\frac{\frac{9\cdot 8}{2}}{\frac{12\cdot 11}{2}}
+    part: P(B)
+  skills:
+  - liczba par bez uwzględniania kolejności
+  - zdarzenia wykluczające się
+  - zdarzenie przeciwne 'co najmniej jeden'
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [P(A)] SymPy solved it fresh: 0.2878787878787879 vs 0.2878787878787879
+      (tol 1e-09) ; [P(B)] SymPy solved it fresh: 0.45454545454545453 vs 0.45454545454545453 (tol 1e-09)'
+- id: g-ex-t00
+  slot: EXERCISE
+  ramp_index: 6
+  difficulty: 3
+  exercise_type: obliczanie prawdopodobieństwa (losowanie bez zwracania, zdarzenie przeciwne)
+  statement: 'W urnie znajduje się 12 kul: 4 kule białe, 3 kule zielone i 5 kul czerwonych. Losujemy jednocześnie
+    dwie kule. Oblicz prawdopodobieństwo zdarzenia A polegającego na tym, że co najmniej jedna z wylosowanych
+    kul jest czerwona, oraz prawdopodobieństwo zdarzenia B polegającego na tym, że obie wylosowane kule
+    są tego samego koloru. Zapisz obliczenia.'
+  statement_latex: \left|\Omega\right|=\frac{12\cdot 11}{2}=66,\qquad P\left(A\right)=1-\frac{\frac{7\cdot
+    6}{2}}{\frac{12\cdot 11}{2}},\qquad P\left(B\right)=\frac{\frac{4\cdot 3}{2}+\frac{3\cdot 2}{2}+\frac{5\cdot
+    4}{2}}{\frac{12\cdot 11}{2}}
+  solution: |-
+    Losujemy jednocześnie dwie kule, więc kolejność jest nieistotna: zdarzeniem elementarnym jest dwuelementowy podzbiór zbioru 12 kul. Stąd \left|\Omega\right|=\frac{12\cdot 11}{2}=66 i wszystkie takie pary są jednakowo prawdopodobne.
+
+    Zdarzenie A: co najmniej jedna kula czerwona. Wygodniej policzyć zdarzenie przeciwne A': żadna z wylosowanych kul nie jest czerwona, czyli obie pochodzą spośród 4+3=7 kul niecerwonych. Zatem \left|A'\right|=\frac{7\cdot 6}{2}=21 oraz P\left(A'\right)=\frac{21}{66}=\frac{7}{22}. Stąd P\left(A\right)=1-\frac{7}{22}=\frac{15}{22}.
+
+    Zdarzenie B: obie kule tego samego koloru. Liczymy w tym samym modelu (bez kolejności): obie białe — \frac{4\cdot 3}{2}=6 par, obie zielone — \frac{3\cdot 2}{2}=3 pary, obie czerwone — \frac{5\cdot 4}{2}=10 par. Te przypadki wykluczają się, więc \left|B\right|=6+3+10=19 i P\left(B\right)=\frac{19}{66}.
+
+    Kontrola: obie wartości należą do przedziału \left[0,1\right].
+  solution_steps:
+  - 'Losowanie jednoczesne — model bez kolejności: \left|\Omega\right|=\frac{12\cdot 11}{2}=66.'
+  - 'Zdarzenie przeciwne A'': obie kule spośród 7 kul niecerwonych, \left|A''\right|=\frac{7\cdot 6}{2}=21.'
+  - P\left(A\right)=1-\frac{21}{66}=\frac{15}{22}.
+  - 'Zdarzenie B: \left|B\right|=\frac{4\cdot 3}{2}+\frac{3\cdot 2}{2}+\frac{5\cdot 4}{2}=6+3+10=19.'
+  - P\left(B\right)=\frac{19}{66}.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: P_A
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{15}{22}
+    - name: P_B
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{19}{66}
+  checks:
+  - kind: evaluate
+    expr: 1-\frac{\frac{7\cdot 6}{2}}{\frac{12\cdot 11}{2}}
+    part: P_A
+  - kind: evaluate
+    expr: \frac{\frac{4\cdot 3}{2}+\frac{3\cdot 2}{2}+\frac{5\cdot 4}{2}}{\frac{12\cdot 11}{2}}
+    part: P_B
+  skills:
+  - model klasyczny
+  - losowanie dwóch elementów bez kolejności
+  - zdarzenie przeciwne
+  - zliczanie regułą mnożenia
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [P_A] SymPy solved it fresh: 0.6818181818181818 vs 0.6818181818181818
+      (tol 1e-09) ; [P_B] SymPy solved it fresh: 0.2878787878787879 vs 0.2878787878787879 (tol 1e-09)'
+- id: g-ex-t01
+  slot: EXERCISE
+  ramp_index: 7
+  difficulty: 4
+  exercise_type: obliczanie prawdopodobieństwa (dwa rzuty kostką, podzielność i zdarzenie przeciwne)
+  statement: Rzucamy dwukrotnie symetryczną sześcienną kostką do gry, która na każdej ściance ma inną
+    liczbę oczek — od jednego oczka do sześciu oczek. Oblicz prawdopodobieństwo zdarzenia A polegającego
+    na tym, że iloczyn liczb wyrzuconych oczek jest podzielny przez 6, oraz prawdopodobieństwo zdarzenia
+    B polegającego na tym, że co najmniej w jednym rzucie wypadło 5 oczek. Zapisz obliczenia.
+  statement_latex: \left|\Omega\right|=6\cdot 6=36,\qquad P\left(A\right)=\frac{1+2+3+2+1+6}{6\cdot 6},\qquad
+    P\left(B\right)=1-\frac{5\cdot 5}{6\cdot 6}
+  solution: |-
+    Wynik doświadczenia zapisujemy jako parę uporządkowaną \left(a,b\right), gdzie a to liczba oczek w pierwszym rzucie, b — w drugim. Wszystkie takie pary są jednakowo prawdopodobne, więc \left|\Omega\right|=6\cdot 6=36.
+
+    Zdarzenie A: 6\mid a\cdot b. Przeglądamy wiersze tabeli 6\times 6:
+    dla a=1 sprzyja tylko b=6 — 1 para;
+    dla a=2: b\in\left\{3,6\right\} — 2 pary;
+    dla a=3: b\in\left\{2,4,6\right\} — 3 pary;
+    dla a=4: b\in\left\{3,6\right\} — 2 pary;
+    dla a=5: b=6 — 1 para;
+    dla a=6: dowolne b — 6 par.
+    Zatem \left|A\right|=1+2+3+2+1+6=15 oraz P\left(A\right)=\frac{15}{36}=\frac{5}{12}.
+
+    Zdarzenie B: co najmniej raz wypadło 5 oczek. Zdarzenie przeciwne B' to: ani razu nie wypadło 5 oczek, czyli w każdym rzucie jeden z pięciu pozostałych wyników: \left|B'\right|=5\cdot 5=25, więc P\left(B'\right)=\frac{25}{36}. Stąd P\left(B\right)=1-\frac{25}{36}=\frac{11}{36}.
+
+    Kontrola: \frac{5}{12}\in\left[0,1\right] i \frac{11}{36}\in\left[0,1\right].
+  solution_steps:
+  - 'Przyjmujemy Ω jako zbiór par uporządkowanych: \left|\Omega\right|=6\cdot 6=36.'
+  - 'Zliczamy pary o iloczynie podzielnym przez 6 wierszami: 1+2+3+2+1+6=15.'
+  - P\left(A\right)=\frac{15}{36}=\frac{5}{12}.
+  - 'Formułujemy zdarzenie przeciwne do B: ani razu 5 oczek, \left|B''\right|=5\cdot 5=25.'
+  - P\left(B\right)=1-\frac{25}{36}=\frac{11}{36}.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: P_A
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{5}{12}
+    - name: P_B
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{11}{36}
+  checks:
+  - kind: evaluate
+    expr: \frac{1+2+3+2+1+6}{6\cdot 6}
+    part: P_A
+  - kind: evaluate
+    expr: 1-\frac{5\cdot 5}{6\cdot 6}
+    part: P_B
+  skills:
+  - tabela wyników dla dwóch rzutów
+  - zliczanie zdarzeń sprzyjających
+  - podzielność iloczynu
+  - metoda zdarzenia przeciwnego
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [P_A] SymPy solved it fresh: 0.4166666666666667 vs 0.4166666666666667
+      (tol 1e-09) ; [P_B] SymPy solved it fresh: 0.3055555555555556 vs 0.3055555555555556 (tol 1e-09)'
+- id: g-cm-06
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: analiza błędu — dobór zbioru \Omega
+  statement: 'Rzucamy dwa razy symetryczną sześcienną kostką do gry, która na każdej ściance ma inną liczbę
+    oczek — od jednego oczka do sześciu oczek. Uczeń tak obliczył prawdopodobieństwo zdarzenia A polegającego
+    na tym, że suma wyrzuconych oczek jest równa 5: „Możliwe sumy oczek to 2, 3, 4, …, 12, czyli jest
+    11 wyników, a suma równa 5 to jeden z nich, więc P(A)=\frac{1}{11}”. Wskaż błąd w tym rozumowaniu
+    i oblicz poprawne prawdopodobieństwo zdarzenia A. Zapisz obliczenia.'
+  statement_latex: P(A)=\frac{4}{6\cdot 6}
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń przyjął \Omega=\{2,3,4,\ldots,12\}, czyli |\Omega|=11, i otrzymał P(A)=\frac{1}{11}.
+    NA CZYM POLEGA BŁĄD: w modelu klasycznym wszystkie zdarzenia elementarne muszą być jednakowo prawdopodobne, a sumy oczek takie nie są — suma 7 powstaje na 6 sposobów, a suma 2 tylko na jeden. Na zbiorze sum model klasyczny nie obowiązuje, więc wzoru P(A)=\frac{|A|}{|\Omega|} nie wolno tam stosować.
+    POPRAWNE ROZWIĄZANIE: bierzemy \Omega jako zbiór par uporządkowanych (a,b), gdzie a i b to wyniki kolejnych rzutów. Wtedy wszystkie wyniki są jednakowo prawdopodobne i |\Omega|=6\cdot 6=36.
+    Sumę 5 dają pary: (1,4), (2,3), (3,2), (4,1), więc |A|=4.
+    Zatem P(A)=\frac{4}{36}=\frac{1}{9}.
+  solution_steps:
+  - 'Błąd: przyjęcie \Omega jako zbioru możliwych sum, w którym wyniki nie są jednakowo prawdopodobne
+    (fałszywy wynik \frac{1}{11}).'
+  - 'Poprawny model: pary uporządkowane, |\Omega|=6\cdot 6=36.'
+  - 'Wypisujemy pary o sumie 5: (1,4), (2,3), (3,2), (4,1), czyli |A|=4.'
+  - P(A)=\frac{4}{36}=\frac{1}{9}.
+  answer:
+    kind: SYMBOLIC
+    latex: \frac{1}{9}
+  checks:
+  - kind: evaluate
+    expr: \frac{4}{6\cdot 6}
+  skills:
+  - warunek jednakowego prawdopodobieństwa
+  - opis \Omega parami uporządkowanymi
+  - zliczanie par o zadanej sumie
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 0.1111111111111111 vs 0.1111111111111111 (tol 1e-09)'
+- id: g-cm-07
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: analiza błędu — spójność modelu
+  statement: 'W urnie jest 6 kul białych i 4 kule czerwone, różniące się wyłącznie kolorem. Losujemy jednocześnie
+    dwie kule. Uczeń zapisał: „Wszystkich wyników jest |\Omega|=10\cdot 9=90, a wyników sprzyjających
+    wylosowaniu kul różnych kolorów jest 6\cdot 4=24, więc P=\frac{24}{90}=\frac{4}{15}”. Wskaż błąd w
+    tym rozumowaniu i oblicz poprawne prawdopodobieństwo wylosowania dwóch kul różnych kolorów. Zapisz
+    obliczenia.'
+  statement_latex: P(A)=\frac{6\cdot 4}{\frac{10\cdot 9}{2}}
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń policzył mianownik w modelu z kolejnością (|\Omega|=10\cdot 9=90, bo są to pary uporządkowane), a licznik w modelu bez kolejności (6\cdot 4=24 pary nieuporządkowane). Otrzymał \frac{24}{90}=\frac{4}{15}.
+    NA CZYM POLEGA BŁĄD: licznik i mianownik muszą być policzone w tym samym modelu.
+    POPRAWNE ROZWIĄZANIE (bez kolejności): |\Omega|=\frac{10\cdot 9}{2}=45, a par „biała i czerwona” jest 6\cdot 4=24, więc P(A)=\frac{24}{45}=\frac{8}{15}.
+    KONTROLA (z kolejnością): |\Omega|=10\cdot 9=90, sprzyjających jest 6\cdot 4+4\cdot 6=48, więc P(A)=\frac{48}{90}=\frac{8}{15} — ten sam wynik.
+  solution_steps:
+  - 'Błąd: mianownik policzony z kolejnością (90), licznik bez kolejności (24) — stąd fałszywy wynik \frac{4}{15}.'
+  - 'Model bez kolejności: |\Omega|=\frac{10\cdot 9}{2}=45, |A|=6\cdot 4=24.'
+  - P(A)=\frac{24}{45}=\frac{8}{15}.
+  - 'Kontrola w modelu z kolejnością: \frac{6\cdot 4+4\cdot 6}{10\cdot 9}=\frac{48}{90}=\frac{8}{15}.'
+  answer:
+    kind: SYMBOLIC
+    latex: \frac{8}{15}
+  checks:
+  - kind: evaluate
+    expr: \frac{6\cdot 4}{\frac{10\cdot 9}{2}}
+  skills:
+  - model z kolejnością i bez kolejności
+  - liczba par \frac{n(n-1)}{2}
+  - kontrola wyniku alternatywnym modelem
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 0.5333333333333333 vs 0.5333333333333333 (tol 1e-09)'
+- id: g-cm-08
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: analiza błędu — losowanie bez zwracania
+  statement: 'Ze zbioru liczb \left\{1,\ 2,\ 3,\ 4,\ 5,\ 6,\ 7\right\} losujemy kolejno dwa razy po jednej
+    liczbie, bez zwracania, i zapisujemy je w kolejności losowania. Uczeń obliczył prawdopodobieństwo
+    zdarzenia A polegającego na tym, że obie wylosowane liczby są parzyste, tak: „|\Omega|=7\cdot 7=49,
+    liczb parzystych jest 3, więc |A|=3\cdot 3=9 i P(A)=\frac{9}{49}”. Wskaż błąd w tym rozumowaniu i
+    oblicz poprawne prawdopodobieństwo zdarzenia A. Zapisz obliczenia.'
+  statement_latex: P(A)=\frac{3\cdot 2}{7\cdot 6}
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń policzył wyniki tak, jakby losowanie było ze zwracaniem: |\Omega|=7\cdot 7=49 i |A|=3\cdot 3=9, otrzymując P(A)=\frac{9}{49}.
+    NA CZYM POLEGA BŁĄD: losujemy bez zwracania, więc w drugim losowaniu do wyboru jest już tylko 6 liczb (a wśród liczb parzystych — tylko 2, bo jedna została już wylosowana).
+    POPRAWNE ROZWIĄZANIE: |\Omega|=7\cdot 6=42. Liczby parzyste w zbiorze to 2, 4, 6 — jest ich 3, więc |A|=3\cdot 2=6.
+    Zatem P(A)=\frac{6}{42}=\frac{1}{7}.
+  solution_steps:
+  - 'Błąd: potraktowanie losowania bez zwracania jak losowania ze zwracaniem (fałszywy wynik \frac{9}{49}).'
+  - 'Poprawnie: |\Omega|=7\cdot 6=42.'
+  - 'Liczby parzyste: 2, 4, 6, więc |A|=3\cdot 2=6.'
+  - P(A)=\frac{6}{42}=\frac{1}{7}.
+  answer:
+    kind: SYMBOLIC
+    latex: \frac{1}{7}
+  checks:
+  - kind: evaluate
+    expr: \frac{3\cdot 2}{7\cdot 6}
+  skills:
+  - losowanie bez zwracania
+  - reguła mnożenia
+  - wzór P(A)=|A|/|\Omega|
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 0.14285714285714285 vs 0.14285714285714285 (tol 1e-09)'
+- id: g-cm-09
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: analiza błędu — zdarzenie przeciwne
+  statement: 'Rzucamy cztery razy symetryczną monetą. Uczeń obliczał prawdopodobieństwo zdarzenia A polegającego
+    na tym, że wypadł co najmniej jeden orzeł, i zapisał: „Zdarzeniem przeciwnym do A jest zdarzenie «wypadł
+    co najwyżej jeden orzeł», a takich wyników jest 1+4=5, więc P(A)=1-\frac{5}{16}=\frac{11}{16}”. Wskaż
+    błąd w tym rozumowaniu i oblicz poprawne prawdopodobieństwo zdarzenia A. Zapisz obliczenia.'
+  statement_latex: P(A)=1-\frac{1}{2^{4}}
+  solution: |-
+    Wynik doświadczenia to czwórka (x_1,x_2,x_3,x_4), gdzie każde x_i\in\{O,R\}. Z reguły mnożenia |\Omega|=2\cdot 2\cdot 2\cdot 2=16.
+    BŁĘDNE ROZUMOWANIE: uczeń przyjął, że zdarzeniem przeciwnym do „co najmniej jeden orzeł” jest „co najwyżej jeden orzeł”. Otrzymał P(A)=1-\frac{5}{16}=\frac{11}{16}.
+    NA CZYM POLEGA BŁĄD: zdarzenia A i A' muszą być rozłączne i razem dawać całe \Omega, a wynik z dokładnie jednym orłem należy do obu tych zbiorów — więc to nie są zdarzenia przeciwne. Negacją „co najmniej jeden” jest „ani jeden”.
+    POPRAWNE ROZWIĄZANIE: A' to „nie wypadł ani jeden orzeł”, czyli same reszki: A'=\{(R,R,R,R)\}, |A'|=1, więc P(A')=\frac{1}{16}.
+    Stąd P(A)=1-\frac{1}{16}=\frac{15}{16}.
+  solution_steps:
+  - '|\Omega|=2^{4}=16.'
+  - 'Błąd: zdarzeniem przeciwnym do „co najmniej jeden orzeł” nie jest „co najwyżej jeden orzeł” (fałszywy
+    wynik \frac{11}{16}).'
+  - 'Poprawna negacja: „ani jeden orzeł”, czyli same reszki: |A''|=1.'
+  - P(A)=1-\frac{1}{16}=\frac{15}{16}.
+  answer:
+    kind: SYMBOLIC
+    latex: \frac{15}{16}
+  checks:
+  - kind: evaluate
+    expr: 1-\frac{1}{2\cdot 2\cdot 2\cdot 2}
+  skills:
+  - negacja zdarzenia 'co najmniej'
+  - wzór P(A')=1-P(A)
+  - reguła mnożenia dla rzutów monetą
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 0.9375 vs 0.9375 (tol 1e-09)'
+- id: g-cm-10
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: analiza błędu — suma zdarzeń
+  statement: 'Ze zbioru liczb \left\{1,\ 2,\ 3,\ \ldots,\ 50\right\} losujemy jedną liczbę. Uczeń obliczał
+    prawdopodobieństwo zdarzenia polegającego na tym, że wylosowana liczba jest podzielna przez 3 lub
+    przez 5, i zapisał: „Podzielnych przez 3 jest 16, podzielnych przez 5 jest 10, więc P=\frac{16}{50}+\frac{10}{50}=\frac{26}{50}=\frac{13}{25}”.
+    Wskaż błąd w tym rozumowaniu i oblicz poprawne prawdopodobieństwo. Zapisz obliczenia.'
+  statement_latex: P\left(A\cup B\right)=\frac{16+10-3}{50}
+  solution: |-
+    |\Omega|=50, każda liczba jest jednakowo prawdopodobna.
+    A — liczby podzielne przez 3: 3, 6, …, 48, czyli |A|=16. B — liczby podzielne przez 5: 5, 10, …, 50, czyli |B|=10.
+    BŁĘDNE ROZUMOWANIE: uczeń zastosował wzór P(A\cup B)=P(A)+P(B), który obowiązuje tylko dla zdarzeń wykluczających się. Otrzymał \frac{13}{25}.
+    NA CZYM POLEGA BŁĄD: zdarzenia A i B nie wykluczają się — liczby podzielne jednocześnie przez 3 i przez 5, czyli przez 15 (15, 30, 45), zostały policzone dwa razy.
+    POPRAWNE ROZWIĄZANIE: |A\cap B|=3, więc z zasady włączeń i wyłączeń |A\cup B|=16+10-3=23.
+    Zatem P(A\cup B)=\frac{23}{50}=0{,}46.
+  solution_steps:
+  - '|\Omega|=50, |A|=16 (podzielne przez 3), |B|=10 (podzielne przez 5).'
+  - 'Błąd: dodanie prawdopodobieństw zdarzeń, które nie wykluczają się (fałszywy wynik \frac{13}{25}).'
+  - 'Liczby podzielne przez 15: 15, 30, 45, więc |A\cap B|=3.'
+  - '|A\cup B|=16+10-3=23, zatem P(A\cup B)=\frac{23}{50}=0{,}46.'
+  answer:
+    kind: SYMBOLIC
+    latex: \frac{23}{50}
+  checks:
+  - kind: evaluate
+    expr: \frac{16+10-3}{50}
+  skills:
+  - zdarzenia wykluczające się
+  - zasada włączeń i wyłączeń
+  - zliczanie wielokrotności
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 0.46 vs 0.46 (tol 1e-09)'
+- id: g-ch-t02
+  slot: CHALLENGE
+  ramp_index: 0
+  difficulty: 4
+  exercise_type: zadanie odwrotne — wyznaczanie liczby elementów z danego prawdopodobieństwa
+  statement: 'W pudełku znajdują się wyłącznie kule zielone i żółte: kul zielonych jest 5, a kul żółtych
+    nie znamy. Z pudełka losujemy jednocześnie dwie kule. Prawdopodobieństwo zdarzenia polegającego na
+    tym, że obie wylosowane kule są żółte, jest równe \frac{3}{7}. Oblicz, ile kul żółtych znajduje się
+    w pudełku. Zapisz obliczenia.'
+  statement_latex: \frac{\frac{n\cdot\left(n-1\right)}{2}}{\frac{\left(n+5\right)\cdot\left(n+4\right)}{2}}=\frac{3}{7}
+  solution: |-
+    Oznaczmy przez n liczbę kul żółtych, n jest liczbą naturalną i n\ge 2 (musimy móc wylosować dwie kule żółte). Wszystkich kul jest n+5.
+
+    Losujemy jednocześnie dwie kule, więc kolejność jest nieistotna:
+    \left|\Omega\right|=\frac{\left(n+5\right)\cdot\left(n+4\right)}{2}.
+    Zdarzeniu A (obie kule żółte) sprzyja \left|A\right|=\frac{n\cdot\left(n-1\right)}{2} par.
+
+    Z warunku zadania:
+    \frac{n\cdot\left(n-1\right)}{\left(n+5\right)\cdot\left(n+4\right)}=\frac{3}{7}.
+    Stąd 7\cdot n\cdot\left(n-1\right)=3\cdot\left(n+5\right)\cdot\left(n+4\right), czyli 7n^{2}-7n=3n^{2}+27n+60, a po uporządkowaniu 4n^{2}-34n-60=0, czyli 2n^{2}-17n-30=0.
+
+    Wyróżnik: \Delta=\left(-17\right)^{2}-4\cdot 2\cdot\left(-30\right)=289+240=529, \sqrt{\Delta}=23.
+    n_{1}=\frac{17-23}{4}=-\frac{3}{2}, n_{2}=\frac{17+23}{4}=10.
+    Liczba kul nie może być ujemna, więc odrzucamy n_{1} i otrzymujemy n=10.
+
+    Sprawdzenie: przy 10 kulach żółtych i 5 zielonych \left|\Omega\right|=\frac{15\cdot 14}{2}=105, \left|A\right|=\frac{10\cdot 9}{2}=45 oraz \frac{45}{105}=\frac{3}{7}. ✓
+  solution_steps:
+  - 'Wprowadzamy niewiadomą: n — liczba kul żółtych, wszystkich kul jest n+5, przy czym n\ge 2.'
+  - 'Model bez kolejności: \left|\Omega\right|=\frac{\left(n+5\right)\left(n+4\right)}{2}, \left|A\right|=\frac{n\left(n-1\right)}{2}.'
+  - Zapisujemy równanie \frac{n\left(n-1\right)}{\left(n+5\right)\left(n+4\right)}=\frac{3}{7}.
+  - Przekształcamy do postaci 2n^{2}-17n-30=0.
+  - \Delta=529, \sqrt{\Delta}=23, n=-\frac{3}{2} lub n=10.
+  - 'Odrzucamy rozwiązanie ujemne; odpowiedź: 10 kul żółtych (sprawdzenie: \frac{45}{105}=\frac{3}{7}).'
+  answer:
+    kind: NUMERIC
+    value: 10.0
+  checks:
+  - kind: evaluate
+    expr: \frac{17+\sqrt{\left(-17\right)^{2}+4\cdot 2\cdot 30}}{2\cdot 2}
+    var: n
+  stated_model:
+    variable: n
+    objective_latex: \frac{n\cdot\left(n-1\right)}{\left(n+5\right)\cdot\left(n+4\right)}=\frac{3}{7}
+    domain_lo: '2'
+    domain_lo_open: false
+    goal: value
+    constraint_used: n jest liczbą naturalną, n\ge 2
+  skills:
+  - model klasyczny
+  - losowanie dwóch elementów bez kolejności
+  - wprowadzenie niewiadomej
+  - równanie kwadratowe
+  - odrzucenie rozwiązania sprzecznego z warunkami zadania
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''n'': ''\\frac{n\\cdot\\left(n-1\\right)}{\\left(n+5\\right)\\cdot\\left(n+4\\right)}=\\frac{3}{7}'')
+      — human review'
+- id: g-ch-t03
+  slot: CHALLENGE
+  ramp_index: 1
+  difficulty: 4
+  exercise_type: prawdopodobieństwo z warunkiem geometrycznym (dwa rzuty kostką)
+  statement: Rzucamy dwukrotnie symetryczną sześcienną kostką do gry, która na każdej ściance ma inną
+    liczbę oczek — od jednego oczka do sześciu oczek. Liczbę oczek otrzymaną w pierwszym rzucie oznaczamy
+    przez a, a liczbę oczek otrzymaną w drugim rzucie oznaczamy przez b. W układzie współrzędnych rozważamy
+    trójkąt o wierzchołkach O=\left(0,0\right), A=\left(a,0\right), B=\left(0,b\right). Oblicz prawdopodobieństwo
+    zdarzenia Z polegającego na tym, że pole tego trójkąta jest większe od 6, oraz prawdopodobieństwo
+    zdarzenia R polegającego na tym, że ten trójkąt jest równoramienny. Zapisz obliczenia.
+  statement_latex: P_{OAB}=\frac{1}{2}\cdot a\cdot b>6\iff a\cdot b>12,\qquad \left|\Omega\right|=6\cdot
+    6=36
+  solution: |-
+    Wynik doświadczenia to para uporządkowana \left(a,b\right), gdzie a,b\in\left\{1,2,3,4,5,6\right\}. Wszystkie pary są jednakowo prawdopodobne, więc \left|\Omega\right|=6\cdot 6=36.
+
+    Punkt A leży na osi Ox, a punkt B na osi Oy, więc trójkąt OAB jest prostokątny, a jego przyprostokątne mają długości a i b. Zatem
+    P_{OAB}=\frac{1}{2}\cdot a\cdot b.
+
+    Zdarzenie Z: \frac{1}{2}\cdot a\cdot b>6, czyli a\cdot b>12 (uwaga: iloczyn równy 12 NIE sprzyja, bo pole ma być większe od 6). Zliczamy pary:
+    a=1, a=2: brak par (największy iloczyn to 12);
+    a=3: \left(3,5\right),\left(3,6\right) — 2 pary;
+    a=4: \left(4,4\right),\left(4,5\right),\left(4,6\right) — 3 pary;
+    a=5: \left(5,3\right),\left(5,4\right),\left(5,5\right),\left(5,6\right) — 4 pary;
+    a=6: \left(6,3\right),\left(6,4\right),\left(6,5\right),\left(6,6\right) — 4 pary.
+    Zatem \left|Z\right|=2+3+4+4=13 oraz P\left(Z\right)=\frac{13}{36}.
+
+    Zdarzenie R: trójkąt OAB jest równoramienny. Przeciwprostokątna AB jest dłuższa od każdej z przyprostokątnych, więc równe mogą być tylko przyprostokątne: a=b. Sprzyjają pary \left(1,1\right),\left(2,2\right),\ldots,\left(6,6\right), czyli \left|R\right|=6 i P\left(R\right)=\frac{6}{36}=\frac{1}{6}.
+  solution_steps:
+  - 'Przyjmujemy Ω jako zbiór par uporządkowanych \left(a,b\right): \left|\Omega\right|=6\cdot 6=36.'
+  - Zauważamy, że trójkąt OAB jest prostokątny o przyprostokątnych a i b, więc P_{OAB}=\frac{1}{2}\cdot
+    a\cdot b.
+  - Warunek P_{OAB}>6 zapisujemy jako a\cdot b>12 (iloczyn równy 12 odrzucamy).
+  - 'Zliczamy sprzyjające pary: 2+3+4+4=13, więc P\left(Z\right)=\frac{13}{36}.'
+  - 'Trójkąt jest równoramienny tylko dla a=b (przeciwprostokątna jest najdłuższa): \left|R\right|=6.'
+  - P\left(R\right)=\frac{6}{36}=\frac{1}{6}.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: P_pole
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{13}{36}
+    - name: P_rownoramienny
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{1}{6}
+  checks:
+  - kind: evaluate
+    expr: \frac{2+3+4+4}{6\cdot 6}
+    part: P_pole
+  - kind: evaluate
+    expr: \frac{6}{6\cdot 6}
+    part: P_rownoramienny
+  stated_model:
+    variable: a
+    objective_latex: P_{OAB}=\frac{1}{2}\cdot a\cdot b
+    domain_lo: '1'
+    domain_hi: '6'
+    domain_lo_open: false
+    domain_hi_open: false
+    goal: value
+    constraint_used: a,b\in\left\{1,2,3,4,5,6\right\}, warunek \frac{1}{2}\cdot a\cdot b>6
+  skills:
+  - dobór modelu Ω
+  - tłumaczenie warunku geometrycznego na warunek na wyniki
+  - pole trójkąta prostokątnego
+  - zliczanie zdarzeń sprzyjających
+  - nierówność ostra a nieostra
+  verification:
+    checkability: STATED_MODEL
+    note: 'stage 1 inconclusive: TypeError: name should be a string, not Token'
+- id: g-ch-t04
+  slot: CHALLENGE
+  ramp_index: 2
+  difficulty: 5
+  exercise_type: zadanie odwrotne dwuczęściowe — skład urny z danego prawdopodobieństwa, następnie prawdopodobieństwo
+    innego zdarzenia
+  statement: |-
+    W pudełku znajdują się wyłącznie kule białe i kule czarne, łącznie 15 kul, przy czym kul białych jest mniej niż kul czarnych. Z pudełka losujemy jednocześnie dwie kule. Prawdopodobieństwo zdarzenia polegającego na tym, że obie wylosowane kule są tego samego koloru, jest równe \frac{7}{15}.
+    a) Wyznacz, ile kul białych i ile kul czarnych znajduje się w tym pudełku.
+    b) Oblicz prawdopodobieństwo zdarzenia C polegającego na tym, że wśród dwóch wylosowanych kul jest co najmniej jedna kula biała.
+    Zapisz obliczenia.
+  statement_latex: \frac{\frac{b\cdot\left(b-1\right)}{2}+\frac{\left(15-b\right)\cdot\left(14-b\right)}{2}}{\frac{15\cdot
+    14}{2}}=\frac{7}{15}
+  solution: |-
+    Niech b oznacza liczbę kul białych; wtedy kul czarnych jest 15-b, a z warunku „białych jest mniej niż czarnych” mamy b<15-b, czyli b\le 7 (b jest liczbą całkowitą, b\ge 0).
+
+    Losujemy jednocześnie dwie kule, więc \left|\Omega\right|=\frac{15\cdot 14}{2}=105.
+    Zdarzeniu S (obie kule tego samego koloru) sprzyja
+    \left|S\right|=\frac{b\cdot\left(b-1\right)}{2}+\frac{\left(15-b\right)\cdot\left(14-b\right)}{2}.
+    Z warunku P\left(S\right)=\frac{7}{15} otrzymujemy \left|S\right|=\frac{7}{15}\cdot 105=49, czyli
+    b\cdot\left(b-1\right)+\left(15-b\right)\cdot\left(14-b\right)=98.
+    Po wymnożeniu: b^{2}-b+210-29b+b^{2}=98, czyli 2b^{2}-30b+112=0, a po podzieleniu przez 2: b^{2}-15b+56=0.
+    \Delta=225-224=1, \sqrt{\Delta}=1, więc b=\frac{15-1}{2}=7 lub b=\frac{15+1}{2}=8.
+    Warunek b\le 7 (kul białych jest mniej niż czarnych) odrzuca b=8. Zatem kul białych jest 7, a kul czarnych 15-7=8.
+
+    b) Zdarzenie C: co najmniej jedna kula biała. Zdarzenie przeciwne C' to: obie kule czarne, \left|C'\right|=\frac{8\cdot 7}{2}=28, więc P\left(C'\right)=\frac{28}{105}=\frac{4}{15}.
+    Stąd P\left(C\right)=1-\frac{4}{15}=\frac{11}{15}.
+
+    Sprawdzenie: \frac{11}{15}\in\left[0,1\right], a przy 7 kulach białych zdarzenie „co najmniej jedna biała” jest częste — wynik jest zgodny z intuicją.
+  solution_steps:
+  - Wprowadzamy niewiadomą b — liczba kul białych; kul czarnych jest 15-b, a warunek b<15-b daje b\le
+    7.
+  - \left|\Omega\right|=\frac{15\cdot 14}{2}=105 (losowanie jednoczesne, bez kolejności).
+  - \left|S\right|=\frac{b\left(b-1\right)}{2}+\frac{\left(15-b\right)\left(14-b\right)}{2} oraz \left|S\right|=\frac{7}{15}\cdot
+    105=49.
+  - 'Rozwiązujemy b^{2}-15b+56=0: \Delta=1, b=7 lub b=8.'
+  - Warunek „białych mniej niż czarnych” wybiera b=7; czarnych jest 8.
+  - 'Zdarzenie przeciwne do C: obie czarne, \left|C''\right|=\frac{8\cdot 7}{2}=28.'
+  - P\left(C\right)=1-\frac{28}{105}=\frac{11}{15}.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: kule_biale
+      answer:
+        kind: NUMERIC
+        value: 7.0
+    - name: kule_czarne
+      answer:
+        kind: NUMERIC
+        value: 8.0
+    - name: P_co_najmniej_jedna_biala
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{11}{15}
+  checks:
+  - kind: evaluate
+    expr: \frac{15-\sqrt{15^{2}-4\cdot 56}}{2}
+    var: b
+    part: kule_biale
+  - kind: evaluate
+    expr: 15-\frac{15-\sqrt{15^{2}-4\cdot 56}}{2}
+    var: b
+    part: kule_czarne
+  - kind: evaluate
+    expr: 1-\frac{\frac{8\cdot 7}{2}}{\frac{15\cdot 14}{2}}
+    part: P_co_najmniej_jedna_biala
+  stated_model:
+    variable: b
+    objective_latex: \frac{\frac{b\cdot\left(b-1\right)}{2}+\frac{\left(15-b\right)\cdot\left(14-b\right)}{2}}{\frac{15\cdot
+      14}{2}}=\frac{7}{15}
+    domain_lo: '0'
+    domain_hi: '7'
+    domain_lo_open: false
+    domain_hi_open: false
+    goal: value
+    constraint_used: b całkowite, b<15-b, czyli b\le 7
+  skills:
+  - wprowadzenie niewiadomej
+  - model klasyczny bez kolejności
+  - równanie kwadratowe
+  - selekcja rozwiązania zgodnego z warunkiem zadania
+  - zdarzenie przeciwne
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''b'': ''\\frac{\\frac{b\\cdot\\left(b-1\\right)}{2}+\\frac{\\left(15-b\\right)\\cdot\\left(14-b\\right)}{2}}{\\frac{15\\cdot
+      14}{2}}=\\frac{7}{15}'') — human review'

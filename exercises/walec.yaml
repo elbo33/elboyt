@@ -1,0 +1,759 @@
+section: walec
+name: Walec
+scope: Volume and surface area of a right cylinder; the axial cross-section; cases where the cylinder
+  is given via an inscribed or circumscribed solid or a rotation.
+requirements:
+- X.5
+counts:
+  total: 16
+  DETERMINISTIC: 9
+  REFERENCE_CALL: 4
+  NOT_MACHINE_CHECKABLE: 3
+exercises:
+- id: g-th-00
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: obliczenie objętości z danych podstawowych
+  statement: Walec ma promień podstawy r = 4 i wysokość H = 7. Oblicz objętość tego walca. Wynik podaj
+    w postaci dokładnej (z liczbą \pi).
+  statement_latex: V = \pi \cdot 4^2 \cdot 7
+  solution: |-
+    Objętość walca obliczamy ze wzoru V = \pi r^2 H, czyli „pole podstawy razy wysokość”.
+    Pole podstawy: P_p = \pi r^2 = \pi \cdot 4^2 = 16\pi.
+    Stąd V = 16\pi \cdot 7 = 112\pi.
+    Odp. V = 112\pi (w przybliżeniu 351{,}86).
+  solution_steps:
+  - 'Zapisz wzór na objętość walca: V = \pi r^2 H.'
+  - 'Oblicz pole podstawy: P_p = \pi \cdot 4^2 = 16\pi.'
+  - 'Pomnóż pole podstawy przez wysokość: V = 16\pi \cdot 7 = 112\pi.'
+  answer:
+    kind: SYMBOLIC
+    latex: 112\pi
+  checks:
+  - kind: evaluate
+    expr: \pi \cdot 4^2 \cdot 7
+    var: r
+  skills:
+  - wzór na objętość walca
+  - podstawianie danych
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 351.85837720205683 vs 351.85837720205683 (tol 1e-09)'
+- id: g-th-01
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: pole powierzchni całkowitej, dana średnica
+  statement: Średnica podstawy walca jest równa 10, a wysokość tego walca jest równa 6. Oblicz pole powierzchni
+    całkowitej tego walca. Wynik podaj w postaci dokładnej (z liczbą \pi).
+  statement_latex: P_c = 2\pi \cdot 5 \cdot \left(5 + 6\right)
+  solution: |-
+    Najpierw z średnicy wyznaczamy promień: 2r = 10, więc r = 5.
+    Walec jest zamknięty, ma dwie podstawy, zatem P_c = 2\pi r^2 + 2\pi r H = 2\pi r\left(r + H\right).
+    P_c = 2\pi \cdot 5 \cdot \left(5 + 6\right) = 10\pi \cdot 11 = 110\pi.
+    Odp. P_c = 110\pi (około 345{,}58).
+  solution_steps:
+  - 'Z średnicy oblicz promień: r = \frac{10}{2} = 5.'
+  - 'Zapisz wzór na pole powierzchni całkowitej: P_c = 2\pi r\left(r + H\right).'
+  - 'Podstaw dane: P_c = 2\pi \cdot 5 \cdot \left(5 + 6\right) = 110\pi.'
+  answer:
+    kind: SYMBOLIC
+    latex: 110\pi
+  checks:
+  - kind: evaluate
+    expr: 2\cdot \pi \cdot 5 \cdot \left(5 + 6\right)
+    var: r
+  skills:
+  - zamiana średnicy na promień
+  - wzór P_c = 2\pi r(r+H)
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 345.57519189487726 vs 345.57519189487726 (tol 1e-09)'
+- id: g-th-02
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: walec jako bryła obrotowa
+  statement: Prostokąt o bokach długości 3 i 8 obrócono wokół prostej zawierającej jego bok długości 8.
+    Podaj promień podstawy r oraz wysokość H otrzymanego walca, a następnie oblicz jego objętość.
+  statement_latex: r = 3,\quad H = 8,\quad V = \pi \cdot 3^2 \cdot 8
+  solution: |-
+    Bok leżący na osi obrotu staje się wysokością walca, a bok do niego prostopadły — promieniem podstawy.
+    Oś obrotu zawiera bok długości 8, więc H = 8, a promieniem jest bok długości 3, czyli r = 3.
+    Objętość: V = \pi r^2 H = \pi \cdot 3^2 \cdot 8 = 72\pi.
+    Odp. r = 3, H = 8, V = 72\pi.
+  solution_steps:
+  - 'Ustal oś obrotu: zawiera ona bok długości 8, więc ten bok jest wysokością walca: H = 8.'
+  - 'Bok prostopadły do osi jest promieniem podstawy: r = 3.'
+  - 'Oblicz objętość: V = \pi \cdot 3^2 \cdot 8 = 72\pi.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: promień i wysokość (r, H)
+      answer:
+        kind: TUPLE
+        items:
+        - '3'
+        - '8'
+    - name: objętość
+      answer:
+        kind: SYMBOLIC
+        latex: 72\pi
+  checks:
+  - kind: evaluate
+    expr: \pi \cdot 3^2 \cdot 8
+    var: r
+    part: objętość
+  skills:
+  - przyporządkowanie r i H przy obrocie prostokąta
+  - objętość walca
+  verification:
+    checkability: REFERENCE_CALL
+    note: 'could not compare: part disagrees: kind mismatch: answer=TUPLE reference=NUMERIC'
+- id: g-ex-03
+  slot: EXERCISE
+  ramp_index: 1
+  difficulty: 2
+  exercise_type: wyznaczenie r z pola bocznego i obliczenie objętości
+  statement: Pole powierzchni bocznej walca jest równe 48\pi, a wysokość tego walca jest równa 6. Oblicz
+    promień podstawy oraz objętość tego walca. Zapisz obliczenia.
+  statement_latex: 2\pi \cdot r \cdot 6 = 48\pi
+  solution: |-
+    Powierzchnia boczna walca rozwija się w prostokąt o bokach 2\pi r oraz H, zatem P_b = 2\pi r H.
+    Podstawiamy dane: 2\pi \cdot r \cdot 6 = 48\pi, czyli 12\pi r = 48\pi.
+    Stąd r = 4 (wartość dodatnia, więc zgodna z warunkami zadania).
+    Objętość: V = \pi r^2 H = \pi \cdot 4^2 \cdot 6 = 96\pi.
+    Odp. r = 4, V = 96\pi.
+  solution_steps:
+  - 'Zapisz wzór na pole powierzchni bocznej: P_b = 2\pi r H.'
+  - 'Ułóż równanie: 2\pi \cdot r \cdot 6 = 48\pi.'
+  - 'Rozwiąż: 12\pi r = 48\pi, więc r = 4.'
+  - 'Oblicz objętość: V = \pi \cdot 4^2 \cdot 6 = 96\pi.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: promień
+      answer:
+        kind: NUMERIC
+        value: 4.0
+    - name: objętość
+      answer:
+        kind: SYMBOLIC
+        latex: 96\pi
+  checks:
+  - kind: solve_equation
+    expr: 2\cdot \pi \cdot r \cdot 6 = 48\cdot \pi
+    var: r
+    part: promień
+  - kind: evaluate
+    expr: \pi \cdot 4^2 \cdot 6
+    var: r
+    part: objętość
+  skills:
+  - wzór P_b = 2\pi r H
+  - równanie z jedną niewiadomą
+  - objętość walca
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [promień] SymPy solved it fresh: 4.0 vs 4.0 (tol 1e-09) ; [objętość]
+      SymPy solved it fresh: 301.59289474462014 vs 301.59289474462014 (tol 1e-09)'
+- id: g-ex-04
+  slot: EXERCISE
+  ramp_index: 2
+  difficulty: 3
+  exercise_type: układ równań z przekroju osiowego
+  statement: Obwód przekroju osiowego walca jest równy 34, a pole tego przekroju jest równe 60. Wysokość
+    walca jest większa od średnicy jego podstawy. Oblicz objętość oraz pole powierzchni całkowitej tego
+    walca. Zapisz obliczenia.
+  statement_latex: \begin{cases} 2\cdot \left(2r + H\right) = 34 \\ 2r\cdot H = 60 \end{cases}
+  solution: |-
+    Przekrój osiowy walca jest prostokątem o bokach 2r (bok przy podstawie, czyli średnica) oraz H.
+    Obwód: 2\left(2r + H\right) = 34, czyli 2r + H = 17.
+    Pole: 2r \cdot H = 60.
+    Oznaczmy x = 2r. Wtedy x + H = 17 oraz x \cdot H = 60, więc x i H są pierwiastkami równania t^2 - 17t + 60 = 0.
+    \Delta = 289 - 240 = 49, \sqrt{\Delta} = 7, zatem t_1 = 5, t_2 = 12.
+    Ponieważ H > 2r, przyjmujemy 2r = 5 oraz H = 12, czyli r = \frac{5}{2}.
+    Objętość: V = \pi r^2 H = \pi \cdot \left(\frac{5}{2}\right)^2 \cdot 12 = \pi \cdot \frac{25}{4}\cdot 12 = 75\pi.
+    Pole całkowite: P_c = 2\pi r\left(r + H\right) = 2\pi \cdot \frac{5}{2}\cdot \left(\frac{5}{2} + 12\right) = 5\pi \cdot \frac{29}{2} = \frac{145\pi}{2} = 72{,}5\pi.
+    Odp. V = 75\pi, P_c = \frac{145\pi}{2}.
+  solution_steps:
+  - 'Zapisz wymiary przekroju osiowego: prostokąt 2r \times H.'
+  - 'Z obwodu: 2\left(2r + H\right) = 34, czyli 2r + H = 17.'
+  - 'Z pola: 2r \cdot H = 60.'
+  - 'Podstaw x = 2r i rozwiąż t^2 - 17t + 60 = 0: t_1 = 5, t_2 = 12.'
+  - Z warunku H > 2r wybierz 2r = 5, H = 12, czyli r = \frac{5}{2}.
+  - Oblicz V = \pi \cdot \left(\frac{5}{2}\right)^2 \cdot 12 = 75\pi.
+  - Oblicz P_c = 2\pi \cdot \frac{5}{2}\cdot \left(\frac{5}{2} + 12\right) = \frac{145\pi}{2}.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: objętość
+      answer:
+        kind: SYMBOLIC
+        latex: 75\pi
+    - name: pole powierzchni całkowitej
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{145\pi}{2}
+  checks:
+  - kind: evaluate
+    expr: \pi \cdot \left(\frac{5}{2}\right)^2 \cdot 12
+    var: r
+    part: objętość
+  - kind: evaluate
+    expr: 2\cdot \pi \cdot \frac{5}{2} \cdot \left(\frac{5}{2} + 12\right)
+    var: r
+    part: pole powierzchni całkowitej
+  skills:
+  - przekrój osiowy 2r \times H
+  - układ równań
+  - objętość i pole całkowite
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [objętość] SymPy solved it fresh: 235.61944901923448 vs 235.61944901923448
+      (tol 1e-09) ; [pole powierzchni całkowitej] SymPy solved it fresh: 227.76546738526002 vs 227.76546738526002
+      (tol 1e-09)'
+- id: g-ex-05
+  slot: EXERCISE
+  ramp_index: 3
+  difficulty: 4
+  exercise_type: trygonometria w przekroju osiowym + kula opisana
+  statement: Przekątna przekroju osiowego walca ma długość 12 i tworzy z płaszczyzną podstawy kąt o mierze
+    \alpha = 30^{\circ}. Oblicz objętość tego walca, pole jego przekroju osiowego oraz promień kuli opisanej
+    na tym walcu. Zapisz obliczenia.
+  statement_latex: 2r = 12\cdot \cos 30^{\circ},\qquad H = 12\cdot \sin 30^{\circ}
+  solution: |-
+    Przekrój osiowy to prostokąt o bokach 2r (poziomy) i H (pionowy); jego przekątna d = 12 tworzy z bokiem 2r kąt \alpha = 30^{\circ}.
+    Z trójkąta prostokątnego: 2r = d\cos\alpha = 12 \cdot \frac{\sqrt{3}}{2} = 6\sqrt{3}, więc r = 3\sqrt{3} oraz r^2 = 27.
+    H = d\sin\alpha = 12 \cdot \frac{1}{2} = 6.
+    Objętość: V = \pi r^2 H = \pi \cdot 27 \cdot 6 = 162\pi.
+    Pole przekroju osiowego: P_{os} = 2r \cdot H = 6\sqrt{3}\cdot 6 = 36\sqrt{3}.
+    Kula opisana na walcu ma środek w środku osi walca, a jej promień spełnia R^2 = r^2 + \left(\frac{H}{2}\right)^2 = 27 + 9 = 36, więc R = 6 (przekątna przekroju osiowego jest średnicą koła wielkiego, 2R = 12).
+    Sprawdzenie: 4r^2 + H^2 = 108 + 36 = 144 = 12^2 ✓.
+    Odp. V = 162\pi, P_{os} = 36\sqrt{3}, R = 6.
+  solution_steps:
+  - Narysuj myślowo prostokąt przekroju osiowego o bokach 2r i H oraz przekątną d = 12.
+  - Oblicz 2r = 12\cos 30^{\circ} = 6\sqrt{3}, więc r = 3\sqrt{3}.
+  - Oblicz H = 12\sin 30^{\circ} = 6.
+  - 'Objętość: V = \pi \cdot \left(3\sqrt{3}\right)^2 \cdot 6 = 162\pi.'
+  - 'Pole przekroju osiowego: P_{os} = 2r\cdot H = 6\sqrt{3}\cdot 6 = 36\sqrt{3}.'
+  - 'Promień kuli opisanej: R = \sqrt{r^2 + \left(\frac{H}{2}\right)^2} = \sqrt{27 + 9} = 6.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: objętość
+      answer:
+        kind: SYMBOLIC
+        latex: 162\pi
+    - name: pole przekroju osiowego
+      answer:
+        kind: SYMBOLIC
+        latex: 36\sqrt{3}
+    - name: promień kuli opisanej
+      answer:
+        kind: NUMERIC
+        value: 6.0
+  checks:
+  - kind: evaluate
+    expr: \pi \cdot \left(3\sqrt{3}\right)^2 \cdot 6
+    var: r
+    part: objętość
+  - kind: evaluate
+    expr: 2\cdot 3\sqrt{3} \cdot 6
+    var: r
+    part: pole przekroju osiowego
+  - kind: evaluate
+    expr: \sqrt{\left(3\sqrt{3}\right)^2 + \left(\frac{6}{2}\right)^2}
+    var: r
+    part: promień kuli opisanej
+  skills:
+  - 2r = d\cos\alpha, H = d\sin\alpha
+  - pole przekroju osiowego
+  - R^2 = r^2 + \left(\frac{H}{2}\right)^2
+  verification:
+    checkability: REFERENCE_CALL
+    note: 3 parts matched
+- id: g-ex-t00
+  slot: EXERCISE
+  ramp_index: 6
+  difficulty: 3
+  exercise_type: Wyznaczanie wymiarów walca z przekroju osiowego (trygonometria)
+  statement: Przekątna przekroju osiowego walca ma długość 12 i jest nachylona do płaszczyzny podstawy
+    pod kątem \alpha = 30^{\circ}. Oblicz objętość tego walca oraz pole jego powierzchni bocznej. Zapisz
+    obliczenia.
+  statement_latex: 2r = 12\cdot\cos 30^{\circ},\qquad H = 12\cdot\sin 30^{\circ},\qquad V=\pi r^{2}H,\qquad
+    P_{b}=2\pi r H
+  solution: |-
+    Przekrój osiowy walca jest prostokątem o wymiarach 2r \times H, a jego przekątna ma długość 12 i tworzy z bokiem długości 2r kąt 30^{\circ}.
+    Z trójkąta prostokątnego o przeciwprostokątnej 12:
+    2r = 12\cdot\cos 30^{\circ} = 12\cdot\frac{\sqrt{3}}{2} = 6\sqrt{3}, więc r = 3\sqrt{3};
+    H = 12\cdot\sin 30^{\circ} = 12\cdot\frac{1}{2} = 6.
+    Objętość: V = \pi r^{2}H = \pi\cdot\left(3\sqrt{3}\right)^{2}\cdot 6 = \pi\cdot 27\cdot 6 = 162\pi.
+    Pole powierzchni bocznej: P_{b} = 2\pi r H = 2\pi\cdot 3\sqrt{3}\cdot 6 = 36\sqrt{3}\pi.
+    Sprawdzenie: \left(2r\right)^{2}+H^{2} = 108 + 36 = 144 = 12^{2}. ✓
+    Odp. V = 162\pi, P_{b} = 36\sqrt{3}\pi \approx 195,9.
+  solution_steps:
+  - Zauważ, że przekrój osiowy to prostokąt o bokach 2r i H, a jego przekątna ma długość 12.
+  - Oblicz 2r = 12\cdot\cos 30^{\circ} = 6\sqrt{3}, czyli r = 3\sqrt{3}.
+  - Oblicz H = 12\cdot\sin 30^{\circ} = 6.
+  - Podstaw do V = \pi r^{2} H = \pi\cdot 27\cdot 6 = 162\pi.
+  - Podstaw do P_{b} = 2\pi r H = 2\pi\cdot 3\sqrt{3}\cdot 6 = 36\sqrt{3}\pi.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: V
+      answer:
+        kind: SYMBOLIC
+        latex: 162\pi
+    - name: P_b
+      answer:
+        kind: SYMBOLIC
+        latex: 36\sqrt{3}\pi
+  checks:
+  - kind: evaluate
+    expr: \pi \cdot \left(3\sqrt{3}\right)^{2} \cdot 6
+    part: V
+  - kind: evaluate
+    expr: 2 \cdot \pi \cdot 3\sqrt{3} \cdot 6
+    part: P_b
+  skills:
+  - przekrój osiowy walca
+  - funkcje trygonometryczne kąta ostrego
+  - objętość walca
+  - pole powierzchni bocznej
+  verification:
+    checkability: REFERENCE_CALL
+    note: 2 parts matched
+- id: g-ex-t01
+  slot: EXERCISE
+  ramp_index: 7
+  difficulty: 4
+  exercise_type: Walec opisany na graniastosłupie prawidłowym, stosunek objętości
+  statement: 'Dany jest graniastosłup prawidłowy trójkątny o krawędzi podstawy równej 6 i wysokości równej
+    10. Na tym graniastosłupie opisano walec: podstawą walca jest koło opisane na podstawie graniastosłupa,
+    a wysokość walca jest równa wysokości graniastosłupa. Oblicz objętość tego walca oraz stosunek objętości
+    walca do objętości graniastosłupa. Zapisz obliczenia.'
+  statement_latex: R = \frac{6\sqrt{3}}{3},\qquad V_{w} = \pi R^{2}\cdot 10,\qquad \frac{V_{w}}{V_{g}}
+    = \frac{\pi R^{2}\cdot 10}{\frac{6^{2}\sqrt{3}}{4}\cdot 10}
+  solution: |-
+    Krok 1. Promień okręgu opisanego na trójkącie równobocznym o boku a = 6:
+    R = \frac{a\sqrt{3}}{3} = \frac{6\sqrt{3}}{3} = 2\sqrt{3}.
+    Wysokość walca jest równa wysokości graniastosłupa: H = 10.
+    Krok 2. Objętość walca:
+    V_{w} = \pi R^{2} H = \pi\cdot\left(2\sqrt{3}\right)^{2}\cdot 10 = \pi\cdot 12\cdot 10 = 120\pi.
+    Krok 3. Pole podstawy graniastosłupa: P = \frac{a^{2}\sqrt{3}}{4} = \frac{36\sqrt{3}}{4} = 9\sqrt{3}, zatem
+    V_{g} = 9\sqrt{3}\cdot 10 = 90\sqrt{3}.
+    Krok 4. Stosunek objętości:
+    \frac{V_{w}}{V_{g}} = \frac{120\pi}{90\sqrt{3}} = \frac{4\pi}{3\sqrt{3}} = \frac{4\sqrt{3}\pi}{9} \approx 2{,}42.
+    Odp. V_{w} = 120\pi \approx 377, stosunek objętości wynosi \frac{4\sqrt{3}\pi}{9}.
+  solution_steps:
+  - 'Zapisz, że wysokość walca równa jest wysokości graniastosłupa: H = 10.'
+  - 'Wyznacz promień koła opisanego na trójkącie równobocznym o boku 6: R = \frac{6\sqrt{3}}{3} = 2\sqrt{3}.'
+  - 'Oblicz objętość walca: V_{w} = \pi\cdot 12\cdot 10 = 120\pi.'
+  - 'Oblicz pole podstawy i objętość graniastosłupa: P = 9\sqrt{3}, V_{g} = 90\sqrt{3}.'
+  - 'Wyznacz i uprość stosunek: \frac{120\pi}{90\sqrt{3}} = \frac{4\sqrt{3}\pi}{9}.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: V_walca
+      answer:
+        kind: SYMBOLIC
+        latex: 120\pi
+    - name: stosunek
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{4\sqrt{3}\pi}{9}
+  checks:
+  - kind: evaluate
+    expr: \pi \cdot \left(2\sqrt{3}\right)^{2} \cdot 10
+    part: V_walca
+  - kind: evaluate
+    expr: \frac{\pi \cdot \left(2\sqrt{3}\right)^{2} \cdot 10}{\frac{6^{2}\sqrt{3}}{4} \cdot 10}
+    part: stosunek
+  skills:
+  - promień okręgu opisanego na trójkącie równobocznym
+  - objętość walca
+  - objętość graniastosłupa
+  - stosunek objętości
+  verification:
+    checkability: REFERENCE_CALL
+    note: 2 parts matched
+- id: g-cm-06
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: wyznaczenie r z pola przekroju osiowego
+  statement: Pole przekroju osiowego walca jest równe 40, a wysokość tego walca jest równa 5. Oblicz promień
+    podstawy oraz objętość tego walca.
+  statement_latex: 2\cdot r \cdot 5 = 40
+  solution: |-
+    Typowy błąd: uczeń zakłada, że przekrój osiowy ma boki r oraz H, i zapisuje r \cdot H = 40, czyli r \cdot 5 = 40, skąd r = 8 i V = \pi \cdot 8^2 \cdot 5 = 320\pi. To wynik błędny.
+    Korekta: przekrój osiowy przechodzi przez oś walca, więc jego bok leżący przy podstawie to CAŁA średnica, a nie promień. Prostokąt ma wymiary 2r \times H, a jego pole to 2rH.
+    Zatem 2 \cdot r \cdot 5 = 40, czyli 10r = 40 i r = 4.
+    Objętość: V = \pi r^2 H = \pi \cdot 4^2 \cdot 5 = 80\pi.
+    Odp. r = 4, V = 80\pi.
+  solution_steps:
+  - 'Błędne rozumowanie: „przekrój osiowy ma boki r i H”, czyli r \cdot 5 = 40, r = 8 i V = 320\pi.'
+  - 'Wskazanie błędu: płaszczyzna przekroju zawiera oś, więc bok przekroju przy podstawie to średnica
+    2r.'
+  - 'Poprawne równanie: 2r \cdot H = 40, czyli 2\cdot r\cdot 5 = 40, skąd r = 4.'
+  - 'Objętość: V = \pi \cdot 4^2 \cdot 5 = 80\pi.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: promień
+      answer:
+        kind: NUMERIC
+        value: 4.0
+    - name: objętość
+      answer:
+        kind: SYMBOLIC
+        latex: 80\pi
+  checks:
+  - kind: solve_equation
+    expr: 2\cdot r \cdot 5 = 40
+    var: r
+    part: promień
+  - kind: evaluate
+    expr: \pi \cdot 4^2 \cdot 5
+    var: r
+    part: objętość
+  skills:
+  - wymiary przekroju osiowego 2r \times H
+  - objętość walca
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [promień] SymPy solved it fresh: 4.0 vs 4.0 (tol 1e-09) ; [objętość]
+      SymPy solved it fresh: 251.32741228718345 vs 251.32741228718345 (tol 1e-09)'
+- id: g-cm-07
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: walec równoboczny
+  statement: Przekrój osiowy walca jest kwadratem o obwodzie 32. Oblicz objętość tego walca.
+  statement_latex: 4\cdot \left(2r\right) = 32,\qquad H = 2r
+  solution: |-
+    Typowy błąd: uczeń rozumuje „kwadrat ma równe boki, więc r = H”. Z obwodu 32 otrzymuje bok 8, przyjmuje r = 8 i H = 8, a stąd V = \pi \cdot 8^2 \cdot 8 = 512\pi. To wynik błędny.
+    Korekta: przekrój osiowy jest prostokątem o wymiarach 2r \times H. Jeśli jest kwadratem, to równe są jego boki 2r i H, czyli H = 2r (walec równoboczny), a promień jest połową wysokości.
+    Bok kwadratu: \frac{32}{4} = 8, zatem H = 8 oraz 2r = 8, czyli r = 4.
+    Objętość: V = \pi r^2 H = \pi \cdot 4^2 \cdot 8 = 128\pi (zgodnie ze wzorem V = 2\pi r^3 = 2\pi\cdot 64 = 128\pi).
+    Odp. V = 128\pi.
+  solution_steps:
+  - 'Błędne rozumowanie: „kwadrat, więc r = H = 8”, stąd V = \pi \cdot 8^2 \cdot 8 = 512\pi.'
+  - 'Wskazanie błędu: bokami przekroju osiowego są 2r i H, więc kwadratowy kształt oznacza H = 2r, a nie
+    r = H.'
+  - 'Bok kwadratu: \frac{32}{4} = 8, czyli H = 8 i 2r = 8, skąd r = 4.'
+  - 'Objętość: V = \pi \cdot 4^2 \cdot 8 = 128\pi.'
+  answer:
+    kind: SYMBOLIC
+    latex: 128\pi
+  checks:
+  - kind: evaluate
+    expr: \pi \cdot 4^2 \cdot 8
+    var: r
+  skills:
+  - H = 2r dla walca równobocznego
+  - objętość walca
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 402.1238596594935 vs 402.1238596594935 (tol 1e-09)'
+- id: g-cm-08
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: pole powierzchni bocznej walca
+  statement: Walec ma promień podstawy równy 5 i wysokość równą 12. Oblicz pole powierzchni bocznej tego
+    walca.
+  statement_latex: P_b = 2\pi \cdot 5 \cdot 12
+  solution: |-
+    Typowy błąd: uczeń przenosi wzory ze stożka i liczy tworzącą jako l = \sqrt{r^2 + H^2} = \sqrt{25 + 144} = 13, a następnie P_b = \pi r l = \pi \cdot 5 \cdot 13 = 65\pi. To wynik błędny.
+    Korekta: w walcu prostym tworząca jest prostopadła do podstaw, więc l = H = 12; wzór \pi r l dotyczy wyłącznie stożka.
+    Powierzchnia boczna walca rozwija się w prostokąt o bokach 2\pi r (obwód podstawy) i H, więc P_b = 2\pi r H = 2\pi \cdot 5 \cdot 12 = 120\pi.
+    Odp. P_b = 120\pi.
+  solution_steps:
+  - 'Błędne rozumowanie: l = \sqrt{5^2 + 12^2} = 13 oraz P_b = \pi \cdot 5 \cdot 13 = 65\pi.'
+  - 'Wskazanie błędu: to wzory stożka; w walcu tworząca jest prostopadła do podstaw, czyli l = H = 12.'
+  - 'Rozwinięcie powierzchni bocznej to prostokąt o bokach 2\pi r i H: P_b = 2\pi r H.'
+  - 'Podstaw dane: P_b = 2\pi \cdot 5 \cdot 12 = 120\pi.'
+  answer:
+    kind: SYMBOLIC
+    latex: 120\pi
+  checks:
+  - kind: evaluate
+    expr: 2\cdot \pi \cdot 5 \cdot 12
+    var: r
+  skills:
+  - tworząca walca l = H
+  - P_b = 2\pi r H
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 376.9911184307752 vs 376.9911184307752 (tol 1e-09)'
+- id: g-cm-09
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: pole powierzchni pojemnika otwartego
+  statement: Pojemnik ma kształt walca o promieniu podstawy 6 cm i wysokości 10 cm, jest otwarty od góry
+    (ma dno, ale nie ma pokrywy). Oblicz pole powierzchni blachy potrzebnej na wykonanie tego pojemnika
+    (pomijamy zakładki i straty materiału).
+  statement_latex: P = \pi \cdot 6^2 + 2\pi \cdot 6 \cdot 10
+  solution: |-
+    Typowy błąd: uczeń automatycznie stosuje wzór na pole powierzchni całkowitej walca zamkniętego: P_c = 2\pi r^2 + 2\pi r H = 2\pi \cdot 36 + 2\pi \cdot 6 \cdot 10 = 72\pi + 120\pi = 192\pi\ \text{cm}^2. To wynik błędny — dolicza drugą podstawę, której pojemnik nie ma.
+    Korekta: trzeba policzyć tylko te powierzchnie, które faktycznie występują. Pojemnik otwarty ma jedną podstawę (dno) i powierzchnię boczną:
+    P = \pi r^2 + 2\pi r H = \pi \cdot 6^2 + 2\pi \cdot 6 \cdot 10 = 36\pi + 120\pi = 156\pi\ \text{cm}^2.
+    Odp. P = 156\pi\ \text{cm}^2 \approx 490 \ \text{cm}^2.
+  solution_steps:
+  - 'Błędne rozumowanie: P = 2\pi \cdot 6^2 + 2\pi \cdot 6 \cdot 10 = 192\pi\ \text{cm}^2 (dwie podstawy).'
+  - 'Wskazanie błędu: pojemnik nie ma pokrywy, więc występuje tylko jedna podstawa.'
+  - 'Poprawny wzór: P = \pi r^2 + 2\pi r H.'
+  - 'Podstaw dane: P = \pi \cdot 36 + 120\pi = 156\pi\ \text{cm}^2.'
+  answer:
+    kind: SYMBOLIC
+    latex: 156\pi
+  checks:
+  - kind: evaluate
+    expr: \pi \cdot 6^2 + 2\cdot \pi \cdot 6 \cdot 10
+    var: r
+  skills:
+  - dobór wzoru na pole do sytuacji praktycznej
+  - P = \pi r^2 + 2\pi r H
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 490.08845396000777 vs 490.08845396000777 (tol 1e-09)'
+- id: g-cm-10
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: obrót prostokąta wokół boku
+  statement: Prostokąt o bokach długości 5 i 9 obrócono wokół prostej zawierającej jego dłuższy bok. Oblicz
+    objętość otrzymanej bryły.
+  statement_latex: V = \pi \cdot 5^2 \cdot 9
+  solution: |-
+    Typowy błąd: uczeń pisze „obracamy wokół boku długości 9, więc r = 9 i H = 5”, skąd V = \pi \cdot 9^2 \cdot 5 = 405\pi. To wynik błędny.
+    Korekta: bok leżący na osi obrotu staje się WYSOKOŚCIĄ walca, a promieniem jest bok do niego prostopadły (jego odległość od osi). Obracamy wokół boku długości 9, więc H = 9 oraz r = 5.
+    Objętość: V = \pi r^2 H = \pi \cdot 5^2 \cdot 9 = 225\pi.
+    Odp. V = 225\pi.
+  solution_steps:
+  - 'Błędne rozumowanie: r = 9, H = 5, stąd V = \pi \cdot 81 \cdot 5 = 405\pi.'
+  - 'Wskazanie błędu: bok leżący na osi obrotu jest wysokością, a nie promieniem.'
+  - 'Poprawne dane: H = 9, r = 5.'
+  - 'Objętość: V = \pi \cdot 5^2 \cdot 9 = 225\pi.'
+  answer:
+    kind: SYMBOLIC
+    latex: 225\pi
+  checks:
+  - kind: evaluate
+    expr: \pi \cdot 5^2 \cdot 9
+    var: r
+  skills:
+  - przyporządkowanie r i H przy obrocie
+  - objętość walca
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 706.8583470577034 vs 706.8583470577034 (tol 1e-09)'
+- id: g-ch-t02
+  slot: CHALLENGE
+  ramp_index: 0
+  difficulty: 4
+  exercise_type: Optymalizacja pola bocznego walca powstałego z obrotu prostokąta
+  statement: Prostokąt o obwodzie równym 28 obracamy wokół prostej zawierającej jeden z jego boków i otrzymujemy
+    walec. Wyznacz długości boków tego prostokąta, dla których pole powierzchni bocznej otrzymanego walca
+    jest największe, oraz oblicz to największe pole. Zapisz obliczenia.
+  statement_latex: P_{b}\left(x\right) = 2\pi\cdot x\cdot\left(14 - x\right),\qquad x\in\left(0;14\right)
+  solution: |-
+    Krok 1. Oznaczmy przez x długość boku prostokąta prostopadłego do osi obrotu. Bok ten staje się promieniem walca, więc r = x. Z obwodu prostokąta: 2\left(x + H\right) = 28, czyli bok leżący na osi obrotu (wysokość walca) ma długość H = 14 - x.
+    Musi być x > 0 oraz 14 - x > 0, zatem x \in \left(0;14\right).
+    Krok 2. Pole powierzchni bocznej walca:
+    P_{b}\left(x\right) = 2\pi r H = 2\pi\cdot x\cdot\left(14 - x\right) = -2\pi x^{2} + 28\pi x.
+    Krok 3. Jest to funkcja kwadratowa o ujemnym współczynniku przy x^{2}, więc największą wartość przyjmuje w wierzchołku:
+    x_{w} = \frac{-28\pi}{2\cdot\left(-2\pi\right)} = 7, a 7 \in \left(0;14\right).
+    Wtedy H = 14 - 7 = 7, czyli prostokąt jest kwadratem o boku 7 (walec jest równoboczny).
+    Krok 4. P_{b} = 2\pi\cdot 7\cdot 7 = 98\pi \approx 307{,}9.
+    Odp. Boki prostokąta mają długości 7 i 7, a największe pole powierzchni bocznej wynosi 98\pi.
+  solution_steps:
+  - 'Wprowadź zmienną: x — długość boku prostopadłego do osi obrotu, czyli promień walca.'
+  - 'Z obwodu 28 wyznacz drugi bok (wysokość walca): H = 14 - x, oraz dziedzinę x\in\left(0;14\right).'
+  - 'Zbuduj funkcję: P_{b}\left(x\right) = 2\pi x\left(14-x\right) = -2\pi x^{2} + 28\pi x.'
+  - 'Wyznacz wierzchołek: x_{w} = 7 (należy do dziedziny), stąd H = 7.'
+  - 'Oblicz największe pole: P_{b} = 2\pi\cdot 7\cdot 7 = 98\pi.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: boki_prostokata
+      answer:
+        kind: TUPLE
+        items:
+        - '7'
+        - '7'
+    - name: P_b_max
+      answer:
+        kind: SYMBOLIC
+        latex: 98\pi
+  checks:
+  - kind: evaluate
+    expr: 2 \cdot \pi \cdot 7 \cdot \left(14 - 7\right)
+    part: P_b_max
+  stated_model:
+    variable: x
+    objective_latex: P_{b}\left(x\right) = 2\pi\cdot x\cdot\left(14 - x\right)
+    domain_lo: '0'
+    domain_hi: '14'
+    constraint_used: 2\left(x + H\right) = 28
+  skills:
+  - walec jako bryła obrotowa
+  - wprowadzenie zmiennej
+  - funkcja kwadratowa - wierzchołek
+  - pole powierzchni bocznej walca
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (AMBIGUOUS: ''parser returned an unresolved ambiguity
+      (_ambig)'') — human review'
+- id: g-ch-t03
+  slot: CHALLENGE
+  ramp_index: 1
+  difficulty: 5
+  exercise_type: Walec wpisany w kulę z ograniczeniem wysokości — optymalizacja z kontrolą dziedziny
+  statement: Rozważamy walce wpisane w kulę o promieniu 5, to znaczy takie, że oba okręgi podstaw walca
+    leżą na powierzchni tej kuli. Dodatkowo wysokość walca ma być nie mniejsza niż 8. Wyznacz wysokość
+    i promień podstawy tego spośród rozważanych walców, którego pole powierzchni bocznej jest największe,
+    oraz oblicz to pole. Zapisz obliczenia.
+  statement_latex: r = \sqrt{25 - \frac{H^{2}}{4}},\qquad P_{b}\left(H\right) = 2\pi\cdot H\cdot\sqrt{25
+    - \frac{H^{2}}{4}},\qquad H\in\left\langle 8;10\right)
+  solution: |-
+    Krok 1. Przekrój osiowy: prostokąt o wymiarach 2r \times H wpisany w koło o promieniu 5, którego przekątna jest średnicą tego koła. Stąd
+    25 = r^{2} + \left(\frac{H}{2}\right)^{2}, czyli r = \sqrt{25 - \frac{H^{2}}{4}}.
+    Warunki: r > 0 daje H < 10, a z treści H \geq 8, zatem H \in \left\langle 8;10\right).
+    Krok 2. Pole powierzchni bocznej:
+    P_{b}\left(H\right) = 2\pi r H = 2\pi H\sqrt{25 - \frac{H^{2}}{4}} = \pi H\sqrt{100 - H^{2}}.
+    Krok 3. Ponieważ P_{b} > 0, wystarczy zbadać wyrażenie pod pierwiastkiem po podniesieniu do kwadratu:
+    \left(\frac{P_{b}}{\pi}\right)^{2} = H^{2}\left(100 - H^{2}\right). Podstawmy t = H^{2}; funkcja g\left(t\right) = t\left(100 - t\right) = -t^{2} + 100t ma wierzchołek dla t = 50, czyli dla H = \sqrt{50} \approx 7{,}07.
+    Dla H \in \left\langle 8;10\right) mamy t = H^{2} \in \left\langle 64;100\right), a na tym przedziale g jest malejąca. Wierzchołek jest więc nieosiągalny — największą wartość otrzymujemy na lewym końcu, dla t = 64, czyli H = 8.
+    Krok 4. Dla H = 8: r = \sqrt{25 - \frac{64}{4}} = \sqrt{9} = 3 (i istotnie r = 3 < 5).
+    P_{b} = 2\pi\cdot 3\cdot 8 = 48\pi \approx 150{,}8.
+    Odp. H = 8, r = 3, największe pole powierzchni bocznej wynosi 48\pi.
+  solution_steps:
+  - Z przekroju osiowego zapisz zależność 25 = r^{2} + \left(\frac{H}{2}\right)^{2} i wyznacz r = \sqrt{25
+    - \frac{H^{2}}{4}}.
+  - 'Ustal dziedzinę: r > 0 daje H < 10, a warunek zadania H \geq 8, więc H\in\left\langle 8;10\right).'
+  - Zbuduj funkcję P_{b}\left(H\right) = \pi H\sqrt{100 - H^{2}}.
+  - 'Podstaw t = H^{2} i zbadaj g\left(t\right) = t\left(100-t\right): wierzchołek t = 50 odpowiada H
+    = \sqrt{50} < 8, więc leży poza dziedziną.'
+  - Na przedziale t\in\left\langle 64;100\right) funkcja g maleje, więc największe pole jest dla H = 8.
+  - Oblicz r = 3 oraz P_{b} = 2\pi\cdot 3\cdot 8 = 48\pi.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: H
+      answer:
+        kind: NUMERIC
+        value: 8.0
+    - name: r
+      answer:
+        kind: NUMERIC
+        value: 3.0
+    - name: P_b_max
+      answer:
+        kind: SYMBOLIC
+        latex: 48\pi
+  checks:
+  - kind: evaluate
+    expr: \sqrt{25 - \frac{8^{2}}{4}}
+    part: r
+  - kind: evaluate
+    expr: 2 \cdot \pi \cdot \sqrt{25 - \frac{8^{2}}{4}} \cdot 8
+    part: P_b_max
+  stated_model:
+    variable: H
+    objective_latex: P_{b}\left(H\right) = 2\pi\cdot H\cdot\sqrt{25 - \frac{H^{2}}{4}}
+    domain_lo: '8'
+    domain_hi: '10'
+    domain_lo_open: false
+    constraint_used: r^{2} + \left(\frac{H}{2}\right)^{2} = 5^{2}
+  skills:
+  - walec wpisany w kulę
+  - zależność R^2 = r^2 + (H/2)^2
+  - podstawienie t = H^2
+  - funkcja kwadratowa i monotoniczność
+  - pole powierzchni bocznej
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (AMBIGUOUS: ''parser returned an unresolved ambiguity
+      (_ambig)'') — human review'
+- id: g-ch-t04
+  slot: CHALLENGE
+  ramp_index: 2
+  difficulty: 5
+  exercise_type: Wzór i dziedzina funkcji pola przekroju osiowego + optymalizacja z ograniczeniem
+  statement: Obwód przekroju osiowego pewnego walca jest równy 40, a wysokość tego walca jest nie większa
+    niż 8. Oznaczmy przez r promień podstawy walca. a) Wyznacz pole przekroju osiowego tego walca jako
+    funkcję zmiennej r oraz podaj dziedzinę tej funkcji. b) Wyznacz największe możliwe pole przekroju
+    osiowego takiego walca i oblicz objętość walca, dla którego to pole jest największe. Zapisz obliczenia.
+  statement_latex: P\left(r\right) = 2r\cdot\left(20 - 2r\right) = 40r - 4r^{2},\qquad r\in\left\langle
+    6;10\right)
+  solution: |-
+    Krok 1. Przekrój osiowy walca jest prostokątem o wymiarach 2r \times H, więc jego obwód wynosi 2\cdot 2r + 2H = 4r + 2H = 40, skąd
+    H = 20 - 2r.
+    Krok 2. Pole przekroju osiowego:
+    P\left(r\right) = 2r\cdot H = 2r\cdot\left(20 - 2r\right) = 40r - 4r^{2}.
+    Krok 3. Dziedzina. Musi być r > 0 oraz H > 0, czyli 20 - 2r > 0, więc r < 10. Ponadto z warunku zadania H \leq 8, czyli 20 - 2r \leq 8, skąd r \geq 6. Ostatecznie r \in \left\langle 6;10\right).
+    Krok 4. Funkcja P\left(r\right) = -4r^{2} + 40r ma wierzchołek dla r_{w} = \frac{-40}{2\cdot\left(-4\right)} = 5, a 5 \notin \left\langle 6;10\right). Dla r > 5 funkcja jest malejąca, więc na przedziale \left\langle 6;10\right) największą wartość przyjmuje dla r = 6:
+    P\left(6\right) = 40\cdot 6 - 4\cdot 6^{2} = 240 - 144 = 96.
+    Krok 5. Dla r = 6 mamy H = 20 - 2\cdot 6 = 8 (warunek H \leq 8 spełniony), więc
+    V = \pi r^{2}H = \pi\cdot 36\cdot 8 = 288\pi \approx 904{,}8.
+    Odp. a) P\left(r\right) = 40r - 4r^{2}, r \in \left\langle 6;10\right); b) największe pole przekroju osiowego wynosi 96, a objętość odpowiadającego walca to 288\pi.
+  solution_steps:
+  - Zapisz obwód przekroju osiowego 4r + 2H = 40 i wyznacz H = 20 - 2r.
+  - 'Zbuduj funkcję pola przekroju osiowego: P\left(r\right) = 2r\left(20 - 2r\right) = 40r - 4r^{2}.'
+  - 'Wyznacz dziedzinę z warunków r > 0, H > 0 oraz H \leq 8: r\in\left\langle 6;10\right).'
+  - Znajdź wierzchołek r_{w} = 5 i stwierdź, że nie należy do dziedziny; na \left\langle 6;10\right) funkcja
+    maleje.
+  - Oblicz największą wartość P\left(6\right) = 96 oraz H = 8.
+  - 'Oblicz objętość walca: V = \pi\cdot 6^{2}\cdot 8 = 288\pi.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wzor_funkcji
+      answer:
+        kind: SYMBOLIC
+        latex: P\left(r\right) = 40r - 4r^{2}
+    - name: dziedzina
+      answer:
+        kind: INTERVAL
+        lo: '6'
+        hi: '10'
+        lo_open: false
+    - name: P_max
+      answer:
+        kind: NUMERIC
+        value: 96.0
+    - name: V
+      answer:
+        kind: SYMBOLIC
+        latex: 288\pi
+  checks:
+  - kind: evaluate
+    expr: 40 \cdot 6 - 4 \cdot 6^{2}
+    var: r
+    part: P_max
+  - kind: evaluate
+    expr: \pi \cdot 6^{2} \cdot \left(20 - 2 \cdot 6\right)
+    var: r
+    part: V
+  stated_model:
+    variable: r
+    objective_latex: P\left(r\right) = 2r\cdot\left(20 - 2r\right)
+    domain_lo: '6'
+    domain_hi: '10'
+    domain_lo_open: false
+    constraint_used: 4r + 2H = 40,\quad 0 < H \leq 8
+  skills:
+  - obwód przekroju osiowego
+  - wprowadzenie zmiennej i budowa funkcji
+  - dziedzina wyznaczona warunkami zadania
+  - funkcja kwadratowa - wierzchołek i monotoniczność
+  - objętość walca
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''r'': ''P\\left(r\\right)
+      = 2r\\cdot\\left(20 - 2r\\right)'') — human review'

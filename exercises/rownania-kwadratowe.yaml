@@ -1,0 +1,821 @@
+section: rownania-kwadratowe
+name: Równania kwadratowe
+scope: 'Solving quadratic equations: factoring, the discriminant and the quadratic formula, Vieta''s formulas;
+  the number of real roots from the sign of the discriminant; equations reducible to quadratic.'
+requirements:
+- III.4
+counts:
+  total: 16
+  DETERMINISTIC: 10
+  REFERENCE_CALL: 3
+  NOT_MACHINE_CHECKABLE: 3
+exercises:
+- id: g-th-00
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: równanie kwadratowe niezupełne
+  statement: Rozwiąż równanie \(5x^{2}-20x=0\). Zapisz obliczenia.
+  statement_latex: 5x^{2}-20x=0
+  solution: |-
+    W równaniu brakuje wyrazu wolnego (c = 0), więc nie liczymy delty, tylko wyłączamy wspólny czynnik przed nawias.
+    \(5x^{2}-20x=0\)
+    \(5x\cdot\left(x-4\right)=0\)
+    Iloczyn jest równy zeru wtedy i tylko wtedy, gdy co najmniej jeden z czynników jest równy zeru:
+    \(5x=0\) lub \(x-4=0\),
+    czyli \(x=0\) lub \(x=4\).
+    Uwaga: gdybyśmy podzielili obie strony przez \(x\), zgubilibyśmy rozwiązanie \(x=0\).
+    Odpowiedź: \(x=0\) lub \(x=4\).
+  solution_steps:
+  - Zauważ, że c = 0 — równanie jest niezupełne.
+  - 'Wyłącz wspólny czynnik: 5x(x−4)=0.'
+  - 'Skorzystaj z własności iloczynu równego zeru: 5x=0 lub x−4=0.'
+  - 'Zapisz rozwiązania: x = 0 lub x = 4.'
+  answer:
+    kind: SET
+    members:
+    - '0'
+    - '4'
+  checks:
+  - kind: solve_equation
+    expr: 5x^{2}-20x=0
+  skills:
+  - rozwiązywanie równań niezupełnych
+  - własność iloczynu równego zeru
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 2 members matched'
+- id: g-th-01
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: wyróżnik i liczba rozwiązań
+  statement: Dane jest równanie \(3x^{2}-4x+5=0\). Oblicz wyróżnik \(\Delta\) tego równania oraz podaj
+    liczbę jego rozwiązań rzeczywistych.
+  statement_latex: 3x^{2}-4x+5=0,\qquad \Delta=b^{2}-4\cdot a\cdot c
+  solution: |-
+    Odczytujemy współczynniki: \(a=3\), \(b=-4\), \(c=5\).
+    Podstawiamy do wzoru na wyróżnik (współczynniki wstawiamy w nawiasach):
+    \(\Delta=\left(-4\right)^{2}-4\cdot 3\cdot 5=16-60=-44\).
+    Otrzymaliśmy \(\Delta<0\), więc równanie nie ma rozwiązań rzeczywistych — liczba rozwiązań jest równa \(0\).
+    Geometrycznie: parabola o równaniu \(y=3x^{2}-4x+5\) leży w całości nad osią \(OX\).
+  solution_steps:
+  - Odczytaj a = 3, b = −4, c = 5.
+  - Oblicz Δ = (−4)² − 4·3·5 = 16 − 60 = −44.
+  - Stwierdź, że Δ < 0.
+  - 'Wywnioskuj: równanie nie ma rozwiązań rzeczywistych (0 rozwiązań).'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: delta
+      answer:
+        kind: NUMERIC
+        value: -44.0
+    - name: liczba rozwiazan
+      answer:
+        kind: NUMERIC
+        value: 0.0
+  checks:
+  - kind: evaluate
+    expr: \left(-4\right)^{2}-4\cdot 3\cdot 5
+    part: delta
+  skills:
+  - obliczanie wyróżnika
+  - liczba rozwiązań a znak delty
+  verification:
+    checkability: REFERENCE_CALL
+    note: '2 parts matched · det: [delta] SymPy solved it fresh: -44.0 vs -44.0 (tol 1e-09)'
+- id: g-th-02
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: postać iloczynowa — odczyt pierwiastków
+  statement: Rozwiąż równanie \(\left(2x-6\right)\cdot\left(x+5\right)=0\).
+  statement_latex: \left(2x-6\right)\cdot\left(x+5\right)=0
+  solution: |-
+    Po lewej stronie stoi iloczyn, a po prawej dokładnie zero, więc możemy skorzystać z własności iloczynu równego zeru:
+    \(2x-6=0\) lub \(x+5=0\).
+    Z pierwszego równania: \(2x=6\), czyli \(x=3\).
+    Z drugiego równania: \(x=-5\).
+    Odpowiedź: \(x=3\) lub \(x=-5\).
+  solution_steps:
+  - Zauważ, że iloczyn jest równy zeru.
+  - 'Przyrównaj każdy czynnik do zera: 2x − 6 = 0 lub x + 5 = 0.'
+  - 'Rozwiąż równania liniowe: x = 3, x = −5.'
+  answer:
+    kind: SET
+    members:
+    - '3'
+    - '-5'
+  checks:
+  - kind: solve_equation
+    expr: \left(2x-6\right)\cdot\left(x+5\right)=0
+  skills:
+  - własność iloczynu równego zeru
+  - odczyt pierwiastków z postaci iloczynowej
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 2 members matched'
+- id: g-ex-03
+  slot: EXERCISE
+  ramp_index: 1
+  difficulty: 2
+  exercise_type: równanie kwadratowe deltą + postać iloczynowa
+  statement: Rozwiąż równanie \(2x^{2}+7x-15=0\), a następnie zapisz trójmian \(2x^{2}+7x-15\) w postaci
+    iloczynowej. Zapisz obliczenia.
+  statement_latex: 2x^{2}+7x-15=0
+  solution: |-
+    Współczynniki: \(a=2\), \(b=7\), \(c=-15\).
+    \(\Delta=7^{2}-4\cdot 2\cdot\left(-15\right)=49+120=169>0\), więc równanie ma dwa różne rozwiązania; \(\sqrt{\Delta}=13\).
+    \(x_{1}=\frac{-7-13}{2\cdot 2}=\frac{-20}{4}=-5\), \(x_{2}=\frac{-7+13}{4}=\frac{6}{4}=\frac{3}{2}\).
+    Sprawdzenie wzorami Viète'a: \(x_{1}+x_{2}=-5+\frac{3}{2}=-\frac{7}{2}=-\frac{b}{a}\) ✓ oraz \(x_{1}\cdot x_{2}=-5\cdot\frac{3}{2}=-\frac{15}{2}=\frac{c}{a}\) ✓.
+    Postać iloczynowa: \(2x^{2}+7x-15=2\cdot\left(x-\frac{3}{2}\right)\cdot\left(x+5\right)\) (nie wolno pominąć czynnika \(a=2\); można też zapisać \(\left(2x-3\right)\left(x+5\right)\)).
+  solution_steps:
+  - Odczytaj a = 2, b = 7, c = −15.
+  - Oblicz Δ = 7² − 4·2·(−15) = 169 oraz √Δ = 13.
+  - Wyznacz x₁ = (−7 − 13)/4 = −5 i x₂ = (−7 + 13)/4 = 3/2.
+  - Sprawdź wynik wzorami Viète'a.
+  - 'Zapisz postać iloczynową: 2(x − 3/2)(x + 5).'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: rozwiazania
+      answer:
+        kind: SET
+        members:
+        - '-5'
+        - \frac{3}{2}
+    - name: postac iloczynowa
+      answer:
+        kind: SYMBOLIC
+        latex: 2\cdot\left(x-\frac{3}{2}\right)\cdot\left(x+5\right)
+  checks:
+  - kind: solve_equation
+    expr: 2x^{2}+7x-15=0
+    part: rozwiazania
+  - kind: simplify
+    expr: 2x^{2}+7x-15
+    part: postac iloczynowa
+  skills:
+  - obliczanie wyróżnika
+  - wzory na pierwiastki
+  - zapis postaci iloczynowej
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [rozwiazania] SymPy solved it fresh: 2 members matched ; [postac
+      iloczynowa] SymPy solved it fresh: ''2\\cdot\\left(x-\\frac{3}{2}\\right)\\cdot\\left(x+5\\right)''
+      vs ''2*x**2 + 7*x - 15'''
+- id: g-ex-04
+  slot: EXERCISE
+  ramp_index: 2
+  difficulty: 3
+  exercise_type: równanie wymierne sprowadzalne do kwadratowego
+  statement: Dane jest równanie \(\frac{24}{x}-\frac{24}{x+2}=2\). Wyznacz wszystkie liczby, których nie
+    może przyjmować niewiadoma \(x\) (wartości wykluczone z dziedziny), a następnie rozwiąż to równanie.
+    Zapisz obliczenia.
+  statement_latex: \frac{24}{x}-\frac{24}{x+2}=2
+  solution: |-
+    Dziedzina: mianowniki muszą być różne od zera, więc \(x\neq 0\) i \(x+2\neq 0\), czyli wykluczamy \(x=0\) oraz \(x=-2\).
+    Mnożymy obie strony przez \(x\cdot\left(x+2\right)\):
+    \(24\cdot\left(x+2\right)-24\cdot x=2\cdot x\cdot\left(x+2\right)\)
+    \(24x+48-24x=2x^{2}+4x\)
+    \(48=2x^{2}+4x\)
+    \(2x^{2}+4x-48=0\), po podzieleniu przez 2: \(x^{2}+2x-24=0\).
+    \(\Delta=2^{2}-4\cdot 1\cdot\left(-24\right)=4+96=100\), \(\sqrt{\Delta}=10\).
+    \(x_{1}=\frac{-2-10}{2}=-6\), \(x_{2}=\frac{-2+10}{2}=4\).
+    Obie liczby należą do dziedziny (żadna nie jest równa 0 ani −2), więc obie są rozwiązaniami.
+    Odpowiedź: wykluczone są \(x=0\) i \(x=-2\); rozwiązania: \(x=-6\) lub \(x=4\).
+  solution_steps:
+  - 'Ustal dziedzinę: x ≠ 0 i x ≠ −2.'
+  - Pomnóż obie strony przez x(x+2).
+  - Uporządkuj do postaci x² + 2x − 24 = 0.
+  - Oblicz Δ = 100 i wyznacz x₁ = −6, x₂ = 4.
+  - Sprawdź zgodność z dziedziną i zapisz odpowiedź.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wartosci wykluczone
+      answer:
+        kind: SET
+        members:
+        - '0'
+        - '-2'
+    - name: rozwiazania
+      answer:
+        kind: SET
+        members:
+        - '-6'
+        - '4'
+  checks:
+  - kind: solve_equation
+    expr: x\cdot\left(x+2\right)=0
+    part: wartosci wykluczone
+  - kind: solve_equation
+    expr: \frac{24}{x}-\frac{24}{x+2}=2
+    part: rozwiazania
+  skills:
+  - wyznaczanie dziedziny
+  - przekształcanie równania wymiernego
+  - rozwiązywanie równania kwadratowego
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [wartosci wykluczone] SymPy solved it fresh: 2 members matched
+      ; [rozwiazania] SymPy solved it fresh: 2 members matched'
+- id: g-ex-05
+  slot: EXERCISE
+  ramp_index: 3
+  difficulty: 4
+  exercise_type: równanie kwadratowe z parametrem i wzory Viète'a
+  statement: Dane jest równanie \(x^{2}-6x+\left(m-2\right)=0\) z niewiadomą \(x\) i parametrem \(m\).
+    a) Wyznacz wszystkie wartości parametru \(m\), dla których to równanie ma dwa różne rozwiązania rzeczywiste
+    \(x_{1}\), \(x_{2}\). b) Wyznacz wszystkie takie wartości \(m\), dla których spełniony jest warunek
+    \(x_{1}^{2}+x_{2}^{2}=20\). Zapisz obliczenia.
+  statement_latex: x^{2}-6x+\left(m-2\right)=0,\qquad x_{1}^{2}+x_{2}^{2}=20
+  solution: |-
+    a) Tu \(a=1\neq 0\), \(b=-6\), \(c=m-2\).
+    \(\Delta=\left(-6\right)^{2}-4\cdot 1\cdot\left(m-2\right)=36-4m+8=44-4m\).
+    Warunek dwóch różnych rozwiązań: \(\Delta>0\), czyli \(44-4m>0\), stąd \(m<11\).
+
+    b) Dla \(m<11\) pierwiastki istnieją, więc możemy użyć wzorów Viète'a:
+    \(S=x_{1}+x_{2}=-\frac{b}{a}=6\), \(P=x_{1}\cdot x_{2}=\frac{c}{a}=m-2\).
+    \(x_{1}^{2}+x_{2}^{2}=S^{2}-2P=36-2\cdot\left(m-2\right)=40-2m\).
+    Warunek zadania: \(40-2m=20\), czyli \(2m=20\), zatem \(m=10\).
+    Sprawdzamy założenie: \(10<11\) ✓ (dla \(m=10\) mamy \(\Delta=44-40=4>0\)).
+    Odpowiedź: a) \(m\in\left(-\infty,\,11\right)\); b) \(m=10\).
+  solution_steps:
+  - Zapisz Δ = (−6)² − 4·1·(m − 2) = 44 − 4m.
+  - Rozwiąż nierówność 44 − 4m > 0, otrzymując m < 11.
+  - 'Zapisz wzory Viète''a: S = 6, P = m − 2.'
+  - Przekształć x₁² + x₂² = S² − 2P = 40 − 2m.
+  - Rozwiąż równanie 40 − 2m = 20, czyli m = 10.
+  - Sprawdź, że m = 10 spełnia warunek m < 11.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: m dla dwoch roznych rozwiazan
+      answer:
+        kind: INTERVAL
+        lo: -\infty
+        hi: '11'
+    - name: m z warunku na sume kwadratow
+      answer:
+        kind: NUMERIC
+        value: 10.0
+  checks:
+  - kind: solve_inequality
+    expr: 44-4\cdot m>0
+    var: m
+    part: m dla dwoch roznych rozwiazan
+  - kind: solve_equation
+    expr: 40-2\cdot m=20
+    var: m
+    part: m z warunku na sume kwadratow
+  skills:
+  - warunek Δ > 0 z parametrem
+  - wzory Viète'a
+  - wyrażenia symetryczne pierwiastków
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [m dla dwoch roznych rozwiazan] SymPy solved it fresh: endpoints
+      matched ; [m z warunku na sume kwadratow] SymPy solved it fresh: 10.0 vs 10.0 (tol 1e-09)'
+- id: g-ex-t00
+  slot: EXERCISE
+  ramp_index: 6
+  difficulty: 4
+  exercise_type: równanie wymierne sprowadzalne do kwadratowego
+  statement: Dane jest równanie \frac{3}{x-2} + \frac{x}{x+2} = \frac{12}{x^{2}-4}. Wyznacz dziedzinę
+    tego równania, a następnie rozwiąż je. Zapisz obliczenia.
+  statement_latex: \frac{3}{x-2} + \frac{x}{x+2} = \frac{12}{x^{2}-4}
+  solution: |-
+    DZIEDZINA. Mianowniki: x-2, x+2 oraz x^{2}-4 = \left(x-2\right)\left(x+2\right). Muszą być różne od zera, więc x \neq 2 i x \neq -2. Dziedziną jest zbiór \mathbb{R}\setminus\left\{-2,\,2\right\}.
+
+    PRZEKSZTAŁCENIE. Mnożymy obie strony równania przez \left(x-2\right)\left(x+2\right) (dla x z dziedziny jest to liczba różna od zera):
+    3\cdot\left(x+2\right) + x\cdot\left(x-2\right) = 12,
+    3x + 6 + x^{2} - 2x = 12,
+    x^{2} + x - 6 = 0.
+
+    ROZWIĄZANIE RÓWNANIA KWADRATOWEGO. a = 1, b = 1, c = -6, więc \Delta = 1^{2} - 4\cdot 1\cdot\left(-6\right) = 1 + 24 = 25, \sqrt{\Delta} = 5.
+    x_{1} = \frac{-1-5}{2} = -3, \qquad x_{2} = \frac{-1+5}{2} = 2.
+
+    WERYFIKACJA Z DZIEDZINĄ. Liczba 2 nie należy do dziedziny (zeruje mianowniki), więc jest rozwiązaniem obcym i ją odrzucamy. Zostaje x = -3.
+
+    SPRAWDZENIE: \frac{3}{-5} + \frac{-3}{-1} = -\frac{3}{5} + 3 = \frac{12}{5} oraz \frac{12}{\left(-3\right)^{2}-4} = \frac{12}{5}. Zgadza się.
+
+    Odpowiedź: dziedzina to \mathbb{R}\setminus\left\{-2,\,2\right\}, jedynym rozwiązaniem jest x = -3.
+  solution_steps:
+  - 'Przyrównaj mianowniki do zera: x-2 \neq 0, x+2 \neq 0, więc D = \mathbb{R}\setminus\left\{-2,2\right\}.'
+  - Zauważ, że x^{2}-4 = \left(x-2\right)\left(x+2\right) i pomnóż równanie stronami przez \left(x-2\right)\left(x+2\right).
+  - 'Uporządkuj: 3x+6+x^{2}-2x = 12, czyli x^{2}+x-6 = 0.'
+  - Oblicz \Delta = 1 + 24 = 25 i pierwiastki x = -3 oraz x = 2.
+  - 'Odrzuć x = 2 jako liczbę spoza dziedziny; odpowiedź: x = -3.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: dziedzina
+      answer:
+        kind: SYMBOLIC
+        latex: \mathbb{R}\setminus\left\{-2,\,2\right\}
+    - name: rozwiazanie
+      answer:
+        kind: SET
+        members:
+        - '-3'
+  checks:
+  - kind: solve_equation
+    expr: \frac{3}{x-2} + \frac{x}{x+2} = \frac{12}{x^{2}-4}
+    part: rozwiazanie
+  skills:
+  - wyznaczanie dziedziny równania wymiernego
+  - sprowadzanie do postaci ogólnej ax^2+bx+c=0
+  - rozwiązywanie równania kwadratowego deltą
+  - odrzucanie rozwiązań spoza dziedziny
+  verification:
+    checkability: REFERENCE_CALL
+    note: 2 parts matched
+- id: g-ex-t01
+  slot: EXERCISE
+  ramp_index: 7
+  difficulty: 5
+  exercise_type: równanie kwadratowe z parametrem, wzory Viète'a
+  statement: Dane jest równanie x^{2} + \left(m-3\right)\cdot x + m = 0 z niewiadomą x i parametrem m.
+    a) Wyznacz wszystkie wartości m, dla których to równanie ma dwa różne rozwiązania rzeczywiste. b)
+    Wyznacz wszystkie wartości m, dla których równanie ma dwa różne rozwiązania x_{1}, x_{2} spełniające
+    warunek x_{1}^{2} + x_{2}^{2} = 9. Zapisz obliczenia.
+  statement_latex: x^{2} + \left(m-3\right)\cdot x + m = 0,\qquad x_{1}^{2}+x_{2}^{2} = 9
+  solution: |-
+    a) Współczynnik przy x^{2} jest równy 1, więc równanie zawsze jest kwadratowe. Mamy a = 1, b = m-3, c = m, zatem
+    \Delta = \left(m-3\right)^{2} - 4\cdot 1\cdot m = m^{2} - 6m + 9 - 4m = m^{2} - 10m + 9.
+    Dwa różne rozwiązania istnieją wtedy i tylko wtedy, gdy \Delta > 0, czyli m^{2}-10m+9 > 0. Miejsca zerowe tego trójmianu: \Delta_{m} = 100 - 36 = 64, \sqrt{\Delta_{m}} = 8, więc m = \frac{10-8}{2} = 1 oraz m = \frac{10+8}{2} = 9. Ramiona paraboli skierowane są w górę, więc nierówność jest spełniona dla m \in \left(-\infty,\,1\right)\cup\left(9,\,+\infty\right).
+
+    b) Ze wzorów Viète'a (przy założeniu \Delta > 0):
+    S = x_{1}+x_{2} = -\frac{m-3}{1} = 3-m, \qquad P = x_{1}\cdot x_{2} = m.
+    Stąd x_{1}^{2}+x_{2}^{2} = S^{2} - 2P = \left(3-m\right)^{2} - 2m = m^{2} - 6m + 9 - 2m = m^{2} - 8m + 9.
+    Warunek zadania: m^{2}-8m+9 = 9, czyli m^{2}-8m = 0, m\left(m-8\right) = 0, więc m = 0 lub m = 8.
+
+    SPRAWDZENIE WARUNKU Z PUNKTU a): m = 0 należy do \left(-\infty,1\right) — dobrze. Dla m = 8 mamy \Delta = 64-80+9 = -7 < 0, więc równanie nie ma wtedy pierwiastków i tę wartość odrzucamy.
+
+    Kontrola dla m = 0: x^{2}-3x = 0, czyli x = 0 lub x = 3, a wtedy x_{1}^{2}+x_{2}^{2} = 0 + 9 = 9. Zgadza się.
+
+    Odpowiedź: a) m \in \left(-\infty,1\right)\cup\left(9,+\infty\right); b) m = 0.
+  solution_steps:
+  - Zapisz a = 1, b = m-3, c = m i oblicz \Delta = \left(m-3\right)^{2}-4m = m^{2}-10m+9.
+  - 'Rozwiąż nierówność m^{2}-10m+9 > 0: miejsca zerowe 1 i 9, stąd m \in \left(-\infty,1\right)\cup\left(9,+\infty\right).'
+  - 'Zapisz wzory Viète''a: S = 3-m, P = m.'
+  - Przekształć x_{1}^{2}+x_{2}^{2} = S^{2}-2P = m^{2}-8m+9.
+  - Rozwiąż równanie m^{2}-8m+9 = 9, otrzymując m = 0 lub m = 8.
+  - 'Odrzuć m = 8 (wtedy \Delta = -7 < 0); odpowiedź: m = 0.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: a_dwa_rozwiazania
+      answer:
+        kind: SYMBOLIC
+        latex: m \in \left(-\infty,\,1\right)\cup\left(9,\,+\infty\right)
+    - name: b_parametr
+      answer:
+        kind: NUMERIC
+        value: 0.0
+  checks:
+  - kind: solve_inequality
+    expr: m^{2} - 10 \cdot m + 9 > 0
+    var: m
+    part: a_dwa_rozwiazania
+  skills:
+  - obliczanie delty z parametrem
+  - rozwiązywanie nierówności kwadratowej z parametrem
+  - wzory Viète'a
+  - suma kwadratów pierwiastków
+  - odrzucanie wartości parametru niespełniających warunku \Delta>0
+  verification:
+    checkability: DETERMINISTIC
+    note: '[a_dwa_rozwiazania] SymPy solved it fresh and disagrees: ''m \\in \\left(-\\infty,\\,1\\right)\\cup\\left(9,\\,+\\infty\\right)''
+      vs ''Union(Interval.open(-oo, 1), Interval.open(9, oo))'' (as text)'
+- id: g-cm-06
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: demonstracja błędu — dzielenie przez x
+  statement: Rozwiąż równanie \(5x^{2}=15x\). Uczeń podzielił obie strony tego równania przez \(x\) i
+    otrzymał \(5x=15\), a stąd jedno rozwiązanie \(x=3\). Wskaż błąd w tym rozumowaniu i podaj wszystkie
+    rozwiązania równania.
+  statement_latex: 5x^{2}=15x
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: \(5x^{2}=15x\ \Rightarrow\ 5x=15\ \Rightarrow\ x=3\) — jedno rozwiązanie.
+
+    GDZIE JEST BŁĄD: dzielenie obu stron przez \(x\) jest dozwolone tylko przy założeniu \(x\neq 0\). Uczeń „po drodze” wykluczył liczbę 0, a przecież \(x=0\) spełnia równanie: \(5\cdot 0^{2}=0\) i \(15\cdot 0=0\). W ten sposób rozwiązanie zostało zgubione.
+
+    POPRAWNE ROZWIĄZANIE: przenosimy wszystko na jedną stronę i wyłączamy wspólny czynnik:
+    \(5x^{2}-15x=0\)
+    \(5x\cdot\left(x-3\right)=0\)
+    \(5x=0\) lub \(x-3=0\)
+    \(x=0\) lub \(x=3\).
+    Odpowiedź: równanie ma dwa rozwiązania: \(x=0\) i \(x=3\).
+  solution_steps:
+  - 'Pokaż błędny tok: dzielenie przez x daje 5x = 15 i tylko x = 3.'
+  - 'Wyjaśnij: dzielić przez x wolno tylko dla x ≠ 0, więc rozwiązanie x = 0 zostaje zgubione.'
+  - 'Poprawnie: 5x² − 15x = 0, czyli 5x(x − 3) = 0.'
+  - 'Z własności iloczynu równego zeru: x = 0 lub x = 3.'
+  answer:
+    kind: SET
+    members:
+    - '0'
+    - '3'
+  checks:
+  - kind: solve_equation
+    expr: 5x^{2}=15\cdot x
+  skills:
+  - równanie niezupełne
+  - własność iloczynu równego zeru
+  - ocena cudzego rozwiązania
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 2 members matched'
+- id: g-cm-07
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: demonstracja błędu — ujemna delta
+  statement: Dane jest równanie \(2x^{2}-3x+5=0\). Uczeń obliczył \(\Delta=-31\), a następnie napisał
+    \(\sqrt{\Delta}=\sqrt{31}\) i podał „rozwiązania” \(x=\frac{3\pm\sqrt{31}}{4}\). Oceń poprawność tego
+    rozumowania, oblicz \(\Delta\) i podaj zbiór rozwiązań równania.
+  statement_latex: 2x^{2}-3x+5=0
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: \(\Delta=-31\), po czym uczeń „pomija minus” i pisze \(\sqrt{\Delta}=\sqrt{31}\), otrzymując dwa nieistniejące pierwiastki \(x=\frac{3\pm\sqrt{31}}{4}\).
+
+    GDZIE JEST BŁĄD: pierwiastek kwadratowy z liczby ujemnej nie istnieje w zbiorze liczb rzeczywistych. Nie wolno ani opuszczać minusa, ani pisać \(\sqrt{\Delta}=-\sqrt{31}\). Znak delty jest ostatecznym rozstrzygnięciem: gdy \(\Delta<0\), nie liczymy już nic więcej.
+    Sprawdzenie „na liczbach”: dla \(x=\frac{3+\sqrt{31}}{4}\approx 2{,}14\) mamy \(2x^{2}-3x+5\approx 7{,}7\neq 0\).
+
+    POPRAWNE ROZWIĄZANIE: \(a=2\), \(b=-3\), \(c=5\),
+    \(\Delta=\left(-3\right)^{2}-4\cdot 2\cdot 5=9-40=-31<0\),
+    zatem równanie nie ma rozwiązań rzeczywistych — zbiór rozwiązań jest pusty. (Parabola \(y=2x^{2}-3x+5\) leży w całości nad osią \(OX\).)
+  solution_steps:
+  - 'Pokaż błędny tok: Δ = −31, „√Δ = √31” i dwa fałszywe pierwiastki.'
+  - Wyjaśnij, że pierwiastek z liczby ujemnej nie istnieje w liczbach rzeczywistych.
+  - Oblicz poprawnie Δ = (−3)² − 4·2·5 = −31.
+  - 'Zapisz wniosek: Δ < 0, równanie nie ma rozwiązań rzeczywistych (zbiór pusty).'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: delta
+      answer:
+        kind: NUMERIC
+        value: -31.0
+    - name: zbior rozwiazan
+      answer:
+        kind: SET
+  checks:
+  - kind: evaluate
+    expr: \left(-3\right)^{2}-4\cdot 2\cdot 5
+    part: delta
+  skills:
+  - obliczanie wyróżnika
+  - interpretacja znaku delty
+  - ocena cudzego rozwiązania
+  verification:
+    checkability: REFERENCE_CALL
+    note: '2 parts matched · det: [delta] SymPy solved it fresh: -31.0 vs -31.0 (tol 1e-09)'
+- id: g-cm-08
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: demonstracja błędu — znak we wzorze na pierwiastki
+  statement: Rozwiąż równanie \(3x^{2}+5x-2=0\). Uczeń obliczył \(\Delta=49\), a następnie zapisał \(x=\frac{5\pm
+    7}{2\cdot 3}\) i podał rozwiązania \(x=2\) oraz \(x=-\frac{1}{3}\). Wskaż błąd i podaj poprawne rozwiązania.
+  statement_latex: 3x^{2}+5x-2=0
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: \(x=\frac{5\pm 7}{6}\), czyli \(x=\frac{12}{6}=2\) lub \(x=\frac{-2}{6}=-\frac{1}{3}\).
+
+    GDZIE JEST BŁĄD: w liczniku wzoru występuje \(-b\), a nie \(b\). Skoro \(b=5\), to \(-b=-5\), a uczeń wstawił \(+5\).
+    Sprawdzenie: dla \(x=2\) mamy \(3\cdot 2^{2}+5\cdot 2-2=12+10-2=20\neq 0\) — liczba 2 nie jest pierwiastkiem.
+
+    POPRAWNE ROZWIĄZANIE: \(a=3\), \(b=5\), \(c=-2\),
+    \(\Delta=5^{2}-4\cdot 3\cdot\left(-2\right)=25+24=49\), \(\sqrt{\Delta}=7\),
+    \(x_{1}=\frac{-5-7}{2\cdot 3}=\frac{-12}{6}=-2\), \(x_{2}=\frac{-5+7}{6}=\frac{2}{6}=\frac{1}{3}\).
+    Sprawdzenie dla \(x=\frac{1}{3}\): \(3\cdot\frac{1}{9}+5\cdot\frac{1}{3}-2=\frac{1}{3}+\frac{5}{3}-2=0\) ✓.
+    Odpowiedź: \(x=-2\) lub \(x=\frac{1}{3}\).
+  solution_steps:
+  - 'Pokaż błędny tok: x = (5 ± 7)/6 i „rozwiązania” 2 oraz −1/3.'
+  - 'Wskaż błąd: w liczniku ma być −b, a więc −5, nie +5.'
+  - Sprawdź podstawieniem, że x = 2 nie spełnia równania.
+  - 'Policz poprawnie: Δ = 49, x₁ = (−5 − 7)/6 = −2, x₂ = (−5 + 7)/6 = 1/3.'
+  answer:
+    kind: SET
+    members:
+    - '-2'
+    - \frac{1}{3}
+  checks:
+  - kind: solve_equation
+    expr: 3x^{2}+5x-2=0
+  skills:
+  - wzory na pierwiastki
+  - sprawdzanie rozwiązań przez podstawienie
+  - ocena cudzego rozwiązania
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 2 members matched'
+- id: g-cm-09
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: demonstracja błędu — znak przy ujemnym c w delcie
+  statement: Dane jest równanie \(3x^{2}-7x-6=0\). Uczeń obliczył \(\Delta=\left(-7\right)^{2}-4\cdot
+    3\cdot 6=49-72=-23\) i napisał, że równanie nie ma rozwiązań. Wskaż błąd, oblicz poprawną wartość
+    \(\Delta\) i rozwiąż równanie.
+  statement_latex: 3x^{2}-7x-6=0
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: \(\Delta=49-72=-23<0\), więc „równanie nie ma rozwiązań”.
+
+    GDZIE JEST BŁĄD: wyrazem wolnym jest \(c=-6\), a nie \(6\). Uczeń pominął minus, przez co składnik \(-4ac\) wyszedł ujemny zamiast dodatniego.
+
+    POPRAWNE ROZWIĄZANIE: \(a=3\), \(b=-7\), \(c=-6\). Podstawiamy współczynniki w nawiasach:
+    \(\Delta=\left(-7\right)^{2}-4\cdot 3\cdot\left(-6\right)=49+72=121>0\), \(\sqrt{\Delta}=11\).
+    \(x_{1}=\frac{7-11}{2\cdot 3}=\frac{-4}{6}=-\frac{2}{3}\), \(x_{2}=\frac{7+11}{6}=\frac{18}{6}=3\).
+    Sprawdzenie dla \(x=3\): \(3\cdot 9-7\cdot 3-6=27-21-6=0\) ✓.
+    Odpowiedź: \(\Delta=121\), \(x=-\frac{2}{3}\) lub \(x=3\).
+  solution_steps:
+  - 'Pokaż błędny rachunek: Δ = 49 − 72 = −23 (pominięty minus przy c).'
+  - Wskaż, że c = −6, więc −4ac = −4·3·(−6) = +72.
+  - Oblicz Δ = 49 + 72 = 121 i √Δ = 11.
+  - Wyznacz x₁ = (7 − 11)/6 = −2/3 oraz x₂ = (7 + 11)/6 = 3.
+  - Sprawdź jeden z pierwiastków przez podstawienie.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: delta
+      answer:
+        kind: NUMERIC
+        value: 121.0
+    - name: rozwiazania
+      answer:
+        kind: SET
+        members:
+        - -\frac{2}{3}
+        - '3'
+  checks:
+  - kind: evaluate
+    expr: \left(-7\right)^{2}-4\cdot 3\cdot\left(-6\right)
+    part: delta
+  - kind: solve_equation
+    expr: 3x^{2}-7x-6=0
+    part: rozwiazania
+  skills:
+  - obliczanie wyróżnika
+  - wzory na pierwiastki
+  - ocena cudzego rozwiązania
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [delta] SymPy solved it fresh: 121.0 vs 121.0 (tol 1e-09) ;
+      [rozwiazania] SymPy solved it fresh: 2 members matched'
+- id: g-cm-10
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: demonstracja błędu — iloczyn równy liczbie różnej od zera
+  statement: 'Rozwiąż równanie \(\left(x-1\right)\cdot\left(x+4\right)=6\). Uczeń zapisał: „iloczyn jest
+    równy 6, więc \(x-1=6\) lub \(x+4=6\)”, i podał rozwiązania \(x=7\) oraz \(x=2\). Wskaż błąd i podaj
+    poprawne rozwiązania.'
+  statement_latex: \left(x-1\right)\cdot\left(x+4\right)=6
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: \(x-1=6\) lub \(x+4=6\), czyli \(x=7\) lub \(x=2\).
+
+    GDZIE JEST BŁĄD: własność „iloczyn równy zeru” działa wyłącznie wtedy, gdy po drugiej stronie stoi \(0\). Liczbę 6 można rozłożyć na iloczyn na nieskończenie wiele sposobów, więc z równości iloczynu i szóstki nic o czynnikach nie wynika.
+    Sprawdzenie: dla \(x=7\) mamy \(\left(7-1\right)\cdot\left(7+4\right)=6\cdot 11=66\neq 6\).
+
+    POPRAWNE ROZWIĄZANIE: wymnażamy i porządkujemy:
+    \(x^{2}+3x-4=6\)
+    \(x^{2}+3x-10=0\)
+    \(\Delta=3^{2}-4\cdot 1\cdot\left(-10\right)=9+40=49\), \(\sqrt{\Delta}=7\),
+    \(x_{1}=\frac{-3-7}{2}=-5\), \(x_{2}=\frac{-3+7}{2}=2\).
+    Sprawdzenie dla \(x=-5\): \(\left(-5-1\right)\cdot\left(-5+4\right)=\left(-6\right)\cdot\left(-1\right)=6\) ✓.
+    Odpowiedź: \(x=-5\) lub \(x=2\) (liczba 2 przypadkiem jest pierwiastkiem, ale sposób jej otrzymania był błędny).
+  solution_steps:
+  - 'Pokaż błędny tok: przyrównanie czynników do 6 i „rozwiązania” 7 oraz 2.'
+  - Wyjaśnij, że reguła iloczynu dotyczy wyłącznie iloczynu równego zeru.
+  - Sprawdź, że x = 7 nie spełnia równania.
+  - 'Wymnóż i uporządkuj: x² + 3x − 10 = 0.'
+  - Oblicz Δ = 49 i wyznacz x₁ = −5, x₂ = 2.
+  answer:
+    kind: SET
+    members:
+    - '-5'
+    - '2'
+  checks:
+  - kind: solve_equation
+    expr: \left(x-1\right)\cdot\left(x+4\right)=6
+  skills:
+  - własność iloczynu równego zeru
+  - porządkowanie równania do postaci ogólnej
+  - wzory na pierwiastki
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 2 members matched'
+- id: g-ch-t02
+  slot: CHALLENGE
+  ramp_index: 0
+  difficulty: 4
+  exercise_type: zadanie tekstowe geometryczne prowadzące do równania kwadratowego
+  statement: Przekątna pewnego prostokąta ma długość 13, a obwód tego prostokąta jest równy 34. Oblicz
+    pole tego prostokąta. Zapisz obliczenia.
+  statement_latex: x^{2} + \left(17 - x\right)^{2} = 13^{2}
+  solution: |-
+    Oznaczmy przez x długość jednego boku prostokąta. Z obwodu 2x + 2y = 34 wynika, że drugi bok ma długość y = 17 - x, przy czym 0 < x < 17.
+
+    Przekątna prostokąta wraz z jego dwoma bokami tworzy trójkąt prostokątny, więc z twierdzenia Pitagorasa:
+    x^{2} + \left(17-x\right)^{2} = 13^{2}.
+    Po wymnożeniu: x^{2} + 289 - 34x + x^{2} = 169, czyli 2x^{2} - 34x + 120 = 0, a po podzieleniu przez 2:
+    x^{2} - 17x + 60 = 0.
+    \Delta = \left(-17\right)^{2} - 4\cdot 1\cdot 60 = 289 - 240 = 49, \sqrt{\Delta} = 7.
+    x_{1} = \frac{17-7}{2} = 5, \qquad x_{2} = \frac{17+7}{2} = 12.
+    Obie liczby należą do przedziału \left(0,\,17\right) i opisują ten sam prostokąt o bokach 5 i 12.
+
+    Pole: P = 5\cdot 12 = 60.
+
+    KRÓTSZA DROGA. Ponieważ x oraz y = 17-x są pierwiastkami równania x^{2}-17x+60=0, to z wzorów Viète'a P = x\cdot y = 60. Można też od razu: \left(x+y\right)^{2} = x^{2}+y^{2}+2xy, czyli 17^{2} = 13^{2} + 2P, skąd P = \frac{289-169}{2} = 60.
+
+    Odpowiedź: pole prostokąta jest równe 60.
+  solution_steps:
+  - 'Wprowadź zmienną: bok x, drugi bok y = 17 - x (z obwodu 34), przy czym 0 < x < 17.'
+  - 'Zapisz twierdzenie Pitagorasa dla przekątnej: x^{2}+\left(17-x\right)^{2} = 169.'
+  - 'Uporządkuj do postaci ogólnej: 2x^{2}-34x+120 = 0, czyli x^{2}-17x+60 = 0.'
+  - Oblicz \Delta = 49 i pierwiastki x = 5 oraz x = 12 — to długości boków prostokąta.
+  - 'Oblicz pole: P = 5\cdot 12 = 60 (równoważnie P = \frac{17^{2}-13^{2}}{2}).'
+  answer:
+    kind: NUMERIC
+    value: 60.0
+  checks:
+  - kind: evaluate
+    expr: \frac{17^{2} - 13^{2}}{2}
+  stated_model:
+    variable: x
+    objective_latex: P\left(x\right) = x\cdot\left(17 - x\right)
+    domain_lo: '0'
+    domain_hi: '17'
+    goal: value
+    constraint_used: x^{2}+\left(17-x\right)^{2} = 13^{2}
+  skills:
+  - wprowadzenie zmiennej x
+  - twierdzenie Pitagorasa
+  - układanie równania kwadratowego z warunków geometrycznych
+  - wzory Viète'a jako skrót
+  - obliczanie pola prostokąta
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''x'': ''P\\left(x\\right)
+      = x\\cdot\\left(17 - x\\right)'') — human review'
+- id: g-ch-t03
+  slot: CHALLENGE
+  ramp_index: 1
+  difficulty: 5
+  exercise_type: zadanie tekstowe (droga–prędkość–czas) z równaniem wymiernym
+  statement: Rowerzysta przejechał trasę o długości 60 km, jadąc ze stałą prędkością. Gdyby przez cały
+    czas jechał ze stałą prędkością o 5 \frac{km}{h} większą, to pokonałby tę samą trasę o godzinę krócej.
+    Oblicz prędkość rowerzysty oraz czas, w jakim przejechał on tę trasę. Zapisz obliczenia.
+  statement_latex: \frac{60}{v} - \frac{60}{v+5} = 1
+  solution: |-
+    Oznaczmy przez v prędkość rowerzysty (w \frac{km}{h}); z sensu zadania v > 0.
+    Czas jazdy z prędkością v wynosi \frac{60}{v} godzin, a z prędkością v+5 wynosi \frac{60}{v+5} godzin. Ten drugi czas jest o godzinę krótszy, więc
+    \frac{60}{v} - \frac{60}{v+5} = 1.
+    Dziedzina: v > 0 (wtedy także v+5 \neq 0).
+
+    Mnożymy obie strony przez v\cdot\left(v+5\right) > 0:
+    60\cdot\left(v+5\right) - 60\cdot v = v\cdot\left(v+5\right),
+    60v + 300 - 60v = v^{2} + 5v,
+    v^{2} + 5v - 300 = 0.
+    \Delta = 5^{2} - 4\cdot 1\cdot\left(-300\right) = 25 + 1200 = 1225, \sqrt{\Delta} = 35.
+    v_{1} = \frac{-5-35}{2} = -20, \qquad v_{2} = \frac{-5+35}{2} = 15.
+    Liczba -20 nie należy do dziedziny (prędkość musi być dodatnia), więc ją odrzucamy.
+
+    Zatem v = 15 \frac{km}{h}, a czas jazdy wynosi \frac{60}{15} = 4 godziny.
+
+    SPRAWDZENIE: przy prędkości 20 \frac{km}{h} czas wynosiłby \frac{60}{20} = 3 godziny, czyli o godzinę mniej. Zgadza się.
+
+    Odpowiedź: prędkość rowerzysty to 15 \frac{km}{h}, a czas przejazdu 4 godziny.
+  solution_steps:
+  - 'Wprowadź zmienną: v — prędkość rowerzysty, v > 0.'
+  - 'Zapisz czasy przejazdu: \frac{60}{v} oraz \frac{60}{v+5} i warunek \frac{60}{v}-\frac{60}{v+5} =
+    1.'
+  - 'Pomnóż stronami przez v\left(v+5\right) i uporządkuj: v^{2}+5v-300 = 0.'
+  - Oblicz \Delta = 1225 i pierwiastki v = -20 oraz v = 15.
+  - Odrzuć v = -20 (prędkość dodatnia); przyjmij v = 15 \frac{km}{h}.
+  - 'Oblicz czas: t = \frac{60}{15} = 4 godziny.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: predkosc_km_h
+      answer:
+        kind: NUMERIC
+        value: 15.0
+    - name: czas_h
+      answer:
+        kind: NUMERIC
+        value: 4.0
+  checks:
+  - kind: evaluate
+    expr: \frac{-5 + \sqrt{5^{2} + 4 \cdot 300}}{2}
+    var: v
+    part: predkosc_km_h
+  - kind: evaluate
+    expr: \frac{60}{\frac{-5 + \sqrt{5^{2} + 4 \cdot 300}}{2}}
+    var: v
+    part: czas_h
+  stated_model:
+    variable: v
+    objective_latex: \frac{60}{v} - \frac{60}{v+5} = 1
+    domain_lo: '0'
+    goal: value
+    constraint_used: v > 0
+  skills:
+  - wprowadzenie zmiennej i dziedziny z warunku dodatniości
+  - układanie równania wymiernego z zależności czasowej
+  - sprowadzenie do równania kwadratowego
+  - odrzucenie pierwiastka niezgodnego z warunkami zadania
+  - interpretacja wyniku
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''v'': ''\\frac{60}{v}
+      - \\frac{60}{v+5} = 1'') — human review'
+- id: g-ch-t04
+  slot: CHALLENGE
+  ramp_index: 2
+  difficulty: 5
+  exercise_type: 'modelowanie: funkcja kwadratowa pola z ograniczeniem zewnętrznym'
+  statement: Rolnik ma 60 metrów siatki i chce ogrodzić nią prostokątny wybieg dla drobiu. Jednym bokiem
+    wybieg ma przylegać do prostej ściany stodoły, więc siatką ogradzane są tylko trzy pozostałe boki.
+    Ściana stodoły ma długość 24 metry, zatem bok wybiegu przylegający do ściany nie może być dłuższy
+    niż 24 metry. Niech x oznacza długość boku wybiegu prostopadłego do ściany (w metrach). a) Wyznacz
+    wzór funkcji P opisującej pole wybiegu w zależności od x oraz jej dziedzinę. b) Oblicz wymiary wybiegu
+    o największym możliwym polu i to największe pole. Zapisz obliczenia.
+  statement_latex: P\left(x\right) = x\cdot\left(60 - 2\cdot x\right)
+  solution: |-
+    a) Oznaczmy przez y długość boku przylegającego do ściany. Siatka pokrywa dwa boki o długości x i jeden bok o długości y, więc
+    2\cdot x + y = 60, \qquad y = 60 - 2\cdot x.
+    Warunki zadania:
+    \bullet x > 0,
+    \bullet y > 0, czyli 60 - 2x > 0, stąd x < 30,
+    \bullet y \le 24 (ściana ma 24 m), czyli 60 - 2x \le 24, stąd 2x \ge 36, czyli x \ge 18.
+    Część wspólna tych warunków to x \in \left\langle 18,\,30\right).
+    Pole wybiegu: P\left(x\right) = x\cdot\left(60 - 2\cdot x\right) = -2x^{2} + 60x, dla x \in \left\langle 18,\,30\right).
+
+    b) Współczynnik przy x^{2} jest ujemny, więc parabola ma ramiona skierowane w dół, a jej wierzchołek ma odciętą
+    p = \frac{-60}{2\cdot\left(-2\right)} = 15.
+    Liczba 15 NIE należy do dziedziny (dla x = 15 bok przy ścianie miałby 30 m, a ściana ma tylko 24 m). Dla x > 15 funkcja P jest malejąca, więc na przedziale \left\langle 18,\,30\right) największą wartość przyjmuje na jego lewym końcu, czyli dla x = 18.
+    Wtedy y = 60 - 2\cdot 18 = 24 oraz
+    P\left(18\right) = 18\cdot 24 = 432.
+    Sprawdzenie ograniczenia: y = 24 \le 24 — warunek jest spełniony (bok dokładnie pokrywa ścianę).
+
+    Odpowiedź: a) P\left(x\right) = -2x^{2} + 60x, x \in \left\langle 18,\,30\right); b) wybieg o wymiarach 18 m i 24 m, jego pole to 432 m^{2}.
+  solution_steps:
+  - 'Oznacz drugi bok: z 2x + y = 60 otrzymaj y = 60 - 2x.'
+  - 'Zapisz warunki: x > 0, y > 0 (x < 30) oraz y \le 24 (x \ge 18); dziedzina to \left\langle 18,30\right).'
+  - 'Zapisz wzór pola: P\left(x\right) = x\left(60-2x\right) = -2x^{2}+60x.'
+  - Oblicz odciętą wierzchołka p = \frac{-60}{2\cdot\left(-2\right)} = 15 i stwierdź, że 15 \notin \left\langle
+    18,30\right).
+  - Zauważ, że dla x > 15 funkcja maleje, więc największa wartość na dziedzinie jest dla x = 18.
+  - Oblicz y = 24 i P\left(18\right) = 18\cdot 24 = 432 m^{2}.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wzor_pola
+      answer:
+        kind: SYMBOLIC
+        latex: -2x^{2} + 60x
+    - name: dziedzina
+      answer:
+        kind: INTERVAL
+        lo: '18'
+        hi: '30'
+        lo_open: false
+    - name: wymiary_m
+      answer:
+        kind: TUPLE
+        items:
+        - '18'
+        - '24'
+    - name: pole_max_m2
+      answer:
+        kind: NUMERIC
+        value: 432.0
+  checks:
+  - kind: simplify
+    expr: x \cdot \left(60 - 2 \cdot x\right)
+    part: wzor_pola
+  - kind: evaluate
+    expr: 18 \cdot \left(60 - 2 \cdot 18\right)
+    part: pole_max_m2
+  stated_model:
+    variable: x
+    objective_latex: P\left(x\right) = x\cdot\left(60 - 2\cdot x\right)
+    domain_lo: '18'
+    domain_hi: '30'
+    domain_lo_open: false
+    constraint_used: 2\cdot x + y = 60,\ 0 < y \le 24
+  skills:
+  - wprowadzenie zmiennej i zapisanie drugiego wymiaru
+  - wyznaczanie wzoru funkcji pola
+  - wyznaczanie dziedziny z warunków zadania
+  - wyznaczanie wierzchołka paraboli
+  - sprawdzenie wykonalności wierzchołka i badanie monotoniczności na przedziale
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''x'': ''P\\left(x\\right)
+      = x\\cdot\\left(60 - 2\\cdot x\\right)'') — human review'

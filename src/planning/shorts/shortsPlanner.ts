@@ -3,21 +3,30 @@ import path from "node:path";
 import {FPS, SCENE_RENDER_DIR, SCENE_SOURCE_DIR} from "../../core/config";
 import {slugify} from "../../core/slug";
 import type {SceneType, Storyboard, VideoScene} from "../../core/types";
-import {ciagArytmetycznyDziesiaty} from "./ciagArytmetycznyDziesiaty";
-import {ciagArytmetycznyIntuicja} from "./ciagArytmetycznyIntuicja";
-import {ciagArytmetycznyN1} from "./ciagArytmetycznyN1";
-import {ciagArytmetycznySuma} from "./ciagArytmetycznySuma";
 import type {ShortSpec} from "./types";
 
-const SHORTS: Record<string, ShortSpec> = {
-  "ciag-arytmetyczny-n1": ciagArytmetycznyN1,
-  "ciag-arytmetyczny-suma": ciagArytmetycznySuma,
-  "ciag-arytmetyczny-dziesiaty": ciagArytmetycznyDziesiaty,
-  "ciag-arytmetyczny-intuicja": ciagArytmetycznyIntuicja
-};
+const SHORTS: Record<string, ShortSpec> = {};
+
+// Which shorts belong to which episode. The shorts stage of an episode renders
+// every key listed here, in order; publish nests them under
+// library/videos/<section>/<type>/shorts/<slug>/.
+const EPISODE_SHORTS: Record<string, string[]> = {};
+
+export function shortsForEpisode(section: string, type: string): string[] {
+  return EPISODE_SHORTS[`${section}/${type}`] ?? [];
+}
+
+export function shortSlug(key: string): string {
+  const s = SHORTS[key];
+  if (!s) throw new Error(`No short "${key}". Registered: ${Object.keys(SHORTS).join(", ")}`);
+  return slugify(s.slug);
+}
 
 function currentKey(): string {
-  return process.env.SHORT || "ciag-arytmetyczny-n1";
+  if (!process.env.SHORT) {
+    throw new Error("SHORT is required. Use the shorts stage after registering shorts for an episode.");
+  }
+  return process.env.SHORT;
 }
 
 function spec(): ShortSpec {
@@ -59,7 +68,7 @@ export function createStoryboard(topic: string): Storyboard {
   return {
     topic: s.topic,
     slug: slugify(s.slug),
-    sectionSlug: "ciag-arytmetyczny",
+    sectionSlug: process.env.SECTION ?? "unknown",
     episodeType: "THEORY",
     format: "short-9x16",
     fps: FPS,

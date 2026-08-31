@@ -1,0 +1,825 @@
+section: przeksztalcanie-rownan-wymierne-do-liniowego
+name: Przekształcanie równań i nierówności; równania wymierne prowadzące do liniowego
+scope: Equivalent transformations of equations and inequalities; solving rational equations that reduce
+  to a linear one, with the domain condition.
+requirements:
+- III.1
+counts:
+  total: 16
+  DETERMINISTIC: 9
+  NOT_MACHINE_CHECKABLE: 3
+  REFERENCE_CALL: 3
+  STATED_MODEL: 1
+exercises:
+- id: g-th-00
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: wyznaczanie dziedziny równania wymiernego
+  statement: Dane jest równanie \[\frac{x+4}{x-5}+\frac{3}{2\cdot x+1}=7.\] Wypisz wszystkie liczby rzeczywiste,
+    które nie należą do dziedziny tego równania.
+  statement_latex: \frac{x+4}{x-5}+\frac{3}{2\cdot x+1}=7
+  solution: |-
+    W równaniu występują dwa mianowniki: x-5 oraz 2x+1. Dziedzinę ustalamy przed jakimikolwiek przekształceniami: każdy mianownik musi być różny od zera.
+    Z warunku x-5 \neq 0 otrzymujemy x \neq 5.
+    Z warunku 2x+1 \neq 0 otrzymujemy 2x \neq -1, czyli x \neq -\frac{1}{2}.
+    Zatem D = \mathbb{R}\setminus\left\{-\frac{1}{2},\,5\right\}, a liczbami wykluczonymi z dziedziny są 5 oraz -\frac{1}{2}.
+  solution_steps:
+  - 'Wypisz wszystkie mianowniki: x-5 oraz 2x+1.'
+  - 'Przyrównaj każdy mianownik do zera: x-5=0 oraz 2x+1=0.'
+  - 'Rozwiąż: x=5 oraz x=-\frac{1}{2}.'
+  - 'Zapisz odpowiedź: z dziedziny wykluczamy liczby 5 i -\frac{1}{2}, czyli D=\mathbb{R}\setminus\left\{-\frac{1}{2},5\right\}.'
+  answer:
+    kind: SET
+    members:
+    - '5'
+    - -\frac{1}{2}
+  checks:
+  - kind: solve_equation
+    expr: \left(x-5\right)\cdot\left(2\cdot x+1\right)=0
+  skills:
+  - wyznaczanie dziedziny wyrażenia wymiernego
+  - zapisywanie założeń
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 2 members matched'
+- id: g-th-01
+  slot: THEORY_SUPPORT
+  ramp_index: 1
+  difficulty: 2
+  exercise_type: równanie wymierne (proporcja)
+  statement: Rozwiąż równanie \[\frac{2\cdot x-1}{x+4}=3.\]
+  statement_latex: \frac{2\cdot x-1}{x+4}=3
+  solution: |-
+    Dziedzina: x+4 \neq 0, czyli x \neq -4, D=\mathbb{R}\setminus\{-4\}.
+    W dziedzinie mnożymy obie strony przez x+4 (wyrażenie różne od zera, więc przekształcenie jest równoważne):
+    2x-1 = 3\cdot\left(x+4\right)
+    2x-1 = 3x+12
+    2x-3x = 12+1
+    -x = 13
+    x = -13.
+    Liczba -13 należy do dziedziny (-13 \neq -4).
+    Sprawdzenie: \frac{2\cdot(-13)-1}{-13+4}=\frac{-27}{-9}=3. ✓
+    Odpowiedź: x=-13.
+  solution_steps:
+  - 'Zapisz założenie: x+4\neq 0, czyli x\neq -4.'
+  - 'Pomnóż obie strony przez x+4: 2x-1=3\cdot\left(x+4\right).'
+  - 'Wymnóż nawias: 2x-1=3x+12.'
+  - 'Uporządkuj: -x=13, stąd x=-13.'
+  - Sprawdź przynależność do dziedziny i podstaw do równania wyjściowego.
+  answer:
+    kind: NUMERIC
+    value: -13.0
+  checks:
+  - kind: solve_equation
+    expr: \frac{2\cdot x-1}{x+4}=3
+  skills:
+  - mnożenie na krzyż
+  - rozwiązywanie równania liniowego
+  - konfrontacja wyniku z dziedziną
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: -13.0 vs -13.0 (tol 1e-09)'
+- id: g-th-02
+  slot: THEORY_SUPPORT
+  ramp_index: 2
+  difficulty: 1
+  exercise_type: nierówność liniowa
+  statement: Rozwiąż nierówność \[-4\cdot x+3>11\] i zapisz zbiór jej rozwiązań w postaci przedziału.
+  statement_latex: -4\cdot x+3>11
+  solution: |-
+    Odejmujemy 3 od obu stron (przekształcenie równoważne, znak bez zmian):
+    -4x > 8.
+    Dzielimy obie strony przez -4. Jest to liczba ujemna, więc ZMIENIAMY zwrot nierówności:
+    x < -2.
+    Zbiór rozwiązań: x \in \left(-\infty,-2\right).
+    Kontrola: dla x=-3 mamy -4\cdot(-3)+3=15>11 (prawda), dla x=0 mamy 3>11 (fałsz).
+  solution_steps:
+  - 'Odejmij 3 od obu stron: -4x>8.'
+  - 'Podziel obie strony przez -4 i odwróć zwrot nierówności: x<-2.'
+  - 'Zapisz zbiór rozwiązań: x\in\left(-\infty,-2\right).'
+  - Sprawdź liczbą z wnętrza przedziału i liczbą spoza niego.
+  answer:
+    kind: INTERVAL
+    hi: '-2'
+  checks:
+  - kind: solve_inequality
+    expr: -4\cdot x+3>11
+  skills:
+  - przekształcenia równoważne nierówności
+  - zmiana zwrotu przy dzieleniu przez liczbę ujemną
+  - zapis zbioru rozwiązań w postaci przedziału
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: endpoints matched'
+- id: g-ex-03
+  slot: EXERCISE
+  ramp_index: 1
+  difficulty: 2
+  exercise_type: równanie liniowe z ułamkami liczbowymi
+  statement: Rozwiąż równanie \[\frac{3\cdot x-2}{4}-\frac{x+1}{6}=\frac{5}{12}.\]
+  statement_latex: \frac{3\cdot x-2}{4}-\frac{x+1}{6}=\frac{5}{12}
+  solution: |-
+    Mianowniki są liczbami, więc dziedziną jest zbiór \mathbb{R}.
+    NWW(4,6,12)=12. Mnożymy obie strony przez 12 (liczba dodatnia, przekształcenie równoważne):
+    3\cdot\left(3x-2\right)-2\cdot\left(x+1\right)=5.
+    Wymnażamy nawiasy, pamiętając o minusie przed drugim nawiasem:
+    9x-6-2x-2=5
+    7x-8=5
+    7x=13
+    x=\frac{13}{7}.
+    Sprawdzenie: dla x=\frac{13}{7} mamy \frac{3\cdot\frac{13}{7}-2}{4}=\frac{\frac{25}{7}}{4}=\frac{25}{28} oraz \frac{\frac{13}{7}+1}{6}=\frac{\frac{20}{7}}{6}=\frac{20}{42}=\frac{10}{21}. Różnica: \frac{75}{84}-\frac{40}{84}=\frac{35}{84}=\frac{5}{12}. ✓
+    Odpowiedź: x=\frac{13}{7}.
+  solution_steps:
+  - Zauważ, że mianowniki są liczbowe, więc D=\mathbb{R}.
+  - 'Pomnóż obie strony przez 12: 3\cdot\left(3x-2\right)-2\cdot\left(x+1\right)=5.'
+  - 'Wymnóż nawiasy: 9x-6-2x-2=5.'
+  - 'Zredukuj wyrazy podobne: 7x=13.'
+  - 'Podziel przez 7: x=\frac{13}{7}; sprawdź podstawieniem.'
+  answer:
+    kind: NUMERIC
+    value: 1.8571428571428572
+  checks:
+  - kind: solve_equation
+    expr: \frac{3\cdot x-2}{4}-\frac{x+1}{6}=\frac{5}{12}
+  skills:
+  - mnożenie przez NWW mianowników
+  - wymnażanie nawiasów ze znakiem minus
+  - rozwiązywanie równania ax=b
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 1.8571428571428572 vs 1.8571428571428572 (tol 1e-09)'
+- id: g-ex-04
+  slot: EXERCISE
+  ramp_index: 2
+  difficulty: 3
+  exercise_type: równanie wymierne prowadzące do liniowego
+  statement: Dane jest równanie \[\frac{x+2}{x-3}=\frac{x-1}{x+2}.\] a) Wyznacz dziedzinę tego równania,
+    tzn. wypisz wszystkie liczby rzeczywiste, które do niej nie należą. b) Rozwiąż to równanie.
+  statement_latex: \frac{x+2}{x-3}=\frac{x-1}{x+2}
+  solution: |-
+    a) Mianowniki: x-3 oraz x+2. Warunki: x-3\neq 0 i x+2\neq 0, czyli x\neq 3 i x\neq -2. Zatem D=\mathbb{R}\setminus\{-2,3\}, a z dziedziny wykluczamy liczby 3 i -2.
+    b) W dziedzinie oba mianowniki są różne od zera, więc możemy zastosować proporcję (mnożenie na krzyż):
+    \left(x+2\right)\cdot\left(x+2\right)=\left(x-1\right)\cdot\left(x-3\right)
+    x^{2}+4x+4=x^{2}-4x+3.
+    Wyrazy x^{2} redukują się po obu stronach – zostaje równanie liniowe:
+    4x+4=-4x+3
+    8x=-1
+    x=-\frac{1}{8}.
+    Liczba -\frac{1}{8} należy do dziedziny (jest różna od 3 i od -2).
+    Sprawdzenie: L=\frac{-\frac{1}{8}+2}{-\frac{1}{8}-3}=\frac{\frac{15}{8}}{-\frac{25}{8}}=-\frac{3}{5}, P=\frac{-\frac{1}{8}-1}{-\frac{1}{8}+2}=\frac{-\frac{9}{8}}{\frac{15}{8}}=-\frac{3}{5}. ✓
+    Odpowiedź: x=-\frac{1}{8}.
+  solution_steps:
+  - 'Zapisz założenia: x-3\neq 0 i x+2\neq 0, czyli x\neq 3 i x\neq -2.'
+  - 'Zastosuj proporcję: \left(x+2\right)^{2}=\left(x-1\right)\cdot\left(x-3\right).'
+  - 'Wymnóż: x^{2}+4x+4=x^{2}-4x+3 i zredukuj wyrazy x^{2}.'
+  - Rozwiąż równanie liniowe 8x=-1, czyli x=-\frac{1}{8}.
+  - Sprawdź, że -\frac{1}{8}\in D i podstaw do równania wyjściowego.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: liczby wykluczone z dziedziny
+      answer:
+        kind: SET
+        members:
+        - '3'
+        - '-2'
+    - name: rozwiązanie równania
+      answer:
+        kind: NUMERIC
+        value: -0.125
+  checks:
+  - kind: solve_equation
+    expr: \left(x-3\right)\cdot\left(x+2\right)=0
+    part: liczby wykluczone z dziedziny
+  - kind: solve_equation
+    expr: \frac{x+2}{x-3}=\frac{x-1}{x+2}
+    part: rozwiązanie równania
+  skills:
+  - wyznaczanie dziedziny
+  - metoda proporcji
+  - redukcja wyrazów z x^2
+  - konfrontacja wyniku z dziedziną
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [liczby wykluczone z dziedziny] SymPy solved it fresh: 2 members
+      matched ; [rozwiązanie równania] SymPy solved it fresh: -0.125 vs -0.125 (tol 1e-09)'
+- id: g-ex-05
+  slot: EXERCISE
+  ramp_index: 3
+  difficulty: 4
+  exercise_type: równanie wymierne z trzema ułamkami
+  statement: Dane jest równanie \[\frac{5}{x-2}-\frac{3}{x}=\frac{4}{x\cdot\left(x-2\right)}.\] a) Wyznacz
+    dziedzinę tego równania, tzn. wypisz wszystkie liczby rzeczywiste, które do niej nie należą. b) Rozwiąż
+    to równanie. c) Rozstrzygnij, czy liczba 2 jest rozwiązaniem tego równania. Odpowiedź uzasadnij.
+  statement_latex: \frac{5}{x-2}-\frac{3}{x}=\frac{4}{x\cdot\left(x-2\right)}
+  solution: |-
+    a) Mianowniki: x-2, x oraz x\cdot\left(x-2\right). Warunki: x-2\neq 0 i x\neq 0, czyli x\neq 2 i x\neq 0. Zatem D=\mathbb{R}\setminus\{0,2\}; z dziedziny wykluczamy liczby 0 i 2.
+    b) Wspólnym mianownikiem jest x\cdot\left(x-2\right), które w dziedzinie jest różne od zera, więc mnożenie przez nie jest przekształceniem równoważnym:
+    5\cdot x-3\cdot\left(x-2\right)=4
+    5x-3x+6=4
+    2x=-2
+    x=-1.
+    Liczba -1 należy do dziedziny.
+    Sprawdzenie: L=\frac{5}{-3}-\frac{3}{-1}=-\frac{5}{3}+3=\frac{4}{3}, P=\frac{4}{\left(-1\right)\cdot\left(-3\right)}=\frac{4}{3}. ✓
+    Odpowiedź: x=-1.
+    c) Nie. Liczba 2 nie należy do dziedziny równania (dla x=2 mianownik x-2 jest równy zeru, więc wyrażenie \frac{5}{x-2} nie ma sensu liczbowego). Liczba spoza dziedziny nigdy nie jest rozwiązaniem.
+  solution_steps:
+  - 'Zapisz założenia: x\neq 0 i x\neq 2.'
+  - Wyznacz wspólny mianownik x\cdot\left(x-2\right) i pomnóż przez niego obie strony.
+  - Otrzymaj równanie 5x-3\cdot\left(x-2\right)=4 i wymnóż nawias.
+  - 'Zredukuj: 2x=-2, czyli x=-1.'
+  - Sprawdź, że -1\in D, i podstaw do równania wyjściowego.
+  - Uzasadnij, że 2 nie może być rozwiązaniem, bo nie należy do dziedziny.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: liczby wykluczone z dziedziny
+      answer:
+        kind: SET
+        members:
+        - '0'
+        - '2'
+    - name: rozwiązanie równania
+      answer:
+        kind: NUMERIC
+        value: -1.0
+    - name: czy 2 jest rozwiązaniem – uzasadnienie
+      answer:
+        kind: NOT_MACHINE_CHECKABLE
+        reason: Uczeń musi uzasadnić, że liczba 2 nie jest rozwiązaniem, ponieważ nie należy do dziedziny
+          (dla x=2 mianownik x-2 równa się zeru i wyrażenie nie ma sensu liczbowego).
+  checks:
+  - kind: solve_equation
+    expr: x\cdot\left(x-2\right)=0
+    part: liczby wykluczone z dziedziny
+  - kind: solve_equation
+    expr: \frac{5}{x-2}-\frac{3}{x}=\frac{4}{x\cdot\left(x-2\right)}
+    part: rozwiązanie równania
+  skills:
+  - wyznaczanie dziedziny
+  - wspólny mianownik wyrażeń wymiernych
+  - rozwiązywanie równania liniowego
+  - uzasadnianie odrzucenia liczby spoza dziedziny
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'part(s) need a human: czy 2 jest rozwiązaniem – uzasadnienie · 2/2 other parts solved fresh'
+- id: g-ex-t00
+  slot: EXERCISE
+  ramp_index: 6
+  difficulty: 3
+  exercise_type: równanie wymierne prowadzące do liniowego
+  statement: Wyznacz dziedzinę równania \frac{x+4}{x-1}-\frac{x-3}{x+1}=\frac{19}{x^{2}-1}, a następnie
+    rozwiąż to równanie.
+  statement_latex: \frac{x+4}{x-1}-\frac{x-3}{x+1}=\frac{19}{x^{2}-1}
+  solution: |-
+    Rozkładamy mianownik prawej strony: x^{2}-1=\left(x-1\right)\cdot\left(x+1\right).
+    Dziedzina: musi być x-1\neq 0 oraz x+1\neq 0, czyli x\neq 1 i x\neq -1. Zatem D=\mathbb{R}\setminus\{-1,1\}.
+    Wspólnym mianownikiem wszystkich ułamków jest \left(x-1\right)\cdot\left(x+1\right); w dziedzinie jest on różny od zera, więc mnożenie obu stron przez niego jest przekształceniem równoważnym:
+    \left(x+4\right)\cdot\left(x+1\right)-\left(x-3\right)\cdot\left(x-1\right)=19.
+    Wymnażamy nawiasy (uwaga na minus przed drugim iloczynem):
+    x^{2}+5x+4-\left(x^{2}-4x+3\right)=19
+    x^{2}+5x+4-x^{2}+4x-3=19
+    9x+1=19
+    9x=18
+    x=2.
+    Liczba 2 należy do dziedziny (2\neq 1 i 2\neq -1).
+    Sprawdzenie w równaniu wyjściowym: L=\frac{6}{1}-\frac{-1}{3}=6+\frac{1}{3}=\frac{19}{3}, P=\frac{19}{4-1}=\frac{19}{3}. Zgadza się.
+    Odpowiedź: D=\mathbb{R}\setminus\{-1,1\}, x=2.
+  solution_steps:
+  - 'Rozłóż mianownik: x^{2}-1=\left(x-1\right)\cdot\left(x+1\right).'
+  - 'Zapisz założenia: x\neq 1 i x\neq -1, czyli D=\mathbb{R}\setminus\{-1,1\}.'
+  - Pomnóż obie strony przez \left(x-1\right)\cdot\left(x+1\right) (w dziedzinie różne od zera).
+  - 'Wymnóż nawiasy: x^{2}+5x+4-x^{2}+4x-3=19.'
+  - 'Zredukuj wyrazy z x^{2} i uporządkuj: 9x=18.'
+  - 'Rozwiąż: x=2 i sprawdź, że 2\in D.'
+  - Wykonaj sprawdzenie przez podstawienie do równania wyjściowego.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: dziedzina
+      answer:
+        kind: SYMBOLIC
+        latex: \mathbb{R}\setminus\{-1,1\}
+    - name: rozwiazanie
+      answer:
+        kind: NUMERIC
+        value: 2.0
+  checks:
+  - kind: solve_equation
+    expr: \frac{x+4}{x-1}-\frac{x-3}{x+1}=\frac{19}{x^{2}-1}
+    part: rozwiazanie
+  skills:
+  - wyznaczanie dziedziny równania wymiernego
+  - sprowadzanie do wspólnego mianownika
+  - rozwiązywanie równania liniowego
+  - konfrontacja wyniku z dziedziną
+  verification:
+    checkability: REFERENCE_CALL
+    note: 2 parts matched
+- id: g-ex-t01
+  slot: EXERCISE
+  ramp_index: 7
+  difficulty: 4
+  exercise_type: przekształcanie wzoru (wyznaczanie zmiennej z mianownika)
+  statement: Opór zastępczy R dwóch oporników o oporach R_{1} i R_{2} połączonych równolegle spełnia zależność
+    \frac{1}{R}=\frac{1}{R_{1}}+\frac{1}{R_{2}}, przy czym R>0, R_{1}>0 i R_{2}>0. a) Wyznacz R_{2} w
+    zależności od R i R_{1} oraz zapisz założenie, przy którym takie przekształcenie jest możliwe. b)
+    Oblicz R_{2} dla R=4\ \Omega oraz R_{1}=12\ \Omega.
+  statement_latex: \frac{1}{R}=\frac{1}{R_{1}}+\frac{1}{R_{2}}
+  solution: |-
+    a) Traktujemy R_{2} jako niewiadomą, a R i R_{1} jako dane dodatnie.
+    Odejmujemy \frac{1}{R_{1}} od obu stron (przekształcenie równoważne):
+    \frac{1}{R_{2}}=\frac{1}{R}-\frac{1}{R_{1}}.
+    Sprowadzamy prawą stronę do wspólnego mianownika R\cdot R_{1}\neq 0:
+    \frac{1}{R_{2}}=\frac{R_{1}-R}{R\cdot R_{1}}.
+    Aby odwrócić obie strony (równoważnie: pomnożyć na krzyż), prawa strona musi być różna od zera, czyli R_{1}-R\neq 0, to znaczy R_{1}\neq R. Wtedy
+    R_{2}=\frac{R\cdot R_{1}}{R_{1}-R}.
+    Dodatkowo z warunku R_{2}>0 wynika R_{1}>R.
+    b) Podstawiamy R=4 i R_{1}=12:
+    R_{2}=\frac{4\cdot 12}{12-4}=\frac{48}{8}=6.
+    Sprawdzenie: \frac{1}{12}+\frac{1}{6}=\frac{1}{12}+\frac{2}{12}=\frac{3}{12}=\frac{1}{4}=\frac{1}{R}. Zgadza się.
+    Odpowiedź: R_{2}=\frac{R\cdot R_{1}}{R_{1}-R} przy założeniu R_{1}\neq R; dla danych liczbowych R_{2}=6\ \Omega.
+  solution_steps:
+  - Potraktuj R_{2} jako niewiadomą; odejmij \frac{1}{R_{1}} od obu stron.
+  - 'Sprowadź prawą stronę do wspólnego mianownika: \frac{1}{R_{2}}=\frac{R_{1}-R}{R\cdot R_{1}}.'
+  - Zapisz założenie R_{1}-R\neq 0 (dzielimy/odwracamy tylko wyrażenie różne od zera).
+  - 'Odwróć obie strony: R_{2}=\frac{R\cdot R_{1}}{R_{1}-R}.'
+  - 'Podstaw R=4 i R_{1}=12: R_{2}=\frac{4\cdot 12}{12-4}=6.'
+  - Sprawdź wynik, podstawiając do wzoru wyjściowego.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wzor
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{R\cdot R_{1}}{R_{1}-R}
+    - name: zalozenie
+      answer:
+        kind: SYMBOLIC
+        latex: R_{1}\neq R
+    - name: wartosc
+      answer:
+        kind: NUMERIC
+        value: 6.0
+  checks:
+  - kind: evaluate
+    expr: \frac{4\cdot 12}{12-4}
+    part: wartosc
+  skills:
+  - przekształcanie wzoru
+  - działania na ułamkach algebraicznych
+  - zapisywanie założeń
+  - obliczanie wartości ze wzoru
+  verification:
+    checkability: REFERENCE_CALL
+    note: 'could not compare: reference produced 2 outputs, answer has 3'
+- id: g-cm-06
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: nierówność liniowa – analiza błędu
+  statement: Rozwiąż nierówność \[4-5\cdot\left(x-1\right)\ge 2\cdot x+23\] i zapisz zbiór jej rozwiązań
+    w postaci przedziału. Uczeń, który rozwiązywał tę nierówność, doszedł do postaci -7\cdot x\ge 14 i
+    zapisał odpowiedź x\in\langle -2,+\infty). Wyjaśnij, na czym polega jego błąd, i podaj poprawny zbiór
+    rozwiązań.
+  statement_latex: 4-5\cdot\left(x-1\right)\ge 2\cdot x+23
+  solution: |-
+    BŁĘDNE ROZUMOWANIE UCZNIA:
+    4-5x+5\ge 2x+23, czyli 9-5x\ge 2x+23, dalej -5x-2x\ge 23-9, czyli -7x\ge 14. Uczeń dzieli obie strony przez -7 i pisze x\ge -2, „bo dzielimy obie strony przez -7 i nic więcej się nie dzieje”. Otrzymuje błędną odpowiedź x\in\langle -2,+\infty).
+    DLACZEGO TO JEST BŁĄD:
+    Mnożenie i dzielenie przez liczbę ujemną odwraca porządek liczb na osi, więc przy dzieleniu przez -7 zwrot nierówności musi się zmienić na przeciwny. Kontrola: liczba x=0 należy do zbioru ucznia, ale nie spełnia nierówności wyjściowej: L=4-5\cdot\left(0-1\right)=9, P=2\cdot 0+23=23 i 9\ge 23 jest fałszem.
+    POPRAWNE ROZWIĄZANIE:
+    4-5x+5\ge 2x+23
+    9-5x\ge 2x+23
+    -7x\ge 14\quad|\ :\left(-7\right)\ \text{(liczba ujemna – zmiana zwrotu)}
+    x\le -2.
+    Zbiór rozwiązań: x\in\left(-\infty,-2\right\rangle.
+    Sprawdzenie: dla x=-2: L=4-5\cdot\left(-3\right)=19, P=-4+23=19, więc 19\ge 19 – prawda; dla x=0 nierówność jest fałszywa, zgodnie z wynikiem.
+  solution_steps:
+  - 'Wymnóż nawias: 4-5x+5\ge 2x+23, czyli 9-5x\ge 2x+23.'
+  - 'Przenieś wyrazy z x na lewą stronę, liczby na prawą: -7x\ge 14.'
+  - 'Zauważ błąd: dzieląc przez -7 (liczbę ujemną) trzeba ODWRÓCIĆ zwrot nierówności.'
+  - 'Poprawnie: x\le -2.'
+  - Zapisz zbiór rozwiązań x\in\left(-\infty,-2\right\rangle i sprawdź liczbą x=0, która nie spełnia nierówności.
+  answer:
+    kind: INTERVAL
+    hi: '-2'
+    hi_open: false
+  checks:
+  - kind: solve_inequality
+    expr: 4-5\cdot\left(x-1\right)\ge 2\cdot x+23
+  skills:
+  - przekształcenia równoważne nierówności
+  - zmiana zwrotu przy dzieleniu przez liczbę ujemną
+  - zapis zbioru rozwiązań
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: endpoints matched'
+- id: g-cm-07
+  slot: COMMON_MISTAKE
+  ramp_index: 1
+  difficulty: 3
+  exercise_type: równanie wymierne – rozwiązanie obce
+  statement: Rozwiąż równanie \[\frac{3\cdot x}{x-5}=\frac{15}{x-5}+2.\] Uczeń pomnożył od razu obie strony
+    przez x-5, otrzymał x=5 i zapisał tę liczbę jako odpowiedź. Wyjaśnij, na czym polega jego błąd, i
+    podaj poprawny zbiór rozwiązań.
+  statement_latex: \frac{3\cdot x}{x-5}=\frac{15}{x-5}+2
+  solution: |-
+    BŁĘDNE ROZUMOWANIE UCZNIA:
+    Uczeń bez żadnych założeń mnoży obie strony przez x-5:
+    3x=15+2\cdot\left(x-5\right)
+    3x=15+2x-10
+    3x-2x=5
+    x=5
+    i podaje odpowiedź x=5.
+    DLACZEGO TO JEST BŁĄD:
+    Dziedzinę trzeba ustalić PRZED przekształceniami. W równaniu występują ułamki o mianowniku x-5, więc x-5\neq 0, czyli x\neq 5 i D=\mathbb{R}\setminus\{5\}. Mnożenie obu stron przez x-5 jest przekształceniem równoważnym tylko przy założeniu x\neq 5; liczba 5 „pojawiła się” jako rozwiązanie obce. Dla x=5 lewa i prawa strona równania wyjściowego w ogóle nie mają sensu liczbowego (dzielenie przez zero).
+    POPRAWNE ROZWIĄZANIE:
+    Założenie: x\neq 5.
+    Mnożymy obie strony przez x-5\neq 0: 3x=15+2\cdot\left(x-5\right), czyli 3x=2x+5, stąd x=5.
+    Otrzymana liczba nie należy do dziedziny, więc ją odrzucamy.
+    Odpowiedź: równanie nie ma rozwiązań (zbiór rozwiązań jest pusty).
+  solution_steps:
+  - 'Zapisz założenie: x-5\neq 0, czyli x\neq 5.'
+  - 'Pomnóż obie strony przez x-5: 3x=15+2\cdot\left(x-5\right).'
+  - 'Uporządkuj: 3x=2x+5, czyli x=5.'
+  - 'Skonfrontuj wynik z dziedziną: 5\notin D, więc jest to rozwiązanie obce (powstało przy mnożeniu przez
+    wyrażenie mogące być zerem).'
+  - 'Zapisz odpowiedź: równanie nie ma rozwiązań.'
+  answer:
+    kind: SET
+  checks:
+  - kind: solve_equation
+    expr: \frac{3\cdot x}{x-5}=\frac{15}{x-5}+2
+  skills:
+  - wyznaczanie dziedziny
+  - rozpoznawanie rozwiązania obcego
+  - równanie sprzeczne w dziedzinie
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 0 members matched'
+- id: g-cm-08
+  slot: COMMON_MISTAKE
+  ramp_index: 2
+  difficulty: 3
+  exercise_type: równanie z czynnikiem wspólnym – analiza błędu
+  statement: 'Rozwiąż równanie \[2\cdot x\cdot\left(x+4\right)=7\cdot\left(x+4\right).\] Uczeń podzielił
+    obie strony przez \left(x+4\right) i podał jedną odpowiedź: x=\frac{7}{2}. Wyjaśnij, na czym polega
+    jego błąd, i podaj wszystkie rozwiązania równania.'
+  statement_latex: 2\cdot x\cdot\left(x+4\right)=7\cdot\left(x+4\right)
+  solution: |-
+    BŁĘDNE ROZUMOWANIE UCZNIA:
+    Uczeń dzieli obie strony przez \left(x+4\right):
+    2x=7, więc x=\frac{7}{2}
+    i podaje to jako jedyne rozwiązanie.
+    DLACZEGO TO JEST BŁĄD:
+    Dzielić obie strony wolno tylko przez wyrażenie RÓŻNE OD ZERA. Wyrażenie x+4 zeruje się dla x=-4, a ta liczba należy do dziedziny równania (dziedziną jest \mathbb{R}, bo nie ma tu ułamków). Dzieląc bez założenia, uczeń gubi rozwiązanie x=-4.
+    POPRAWNE ROZWIĄZANIE:
+    Przenosimy wszystko na jedną stronę i wyłączamy wspólny czynnik:
+    2x\cdot\left(x+4\right)-7\cdot\left(x+4\right)=0
+    \left(x+4\right)\cdot\left(2x-7\right)=0.
+    Iloczyn jest równy zeru, gdy któryś czynnik jest zerem:
+    x+4=0\ \text{lub}\ 2x-7=0,
+    czyli x=-4 lub x=\frac{7}{2}.
+    Sprawdzenie dla x=-4: L=2\cdot\left(-4\right)\cdot 0=0, P=7\cdot 0=0 – równość prawdziwa.
+    Odpowiedź: x=-4 oraz x=\frac{7}{2}.
+  solution_steps:
+  - Zauważ, że dzielenie przez \left(x+4\right) wymaga założenia x\neq -4.
+  - 'Przenieś wszystko na jedną stronę: 2x\cdot\left(x+4\right)-7\cdot\left(x+4\right)=0.'
+  - 'Wyłącz wspólny czynnik: \left(x+4\right)\cdot\left(2x-7\right)=0.'
+  - 'Przyrównaj każdy czynnik do zera: x=-4 lub x=\frac{7}{2}.'
+  - Sprawdź, że x=-4 spełnia równanie wyjściowe – to rozwiązanie zgubione przez ucznia.
+  answer:
+    kind: SET
+    members:
+    - '-4'
+    - \frac{7}{2}
+  checks:
+  - kind: solve_equation
+    expr: 2\cdot x\cdot\left(x+4\right)=7\cdot\left(x+4\right)
+  skills:
+  - dzielenie tylko przez wyrażenie różne od zera
+  - rozkład na czynniki
+  - postać iloczynowa równania
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 2 members matched'
+- id: g-cm-09
+  slot: COMMON_MISTAKE
+  ramp_index: 3
+  difficulty: 3
+  exercise_type: nierówność wymierna – analiza niepoprawnego przekształcenia
+  statement: 'Uczeń rozwiązywał nierówność \[\frac{2}{x-3}>1\] w następujący sposób: pomnożył obie strony
+    przez \left(x-3\right), otrzymał 2>x-3, a stąd x<5, i zapisał odpowiedź x\in\left(-\infty,5\right).
+    a) Oblicz wartość lewej strony nierówności dla x=1. b) Rozstrzygnij, czy liczba x=1 spełnia nierówność
+    \frac{2}{x-3}>1 (odpowiedz TAK lub NIE). Wyjaśnij, na czym polega błąd ucznia.'
+  statement_latex: \frac{2}{x-3}>1
+  solution: |-
+    BŁĘDNE ROZUMOWANIE UCZNIA:
+    \frac{2}{x-3}>1\ \Big|\cdot\left(x-3\right) daje 2>x-3, czyli x<5, więc rzekomo x\in\left(-\infty,5\right). W szczególności liczba 1 miałaby spełniać nierówność.
+    SPRAWDZENIE:
+    a) Dla x=1 lewa strona wynosi \frac{2}{1-3}=\frac{2}{-2}=-1.
+    b) Otrzymujemy -1>1, co jest zdaniem FAŁSZYWYM, więc liczba 1 NIE spełnia nierówności – mimo że należy do zbioru podanego przez ucznia.
+    DLACZEGO TO JEST BŁĄD:
+    Znak wyrażenia x-3 zależy od x: dla x>3 jest ono dodatnie, a dla x<3 – ujemne. Mnożąc nierówność przez wyrażenie o nieznanym znaku, nie wiemy, czy zwrot ma się zmienić, więc takie przekształcenie NIE jest równoważne. Na poziomie podstawowym nierówności mnożymy wyłącznie przez konkretne liczby o znanym znaku (przy liczbie ujemnej odwracamy zwrot).
+    Odpowiedź: a) -1; b) NIE.
+  solution_steps:
+  - 'Podstaw x=1 do lewej strony: \frac{2}{1-3}=-1.'
+  - 'Porównaj z prawą stroną: -1>1 jest zdaniem fałszywym, więc x=1 nie spełnia nierówności.'
+  - 'Wskaż błąd: uczeń pomnożył obie strony przez x-3, czyli przez wyrażenie o nieznanym znaku – to przekształcenie
+    nie jest równoważne.'
+  - 'Zapamiętaj zasadę: nierówność mnożymy tylko przez liczby o znanym znaku; przy liczbie ujemnej zmieniamy
+    zwrot.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wartość lewej strony dla x=1
+      answer:
+        kind: NUMERIC
+        value: -1.0
+    - name: czy x=1 spełnia nierówność
+      answer:
+        kind: BOOLEAN
+        truth: false
+  checks:
+  - kind: evaluate
+    expr: \frac{2}{1-3}
+    part: wartość lewej strony dla x=1
+  skills:
+  - ocena równoważności przekształcenia
+  - sprawdzanie liczby w nierówności wyjściowej
+  - znak wyrażenia z niewiadomą
+  verification:
+    checkability: REFERENCE_CALL
+    note: '2 parts matched · det: [wartość lewej strony dla x=1] SymPy solved it fresh: -1.0 vs -1.0 (tol
+      1e-09)'
+- id: g-cm-10
+  slot: COMMON_MISTAKE
+  ramp_index: 4
+  difficulty: 3
+  exercise_type: warunek zerowania się ułamka
+  statement: 'Rozwiąż w zbiorze liczb rzeczywistych równanie \[\frac{\left(x-4\right)\cdot\left(x+1\right)}{\left(x+1\right)\cdot\left(x+3\right)}=0.\]
+    Uczeń zapisał, że licznik ma być równy zeru, i podał dwa rozwiązania: x=4 oraz x=-1. Wyjaśnij, na
+    czym polega jego błąd, i podaj poprawny zbiór rozwiązań.'
+  statement_latex: \frac{\left(x-4\right)\cdot\left(x+1\right)}{\left(x+1\right)\cdot\left(x+3\right)}=0
+  solution: |-
+    BŁĘDNE ROZUMOWANIE UCZNIA:
+    „Ułamek jest równy zeru, gdy licznik jest równy zeru”, więc \left(x-4\right)\cdot\left(x+1\right)=0, czyli x=4 lub x=-1 – i uczeń podaje oba te wyniki.
+    DLACZEGO TO JEST BŁĄD:
+    Warunek zerowania się ułamka brzmi: \frac{a}{b}=0 wtedy i tylko wtedy, gdy a=0 ORAZ b\neq 0. Mianownik ma prawo weta. Tutaj dziedzina: \left(x+1\right)\cdot\left(x+3\right)\neq 0, czyli x\neq -1 i x\neq -3, D=\mathbb{R}\setminus\{-3,-1\}. Liczba -1 zeruje także mianownik, więc nie należy do dziedziny i nie może być rozwiązaniem (dla x=-1 wyrażenie po lewej stronie nie ma sensu liczbowego).
+    POPRAWNE ROZWIĄZANIE:
+    Dziedzina: x\neq -1 i x\neq -3.
+    Licznik równy zeru: \left(x-4\right)\cdot\left(x+1\right)=0, czyli x=4 lub x=-1.
+    Odrzucamy x=-1 (poza dziedziną); zostaje x=4, które należy do dziedziny.
+    Sprawdzenie: \frac{\left(4-4\right)\cdot 5}{5\cdot 7}=\frac{0}{35}=0. ✓
+    Odpowiedź: równanie ma dokładnie jedno rozwiązanie: x=4.
+  solution_steps:
+  - 'Wyznacz dziedzinę: \left(x+1\right)\cdot\left(x+3\right)\neq 0, czyli x\neq -1 i x\neq -3.'
+  - Zastosuj warunek \frac{a}{b}=0 \iff a=0 \wedge b\neq 0.
+  - 'Przyrównaj licznik do zera: \left(x-4\right)\cdot\left(x+1\right)=0, stąd x=4 lub x=-1.'
+  - Odrzuć x=-1 jako liczbę spoza dziedziny.
+  - 'Zapisz odpowiedź: jedynym rozwiązaniem jest x=4.'
+  answer:
+    kind: SET
+    members:
+    - '4'
+  checks:
+  - kind: solve_equation
+    expr: \frac{\left(x-4\right)\cdot\left(x+1\right)}{\left(x+1\right)\cdot\left(x+3\right)}=0
+  skills:
+  - warunek \frac{a}{b}=0
+  - wyznaczanie dziedziny
+  - odrzucanie liczb spoza dziedziny
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 1 members matched'
+- id: g-ch-t02
+  slot: CHALLENGE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: zadanie tekstowe prowadzące do równania wymiernego
+  statement: Licznik pewnego ułamka jest o 4 mniejszy od jego mianownika. Jeżeli do licznika i do mianownika
+    tego ułamka dodamy liczbę 3, to otrzymamy ułamek równy \frac{5}{7}. Wyznacz licznik i mianownik ułamka
+    wyjściowego.
+  statement_latex: \frac{\left(x-4\right)+3}{x+3}=\frac{5}{7}
+  solution: |-
+    Oznaczmy przez x mianownik szukanego ułamka. Wtedy jego licznik jest równy x-4.
+    Po dodaniu 3 do licznika i do mianownika otrzymujemy ułamek \frac{x-4+3}{x+3}=\frac{x-1}{x+3}, a z treści zadania jest on równy \frac{5}{7}. Zapisujemy równanie:
+    \frac{x-1}{x+3}=\frac{5}{7}.
+    Dziedzina: x+3\neq 0, czyli x\neq -3 (mianownik ułamka wyjściowego też musi być różny od zera, więc x\neq 0).
+    Stosujemy proporcję (oba mianowniki różne od zera):
+    7\cdot\left(x-1\right)=5\cdot\left(x+3\right)
+    7x-7=5x+15
+    2x=22
+    x=11.
+    Liczba 11 należy do dziedziny, więc mianownik wynosi 11, a licznik 11-4=7.
+    Sprawdzenie: ułamek \frac{7}{11}; po dodaniu 3 do licznika i mianownika: \frac{10}{14}=\frac{5}{7}. Zgadza się.
+    Odpowiedź: licznik jest równy 7, a mianownik 11 (ułamek \frac{7}{11}).
+  solution_steps:
+  - 'Wprowadź niewiadomą: x – mianownik ułamka, wtedy licznik to x-4.'
+  - Zapisz warunek zadania jako równanie \frac{x-1}{x+3}=\frac{5}{7}.
+  - 'Ustal dziedzinę: x\neq -3 (oraz x\neq 0 dla ułamka wyjściowego).'
+  - 'Zastosuj proporcję: 7\cdot\left(x-1\right)=5\cdot\left(x+3\right).'
+  - 'Rozwiąż równanie liniowe: 2x=22, x=11.'
+  - 'Oblicz licznik: 11-4=7 i sprawdź warunek zadania.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: licznik
+      answer:
+        kind: NUMERIC
+        value: 7.0
+    - name: mianownik
+      answer:
+        kind: NUMERIC
+        value: 11.0
+  checks:
+  - kind: solve_equation
+    expr: \frac{x+3}{x+7}=\frac{5}{7}
+    part: licznik
+  - kind: solve_equation
+    expr: \frac{x-1}{x+3}=\frac{5}{7}
+    part: mianownik
+  stated_model:
+    variable: x
+    objective_latex: \frac{\left(x-4\right)+3}{x+3}=\frac{5}{7}
+    domain_lo: '0'
+    goal: value
+    constraint_used: licznik = mianownik - 4; x+3\neq 0
+  skills:
+  - zapisywanie sytuacji tekstowej równaniem
+  - proporcja (mnożenie na krzyż)
+  - dziedzina równania wymiernego
+  - interpretacja wyniku
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''x'': ''\\frac{\\left(x-4\\right)+3}{x+3}=\\frac{5}{7}'')
+      — human review'
+- id: g-ch-t03
+  slot: CHALLENGE
+  ramp_index: 1
+  difficulty: 4
+  exercise_type: zadanie tekstowe – równanie wymierne i rozstrzygnięcie
+  statement: W pewnej grupie jest 12 osób, a średnia arytmetyczna ich wieku wynosi 30 lat. Do grupy mają
+    dołączyć nowe osoby, z których każda ma dokładnie 20 lat. a) Oblicz, ile takich osób musi dołączyć
+    do grupy, aby średnia wieku wszystkich osób w grupie była równa 26 lat. b) Rozstrzygnij, czy dołączając
+    do tej grupy wyłącznie osoby dwudziestoletnie, można uzyskać średnią wieku grupy równą dokładnie 20
+    lat. Odpowiedź uzasadnij.
+  statement_latex: \frac{12\cdot 30+20\cdot n}{12+n}=26
+  solution: |-
+    Oznaczmy przez n liczbę dołączających osób dwudziestoletnich, n\in\{0,1,2,\ldots\}.
+    Suma lat osób będących już w grupie wynosi 12\cdot 30=360, a po dołączeniu n osób suma lat to 360+20\cdot n, natomiast liczebność grupy to 12+n.
+    a) Średnia ma być równa 26, więc
+    \frac{360+20\cdot n}{12+n}=26.
+    Dziedzina: 12+n\neq 0, czyli n\neq -12 – dla n\geq 0 warunek jest spełniony, więc mnożymy obie strony przez 12+n:
+    360+20\cdot n=26\cdot\left(12+n\right)
+    360+20n=312+26n
+    48=6n
+    n=8.
+    Liczba 8 jest liczbą naturalną, więc jest to poprawna odpowiedź.
+    Sprawdzenie: \frac{360+160}{20}=\frac{520}{20}=26. Zgadza się.
+    b) Przypuśćmy, że po dołączeniu n osób dwudziestoletnich średnia wynosi 20:
+    \frac{360+20\cdot n}{12+n}=20
+    360+20n=20\cdot\left(12+n\right)
+    360+20n=240+20n
+    360=240.
+    Niewiadoma zniknęła, a otrzymana równość jest fałszywa – równanie jest sprzeczne, nie ma rozwiązań. Zatem nie istnieje taka liczba dołączających dwudziestolatków. (Zgadza się to z intuicją: dołączanie osób w wieku 20 lat obniża średnią, ale nigdy poniżej ani do poziomu 20 lat, bo suma lat jest zawsze o 120 większa niż 20\cdot\left(12+n\right).)
+    Odpowiedź: a) 8 osób; b) nie, jest to niemożliwe.
+  solution_steps:
+  - Wprowadź niewiadomą n – liczbę dołączających osób dwudziestoletnich (n liczba naturalna).
+  - 'Zapisz sumę lat: 12\cdot 30+20\cdot n oraz liczebność grupy: 12+n.'
+  - a) Ułóż równanie \frac{360+20\cdot n}{12+n}=26 i podaj założenie 12+n\neq 0.
+  - 'a) Pomnóż przez 12+n, uporządkuj: 48=6n, więc n=8; sprawdź, że 8 jest liczbą naturalną.'
+  - 'b) Ułóż analogiczne równanie ze średnią 20: \frac{360+20\cdot n}{12+n}=20.'
+  - b) Po wymnożeniu otrzymasz 360=240 – równość fałszywa, równanie sprzeczne, więc taka średnia jest
+    nieosiągalna.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: liczba_osob
+      answer:
+        kind: NUMERIC
+        value: 8.0
+    - name: czy_mozliwa_srednia_20
+      answer:
+        kind: BOOLEAN
+        truth: false
+    - name: uzasadnienie
+      answer:
+        kind: NOT_MACHINE_CHECKABLE
+        reason: Uczeń musi zapisać równanie \frac{360+20\cdot n}{12+n}=20, wykonać równoważne przekształcenie
+          i stwierdzić, że prowadzi ono do fałszywej równości 360=240, czyli że równanie jest sprzeczne
+          – dołączanie dwudziestolatków nie może dać średniej równej 20 lat.
+  checks:
+  - kind: solve_equation
+    expr: \frac{12\cdot 30+20\cdot n}{12+n}=26
+    var: n
+    part: liczba_osob
+  stated_model:
+    variable: n
+    objective_latex: \frac{12\cdot 30+20\cdot n}{12+n}
+    domain_lo: '0'
+    domain_lo_open: false
+    goal: value
+    constraint_used: n – liczba naturalna, 12+n\neq 0
+  skills:
+  - modelowanie sytuacji równaniem wymiernym
+  - średnia arytmetyczna
+  - rozwiązywanie równania liniowego
+  - rozpoznanie równania sprzecznego i uzasadnienie odpowiedzi
+  verification:
+    checkability: STATED_MODEL
+    note: 'stage 1 inconclusive: kind mismatch: answer=SYMBOLIC reference=MULTIPART'
+- id: g-ch-t04
+  slot: CHALLENGE
+  ramp_index: 2
+  difficulty: 5
+  exercise_type: zadanie tekstowe – wzór funkcji wymiernej, równanie i rozstrzygnięcie wykonalności
+  statement: Zmieszano 200 g wodnego roztworu soli o stężeniu 10% oraz 300 g wodnego roztworu soli o stężeniu
+    20%. Do otrzymanej mieszaniny dosypano x gramów czystej soli, która całkowicie się rozpuściła. a)
+    Zapisz wzór na stężenie procentowe p(x) (w procentach) roztworu otrzymanego po dosypaniu soli oraz
+    podaj dziedzinę tego wzoru wynikającą z warunków zadania. b) Oblicz, ile gramów czystej soli należy
+    dosypać do mieszaniny, aby otrzymać roztwór o stężeniu 20%. c) W pracowni pozostało tylko 60 g czystej
+    soli. Rozstrzygnij, czy z otrzymanej mieszaniny można w ten sposób sporządzić roztwór o stężeniu 30%.
+  statement_latex: p\left(x\right)=\frac{\left(80+x\right)\cdot 100}{500+x}
+  solution: |-
+    Najpierw ustalamy skład mieszaniny.
+    W 200 g roztworu 10% jest 0{,}1\cdot 200=20 g soli, a w 300 g roztworu 20% jest 0{,}2\cdot 300=60 g soli.
+    Razem mieszanina ma masę 200+300=500 g i zawiera 20+60=80 g soli.
+    a) Po dosypaniu x gramów czystej soli masa soli wynosi 80+x, a masa całego roztworu 500+x, zatem
+    p\left(x\right)=\frac{\left(80+x\right)\cdot 100}{500+x}\ \left[\%\right].
+    Z warunków zadania dosypujemy nieujemną masę soli, więc x\geq 0; dla takich x mianownik 500+x jest dodatni, czyli różny od zera. Dziedzina: x\in\left\langle 0,+\infty\right).
+    b) Rozwiązujemy równanie p\left(x\right)=20, czyli
+    \frac{80+x}{500+x}=\frac{20}{100}=\frac{1}{5}.
+    Mnożymy na krzyż (mianowniki różne od zera):
+    5\cdot\left(80+x\right)=500+x
+    400+5x=500+x
+    4x=100
+    x=25.
+    Liczba 25 należy do dziedziny.
+    Sprawdzenie: \frac{80+25}{500+25}=\frac{105}{525}=\frac{1}{5}=20\%.
+    c) Szukamy x, dla którego p\left(x\right)=30:
+    \frac{80+x}{500+x}=\frac{30}{100}=\frac{3}{10}
+    10\cdot\left(80+x\right)=3\cdot\left(500+x\right)
+    800+10x=1500+3x
+    7x=700
+    x=100.
+    Potrzeba więc 100 g czystej soli, a w pracowni jest tylko 60 g, ponieważ 100>60. Zatem nie można sporządzić roztworu o stężeniu 30%.
+    Odpowiedź: a) p\left(x\right)=\frac{\left(80+x\right)\cdot 100}{500+x} dla x\in\left\langle 0,+\infty\right); b) 25 g; c) nie – potrzeba 100 g soli, a dostępne jest tylko 60 g.
+  solution_steps:
+  - 'Oblicz masy soli w obu roztworach: 0{,}1\cdot 200=20 g oraz 0{,}2\cdot 300=60 g.'
+  - 'Wyznacz masę mieszaniny 500 g i masę soli w niej: 80 g.'
+  - a) Zapisz wzór p\left(x\right)=\frac{\left(80+x\right)\cdot 100}{500+x} i dziedzinę x\in\left\langle
+    0,+\infty\right).
+  - 'b) Ułóż i rozwiąż równanie \frac{80+x}{500+x}=\frac{1}{5}: 400+5x=500+x, x=25.'
+  - 'c) Ułóż i rozwiąż równanie \frac{80+x}{500+x}=\frac{3}{10}: 800+10x=1500+3x, x=100.'
+  - 'c) Porównaj 100 g z dostępnymi 60 g i sformułuj wniosek: sporządzenie roztworu 30% jest niemożliwe.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wzor
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{\left(80+x\right)\cdot 100}{500+x}
+    - name: dziedzina
+      answer:
+        kind: INTERVAL
+        lo: '0'
+        hi: \infty
+        lo_open: false
+    - name: masa_soli_20_procent
+      answer:
+        kind: NUMERIC
+        value: 25.0
+    - name: masa_soli_30_procent
+      answer:
+        kind: NUMERIC
+        value: 100.0
+    - name: czy_wykonalne_30_procent
+      answer:
+        kind: BOOLEAN
+        truth: false
+  checks:
+  - kind: solve_equation
+    expr: \frac{80+x}{500+x}=\frac{20}{100}
+    part: masa_soli_20_procent
+  - kind: solve_equation
+    expr: \frac{80+x}{500+x}=\frac{30}{100}
+    part: masa_soli_30_procent
+  stated_model:
+    variable: x
+    objective_latex: p\left(x\right)=\frac{\left(80+x\right)\cdot 100}{500+x}
+    domain_lo: '0'
+    domain_lo_open: false
+    goal: value
+    constraint_used: 'masa soli w mieszaninie: 80 g, masa mieszaniny: 500 g, dosypana masa x\geq 0'
+  skills:
+  - układanie wzoru wymiernego z opisu sytuacji
+  - wyznaczanie dziedziny wynikającej z kontekstu
+  - rozwiązywanie równania wymiernego prowadzącego do liniowego
+  - sprawdzanie wykonalności wyniku wobec ograniczenia
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''x'': ''p\\left(x\\right)=\\frac{\\left(80+x\\right)\\cdot
+      100}{500+x}'') — human review'

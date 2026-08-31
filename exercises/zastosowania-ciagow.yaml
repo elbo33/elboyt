@@ -1,0 +1,767 @@
+section: zastosowania-ciagow
+name: Zastosowania ciągów arytmetycznych i geometrycznych
+scope: Using sequence properties, arithmetic and geometric in particular, to solve problems, including
+  practical ones.
+requirements:
+- VI.7
+counts:
+  total: 16
+  DETERMINISTIC: 11
+  REFERENCE_CALL: 2
+  STATED_MODEL: 3
+exercises:
+- id: g-th-00
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: model arytmetyczny — wyraz ciągu
+  statement: W sali kinowej w pierwszym rzędzie jest 14 miejsc, a w każdym następnym rzędzie jest o 2
+    miejsca więcej niż w rzędzie poprzednim. Oblicz, ile miejsc jest w dziesiątym rzędzie tej sali. Zapisz
+    obliczenia.
+  statement_latex: a_{1} = 14,\quad r = 2,\quad a_{10} = 14 + \left(10-1\right)\cdot 2
+  solution: |-
+    Niech a_n oznacza liczbę miejsc w n-tym rzędzie. Z treści zadania a_1 = 14 oraz każdy następny wyraz powstaje przez dodanie 2, więc ciąg (a_n) jest arytmetyczny o różnicy r = 2.
+    Korzystamy ze wzoru a_n = a_1 + (n-1)\cdot r:
+    a_{10} = 14 + (10-1)\cdot 2 = 14 + 18 = 32.
+    Odpowiedź: w dziesiątym rzędzie jest 32 miejsca.
+  solution_steps:
+  - 'Ustal model: a_n — liczba miejsc w n-tym rzędzie, a_1 = 14, r = 2 (ciąg arytmetyczny).'
+  - Zastosuj wzór a_n = a_1 + (n-1)\cdot r dla n = 10.
+  - Oblicz a_{10} = 14 + 9\cdot 2 = 32.
+  - 'Sformułuj odpowiedź: 32 miejsca.'
+  answer:
+    kind: NUMERIC
+    value: 32.0
+  checks:
+  - kind: evaluate
+    expr: 14 + \left(10-1\right)\cdot 2
+  skills:
+  - budowa modelu ciągowego
+  - wzór na n-ty wyraz ciągu arytmetycznego
+  - interpretacja wyniku
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 32.0 vs 32.0 (tol 1e-09)'
+- id: g-th-01
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: spadek wykładniczy — wartość po n okresach
+  statement: Maszyna kosztowała nowa 20 000 zł. Jej wartość co roku maleje o 10% wartości z roku poprzedniego.
+    Oblicz wartość tej maszyny po 3 latach. Zapisz obliczenia.
+  statement_latex: W_{3} = 20000\cdot\left(1-\frac{10}{100}\right)^{3}
+  solution: |-
+    Spadkowi o 10% odpowiada mnożnik q = 1 - \frac{10}{100} = 0{,}9. Wartości maszyny w kolejnych latach tworzą ciąg geometryczny o ilorazie 0,9, a wartość początkowa odpowiada zeru okresów.
+    W_3 = 20000\cdot 0{,}9^{3} = 20000\cdot 0{,}729 = 14580.
+    Odpowiedź: po 3 latach maszyna jest warta 14 580 zł.
+  solution_steps:
+  - 'Zamień spadek o 10% na mnożnik jednego roku: q = 1 - 0,10 = 0,9.'
+  - Zauważ, że wartość po n latach to W_n = W_0\cdot q^{n}, przy czym W_0 = 20000.
+  - Oblicz 0,9^3 = 0,729.
+  - Oblicz W_3 = 20000\cdot 0,729 = 14580 zł.
+  answer:
+    kind: NUMERIC
+    value: 14580.0
+  checks:
+  - kind: evaluate
+    expr: 20000\cdot\left(1-\frac{10}{100}\right)^{3}
+  skills:
+  - współczynnik spadku
+  - wzór na n-ty wyraz ciągu geometrycznego
+  - amortyzacja
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 14580.0 vs 14580.0 (tol 1e-09)'
+- id: g-th-02
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: procent składany — kapitalizacja roczna
+  statement: Klient wpłacił 5000 zł na lokatę oprocentowaną 3% w skali roku, z kapitalizacją roczną. Podatku
+    od odsetek nie uwzględniamy. Oblicz wartość lokaty po 2 latach. Zapisz obliczenia.
+  statement_latex: K_{2} = 5000\cdot\left(1+\frac{3}{100}\right)^{2}
+  solution: |-
+    Mnożnik jednego roku wynosi q = 1 + \frac{3}{100} = 1{,}03. Po n latach kapitał wynosi K_n = K_0\cdot q^{n} (kapitał początkowy odpowiada zeru lat).
+    K_2 = 5000\cdot 1{,}03^{2} = 5000\cdot 1{,}0609 = 5304{,}50.
+    Odpowiedź: po dwóch latach na lokacie będzie 5304,50 zł.
+  solution_steps:
+  - 'Wyznacz mnożnik jednego okresu: q = 1 + 3/100 = 1,03.'
+  - Zapisz K_2 = 5000\cdot 1,03^2.
+  - Oblicz 1,03^2 = 1,0609.
+  - Oblicz K_2 = 5304,50 zł.
+  answer:
+    kind: NUMERIC
+    value: 5304.5
+    tol: 0.005
+  checks:
+  - kind: evaluate
+    expr: 5000\cdot\left(1+\frac{3}{100}\right)^{2}
+  skills:
+  - procent składany
+  - mnożnik wzrostu
+  - zaokrąglanie kwot
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 5304.5 vs 5304.5 (tol 0.005)'
+- id: g-ex-03
+  slot: EXERCISE
+  ramp_index: 1
+  difficulty: 2
+  exercise_type: model arytmetyczny — wyraz i suma
+  statement: W amfiteatrze w pierwszym rzędzie widowni jest 12 miejsc, a w każdym następnym rzędzie o
+    4 miejsca więcej niż w rzędzie poprzednim. Widownia ma 20 rzędów. Oblicz, ile miejsc jest w ostatnim
+    rzędzie oraz ile miejsc ma cała widownia. Zapisz obliczenia.
+  statement_latex: a_{1} = 12,\quad r = 4,\quad a_{20} = 12 + \left(20-1\right)\cdot 4,\quad S_{20} =
+    \frac{a_{1}+a_{20}}{2}\cdot 20
+  solution: |-
+    Niech a_n oznacza liczbę miejsc w n-tym rzędzie. Z treści a_1 = 12 oraz a_{n+1} = a_n + 4, więc (a_n) jest ciągiem arytmetycznym o różnicy r = 4.
+    Ostatni (dwudziesty) rząd: a_{20} = 12 + (20-1)\cdot 4 = 12 + 76 = 88 miejsc.
+    Cała widownia to suma 20 początkowych wyrazów:
+    S_{20} = \frac{a_1 + a_{20}}{2}\cdot 20 = \frac{12+88}{2}\cdot 20 = 50\cdot 20 = 1000.
+    Odpowiedź: w ostatnim rzędzie jest 88 miejsc, a cała widownia liczy 1000 miejsc.
+  solution_steps:
+  - 'Zapisz model: a_n — liczba miejsc w n-tym rzędzie, a_1 = 12, r = 4.'
+  - 'Oblicz liczbę miejsc w ostatnim rzędzie: a_{20} = 12 + 19\cdot 4 = 88.'
+  - Zauważ, że liczba wszystkich miejsc to suma S_{20}, a nie wyraz a_{20}.
+  - Oblicz S_{20} = \frac{12+88}{2}\cdot 20 = 1000.
+  - 'Podaj odpowiedź z jednostkami: 88 miejsc i 1000 miejsc.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: liczba miejsc w ostatnim rzędzie
+      answer:
+        kind: NUMERIC
+        value: 88.0
+    - name: liczba wszystkich miejsc na widowni
+      answer:
+        kind: NUMERIC
+        value: 1000.0
+  checks:
+  - kind: evaluate
+    expr: 12 + \left(20-1\right)\cdot 4
+    part: liczba miejsc w ostatnim rzędzie
+  - kind: evaluate
+    expr: \frac{12 + \left(12 + 19\cdot 4\right)}{2}\cdot 20
+    part: liczba wszystkich miejsc na widowni
+  skills:
+  - budowa modelu ciągowego
+  - wzór na n-ty wyraz
+  - suma n początkowych wyrazów
+  - odróżnianie a_n od S_n
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [liczba miejsc w ostatnim rzędzie] SymPy solved it fresh: 88.0
+      vs 88.0 (tol 1e-09) ; [liczba wszystkich miejsc na widowni] SymPy solved it fresh: 1000.0 vs 1000.0
+      (tol 1e-09)'
+- id: g-ex-04
+  slot: EXERCISE
+  ramp_index: 2
+  difficulty: 3
+  exercise_type: procent składany — kapitalizacja kwartalna
+  statement: Pani Anna wpłaciła 12 000 zł na dwuletnią lokatę o nominalnym oprocentowaniu 6% w skali roku,
+    z kapitalizacją kwartalną. Podatku od odsetek nie uwzględniamy. Oblicz wartość lokaty po dwóch latach
+    oraz łączną kwotę odsetek. Wyniki podaj z dokładnością do 1 grosza. Zapisz obliczenia.
+  statement_latex: K = 12000\cdot\left(1+\frac{6}{100\cdot 4}\right)^{4\cdot 2}
+  solution: |-
+    Kapitalizacja kwartalna oznacza, że jeden okres to kwartał, a stopa w jednym okresie wynosi \frac{6\%}{4} = 1{,}5\%. Mnożnik jednego okresu to q = 1 + \frac{1{,}5}{100} = 1{,}015.
+    Liczba okresów: N = 4\cdot 2 = 8.
+    K = 12000\cdot 1{,}015^{8}. Ponieważ 1{,}015^{8} \approx 1{,}1264926, mamy K \approx 12000\cdot 1{,}1264926 = 13517{,}91 zł.
+    Odsetki: K - K_0 \approx 13517{,}91 - 12000 = 1517{,}91 zł.
+    Odpowiedź: po dwóch latach na lokacie będzie około 13 517,91 zł, a odsetki wyniosą około 1517,91 zł.
+  solution_steps:
+  - 'Oblicz stopę na jeden kwartał: 6% : 4 = 1,5%, czyli q = 1,015.'
+  - 'Oblicz liczbę okresów kapitalizacji: N = 4\cdot 2 = 8.'
+  - Zapisz K = 12000\cdot 1,015^{8}.
+  - Oblicz 1,015^8 ≈ 1,1264926 i K ≈ 13517,91 zł (zaokrąglenie dopiero na końcu).
+  - Oblicz odsetki jako K - 12000 ≈ 1517,91 zł.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wartość lokaty po 2 latach (zł)
+      answer:
+        kind: NUMERIC
+        value: 13517.91
+        tol: 0.02
+    - name: kwota odsetek (zł)
+      answer:
+        kind: NUMERIC
+        value: 1517.91
+        tol: 0.02
+  checks:
+  - kind: evaluate
+    expr: 12000\cdot\left(1+\frac{6}{100\cdot 4}\right)^{8}
+    part: wartość lokaty po 2 latach (zł)
+  - kind: evaluate
+    expr: 12000\cdot\left(1+\frac{6}{100\cdot 4}\right)^{8}-12000
+    part: kwota odsetek (zł)
+  skills:
+  - stopa w okresie kapitalizacji
+  - liczba okresów
+  - procent składany
+  - obliczanie odsetek
+  - zaokrąglanie do groszy
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [wartość lokaty po 2 latach (zł)] SymPy solved it fresh: 13517.91
+      vs 13517.911039143683 (tol 0.02) ; [kwota odsetek (zł)] SymPy solved it fresh: 1517.91 vs 1517.9110391436832
+      (tol 0.02)'
+- id: g-ex-05
+  slot: EXERCISE
+  ramp_index: 3
+  difficulty: 4
+  exercise_type: 'zadanie mieszane: ciąg arytmetyczny → geometryczny'
+  statement: Trzy liczby tworzą ciąg arytmetyczny, a ich suma jest równa 21. Jeżeli do pierwszej z tych
+    liczb dodamy 1, od drugiej odejmiemy 1, a do trzeciej dodamy 5, to otrzymane liczby (w tej samej kolejności)
+    utworzą ciąg geometryczny. Wyznacz wszystkie trójki liczb spełniające warunki zadania. Zapisz obliczenia.
+  statement_latex: \left(a-r\right)+a+\left(a+r\right)=21,\qquad 6^{2}=\left(8-r\right)\cdot\left(12+r\right)
+  solution: |-
+    Oznaczmy szukane liczby jako a-r,\ a,\ a+r.
+    Z warunku na sumę: (a-r)+a+(a+r) = 3a = 21, więc a = 7. Liczby to 7-r,\ 7,\ 7+r.
+    Po zmianach otrzymujemy: (7-r)+1 = 8-r, \ 7-1 = 6, \ (7+r)+5 = 12+r.
+    Warunek ciągu geometrycznego: 6^{2} = (8-r)(12+r), czyli 36 = 96 + 8r - 12r - r^{2}, stąd r^{2} + 4r - 60 = 0.
+    \Delta = 16 + 240 = 256, \sqrt{\Delta} = 16, więc r = \frac{-4-16}{2} = -10 lub r = \frac{-4+16}{2} = 6.
+    Dla r = 6: liczby 1,\ 7,\ 13; po zmianie 2,\ 6,\ 18 — ciąg geometryczny o ilorazie 3, bo 6^{2} = 2\cdot 18 = 36.
+    Dla r = -10: liczby 17,\ 7,\ -3; po zmianie 18,\ 6,\ 2 — ciąg geometryczny o ilorazie \tfrac{1}{3}, bo 6^{2} = 18\cdot 2 = 36.
+    Odpowiedź: szukane liczby to 1, 7, 13 albo 17, 7, -3.
+  solution_steps:
+  - Oznacz liczby a-r, a, a+r i z sumy 3a = 21 wyznacz a = 7.
+  - 'Zapisz liczby po zmianie: 8-r, 6, 12+r.'
+  - Zastosuj warunek ciągu geometrycznego 6^2 = (8-r)(12+r).
+  - 'Doprowadź do równania kwadratowego r^2 + 4r - 60 = 0 i rozwiąż je: r = 6 lub r = -10.'
+  - Odtwórz obie trójki liczb i sprawdź oba warunki zadania.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: możliwe wartości różnicy r
+      answer:
+        kind: SET
+        members:
+        - '6'
+        - '-10'
+    - name: trójka liczb dla r = 6
+      answer:
+        kind: TUPLE
+        items:
+        - '1'
+        - '7'
+        - '13'
+    - name: trójka liczb dla r = -10
+      answer:
+        kind: TUPLE
+        items:
+        - '17'
+        - '7'
+        - '-3'
+  checks:
+  - kind: solve_equation
+    expr: r^{2}+4\cdot r-60=0
+    var: r
+    part: możliwe wartości różnicy r
+  skills:
+  - oznaczenia a-r, a, a+r
+  - warunek b^2 = a\cdot c
+  - równanie kwadratowe
+  - uwzględnienie obu rozwiązań
+  verification:
+    checkability: REFERENCE_CALL
+    note: 'could not compare: kind mismatch: answer=MULTIPART reference=SET'
+- id: g-ex-t00
+  slot: EXERCISE
+  ramp_index: 6
+  difficulty: 4
+  exercise_type: procent składany z kapitalizacją półroczną i podatkiem
+  statement: Pan Nowak wpłacił 12 000 zł na dwuletnią lokatę o nominalnym oprocentowaniu 6% w skali roku,
+    z kapitalizacją półroczną. Od odsetek naliczonych na koniec każdego półrocza bank pobiera 19% podatku,
+    a pozostałą część odsetek dopisuje do kapitału. Oblicz kwotę, jaką pan Nowak będzie miał na lokacie
+    po dwóch latach, oraz łączną kwotę odsetek po opodatkowaniu. Wyniki podaj z dokładnością do 1 grosza.
+    Zapisz obliczenia.
+  statement_latex: K = 12000\cdot\left(1+\frac{6}{2\cdot 100}\cdot\left(1-\frac{19}{100}\right)\right)^{4}
+  solution: |-
+    Jeden okres kapitalizacji to pół roku, więc stopa w okresie wynosi \frac{6\%}{2}=3\%.
+    Podatek zabiera 19% odsetek, więc do kapitału dopisywane jest 81% odsetek: mnożnik jednego półrocza to q = 1+\frac{3}{100}\cdot\frac{81}{100} = 1+0{,}0243 = 1{,}0243.
+    W dwóch latach mieszczą się N = 2\cdot 2 = 4 okresy kapitalizacji, a ciąg kolejnych stanów konta jest geometryczny o ilorazie q, przy czym kapitał początkowy odpowiada zeru okresów.
+    Zatem K = 12000\cdot 1{,}0243^{4}. Ponieważ 1{,}0243^{2} = 1{,}04919049 oraz 1{,}0243^{4} = 1{,}04919049^{2} \approx 1{,}10080069, otrzymujemy
+    K \approx 12000\cdot 1{,}10080069 = 13209{,}6083 \approx 13209{,}61 zł.
+    Odsetki po opodatkowaniu: K - 12000 \approx 13209{,}61 - 12000 = 1209{,}61 zł.
+    Odpowiedź: po dwóch latach na lokacie będzie około 13 209,61 zł, a odsetki po opodatkowaniu wyniosą około 1209,61 zł.
+  solution_steps:
+  - 'Ustal długość okresu kapitalizacji: pół roku, stopa w okresie p = 6% : 2 = 3%.'
+  - 'Uwzględnij podatek: mnożnik jednego okresu q = 1 + 0,03·0,81 = 1,0243.'
+  - 'Policz liczbę okresów: N = 2 lata · 2 = 4.'
+  - Zastosuj wzór K = 12000·1,0243^4 ≈ 13 209,61 zł.
+  - 'Oblicz odsetki netto: 13 209,61 − 12 000 = 1209,61 zł i sformułuj odpowiedź.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: kapital_po_2_latach
+      answer:
+        kind: NUMERIC
+        value: 13209.61
+        tol: 0.01
+    - name: odsetki_netto
+      answer:
+        kind: NUMERIC
+        value: 1209.61
+        tol: 0.01
+  checks:
+  - kind: evaluate
+    expr: 12000\cdot\left(1+\frac{3}{100}\cdot\frac{81}{100}\right)^{4}
+    part: kapital_po_2_latach
+  - kind: evaluate
+    expr: 12000\cdot\left(1+\frac{3}{100}\cdot\frac{81}{100}\right)^{4}-12000
+    part: odsetki_netto
+  skills:
+  - model geometryczny procentu składanego
+  - przeliczanie stopy na okres kapitalizacji
+  - uwzględnianie podatku od odsetek
+  - zaokrąglanie kwot do groszy
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [kapital_po_2_latach] SymPy solved it fresh: 13209.61 vs 13209.608211677281
+      (tol 0.01) ; [odsetki_netto] SymPy solved it fresh: 1209.61 vs 1209.6082116772811 (tol 0.01)'
+- id: g-ex-t01
+  slot: EXERCISE
+  ramp_index: 7
+  difficulty: 4
+  exercise_type: 'zadanie mieszane: ciąg arytmetyczny → ciąg geometryczny'
+  statement: Trzy liczby tworzą ciąg arytmetyczny o różnicy r, a ich suma jest równa 24. Jeżeli do pierwszej
+    z tych liczb dodamy 1, drugą pozostawimy bez zmian, a do trzeciej dodamy 3, to otrzymane liczby —
+    w tej samej kolejności — utworzą ciąg geometryczny. Wyznacz wszystkie możliwe wartości różnicy r oraz
+    odpowiadające im trójki liczb. Zapisz obliczenia.
+  statement_latex: 8^{2} = \left(8-r+1\right)\cdot\left(8+r+3\right)
+  solution: |-
+    Oznaczmy szukane liczby jako 8-r,\ 8,\ 8+r? Najpierw wyznaczmy środkowy wyraz: jeżeli liczby to a-r,\ a,\ a+r, to ich suma wynosi 3a = 24, więc a = 8. Liczby mają postać 8-r,\ 8,\ 8+r.
+    Po zmianie otrzymujemy trójkę: 8-r+1 = 9-r,\quad 8,\quad 8+r+3 = 11+r.
+    Warunek ciągu geometrycznego dla trzech kolejnych wyrazów: 8^{2} = \left(9-r\right)\cdot\left(11+r\right).
+    64 = 99 + 9r - 11r - r^{2}, czyli 64 = 99 - 2r - r^{2}, stąd r^{2}+2\cdot r-35 = 0.
+    \Delta = 4 + 140 = 144,\ \sqrt{\Delta} = 12, więc r = \frac{-2-12}{2} = -7 albo r = \frac{-2+12}{2} = 5.
+    Dla r = 5: liczby 3,\ 8,\ 13 (suma 24 ✓); po zmianie 4,\ 8,\ 16 — ciąg geometryczny o ilorazie 2, bo 8^{2} = 4\cdot 16 = 64 ✓.
+    Dla r = -7: liczby 15,\ 8,\ 1 (suma 24 ✓); po zmianie 16,\ 8,\ 4 — ciąg geometryczny o ilorazie \frac{1}{2}, bo 8^{2} = 16\cdot 4 = 64 ✓.
+    Odpowiedź: r = 5 i liczby 3, 8, 13 albo r = −7 i liczby 15, 8, 1.
+  solution_steps:
+  - Oznacz liczby jako a − r, a, a + r; z sumy 3a = 24 wyznacz a = 8.
+  - 'Zapisz trójkę po zmianie: 9 − r, 8, 11 + r.'
+  - Zastosuj warunek ciągu geometrycznego 8² = (9 − r)(11 + r).
+  - 'Doprowadź do równania r² + 2r − 35 = 0 i rozwiąż je: r = 5 lub r = −7.'
+  - Odtwórz obie trójki liczb i sprawdź oba warunki zadania; podaj obie odpowiedzi.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: roznica_r
+      answer:
+        kind: SET
+        members:
+        - '5'
+        - '-7'
+    - name: trojki_liczb
+      answer:
+        kind: SET
+        members:
+        - \left(3,\ 8,\ 13\right)
+        - \left(15,\ 8,\ 1\right)
+  checks:
+  - kind: solve_equation
+    expr: r^{2}+2\cdot r-35=0
+    var: r
+    part: roznica_r
+  skills:
+  - podstawienie a−r, a, a+r
+  - warunek b² = a·c
+  - rozwiązywanie równania kwadratowego
+  - uwzględnianie obu pierwiastków
+  verification:
+    checkability: REFERENCE_CALL
+    note: 'could not compare: part disagrees: kind mismatch: answer=SET reference=TUPLE'
+- id: g-cm-06
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: 'demonstracja błędu: procent zamiast stałej kwoty'
+  statement: 'Pensja miesięczna pracownika w pierwszym roku pracy wynosi 4000 zł i co roku wzrasta o 5%
+    w stosunku do pensji z roku poprzedniego. Pewien uczeń rozwiązał zadanie tak: „5% z 4000 zł to 200
+    zł, więc pensja rośnie co roku o 200 zł; jest to ciąg arytmetyczny o r = 200 i w czwartym roku pensja
+    wynosi 4000 + 3\cdot 200 = 4600 zł”. Wyjaśnij, na czym polega błąd tego rozumowania, i oblicz poprawnie
+    pensję miesięczną w czwartym roku pracy (z dokładnością do 1 grosza).'
+  statement_latex: a_{4} = 4000\cdot\left(1+\frac{5}{100}\right)^{3}
+  solution: |-
+    Błędne rozumowanie: uczeń policzył 5% tylko od pensji początkowej (0,05\cdot 4000 = 200 zł) i przyjął, że co roku przyrost wynosi te same 200 zł. Otrzymał model arytmetyczny a_n = 4000 + (n-1)\cdot 200 i wynik a_4 = 4600 zł.
+    Dlaczego to źle: wzrost o stały PROCENT liczy się za każdym razem od nowej, większej pensji, więc przyrost kwotowy nie jest stały (w drugim roku to 5% z 4200 zł = 210 zł, w trzecim 5% z 4410 zł = 220,50 zł). Stały przyrost kwotowy daje ciąg arytmetyczny, a stała zmiana procentowa — ciąg geometryczny.
+    Poprawne rozwiązanie: mnożnik jednego roku q = 1 + \frac{5}{100} = 1{,}05, więc a_n = 4000\cdot 1{,}05^{n-1}.
+    a_4 = 4000\cdot 1{,}05^{3} = 4000\cdot 1{,}157625 = 4630{,}50.
+    Odpowiedź: w czwartym roku pensja wynosi 4630,50 zł (a nie 4600 zł).
+  solution_steps:
+  - 'Błędnie: 5% z 4000 = 200 zł, model arytmetyczny r = 200, a_4 = 4000 + 3\cdot 200 = 4600 zł.'
+  - 'Wskazanie błędu: procent liczymy od aktualnej pensji, więc przyrost kwotowy rośnie (210 zł, 220,50
+    zł, ...).'
+  - 'Poprawny model: ciąg geometryczny o q = 1,05, a_n = 4000\cdot 1,05^{n-1}.'
+  - Oblicz a_4 = 4000\cdot 1,05^3 = 4630,50 zł.
+  - Porównaj z błędnym wynikiem 4600 zł — różnica 30,50 zł.
+  answer:
+    kind: NUMERIC
+    value: 4630.5
+    tol: 0.005
+  checks:
+  - kind: evaluate
+    expr: 4000\cdot\left(1+\frac{5}{100}\right)^{3}
+  skills:
+  - rozpoznanie modelu geometrycznego
+  - mnożnik wzrostu procentowego
+  - wzór a_n = a_1 q^{n-1}
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 4630.5 vs 4630.5 (tol 0.005)'
+- id: g-cm-07
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: 'demonstracja błędu: zły wykładnik w procencie składanym'
+  statement: 'Na lokatę wpłacono 6000 zł przy oprocentowaniu 3% w skali roku i kapitalizacji rocznej (bez
+    podatku). Uczeń napisał: „kapitał po 5 latach to K = 6000\cdot 1{,}03^{5-1} = 6000\cdot 1{,}03^{4},
+    bo we wzorze na wyraz ciągu geometrycznego jest wykładnik n-1”, i otrzymał 6753,05 zł. Wyjaśnij, na
+    czym polega błąd, i oblicz poprawną wartość lokaty po 5 latach z dokładnością do 1 grosza.'
+  statement_latex: K_{5} = 6000\cdot\left(1+\frac{3}{100}\right)^{5}
+  solution: |-
+    Błędne rozumowanie: uczeń zastosował wykładnik 5-1 = 4 i otrzymał 6000\cdot 1{,}03^{4} \approx 6753{,}05 zł.
+    Dlaczego to źle: wzór a_n = a_1\cdot q^{n-1} dotyczy numeracji, w której a_1 jest PIERWSZYM wyrazem. Tu kapitał początkowy K_0 = 6000 zł odpowiada zeru lat, więc kapitał po n latach to K_n = K_0\cdot q^{n}. Test kontrolny: po 1 roku kapitał musi wynosić 6000\cdot 1{,}03 = 6180 zł, a wzór ucznia dałby 6000\cdot 1{,}03^{0} = 6000 zł, czyli brak odsetek — to nieprawda.
+    Poprawne rozwiązanie: K_5 = 6000\cdot 1{,}03^{5} = 6000\cdot 1{,}1592741 \approx 6955{,}64 zł.
+    Odpowiedź: po 5 latach lokata jest warta około 6955,64 zł (błędny wynik zaniża kwotę o ok. 202,59 zł).
+  solution_steps:
+  - 'Błędnie: K = 6000\cdot 1,03^{4} ≈ 6753,05 zł (wykładnik n-1).'
+  - 'Wskazanie błędu: K_0 odpowiada zeru okresów, więc po n latach K_n = K_0\cdot q^{n}.'
+  - 'Sprawdzenie wzoru dla n = 1: musi wyjść 6000\cdot 1,03 = 6180 zł.'
+  - 'Poprawnie: K_5 = 6000\cdot 1,03^{5} ≈ 6955,64 zł.'
+  answer:
+    kind: NUMERIC
+    value: 6955.64
+    tol: 0.02
+  checks:
+  - kind: evaluate
+    expr: 6000\cdot\left(1+\frac{3}{100}\right)^{5}
+  skills:
+  - procent składany
+  - numeracja okresów
+  - sprawdzanie wzoru dla n = 1
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 6955.64 vs 6955.6444458 (tol 0.02)'
+- id: g-cm-08
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: 'demonstracja błędu: stopa a okres kapitalizacji'
+  statement: 'Na lokatę wpłacono 10 000 zł przy nominalnym oprocentowaniu 8% w skali roku z kapitalizacją
+    półroczną, na 3 lata (podatku nie uwzględniamy). Uczeń zapisał: „6 okresów po 8%, czyli K = 10000\cdot
+    1{,}08^{6} \approx 15\,868{,}74 zł”. Wyjaśnij, na czym polega błąd, i oblicz poprawną wartość lokaty
+    po 3 latach z dokładnością do 1 grosza.'
+  statement_latex: K = 10000\cdot\left(1+\frac{8}{100\cdot 2}\right)^{2\cdot 3}
+  solution: |-
+    Błędne rozumowanie: uczeń poprawnie policzył liczbę okresów (2\cdot 3 = 6), ale w każdym okresie zastosował pełną stopę roczną 8%, otrzymując 10000\cdot 1{,}08^{6} \approx 15\,868{,}74 zł.
+    Dlaczego to źle: przy kapitalizacji m razy w roku stopa jednego okresu wynosi \frac{p}{m}. Dla 8% rocznie i półrocza jest to \frac{8\%}{2} = 4\%, czyli mnożnik jednego okresu q = 1{,}04. Wynik ucznia oznaczałby oprocentowanie 8% co pół roku, czyli ponad 16% rocznie.
+    Poprawne rozwiązanie: K = 10000\cdot 1{,}04^{6} = 10000\cdot 1{,}2653190 \approx 12\,653{,}19 zł.
+    Odpowiedź: po 3 latach na lokacie będzie około 12 653,19 zł.
+  solution_steps:
+  - 'Błędnie: K = 10000\cdot 1,08^{6} ≈ 15 868,74 zł.'
+  - 'Wskazanie błędu: stopa jednego okresu to 8% : 2 = 4%, a nie 8%.'
+  - 'Poprawny mnożnik jednego półrocza: q = 1,04; liczba okresów N = 2\cdot 3 = 6.'
+  - Oblicz K = 10000\cdot 1,04^{6} ≈ 12 653,19 zł.
+  answer:
+    kind: NUMERIC
+    value: 12653.19
+    tol: 0.02
+  checks:
+  - kind: evaluate
+    expr: 10000\cdot\left(1+\frac{8}{100\cdot 2}\right)^{2\cdot 3}
+  skills:
+  - stopa w jednym okresie kapitalizacji
+  - liczba okresów
+  - procent składany
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 12653.19 vs 12653.19018496 (tol 0.02)'
+- id: g-cm-09
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: 'demonstracja błędu: spadek i wzrost o ten sam procent'
+  statement: 'Rower kosztował 1800 zł. Najpierw jego cenę obniżono o 25%, a po miesiącu nową cenę podwyższono
+    o 25%. Uczeń stwierdził: „obniżka i podwyżka o tyle samo procent się znoszą, więc rower znowu kosztuje
+    1800 zł”. Wyjaśnij, na czym polega błąd, oblicz cenę roweru po tych dwóch zmianach oraz podaj, o ile
+    procent końcowa cena jest niższa od ceny początkowej.'
+  statement_latex: 1800\cdot\left(1-\frac{25}{100}\right)\cdot\left(1+\frac{25}{100}\right)
+  solution: |-
+    Błędne rozumowanie: „-25% i +25% daje 0%”, więc cena końcowa to 1800 zł.
+    Dlaczego to źle: obniżkę liczymy od ceny 1800 zł, a podwyżkę od nowej, niższej ceny 1350 zł — procenty są liczone od różnych podstaw. Poprawnie składamy mnożniki: 0{,}75\cdot 1{,}25 = 0{,}9375 \neq 1.
+    Poprawne rozwiązanie: cena końcowa to 1800\cdot 0{,}75\cdot 1{,}25 = 1350\cdot 1{,}25 = 1687{,}50 zł.
+    Zmiana względem ceny początkowej: \frac{1800-1687{,}50}{1800}\cdot 100\% = \frac{112{,}50}{1800}\cdot 100\% = 6{,}25\%.
+    Odpowiedź: rower kosztuje 1687,50 zł, czyli o 6,25% mniej niż początkowo.
+  solution_steps:
+  - 'Błędnie: -25% i +25% "się znoszą", cena 1800 zł.'
+  - 'Wskazanie błędu: procenty liczone są od różnych podstaw; mnożniki 0,75 i 1,25 dają 0,9375.'
+  - 'Oblicz cenę po obniżce: 1800\cdot 0,75 = 1350 zł.'
+  - 'Oblicz cenę po podwyżce: 1350\cdot 1,25 = 1687,50 zł.'
+  - 'Oblicz spadek procentowy: (1800-1687,50)/1800\cdot 100% = 6,25%.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: cena końcowa (zł)
+      answer:
+        kind: NUMERIC
+        value: 1687.5
+        tol: 0.005
+    - name: o ile procent cena końcowa jest niższa od początkowej
+      answer:
+        kind: NUMERIC
+        value: 6.25
+        tol: 0.001
+  checks:
+  - kind: evaluate
+    expr: 1800\cdot\left(1-\frac{25}{100}\right)\cdot\left(1+\frac{25}{100}\right)
+    part: cena końcowa (zł)
+  - kind: evaluate
+    expr: \frac{1800-1800\cdot\left(1-\frac{25}{100}\right)\cdot\left(1+\frac{25}{100}\right)}{1800}\cdot
+      100
+    part: o ile procent cena końcowa jest niższa od początkowej
+  skills:
+  - mnożniki zmian procentowych
+  - składanie zmian procentowych
+  - obliczanie zmiany względnej
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [cena końcowa (zł)] SymPy solved it fresh: 1687.5 vs 1687.5
+      (tol 0.005) ; [o ile procent cena końcowa jest niższa od początkowej] SymPy solved it fresh: 6.25
+      vs 6.25 (tol 0.001)'
+- id: g-cm-10
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: 'demonstracja błędu: wyraz zamiast sumy'
+  statement: Zakład w pierwszym roku działalności wyprodukował 500 urządzeń, a w każdym następnym roku
+    o 40 urządzeń więcej niż w roku poprzednim. Uczeń, odpowiadając na pytanie „ile urządzeń zakład wyprodukował
+    łącznie przez pierwszych 12 lat?”, obliczył 500 + 11\cdot 40 = 940 i podał wynik 940 urządzeń. Wyjaśnij,
+    na czym polega błąd, i oblicz poprawnie łączną produkcję z 12 lat.
+  statement_latex: S_{12} = \frac{500+\left(500+11\cdot 40\right)}{2}\cdot 12
+  solution: |-
+    Błędne rozumowanie: uczeń policzył a_{12} = 500 + 11\cdot 40 = 940, czyli produkcję W DWUNASTYM ROKU, i podał ją jako odpowiedź.
+    Dlaczego to źle: pytanie „łącznie przez 12 lat” dotyczy sumy S_{12} = a_1 + a_2 + \ldots + a_{12}, a nie pojedynczego wyrazu a_{12}. Reguła: „w n-tym roku” → a_n, „łącznie/razem przez n lat” → S_n.
+    Poprawne rozwiązanie: (a_n) jest ciągiem arytmetycznym o a_1 = 500 i r = 40, a_{12} = 940, więc
+    S_{12} = \frac{a_1 + a_{12}}{2}\cdot 12 = \frac{500+940}{2}\cdot 12 = 720\cdot 12 = 8640.
+    Odpowiedź: przez 12 lat zakład wyprodukował łącznie 8640 urządzeń (940 to produkcja tylko w dwunastym roku).
+  solution_steps:
+  - 'Błędnie: podano a_{12} = 500 + 11\cdot 40 = 940 jako produkcję łączną.'
+  - 'Wskazanie błędu: a_{12} to produkcja w 12. roku, a łączna produkcja to suma S_{12}.'
+  - Zastosuj wzór S_{12} = \frac{a_1+a_{12}}{2}\cdot 12 z a_1 = 500, a_{12} = 940.
+  - Oblicz S_{12} = 720\cdot 12 = 8640 urządzeń.
+  answer:
+    kind: NUMERIC
+    value: 8640.0
+  checks:
+  - kind: evaluate
+    expr: \frac{500+\left(500+11\cdot 40\right)}{2}\cdot 12
+  skills:
+  - odróżnianie a_n od S_n
+  - suma ciągu arytmetycznego
+  - interpretacja treści zadania
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 8640.0 vs 8640.0 (tol 1e-09)'
+- id: g-ch-t02
+  slot: CHALLENGE
+  ramp_index: 0
+  difficulty: 4
+  exercise_type: modelowanie spadku wykładniczego, zadanie odwrotne
+  statement: Maszynę do pakowania kupiono za 40 000 zł. Co roku maszyna traci ten sam procent wartości,
+    jaką miała na początku danego roku. Po dwóch latach od zakupu jej wartość wyceniono na 32 400 zł.
+    Oblicz, o ile procent maleje wartość tej maszyny w ciągu jednego roku, oraz oblicz, ile będzie ona
+    warta po czterech latach od zakupu. Zapisz obliczenia.
+  statement_latex: 40000\cdot q^{2} = 32400,\qquad W_4 = 40000\cdot q^{4}
+  solution: |-
+    Niech W_n oznacza wartość maszyny po n latach od zakupu, a q — mnożnik jednego roku. Wartość zmienia się co roku o ten sam procent, więc ciąg (W_n) jest geometryczny o ilorazie q i W_n = 40000\cdot q^{\,n}, przy czym W_0 = 40000.
+    Z warunku zadania: 40000\cdot q^{2} = 32400, czyli q^{2} = \frac{32400}{40000} = 0{,}81.
+    Stąd q = 0{,}9 albo q = -0{,}9; wartość maszyny jest dodatnia, więc q = 0{,}9.
+    Mnożnik 0,9 = 1 − 0,10 oznacza spadek o 10% rocznie.
+    Po czterech latach: W_4 = 40000\cdot 0{,}9^{4} = 40000\cdot 0{,}6561 = 26244 zł.
+    (Kontrola sensowności: wartość maleje, 26 244 zł < 32 400 zł ✓.)
+    Odpowiedź: maszyna traci 10% wartości rocznie, a po czterech latach jest warta 26 244 zł.
+  solution_steps:
+  - 'Wprowadź model: W_n = 40000·q^n, gdzie q to mnożnik jednego roku (wartość początkowa odpowiada zeru
+    okresów).'
+  - Z warunku po dwóch latach zapisz 40000·q² = 32400, czyli q² = 0,81.
+  - 'Wybierz q = 0,9 (q > 0, bo wartość jest dodatnia) i odczytaj spadek: 1 − 0,9 = 0,1, czyli 10%.'
+  - Oblicz W_4 = 40000·0,9⁴ = 26 244 zł.
+  - Sprawdź sensowność (ciąg malejący) i sformułuj odpowiedź.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: procent_spadku
+      answer:
+        kind: NUMERIC
+        value: 10.0
+    - name: wartosc_po_4_latach
+      answer:
+        kind: NUMERIC
+        value: 26244.0
+        tol: 1.0e-06
+  checks:
+  - kind: evaluate
+    expr: 100\cdot\left(1-\sqrt{\frac{32400}{40000}}\right)
+    part: procent_spadku
+  - kind: evaluate
+    expr: 40000\cdot\left(\frac{32400}{40000}\right)^{2}
+    part: wartosc_po_4_latach
+  stated_model:
+    variable: n
+    objective_latex: W_n = 40000\cdot\left(0{,}9\right)^{n}
+    domain_lo: '0'
+    domain_lo_open: false
+    goal: value
+    constraint_used: W_2 = 32400,\ q>0
+  skills:
+  - rozpoznanie modelu geometrycznego
+  - wyznaczanie ilorazu z warunku odwrotnego
+  - odrzucenie pierwiastka ujemnego
+  - obliczanie wartości po n okresach
+  verification:
+    checkability: STATED_MODEL
+    note: 'stage 1 inconclusive: TypeError: name should be a string, not Token'
+- id: g-ch-t03
+  slot: CHALLENGE
+  ramp_index: 1
+  difficulty: 5
+  exercise_type: 'model wykładniczy: wyznaczanie parametru i liczby okresów'
+  statement: Roczna produkcja pewnej fabryki rośnie co roku o ten sam procent. W drugim roku działalności
+    fabryka wyprodukowała 4800 sztuk wyrobu, a w czwartym roku — 6912 sztuk. Oblicz, o ile procent rośnie
+    roczna produkcja, ile sztuk wyprodukowano w pierwszym roku działalności oraz w którym roku działalności
+    roczna produkcja po raz pierwszy przekroczy 12 000 sztuk. Zapisz obliczenia.
+  statement_latex: a_2 = 4800,\quad a_4 = 4800\cdot q^{2} = 6912,\quad a_n = a_1\cdot q^{\,n-1} > 12000
+  solution: |-
+    Niech a_n oznacza produkcję (w sztukach) w n-tym roku działalności. Wzrost o stały procent oznacza, że (a_n) jest ciągiem geometrycznym o ilorazie q>0.
+    Z warunków: a_4 = a_2\cdot q^{2}, czyli 6912 = 4800\cdot q^{2}, stąd q^{2} = \frac{6912}{4800} = 1{,}44, więc q = 1{,}2 (pierwiastek ujemny odrzucamy, bo produkcja jest dodatnia).
+    Mnożnik 1,2 = 1 + 0,20, więc produkcja rośnie o 20% rocznie.
+    Pierwszy rok: a_1 = \frac{a_2}{q} = \frac{4800}{1{,}2} = 4000 sztuk.
+    Szukamy najmniejszej liczby naturalnej n, dla której a_n = 4000\cdot 1{,}2^{\,n-1} > 12000, czyli 1{,}2^{\,n-1} > 3.
+    Szacujemy kolejne potęgi: 1{,}2^{5} = 2{,}48832,\quad 1{,}2^{6} = 2{,}985984 < 3,\quad 1{,}2^{7} = 3{,}5831808 > 3.
+    Najmniejsze n-1 spełniające warunek to 7, więc n = 8.
+    Sprawdzenie: a_7 = 4000\cdot 2{,}985984 = 11943{,}94 < 12000 oraz a_8 = 4000\cdot 3{,}5831808 = 14332{,}72 > 12000 ✓.
+    Odpowiedź: produkcja rośnie o 20% rocznie, w pierwszym roku wyprodukowano 4000 sztuk, a produkcja przekroczy 12 000 sztuk po raz pierwszy w 8. roku działalności.
+  solution_steps:
+  - Wprowadź ciąg (a_n) — produkcja w n-tym roku — i zauważ, że stały procent wzrostu daje ciąg geometryczny.
+  - Z zależności a_4 = a_2·q² wyznacz q² = 1,44 i wybierz q = 1,2 (q > 0).
+  - 'Odczytaj procent wzrostu: q = 1 + 0,20, czyli 20% rocznie.'
+  - 'Oblicz a_1 = 4800 : 1,2 = 4000 sztuk.'
+  - 'Zapisz nierówność 4000·1,2^{n−1} > 12 000, czyli 1,2^{n−1} > 3, i szacuj potęgi: 1,2⁶ = 2,985984
+    < 3, 1,2⁷ = 3,5831808 > 3.'
+  - Wybierz n = 8, sprawdzając a_7 < 12 000 i a_8 > 12 000; sformułuj odpowiedź.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: procent_wzrostu
+      answer:
+        kind: NUMERIC
+        value: 20.0
+    - name: produkcja_w_1_roku
+      answer:
+        kind: NUMERIC
+        value: 4000.0
+        tol: 1.0e-06
+    - name: numer_roku
+      answer:
+        kind: NUMERIC
+        value: 8.0
+  checks:
+  - kind: evaluate
+    expr: 100\cdot\left(\sqrt{\frac{6912}{4800}}-1\right)
+    part: procent_wzrostu
+  - kind: evaluate
+    expr: \frac{4800}{\sqrt{\frac{6912}{4800}}}
+    part: produkcja_w_1_roku
+  - kind: evaluate
+    expr: 1+\left\lceil\frac{\ln\left(\frac{12000}{4000}\right)}{\ln\left(\frac{6}{5}\right)}\right\rceil
+    part: numer_roku
+  stated_model:
+    variable: n
+    objective_latex: a_n = 4000\cdot\left(\frac{6}{5}\right)^{\,n-1}
+    domain_lo: '1'
+    domain_lo_open: false
+    goal: value
+    constraint_used: a_n > 12000,\ n\in\mathbb{N}_+
+  skills:
+  - budowa modelu geometrycznego z dwóch wyrazów
+  - odrzucenie pierwiastka ujemnego
+  - rozwiązywanie nierówności wykładniczej przez szacowanie potęg
+  - interpretacja numeru wyrazu
+  verification:
+    checkability: STATED_MODEL
+    note: 'stage 1 inconclusive: TypeError: name should be a string, not Token'
+- id: g-ch-t04
+  slot: CHALLENGE
+  ramp_index: 2
+  difficulty: 5
+  exercise_type: 'model arytmetyczny: wzór na sumę i sprawdzenie ograniczeń'
+  statement: |-
+    W amfiteatrze rzędy widowni ustawiono tak, że każdy następny rząd ma o 6 miejsc więcej niż rząd poprzedni. W piątym rzędzie jest 48 miejsc. Przepisy przeciwpożarowe wymagają, aby żaden rząd nie liczył więcej niż 90 miejsc, a cała widownia nie liczyła więcej niż 900 miejsc.
+    a) Wyznacz wzór na łączną liczbę S_n miejsc w pierwszych n rzędach tej widowni.
+    b) Oblicz, ile najwięcej rzędów może mieć ta widownia i ile miejsc jest wtedy na całej widowni. Zapisz obliczenia.
+  statement_latex: S_n = \frac{\left(2\cdot 24+\left(n-1\right)\cdot 6\right)\cdot n}{2},\qquad a_n =
+    18+6\cdot n \le 90,\qquad S_n \le 900
+  solution: |-
+    Niech a_n oznacza liczbę miejsc w n-tym rzędzie. Każdy następny rząd ma o 6 miejsc więcej, więc (a_n) jest ciągiem arytmetycznym o r = 6.
+    Z warunku a_5 = 48: a_1 = a_5 - 4\cdot r = 48 - 24 = 24. Zatem a_n = 24 + \left(n-1\right)\cdot 6 = 18 + 6\cdot n.
+    a) S_n = \frac{\left(2\cdot 24 + \left(n-1\right)\cdot 6\right)\cdot n}{2} = \frac{\left(42+6\cdot n\right)\cdot n}{2} = 3\cdot n^{2} + 21\cdot n, dla n \in \mathbb{N}_{+}.
+    b) Pierwszy warunek (żaden rząd nie większy niż 90 miejsc): 18 + 6\cdot n \le 90, czyli 6\cdot n \le 72, więc n \le 12.
+    Drugi warunek (widownia nie większa niż 900 miejsc): 3\cdot n^{2} + 21\cdot n \le 900, czyli n^{2} + 7\cdot n - 300 \le 0. Wyróżnik: \Delta = 49 + 1200 = 1249, \sqrt{1249} \approx 35{,}34, dodatni pierwiastek to \frac{-7+35{,}34}{2} \approx 14{,}17, więc n \le 14.
+    Oba warunki muszą być spełnione jednocześnie, więc wiążące jest ograniczenie n \le 12.
+    Dla n = 12: a_{12} = 18 + 72 = 90 \le 90 ✓ oraz S_{12} = 3\cdot 144 + 21\cdot 12 = 432 + 252 = 684 \le 900 ✓.
+    Dla n = 13 byłoby a_{13} = 96 > 90, co jest niedozwolone.
+    Odpowiedź: a) S_n = 3n^{2}+21n; b) widownia może mieć najwyżej 12 rzędów, a wtedy jest na niej 684 miejsca.
+  solution_steps:
+  - Zauważ, że liczby miejsc w rzędach tworzą ciąg arytmetyczny o r = 6, i wyznacz a_1 = 48 − 4·6 = 24.
+  - Zapisz a_n = 24 + (n−1)·6 = 18 + 6n.
+  - 'Wyprowadź wzór na sumę: S_n = ((2·24 + (n−1)·6)·n)/2 = 3n² + 21n dla n ∈ N₊.'
+  - Z warunku a_n ≤ 90 otrzymaj n ≤ 12.
+  - Z warunku S_n ≤ 900 otrzymaj n² + 7n − 300 ≤ 0, czyli n ≤ 14.
+  - 'Wybierz ograniczenie ostrzejsze: n = 12, sprawdź a_12 = 90 i S_12 = 684 oraz odrzuć n = 13 (a_13
+    = 96 > 90); podaj odpowiedź.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wzor_S_n
+      answer:
+        kind: SYMBOLIC
+        latex: 3\cdot n^{2}+21\cdot n
+    - name: liczba_rzedow
+      answer:
+        kind: NUMERIC
+        value: 12.0
+    - name: liczba_miejsc
+      answer:
+        kind: NUMERIC
+        value: 684.0
+  checks:
+  - kind: simplify
+    expr: \frac{\left(2\cdot 24+\left(n-1\right)\cdot 6\right)\cdot n}{2}
+    var: n
+    part: wzor_S_n
+  - kind: evaluate
+    expr: \left\lfloor\frac{90-24}{6}\right\rfloor+1
+    var: n
+    part: liczba_rzedow
+  - kind: evaluate
+    expr: 3\cdot 12^{2}+21\cdot 12
+    var: n
+    part: liczba_miejsc
+  stated_model:
+    variable: n
+    objective_latex: S_n = 3\cdot n^{2}+21\cdot n
+    domain_lo: '1'
+    domain_hi: '12'
+    domain_lo_open: false
+    domain_hi_open: false
+    constraint_used: a_n = 18+6\cdot n \le 90 \ \wedge\ S_n \le 900,\ n\in\mathbb{N}_+
+  skills:
+  - wyznaczanie a_1 z wyrazu a_5
+  - wyprowadzenie wzoru na S_n
+  - rozwiązywanie nierówności z niewiadomym n
+  - sprawdzenie dwóch ograniczeń i wybór wiążącego
+  verification:
+    checkability: STATED_MODEL
+    note: 'stage 1 inconclusive: TypeError: name should be a string, not Token'

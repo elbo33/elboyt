@@ -1,0 +1,739 @@
+section: prawa-dzialan-potegi-pierwiastki
+name: Prawa działań na potęgach i pierwiastkach
+scope: Rational exponents and the root-power link; the laws for multiplying, dividing and raising powers,
+  and their counterparts for roots.
+requirements:
+- I.4
+counts:
+  total: 16
+  DETERMINISTIC: 11
+  REFERENCE_CALL: 2
+  STATED_MODEL: 2
+  NOT_MACHINE_CHECKABLE: 1
+exercises:
+- id: g-th-00
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: zamiana zapisu pierwiastkowego na potęgowy
+  statement: Zapisz liczbę \(\sqrt[4]{5^{3}}\) w postaci potęgi liczby 5 o wykładniku wymiernym.
+  statement_latex: \sqrt[4]{5^{3}}
+  solution: |-
+    Korzystamy ze wzoru \(\sqrt[n]{a^{m}}=a^{\frac{m}{n}}\), prawdziwego dla \(a>0\).
+    Stopień pierwiastka (4) trafia do mianownika wykładnika, a wykładnik spod pierwiastka (3) — do licznika:
+    \[\sqrt[4]{5^{3}}=5^{\frac{3}{4}}.\]
+    Odpowiedź: \(5^{\frac{3}{4}}\).
+  solution_steps:
+  - Rozpoznaj wzór \(\sqrt[n]{a^{m}}=a^{\frac{m}{n}}\).
+  - Podstaw \(n=4\), \(m=3\), \(a=5\).
+  - 'Zapisz wynik: \(5^{\frac{3}{4}}\).'
+  answer:
+    kind: SYMBOLIC
+    latex: 5^{\frac{3}{4}}
+  checks:
+  - kind: simplify
+    expr: \sqrt[4]{5^{3}}
+  skills:
+  - pierwiastek jako potęga o wykładniku wymiernym
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: ''5^{\\frac{3}{4}}'' vs ''5**(3/4)'''
+- id: g-th-01
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: obliczanie potęgi o wykładniku wymiernym
+  statement: Oblicz wartość wyrażenia \(16^{\frac{3}{4}}\).
+  statement_latex: 16^{\frac{3}{4}}
+  solution: |-
+    Zapisujemy podstawę jako potęgę liczby 2: \(16=2^{4}\).
+    \[16^{\frac{3}{4}}=\left(2^{4}\right)^{\frac{3}{4}}=2^{4\cdot\frac{3}{4}}=2^{3}=8.\]
+    Równoważnie: \(16^{\frac{3}{4}}=\left(\sqrt[4]{16}\right)^{3}=2^{3}=8\).
+    Odpowiedź: 8.
+  solution_steps:
+  - 'Zapisz podstawę jako potęgę liczby pierwszej: \(16=2^{4}\).'
+  - 'Zastosuj wzór \(\left(a^{m}\right)^{n}=a^{m\cdot n}\): \(2^{4\cdot\frac{3}{4}}=2^{3}\).'
+  - Oblicz \(2^{3}=8\).
+  answer:
+    kind: NUMERIC
+    value: 8.0
+  checks:
+  - kind: evaluate
+    expr: 16^{\frac{3}{4}}
+  skills:
+  - sprowadzanie do wspólnej podstawy
+  - potęgowanie potęgi
+  - wykładnik wymierny
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 8.0 vs 8.0 (tol 1e-09)'
+- id: g-th-02
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: prawa działań na potęgach
+  statement: Wyrażenie \(\frac{2^{7}\cdot 2^{-3}}{2^{2}}\) zapisz w postaci jednej potęgi liczby 2 oraz
+    oblicz jego wartość.
+  statement_latex: \frac{2^{7}\cdot 2^{-3}}{2^{2}}
+  solution: |-
+    W liczniku mnożymy potęgi o tej samej podstawie, więc dodajemy wykładniki:
+    \[2^{7}\cdot 2^{-3}=2^{7+(-3)}=2^{4}.\]
+    Następnie dzielimy potęgi o tej samej podstawie, więc odejmujemy wykładniki:
+    \[\frac{2^{4}}{2^{2}}=2^{4-2}=2^{2}.\]
+    Wartość: \(2^{2}=4\).
+    Odpowiedź: \(2^{2}=4\).
+  solution_steps:
+  - 'W liczniku dodaj wykładniki: \(2^{7}\cdot 2^{-3}=2^{4}\).'
+  - 'Przy dzieleniu odejmij wykładniki: \(\frac{2^{4}}{2^{2}}=2^{2}\).'
+  - 'Oblicz wartość: \(2^{2}=4\).'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: postać potęgowa
+      answer:
+        kind: SYMBOLIC
+        latex: 2^{2}
+    - name: wartość
+      answer:
+        kind: NUMERIC
+        value: 4.0
+  checks:
+  - kind: simplify
+    expr: \frac{2^{7}\cdot 2^{-3}}{2^{2}}
+    part: postać potęgowa
+  - kind: evaluate
+    expr: \frac{2^{7}\cdot 2^{-3}}{2^{2}}
+    part: wartość
+  skills:
+  - mnożenie i dzielenie potęg o tej samej podstawie
+  - potęga o wykładniku ujemnym
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [postać potęgowa] SymPy solved it fresh: ''2^{2}'' vs ''4''
+      ; [wartość] SymPy solved it fresh: 4.0 vs 4.0 (tol 1e-09)'
+- id: g-ex-03
+  slot: EXERCISE
+  ramp_index: 1
+  difficulty: 2
+  exercise_type: obliczanie wartości wyrażenia z potęgami
+  statement: Oblicz wartość wyrażenia \(\left(\frac{1}{9}\right)^{-\frac{1}{2}}+32^{\frac{2}{5}}-7^{0}\).
+  statement_latex: \left(\frac{1}{9}\right)^{-\frac{1}{2}}+32^{\frac{2}{5}}-7^{0}
+  solution: |-
+    Liczymy każdy składnik osobno.
+    1) Ujemny wykładnik odwraca ułamek: \(\left(\frac{1}{9}\right)^{-\frac{1}{2}}=9^{\frac{1}{2}}=\sqrt{9}=3\).
+    2) \(32=2^{5}\), więc \(32^{\frac{2}{5}}=\left(2^{5}\right)^{\frac{2}{5}}=2^{5\cdot\frac{2}{5}}=2^{2}=4\).
+    3) \(7^{0}=1\).
+    Razem: \(3+4-1=6\).
+    Odpowiedź: 6.
+  solution_steps:
+  - 'Odwróć ułamek przy ujemnym wykładniku: \(\left(\frac{1}{9}\right)^{-\frac{1}{2}}=9^{\frac{1}{2}}=3\).'
+  - Zapisz \(32=2^{5}\) i oblicz \(32^{\frac{2}{5}}=2^{2}=4\).
+  - Zauważ, że \(7^{0}=1\).
+  - 'Wykonaj dodawanie i odejmowanie: \(3+4-1=6\).'
+  answer:
+    kind: NUMERIC
+    value: 6.0
+  checks:
+  - kind: evaluate
+    expr: \left(\frac{1}{9}\right)^{-\frac{1}{2}}+32^{\frac{2}{5}}-7^{0}
+  skills:
+  - ujemny wykładnik wymierny
+  - sprowadzanie do wspólnej podstawy
+  - potęga o wykładniku zerowym
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 6.0 vs 6.0 (tol 1e-09)'
+- id: g-ex-04
+  slot: EXERCISE
+  ramp_index: 2
+  difficulty: 3
+  exercise_type: działania na pierwiastkach
+  statement: |-
+    a) Uprość wyrażenie \(\sqrt{75}-\sqrt{27}+\frac{6}{\sqrt{3}}\).
+    b) Usuń niewymierność z mianownika ułamka \(\frac{10}{\sqrt[3]{4}}\) i zapisz wynik w możliwie najprostszej postaci.
+  statement_latex: \text{a) } \sqrt{75}-\sqrt{27}+\frac{6}{\sqrt{3}}\qquad \text{b) } \frac{10}{\sqrt[3]{4}}
+  solution: |-
+    a) Wyłączamy czynniki przed znak pierwiastka:
+    \[\sqrt{75}=\sqrt{25\cdot 3}=5\sqrt{3},\qquad \sqrt{27}=\sqrt{9\cdot 3}=3\sqrt{3}.\]
+    Usuwamy niewymierność: \(\frac{6}{\sqrt{3}}=\frac{6\cdot\sqrt{3}}{\sqrt{3}\cdot\sqrt{3}}=\frac{6\sqrt{3}}{3}=2\sqrt{3}\).
+    Zbieramy wyrazy podobne: \(5\sqrt{3}-3\sqrt{3}+2\sqrt{3}=\left(5-3+2\right)\sqrt{3}=4\sqrt{3}\).
+
+    b) Ponieważ \(4=2^{2}\), mnożymy licznik i mianownik przez \(\sqrt[3]{2}\), aby pod pierwiastkiem powstało \(2^{3}\):
+    \[\frac{10}{\sqrt[3]{2^{2}}}=\frac{10\cdot\sqrt[3]{2}}{\sqrt[3]{2^{2}}\cdot\sqrt[3]{2}}=\frac{10\sqrt[3]{2}}{\sqrt[3]{2^{3}}}=\frac{10\sqrt[3]{2}}{2}=5\sqrt[3]{2}.\]
+    Odpowiedzi: a) \(4\sqrt{3}\); b) \(5\sqrt[3]{2}\).
+  solution_steps:
+  - 'Wyłącz czynniki: \(\sqrt{75}=5\sqrt{3}\), \(\sqrt{27}=3\sqrt{3}\).'
+  - 'Usuń niewymierność: \(\frac{6}{\sqrt{3}}=2\sqrt{3}\).'
+  - 'Zbierz wyrazy podobne: \(5\sqrt{3}-3\sqrt{3}+2\sqrt{3}=4\sqrt{3}\).'
+  - W b) zapisz \(4=2^{2}\) i pomnóż licznik i mianownik przez \(\sqrt[3]{2}\).
+  - 'Uprość: \(\frac{10\sqrt[3]{2}}{2}=5\sqrt[3]{2}\).'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: a
+      answer:
+        kind: SYMBOLIC
+        latex: 4\sqrt{3}
+    - name: b
+      answer:
+        kind: SYMBOLIC
+        latex: 5\sqrt[3]{2}
+  checks:
+  - kind: simplify
+    expr: \sqrt{75}-\sqrt{27}+\frac{6}{\sqrt{3}}
+    part: a
+  - kind: simplify
+    expr: \frac{10}{\sqrt[3]{4}}
+    part: b
+  skills:
+  - wyłączanie czynnika przed pierwiastek
+  - dodawanie wyrazów podobnych
+  - usuwanie niewymierności z mianownika
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [a] SymPy solved it fresh: ''4\\sqrt{3}'' vs ''4*sqrt(3)''
+      ; [b] SymPy solved it fresh: ''5\\sqrt[3]{2}'' vs ''5*2**(1/3)'''
+- id: g-ex-05
+  slot: EXERCISE
+  ramp_index: 3
+  difficulty: 4
+  exercise_type: potęgi o wykładnikach wymiernych i porównywanie liczb
+  statement: |-
+    a) Zapisz liczbę \(\frac{\sqrt[3]{3}\cdot\sqrt[4]{3^{3}}}{\sqrt{3}}\) w postaci potęgi liczby 3 o wykładniku wymiernym.
+    b) Rozstrzygnij, która z liczb \(\sqrt[3]{4}\) oraz \(\sqrt{3}\) jest większa. Odpowiedź zapisz w postaci nierówności.
+  statement_latex: \text{a) } \frac{\sqrt[3]{3}\cdot\sqrt[4]{3^{3}}}{\sqrt{3}}\qquad \text{b) } \sqrt[3]{4}\
+    \text{oraz}\ \sqrt{3}
+  solution: |-
+    a) Zamieniamy pierwiastki na potęgi o wykładnikach wymiernych:
+    \[\sqrt[3]{3}=3^{\frac{1}{3}},\qquad \sqrt[4]{3^{3}}=3^{\frac{3}{4}},\qquad \sqrt{3}=3^{\frac{1}{2}}.\]
+    Przy mnożeniu dodajemy wykładniki, przy dzieleniu odejmujemy:
+    \[\frac{1}{3}+\frac{3}{4}-\frac{1}{2}=\frac{4}{12}+\frac{9}{12}-\frac{6}{12}=\frac{7}{12}.\]
+    Zatem wyrażenie równa się \(3^{\frac{7}{12}}\) (czyli \(\sqrt[12]{3^{7}}\)).
+
+    b) Obie liczby są dodatnie, a stopnie pierwiastków to 3 i 2; \(\mathrm{NWW}(3,2)=6\). Podnosimy obie liczby do potęgi 6 (nierówność między liczbami dodatnimi się nie odwróci):
+    \[\left(\sqrt[3]{4}\right)^{6}=4^{2}=16,\qquad \left(\sqrt{3}\right)^{6}=3^{3}=27.\]
+    Ponieważ \(16<27\), to \(\sqrt[3]{4}<\sqrt{3}\).
+    Odpowiedzi: a) \(3^{\frac{7}{12}}\); b) \(\sqrt[3]{4}<\sqrt{3}\).
+  solution_steps:
+  - 'Zamień pierwiastki na potęgi: \(3^{\frac{1}{3}}\), \(3^{\frac{3}{4}}\), \(3^{\frac{1}{2}}\).'
+  - 'Dodaj wykładniki licznika i odejmij wykładnik mianownika: \(\frac{1}{3}+\frac{3}{4}-\frac{1}{2}=\frac{7}{12}\).'
+  - 'Zapisz wynik: \(3^{\frac{7}{12}}\).'
+  - 'W b) podnieś obie liczby do potęgi \(\mathrm{NWW}(3,2)=6\): \(16\) i \(27\).'
+  - 'Porównaj: \(16<27\), więc \(\sqrt[3]{4}<\sqrt{3}\).'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: a
+      answer:
+        kind: SYMBOLIC
+        latex: 3^{\frac{7}{12}}
+    - name: b
+      answer:
+        kind: SYMBOLIC
+        latex: \sqrt[3]{4}<\sqrt{3}
+  checks:
+  - kind: simplify
+    expr: \frac{\sqrt[3]{3}\cdot\sqrt[4]{3^{3}}}{\sqrt{3}}
+    part: a
+  skills:
+  - zamiana pierwiastków na potęgi
+  - działania na wykładnikach wymiernych
+  - porównywanie pierwiastków różnych stopni
+  verification:
+    checkability: REFERENCE_CALL
+    note: 2 parts matched
+- id: g-ex-t00
+  slot: EXERCISE
+  ramp_index: 6
+  difficulty: 3
+  exercise_type: obliczanie wartości potęg o wykładnikach wymiernych i upraszczanie wyrażenia potęgowego
+  statement: |-
+    a) Oblicz wartość wyrażenia \( W = 27^{-\frac{2}{3}} + \left(\frac{1}{4}\right)^{-\frac{3}{2}} - \sqrt[4]{81} \).
+    b) Dla \( a > 0 \) uprość wyrażenie \( \frac{a^{\frac{5}{6}}\cdot \sqrt[3]{a}}{\sqrt{a}} \) i zapisz wynik w postaci potęgi o wykładniku wymiernym.
+  statement_latex: W = 27^{-\frac{2}{3}} + \left(\frac{1}{4}\right)^{-\frac{3}{2}} - \sqrt[4]{81};\qquad
+    \frac{a^{\frac{5}{6}}\cdot \sqrt[3]{a}}{\sqrt{a}}
+  solution: |-
+    a) Każdy składnik sprowadzamy do potęgi liczby pierwszej.
+    \( 27^{-\frac{2}{3}} = \left(3^{3}\right)^{-\frac{2}{3}} = 3^{3\cdot\left(-\frac{2}{3}\right)} = 3^{-2} = \frac{1}{9} \).
+    \( \left(\frac{1}{4}\right)^{-\frac{3}{2}} = 4^{\frac{3}{2}} = \left(2^{2}\right)^{\frac{3}{2}} = 2^{3} = 8 \) (ujemny wykładnik odwraca ułamek).
+    \( \sqrt[4]{81} = \left(3^{4}\right)^{\frac{1}{4}} = 3 \).
+    Zatem \( W = \frac{1}{9} + 8 - 3 = 5 + \frac{1}{9} = \frac{46}{9} \).
+
+    b) Zamieniamy pierwiastki na potęgi: \( \sqrt[3]{a} = a^{\frac{1}{3}} \), \( \sqrt{a} = a^{\frac{1}{2}} \). Przy mnożeniu wykładniki dodajemy, przy dzieleniu odejmujemy:
+    \( \frac{5}{6} + \frac{1}{3} - \frac{1}{2} = \frac{5}{6} + \frac{2}{6} - \frac{3}{6} = \frac{4}{6} = \frac{2}{3} \).
+    Zatem wyrażenie równa się \( a^{\frac{2}{3}} \) (co można też zapisać jako \( \sqrt[3]{a^{2}} \)). Założenie \( a>0 \) jest konieczne, by stosować wykładniki wymierne.
+  solution_steps:
+  - 'Zapisz 27, 4 i 81 jako potęgi liczb pierwszych: 27 = 3^3, 4 = 2^2, 81 = 3^4.'
+  - 'Zastosuj (a^m)^n = a^{m·n}: 27^{-2/3} = 3^{-2} = 1/9, (1/4)^{-3/2} = 4^{3/2} = 8, czwarty pierwiastek
+    z 81 równa się 3.'
+  - 'Dodaj i odejmij otrzymane liczby: 1/9 + 8 − 3 = 46/9.'
+  - W drugim wyrażeniu zamień pierwiastki na potęgi o wykładnikach wymiernych.
+  - 'Dodaj wykładniki licznika i odejmij wykładnik mianownika: 5/6 + 1/3 − 1/2 = 2/3.'
+  - Zapisz wynik jako a^{2/3}.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: W
+      answer:
+        kind: NUMERIC
+        value: 5.111111111111111
+        latex: \frac{46}{9}
+    - name: uproszczenie
+      answer:
+        kind: SYMBOLIC
+        latex: a^{\frac{2}{3}}
+  checks:
+  - kind: evaluate
+    expr: 27^{-\frac{2}{3}} + \left(\frac{1}{4}\right)^{-\frac{3}{2}} - \sqrt[4]{81}
+    part: W
+  - kind: simplify
+    expr: \frac{a^{\frac{5}{6}}\cdot a^{\frac{1}{3}}}{a^{\frac{1}{2}}}
+    var: a
+    part: uproszczenie
+  skills:
+  - potęga o wykładniku wymiernym
+  - potęga o wykładniku ujemnym
+  - sprowadzanie do wspólnej podstawy
+  - zamiana pierwiastków na potęgi
+  - prawa działań na potęgach
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [W] SymPy solved it fresh: 5.111111111111111 vs 5.111111111111111
+      (tol 1e-09) ; [uproszczenie] SymPy solved it fresh: ''a^{\\frac{2}{3}}'' vs ''a**(2/3)'''
+- id: g-ex-t01
+  slot: EXERCISE
+  ramp_index: 7
+  difficulty: 4
+  exercise_type: działania na pierwiastkach, usuwanie niewymierności i porównywanie pierwiastków różnych
+    stopni
+  statement: |-
+    a) Wykonaj działania i zapisz wynik w najprostszej postaci: \( \frac{12}{\sqrt{18}} + \sqrt{50} - \sqrt{8} \).
+    b) Rozstrzygnij, która z liczb \( \sqrt[3]{4} \), \( \sqrt[4]{7} \) jest większa. Odpowiedź zapisz w postaci nierówności.
+  statement_latex: \frac{12}{\sqrt{18}} + \sqrt{50} - \sqrt{8};\qquad \sqrt[3]{4}\ \text{oraz}\ \sqrt[4]{7}
+  solution: |-
+    a) Najpierw upraszczamy liczby pod pierwiastkami:
+    \( \sqrt{18} = \sqrt{9\cdot 2} = 3\sqrt{2} \), \( \sqrt{50} = \sqrt{25\cdot 2} = 5\sqrt{2} \), \( \sqrt{8} = \sqrt{4\cdot 2} = 2\sqrt{2} \).
+    Usuwamy niewymierność z mianownika:
+    \( \frac{12}{\sqrt{18}} = \frac{12}{3\sqrt{2}} = \frac{4}{\sqrt{2}} = \frac{4\cdot\sqrt{2}}{2} = 2\sqrt{2} \).
+    Zbieramy wyrazy podobne: \( 2\sqrt{2} + 5\sqrt{2} - 2\sqrt{2} = \left(2+5-2\right)\sqrt{2} = 5\sqrt{2} \).
+
+    b) Stopnie pierwiastków są różne: 3 i 4, a \( \mathrm{NWW}(3,4) = 12 \). Obie liczby są dodatnie, więc podniesienie do potęgi 12 nie odwraca nierówności:
+    \( \left(\sqrt[3]{4}\right)^{12} = 4^{4} = 256 \), \( \left(\sqrt[4]{7}\right)^{12} = 7^{3} = 343 \).
+    Ponieważ \( 256 < 343 \), to \( \sqrt[3]{4} < \sqrt[4]{7} \); większa jest liczba \( \sqrt[4]{7} \).
+  solution_steps:
+  - 'Wyłącz czynniki przed pierwiastki: √18 = 3√2, √50 = 5√2, √8 = 2√2.'
+  - 'Usuń niewymierność z mianownika: 12/(3√2) = 4/√2 = 2√2.'
+  - 'Zbierz wyrazy podobne: 2√2 + 5√2 − 2√2 = 5√2.'
+  - 'Do porównania pierwiastków znajdź NWW stopni: NWW(3,4) = 12.'
+  - 'Podnieś obie dodatnie liczby do potęgi 12: 4^4 = 256 oraz 7^3 = 343.'
+  - Z 256 < 343 wynika, że trzeci pierwiastek z 4 jest mniejszy od czwartego pierwiastka z 7.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wartosc_wyrazenia
+      answer:
+        kind: NUMERIC
+        value: 7.0710678118654755
+        latex: 5\sqrt{2}
+    - name: porownanie
+      answer:
+        kind: SYMBOLIC
+        latex: \sqrt[3]{4} < \sqrt[4]{7}
+  checks:
+  - kind: evaluate
+    expr: \frac{12}{\sqrt{18}} + \sqrt{50} - \sqrt{8}
+    part: wartosc_wyrazenia
+  skills:
+  - wyłączanie czynnika przed znak pierwiastka
+  - usuwanie niewymierności z mianownika
+  - dodawanie wyrazów podobnych z pierwiastkami
+  - porównywanie pierwiastków różnych stopni
+  verification:
+    checkability: REFERENCE_CALL
+    note: 2 parts matched
+- id: g-cm-06
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: korekta błędu rachunkowego
+  statement: 'Oblicz: a) \(\sqrt{36+64}\),  b) \(\left(\sqrt{7}+3\right)^{2}\). Uczeń zapisał: \(\sqrt{36+64}=\sqrt{36}+\sqrt{64}=6+8=14\)
+    oraz \(\left(\sqrt{7}+3\right)^{2}=\left(\sqrt{7}\right)^{2}+3^{2}=7+9=16\). Wskaż błąd w jego rozumowaniu
+    i podaj poprawne wyniki.'
+  statement_latex: \text{a) } \sqrt{36+64}\qquad \text{b) } \left(\sqrt{7}+3\right)^{2}
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń „rozdzielił” pierwiastek i potęgę względem sumy:
+    \[\sqrt{36+64}=\sqrt{36}+\sqrt{64}=6+8=14,\qquad \left(\sqrt{7}+3\right)^{2}=7+9=16.\]
+    Dlaczego to źle: pierwiastkowanie i potęgowanie są rozdzielne wyłącznie względem mnożenia i dzielenia (\(\sqrt{a\cdot b}=\sqrt{a}\cdot\sqrt{b}\)), a nie względem dodawania. Nie istnieje żaden wzór na \(\sqrt{a+b}\).
+
+    POPRAWNIE:
+    a) Najpierw wykonujemy dodawanie pod pierwiastkiem: \(\sqrt{36+64}=\sqrt{100}=10\) (a nie 14).
+    b) Stosujemy wzór \(\left(a+b\right)^{2}=a^{2}+2\cdot a\cdot b+b^{2}\):
+    \[\left(\sqrt{7}+3\right)^{2}=\left(\sqrt{7}\right)^{2}+2\cdot\sqrt{7}\cdot 3+3^{2}=7+6\sqrt{7}+9=16+6\sqrt{7}.\]
+    Odpowiedzi: a) 10; b) \(16+6\sqrt{7}\).
+  solution_steps:
+  - 'Zauważ błąd: uczeń rozdzielił pierwiastek i kwadrat względem sumy.'
+  - Przypomnij, że \(\sqrt{a\cdot b}=\sqrt{a}\cdot\sqrt{b}\), ale \(\sqrt{a+b}\neq\sqrt{a}+\sqrt{b}\).
+  - 'W a) dodaj liczby pod pierwiastkiem: \(\sqrt{100}=10\).'
+  - W b) użyj wzoru \(\left(a+b\right)^{2}=a^{2}+2ab+b^{2}\).
+  - 'Zapisz wynik: \(7+6\sqrt{7}+9=16+6\sqrt{7}\).'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: a
+      answer:
+        kind: NUMERIC
+        value: 10.0
+    - name: b
+      answer:
+        kind: SYMBOLIC
+        latex: 16+6\sqrt{7}
+  checks:
+  - kind: evaluate
+    expr: \sqrt{36+64}
+    part: a
+  - kind: simplify
+    expr: \left(\sqrt{7}+3\right)^{2}
+    part: b
+  skills:
+  - pierwiastek z sumy
+  - wzór skróconego mnożenia \left(a+b\right)^{2}
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [a] SymPy solved it fresh: 10.0 vs 10.0 (tol 1e-09) ; [b] SymPy
+      solved it fresh: ''16+6\\sqrt{7}'' vs ''(sqrt(7) + 3)**2'''
+- id: g-cm-07
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: korekta błędu rachunkowego
+  statement: Oblicz wartość wyrażenia \(\sqrt{\left(-7\right)^{2}}+\sqrt{\left(2-\sqrt{5}\right)^{2}}\).
+    Uczeń stwierdził, że „pierwiastek i kwadrat się znoszą”, i otrzymał \(-7+\left(2-\sqrt{5}\right)=-5-\sqrt{5}\).
+    Wyjaśnij, na czym polega jego błąd, i podaj poprawny wynik.
+  statement_latex: \sqrt{\left(-7\right)^{2}}+\sqrt{\left(2-\sqrt{5}\right)^{2}}
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń skrócił pierwiastek z kwadratem „wprost”:
+    \[\sqrt{\left(-7\right)^{2}}=-7,\qquad \sqrt{\left(2-\sqrt{5}\right)^{2}}=2-\sqrt{5},\]
+    skąd suma \(-7+2-\sqrt{5}=-5-\sqrt{5}\approx-7{,}24\).
+    Dlaczego to źle: pierwiastek arytmetyczny stopnia parzystego jest zawsze liczbą nieujemną, więc jego wartość nie może być ujemna. Obowiązuje wzór \(\sqrt{a^{2}}=\left|a\right|\).
+
+    POPRAWNIE:
+    \[\sqrt{\left(-7\right)^{2}}=\left|-7\right|=7.\]
+    Ponieważ \(\sqrt{5}\approx 2{,}24>2\), liczba \(2-\sqrt{5}\) jest ujemna, zatem
+    \[\sqrt{\left(2-\sqrt{5}\right)^{2}}=\left|2-\sqrt{5}\right|=\sqrt{5}-2.\]
+    Razem: \(7+\sqrt{5}-2=5+\sqrt{5}\).
+    Odpowiedź: \(5+\sqrt{5}\).
+  solution_steps:
+  - 'Zauważ błąd: skracanie \(\sqrt{a^{2}}=a\) wolno stosować tylko dla \(a\ge 0\).'
+  - Zastosuj wzór \(\sqrt{a^{2}}=\left|a\right|\).
+  - Oblicz \(\sqrt{\left(-7\right)^{2}}=\left|-7\right|=7\).
+  - 'Ustal znak: \(\sqrt{5}>2\), więc \(\left|2-\sqrt{5}\right|=\sqrt{5}-2\).'
+  - 'Dodaj: \(7+\sqrt{5}-2=5+\sqrt{5}\).'
+  answer:
+    kind: SYMBOLIC
+    latex: 5+\sqrt{5}
+  checks:
+  - kind: simplify
+    expr: \sqrt{\left(-7\right)^{2}}+\sqrt{\left(2-\sqrt{5}\right)^{2}}
+  skills:
+  - wzór \sqrt{a^{2}}=|a|
+  - szacowanie znaku wyrażenia
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: ''5+\\sqrt{5}'' vs ''sqrt(5) + 5'''
+- id: g-cm-08
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: korekta błędu rachunkowego
+  statement: 'Oblicz wartość wyrażenia \(2^{-3}+\left(\frac{1}{5}\right)^{-2}\). Uczeń zapisał: \(2^{-3}=-8\)
+    oraz \(\left(\frac{1}{5}\right)^{-2}=-\frac{1}{25}\), skąd otrzymał \(-8-\frac{1}{25}\). Wskaż błąd
+    i podaj poprawną wartość wyrażenia.'
+  statement_latex: 2^{-3}+\left(\frac{1}{5}\right)^{-2}
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń uznał, że minus w wykładniku „przechodzi” na wynik:
+    \[2^{-3}=-8,\qquad \left(\frac{1}{5}\right)^{-2}=-\frac{1}{25},\]
+    czyli wartość wyrażenia to \(-8-\frac{1}{25}=-8{,}04\).
+    Dlaczego to źle: ujemny wykładnik nie oznacza liczby ujemnej, lecz odwrotność: \(a^{-n}=\frac{1}{a^{n}}\). Potęga liczby dodatniej jest zawsze dodatnia.
+
+    POPRAWNIE:
+    \[2^{-3}=\frac{1}{2^{3}}=\frac{1}{8},\qquad \left(\frac{1}{5}\right)^{-2}=\left(\frac{5}{1}\right)^{2}=25.\]
+    Razem: \(\frac{1}{8}+25=\frac{1+200}{8}=\frac{201}{8}=25{,}125\).
+    Odpowiedź: \(\frac{201}{8}\).
+  solution_steps:
+  - 'Zauważ błąd: ujemny wykładnik potraktowano jak znak minus przy wyniku.'
+  - 'Zastosuj \(a^{-n}=\frac{1}{a^{n}}\): \(2^{-3}=\frac{1}{8}\).'
+  - 'Odwróć ułamek: \(\left(\frac{1}{5}\right)^{-2}=5^{2}=25\).'
+  - 'Dodaj: \(\frac{1}{8}+25=\frac{201}{8}\).'
+  answer:
+    kind: NUMERIC
+    value: 25.125
+  checks:
+  - kind: evaluate
+    expr: 2^{-3}+\left(\frac{1}{5}\right)^{-2}
+  skills:
+  - potęga o wykładniku całkowitym ujemnym
+  - odwracanie ułamka w potędze
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 25.125 vs 25.125 (tol 1e-09)'
+- id: g-cm-09
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: korekta błędu rachunkowego
+  statement: Oblicz wartość wyrażenia \(-3^{4}+\left(-3\right)^{4}+\left(-2\right)^{3}-2^{3}\). Uczeń
+    uznał, że \(-3^{4}=81\) (bo \(\left(-3\right)\cdot\left(-3\right)\cdot\left(-3\right)\cdot\left(-3\right)=81\))
+    i otrzymał wynik \(81+81-8-8=146\). Wskaż błąd i podaj poprawną wartość.
+  statement_latex: -3^{4}+\left(-3\right)^{4}+\left(-2\right)^{3}-2^{3}
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń potraktował zapis \(-3^{4}\) tak samo jak \(\left(-3\right)^{4}\) i przyjął \(-3^{4}=81\), otrzymując
+    \[81+81-8-8=146.\]
+    Dlaczego to źle: bez nawiasu najpierw wykonujemy potęgowanie, a dopiero potem zmieniamy znak, czyli \(-3^{4}=-\left(3^{4}\right)\). To nawias decyduje o tym, co jest podstawą potęgi.
+
+    POPRAWNIE:
+    \[-3^{4}=-\left(3^{4}\right)=-81,\qquad \left(-3\right)^{4}=81,\]
+    \[\left(-2\right)^{3}=-8,\qquad 2^{3}=8.\]
+    Razem: \(-81+81+\left(-8\right)-8=-16\).
+    Odpowiedź: \(-16\).
+  solution_steps:
+  - 'Zauważ błąd: pomylono \(-a^{n}\) z \(\left(-a\right)^{n}\).'
+  - Oblicz \(-3^{4}=-\left(3^{4}\right)=-81\) oraz \(\left(-3\right)^{4}=81\).
+  - Oblicz \(\left(-2\right)^{3}=-8\) oraz \(2^{3}=8\).
+  - 'Zsumuj: \(-81+81-8-8=-16\).'
+  answer:
+    kind: NUMERIC
+    value: -16.0
+  checks:
+  - kind: evaluate
+    expr: -3^{4}+\left(-3\right)^{4}+\left(-2\right)^{3}-2^{3}
+  skills:
+  - kolejność działań przy potęgowaniu
+  - znak potęgi liczby ujemnej
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: -16.0 vs -16.0 (tol 1e-09)'
+- id: g-cm-10
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: korekta błędu rachunkowego
+  statement: Iloczyn \(\sqrt{7}\cdot\sqrt[3]{7}\) zapisz w postaci potęgi liczby 7 o wykładniku wymiernym
+    oraz w postaci jednego pierwiastka. Uczeń napisał, że \(\sqrt{7}\cdot\sqrt[3]{7}=\sqrt[5]{7}\), bo
+    „stopnie pierwiastków się dodają”. Wyjaśnij, dlaczego jest to błąd, i podaj poprawny wynik.
+  statement_latex: \sqrt{7}\cdot\sqrt[3]{7}
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń dodał stopnie pierwiastków:
+    \[\sqrt{7}\cdot\sqrt[3]{7}=\sqrt[2+3]{7}=\sqrt[5]{7}=7^{\frac{1}{5}}.\]
+    Dlaczego to źle: przy mnożeniu potęg o tej samej podstawie dodają się WYKŁADNIKI, a nie stopnie pierwiastków (stopień siedzi w mianowniku wykładnika). Zresztą \(7^{\frac{1}{5}}\approx 1{,}48\), a \(\sqrt{7}\cdot\sqrt[3]{7}\approx 2{,}65\cdot 1{,}91\approx 5{,}06\).
+
+    POPRAWNIE: zamieniamy pierwiastki na potęgi (\(7>0\)):
+    \[\sqrt{7}=7^{\frac{1}{2}},\qquad \sqrt[3]{7}=7^{\frac{1}{3}},\]
+    \[7^{\frac{1}{2}}\cdot 7^{\frac{1}{3}}=7^{\frac{1}{2}+\frac{1}{3}}=7^{\frac{3}{6}+\frac{2}{6}}=7^{\frac{5}{6}}=\sqrt[6]{7^{5}}.\]
+    Odpowiedź: \(7^{\frac{5}{6}}=\sqrt[6]{7^{5}}\).
+  solution_steps:
+  - 'Zauważ błąd: dodano stopnie pierwiastków zamiast wykładników.'
+  - 'Zamień pierwiastki na potęgi: \(7^{\frac{1}{2}}\) oraz \(7^{\frac{1}{3}}\).'
+  - 'Dodaj wykładniki: \(\frac{1}{2}+\frac{1}{3}=\frac{5}{6}\).'
+  - Zapisz wynik jako potęgę \(7^{\frac{5}{6}}\) i jako pierwiastek \(\sqrt[6]{7^{5}}\).
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: postać potęgowa
+      answer:
+        kind: SYMBOLIC
+        latex: 7^{\frac{5}{6}}
+    - name: postać pierwiastkowa
+      answer:
+        kind: SYMBOLIC
+        latex: \sqrt[6]{7^{5}}
+  checks:
+  - kind: simplify
+    expr: \sqrt{7}\cdot\sqrt[3]{7}
+    part: postać potęgowa
+  - kind: simplify
+    expr: \sqrt{7}\cdot\sqrt[3]{7}
+    part: postać pierwiastkowa
+  skills:
+  - zamiana pierwiastków na potęgi
+  - dodawanie wykładników wymiernych
+  - powrót do zapisu pierwiastkowego
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [postać potęgowa] SymPy solved it fresh: ''7^{\\frac{5}{6}}''
+      vs ''7**(5/6)'' ; [postać pierwiastkowa] SymPy solved it fresh: ''\\sqrt[6]{7^{5}}'' vs ''7**(5/6)'''
+- id: g-ch-t02
+  slot: CHALLENGE
+  ramp_index: 0
+  difficulty: 4
+  exercise_type: 'zadanie z treścią: odtworzenie brakującego wymiaru figury i obliczenie obwodu'
+  statement: Prostokąt \( ABCD \) ma pole równe 6 cm\(^2\), a jego bok \( AB \) ma długość \( \sqrt{12}
+    \) cm. Oblicz obwód tego prostokąta. Wynik podaj w najprostszej postaci.
+  statement_latex: P_{ABCD} = 6,\qquad |AB| = \sqrt{12},\qquad \text{Obw} = 2\cdot\left(\sqrt{12} + \frac{6}{\sqrt{12}}\right)
+  solution: |-
+    Oznaczmy przez \( b \) (w centymetrach) długość boku \( BC \), \( b > 0 \).
+    Pole prostokąta: \( \sqrt{12}\cdot b = 6 \), więc \( b = \frac{6}{\sqrt{12}} \).
+    Upraszczamy: \( \sqrt{12} = \sqrt{4\cdot 3} = 2\sqrt{3} \), zatem
+    \( b = \frac{6}{2\sqrt{3}} = \frac{3}{\sqrt{3}} = \frac{3\sqrt{3}}{3} = \sqrt{3} \).
+    Obwód prostokąta: \( \text{Obw} = 2\cdot\left(|AB| + b\right) = 2\cdot\left(2\sqrt{3} + \sqrt{3}\right) = 2\cdot 3\sqrt{3} = 6\sqrt{3} \).
+    Odpowiedź: obwód prostokąta jest równy \( 6\sqrt{3} \) cm (około 10,39 cm).
+  solution_steps:
+  - 'Wprowadź niewiadomą: b — długość boku BC, b > 0.'
+  - Z warunku na pole zapisz równanie √12 · b = 6, skąd b = 6/√12.
+  - 'Uprość √12 = 2√3 i usuń niewymierność: b = 3/√3 = √3.'
+  - 'Ułóż wyrażenie na obwód: Obw = 2·(2√3 + √3).'
+  - 'Wykonaj działania: Obw = 6√3 cm.'
+  answer:
+    kind: NUMERIC
+    value: 10.392304845413264
+    latex: 6\sqrt{3}
+  checks:
+  - kind: evaluate
+    expr: 2\cdot\left(\sqrt{12} + \frac{6}{\sqrt{12}}\right)
+  stated_model:
+    variable: b
+    objective_latex: 2\cdot\left(\sqrt{12} + b\right)
+    domain_lo: '0'
+    goal: value
+    constraint_used: \sqrt{12}\cdot b = 6
+  skills:
+  - wyłączanie czynnika przed znak pierwiastka
+  - usuwanie niewymierności z mianownika
+  - 'modelowanie: wprowadzenie niewiadomej'
+  - działania na pierwiastkach
+  verification:
+    checkability: STATED_MODEL
+    note: 'stage 1 inconclusive: kind mismatch: answer=SYMBOLIC reference=NUMERIC'
+- id: g-ch-t03
+  slot: CHALLENGE
+  ramp_index: 1
+  difficulty: 4
+  exercise_type: 'zadanie z treścią: odwrotne wyznaczenie krawędzi bryły z objętości i test mieszczenia'
+  statement: |-
+    Objętość pewnego sześcianu jest równa \( 24\sqrt{3} \) cm\(^3\).
+    a) Oblicz pole powierzchni całkowitej tego sześcianu.
+    b) Rozstrzygnij, czy ten sześcian można w całości umieścić w pudełku, które ma kształt sześcianu o krawędzi długości 3,4 cm (krawędzie obu sześcianów są odpowiednio równoległe).
+  statement_latex: a^{3} = 24\sqrt{3},\qquad P_{c} = 6\cdot a^{2},\qquad a\ \text{vs}\ 3{,}4
+  solution: |-
+    Oznaczmy przez \( a \) (w centymetrach) długość krawędzi sześcianu, \( a > 0 \).
+    a) Z warunku na objętość: \( a^{3} = 24\sqrt{3} \).
+    Zapiszmy prawą stronę jako potęgę: \( 24\sqrt{3} = 8\cdot 3\cdot\sqrt{3} = 2^{3}\cdot\left(\sqrt{3}\right)^{3} = \left(2\sqrt{3}\right)^{3} \).
+    Zatem \( a = 2\sqrt{3} \) cm, a stąd \( a^{2} = \left(2\sqrt{3}\right)^{2} = 4\cdot 3 = 12 \).
+    Pole powierzchni całkowitej: \( P_{c} = 6\cdot a^{2} = 6\cdot 12 = 72 \) cm\(^2\).
+    b) Sześcian zmieści się w pudełku wtedy i tylko wtedy, gdy \( a \le 3{,}4 \). Porównujemy liczby dodatnie, podnosząc je do kwadratu:
+    \( a^{2} = 12 \), \( 3{,}4^{2} = 11{,}56 \).
+    Ponieważ \( 12 > 11{,}56 \), to \( 2\sqrt{3} > 3{,}4 \), czyli krawędź sześcianu jest dłuższa niż krawędź pudełka.
+    Odpowiedź: a) \( 72 \) cm\(^2\); b) nie, sześcianu nie da się umieścić w tym pudełku.
+  solution_steps:
+  - 'Wprowadź niewiadomą: a — długość krawędzi sześcianu, a > 0.'
+  - 'Zapisz warunek na objętość: a^3 = 24√3.'
+  - Przekształć 24√3 = 2^3·(√3)^3 = (2√3)^3, skąd a = 2√3 cm.
+  - Oblicz a^2 = 12 i pole powierzchni całkowitej P = 6a^2 = 72 cm².
+  - 'Porównaj a = 2√3 z 3,4, podnosząc obie liczby dodatnie do kwadratu: 12 > 11,56.'
+  - Wywnioskuj, że 2√3 > 3,4, więc sześcian nie zmieści się w pudełku.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: pole_powierzchni_calkowitej
+      answer:
+        kind: NUMERIC
+        value: 72.0
+        latex: '72'
+    - name: czy_zmiesci_sie
+      answer:
+        kind: BOOLEAN
+        truth: false
+  checks:
+  - kind: evaluate
+    expr: 6\cdot \left(\left(24\cdot\sqrt{3}\right)^{\frac{1}{3}}\right)^{2}
+    part: pole_powierzchni_calkowitej
+  stated_model:
+    variable: a
+    objective_latex: 6\cdot a^{2}
+    domain_lo: '0'
+    goal: value
+    constraint_used: a^{3} = 24\cdot\sqrt{3}
+  skills:
+  - potęga o wykładniku wymiernym
+  - pierwiastek stopnia trzeciego
+  - 'modelowanie: wprowadzenie niewiadomej'
+  - porównywanie liczb niewymiernych z wymiernymi
+  verification:
+    checkability: STATED_MODEL
+    note: 'stage 1 inconclusive: kind mismatch: answer=SYMBOLIC reference=MULTIPART'
+- id: g-ch-t04
+  slot: CHALLENGE
+  ramp_index: 2
+  difficulty: 5
+  exercise_type: 'zadanie z treścią: wzór i dziedzina dla pola powierzchni bocznej, obliczenie wartości
+    i test progu'
+  statement: |-
+    Prostopadłościan ma podstawę, która jest kwadratem, a jego objętość jest równa 32 cm\(^3\).
+    a) Wyznacz wzór na pole powierzchni bocznej \( P \) tego prostopadłościanu w zależności od długości krawędzi podstawy oraz podaj dziedzinę tak otrzymanej funkcji.
+    b) Oblicz pole powierzchni bocznej tego prostopadłościanu, jeżeli krawędź podstawy ma długość \( 2\sqrt{2} \) cm. Wynik podaj w najprostszej postaci.
+    c) Rozstrzygnij, czy dla krawędzi podstawy równej \( 2\sqrt{2} \) cm pole powierzchni bocznej jest mniejsze od 46 cm\(^2\).
+  statement_latex: x^{2}\cdot h = 32,\qquad P\left(x\right) = 4\cdot x\cdot h = \frac{128}{x},\qquad P\left(2\sqrt{2}\right)
+    = \frac{128}{2\sqrt{2}}
+  solution: |-
+    Oznaczmy przez \( x \) (w centymetrach) długość krawędzi podstawy, a przez \( h \) wysokość prostopadłościanu; oczywiście \( x > 0 \) i \( h > 0 \).
+    a) Objętość: \( x^{2}\cdot h = 32 \), więc \( h = \frac{32}{x^{2}} \).
+    Powierzchnia boczna składa się z czterech jednakowych prostokątów o wymiarach \( x \) i \( h \):
+    \( P = 4\cdot x\cdot h = 4\cdot x\cdot\frac{32}{x^{2}} = \frac{128}{x} \).
+    Dziedzina: \( x \) jest długością krawędzi, więc \( x > 0 \), czyli \( D = \left(0,\ +\infty\right) \) (dla każdego takiego \( x \) wysokość \( h = \frac{32}{x^{2}} \) jest dodatnia, więc prostopadłościan istnieje).
+    b) Dla \( x = 2\sqrt{2} \):
+    \( P = \frac{128}{2\sqrt{2}} = \frac{64}{\sqrt{2}} = \frac{64\sqrt{2}}{2} = 32\sqrt{2} \) cm\(^2\).
+    (Sprawdzenie: \( h = \frac{32}{\left(2\sqrt{2}\right)^{2}} = \frac{32}{8} = 4 \) cm, więc \( P = 4\cdot 2\sqrt{2}\cdot 4 = 32\sqrt{2} \)).
+    c) Porównujemy dodatnie liczby \( 32\sqrt{2} \) i \( 46 \), podnosząc je do kwadratu:
+    \( \left(32\sqrt{2}\right)^{2} = 1024\cdot 2 = 2048 \), \( 46^{2} = 2116 \).
+    Ponieważ \( 2048 < 2116 \), to \( 32\sqrt{2} < 46 \).
+    Odpowiedź: a) \( P\left(x\right) = \frac{128}{x} \), \( x \in \left(0,\ +\infty\right) \); b) \( 32\sqrt{2} \) cm\(^2\); c) tak, pole jest mniejsze od 46 cm\(^2\).
+  solution_steps:
+  - 'Wprowadź oznaczenia: x — krawędź podstawy, h — wysokość prostopadłościanu.'
+  - Z warunku na objętość x²·h = 32 wyznacz h = 32/x².
+  - 'Ułóż wzór na pole powierzchni bocznej: P = 4·x·h = 4·x·32/x² = 128/x.'
+  - 'Podaj dziedzinę wynikającą z dodatniości krawędzi: x ∈ (0, +∞).'
+  - 'Podstaw x = 2√2 i usuń niewymierność: P = 128/(2√2) = 64/√2 = 32√2 cm².'
+  - 'Porównaj 32√2 z 46, podnosząc obie liczby dodatnie do kwadratu: 2048 < 2116.'
+  - Wywnioskuj, że 32√2 < 46, czyli pole powierzchni bocznej jest mniejsze od 46 cm².
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wzor_P
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{128}{x}
+    - name: dziedzina
+      answer:
+        kind: INTERVAL
+        lo: '0'
+    - name: wartosc_P
+      answer:
+        kind: NUMERIC
+        value: 45.254833995939045
+        latex: 32\sqrt{2}
+    - name: czy_mniejsze_od_46
+      answer:
+        kind: BOOLEAN
+        truth: true
+  checks:
+  - kind: simplify
+    expr: 4\cdot x\cdot \frac{32}{x^{2}}
+    part: wzor_P
+  - kind: evaluate
+    expr: \frac{128}{2\cdot\sqrt{2}}
+    part: wartosc_P
+  stated_model:
+    variable: x
+    objective_latex: P\left(x\right) = \frac{128}{x}
+    domain_lo: '0'
+    goal: value
+    constraint_used: x^{2}\cdot h = 32,\ h>0
+  skills:
+  - 'modelowanie: wprowadzenie niewiadomej'
+  - wyznaczanie wzoru funkcji i jej dziedziny
+  - usuwanie niewymierności z mianownika
+  - działania na potęgach i pierwiastkach
+  - porównywanie liczby niewymiernej z wymierną
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''x'': ''P\\left(x\\right)
+      = \\frac{128}{x}'') — human review'

@@ -1,0 +1,890 @@
+section: funkcja-odwrotnie-proporcjonalna
+name: Funkcja odwrotnie proporcjonalna
+scope: 'The inversely-proportional function y = a/x: its hyperbola, domain and asymptotic behaviour; using
+  it to model and interpret inversely-proportional quantities.'
+requirements:
+- V.13
+counts:
+  total: 16
+  DETERMINISTIC: 5
+  REFERENCE_CALL: 4
+  NOT_MACHINE_CHECKABLE: 7
+exercises:
+- id: g-th-00
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: wyznaczanie współczynnika a
+  statement: Funkcja odwrotnie proporcjonalna f jest określona wzorem f(x)=\frac{a}{x}, gdzie a\neq 0.
+    Wykres tej funkcji przechodzi przez punkt A=\left(4,\ -5\right). Oblicz współczynnik a.
+  statement_latex: f(x)=\frac{a}{x},\qquad A=\left(4,\ -5\right)
+  solution: 'Punkt A należy do wykresu, więc jego współrzędne spełniają wzór funkcji: -5=\frac{a}{4}.
+    Mnożąc obie strony przez 4, otrzymujemy a=4\cdot\left(-5\right)=-20. Krócej: dla funkcji odwrotnie
+    proporcjonalnej współczynnik a jest iloczynem współrzędnych dowolnego punktu wykresu, czyli a=x_0\cdot
+    y_0=4\cdot\left(-5\right)=-20. Sprawdzenie: f(4)=\frac{-20}{4}=-5, zgadza się.'
+  solution_steps:
+  - Zapisz wzór ogólny f(x)=\frac{a}{x}.
+  - 'Podstaw współrzędne punktu A: -5=\frac{a}{4}.'
+  - Wyznacz a=4\cdot\left(-5\right)=-20.
+  - 'Sprawdź: f(4)=\frac{-20}{4}=-5.'
+  answer:
+    kind: NUMERIC
+    value: -20.0
+    latex: a=-20
+  checks:
+  - kind: evaluate
+    expr: 4 \cdot \left(-5\right)
+  skills:
+  - wyznaczanie współczynnika proporcjonalności
+  - przynależność punktu do wykresu
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: -20.0 vs -20.0 (tol 1e-09)'
+- id: g-th-01
+  slot: THEORY_SUPPORT
+  ramp_index: 1
+  difficulty: 1
+  exercise_type: równanie typu a/x = c
+  statement: Funkcja f jest określona wzorem f(x)=\frac{15}{x} dla x\neq 0. Wyznacz argument, dla którego
+    funkcja przyjmuje wartość -3, to znaczy rozwiąż równanie \frac{15}{x}=-3.
+  statement_latex: \frac{15}{x}=-3,\qquad x\neq 0
+  solution: 'Zakładamy x\neq 0. Mnożymy obie strony równania przez x: 15=-3\cdot x. Stąd x=\frac{15}{-3}=-5.
+    Liczba -5 spełnia założenie x\neq 0, więc jest rozwiązaniem. Sprawdzenie: f(-5)=\frac{15}{-5}=-3.'
+  solution_steps:
+  - Zapisz założenie x\neq 0.
+  - 'Pomnóż obie strony przez x: 15=-3\cdot x.'
+  - Wyznacz x=\frac{15}{-3}=-5.
+  - 'Sprawdź: f(-5)=\frac{15}{-5}=-3.'
+  answer:
+    kind: SET
+    latex: x=-5
+    members:
+    - '-5'
+  checks:
+  - kind: solve_equation
+    expr: \frac{15}{x} = -3
+  skills:
+  - rozwiązywanie równania a/x=c
+  - uwzględnianie założenia x≠0
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 1 members matched'
+- id: g-th-02
+  slot: THEORY_SUPPORT
+  ramp_index: 2
+  difficulty: 2
+  exercise_type: rozpoznanie proporcjonalności odwrotnej z tabeli
+  statement: 'W tabeli zestawiono odpowiadające sobie wartości wielkości x i y: dla x=2 jest y=30, dla
+    x=5 jest y=12, dla x=6 jest y=10, a dla x=4 wartość y nie została podana. Rozstrzygnij, czy wielkości
+    x i y są odwrotnie proporcjonalne (odpowiedz TAK lub NIE), wyznacz współczynnik proporcjonalności
+    a oraz brakującą wartość y dla x=4.'
+  statement_latex: x\cdot y = a,\qquad \left(2;\,30\right),\ \left(5;\,12\right),\ \left(6;\,10\right),\
+    \left(4;\,?\right)
+  solution: 'Obliczamy iloczyny odpowiadających sobie wartości: 2\cdot 30=60, 5\cdot 12=60, 6\cdot 10=60.
+    Wszystkie iloczyny są równe tej samej liczbie 60\neq 0, zatem wielkości są odwrotnie proporcjonalne,
+    a współczynnik proporcjonalności wynosi a=60. Wzór zależności to y=\frac{60}{x}. Dla x=4 mamy y=\frac{60}{4}=15.'
+  solution_steps:
+  - 'Oblicz iloczyny x\cdot y dla wszystkich pełnych par: 2\cdot 30=60, 5\cdot 12=60, 6\cdot 10=60.'
+  - Stwierdź, że iloczyny są stałe i równe 60, więc wielkości są odwrotnie proporcjonalne, a=60.
+  - Zapisz wzór y=\frac{60}{x}.
+  - 'Oblicz brakującą wartość: y=\frac{60}{4}=15.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: czy odwrotnie proporcjonalne
+      answer:
+        kind: BOOLEAN
+        latex: TAK
+        truth: true
+    - name: wspolczynnik a
+      answer:
+        kind: NUMERIC
+        value: 60.0
+        latex: a=60
+    - name: y dla x=4
+      answer:
+        kind: NUMERIC
+        value: 15.0
+        latex: y=15
+  checks:
+  - kind: evaluate
+    expr: 2 \cdot 30
+    part: wspolczynnik a
+  - kind: evaluate
+    expr: \frac{60}{4}
+    part: y dla x=4
+  skills:
+  - test stałego iloczynu
+  - wyznaczanie wzoru z tabeli
+  - uzupełnianie tabeli
+  verification:
+    checkability: REFERENCE_CALL
+    note: '3 parts matched · det: [wspolczynnik a] SymPy solved it fresh: 60.0 vs 60.0 (tol 1e-09) ; [y
+      dla x=4] SymPy solved it fresh: 15.0 vs 15.0 (tol 1e-09)'
+- id: g-ex-03
+  slot: EXERCISE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: wzór funkcji i własności hiperboli
+  statement: Wykres funkcji odwrotnie proporcjonalnej f, danej wzorem f(x)=\frac{a}{x}, przechodzi przez
+    punkt P=\left(-6,\ 2\right). a) Wyznacz wzór funkcji f. b) Oblicz f(3). c) Rozstrzygnij, czy punkt
+    B=\left(4,\ -3\right) należy do wykresu funkcji f (odpowiedz TAK lub NIE). d) Podaj, w których ćwiartkach
+    układu współrzędnych leżą gałęzie tej hiperboli.
+  statement_latex: f(x)=\frac{a}{x},\qquad P=\left(-6,\ 2\right)
+  solution: |-
+    a) Współrzędne punktu P spełniają wzór: 2=\frac{a}{-6}, więc a=\left(-6\right)\cdot 2=-12 i f(x)=\frac{-12}{x}.
+    b) f(3)=\frac{-12}{3}=-4.
+    c) Sprawdzamy iloczyn współrzędnych punktu B: 4\cdot\left(-3\right)=-12=a, zatem punkt B należy do wykresu (istotnie f(4)=\frac{-12}{4}=-3).
+    d) Ponieważ a=-12<0, iloraz \frac{a}{x} ma znak przeciwny do znaku x: dla x<0 wartości są dodatnie, a dla x>0 ujemne. Gałęzie leżą więc w II i IV ćwiartce.
+  solution_steps:
+  - 'Podstaw P do wzoru ogólnego: 2=\frac{a}{-6}.'
+  - Wyznacz a=\left(-6\right)\cdot 2=-12 i zapisz f(x)=\frac{-12}{x}.
+  - Oblicz f(3)=\frac{-12}{3}=-4.
+  - 'Sprawdź punkt B iloczynem współrzędnych: 4\cdot\left(-3\right)=-12=a, więc B należy do wykresu.'
+  - Z warunku a<0 wywnioskuj, że gałęzie leżą w II i IV ćwiartce.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wzor funkcji
+      answer:
+        kind: SYMBOLIC
+        latex: f(x)=\frac{-12}{x}
+    - name: f(3)
+      answer:
+        kind: NUMERIC
+        value: -4.0
+        latex: f(3)=-4
+    - name: czy B nalezy do wykresu
+      answer:
+        kind: BOOLEAN
+        latex: TAK
+        truth: true
+    - name: cwiartki
+      answer:
+        kind: SET
+        latex: \text{II i IV ćwiartka}
+        members:
+        - II
+        - IV
+  checks:
+  - kind: simplify
+    expr: \frac{\left(-6\right)\cdot 2}{x}
+    part: wzor funkcji
+  - kind: evaluate
+    expr: \frac{-12}{3}
+    part: f(3)
+  skills:
+  - wyznaczanie wzoru z jednego punktu
+  - obliczanie wartości funkcji
+  - sprawdzanie przynależności punktu
+  - położenie gałęzi a znak a
+  verification:
+    checkability: DETERMINISTIC
+    note: '[wzor funkcji] SymPy solved it fresh and disagrees: ''f(x)=\\frac{-12}{x}'' vs ''-12/x'' (as
+      text)'
+- id: g-ex-04
+  slot: EXERCISE
+  ramp_index: 1
+  difficulty: 3
+  exercise_type: równanie i nierówność z funkcją a/x
+  statement: Funkcja f jest określona wzorem f(x)=\frac{8}{x} dla x\neq 0. a) Rozwiąż nierówność \frac{8}{x}\ge
+    4. b) Rozwiąż równanie \frac{8}{x}=-16. c) Uzasadnij, że funkcja f nie ma miejsc zerowych.
+  statement_latex: f(x)=\frac{8}{x},\qquad \frac{8}{x}\ge 4,\qquad \frac{8}{x}=-16
+  solution: |-
+    a) Zakładamy x\neq 0 i rozpatrujemy dwa przypadki.
+    Dla x>0 mnożymy nierówność przez dodatnie x, znak nierówności się nie zmienia: 8\ge 4\cdot x, czyli x\le 2. Razem z warunkiem x>0 otrzymujemy 0<x\le 2.
+    Dla x<0 lewa strona \frac{8}{x} jest ujemna, a prawa równa 4>0, więc nierówność nie jest spełniona dla żadnego x<0.
+    Odpowiedź: x\in\left(0,\ 2\right\rangle.
+    b) Mnożymy przez x: 8=-16\cdot x, stąd x=\frac{8}{-16}=-\frac{1}{2}. Sprawdzenie: f\left(-\frac{1}{2}\right)=\frac{8}{-\frac{1}{2}}=-16.
+    c) Miejsce zerowe to rozwiązanie równania \frac{8}{x}=0. Ułamek jest równy zeru tylko wtedy, gdy jego licznik jest zerem, a licznik jest stale równy 8\neq 0. Zatem równanie jest sprzeczne i funkcja f nie ma miejsc zerowych (jej wykres nie ma punktów wspólnych z osią OX, która jest asymptotą poziomą).
+  solution_steps:
+  - Zapisz założenie x\neq 0.
+  - 'Dla x>0 pomnóż nierówność przez x: 8\ge 4\cdot x, czyli x\le 2; łącznie 0<x\le 2.'
+  - Dla x<0 zauważ, że \frac{8}{x}<0<4, więc nierówność nie zachodzi.
+  - 'Zapisz rozwiązanie nierówności: x\in\left(0,\ 2\right\rangle.'
+  - 'Rozwiąż równanie: 8=-16\cdot x, stąd x=-\frac{1}{2}.'
+  - 'Uzasadnij brak miejsc zerowych: \frac{8}{x}=0 jest sprzeczne, bo 8\neq 0.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: rozwiazanie nierownosci
+      answer:
+        kind: INTERVAL
+        latex: x\in\left(0,\ 2\right\rangle
+        lo: '0'
+        hi: '2'
+        hi_open: false
+    - name: rozwiazanie rownania
+      answer:
+        kind: SET
+        latex: x=-\frac{1}{2}
+        members:
+        - -\frac{1}{2}
+    - name: uzasadnienie braku miejsc zerowych
+      answer:
+        kind: NOT_MACHINE_CHECKABLE
+        reason: Uczeń ma uzasadnić, że równanie \frac{8}{x}=0 jest sprzeczne, bo ułamek jest zerem tylko
+          przy zerowym liczniku, a licznik wynosi 8\neq 0.
+  checks:
+  - kind: solve_inequality
+    expr: \frac{8}{x} \ge 4
+    part: rozwiazanie nierownosci
+  - kind: solve_equation
+    expr: \frac{8}{x} = -16
+    part: rozwiazanie rownania
+  skills:
+  - rozwiązywanie nierówności a/x≥c z uwzględnieniem znaku x
+  - rozwiązywanie równania a/x=c
+  - uzasadnianie braku miejsc zerowych
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'part(s) need a human: uzasadnienie braku miejsc zerowych · 2/2 other parts solved fresh'
+- id: g-ex-05
+  slot: EXERCISE
+  ramp_index: 2
+  difficulty: 4
+  exercise_type: 'zadanie tekstowe: praca–wydajność–czas'
+  statement: Sześć jednakowych maszyn pakujących wykonuje pewne zlecenie w ciągu 14 dni, pracując jednakowo
+    wydajnie. Zakładamy, że każda maszyna pracuje z tą samą wydajnością, a czas t wykonania całego zlecenia
+    zależy tylko od liczby n pracujących maszyn. a) Zapisz t jako funkcję zmiennej n oraz podaj dziedzinę
+    tej funkcji wynikającą z treści zadania. b) Oblicz, w ile dni zlecenie wykonałoby 12 maszyn. c) Oblicz,
+    ile maszyn trzeba zatrudnić, aby zlecenie zostało wykonane w 4 dni. d) Oblicz, o ile procent skróci
+    się czas wykonania zlecenia, jeżeli zamiast 6 maszyn pracować będzie 8 maszyn.
+  statement_latex: t\left(n\right)=\frac{a}{n},\qquad a=6\cdot 14
+  solution: |-
+    a) Cała praca do wykonania jest stała, więc iloczyn liczby maszyn i czasu jest stały: n\cdot t=6\cdot 14=84 (w maszynodniach). Stąd t\left(n\right)=\frac{84}{n}. W kontekście zadania n jest dodatnią liczbą naturalną, więc dziedziną jest zbiór n\in\mathbb{N},\ n\ge 1 (rysujemy tylko fragment prawej gałęzi hiperboli w I ćwiartce).
+    b) t\left(12\right)=\frac{84}{12}=7 dni.
+    c) Rozwiązujemy \frac{84}{n}=4, czyli n=\frac{84}{4}=21 maszyn.
+    d) t\left(6\right)=\frac{84}{6}=14 dni, t\left(8\right)=\frac{84}{8}=10{,}5 dnia. Skrócenie wynosi 14-10{,}5=3{,}5 dnia, co stanowi \frac{3{,}5}{14}=0{,}25=25\% czasu początkowego. Zauważmy, że liczba maszyn wzrosła o około 33\%, a czas zmalał o 25\% — zależność jest odwrotnie proporcjonalna, a nie liniowa.
+  solution_steps:
+  - Zauważ, że praca jest stała, więc n\cdot t=6\cdot 14=84.
+  - Zapisz model t\left(n\right)=\frac{84}{n} z dziedziną n\in\mathbb{N},\ n\ge 1.
+  - Oblicz t\left(12\right)=\frac{84}{12}=7 dni.
+  - Rozwiąż \frac{84}{n}=4, otrzymując n=\frac{84}{4}=21 maszyn.
+  - Oblicz t\left(6\right)=14 i t\left(8\right)=10{,}5.
+  - 'Oblicz procent skrócenia: \frac{14-10{,}5}{14}\cdot 100\%=25\%.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wzor funkcji
+      answer:
+        kind: SYMBOLIC
+        latex: t\left(n\right)=\frac{84}{n}
+    - name: dziedzina
+      answer:
+        kind: SYMBOLIC
+        latex: n\in\mathbb{N},\ n\ge 1
+    - name: czas dla 12 maszyn
+      answer:
+        kind: NUMERIC
+        value: 7.0
+        latex: 7\ \text{dni}
+    - name: liczba maszyn na 4 dni
+      answer:
+        kind: NUMERIC
+        value: 21.0
+        latex: 21\ \text{maszyn}
+    - name: procent skrocenia czasu
+      answer:
+        kind: NUMERIC
+        value: 25.0
+        latex: 25\%
+  checks:
+  - kind: simplify
+    expr: \frac{6 \cdot 14}{n}
+    var: n
+    part: wzor funkcji
+  - kind: evaluate
+    expr: \frac{84}{12}
+    var: n
+    part: czas dla 12 maszyn
+  - kind: solve_equation
+    expr: \frac{84}{n} = 4
+    var: n
+    part: liczba maszyn na 4 dni
+  - kind: evaluate
+    expr: \frac{\frac{84}{6} - \frac{84}{8}}{\frac{84}{6}} \cdot 100
+    var: n
+    part: procent skrocenia czasu
+  stated_model:
+    variable: n
+    objective_latex: t\left(n\right)=\frac{84}{n}
+    domain_lo: '0'
+    goal: value
+    constraint_used: n\cdot t = 6\cdot 14 = 84, n liczba naturalna dodatnia
+  skills:
+  - budowanie modelu odwrotnie proporcjonalnego
+  - dziedzina wynikająca z kontekstu
+  - obliczenia procentowe
+  - interpretacja wyniku
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''n'': ''t\\left(n\\right)=\\frac{84}{n}'')
+      — human review'
+- id: g-ex-t00
+  slot: EXERCISE
+  ramp_index: 6
+  difficulty: 3
+  exercise_type: wyznaczanie wzoru i własności funkcji odwrotnie proporcjonalnej
+  statement: |-
+    Wykres funkcji odwrotnie proporcjonalnej f przechodzi przez punkt A = (-4, 3).
+    a) Wyznacz współczynnik a i zapisz wzór funkcji f.
+    b) Rozstrzygnij, czy punkt B = (3, -4) należy do wykresu funkcji f.
+    c) Rozwiąż nierówność f(x) \le -2.
+    d) Podaj, w których ćwiartkach układu współrzędnych leżą gałęzie hiperboli będącej wykresem funkcji f.
+  statement_latex: f\left(x\right)=\frac{a}{x},\qquad A=\left(-4,\,3\right),\qquad \frac{a}{x}\le -2
+  solution: |-
+    a) Ze wzoru f(x) = \frac{a}{x} oraz z warunku f(-4) = 3 otrzymujemy 3 = \frac{a}{-4}, czyli a = \left(-4\right)\cdot 3 = -12. Zatem f\left(x\right)=\frac{-12}{x}.
+    b) Punkt należy do wykresu wtedy i tylko wtedy, gdy iloczyn jego współrzędnych jest równy a. Mamy 3\cdot\left(-4\right) = -12 = a, więc punkt B należy do wykresu (istotnie f(3) = \frac{-12}{3} = -4).
+    c) Rozwiązujemy \frac{-12}{x}\le -2 przy założeniu x \neq 0.
+    Przypadek x > 0: mnożymy obie strony przez x (dodatnie), znak nierówności zostaje: -12 \le -2x, czyli 2x \le 12, stąd x \le 6. Uwzględniając x > 0, otrzymujemy 0 < x \le 6.
+    Przypadek x < 0: wtedy \frac{-12}{x} > 0, a liczba dodatnia nie jest mniejsza ani równa -2, więc nierówność nie ma tu rozwiązań.
+    Odpowiedź: x \in \left(0,\,6\right].
+    d) Ponieważ a = -12 < 0, gałęzie hiperboli leżą w II i IV ćwiartce.
+  solution_steps:
+  - 'Zapisz wzór ogólny f(x) = a/x i podstaw współrzędne punktu A: 3 = a/(-4).'
+  - Wyznacz a = (-4)·3 = -12, więc f(x) = -12/x.
+  - 'Sprawdź B: 3·(-4) = -12 = a, więc B należy do wykresu.'
+  - 'Nierówność -12/x ≤ -2 rozważ w dwóch przypadkach: x > 0 daje 0 < x ≤ 6, x < 0 nie daje rozwiązań.'
+  - Zapisz odpowiedź (0, 6] oraz, z warunku a < 0, wskaż ćwiartki II i IV.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: a
+      answer:
+        kind: NUMERIC
+        value: -12.0
+    - name: wzor
+      answer:
+        kind: SYMBOLIC
+        latex: f\left(x\right)=\frac{-12}{x}
+    - name: B_nalezy
+      answer:
+        kind: BOOLEAN
+        truth: true
+    - name: nierownosc
+      answer:
+        kind: INTERVAL
+        lo: '0'
+        hi: '6'
+        hi_open: false
+    - name: cwiartki
+      answer:
+        kind: SYMBOLIC
+        latex: II i IV
+  checks:
+  - kind: evaluate
+    expr: \left(-4\right)\cdot 3
+    part: a
+  - kind: solve_inequality
+    expr: \frac{-12}{x} \le -2
+    part: nierownosc
+  skills:
+  - wyznaczanie współczynnika a z punktu wykresu
+  - sprawdzanie przynależności punktu do wykresu
+  - rozwiązywanie nierówności typu a/x ≤ c
+  - położenie gałęzi hiperboli a znak a
+  verification:
+    checkability: REFERENCE_CALL
+    note: 'could not compare: reference produced 4 outputs, answer has 5'
+- id: g-ex-t01
+  slot: EXERCISE
+  ramp_index: 7
+  difficulty: 4
+  exercise_type: 'zadanie tekstowe: model odwrotnie proporcjonalny praca–wydajność–czas'
+  statement: |-
+    Osiem jednakowych koparek, pracujących z tą samą wydajnością, wykonuje pewien wykop w ciągu 15 dni. Czas t (w dniach) wykonania tego wykopu jest odwrotnie proporcjonalny do liczby n pracujących koparek.
+    a) Wyznacz wzór funkcji t(n) i podaj jej dziedzinę wynikającą z treści zadania.
+    b) Oblicz, ile koparek trzeba skierować do pracy, aby wykop został wykonany w ciągu 10 dni.
+    c) Oblicz, o ile procent skróci się czas wykonania wykopu, jeżeli zamiast 8 koparek będzie pracowało 10 koparek.
+  statement_latex: t\left(n\right)=\frac{a}{n},\qquad a=8\cdot 15,\qquad \frac{120}{n}=10
+  solution: |-
+    a) Iloczyn liczby koparek i czasu pracy jest stały i równy łącznej pracy: a = 8\cdot 15 = 120 (koparkodni). Zatem t\left(n\right)=\frac{120}{n}. Z treści zadania n jest dodatnią liczbą naturalną, więc D = \mathbb{N}_{+}.
+    b) Rozwiązujemy \frac{120}{n}=10, stąd n = \frac{120}{10}=12. Potrzeba 12 koparek. Wynik jest sensowny: więcej koparek — krótszy czas.
+    c) Dla n = 8: t = \frac{120}{8} = 15 dni. Dla n = 10: t = \frac{120}{10} = 12 dni. Skrócenie wynosi 15 - 12 = 3 dni, co stanowi \frac{3}{15}\cdot 100\% = 20\% czasu początkowego. (Zauważ, że liczba koparek wzrosła o 25\%, a czas zmalał o 20\% — zależność jest odwrotnie proporcjonalna, a nie liniowa.)
+  solution_steps:
+  - 'Wyznacz stałą pracy: a = 8·15 = 120 koparkodni.'
+  - Zapisz model t(n) = 120/n z dziedziną n ∈ N+.
+  - Rozwiąż 120/n = 10, otrzymując n = 12 koparek.
+  - Oblicz t(8) = 15 dni i t(10) = 12 dni.
+  - 'Oblicz spadek procentowy: (15 − 12)/15 · 100% = 20%.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wzor
+      answer:
+        kind: SYMBOLIC
+        latex: t\left(n\right)=\frac{120}{n}
+    - name: dziedzina
+      answer:
+        kind: SYMBOLIC
+        latex: n \in \mathbb{N}_{+}
+    - name: liczba_koparek
+      answer:
+        kind: NUMERIC
+        value: 12.0
+    - name: procent
+      answer:
+        kind: NUMERIC
+        value: 20.0
+  checks:
+  - kind: solve_equation
+    expr: \frac{120}{n} = 10
+    var: n
+    part: liczba_koparek
+  - kind: evaluate
+    expr: \frac{15 - \frac{120}{10}}{15}\cdot 100
+    part: procent
+  stated_model:
+    variable: n
+    objective_latex: t\left(n\right)=\frac{120}{n}
+    domain_lo: '0'
+    goal: value
+    constraint_used: n\cdot t = 8\cdot 15 = 120
+  skills:
+  - budowanie modelu y = a/x z danych
+  - dziedzina wynikająca z kontekstu
+  - rozwiązywanie równania a/x = c
+  - obliczenia procentowe
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''n'': ''t\\left(n\\right)=\\frac{120}{n}'')
+      — human review'
+- id: g-cm-06
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: ocena stwierdzenia o monotoniczności
+  statement: 'Funkcja f jest określona wzorem f(x)=\frac{5}{x} dla x\neq 0. Uczeń napisał: „Ponieważ a=5>0,
+    funkcja f jest malejąca w całej swojej dziedzinie, czyli w zbiorze \mathbb{R}\setminus\left\{0\right\}”.
+    Oceń prawdziwość tego stwierdzenia (P — prawda, F — fałsz), oblicz f\left(-1\right) oraz f\left(1\right)
+    i wyjaśnij, na czym polega błąd ucznia.'
+  statement_latex: f(x)=\frac{5}{x},\qquad f\left(-1\right),\ f\left(1\right)
+  solution: |-
+    BŁĘDNE ROZUMOWANIE UCZNIA: „Obie gałęzie hiperboli opadają, więc im większy argument, tym mniejsza wartość — funkcja jest malejąca w zbiorze \mathbb{R}\setminus\left\{0\right\}”. Ta odpowiedź (P) jest niepoprawna.
+    KONTRPRZYKŁAD: f\left(-1\right)=\frac{5}{-1}=-5 oraz f\left(1\right)=\frac{5}{1}=5. Mamy -1<1, a mimo to f\left(-1\right)=-5<5=f\left(1\right), czyli przy większym argumencie wartość jest większa. Funkcja NIE jest więc malejąca w całej dziedzinie — stwierdzenie ucznia jest fałszywe (F).
+    KOREKTA: monotoniczność orzeka się na przedziale zawartym w dziedzinie. Poprawnie: funkcja f jest malejąca w przedziale \left(-\infty,\ 0\right) i malejąca w przedziale \left(0,\ +\infty\right), ale nie w sumie tych przedziałów. Powodem jest przerwa w dziedzinie w punkcie x=0 (asymptota pionowa), przez którą wartości „przeskakują” z ujemnych na dodatnie.
+  solution_steps:
+  - 'Zapisz błędną tezę ucznia: f jest malejąca w \mathbb{R}\setminus\left\{0\right\}.'
+  - Oblicz f\left(-1\right)=\frac{5}{-1}=-5 oraz f\left(1\right)=\frac{5}{1}=5.
+  - Zauważ, że -1<1, a f\left(-1\right)<f\left(1\right) — to kontrprzykład, więc stwierdzenie jest fałszywe.
+  - 'Sformułuj poprawny wniosek: f jest malejąca w \left(-\infty,\ 0\right) i malejąca w \left(0,\ +\infty\right),
+    rozpatrywanych osobno.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: ocena stwierdzenia
+      answer:
+        kind: BOOLEAN
+        latex: F (fałsz)
+        truth: false
+    - name: f(-1)
+      answer:
+        kind: NUMERIC
+        value: -5.0
+        latex: f\left(-1\right)=-5
+    - name: f(1)
+      answer:
+        kind: NUMERIC
+        value: 5.0
+        latex: f\left(1\right)=5
+  checks:
+  - kind: evaluate
+    expr: \frac{5}{-1}
+    part: f(-1)
+  - kind: evaluate
+    expr: \frac{5}{1}
+    part: f(1)
+  skills:
+  - monotoniczność w przedziałach
+  - kontrprzykład
+  - obliczanie wartości funkcji
+  verification:
+    checkability: REFERENCE_CALL
+    note: '3 parts matched · det: [f(-1)] SymPy solved it fresh: -5.0 vs -5.0 (tol 1e-09) ; [f(1)] SymPy
+      solved it fresh: 5.0 vs 5.0 (tol 1e-09)'
+- id: g-cm-07
+  slot: COMMON_MISTAKE
+  ramp_index: 1
+  difficulty: 2
+  exercise_type: budowa wykresu hiperboli
+  statement: 'Funkcja f jest określona wzorem f(x)=\frac{4}{x} dla x\neq 0. Uczeń narysował jej wykres
+    jako jedną ciągłą krzywą łączącą obie gałęzie i stwierdził: „skoro wartości funkcji przechodzą od
+    ujemnych do dodatnich, to gdzieś między x=-0{,}5 a x=0{,}5 wykres przecina oś OY”. Oblicz f\left(-0{,}5\right)
+    i f\left(0{,}5\right), podaj liczbę punktów wspólnych wykresu funkcji f z osią OY i wyjaśnij błąd
+    ucznia.'
+  statement_latex: f(x)=\frac{4}{x},\qquad f\left(-0{,}5\right),\ f\left(0{,}5\right)
+  solution: |-
+    BŁĘDNE ROZUMOWANIE UCZNIA: „Wykres jest jedną ciągłą krzywą, więc przechodząc od wartości ujemnych do dodatnich musi przeciąć oś OY (i po drodze oś OX)”. Prowadzi to do błędnej odpowiedzi: 1 punkt wspólny z osią OY.
+    OBLICZENIA: f\left(-0{,}5\right)=\frac{4}{-0{,}5}=-8 oraz f\left(0{,}5\right)=\frac{4}{0{,}5}=8. Widać, że przy zbliżaniu się do zera od lewej wartości maleją nieograniczenie (-8, -40, -400 dla x=-0{,}1;\ -0{,}01), a od prawej rosną nieograniczenie. Wykres nie „przechodzi” przez okolice punktu \left(0,\ 0\right), tylko ucieka wzdłuż osi OY.
+    KOREKTA: liczba 0 nie należy do dziedziny, więc f\left(0\right) nie istnieje i wykres nie ma ŻADNEGO punktu na osi OY — liczba punktów wspólnych z osią OY wynosi 0. Hiperbola składa się z dwóch rozłącznych gałęzi, których nie wolno łączyć; prosta x=0 jest asymptotą pionową.
+  solution_steps:
+  - 'Zapisz błędny wniosek ucznia: wykres przecina oś OY w jednym punkcie.'
+  - Oblicz f\left(-0{,}5\right)=\frac{4}{-0{,}5}=-8 i f\left(0{,}5\right)=\frac{4}{0{,}5}=8.
+  - Zauważ, że przy x dążącym do 0 wartości |f(x)| rosną nieograniczenie — wykres ucieka wzdłuż osi OY.
+  - Stwierdź, że 0 nie należy do dziedziny, więc wykres nie ma punktów wspólnych z osią OY (0 punktów),
+    a gałęzie hiperboli są rozłączne.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: f(-0,5)
+      answer:
+        kind: NUMERIC
+        value: -8.0
+        latex: f\left(-0{,}5\right)=-8
+    - name: f(0,5)
+      answer:
+        kind: NUMERIC
+        value: 8.0
+        latex: f\left(0{,}5\right)=8
+    - name: liczba punktow wspolnych z osia OY
+      answer:
+        kind: NUMERIC
+        value: 0.0
+        latex: '0'
+  checks:
+  - kind: evaluate
+    expr: \frac{4}{-0.5}
+    part: f(-0,5)
+  - kind: evaluate
+    expr: \frac{4}{0.5}
+    part: f(0,5)
+  skills:
+  - rozłączność gałęzi hiperboli
+  - asymptota pionowa
+  - obliczanie wartości funkcji
+  verification:
+    checkability: REFERENCE_CALL
+    note: '3 parts matched · det: [f(-0,5)] SymPy solved it fresh: -8.0 vs -8.0 (tol 1e-09) ; [f(0,5)]
+      SymPy solved it fresh: 8.0 vs 8.0 (tol 1e-09)'
+- id: g-cm-08
+  slot: COMMON_MISTAKE
+  ramp_index: 2
+  difficulty: 2
+  exercise_type: miejsca zerowe funkcji odwrotnie proporcjonalnej
+  statement: 'Funkcja f jest określona wzorem f(x)=\frac{-9}{x} dla x\neq 0. Uczeń napisał: „f\left(0\right)=\frac{-9}{0}=0,
+    zatem miejscem zerowym funkcji f jest liczba 0”. Podaj zbiór miejsc zerowych funkcji f, rozwiąż równanie
+    f(x)=3 i wyjaśnij, na czym polega błąd ucznia.'
+  statement_latex: f(x)=\frac{-9}{x},\qquad \frac{-9}{x}=0,\qquad \frac{-9}{x}=3
+  solution: |-
+    BŁĘDNE ROZUMOWANIE UCZNIA: „Podstawiam x=0 i otrzymuję \frac{-9}{0}=0, więc miejscem zerowym jest x=0”. Odpowiedź „miejscem zerowym jest 0” jest niepoprawna z dwóch powodów.
+    KOREKTA: po pierwsze dzielenie przez zero jest niewykonalne, więc f\left(0\right) w ogóle nie istnieje — liczba 0 nie należy do dziedziny D=\mathbb{R}\setminus\left\{0\right\}. Po drugie równanie \frac{-9}{x}=0 jest sprzeczne: ułamek jest równy zeru tylko wtedy, gdy jego licznik jest zerem, a tutaj licznik wynosi -9\neq 0. Zatem funkcja f nie ma miejsc zerowych, a zbiór jej miejsc zerowych jest pusty (\emptyset); oś OX jest asymptotą poziomą wykresu.
+    RÓWNANIE f(x)=3: zakładamy x\neq 0 i mnożymy przez x: -9=3\cdot x, stąd x=\frac{-9}{3}=-3. Sprawdzenie: f\left(-3\right)=\frac{-9}{-3}=3.
+  solution_steps:
+  - 'Wskaż błąd: dzielenie przez zero jest niewykonalne, f\left(0\right) nie istnieje, bo 0\notin D.'
+  - Zauważ, że równanie \frac{-9}{x}=0 jest sprzeczne, bo licznik -9\neq 0.
+  - Zapisz, że zbiór miejsc zerowych funkcji f jest pusty.
+  - 'Rozwiąż \frac{-9}{x}=3: -9=3\cdot x, czyli x=-3.'
+  - 'Sprawdź: f\left(-3\right)=\frac{-9}{-3}=3.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: zbior miejsc zerowych
+      answer:
+        kind: SET
+        latex: \emptyset
+    - name: rozwiazanie rownania f(x)=3
+      answer:
+        kind: SET
+        latex: x=-3
+        members:
+        - '-3'
+  checks:
+  - kind: solve_equation
+    expr: \frac{-9}{x} = 0
+    part: zbior miejsc zerowych
+  - kind: solve_equation
+    expr: \frac{-9}{x} = 3
+    part: rozwiazanie rownania f(x)=3
+  skills:
+  - brak miejsc zerowych
+  - dziedzina R\{0}
+  - rozwiązywanie równania a/x=c
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [zbior miejsc zerowych] SymPy solved it fresh: 0 members matched
+      ; [rozwiazanie rownania f(x)=3] SymPy solved it fresh: 1 members matched'
+- id: g-cm-09
+  slot: COMMON_MISTAKE
+  ramp_index: 3
+  difficulty: 2
+  exercise_type: zmiana wielkości odwrotnie proporcjonalnych
+  statement: 'Wielkości dodatnie x i y są odwrotnie proporcjonalne, a dla x=3 mamy y=20. Uczeń rozumuje
+    tak: „skoro x wzrosło z 3 do 6, czyli o 3, to y zmaleje o 3 i wyniesie 17”. Oblicz poprawną wartość
+    y dla x=6 oraz wartość y dla x=15, a następnie wyjaśnij, na czym polega błąd ucznia.'
+  statement_latex: x\cdot y = 3\cdot 20 = 60,\qquad y=\frac{60}{x}
+  solution: |-
+    BŁĘDNE ROZUMOWANIE UCZNIA: „x wzrosło o 3, więc y maleje o 3: y=20-3=17”. Wynik 17 jest niepoprawny, bo wtedy iloczyn wynosiłby 6\cdot 17=102, a nie 60.
+    KOREKTA: przy proporcjonalności odwrotnej stały jest ILOCZYN, a nie różnica. Mamy a=x\cdot y=3\cdot 20=60, więc y=\frac{60}{x}.
+    Dla x=6: y=\frac{60}{6}=10. Zgadza się to z zasadą: x wzrosło 2 razy \left(6=2\cdot 3\right), więc y zmalało 2 razy \left(10=\frac{20}{2}\right).
+    Dla x=15: y=\frac{60}{15}=4 (x wzrosło 5 razy, więc y zmalało 5 razy).
+    Zmiany o stałą wartość (addytywne) opisują funkcję liniową, a nie hiperbolę.
+  solution_steps:
+  - 'Oblicz współczynnik proporcjonalności: a=3\cdot 20=60.'
+  - Zapisz model y=\frac{60}{x}.
+  - 'Dla x=6: y=\frac{60}{6}=10 (a nie 17 — uczeń odjął 3 zamiast podzielić przez 2).'
+  - 'Dla x=15: y=\frac{60}{15}=4.'
+  - 'Sformułuj zasadę: jeśli x rośnie k razy, to y maleje k razy, bo iloczyn x\cdot y jest stały.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: y dla x=6
+      answer:
+        kind: NUMERIC
+        value: 10.0
+        latex: y=10
+    - name: y dla x=15
+      answer:
+        kind: NUMERIC
+        value: 4.0
+        latex: y=4
+  checks:
+  - kind: evaluate
+    expr: \frac{3 \cdot 20}{6}
+    part: y dla x=6
+  - kind: evaluate
+    expr: \frac{3 \cdot 20}{15}
+    part: y dla x=15
+  skills:
+  - stały iloczyn x·y
+  - zmiana wielokrotna zamiast addytywnej
+  - obliczanie wartości z modelu
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [y dla x=6] SymPy solved it fresh: 10.0 vs 10.0 (tol 1e-09)
+      ; [y dla x=15] SymPy solved it fresh: 4.0 vs 4.0 (tol 1e-09)'
+- id: g-cm-10
+  slot: COMMON_MISTAKE
+  ramp_index: 4
+  difficulty: 3
+  exercise_type: 'zadanie tekstowe: proporcja odwrotna kontra prosta'
+  statement: Piętnaście jednakowych drukarek, pracujących z tą samą wydajnością, drukuje cały nakład ulotek
+    w ciągu 8 godzin. Uczeń, chcąc obliczyć czas x potrzebny 20 takim drukarkom, zapisał proporcję \frac{15}{8}=\frac{20}{x}
+    i otrzymał wynik x=\frac{160}{15}\approx 10{,}7 godziny. Oblicz poprawnie, w ciągu ilu godzin 20 drukarek
+    wydrukuje ten sam nakład, i wyjaśnij, na czym polega błąd ucznia.
+  statement_latex: 15\cdot 8 = 20\cdot x,\qquad x=\frac{15\cdot 8}{20}
+  solution: |-
+    BŁĘDNE ROZUMOWANIE UCZNIA: uczeń użył proporcji prostej \frac{15}{8}=\frac{20}{x}, czyli 15\cdot x=160, skąd x=\frac{160}{15}\approx 10{,}7 h. Wynik jest bezsensowny: więcej drukarek miałoby pracować DŁUŻEJ niż mniej drukarek, co przeczy sytuacji z zadania.
+    KOREKTA: liczba drukarek i czas druku tego samego nakładu są odwrotnie proporcjonalne, bo stała jest praca do wykonania: n\cdot t=\text{const}. Zatem należy przyrównać iloczyny: 15\cdot 8=20\cdot x, czyli 120=20\cdot x, skąd x=\frac{15\cdot 8}{20}=6.
+    ODPOWIEDŹ: 20 drukarek wydrukuje nakład w 6 godzin. Wynik jest sensowny — więcej drukarek oznacza krótszy czas (model t\left(n\right)=\frac{120}{n} jest funkcją malejącą dla n>0).
+  solution_steps:
+  - Wskaż, że wielkości „liczba drukarek” i „czas” są odwrotnie proporcjonalne, bo praca n\cdot t jest
+    stała.
+  - 'Oblicz stałą: a=15\cdot 8=120 (drukarkogodziny).'
+  - 'Zapisz równość iloczynów: 15\cdot 8=20\cdot x.'
+  - Wyznacz x=\frac{120}{20}=6 godzin.
+  - 'Oceń sens wyniku: więcej drukarek — krótszy czas, więc 6 h < 8 h; wynik ucznia 10{,}7 h był sprzeczny
+    z treścią zadania.'
+  answer:
+    kind: NUMERIC
+    value: 6.0
+    latex: x=6\ \text{godzin}
+  checks:
+  - kind: evaluate
+    expr: \frac{15 \cdot 8}{20}
+  stated_model:
+    variable: n
+    objective_latex: t\left(n\right)=\frac{120}{n}
+    domain_lo: '0'
+    goal: value
+    constraint_used: n\cdot t = 15\cdot 8 = 120
+  skills:
+  - proporcja odwrotna x₁y₁=x₂y₂
+  - ocena sensowności wyniku
+  - model praca–wydajność–czas
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''n'': ''t\\left(n\\right)=\\frac{120}{n}'')
+      — human review'
+- id: g-ch-t02
+  slot: CHALLENGE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: 'zadanie odwrotne: wyznaczenie liczby maszyn ze stałości iloczynu'
+  statement: |-
+    Pewna liczba jednakowych maszyn pakujących, pracujących z tą samą wydajnością, pakuje całą partię towaru w ciągu 12 godzin. Gdyby maszyn tych było o 4 więcej, ta sama partia zostałaby zapakowana o 4 godziny szybciej.
+    a) Oblicz, ile maszyn pakuje partię towaru w ciągu 12 godzin.
+    b) Oblicz, w ciągu ilu godzin tę samą partię towaru zapakowałoby 16 takich maszyn.
+  statement_latex: 12\cdot x = 8\cdot \left(x+4\right)
+  solution: |-
+    Oznaczmy przez x liczbę maszyn pakujących partię towaru w ciągu 12 godzin (x > 0). Przy jednakowej wydajności maszyn iloczyn (liczba maszyn) \cdot (czas pracy) jest stały i równy całej pracy do wykonania.
+    W pierwszej sytuacji praca ta wynosi 12\cdot x, w drugiej — \left(x+4\right)\cdot 8, bo czas skraca się o 4 godziny, czyli do 8 godzin. Stąd
+    12\cdot x = 8\cdot\left(x+4\right)
+    12x = 8x + 32
+    4x = 32
+    x = 8.
+    a) Partię towaru pakuje 8 maszyn. Sprawdzenie: 8\cdot 12 = 96 oraz 12\cdot 8 = 96 — iloczyny są równe.
+    b) Stała praca wynosi a = 96 (maszynogodzin), więc czas pracy 16 maszyn to t = \frac{96}{16} = 6 godzin.
+  solution_steps:
+  - Oznacz przez x liczbę maszyn, x > 0.
+  - Zauważ, że przy stałej pracy iloczyn (liczba maszyn)·(czas) jest stały.
+  - Zapisz równanie 12·x = 8·(x + 4), bo o 4 maszyny więcej pracuje 8 godzin.
+  - 'Rozwiąż: 4x = 32, czyli x = 8 maszyn.'
+  - 'Oblicz stałą a = 8·12 = 96 i czas dla 16 maszyn: t = 96/16 = 6 godzin.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: liczba_maszyn
+      answer:
+        kind: NUMERIC
+        value: 8.0
+    - name: czas_16_maszyn
+      answer:
+        kind: NUMERIC
+        value: 6.0
+  checks:
+  - kind: solve_equation
+    expr: 12 \cdot x = 8 \cdot \left( x + 4 \right)
+    part: liczba_maszyn
+  - kind: evaluate
+    expr: \frac{8 \cdot 12}{16}
+    part: czas_16_maszyn
+  stated_model:
+    variable: x
+    objective_latex: t\left(x\right)=\frac{96}{x}
+    domain_lo: '0'
+    goal: value
+    constraint_used: 12\cdot x = 8\cdot\left(x+4\right)
+  skills:
+  - wprowadzenie niewiadomej
+  - zapisanie warunku stałości iloczynu x·y
+  - rozwiązanie równania liniowego
+  - interpretacja wyniku w kontekście
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''x'': ''t\\left(x\\right)=\\frac{96}{x}'')
+      — human review'
+- id: g-ch-t03
+  slot: CHALLENGE
+  ramp_index: 1
+  difficulty: 4
+  exercise_type: zadanie tekstowe z modelem odwrotnie proporcjonalnym i warunkiem brzegowym
+  statement: |-
+    Ekipa 6 malarzy o jednakowej wydajności pomalowałaby pewną halę w ciągu 10 dni pracy. Ekipa pracowała w tym składzie przez 4 dni, po czym prace przerwano. Malowanie ma zostać dokończone w ciągu kolejnych 5 dni roboczych przez malarzy o takiej samej wydajności.
+    a) Oblicz, ilu co najmniej malarzy musi pracować przez te 5 dni, aby malowanie zostało ukończone w terminie.
+    b) Oblicz, ile dni zajęłoby dokończenie malowania, gdyby pracowało przy nim 12 malarzy.
+  statement_latex: W=6\cdot 10,\qquad W_{\text{poz}}=60-6\cdot 4,\qquad t\left(n\right)=\frac{36}{n}\le
+    5
+  solution: |-
+    Całą pracę mierzymy w roboczodniach. Cała hala to W = 6\cdot 10 = 60 roboczodni.
+    Przez 4 dni sześciu malarzy wykonało 6\cdot 4 = 24 roboczodni, więc do wykonania pozostało 60 - 24 = 36 roboczodni.
+    Czas dokończenia malowania przez n malarzy jest odwrotnie proporcjonalny do n: t\left(n\right)=\frac{36}{n}, gdzie n jest dodatnią liczbą naturalną.
+    a) Warunek terminu: \frac{36}{n}\le 5. Ponieważ n > 0, mnożymy przez n: 36 \le 5n, czyli n \ge \frac{36}{5}=7{,}2. Liczba malarzy jest liczbą naturalną, więc n = 8 — musi pracować co najmniej 8 malarzy. (Dla 7 malarzy potrzeba \frac{36}{7}\approx 5{,}14 dnia, czyli za dużo.)
+    b) Dla n = 12: t = \frac{36}{12} = 3 dni.
+  solution_steps:
+  - 'Wyraź całą pracę w roboczodniach: W = 6·10 = 60.'
+  - 'Oblicz pracę wykonaną w 4 dni: 6·4 = 24 roboczodni.'
+  - 'Oblicz pracę pozostałą: 60 − 24 = 36 roboczodni.'
+  - Zapisz model t(n) = 36/n i warunek 36/n ≤ 5, skąd n ≥ 7,2.
+  - Z warunku naturalności n przyjmij n = 8 malarzy.
+  - Oblicz t(12) = 36/12 = 3 dni.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: min_malarzy
+      answer:
+        kind: NUMERIC
+        value: 8.0
+    - name: czas_12_malarzy
+      answer:
+        kind: NUMERIC
+        value: 3.0
+  checks:
+  - kind: evaluate
+    expr: \left\lceil \frac{60 - 6 \cdot 4}{5} \right\rceil
+    var: n
+    part: min_malarzy
+  - kind: evaluate
+    expr: \frac{60 - 6 \cdot 4}{12}
+    var: n
+    part: czas_12_malarzy
+  stated_model:
+    variable: n
+    objective_latex: t\left(n\right)=\frac{36}{n}
+    domain_lo: '0'
+    goal: value
+    constraint_used: \frac{36}{n}\le 5,\; n\in\mathbb{N}_{+}
+  skills:
+  - obliczanie łącznej pracy jako stałej a
+  - składanie wielkości pośrednich (praca wykonana i pozostała)
+  - nierówność a/n ≤ c i zaokrąglenie w górę
+  - sens dziedziny naturalnej
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''n'': ''t\\left(n\\right)=\\frac{36}{n}'')
+      — human review'
+- id: g-ch-t04
+  slot: CHALLENGE
+  ramp_index: 2
+  difficulty: 5
+  exercise_type: 'modelowanie: stałe pole prostokąta, funkcja odwrotnie proporcjonalna, dziedzina i selekcja
+    rozwiązania'
+  statement: |-
+    Prostokątną rabatę o polu 60 m^2 planuje się założyć tak, aby jednym bokiem przylegała do prostego muru o długości 12 m. Bok rabaty leżący przy murze nie może być dłuższy niż mur i nie jest ogradzany — siatką ogradza się pozostałe trzy boki rabaty. Niech x oznacza długość (w metrach) boku rabaty prostopadłego do muru.
+    a) Wyznacz wzór funkcji L opisującej długość zużytej siatki (w metrach) w zależności od x oraz podaj dziedzinę tej funkcji wynikającą z warunków zadania.
+    b) Wiedząc, że zużyto dokładnie 34 m siatki, oblicz wymiary rabaty.
+  statement_latex: L\left(x\right)=2\cdot x+\frac{60}{x},\qquad 2\cdot x+\frac{60}{x}=34
+  solution: |-
+    a) Bok prostopadły do muru ma długość x, a bok przy murze — długość y. Pole rabaty jest stałe: x\cdot y = 60, więc y = \frac{60}{x} (wielkości x i y są odwrotnie proporcjonalne).
+    Ogradzamy dwa boki o długości x i jeden bok o długości y (bok przy murze nie jest ogradzany), zatem
+    L\left(x\right)=2\cdot x+\frac{60}{x}.
+    Dziedzina: musi być x > 0 oraz bok przy murze nie może być dłuższy od muru, czyli \frac{60}{x}\le 12, skąd 60 \le 12x, czyli x \ge 5. Ostatecznie D = \left[5,\,+\infty\right).
+    b) Rozwiązujemy równanie 2x+\frac{60}{x}=34 przy x \ge 5. Mnożąc przez x (dodatnie) otrzymujemy
+    2x^{2}+60=34x, czyli 2x^{2}-34x+60=0, a po podzieleniu przez 2: x^{2}-17x+30=0.
+    \Delta = 289-120=169, \sqrt{\Delta}=13, więc x_{1}=\frac{17-13}{2}=2, x_{2}=\frac{17+13}{2}=15.
+    Liczba 2 nie należy do dziedziny (dla x = 2 bok przy murze miałby długość \frac{60}{2}=30 m, a mur ma tylko 12 m), więc x = 15.
+    Wtedy drugi bok ma długość \frac{60}{15}=4 m i istotnie 4 \le 12 oraz 2\cdot 15+4=34 m siatki.
+    Odpowiedź: rabata ma wymiary 15 m \times 4 m.
+  solution_steps:
+  - 'Oznacz bok przy murze przez y i zapisz stałe pole: x·y = 60, czyli y = 60/x.'
+  - 'Złóż funkcję długości siatki: ogradzane są dwa boki x i jeden bok y, więc L(x) = 2x + 60/x.'
+  - 'Wyznacz dziedzinę: x > 0 oraz 60/x ≤ 12, czyli x ≥ 5; D = [5, +∞).'
+  - 'Rozwiąż 2x + 60/x = 34: 2x² − 34x + 60 = 0, czyli x² − 17x + 30 = 0.'
+  - Oblicz Δ = 169 i pierwiastki x = 2 oraz x = 15.
+  - Odrzuć x = 2 (nie należy do dziedziny — bok przy murze miałby 30 m > 12 m) i przyjmij x = 15.
+  - 'Oblicz drugi bok: 60/15 = 4 m; wymiary rabaty to 15 m × 4 m.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wzor_L
+      answer:
+        kind: SYMBOLIC
+        latex: L\left(x\right)=2\cdot x+\frac{60}{x}
+    - name: dziedzina
+      answer:
+        kind: INTERVAL
+        lo: '5'
+        hi: \infty
+        lo_open: false
+    - name: bok_prostopadly
+      answer:
+        kind: NUMERIC
+        value: 15.0
+    - name: bok_przy_murze
+      answer:
+        kind: NUMERIC
+        value: 4.0
+  checks:
+  - kind: evaluate
+    expr: \frac{17 + \sqrt{169}}{2}
+    part: bok_prostopadly
+  - kind: evaluate
+    expr: \frac{60}{15}
+    part: bok_przy_murze
+  stated_model:
+    variable: x
+    objective_latex: L\left(x\right)=2\cdot x+\frac{60}{x}
+    domain_lo: '5'
+    domain_lo_open: false
+    goal: value
+    constraint_used: x\cdot y = 60,\; \frac{60}{x}\le 12,\; L\left(x\right)=34
+  skills:
+  - zapisanie boku prostokąta o stałym polu jako 60/x
+  - składanie funkcji długości ogrodzenia
+  - wyznaczanie dziedziny z warunków zadania
+  - rozwiązanie równania wymiernego sprowadzonego do kwadratowego
+  - odrzucenie rozwiązania niespełniającego warunku
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''x'': ''L\\left(x\\right)=2\\cdot
+      x+\\frac{60}{x}'') — human review'

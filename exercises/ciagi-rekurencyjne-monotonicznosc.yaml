@@ -1,0 +1,1003 @@
+section: ciagi-rekurencyjne-monotonicznosc
+name: Ciągi rekurencyjne i monotoniczność ciągu
+scope: Computing the first terms of a recursively defined sequence; deciding in simple cases whether a
+  sequence is increasing or decreasing.
+requirements:
+- VI.2
+- VI.3
+counts:
+  total: 16
+  DETERMINISTIC: 3
+  NOT_MACHINE_CHECKABLE: 5
+  REFERENCE_CALL: 6
+  STATED_MODEL: 2
+exercises:
+- id: g-th-00
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: obliczanie wyrazów ciągu rekurencyjnego
+  statement: 'Ciąg \left(a_{n}\right) jest określony następująco: a_{1} = 5 oraz a_{n+1} = a_{n} - 4 dla
+    każdej liczby naturalnej n \geq 1. Oblicz drugi i trzeci wyraz tego ciągu.'
+  statement_latex: a_{1}=5,\qquad a_{n+1}=a_{n}-4\quad\text{dla }n\geq 1
+  solution: |-
+    Wyrazy liczymy po kolei, zawsze zapisując, jakie n podstawiamy.
+    Dla n = 1: a_{2} = a_{1} - 4 = 5 - 4 = 1.
+    Dla n = 2: a_{3} = a_{2} - 4 = 1 - 4 = -3.
+    Zatem a_{2} = 1 oraz a_{3} = -3.
+  solution_steps:
+  - 'Zapisz dane: a_{1} = 5 oraz regułę a_{n+1} = a_{n} - 4.'
+  - 'Podstaw n = 1: a_{2} = a_{1} - 4 = 5 - 4 = 1.'
+  - 'Podstaw n = 2, korzystając z obliczonego a_{2}: a_{3} = a_{2} - 4 = 1 - 4 = -3.'
+  - 'Zapisz odpowiedź: a_{2} = 1, a_{3} = -3.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: a_2
+      answer:
+        kind: NUMERIC
+        value: 1.0
+    - name: a_3
+      answer:
+        kind: NUMERIC
+        value: -3.0
+  checks:
+  - kind: evaluate
+    expr: 5-4
+    var: n
+    part: a_2
+  - kind: evaluate
+    expr: \left(5-4\right)-4
+    var: n
+    part: a_3
+  skills:
+  - podstawianie w zależności rekurencyjnej
+  - odczytanie warunku początkowego
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [a_2] SymPy solved it fresh: 1.0 vs 1.0 (tol 1e-09) ; [a_3]
+      SymPy solved it fresh: -3.0 vs -3.0 (tol 1e-09)'
+- id: g-th-01
+  slot: THEORY_SUPPORT
+  ramp_index: 1
+  difficulty: 1
+  exercise_type: wyznaczanie a_{n+1} i różnicy
+  statement: Dany jest ciąg \left(a_{n}\right) określony wzorem a_{n} = 4n + 7 dla każdej liczby naturalnej
+    n \geq 1. Wyznacz wyraz a_{n+1} (w postaci uproszczonej) oraz oblicz różnicę a_{n+1} - a_{n}.
+  statement_latex: a_{n}=4n+7,\qquad a_{n+1}=?,\qquad a_{n+1}-a_{n}=?
+  solution: |-
+    W miejsce każdego n we wzorze wstawiamy (n+1) w nawiasie:
+    a_{n+1} = 4\left(n+1\right) + 7 = 4n + 4 + 7 = 4n + 11.
+    Różnica:
+    a_{n+1} - a_{n} = \left(4n+11\right) - \left(4n+7\right) = 4.
+    Różnica jest liczbą dodatnią (równą 4) dla każdego n \geq 1, więc ciąg jest rosnący.
+  solution_steps:
+  - 'Wstaw (n+1) w nawiasie w miejsce n: a_{n+1} = 4\left(n+1\right) + 7.'
+  - 'Uprość: a_{n+1} = 4n + 11.'
+  - 'Utwórz różnicę: a_{n+1} - a_{n} = \left(4n+11\right) - \left(4n+7\right).'
+  - 'Zredukuj wyrazy podobne: różnica jest równa 4.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: a_{n+1}
+      answer:
+        kind: SYMBOLIC
+        latex: 4n+11
+    - name: roznica
+      answer:
+        kind: NUMERIC
+        value: 4.0
+  checks:
+  - kind: simplify
+    expr: 4\left(n+1\right)+7
+    var: n
+    part: a_{n+1}
+  - kind: simplify
+    expr: \left(4\left(n+1\right)+7\right)-\left(4n+7\right)
+    var: n
+    part: roznica
+  skills:
+  - podstawianie (n+1) do wzoru ogólnego
+  - metoda różnicy
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [a_{n+1}] SymPy solved it fresh: ''4n+11'' vs ''4*n + 11''
+      ; [roznica] SymPy solved it fresh: 4.0 vs 4.0 (tol 1e-09)'
+- id: g-th-02
+  slot: THEORY_SUPPORT
+  ramp_index: 2
+  difficulty: 2
+  exercise_type: rekurencja dwuwyrazowa
+  statement: 'Ciąg \left(a_{n}\right) jest określony następująco: a_{1} = 2, a_{2} = 3 oraz a_{n+2} =
+    a_{n+1} + a_{n} dla każdej liczby naturalnej n \geq 1. Oblicz a_{3}, a_{4} oraz a_{5}.'
+  statement_latex: a_{1}=2,\quad a_{2}=3,\quad a_{n+2}=a_{n+1}+a_{n}\ \text{dla } n\geq 1
+  solution: |-
+    W każdym kroku sumujemy dwa poprzednie wyrazy.
+    Dla n = 1: a_{3} = a_{2} + a_{1} = 3 + 2 = 5.
+    Dla n = 2: a_{4} = a_{3} + a_{2} = 5 + 3 = 8.
+    Dla n = 3: a_{5} = a_{4} + a_{3} = 8 + 5 = 13.
+    Zatem a_{3} = 5, a_{4} = 8, a_{5} = 13.
+  solution_steps:
+  - 'Zapisz oba warunki początkowe: a_{1} = 2, a_{2} = 3.'
+  - 'Podstaw n = 1: a_{3} = a_{2} + a_{1} = 3 + 2 = 5.'
+  - 'Podstaw n = 2: a_{4} = a_{3} + a_{2} = 5 + 3 = 8.'
+  - 'Podstaw n = 3: a_{5} = a_{4} + a_{3} = 8 + 5 = 13.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: a_3
+      answer:
+        kind: NUMERIC
+        value: 5.0
+    - name: a_4
+      answer:
+        kind: NUMERIC
+        value: 8.0
+    - name: a_5
+      answer:
+        kind: NUMERIC
+        value: 13.0
+  checks:
+  - kind: evaluate
+    expr: 3+2
+    var: n
+    part: a_3
+  - kind: evaluate
+    expr: \left(3+2\right)+3
+    var: n
+    part: a_4
+  - kind: evaluate
+    expr: \left(\left(3+2\right)+3\right)+\left(3+2\right)
+    var: n
+    part: a_5
+  skills:
+  - obliczanie wyrazów rekurencji dwuwyrazowej
+  - praca z dwoma warunkami początkowymi
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [a_3] SymPy solved it fresh: 5.0 vs 5.0 (tol 1e-09) ; [a_4]
+      SymPy solved it fresh: 8.0 vs 8.0 (tol 1e-09) ; [a_5] SymPy solved it fresh: 13.0 vs 13.0 (tol 1e-09)'
+- id: g-ex-03
+  slot: EXERCISE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: wyrazy ciągu rekurencyjnego i monotoniczność
+  statement: 'Ciąg \left(a_{n}\right) jest określony następująco: a_{1} = 4 oraz a_{n+1} = 3a_{n} - 5
+    dla każdej liczby naturalnej n \geq 1. a) Oblicz a_{2}, a_{3} oraz a_{4}. b) Uzasadnij, że ciąg \left(a_{n}\right)
+    jest rosnący.'
+  statement_latex: a_{1}=4,\qquad a_{n+1}=3\cdot a_{n}-5\quad\text{dla } n\geq 1
+  solution: |-
+    a) Liczymy krok po kroku:
+    n = 1: a_{2} = 3\cdot a_{1} - 5 = 3\cdot 4 - 5 = 7.
+    n = 2: a_{3} = 3\cdot a_{2} - 5 = 3\cdot 7 - 5 = 16.
+    n = 3: a_{4} = 3\cdot a_{3} - 5 = 3\cdot 16 - 5 = 43.
+    b) Tworzymy różnicę bezpośrednio z rekurencji:
+    a_{n+1} - a_{n} = \left(3a_{n} - 5\right) - a_{n} = 2a_{n} - 5.
+    Wszystkie wyrazy ciągu są nie mniejsze od 4: istotnie a_{1} = 4, a jeżeli a_{n} \geq 4, to a_{n+1} = 3a_{n} - 5 \geq 3\cdot 4 - 5 = 7 > 4. Zatem dla każdego n \geq 1 mamy a_{n} \geq 4, czyli 2a_{n} - 5 \geq 8 - 5 = 3 > 0.
+    Różnica a_{n+1} - a_{n} jest dodatnia dla każdego n \in \mathbb{N}^{+}, więc z definicji ciąg \left(a_{n}\right) jest rosnący.
+  solution_steps:
+  - 'Podstaw n = 1: a_{2} = 3\cdot 4 - 5 = 7.'
+  - 'Podstaw n = 2: a_{3} = 3\cdot 7 - 5 = 16.'
+  - 'Podstaw n = 3: a_{4} = 3\cdot 16 - 5 = 43.'
+  - 'Zapisz różnicę: a_{n+1} - a_{n} = \left(3a_{n}-5\right) - a_{n} = 2a_{n} - 5.'
+  - Uzasadnij, że a_{n} \geq 4 dla każdego n (a_{1} = 4, a z a_{n} \geq 4 wynika a_{n+1} = 3a_{n} - 5
+    \geq 7).
+  - 'Wywnioskuj: 2a_{n} - 5 \geq 3 > 0, więc a_{n+1} > a_{n} dla każdego n — ciąg jest rosnący.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: a_2
+      answer:
+        kind: NUMERIC
+        value: 7.0
+    - name: a_3
+      answer:
+        kind: NUMERIC
+        value: 16.0
+    - name: a_4
+      answer:
+        kind: NUMERIC
+        value: 43.0
+    - name: uzasadnienie_monotonicznosci
+      answer:
+        kind: NOT_MACHINE_CHECKABLE
+        reason: Uczeń ma wykazać, że a_{n+1} - a_{n} = 2a_{n} - 5 > 0 dla każdego n, uzasadniając wcześniej,
+          że a_{n} \geq 4, i sformułować wniosek, że ciąg jest rosnący.
+  checks:
+  - kind: evaluate
+    expr: 3\cdot 4-5
+    var: n
+    part: a_2
+  - kind: evaluate
+    expr: 3\cdot\left(3\cdot 4-5\right)-5
+    var: n
+    part: a_3
+  - kind: evaluate
+    expr: 3\cdot\left(3\cdot\left(3\cdot 4-5\right)-5\right)-5
+    var: n
+    part: a_4
+  skills:
+  - obliczanie wyrazów rekurencji liniowej
+  - badanie znaku różnicy a_{n+1}-a_{n}
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'part(s) need a human: uzasadnienie_monotonicznosci · 3/3 other parts solved fresh'
+- id: g-ex-04
+  slot: EXERCISE
+  ramp_index: 1
+  difficulty: 3
+  exercise_type: badanie monotoniczności metodą różnicy
+  statement: Dany jest ciąg \left(a_{n}\right) określony wzorem a_{n} = n^{2} - 8n + 3 dla każdej liczby
+    naturalnej n \geq 1. a) Wyznacz i uprość różnicę a_{n+1} - a_{n}. b) Rozstrzygnij, czy ciąg \left(a_{n}\right)
+    jest monotoniczny — odpowiedź uzasadnij. c) Oblicz najmniejszy wyraz tego ciągu.
+  statement_latex: a_{n}=n^{2}-8n+3,\qquad a_{n+1}-a_{n}=?
+  solution: |-
+    a) Podstawiamy (n+1) w nawiasie w miejsce każdego n:
+    a_{n+1} = \left(n+1\right)^{2} - 8\left(n+1\right) + 3 = n^{2} + 2n + 1 - 8n - 8 + 3 = n^{2} - 6n - 4.
+    Różnica: a_{n+1} - a_{n} = \left(n^{2} - 6n - 4\right) - \left(n^{2} - 8n + 3\right) = 2n - 7.
+    b) Badamy znak wyrażenia 2n - 7 dla n \in \mathbb{N}^{+}:
+    dla n = 1: 2\cdot 1 - 7 = -5 < 0, czyli a_{2} < a_{1};
+    dla n = 4: 2\cdot 4 - 7 = 1 > 0, czyli a_{5} > a_{4}.
+    Różnica przyjmuje wartości ujemne i dodatnie, zatem ciąg NIE jest monotoniczny (nie jest ani rosnący, ani malejący).
+    c) Dla n \in \{1,2,3\} różnica jest ujemna (ciąg maleje), a dla n \geq 4 dodatnia (ciąg rośnie), więc najmniejszym wyrazem jest a_{4}:
+    a_{4} = 4^{2} - 8\cdot 4 + 3 = 16 - 32 + 3 = -13.
+  solution_steps:
+  - Wyznacz a_{n+1} = \left(n+1\right)^{2} - 8\left(n+1\right) + 3 = n^{2} - 6n - 4.
+  - 'Oblicz różnicę: a_{n+1} - a_{n} = \left(n^{2}-6n-4\right) - \left(n^{2}-8n+3\right) = 2n - 7.'
+  - 'Zbadaj znak 2n - 7 dla n \geq 1: ujemny dla n \in \{1,2,3\}, dodatni dla n \geq 4.'
+  - Wskaż dwie różnice o przeciwnych znakach (n = 1 i n = 4) i wywnioskuj brak monotoniczności.
+  - Zauważ, że ciąg maleje do wyrazu a_{4}, a potem rośnie, więc najmniejszy wyraz to a_{4} = 16 - 32
+    + 3 = -13.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: roznica
+      answer:
+        kind: SYMBOLIC
+        latex: 2n-7
+    - name: czy_monotoniczny
+      answer:
+        kind: NOT_MACHINE_CHECKABLE
+        reason: Uczeń ma stwierdzić, że ciąg nie jest monotoniczny, i uzasadnić to, wskazując np. a_{2}
+          - a_{1} = -5 < 0 oraz a_{5} - a_{4} = 1 > 0.
+    - name: najmniejszy_wyraz
+      answer:
+        kind: NUMERIC
+        value: -13.0
+  checks:
+  - kind: simplify
+    expr: \left(\left(n+1\right)^{2}-8\left(n+1\right)+3\right)-\left(n^{2}-8n+3\right)
+    var: n
+    part: roznica
+  - kind: evaluate
+    expr: 4^{2}-8\cdot 4+3
+    var: n
+    part: najmniejszy_wyraz
+  skills:
+  - podstawianie (n+1)
+  - znak wyrażenia liniowego dla n naturalnych
+  - obalanie monotoniczności
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'part(s) need a human: czy_monotoniczny · 2/2 other parts solved fresh'
+- id: g-ex-05
+  slot: EXERCISE
+  ramp_index: 2
+  difficulty: 4
+  exercise_type: dowód monotoniczności ciągu wymiernego
+  statement: Dany jest ciąg \left(a_{n}\right) określony wzorem a_{n} = \frac{3n+2}{n+2} dla każdej liczby
+    naturalnej n \geq 1. a) Oblicz a_{1}. b) Wyznacz różnicę a_{n+1} - a_{n} i zapisz ją w postaci jednego
+    ułamka w najprostszej postaci. c) Wykaż, że ciąg \left(a_{n}\right) jest rosnący.
+  statement_latex: a_{n}=\frac{3n+2}{n+2},\qquad a_{n+1}-a_{n}=?
+  solution: |-
+    a) a_{1} = \frac{3\cdot 1 + 2}{1+2} = \frac{5}{3}.
+    b) Dla n \geq 1 mamy n + 2 > 0, więc wzór jest poprawnie określony. Podstawiamy (n+1):
+    a_{n+1} = \frac{3\left(n+1\right)+2}{\left(n+1\right)+2} = \frac{3n+5}{n+3}.
+    Różnica:
+    a_{n+1} - a_{n} = \frac{3n+5}{n+3} - \frac{3n+2}{n+2} = \frac{\left(3n+5\right)\left(n+2\right) - \left(3n+2\right)\left(n+3\right)}{\left(n+3\right)\left(n+2\right)}.
+    Licznik: \left(3n+5\right)\left(n+2\right) = 3n^{2} + 11n + 10, \left(3n+2\right)\left(n+3\right) = 3n^{2} + 11n + 6, ich różnica to 4.
+    Zatem a_{n+1} - a_{n} = \frac{4}{\left(n+2\right)\left(n+3\right)}.
+    c) Dla każdego n \in \mathbb{N}^{+} mamy n + 2 > 0 oraz n + 3 > 0, więc mianownik jest dodatni, a licznik równy 4 > 0. Stąd a_{n+1} - a_{n} > 0 dla każdego n, czyli a_{n+1} > a_{n}. Z definicji ciąg \left(a_{n}\right) jest rosnący. \square
+  solution_steps:
+  - Oblicz a_{1} = \frac{3\cdot 1+2}{1+2} = \frac{5}{3}.
+  - Wyznacz a_{n+1} = \frac{3\left(n+1\right)+2}{\left(n+1\right)+2} = \frac{3n+5}{n+3}.
+  - 'Sprowadź różnicę do wspólnego mianownika: \frac{\left(3n+5\right)\left(n+2\right)-\left(3n+2\right)\left(n+3\right)}{\left(n+3\right)\left(n+2\right)}.'
+  - 'Uprość licznik: 3n^{2}+11n+10 - \left(3n^{2}+11n+6\right) = 4, więc a_{n+1} - a_{n} = \frac{4}{\left(n+2\right)\left(n+3\right)}.'
+  - Zauważ, że dla n \geq 1 mianownik jest dodatni, a licznik równy 4 > 0.
+  - 'Sformułuj wniosek: a_{n+1} - a_{n} > 0 dla każdego n \in \mathbb{N}^{+}, zatem ciąg jest rosnący.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: a_1
+      answer:
+        kind: NUMERIC
+        value: 1.6666666666666667
+    - name: roznica
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{4}{\left(n+2\right)\left(n+3\right)}
+    - name: dowod
+      answer:
+        kind: NOT_MACHINE_CHECKABLE
+        reason: Uczeń ma wykazać, że różnica \frac{4}{\left(n+2\right)\left(n+3\right)} jest dodatnia
+          dla każdego n \in \mathbb{N}^{+} (dodatni licznik i dodatni mianownik) i stąd wywnioskować,
+          że ciąg jest rosnący.
+  checks:
+  - kind: evaluate
+    expr: \frac{3\cdot 1+2}{1+2}
+    var: n
+    part: a_1
+  - kind: simplify
+    expr: \frac{3\left(n+1\right)+2}{\left(n+1\right)+2}-\frac{3n+2}{n+2}
+    var: n
+    part: roznica
+  skills:
+  - metoda różnicy dla ułamków
+  - sprowadzanie do wspólnego mianownika
+  - formułowanie dowodu
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'part(s) need a human: dowod · 2/2 other parts solved fresh'
+- id: g-ex-t00
+  slot: EXERCISE
+  ramp_index: 6
+  difficulty: 3
+  exercise_type: ciąg rekurencyjny — wyrazy początkowe i monotoniczność
+  statement: 'Ciąg \left( a_{n} \right) jest określony rekurencyjnie następująco: a_{1} = 2 oraz a_{n+1}
+    = a_{n} + 2n - 7 dla każdej liczby naturalnej n \geq 1. Oblicz wyrazy a_{2}, a_{3}, a_{4} oraz a_{5}.
+    Rozstrzygnij, czy ciąg \left( a_{n} \right) jest monotoniczny. Odpowiedź uzasadnij.'
+  statement_latex: a_{1} = 2,\qquad a_{n+1} = a_{n} + 2\cdot n - 7 \quad \text{dla } n \geq 1
+  solution: |-
+    Wyrazy liczymy kolejno, podstawiając za n liczby 1, 2, 3, 4.
+    n = 1: a_{2} = a_{1} + 2\cdot 1 - 7 = 2 - 5 = -3.
+    n = 2: a_{3} = a_{2} + 2\cdot 2 - 7 = -3 - 3 = -6.
+    n = 3: a_{4} = a_{3} + 2\cdot 3 - 7 = -6 - 1 = -7.
+    n = 4: a_{5} = a_{4} + 2\cdot 4 - 7 = -7 + 1 = -6.
+    Zatem a_{1} = 2, a_{2} = -3, a_{3} = -6, a_{4} = -7, a_{5} = -6.
+    Rekurencja ma postać a_{n+1} = a_{n} + f\left(n\right), więc a_{n+1} - a_{n} = 2\cdot n - 7.
+    Dla n = 1: 2\cdot 1 - 7 = -5 < 0, czyli a_{2} < a_{1}.
+    Dla n = 4: 2\cdot 4 - 7 = 1 > 0, czyli a_{5} > a_{4}.
+    Różnica a_{n+1} - a_{n} przyjmuje zarówno wartości ujemne (dla n \in \{1,2,3\}), jak i dodatnie (dla n \geq 4), więc ciąg nie jest ani rosnący, ani malejący — nie jest monotoniczny.
+  solution_steps:
+  - 'Zapisz dane: a_{1} = 2 oraz regułę a_{n+1} = a_{n} + 2\cdot n - 7.'
+  - Podstaw n = 1 i oblicz a_{2} = 2 + \left(2\cdot 1 - 7\right) = -3.
+  - Podstaw n = 2 i oblicz a_{3} = -3 + \left(2\cdot 2 - 7\right) = -6.
+  - Podstaw n = 3 i oblicz a_{4} = -6 + \left(2\cdot 3 - 7\right) = -7.
+  - Podstaw n = 4 i oblicz a_{5} = -7 + \left(2\cdot 4 - 7\right) = -6.
+  - Zauważ, że a_{n+1} - a_{n} = 2\cdot n - 7.
+  - 'Zbadaj znak: dla n = 1 różnica jest ujemna, dla n = 4 dodatnia.'
+  - 'Wniosek: ciąg nie jest monotoniczny.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: a_2
+      answer:
+        kind: NUMERIC
+        value: -3.0
+    - name: a_3
+      answer:
+        kind: NUMERIC
+        value: -6.0
+    - name: a_4
+      answer:
+        kind: NUMERIC
+        value: -7.0
+    - name: a_5
+      answer:
+        kind: NUMERIC
+        value: -6.0
+    - name: monotonicznosc
+      answer:
+        kind: SYMBOLIC
+        latex: niemonotoniczny
+    - name: uzasadnienie
+      answer:
+        kind: NOT_MACHINE_CHECKABLE
+        reason: 'Należy wykazać, że a_{n+1} - a_{n} = 2n - 7 zmienia znak: dla n = 1 różnica jest ujemna
+          (a_2 < a_1), a dla n = 4 dodatnia (a_5 > a_4), więc ciąg nie jest ani rosnący, ani malejący.'
+  checks:
+  - kind: evaluate
+    expr: 2 + \left(2\cdot 1 - 7\right)
+    var: n
+    part: a_2
+  - kind: evaluate
+    expr: 2 + \left(2\cdot 1 - 7\right) + \left(2\cdot 2 - 7\right)
+    var: n
+    part: a_3
+  - kind: evaluate
+    expr: 2 + \left(2\cdot 1 - 7\right) + \left(2\cdot 2 - 7\right) + \left(2\cdot 3 - 7\right)
+    var: n
+    part: a_4
+  - kind: evaluate
+    expr: 2 + \left(2\cdot 1 - 7\right) + \left(2\cdot 2 - 7\right) + \left(2\cdot 3 - 7\right) + \left(2\cdot
+      4 - 7\right)
+    var: n
+    part: a_5
+  skills:
+  - obliczanie wyrazów ciągu zadanego rekurencyjnie
+  - badanie znaku różnicy a_{n+1}-a_n
+  - obalanie monotoniczności przez wskazanie różnic o przeciwnych znakach
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'part(s) need a human: uzasadnienie · 4/5 other parts solved fresh'
+- id: g-ex-t01
+  slot: EXERCISE
+  ramp_index: 7
+  difficulty: 4
+  exercise_type: monotoniczność ciągu wymiernego + nierówność z wyrazem ciągu
+  statement: Ciąg \left( a_{n} \right) jest określony wzorem a_{n} = \frac{4n - 3}{n + 1} dla każdej liczby
+    naturalnej n \geq 1. Wyznacz i uprość różnicę a_{n+1} - a_{n}, rozstrzygnij, czy ciąg \left( a_{n}
+    \right) jest rosnący, czy malejący, a następnie wyznacz najmniejszą liczbę naturalną n, dla której
+    a_{n} > 3{,}5.
+  statement_latex: a_{n} = \frac{4\cdot n - 3}{n + 1}
+  solution: |-
+    Dla n \geq 1 mianownik n + 1 > 0, więc wzór ma sens.
+    Podstawiamy (n+1) w miejsce każdego n:
+    a_{n+1} = \frac{4\cdot \left(n+1\right) - 3}{\left(n+1\right) + 1} = \frac{4n + 1}{n + 2}.
+    Różnica:
+    a_{n+1} - a_{n} = \frac{4n+1}{n+2} - \frac{4n-3}{n+1} = \frac{\left(4n+1\right)\cdot\left(n+1\right) - \left(4n-3\right)\cdot\left(n+2\right)}{\left(n+1\right)\cdot\left(n+2\right)}.
+    Licznik: \left(4n+1\right)\left(n+1\right) = 4n^{2} + 5n + 1, \left(4n-3\right)\left(n+2\right) = 4n^{2} + 5n - 6, a ich różnica wynosi 7.
+    Zatem a_{n+1} - a_{n} = \frac{7}{\left(n+1\right)\cdot\left(n+2\right)}.
+    Dla każdego n \geq 1 mamy n + 1 > 0 i n + 2 > 0, więc różnica jest dodatnia — ciąg jest rosnący.
+    Teraz nierówność a_{n} > 3{,}5:
+    \frac{4n-3}{n+1} > \frac{7}{2}. Ponieważ n + 1 > 0, mnożymy obustronnie przez 2\cdot\left(n+1\right):
+    2\cdot\left(4n - 3\right) > 7\cdot\left(n + 1\right), czyli 8n - 6 > 7n + 7, stąd n > 13.
+    Najmniejszą liczbą naturalną spełniającą ten warunek jest n = 14 (sprawdzenie: a_{14} = \frac{53}{15} \approx 3{,}53 > 3{,}5, a a_{13} = \frac{49}{14} = 3{,}5).
+  solution_steps:
+  - Zauważ, że n + 1 > 0 dla n \geq 1.
+  - Wyznacz a_{n+1} = \frac{4\cdot\left(n+1\right) - 3}{\left(n+1\right)+1} = \frac{4n+1}{n+2}.
+  - Utwórz różnicę i sprowadź do wspólnego mianownika \left(n+1\right)\left(n+2\right).
+  - 'Uprość licznik: \left(4n^{2}+5n+1\right) - \left(4n^{2}+5n-6\right) = 7.'
+  - Stwierdź, że a_{n+1} - a_{n} = \frac{7}{\left(n+1\right)\left(n+2\right)} > 0, więc ciąg jest rosnący.
+  - Rozwiąż nierówność \frac{4n-3}{n+1} > \frac{7}{2}, otrzymując n > 13.
+  - Wybierz najmniejszą liczbę naturalną większą od 13, czyli n = 14.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: roznica
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{7}{\left(n+1\right)\cdot\left(n+2\right)}
+    - name: monotonicznosc
+      answer:
+        kind: SYMBOLIC
+        latex: rosnący
+    - name: n_min
+      answer:
+        kind: NUMERIC
+        value: 14.0
+  checks:
+  - kind: simplify
+    expr: \frac{4\cdot\left(n+1\right)-3}{\left(n+1\right)+1} - \frac{4\cdot n - 3}{n+1}
+    var: n
+    part: roznica
+  - kind: evaluate
+    expr: \left\lfloor 13 \right\rfloor + 1
+    var: n
+    part: n_min
+  skills:
+  - wyznaczanie a_{n+1} przez podstawienie (n+1)
+  - metoda różnicy dla ciągu wymiernego
+  - rozwiązywanie nierówności z ułamkiem i wybór najmniejszej liczby naturalnej
+  verification:
+    checkability: REFERENCE_CALL
+    note: 'could not compare: part disagrees: kind mismatch: answer=SYMBOLIC reference=BOOLEAN'
+- id: g-cm-06
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: ocena poprawności rozumowania
+  statement: 'Dany jest ciąg \left(a_{n}\right) określony wzorem a_{n} = n^{2} - 9n + 4 dla każdej liczby
+    naturalnej n \geq 1. Uczeń obliczył a_{1} = -4, a_{2} = -10, a_{3} = -14, a_{4} = -16 i napisał: „wyrazy
+    maleją, więc ciąg jest malejący”. Wyznacz różnicę a_{n+1} - a_{n}, oblicz a_{6} - a_{5} i rozstrzygnij,
+    czy ciąg jest monotoniczny. Wskaż błąd w rozumowaniu ucznia.'
+  statement_latex: a_{n}=n^{2}-9n+4,\qquad a_{n+1}-a_{n}=?,\qquad a_{6}-a_{5}=?
+  solution: |-
+    BŁĘDNE ROZUMOWANIE UCZNIA: sprawdził cztery pierwsze wyrazy (-4, -10, -14, -16), zobaczył, że maleją, i stwierdził: „ciąg jest malejący”. Otrzymał w ten sposób błędną odpowiedź.
+    DLACZEGO TO BŁĄD: definicja ciągu malejącego wymaga nierówności a_{n+1} < a_{n} dla KAŻDEJ liczby naturalnej n \geq 1. Sprawdzenie skończenie wielu wyrazów niczego nie dowodzi — dalsze wyrazy mogą zachować się inaczej.
+    POPRAWNE ROZWIĄZANIE: a_{n+1} = \left(n+1\right)^{2} - 9\left(n+1\right) + 4 = n^{2} - 7n - 4, więc
+    a_{n+1} - a_{n} = \left(n^{2}-7n-4\right) - \left(n^{2}-9n+4\right) = 2n - 8.
+    Dla n = 1 mamy 2 - 8 = -6 < 0, ale dla n = 5 mamy 2\cdot 5 - 8 = 2 > 0, czyli a_{6} - a_{5} = 2 > 0 (istotnie a_{5} = -16, a_{6} = -14).
+    Różnice mają różne znaki, więc ciąg NIE jest monotoniczny: nie jest ani rosnący, ani malejący.
+    UWAGA: odwrotny kierunek jest poprawny — wskazanie dwóch różnic o przeciwnych znakach WYSTARCZA, by obalić monotoniczność.
+  solution_steps:
+  - Zauważ, że uczeń oparł wniosek tylko na czterech pierwszych wyrazach — to nie jest dowód.
+  - Wyznacz a_{n+1} = \left(n+1\right)^{2} - 9\left(n+1\right) + 4 = n^{2} - 7n - 4.
+  - 'Oblicz różnicę: a_{n+1} - a_{n} = 2n - 8.'
+  - 'Podstaw n = 5: a_{6} - a_{5} = 2\cdot 5 - 8 = 2 > 0, a dla n = 1 różnica wynosi -6 < 0.'
+  - 'Wniosek: różnica zmienia znak, więc ciąg nie jest monotoniczny; rozumowanie ucznia jest błędne.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: roznica
+      answer:
+        kind: SYMBOLIC
+        latex: 2n-8
+    - name: a_6-a_5
+      answer:
+        kind: NUMERIC
+        value: 2.0
+    - name: czy_monotoniczny
+      answer:
+        kind: BOOLEAN
+        truth: false
+  checks:
+  - kind: simplify
+    expr: \left(\left(n+1\right)^{2}-9\left(n+1\right)+4\right)-\left(n^{2}-9n+4\right)
+    var: n
+    part: roznica
+  - kind: evaluate
+    expr: \left(6^{2}-9\cdot 6+4\right)-\left(5^{2}-9\cdot 5+4\right)
+    var: n
+    part: a_6-a_5
+  skills:
+  - metoda różnicy
+  - obalanie monotoniczności kontrprzykładem
+  - krytyczna ocena rozumowania
+  verification:
+    checkability: REFERENCE_CALL
+    note: '3 parts matched · det: [roznica] SymPy solved it fresh: ''2n-8'' vs ''2*n - 8'' ; [a_6-a_5]
+      SymPy solved it fresh: 2.0 vs 2.0 (tol 1e-09)'
+- id: g-cm-07
+  slot: COMMON_MISTAKE
+  ramp_index: 1
+  difficulty: 2
+  exercise_type: poprawne wyznaczanie a_{n+1}
+  statement: 'Dany jest ciąg \left(a_{n}\right) określony wzorem a_{n} = 5n - 3 dla każdej liczby naturalnej
+    n \geq 1. Uczeń zapisał: „a_{n+1} = a_{n} + 1 = 5n - 2”. Wyznacz poprawnie wyraz a_{n+1}, oblicz różnicę
+    a_{n+1} - a_{n} i rozstrzygnij, czy ciąg jest rosnący. Wyjaśnij, na czym polega błąd ucznia.'
+  statement_latex: a_{n}=5n-3,\qquad a_{n+1}=?,\qquad a_{n+1}-a_{n}=?
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń potraktował symbol a_{n+1} tak, jakby oznaczał „a_{n} powiększone o 1”, i napisał a_{n+1} = a_{n} + 1 = \left(5n-3\right) + 1 = 5n - 2. Stąd otrzymałby różnicę a_{n+1} - a_{n} = 1 — wartość błędną.
+    DLACZEGO TO BŁĄD: a_{n+1} to NASTĘPNY WYRAZ ciągu, czyli wartość wzoru dla argumentu n+1, a nie poprzedni wyraz zwiększony o 1. Indeks n+1 wstawiamy do wzoru, a nie dodajemy do wartości.
+    POPRAWNE ROZWIĄZANIE: w miejsce każdego n wstawiamy (n+1) w nawiasie:
+    a_{n+1} = 5\left(n+1\right) - 3 = 5n + 5 - 3 = 5n + 2.
+    Różnica: a_{n+1} - a_{n} = \left(5n+2\right) - \left(5n-3\right) = 5.
+    Sprawdzenie: a_{1} = 2, a_{2} = 7, a_{3} = 12 — kolejne wyrazy różnią się o 5, a nie o 1.
+    Ponieważ a_{n+1} - a_{n} = 5 > 0 dla każdego n \in \mathbb{N}^{+}, ciąg jest rosnący.
+  solution_steps:
+  - Zauważ, że a_{n+1} oznacza wartość wzoru dla argumentu n+1, a nie a_{n} + 1.
+  - 'Podstaw (n+1) w nawiasie: a_{n+1} = 5\left(n+1\right) - 3 = 5n + 2.'
+  - 'Oblicz różnicę: a_{n+1} - a_{n} = \left(5n+2\right) - \left(5n-3\right) = 5.'
+  - Ponieważ 5 > 0 dla każdego n \geq 1, ciąg jest rosnący.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: a_{n+1}
+      answer:
+        kind: SYMBOLIC
+        latex: 5n+2
+    - name: roznica
+      answer:
+        kind: NUMERIC
+        value: 5.0
+    - name: czy_rosnacy
+      answer:
+        kind: BOOLEAN
+        truth: true
+  checks:
+  - kind: simplify
+    expr: 5\left(n+1\right)-3
+    var: n
+    part: a_{n+1}
+  - kind: simplify
+    expr: \left(5\left(n+1\right)-3\right)-\left(5n-3\right)
+    var: n
+    part: roznica
+  skills:
+  - podstawianie (n+1) do wzoru ogólnego
+  - metoda różnicy
+  verification:
+    checkability: REFERENCE_CALL
+    note: '3 parts matched · det: [roznica] SymPy solved it fresh: 5.0 vs 5.0 (tol 1e-09)'
+- id: g-cm-08
+  slot: COMMON_MISTAKE
+  ramp_index: 2
+  difficulty: 2
+  exercise_type: poprawne podstawianie z nawiasami
+  statement: 'Dany jest ciąg \left(a_{n}\right) określony wzorem a_{n} = n^{2} + 3n - 1 dla każdej liczby
+    naturalnej n \geq 1. Uczeń zapisał: „a_{n+1} = n+1^{2} + 3n+1 - 1 = 4n + 1”. Wyznacz poprawnie a_{n+1},
+    oblicz różnicę a_{n+1} - a_{n} i rozstrzygnij, czy ciąg jest rosnący. Wskaż błąd ucznia.'
+  statement_latex: a_{n}=n^{2}+3n-1,\qquad a_{n+1}=?,\qquad a_{n+1}-a_{n}=?
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń nie ujął podstawianego wyrażenia w nawiasy i otrzymał a_{n+1} = n + 1^{2} + 3n + 1 - 1 = 4n + 1. Wtedy różnica wyszłaby
+    \left(4n+1\right) - \left(n^{2}+3n-1\right) = -n^{2} + n + 2,
+    co dla n = 2 daje -4 + 2 + 2 = 0, a dla n = 3 daje -9 + 3 + 2 = -4 < 0 — uczeń błędnie orzekłby, że ciąg maleje.
+    DLACZEGO TO BŁĄD: podstawiając n+1 za n, trzeba całe wyrażenie ująć w nawias, bo podnoszeniu do kwadratu i mnożeniu podlega suma n+1, a nie samo n.
+    POPRAWNE ROZWIĄZANIE:
+    a_{n+1} = \left(n+1\right)^{2} + 3\left(n+1\right) - 1 = n^{2} + 2n + 1 + 3n + 3 - 1 = n^{2} + 5n + 3.
+    Różnica: a_{n+1} - a_{n} = \left(n^{2}+5n+3\right) - \left(n^{2}+3n-1\right) = 2n + 4.
+    Dla każdego n \geq 1 mamy 2n + 4 \geq 6 > 0, więc a_{n+1} > a_{n}, czyli ciąg jest rosnący.
+    Sprawdzenie: a_{1} = 3, a_{2} = 9, a_{3} = 17 — wyrazy rosną, co potwierdza wniosek (a przeczy błędnej wersji ucznia).
+  solution_steps:
+  - 'Zauważ, że podstawiając n+1, trzeba użyć nawiasów: \left(n+1\right)^{2} oraz 3\left(n+1\right).'
+  - 'Uprość: a_{n+1} = n^{2} + 2n + 1 + 3n + 3 - 1 = n^{2} + 5n + 3.'
+  - 'Oblicz różnicę: a_{n+1} - a_{n} = \left(n^{2}+5n+3\right) - \left(n^{2}+3n-1\right) = 2n + 4.'
+  - 'Zbadaj znak: dla n \geq 1 mamy 2n + 4 > 0, więc ciąg jest rosnący.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: a_{n+1}
+      answer:
+        kind: SYMBOLIC
+        latex: n^{2}+5n+3
+    - name: roznica
+      answer:
+        kind: SYMBOLIC
+        latex: 2n+4
+    - name: czy_rosnacy
+      answer:
+        kind: BOOLEAN
+        truth: true
+  checks:
+  - kind: simplify
+    expr: \left(n+1\right)^{2}+3\left(n+1\right)-1
+    var: n
+    part: a_{n+1}
+  - kind: simplify
+    expr: \left(\left(n+1\right)^{2}+3\left(n+1\right)-1\right)-\left(n^{2}+3n-1\right)
+    var: n
+    part: roznica
+  skills:
+  - podstawianie (n+1) w nawiasie
+  - metoda różnicy
+  - znak wyrażenia liniowego dla n \geq 1
+  verification:
+    checkability: REFERENCE_CALL
+    note: '3 parts matched · det: [roznica] SymPy solved it fresh: ''2n+4'' vs ''2*n + 4'''
+- id: g-cm-09
+  slot: COMMON_MISTAKE
+  ramp_index: 3
+  difficulty: 2
+  exercise_type: kolejność w różnicy
+  statement: 'Dany jest ciąg \left(a_{n}\right) określony wzorem a_{n} = 7 - 2n dla każdej liczby naturalnej
+    n \geq 1. Uczeń obliczył a_{n} - a_{n+1} = 2 i napisał: „różnica jest dodatnia, więc ciąg jest rosnący”.
+    Oblicz różnicę a_{n+1} - a_{n} zgodnie z definicją i rozstrzygnij, czy ciąg jest malejący. Wyjaśnij
+    błąd ucznia.'
+  statement_latex: a_{n}=7-2n,\qquad a_{n+1}-a_{n}=?
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń policzył różnicę w odwrotnej kolejności:
+    a_{n} - a_{n+1} = \left(7-2n\right) - \left(7-2\left(n+1\right)\right) = 2,
+    otrzymał liczbę dodatnią i stąd błędnie wywnioskował, że ciąg jest rosnący.
+    DLACZEGO TO BŁĄD: kryterium monotoniczności dotyczy różnicy „następny minus poprzedni”, czyli a_{n+1} - a_{n}. Przy odwróconej kolejności wnioski trzeba odwrócić — dodatnia różnica a_{n} - a_{n+1} oznacza właśnie, że ciąg MALEJE.
+    POPRAWNE ROZWIĄZANIE:
+    a_{n+1} = 7 - 2\left(n+1\right) = 7 - 2n - 2 = 5 - 2n,
+    a_{n+1} - a_{n} = \left(5-2n\right) - \left(7-2n\right) = -2.
+    Różnica jest ujemna dla każdego n \in \mathbb{N}^{+}, więc a_{n+1} < a_{n}, czyli ciąg jest malejący.
+    Sprawdzenie: a_{1} = 5, a_{2} = 3, a_{3} = 1, a_{4} = -1 — wyrazy maleją.
+  solution_steps:
+  - 'Przypomnij definicję: ciąg jest malejący, gdy a_{n+1} - a_{n} < 0 dla każdego n (następny minus poprzedni).'
+  - Wyznacz a_{n+1} = 7 - 2\left(n+1\right) = 5 - 2n.
+  - 'Oblicz różnicę: a_{n+1} - a_{n} = \left(5-2n\right) - \left(7-2n\right) = -2.'
+  - Ponieważ -2 < 0 dla każdego n \geq 1, ciąg jest malejący; uczeń odwrócił kolejność odejmowania i dlatego
+    pomylił wniosek.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: roznica
+      answer:
+        kind: NUMERIC
+        value: -2.0
+    - name: czy_malejacy
+      answer:
+        kind: BOOLEAN
+        truth: true
+  checks:
+  - kind: simplify
+    expr: \left(7-2\left(n+1\right)\right)-\left(7-2n\right)
+    var: n
+    part: roznica
+  skills:
+  - poprawne stosowanie definicji monotoniczności
+  - metoda różnicy
+  verification:
+    checkability: REFERENCE_CALL
+    note: '2 parts matched · det: [roznica] SymPy solved it fresh: -2.0 vs -2.0 (tol 1e-09)'
+- id: g-cm-10
+  slot: COMMON_MISTAKE
+  ramp_index: 4
+  difficulty: 3
+  exercise_type: granice stosowalności metody ilorazu
+  statement: 'Dany jest ciąg \left(a_{n}\right) określony wzorem a_{n} = -5\cdot 2^{n} dla każdej liczby
+    naturalnej n \geq 1. Uczeń obliczył iloraz \frac{a_{n+1}}{a_{n}} = 2 i napisał: „iloraz jest większy
+    od 1, więc ciąg jest rosnący”. Oblicz a_{1}, a_{2}, a_{3}, wyznacz różnicę a_{n+1} - a_{n} i rozstrzygnij,
+    czy ciąg jest malejący. Wyjaśnij, dlaczego rozumowanie ucznia jest błędne.'
+  statement_latex: a_{n}=-5\cdot 2^{n},\qquad \frac{a_{n+1}}{a_{n}}=2,\qquad a_{n+1}-a_{n}=?
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: \frac{a_{n+1}}{a_{n}} = \frac{-5\cdot 2^{n+1}}{-5\cdot 2^{n}} = 2 > 1, więc — zdaniem ucznia — ciąg jest rosnący.
+    DLACZEGO TO BŁĄD: kryterium ilorazowe wolno stosować TYLKO wtedy, gdy wszystkie wyrazy ciągu są dodatnie. Tutaj a_{1} = -5\cdot 2 = -10, a_{2} = -5\cdot 4 = -20, a_{3} = -5\cdot 8 = -40 — wszystkie wyrazy są ujemne, więc warunek stosowalności nie jest spełniony i wniosek jest fałszywy (widać zresztą, że -20 < -10).
+    POPRAWNE ROZWIĄZANIE (metoda różnicy):
+    a_{n+1} = -5\cdot 2^{n+1} = -10\cdot 2^{n},
+    a_{n+1} - a_{n} = -10\cdot 2^{n} + 5\cdot 2^{n} = -5\cdot 2^{n}.
+    Dla każdego n \in \mathbb{N}^{+} mamy 2^{n} > 0, więc -5\cdot 2^{n} < 0, czyli a_{n+1} < a_{n}. Ciąg jest malejący.
+  solution_steps:
+  - 'Oblicz kilka wyrazów: a_{1} = -10, a_{2} = -20, a_{3} = -40 — wszystkie ujemne.'
+  - Zauważ, że kryterium ilorazowe wymaga dodatniości wszystkich wyrazów, więc tutaj nie wolno go stosować.
+  - 'Zastosuj metodę różnicy: a_{n+1} - a_{n} = -5\cdot 2^{n+1} - \left(-5\cdot 2^{n}\right) = -5\cdot
+    2^{n}.'
+  - 'Zbadaj znak: 2^{n} > 0, więc różnica jest ujemna dla każdego n \geq 1.'
+  - 'Wniosek: ciąg jest malejący, a rozumowanie ucznia jest błędne.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: a_1
+      answer:
+        kind: NUMERIC
+        value: -10.0
+    - name: a_2
+      answer:
+        kind: NUMERIC
+        value: -20.0
+    - name: a_3
+      answer:
+        kind: NUMERIC
+        value: -40.0
+    - name: roznica
+      answer:
+        kind: SYMBOLIC
+        latex: -5\cdot 2^{n}
+    - name: czy_malejacy
+      answer:
+        kind: BOOLEAN
+        truth: true
+  checks:
+  - kind: evaluate
+    expr: -5\cdot 2^{1}
+    var: n
+    part: a_1
+  - kind: evaluate
+    expr: -5\cdot 2^{2}
+    var: n
+    part: a_2
+  - kind: evaluate
+    expr: -5\cdot 2^{3}
+    var: n
+    part: a_3
+  - kind: simplify
+    expr: \left(-5\cdot 2^{n+1}\right)-\left(-5\cdot 2^{n}\right)
+    var: n
+    part: roznica
+  skills:
+  - warunek dodatniości w metodzie ilorazu
+  - metoda różnicy dla ciągu o wyrazach ujemnych
+  verification:
+    checkability: REFERENCE_CALL
+    note: '5 parts matched · det: [a_1] SymPy solved it fresh: -10.0 vs -10.0 (tol 1e-09) ; [a_2] SymPy
+      solved it fresh: -20.0 vs -20.0 (tol 1e-09) ; [a_3] SymPy solved it fresh: -40.0 vs -40.0 (tol 1e-09)'
+- id: g-ch-t02
+  slot: CHALLENGE
+  ramp_index: 0
+  difficulty: 4
+  exercise_type: modelowanie rekurencyjne (D2, D3) z rozstrzygnięciem monotoniczności
+  statement: 'W stawie hodowlanym na początku pierwszego roku obserwacji było 500 karpi. Przyjmujemy następujący
+    model: liczba karpi na początku każdego następnego roku jest równa liczbie karpi z początku roku poprzedniego
+    powiększonej o 20% tej liczby i pomniejszonej o 60 ryb odłowionych w ciągu tego roku. Zapisz wzór
+    rekurencyjny ciągu \left( a_{n} \right), którego n-ty wyraz oznacza liczbę karpi na początku n-tego
+    roku obserwacji, oblicz a_{3} oraz rozstrzygnij, czy w tym modelu liczba karpi rośnie z roku na rok.
+    Odpowiedź uzasadnij.'
+  statement_latex: a_{1} = 500,\qquad a_{n+1} = \frac{6}{5}\cdot a_{n} - 60
+  solution: |-
+    Oznaczmy przez a_{n} liczbę karpi na początku n-tego roku obserwacji. Z warunków zadania a_{1} = 500, a powiększenie o 20% to pomnożenie przez \frac{6}{5}, więc
+    a_{n+1} = \frac{6}{5}\cdot a_{n} - 60 dla n \geq 1.
+    Obliczamy kolejno:
+    a_{2} = \frac{6}{5}\cdot 500 - 60 = 600 - 60 = 540,
+    a_{3} = \frac{6}{5}\cdot 540 - 60 = 648 - 60 = 588.
+    Monotoniczność: a_{n+1} - a_{n} = \frac{6}{5}\cdot a_{n} - 60 - a_{n} = \frac{1}{5}\cdot a_{n} - 60.
+    Różnica jest dodatnia dokładnie wtedy, gdy a_{n} > 300.
+    Mamy a_{1} = 500 > 300. Ponadto jeżeli a_{n} > 300, to a_{n+1} = \frac{6}{5}\cdot a_{n} - 60 > \frac{6}{5}\cdot 300 - 60 = 300.
+    Zatem a_{n} > 300 dla każdego n \geq 1, więc a_{n+1} - a_{n} = \frac{1}{5}\cdot a_{n} - 60 > 0 dla każdego n.
+    Ciąg \left( a_{n} \right) jest rosnący — w tym modelu liczba karpi rośnie z roku na rok.
+  solution_steps:
+  - 'Wprowadź ciąg: a_{n} — liczba karpi na początku n-tego roku, a_{1} = 500.'
+  - 'Zapisz regułę przejścia: wzrost o 20% to mnożenie przez \frac{6}{5}, odłów to odjęcie 60, czyli a_{n+1}
+    = \frac{6}{5}\cdot a_{n} - 60.'
+  - Oblicz a_{2} = \frac{6}{5}\cdot 500 - 60 = 540.
+  - Oblicz a_{3} = \frac{6}{5}\cdot 540 - 60 = 588.
+  - Wyznacz różnicę a_{n+1} - a_{n} = \frac{1}{5}\cdot a_{n} - 60.
+  - Zauważ, że różnica jest dodatnia dla a_{n} > 300, oraz że a_{1} = 500 > 300 i z a_{n} > 300 wynika
+    a_{n+1} > 300.
+  - 'Wniosek: różnica jest dodatnia dla każdego n, więc ciąg jest rosnący.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wzor_rekurencyjny
+      answer:
+        kind: SYMBOLIC
+        latex: a_{n+1} = \frac{6}{5}\cdot a_{n} - 60
+    - name: a_3
+      answer:
+        kind: NUMERIC
+        value: 588.0
+    - name: monotonicznosc
+      answer:
+        kind: SYMBOLIC
+        latex: rosnący
+    - name: uzasadnienie
+      answer:
+        kind: NOT_MACHINE_CHECKABLE
+        reason: Trzeba pokazać, że a_{n+1} - a_{n} = \frac{1}{5}a_{n} - 60 > 0, korzystając z tego, że
+          a_{1} = 500 > 300 oraz że z a_{n} > 300 wynika a_{n+1} > 300, więc wszystkie wyrazy są większe
+          od 300.
+  checks:
+  - kind: evaluate
+    expr: \frac{6}{5}\cdot\left(\frac{6}{5}\cdot 500 - 60\right) - 60
+    var: n
+    part: a_3
+  stated_model:
+    variable: a_n
+    objective_latex: a_{1} = 500,\quad a_{n+1} = \frac{6}{5}\cdot a_{n} - 60
+    domain_lo: '1'
+    goal: value
+    constraint_used: wzrost o 20% i odłów 60 sztuk w każdym roku
+  skills:
+  - układanie wzoru rekurencyjnego z opisu słownego
+  - obliczanie kolejnych wyrazów ciągu rekurencyjnego
+  - badanie monotoniczności ciągu zadanego rekurencyjnie
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (PARSE_ERROR: "UnexpectedCharacters: No terminal
+      matches '','' in the current parser context, at line 1 col 12") — human review'
+- id: g-ch-t03
+  slot: CHALLENGE
+  ramp_index: 1
+  difficulty: 4
+  exercise_type: ciąg z opisu geometrycznego (D1, D2, D3) z progiem (D6)
+  statement: Kwadrat K_{1} ma bok długości 12. Dla każdej liczby naturalnej n \geq 1 wierzchołkami kwadratu
+    K_{n+1} są środki boków kwadratu K_{n}. Niech P_{n} oznacza pole kwadratu K_{n}. Wyznacz wzór ogólny
+    ciągu \left( P_{n} \right), rozstrzygnij, czy ciąg ten jest rosnący, czy malejący, oraz wyznacz najmniejszą
+    liczbę naturalną n, dla której P_{n} < 5, i oblicz pole P_{n} dla tego n.
+  statement_latex: P_{1} = 12^{2} = 144,\qquad P_{n+1} = \frac{1}{2}\cdot P_{n}
+  solution: |-
+    Niech bok kwadratu K_{n} ma długość b_{n}. Wierzchołki kwadratu K_{n+1} są środkami boków K_{n}, więc każdy bok kwadratu K_{n+1} jest przeciwprostokątną trójkąta prostokątnego równoramiennego o przyprostokątnych \frac{b_{n}}{2}, zatem
+    b_{n+1} = \sqrt{\left(\frac{b_{n}}{2}\right)^{2} + \left(\frac{b_{n}}{2}\right)^{2}} = \frac{b_{n}\cdot\sqrt{2}}{2}.
+    Stąd P_{n+1} = b_{n+1}^{2} = \frac{b_{n}^{2}}{2} = \frac{1}{2}\cdot P_{n} — każde kolejne pole jest połową poprzedniego.
+    Ponieważ P_{1} = 12^{2} = 144, otrzymujemy
+    P_{n} = \frac{144}{2^{n-1}}.
+    Monotoniczność: wszystkie wyrazy są dodatnie i \frac{P_{n+1}}{P_{n}} = \frac{1}{2} < 1, więc ciąg \left( P_{n} \right) jest malejący.
+    Warunek P_{n} < 5:
+    \frac{144}{2^{n-1}} < 5 \iff 2^{n-1} > \frac{144}{5} = 28{,}8.
+    Mamy 2^{4} = 16 < 28{,}8 oraz 2^{5} = 32 > 28{,}8, więc n - 1 \geq 5, czyli n \geq 6.
+    Najmniejsza taka liczba naturalna to n = 6, a P_{6} = \frac{144}{2^{5}} = \frac{144}{32} = 4{,}5 < 5.
+  solution_steps:
+  - Oznacz bok kwadratu K_{n} przez b_{n} i zauważ, że b_{n+1} = \frac{b_{n}\cdot\sqrt{2}}{2}.
+  - 'Wywnioskuj stąd zależność pól: P_{n+1} = \frac{1}{2}\cdot P_{n}.'
+  - Oblicz P_{1} = 12^{2} = 144 i zapisz wzór ogólny P_{n} = \frac{144}{2^{n-1}}.
+  - Zbadaj iloraz \frac{P_{n+1}}{P_{n}} = \frac{1}{2} < 1 przy dodatnich wyrazach — ciąg jest malejący.
+  - Rozwiąż nierówność \frac{144}{2^{n-1}} < 5, czyli 2^{n-1} > 28{,}8.
+  - Porównaj 2^{4} = 16 i 2^{5} = 32, otrzymując n \geq 6.
+  - Oblicz P_{6} = \frac{144}{32} = 4{,}5.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wzor_ogolny
+      answer:
+        kind: SYMBOLIC
+        latex: P_{n} = \frac{144}{2^{n-1}}
+    - name: monotonicznosc
+      answer:
+        kind: SYMBOLIC
+        latex: malejący
+    - name: n_min
+      answer:
+        kind: NUMERIC
+        value: 6.0
+    - name: P_n_min
+      answer:
+        kind: NUMERIC
+        value: 4.5
+  checks:
+  - kind: evaluate
+    expr: \left\lfloor \log_{2}\left(\frac{144}{5}\right) \right\rfloor + 2
+    var: n
+    part: n_min
+  - kind: evaluate
+    expr: \frac{144}{2^{6-1}}
+    var: n
+    part: P_n_min
+  stated_model:
+    variable: P_n
+    objective_latex: P_{n} = \frac{144}{2^{n-1}}
+    domain_lo: '1'
+    goal: value
+    constraint_used: wierzchołkami kolejnego kwadratu są środki boków poprzedniego, więc pole maleje o
+      połowę
+  skills:
+  - przełożenie opisu geometrycznego na ciąg
+  - wyznaczanie wzoru ogólnego ciągu geometrycznego z rekurencji
+  - badanie monotoniczności ciągu o wyrazach dodatnich
+  - rozwiązanie nierówności wykładniczej dla n naturalnych
+  verification:
+    checkability: STATED_MODEL
+    note: 'stage 1 inconclusive: TypeError: name should be a string, not Token'
+- id: g-ch-t04
+  slot: CHALLENGE
+  ramp_index: 2
+  difficulty: 5
+  exercise_type: 'ciąg pól prostokątów: wzór + dziedzina, monotoniczność i wartość największa (D1, D3,
+    D5, D8, D10)'
+  statement: |-
+    Dla liczby naturalnej n \geq 1 rozważamy prostokąt P_{n}, którego jeden bok ma długość n + 1, a drugi bok ma długość 14 - n (w tych samych jednostkach). Prostokąt P_{n} istnieje tylko wtedy, gdy oba jego boki mają dodatnią długość. Niech a_{n} oznacza pole prostokąta P_{n}.
+    a) Wyznacz wzór ciągu \left( a_{n} \right) w postaci wielomianu zmiennej n oraz największą liczbę naturalną n, dla której prostokąt P_{n} istnieje.
+    b) Wyznacz wszystkie liczby naturalne n, dla których a_{n+1} > a_{n}, rozstrzygnij, czy ciąg \left( a_{n} \right) jest monotoniczny, oraz oblicz największe pole spośród pól prostokątów P_{n}.
+  statement_latex: a_{n} = \left(n + 1\right)\cdot\left(14 - n\right)
+  solution: |-
+    a) Pole prostokąta to iloczyn boków:
+    a_{n} = \left(n+1\right)\cdot\left(14-n\right) = 14n - n^{2} + 14 - n = -n^{2} + 13n + 14.
+    Boki muszą być dodatnie: n + 1 > 0 (spełnione dla każdego n \geq 1) oraz 14 - n > 0, czyli n < 14.
+    Największą liczbą naturalną spełniającą ten warunek jest n = 13 (wtedy boki mają długości 14 i 1).
+    b) Wyznaczamy różnicę. Podstawiając (n+1):
+    a_{n+1} = \left(n+2\right)\cdot\left(13-n\right) = -n^{2} + 11n + 26.
+    Zatem
+    a_{n+1} - a_{n} = \left(-n^{2} + 11n + 26\right) - \left(-n^{2} + 13n + 14\right) = 12 - 2n.
+    Warunek a_{n+1} > a_{n} oznacza 12 - 2n > 0, czyli n < 6. Dla n naturalnych daje to n \in \{1, 2, 3, 4, 5\}.
+    Dla n = 6 różnica jest równa 0 (a_{7} = a_{6}), a dla n \in \{7, 8, \dots, 12\} różnica jest ujemna, więc wyrazy maleją.
+    Różnice mają zatem różne znaki — ciąg nie jest monotoniczny.
+    Największe pole otrzymujemy dla n = 6 (i tyle samo dla n = 7):
+    a_{6} = \left(6+1\right)\cdot\left(14-6\right) = 7\cdot 8 = 56, a_{7} = 8\cdot 7 = 56.
+    Największe pole prostokąta P_{n} jest równe 56.
+  solution_steps:
+  - 'Zapisz pole jako iloczyn boków: a_{n} = \left(n+1\right)\cdot\left(14-n\right).'
+  - 'Rozwiń nawiasy: a_{n} = -n^{2} + 13n + 14.'
+  - Z warunku dodatniości boków 14 - n > 0 otrzymaj n < 14, więc największe naturalne n to 13.
+  - Wyznacz a_{n+1} = \left(n+2\right)\cdot\left(13-n\right) = -n^{2} + 11n + 26.
+  - Oblicz różnicę a_{n+1} - a_{n} = 12 - 2n.
+  - Rozwiąż 12 - 2n > 0, otrzymując n < 6, czyli n \in \{1,2,3,4,5\}.
+  - Zauważ, że dla n = 6 różnica jest zerowa, a dla n \geq 7 ujemna — ciąg nie jest monotoniczny.
+  - 'Oblicz największy wyraz: a_{6} = 7\cdot 8 = 56 (oraz a_{7} = 56).'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wzor
+      answer:
+        kind: SYMBOLIC
+        latex: -n^{2} + 13\cdot n + 14
+    - name: n_max
+      answer:
+        kind: NUMERIC
+        value: 13.0
+    - name: n_rosnace
+      answer:
+        kind: SET
+        members:
+        - '1'
+        - '2'
+        - '3'
+        - '4'
+        - '5'
+    - name: monotonicznosc
+      answer:
+        kind: SYMBOLIC
+        latex: niemonotoniczny
+    - name: pole_max
+      answer:
+        kind: NUMERIC
+        value: 56.0
+  checks:
+  - kind: simplify
+    expr: \left(n + 1\right)\cdot\left(14 - n\right)
+    var: n
+    part: wzor
+  - kind: evaluate
+    expr: \left\lceil 14 \right\rceil - 1
+    var: n
+    part: n_max
+  - kind: evaluate
+    expr: \left(6 + 1\right)\cdot\left(14 - 6\right)
+    var: n
+    part: pole_max
+  stated_model:
+    variable: n
+    objective_latex: a_{n} = \left(n+1\right)\cdot\left(14-n\right)
+    domain_lo: '1'
+    domain_hi: '13'
+    domain_lo_open: false
+    domain_hi_open: false
+    constraint_used: 'oba boki dodatnie: n + 1 > 0 oraz 14 - n > 0, n liczba naturalna'
+  skills:
+  - układanie wzoru ciągu z opisu geometrycznego
+  - wyznaczanie dziedziny z warunku dodatniości boków
+  - badanie znaku różnicy a_{n+1}-a_{n} dla ciągu kwadratowego
+  - wyznaczanie największego wyrazu ciągu
+  verification:
+    checkability: STATED_MODEL
+    note: 'stage 1 inconclusive: TypeError: name should be a string, not Token'

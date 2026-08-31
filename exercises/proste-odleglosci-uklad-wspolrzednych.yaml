@@ -1,0 +1,855 @@
+section: proste-odleglosci-uklad-wspolrzednych
+name: Proste i odległości w układzie współrzędnych
+scope: Line equations in slope and general form; relative position of two lines and their common point;
+  distance between two points and length of a segment.
+requirements:
+- IX.1
+- IX.2
+- IX.3
+counts:
+  total: 16
+  DETERMINISTIC: 6
+  REFERENCE_CALL: 6
+  NOT_MACHINE_CHECKABLE: 4
+exercises:
+- id: g-th-00
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: obliczenie odległości dwóch punktów
+  statement: W kartezjańskim układzie współrzędnych (x, y) dane są punkty A = (-3, 2) oraz B = (1, -1).
+    Oblicz długość odcinka AB. Zapisz obliczenia.
+  statement_latex: '|AB| = \sqrt{\left(1-\left(-3\right)\right)^{2}+\left(-1-2\right)^{2}}'
+  solution: |-
+    Obliczamy przyrosty współrzędnych: \Delta x = x_B - x_A = 1 - (-3) = 4 oraz \Delta y = y_B - y_A = -1 - 2 = -3.
+    Stosujemy wzór na odległość dwóch punktów:
+    |AB| = \sqrt{\left(\Delta x\right)^{2}+\left(\Delta y\right)^{2}} = \sqrt{4^{2}+\left(-3\right)^{2}} = \sqrt{16+9} = \sqrt{25} = 5.
+    Odpowiedź: |AB| = 5.
+  solution_steps:
+  - 'Wyznacz przyrost odciętych: \Delta x = 1 - \left(-3\right) = 4.'
+  - 'Wyznacz przyrost rzędnych: \Delta y = -1 - 2 = -3.'
+  - 'Podstaw do wzoru: |AB| = \sqrt{4^{2}+\left(-3\right)^{2}} = \sqrt{25}.'
+  - 'Oblicz pierwiastek: |AB| = 5.'
+  answer:
+    kind: NUMERIC
+    value: 5.0
+    latex: '5'
+  checks:
+  - kind: evaluate
+    expr: \sqrt{\left(1-\left(-3\right)\right)^{2}+\left(-1-2\right)^{2}}
+  skills:
+  - wzór na odległość dwóch punktów
+  - działania na liczbach ujemnych
+  - upraszczanie pierwiastka
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 5.0 vs 5.0 (tol 1e-09)'
+- id: g-th-01
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: zamiana postaci ogólnej na kierunkową
+  statement: W kartezjańskim układzie współrzędnych (x, y) dana jest prosta k o równaniu 2x - 5y + 10
+    = 0. Zapisz równanie prostej k w postaci kierunkowej, a następnie podaj jej współczynnik kierunkowy
+    a oraz wyraz wolny b.
+  statement_latex: 2x-5y+10=0 \iff y = \frac{2}{5}x + 2
+  solution: |-
+    Wyznaczamy y z równania prostej:
+    2x - 5y + 10 = 0 \iff -5y = -2x - 10 \iff y = \frac{-2x-10}{-5} = \frac{2}{5}x + 2.
+    Zatem postać kierunkowa prostej k to y = \frac{2}{5}x + 2, czyli a = \frac{2}{5} oraz b = 2.
+    (Kontrola wzorem: a = -\frac{A}{B} = -\frac{2}{-5} = \frac{2}{5}, b = -\frac{C}{B} = -\frac{10}{-5} = 2.)
+  solution_steps:
+  - 'Przenieś wyrazy z x i wyraz wolny na prawą stronę: -5y = -2x - 10.'
+  - 'Podziel obie strony przez -5: y = \frac{2}{5}x + 2.'
+  - 'Odczytaj współczynnik kierunkowy: a = \frac{2}{5}.'
+  - 'Odczytaj wyraz wolny: b = 2 (prosta przechodzi przez punkt \left(0,\ 2\right)).'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wspolczynnik_a
+      answer:
+        kind: NUMERIC
+        value: 0.4
+        latex: \frac{2}{5}
+    - name: wyraz_wolny_b
+      answer:
+        kind: NUMERIC
+        value: 2.0
+        latex: '2'
+  checks:
+  - kind: evaluate
+    expr: -\frac{2}{-5}
+    part: wspolczynnik_a
+  - kind: evaluate
+    expr: -\frac{10}{-5}
+    part: wyraz_wolny_b
+  skills:
+  - przekształcanie równania prostej
+  - odczytywanie współczynnika kierunkowego
+  - odczytywanie wyrazu wolnego
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [wspolczynnik_a] SymPy solved it fresh: 0.4 vs 0.4 (tol 1e-09)
+      ; [wyraz_wolny_b] SymPy solved it fresh: 2.0 vs 2.0 (tol 1e-09)'
+- id: g-th-02
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: warunek prostopadłości
+  statement: W kartezjańskim układzie współrzędnych (x, y) dana jest prosta k o równaniu y = \frac{3}{4}x
+    - 1. Oblicz współczynnik kierunkowy dowolnej prostej prostopadłej do prostej k.
+  statement_latex: a_{k}\cdot a = -1,\qquad \frac{3}{4}\cdot a = -1
+  solution: |-
+    Z równania prostej k odczytujemy a_k = \frac{3}{4}.
+    Warunek prostopadłości: a_k \cdot a = -1, czyli \frac{3}{4}\cdot a = -1.
+    Stąd a = -1 \cdot \frac{4}{3} = -\frac{4}{3}.
+    Odpowiedź: a = -\frac{4}{3}.
+  solution_steps:
+  - 'Odczytaj współczynnik kierunkowy prostej k: a_{k} = \frac{3}{4}.'
+  - 'Zapisz warunek prostopadłości: \frac{3}{4}\cdot a = -1.'
+  - 'Rozwiąż równanie: a = -\frac{4}{3} (odwracamy ułamek i zmieniamy znak).'
+  answer:
+    kind: NUMERIC
+    value: -1.3333333333333333
+    latex: -\frac{4}{3}
+  checks:
+  - kind: evaluate
+    expr: -\frac{1}{\frac{3}{4}}
+  skills:
+  - warunek prostopadłości a_1 \cdot a_2 = -1
+  - działania na ułamkach
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: -1.3333333333333333 vs -1.3333333333333333 (tol 1e-09)'
+- id: g-ex-03
+  slot: EXERCISE
+  ramp_index: 1
+  difficulty: 2
+  exercise_type: prosta przez dwa punkty i sprawdzenie przynależności punktu
+  statement: W kartezjańskim układzie współrzędnych (x, y) dane są punkty A = (-4, 1) oraz B = (2, -3).
+    Prosta AB ma równanie w postaci kierunkowej y = ax + b. Oblicz współczynnik kierunkowy a oraz wyraz
+    wolny b tej prostej, a następnie rozstrzygnij, czy punkt C = (5, -5) leży na prostej AB. Zapisz obliczenia.
+  statement_latex: a = \frac{-3-1}{2-\left(-4\right)},\qquad 1 = a\cdot\left(-4\right)+b
+  solution: |-
+    Ponieważ x_A = -4 \ne 2 = x_B, prosta AB nie jest pionowa.
+    Współczynnik kierunkowy: a = \frac{y_B-y_A}{x_B-x_A} = \frac{-3-1}{2-\left(-4\right)} = \frac{-4}{6} = -\frac{2}{3}.
+    Wyraz wolny wyznaczamy, wstawiając współrzędne punktu A do równania y = ax + b:
+    1 = -\frac{2}{3}\cdot\left(-4\right)+b, czyli 1 = \frac{8}{3}+b, stąd b = 1-\frac{8}{3} = -\frac{5}{3}.
+    Prosta AB: y = -\frac{2}{3}x-\frac{5}{3}.
+    Sprawdzenie dla punktu B: -\frac{2}{3}\cdot 2-\frac{5}{3} = -\frac{4}{3}-\frac{5}{3} = -3 \checkmark.
+    Sprawdzamy punkt C = (5, -5): -\frac{2}{3}\cdot 5-\frac{5}{3} = -\frac{10}{3}-\frac{5}{3} = -\frac{15}{3} = -5, a więc równość jest prawdziwa.
+    Odpowiedź: a = -\frac{2}{3}, b = -\frac{5}{3}, punkt C leży na prostej AB.
+  solution_steps:
+  - Sprawdź, że x_A \ne x_B, więc prosta AB nie jest pionowa.
+  - Oblicz a = \frac{-3-1}{2-\left(-4\right)} = -\frac{2}{3}.
+  - 'Wstaw współrzędne punktu A do y = ax+b: 1 = -\frac{2}{3}\cdot\left(-4\right)+b i wyznacz b = -\frac{5}{3}.'
+  - 'Podstaw współrzędne punktu C: -\frac{2}{3}\cdot 5-\frac{5}{3} = -5 — równość zachodzi.'
+  - 'Sformułuj wniosek: punkt C leży na prostej AB.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wspolczynnik_a
+      answer:
+        kind: NUMERIC
+        value: -0.6666666666666666
+        latex: -\frac{2}{3}
+    - name: wyraz_wolny_b
+      answer:
+        kind: NUMERIC
+        value: -1.6666666666666667
+        latex: -\frac{5}{3}
+    - name: czy_C_lezy_na_prostej
+      answer:
+        kind: BOOLEAN
+        latex: \text{tak}
+        truth: true
+  checks:
+  - kind: evaluate
+    expr: \frac{-3-1}{2-\left(-4\right)}
+    part: wspolczynnik_a
+  - kind: solve_equation
+    expr: 1 = -\frac{2}{3}\cdot\left(-4\right)+b
+    var: b
+    part: wyraz_wolny_b
+  skills:
+  - współczynnik kierunkowy z dwóch punktów
+  - wyznaczanie wyrazu wolnego
+  - sprawdzanie, czy punkt należy do prostej
+  verification:
+    checkability: REFERENCE_CALL
+    note: '3 parts matched · det: [wspolczynnik_a] SymPy solved it fresh: -0.6666666666666666 vs -0.6666666666666666
+      (tol 1e-09) ; [wyraz_wolny_b] SymPy solved it fresh: -1.6666666666666667 vs -1.6666666666666667
+      (tol 1e-09)'
+- id: g-ex-04
+  slot: EXERCISE
+  ramp_index: 2
+  difficulty: 3
+  exercise_type: prosta prostopadła, punkt wspólny, odległość
+  statement: W kartezjańskim układzie współrzędnych (x, y) dana jest prosta k o równaniu 2x + y - 5 =
+    0 oraz punkt P = (-3, 1). Prosta l jest prostopadła do prostej k i przechodzi przez punkt P. Wyznacz
+    równanie prostej l w postaci kierunkowej, oblicz współrzędne punktu wspólnego S prostych k i l oraz
+    oblicz odległość |PS|. Zapisz obliczenia.
+  statement_latex: k:\ 2x+y-5=0,\qquad l:\ y = \frac{1}{2}x+\frac{5}{2}
+  solution: |-
+    Sprowadzamy prostą k do postaci kierunkowej: y = -2x+5, więc a_k = -2.
+    Z warunku prostopadłości a_k \cdot a_l = -1 otrzymujemy a_l = -\frac{1}{-2} = \frac{1}{2}.
+    Wstawiamy współrzędne punktu P = (-3, 1) do równania y = \frac{1}{2}x+b:
+    1 = \frac{1}{2}\cdot\left(-3\right)+b, czyli 1 = -\frac{3}{2}+b, stąd b = \frac{5}{2}.
+    Zatem l: y = \frac{1}{2}x+\frac{5}{2}.
+    Punkt wspólny: -2x+5 = \frac{1}{2}x+\frac{5}{2}. Mnożymy obie strony przez 2: -4x+10 = x+5, stąd 5 = 5x, czyli x = 1 oraz y = -2\cdot 1+5 = 3.
+    Sprawdzenie: \frac{1}{2}\cdot 1+\frac{5}{2} = 3 \checkmark, więc S = (1, 3).
+    Odległość: |PS| = \sqrt{\left(1-\left(-3\right)\right)^{2}+\left(3-1\right)^{2}} = \sqrt{16+4} = \sqrt{20} = 2\sqrt{5}.
+  solution_steps:
+  - 'Zapisz prostą k w postaci kierunkowej: y = -2x+5, zatem a_{k} = -2.'
+  - Z warunku prostopadłości wyznacz a_{l} = \frac{1}{2}.
+  - Wstaw P = \left(-3,\ 1\right) do y = \frac{1}{2}x+b i oblicz b = \frac{5}{2}; zapisz l:\ y = \frac{1}{2}x+\frac{5}{2}.
+  - 'Rozwiąż układ: -2x+5 = \frac{1}{2}x+\frac{5}{2}, stąd x = 1 oraz y = 3, czyli S = \left(1,\ 3\right).'
+  - Oblicz |PS| = \sqrt{\left(1-\left(-3\right)\right)^{2}+\left(3-1\right)^{2}} = 2\sqrt{5}.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: rownanie_prostej_l
+      answer:
+        kind: SYMBOLIC
+        latex: y = \frac{1}{2}x+\frac{5}{2}
+    - name: punkt_S
+      answer:
+        kind: TUPLE
+        latex: \left(1,\ 3\right)
+        items:
+        - '1'
+        - '3'
+    - name: odleglosc_PS
+      answer:
+        kind: NUMERIC
+        value: 4.47213595499958
+        latex: 2\sqrt{5}
+  checks:
+  - kind: evaluate
+    expr: \sqrt{\left(1-\left(-3\right)\right)^{2}+\left(3-1\right)^{2}}
+    part: odleglosc_PS
+  skills:
+  - zamiana postaci ogólnej na kierunkową
+  - warunek prostopadłości
+  - rozwiązywanie układu równań
+  - odległość dwóch punktów
+  verification:
+    checkability: REFERENCE_CALL
+    note: '3 parts matched · det: [odleglosc_PS] SymPy solved it fresh: 4.47213595499958 vs 4.47213595499958
+      (tol 1e-09)'
+- id: g-ex-05
+  slot: EXERCISE
+  ramp_index: 3
+  difficulty: 4
+  exercise_type: wzajemne położenie prostych z parametrem
+  statement: 'W kartezjańskim układzie współrzędnych (x, y) dane są proste k oraz l o równaniach k: y
+    = (m+2)x - 3 oraz l: 4x + 2y - 7 = 0, gdzie m jest parametrem. Wyznacz wszystkie wartości parametru
+    m, dla których: a) proste k i l są równoległe, b) proste k i l są prostopadłe, c) proste k i l mają
+    dokładnie jeden punkt wspólny.'
+  statement_latex: k:\ y = \left(m+2\right)x-3,\qquad l:\ 4x+2y-7=0
+  solution: |-
+    Sprowadzamy prostą l do postaci kierunkowej: 2y = -4x+7, czyli y = -2x+\frac{7}{2}. Zatem a_l = -2 oraz b_l = \frac{7}{2}. Dla prostej k mamy a_k = m+2 oraz b_k = -3.
+    a) Równoległość: a_k = a_l, czyli m+2 = -2, stąd m = -4. Wtedy k: y = -2x-3, a ponieważ -3 \ne \frac{7}{2}, proste są równoległe i rozłączne (dla żadnego m się nie pokrywają).
+    b) Prostopadłość: a_k \cdot a_l = -1, czyli \left(m+2\right)\cdot\left(-2\right) = -1, stąd m+2 = \frac{1}{2}, czyli m = -\frac{3}{2}.
+    c) Dokładnie jeden punkt wspólny mają proste, które nie są równoległe: m+2 \ne -2, czyli m \ne -4.
+    Odpowiedź: a) m = -4, b) m = -\frac{3}{2}, c) m \in \mathbb{R}\setminus\{-4\}.
+  solution_steps:
+  - 'Zapisz prostą l w postaci kierunkowej: y = -2x+\frac{7}{2}, więc a_{l} = -2, b_{l} = \frac{7}{2}.'
+  - a) Rozwiąż m+2 = -2, otrzymując m = -4; sprawdź, że -3 \ne \frac{7}{2}, więc proste są rozłączne.
+  - b) Rozwiąż \left(m+2\right)\cdot\left(-2\right) = -1, otrzymując m = -\frac{3}{2}.
+  - c) Proste przecinają się w jednym punkcie dokładnie wtedy, gdy m+2 \ne -2, czyli m \ne -4.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: m_rownolegle
+      answer:
+        kind: NUMERIC
+        value: -4.0
+        latex: '-4'
+    - name: m_prostopadle
+      answer:
+        kind: NUMERIC
+        value: -1.5
+        latex: -\frac{3}{2}
+    - name: m_jeden_punkt_wspolny
+      answer:
+        kind: SYMBOLIC
+        latex: m \in \mathbb{R}\setminus\left\{-4\right\}
+  checks:
+  - kind: solve_equation
+    expr: m+2 = -2
+    var: m
+    part: m_rownolegle
+  - kind: solve_equation
+    expr: \left(m+2\right)\cdot\left(-2\right) = -1
+    var: m
+    part: m_prostopadle
+  skills:
+  - zamiana postaci ogólnej na kierunkową
+  - warunek równoległości
+  - warunek prostopadłości
+  - warunek przecinania się prostych
+  verification:
+    checkability: REFERENCE_CALL
+    note: 'could not compare: part disagrees: NOT_MACHINE_CHECKABLE: ''piecewise / matrix form'''
+- id: g-ex-t00
+  slot: EXERCISE
+  ramp_index: 6
+  difficulty: 3
+  exercise_type: prosta prostopadła, punkt wspólny, odległość punktów
+  statement: |-
+    W kartezjańskim układzie współrzędnych (x, y) dane są: prosta k o równaniu x - 2y + 2 = 0 oraz punkt P = (4, 8). Prosta l jest prostopadła do prostej k i przechodzi przez punkt P. Punkt S jest punktem wspólnym prostych k oraz l.
+    a) Wyznacz równanie prostej l w postaci kierunkowej.
+    b) Oblicz współrzędne punktu S.
+    c) Oblicz długość odcinka PS.
+    Zapisz obliczenia.
+  statement_latex: k:\ x - 2y + 2 = 0,\qquad P = \left(4,\ 8\right),\qquad l \perp k,\qquad S = k \cap
+    l,\qquad |PS| = \sqrt{\left(x_S - 4\right)^2 + \left(y_S - 8\right)^2}
+  solution: |-
+    Sprowadzamy prostą k do postaci kierunkowej: z równania x - 2y + 2 = 0 otrzymujemy 2y = x + 2, czyli y = \frac{1}{2}\cdot x + 1. Zatem a_k = \frac{1}{2}.
+
+    a) Z warunku prostopadłości a_l \cdot a_k = -1 mamy a_l = -\frac{1}{\frac{1}{2}} = -2. Prosta l ma więc równanie y = -2\cdot x + b. Podstawiamy współrzędne punktu P = (4, 8): 8 = -2\cdot 4 + b, stąd b = 16. Zatem l: y = -2x + 16.
+
+    b) Rozwiązujemy układ równań prostych k i l, przyrównując prawe strony: \frac{1}{2}\cdot x + 1 = -2\cdot x + 16. Mnożymy obie strony przez 2: x + 2 = -4x + 32, czyli 5x = 30, więc x = 6. Wtedy y = \frac{1}{2}\cdot 6 + 1 = 4. Punkt wspólny to S = (6, 4). Sprawdzenie: 6 - 2\cdot 4 + 2 = 0 oraz -2\cdot 6 + 16 = 4.
+
+    c) |PS| = \sqrt{\left(6 - 4\right)^2 + \left(4 - 8\right)^2} = \sqrt{4 + 16} = \sqrt{20} = 2\sqrt{5}.
+  solution_steps:
+  - 'Zamień równanie k na postać kierunkową: y = \frac{1}{2}\cdot x + 1, więc a_k = \frac{1}{2}.'
+  - Z warunku a_l \cdot a_k = -1 wyznacz a_l = -2.
+  - 'Podstaw P = (4, 8) do y = -2x + b i oblicz b = 16, czyli l: y = -2x + 16.'
+  - Przyrównaj \frac{1}{2}\cdot x + 1 = -2\cdot x + 16 i wyznacz x = 6.
+  - Oblicz y = \frac{1}{2}\cdot 6 + 1 = 4, czyli S = (6, 4).
+  - Oblicz |PS| = \sqrt{\left(6-4\right)^2 + \left(4-8\right)^2} = \sqrt{20} = 2\sqrt{5}.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: l
+      answer:
+        kind: SYMBOLIC
+        latex: y = -2x + 16
+    - name: S_x
+      answer:
+        kind: NUMERIC
+        value: 6.0
+    - name: S_y
+      answer:
+        kind: NUMERIC
+        value: 4.0
+    - name: PS
+      answer:
+        kind: NUMERIC
+        value: 4.47213595499958
+        tol: 1.0e-06
+  checks:
+  - kind: solve_equation
+    expr: \frac{1}{2}\cdot x + 1 = -2\cdot x + 16
+    part: S_x
+  - kind: evaluate
+    expr: \frac{1}{2}\cdot 6 + 1
+    part: S_y
+  - kind: evaluate
+    expr: \sqrt{\left(6 - 4\right)^2 + \left(4 - 8\right)^2}
+    part: PS
+  skills:
+  - zamiana postaci ogólnej na kierunkową
+  - wyznaczanie prostej prostopadłej przez dany punkt
+  - rozwiązywanie układu równań prostych
+  - obliczanie odległości dwóch punktów
+  verification:
+    checkability: REFERENCE_CALL
+    note: 'could not compare: reference produced 3 outputs, answer has 4'
+- id: g-ex-t01
+  slot: EXERCISE
+  ramp_index: 7
+  difficulty: 4
+  exercise_type: punkt na osi równo oddalony od dwóch punktów, obwód trójkąta
+  statement: |-
+    W kartezjańskim układzie współrzędnych (x, y) dane są punkty A = (-2, 1) oraz B = (6, 7). Punkt C leży na osi Ox i jest równo oddalony od punktów A i B.
+    a) Oblicz współrzędne punktu C.
+    b) Oblicz obwód trójkąta ABC.
+    c) Uzasadnij, że kąt ACB jest kątem prostym.
+    Zapisz obliczenia.
+  statement_latex: A = \left(-2,\ 1\right),\quad B = \left(6,\ 7\right),\quad C = \left(x,\ 0\right),\quad
+    |AC| = |BC|
+  solution: |-
+    a) Punkt C leży na osi Ox, więc C = (x, 0). Warunek |AC| = |BC| zapisujemy dla kwadratów długości:
+    \left(x - \left(-2\right)\right)^2 + \left(0 - 1\right)^2 = \left(x - 6\right)^2 + \left(0 - 7\right)^2,
+    czyli x^2 + 4x + 4 + 1 = x^2 - 12x + 36 + 49. Po redukcji: 4x + 5 = -12x + 85, więc 16x = 80 i x = 5. Zatem C = (5, 0).
+
+    b) |AC| = \sqrt{\left(5 + 2\right)^2 + \left(0 - 1\right)^2} = \sqrt{49 + 1} = \sqrt{50} = 5\sqrt{2},
+    |BC| = \sqrt{\left(5 - 6\right)^2 + \left(0 - 7\right)^2} = \sqrt{1 + 49} = 5\sqrt{2},
+    |AB| = \sqrt{\left(6 + 2\right)^2 + \left(7 - 1\right)^2} = \sqrt{64 + 36} = \sqrt{100} = 10.
+    Obwód: 5\sqrt{2} + 5\sqrt{2} + 10 = 10 + 10\sqrt{2}.
+
+    c) |AC|^2 + |BC|^2 = 50 + 50 = 100 = |AB|^2, więc z twierdzenia odwrotnego do twierdzenia Pitagorasa kąt przy wierzchołku C (naprzeciw najdłuższego boku AB) jest prosty. Równoważnie: a_{CA} = \frac{1 - 0}{-2 - 5} = -\frac{1}{7}, a_{CB} = \frac{7 - 0}{6 - 5} = 7 oraz \left(-\frac{1}{7}\right)\cdot 7 = -1.
+  solution_steps:
+  - Zapisz C = (x, 0), bo C leży na osi Ox.
+  - 'Zapisz warunek |AC|^2 = |BC|^2: \left(x + 2\right)^2 + 1 = \left(x - 6\right)^2 + 49.'
+  - 'Rozwiąż równanie: 16x = 80, czyli x = 5, więc C = (5, 0).'
+  - Oblicz |AC| = 5\sqrt{2}, |BC| = 5\sqrt{2}, |AB| = 10.
+  - 'Dodaj długości boków: obwód = 10 + 10\sqrt{2}.'
+  - Sprawdź, że |AC|^2 + |BC|^2 = 100 = |AB|^2, więc kąt ACB jest prosty.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: C_x
+      answer:
+        kind: NUMERIC
+        value: 5.0
+    - name: obwod
+      answer:
+        kind: NUMERIC
+        value: 24.14213562373095
+        tol: 1.0e-06
+    - name: uzasadnienie_kata_prostego
+      answer:
+        kind: NOT_MACHINE_CHECKABLE
+        reason: Należy wykazać, że |AC|^2 + |BC|^2 = |AB|^2 (50 + 50 = 100) i powołać się na twierdzenie
+          odwrotne do twierdzenia Pitagorasa, albo pokazać, że iloczyn współczynników kierunkowych prostych
+          CA i CB jest równy -1.
+  checks:
+  - kind: solve_equation
+    expr: \left(x + 2\right)^2 + \left(0 - 1\right)^2 = \left(x - 6\right)^2 + \left(0 - 7\right)^2
+    part: C_x
+  - kind: evaluate
+    expr: \sqrt{50} + \sqrt{50} + \sqrt{100}
+    part: obwod
+  skills:
+  - stosowanie wzoru na odległość dwóch punktów
+  - układanie i rozwiązywanie równania z warunku równych długości
+  - obliczanie obwodu trójkąta
+  - twierdzenie odwrotne do twierdzenia Pitagorasa
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'part(s) need a human: uzasadnienie_kata_prostego · 2/2 other parts solved fresh'
+- id: g-cm-06
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: współczynnik kierunkowy z dwóch punktów — demonstracja błędu
+  statement: W kartezjańskim układzie współrzędnych (x, y) dane są punkty A = (-2, 1) oraz B = (4, 5).
+    Oblicz współczynnik kierunkowy a prostej AB. Pewien uczeń otrzymał a = \frac{3}{2}. Wskaż, na czym
+    polega jego błąd, i podaj poprawną wartość a.
+  statement_latex: a = \frac{5-1}{4-\left(-2\right)}
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń zastosował „odwrócony” wzór a = \frac{x_B-x_A}{y_B-y_A} = \frac{4-\left(-2\right)}{5-1} = \frac{6}{4} = \frac{3}{2} i otrzymał a = \frac{3}{2}.
+    DLACZEGO JEST TO BŁĄD: współczynnik kierunkowy mówi, o ile zmienia się y, gdy x rośnie o 1, więc w liczniku musi stać przyrost rzędnych, a w mianowniku przyrost odciętych. Szybka kontrola: dla punktów \left(0,\ 0\right) i \left(1,\ 2\right) prosta ma równanie y = 2x, czyli a = 2, a wzór ucznia dałby \frac{1}{2}.
+    POPRAWNIE: a = \frac{y_B-y_A}{x_B-x_A} = \frac{5-1}{4-\left(-2\right)} = \frac{4}{6} = \frac{2}{3}.
+    Odpowiedź: a = \frac{2}{3}.
+  solution_steps:
+  - Zauważ, że uczeń policzył \frac{x_{B}-x_{A}}{y_{B}-y_{A}} = \frac{6}{4} = \frac{3}{2}, czyli odwrócił
+    wzór.
+  - 'Przypomnij wzór poprawny: a = \frac{y_{B}-y_{A}}{x_{B}-x_{A}}.'
+  - Oblicz a = \frac{5-1}{4-\left(-2\right)} = \frac{4}{6}.
+  - 'Skróć ułamek: a = \frac{2}{3}.'
+  answer:
+    kind: NUMERIC
+    value: 0.6666666666666666
+    latex: \frac{2}{3}
+  checks:
+  - kind: evaluate
+    expr: \frac{5-1}{4-\left(-2\right)}
+  skills:
+  - wzór a = \frac{\Delta y}{\Delta x}
+  - kontrola poprawności wyniku
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 0.6666666666666666 vs 0.6666666666666666 (tol 1e-09)'
+- id: g-cm-07
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: kolejność odejmowania we wzorze na a — demonstracja błędu
+  statement: W kartezjańskim układzie współrzędnych (x, y) dane są punkty A = (3, -2) oraz B = (-1, 6).
+    Oblicz współczynnik kierunkowy a prostej AB. Pewien uczeń otrzymał a = 2. Wskaż, na czym polega jego
+    błąd, i podaj poprawną wartość a.
+  statement_latex: a = \frac{6-\left(-2\right)}{-1-3}
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń pomieszał kolejność punktów i policzył a = \frac{y_B-y_A}{x_A-x_B} = \frac{6-\left(-2\right)}{3-\left(-1\right)} = \frac{8}{4} = 2.
+    DLACZEGO JEST TO BŁĄD: w liczniku i w mianowniku musimy odejmować współrzędne w tej samej kolejności. Zamiana kolejności tylko w mianowniku zmienia znak wyniku. Tu punkt B leży wyżej i bardziej na lewo niż A, więc prosta maleje i a musi być ujemne.
+    POPRAWNIE: a = \frac{y_B-y_A}{x_B-x_A} = \frac{6-\left(-2\right)}{-1-3} = \frac{8}{-4} = -2 (ten sam wynik daje \frac{y_A-y_B}{x_A-x_B} = \frac{-8}{4} = -2).
+    Odpowiedź: a = -2.
+  solution_steps:
+  - Zauważ, że uczeń policzył \frac{y_{B}-y_{A}}{x_{A}-x_{B}}, mieszając kolejność punktów.
+  - 'Zapisz poprawny wzór: a = \frac{y_{B}-y_{A}}{x_{B}-x_{A}}.'
+  - Oblicz a = \frac{6-\left(-2\right)}{-1-3} = \frac{8}{-4} = -2.
+  - 'Skontroluj znak: prosta AB maleje, więc a < 0.'
+  answer:
+    kind: NUMERIC
+    value: -2.0
+    latex: '-2'
+  checks:
+  - kind: evaluate
+    expr: \frac{6-\left(-2\right)}{-1-3}
+  skills:
+  - wzór a = \frac{\Delta y}{\Delta x}
+  - kontrola znaku współczynnika kierunkowego
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: -2.0 vs -2.0 (tol 1e-09)'
+- id: g-cm-08
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: zamiana postaci ogólnej na kierunkową — demonstracja błędu
+  statement: W kartezjańskim układzie współrzędnych (x, y) dana jest prosta k o równaniu 5x + 2y - 8 =
+    0. Pewien uczeń zapisał, że współczynnik kierunkowy tej prostej jest równy \frac{5}{2}, a wyraz wolny
+    jest równy -8. Wyjaśnij, na czym polega jego błąd, i podaj poprawne wartości a oraz b.
+  statement_latex: 5x+2y-8=0 \iff y = -\frac{5}{2}x+4
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń „odczytał” współczynniki wprost z postaci ogólnej: przy x stoi 5, przy y stoi 2, więc a = \frac{5}{2}, a wyraz wolny to -8.
+    DLACZEGO JEST TO BŁĄD: postać kierunkowa to y = ax+b, więc najpierw trzeba wyznaczyć y z równania — przy przenoszeniu wyrazów zmieniają się znaki i całość dzielimy przez współczynnik przy y.
+    POPRAWNIE: 5x+2y-8 = 0 \iff 2y = -5x+8 \iff y = -\frac{5}{2}x+4.
+    Zatem a = -\frac{A}{B} = -\frac{5}{2}, b = -\frac{C}{B} = -\frac{-8}{2} = 4.
+    Sprawdzenie: dla x = 0 mamy y = 4 oraz 5\cdot 0+2\cdot 4-8 = 0 \checkmark.
+    Odpowiedź: a = -\frac{5}{2}, b = 4.
+  solution_steps:
+  - Zauważ, że uczeń odczytał współczynniki bez wyznaczania y i pominął zmiany znaków.
+  - 'Wyznacz y: 2y = -5x+8.'
+  - 'Podziel przez 2: y = -\frac{5}{2}x+4.'
+  - Odczytaj a = -\frac{5}{2} oraz b = 4 i sprawdź punkt \left(0,\ 4\right) w równaniu ogólnym.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wspolczynnik_a
+      answer:
+        kind: NUMERIC
+        value: -2.5
+        latex: -\frac{5}{2}
+    - name: wyraz_wolny_b
+      answer:
+        kind: NUMERIC
+        value: 4.0
+        latex: '4'
+  checks:
+  - kind: evaluate
+    expr: -\frac{5}{2}
+    part: wspolczynnik_a
+  - kind: evaluate
+    expr: -\frac{-8}{2}
+    part: wyraz_wolny_b
+  skills:
+  - przekształcanie równania prostej
+  - a = -\frac{A}{B}
+  - b = -\frac{C}{B}
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [wspolczynnik_a] SymPy solved it fresh: -2.5 vs -2.5 (tol 1e-09)
+      ; [wyraz_wolny_b] SymPy solved it fresh: 4.0 vs 4.0 (tol 1e-09)'
+- id: g-cm-09
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: prosta pionowa — demonstracja błędu
+  statement: W kartezjańskim układzie współrzędnych (x, y) dane są punkty A = (-4, 3) oraz B = (-4, -2).
+    Pewien uczeń policzył a = \frac{-2-3}{-4-\left(-4\right)} = \frac{-5}{0} i zapisał, że prosta AB ma
+    równanie y = 0 \cdot x + b. Wyjaśnij, na czym polega jego błąd, podaj równanie prostej AB oraz oblicz
+    długość odcinka AB.
+  statement_latex: x_{A} = x_{B} = -4,\qquad |AB| = \sqrt{\left(-4-\left(-4\right)\right)^{2}+\left(-2-3\right)^{2}}
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń podstawił do wzoru na współczynnik kierunkowy i otrzymał w mianowniku zero, a następnie potraktował wynik jak a = 0 i zapisał prostą poziomą y = 0\cdot x+b.
+    DLACZEGO JEST TO BŁĄD: dzielenie przez zero jest niewykonalne, więc \frac{-5}{0} nie jest żadną liczbą, a już na pewno nie zerem. Gdy x_A = x_B, prosta AB jest pionowa i w ogóle nie ma postaci kierunkowej ani współczynnika kierunkowego.
+    POPRAWNIE: ponieważ x_A = x_B = -4, prosta AB ma równanie x = -4 (jest równoległa do osi Oy).
+    Długość odcinka: |AB| = \sqrt{\left(-4-\left(-4\right)\right)^{2}+\left(-2-3\right)^{2}} = \sqrt{0+25} = 5, co zgadza się ze wzorem |AB| = |y_B-y_A| = |-2-3| = 5.
+    Odpowiedź: prosta AB ma równanie x = -4, a |AB| = 5.
+  solution_steps:
+  - Zauważ, że x_{A} = x_{B} = -4, więc mianownik we wzorze na a jest równy 0 — wzoru nie można zastosować.
+  - Wywnioskuj, że prosta AB jest pionowa i ma równanie x = -4.
+  - 'Oblicz długość odcinka: |AB| = \sqrt{0^{2}+\left(-5\right)^{2}} = 5.'
+  - 'Zapisz odpowiedź: x = -4 oraz |AB| = 5.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: rownanie_prostej_AB
+      answer:
+        kind: SYMBOLIC
+        latex: x = -4
+    - name: dlugosc_AB
+      answer:
+        kind: NUMERIC
+        value: 5.0
+        latex: '5'
+  checks:
+  - kind: evaluate
+    expr: \sqrt{\left(-4-\left(-4\right)\right)^{2}+\left(-2-3\right)^{2}}
+    part: dlugosc_AB
+  skills:
+  - rozpoznawanie prostej pionowej
+  - równanie x = c
+  - odległość punktów o równych odciętych
+  verification:
+    checkability: REFERENCE_CALL
+    note: '2 parts matched · det: [dlugosc_AB] SymPy solved it fresh: 5.0 vs 5.0 (tol 1e-09)'
+- id: g-cm-10
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: wzajemne położenie prostych — demonstracja błędu
+  statement: 'W kartezjańskim układzie współrzędnych (x, y) dane są proste k oraz l o równaniach k: y
+    = 3x - 2 oraz l: 6x - 2y + 10 = 0. Pewien uczeń stwierdził: „obie proste mają współczynnik kierunkowy
+    równy 3, więc pokrywają się i mają nieskończenie wiele punktów wspólnych”. Wyjaśnij, na czym polega
+    jego błąd. Podaj wyraz wolny prostej l oraz liczbę punktów wspólnych prostych k i l.'
+  statement_latex: k:\ y = 3x-2,\qquad l:\ 6x-2y+10=0 \iff y = 3x+5
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń sprawdził tylko współczynniki kierunkowe: a_k = 3 oraz a_l = -\frac{6}{-2} = 3, i z równości a_k = a_l wywnioskował, że proste się pokrywają, czyli mają nieskończenie wiele punktów wspólnych.
+    DLACZEGO JEST TO BŁĄD: równość współczynników kierunkowych oznacza tylko ten sam kierunek (równoległość). Aby rozstrzygnąć, czy proste się pokrywają, trzeba jeszcze porównać wyrazy wolne.
+    POPRAWNIE: sprowadzamy l do postaci kierunkowej: -2y = -6x-10, czyli y = 3x+5. Zatem b_l = 5, a b_k = -2.
+    Ponieważ a_k = a_l = 3, ale b_k = -2 \ne 5 = b_l, proste są równoległe i rozłączne — nie mają punktów wspólnych.
+    Można też rozwiązać układ: 3x-2 = 3x+5 \iff -2 = 5, co jest sprzecznością, więc punktu wspólnego nie ma.
+    Odpowiedź: b_l = 5, proste k i l mają 0 punktów wspólnych.
+  solution_steps:
+  - 'Sprowadź prostą l do postaci kierunkowej: y = 3x+5, więc a_{l} = 3 oraz b_{l} = 5.'
+  - 'Porównaj współczynniki kierunkowe: a_{k} = a_{l} = 3 — proste są równoległe.'
+  - 'Porównaj wyrazy wolne: -2 \ne 5, więc proste nie pokrywają się.'
+  - 'Wniosek: proste są równoległe i rozłączne — liczba punktów wspólnych wynosi 0 (układ równań jest
+    sprzeczny).'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wyraz_wolny_prostej_l
+      answer:
+        kind: NUMERIC
+        value: 5.0
+        latex: '5'
+    - name: liczba_punktow_wspolnych
+      answer:
+        kind: NUMERIC
+        value: 0.0
+        latex: '0'
+  checks:
+  - kind: evaluate
+    expr: -\frac{10}{-2}
+    part: wyraz_wolny_prostej_l
+  skills:
+  - zamiana postaci ogólnej na kierunkową
+  - warunek równoległości
+  - rozróżnianie prostych pokrywających się i rozłącznych
+  verification:
+    checkability: REFERENCE_CALL
+    note: '2 parts matched · det: [wyraz_wolny_prostej_l] SymPy solved it fresh: 5.0 vs 5.0 (tol 1e-09)'
+- id: g-ch-t02
+  slot: CHALLENGE
+  ramp_index: 0
+  difficulty: 4
+  exercise_type: punkt na prostej o zadanej odległości, równanie prostej
+  statement: 'W kartezjańskim układzie współrzędnych (x, y) dane są: prosta k o równaniu y = 2x - 3 oraz
+    punkt A = (1, 4). Punkt K leży na prostej k, jego odległość od punktu A jest równa 5, a obie współrzędne
+    punktu K są liczbami dodatnimi. Oblicz współrzędne punktu K oraz wyznacz równanie prostej AK w postaci
+    ogólnej. Zapisz obliczenia.'
+  statement_latex: k:\ y = 2x - 3,\qquad A = \left(1,\ 4\right),\qquad K \in k,\qquad |AK| = 5,\qquad
+    x_K > 0,\ y_K > 0
+  solution: |-
+    Skoro punkt K leży na prostej k, to jego współrzędne mają postać K = \left(t,\ 2t - 3\right) dla pewnej liczby rzeczywistej t.
+
+    Zapisujemy warunek |AK| = 5 dla kwadratów:
+    \left(t - 1\right)^2 + \left(2t - 3 - 4\right)^2 = 25,
+    czyli t^2 - 2t + 1 + 4t^2 - 28t + 49 = 25, a stąd 5t^2 - 30t + 25 = 0, czyli t^2 - 6t + 5 = 0.
+    Przekształcamy: \left(t - 3\right)^2 = 4, więc t = 3 - 2 = 1 albo t = 3 + 2 = 5.
+
+    Dla t = 1 otrzymujemy K = (1, -1) — rzędna jest ujemna, więc ten punkt odrzucamy. Dla t = 3 + 2 = 5 otrzymujemy K = (5, 2\cdot 5 - 3) = (5, 7); obie współrzędne są dodatnie, więc K = (5, 7).
+
+    Równanie prostej AK: a = \frac{7 - 4}{5 - 1} = \frac{3}{4}. Podstawiamy A = (1, 4): 4 = \frac{3}{4}\cdot 1 + b, stąd b = \frac{13}{4}, czyli y = \frac{3}{4}\cdot x + \frac{13}{4}. Mnożymy przez 4 i porządkujemy: 4y = 3x + 13, czyli 3x - 4y + 13 = 0.
+    Sprawdzenie: dla A: 3\cdot 1 - 4\cdot 4 + 13 = 0, dla K: 3\cdot 5 - 4\cdot 7 + 13 = 0.
+  solution_steps:
+  - Zauważ, że punkt prostej k ma postać K = (t, 2t - 3) — wprowadź parametr t.
+  - 'Zapisz warunek |AK|^2 = 25: \left(t - 1\right)^2 + \left(2t - 7\right)^2 = 25.'
+  - 'Uporządkuj równanie: 5t^2 - 30t + 25 = 0, czyli \left(t - 3\right)^2 = 4.'
+  - Wyznacz t = 1 lub t = 5 i odrzuć t = 1, bo wtedy K = (1, -1) ma ujemną rzędną.
+  - Zapisz K = (5, 7).
+  - 'Oblicz współczynnik kierunkowy prostej AK: a = \frac{3}{4}, następnie b = \frac{13}{4}.'
+  - 'Zapisz postać ogólną: 3x - 4y + 13 = 0.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: K_x
+      answer:
+        kind: NUMERIC
+        value: 5.0
+    - name: K_y
+      answer:
+        kind: NUMERIC
+        value: 7.0
+    - name: prosta_AK
+      answer:
+        kind: SYMBOLIC
+        latex: 3x - 4y + 13 = 0
+  checks:
+  - kind: evaluate
+    expr: 3 + 2
+    var: t
+    part: K_x
+  - kind: evaluate
+    expr: 2\cdot 5 - 3
+    var: t
+    part: K_y
+  stated_model:
+    variable: t
+    objective_latex: '|AK|^2 = \left(t - 1\right)^2 + \left(2t - 7\right)^2'
+    domain_lo: \frac{3}{2}
+    goal: value
+    constraint_used: '|AK| = 5 oraz t > 0 i 2t - 3 > 0'
+  skills:
+  - parametryzacja punktu leżącego na prostej
+  - stosowanie wzoru na odległość dwóch punktów
+  - rozwiązywanie równania kwadratowego
+  - odrzucanie rozwiązania sprzecznego z warunkiem zadania
+  - wyznaczanie równania prostej przez dwa punkty
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (NOT_MACHINE_CHECKABLE: ''segment length / measure
+      bars'') — human review'
+- id: g-ch-t03
+  slot: CHALLENGE
+  ramp_index: 1
+  difficulty: 4
+  exercise_type: warunek prostopadłości, punkt na osi, pole trójkąta
+  statement: W kartezjańskim układzie współrzędnych (x, y) dane są punkty A = (0, 4) oraz B = (6, 2).
+    Punkt C leży na osi Ox, jego odcięta jest większa od 3, a kąt ACB jest kątem prostym. Oblicz odciętę
+    punktu C oraz pole trójkąta ABC. Zapisz obliczenia.
+  statement_latex: A = \left(0,\ 4\right),\quad B = \left(6,\ 2\right),\quad C = \left(x,\ 0\right),\quad
+    x > 3,\quad \sphericalangle ACB = 90^{\circ}
+  solution: |-
+    Punkt C leży na osi Ox, więc C = (x, 0), przy czym x \ne 0 oraz x \ne 6 (w przeciwnym razie jedna z prostych CA, CB byłaby pionowa i kąt prosty nie mógłby powstać w opisany sposób).
+
+    Współczynniki kierunkowe:
+    a_{CA} = \frac{4 - 0}{0 - x} = -\frac{4}{x}, \qquad a_{CB} = \frac{2 - 0}{6 - x} = \frac{2}{6 - x}.
+
+    Z warunku prostopadłości a_{CA}\cdot a_{CB} = -1 mamy
+    \left(-\frac{4}{x}\right)\cdot \frac{2}{6 - x} = -1, czyli \frac{8}{x\cdot\left(6 - x\right)} = 1,
+    zatem x\cdot\left(6 - x\right) = 8, czyli x^2 - 6x + 8 = 0, a stąd \left(x - 3\right)^2 = 1.
+    Otrzymujemy x = 3 - 1 = 2 albo x = 3 + 1 = 4. Warunek x > 3 spełnia tylko x = 4, więc C = (4, 0).
+
+    Długości przyprostokątnych:
+    |CA| = \sqrt{\left(0 - 4\right)^2 + \left(4 - 0\right)^2} = \sqrt{32} = 4\sqrt{2},
+    |CB| = \sqrt{\left(6 - 4\right)^2 + \left(2 - 0\right)^2} = \sqrt{8} = 2\sqrt{2}.
+    Pole: P = \frac{1}{2}\cdot 4\sqrt{2}\cdot 2\sqrt{2} = \frac{1}{2}\cdot 16 = 8.
+  solution_steps:
+  - Zapisz C = (x, 0) — wprowadź niewiadomą odciętą punktu leżącego na osi Ox.
+  - 'Wyznacz współczynniki kierunkowe: a_{CA} = -\frac{4}{x}, a_{CB} = \frac{2}{6 - x}.'
+  - Zapisz warunek prostopadłości a_{CA}\cdot a_{CB} = -1 i uprość do x^2 - 6x + 8 = 0.
+  - 'Rozwiąż: \left(x - 3\right)^2 = 1, czyli x = 2 lub x = 4.'
+  - Odrzuć x = 2 (nie spełnia warunku x > 3); zatem C = (4, 0).
+  - Oblicz |CA| = 4\sqrt{2} oraz |CB| = 2\sqrt{2}.
+  - 'Oblicz pole trójkąta prostokątnego: P = \frac{1}{2}\cdot 4\sqrt{2}\cdot 2\sqrt{2} = 8.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: C_x
+      answer:
+        kind: NUMERIC
+        value: 4.0
+    - name: pole
+      answer:
+        kind: NUMERIC
+        value: 8.0
+  checks:
+  - kind: evaluate
+    expr: 3 + 1
+    part: C_x
+  - kind: evaluate
+    expr: \frac{1}{2}\cdot 4\sqrt{2}\cdot 2\sqrt{2}
+    part: pole
+  stated_model:
+    variable: x
+    objective_latex: P = \frac{1}{2}\cdot\sqrt{x^2 + 16}\cdot\sqrt{\left(6 - x\right)^2 + 4}
+    domain_lo: '3'
+    goal: value
+    constraint_used: a_{CA}\cdot a_{CB} = -1 oraz x > 3
+  skills:
+  - parametryzacja punktu na osi Ox
+  - współczynnik kierunkowy z dwóch punktów
+  - warunek prostopadłości a_1 \cdot a_2 = -1
+  - rozwiązywanie równania kwadratowego i wybór rozwiązania
+  - obliczanie długości odcinków i pola trójkąta prostokątnego
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''x'': ''P = \\frac{1}{2}\\cdot\\sqrt{x^2
+      + 16}\\cdot\\sqrt{\\left(6 - x\\right)^2 + 4}'') — human review'
+- id: g-ch-t04
+  slot: CHALLENGE
+  ramp_index: 2
+  difficulty: 5
+  exercise_type: trójkąt prostokątny równoramienny w układzie współrzędnych, wzór prostej i obwód
+  statement: |-
+    W kartezjańskim układzie współrzędnych (x, y) dane są punkty A = (-1, 2) oraz B = (5, 4). Trójkąt ABC jest równoramienny, kąt przy wierzchołku B jest kątem prostym oraz |BA| = |BC|. Ponadto odległość wierzchołka C od początku układu współrzędnych O = (0, 0) jest nie większa niż 8.
+    a) Wyznacz równanie prostej BC w postaci kierunkowej oraz współrzędne wierzchołka C.
+    b) Oblicz obwód trójkąta ABC.
+    Zapisz obliczenia.
+  statement_latex: A = \left(-1,\ 2\right),\quad B = \left(5,\ 4\right),\quad BC \perp BA,\quad |BC| =
+    |BA|,\quad |OC| \le 8
+  solution: |-
+    a) Współczynnik kierunkowy prostej AB: a_{AB} = \frac{4 - 2}{5 - \left(-1\right)} = \frac{2}{6} = \frac{1}{3}.
+    Kąt przy wierzchołku B jest prosty, więc prosta BC jest prostopadła do AB: a_{BC} = -\frac{1}{\frac{1}{3}} = -3. Prosta BC przechodzi przez B = (5, 4): 4 = -3\cdot 5 + b, stąd b = 19, czyli BC:\ y = -3x + 19.
+
+    Punkt C leży na tej prostej, więc C = \left(t,\ -3t + 19\right).
+    Długość ramienia: |BA| = \sqrt{\left(5 + 1\right)^2 + \left(4 - 2\right)^2} = \sqrt{36 + 4} = \sqrt{40}.
+    Warunek |BC| = |BA| zapisujemy dla kwadratów:
+    \left(t - 5\right)^2 + \left(-3t + 19 - 4\right)^2 = 40, czyli \left(t - 5\right)^2 + 9\cdot\left(t - 5\right)^2 = 40, więc 10\cdot\left(t - 5\right)^2 = 40, czyli \left(t - 5\right)^2 = 4.
+    Stąd t = 5 - 2 = 3 albo t = 5 + 2 = 7, co daje kandydatów C_1 = (3, 10) oraz C_2 = (7, -2).
+
+    Sprawdzamy warunek |OC| \le 8:
+    |OC_1| = \sqrt{3^2 + 10^2} = \sqrt{109} > 8, bo 109 > 64 — punkt C_1 odrzucamy;
+    |OC_2| = \sqrt{7^2 + \left(-2\right)^2} = \sqrt{53} \le 8, bo 53 < 64 — warunek jest spełniony.
+    Zatem C = (7, -2).
+
+    b) |BA| = |BC| = \sqrt{40} = 2\sqrt{10}, a przeciwprostokątna
+    |AC| = \sqrt{\left(7 + 1\right)^2 + \left(-2 - 2\right)^2} = \sqrt{64 + 16} = \sqrt{80} = 4\sqrt{5}.
+    Obwód: 2\sqrt{10} + 2\sqrt{10} + 4\sqrt{5} = 4\sqrt{10} + 4\sqrt{5}.
+  solution_steps:
+  - Oblicz a_{AB} = \frac{4 - 2}{5 + 1} = \frac{1}{3}.
+  - 'Z warunku prostopadłości w wierzchołku B wyznacz a_{BC} = -3 i równanie prostej BC: y = -3x + 19.'
+  - Zapisz C = (t, -3t + 19) i oblicz |BA|^2 = 40.
+  - Z warunku |BC|^2 = 40 otrzymaj 10\cdot\left(t - 5\right)^2 = 40, czyli t = 3 lub t = 7.
+  - 'Sprawdź warunek |OC| \le 8: \sqrt{109} > 8 odrzuca C = (3, 10), \sqrt{53} < 8 dopuszcza C = (7, -2).'
+  - Oblicz |AC| = \sqrt{80} = 4\sqrt{5}.
+  - 'Zsumuj boki: obwód = 2\sqrt{10} + 2\sqrt{10} + 4\sqrt{5} = 4\sqrt{10} + 4\sqrt{5}.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: prosta_BC
+      answer:
+        kind: SYMBOLIC
+        latex: y = -3x + 19
+    - name: C_x
+      answer:
+        kind: NUMERIC
+        value: 7.0
+    - name: C_y
+      answer:
+        kind: NUMERIC
+        value: -2.0
+    - name: obwod
+      answer:
+        kind: NUMERIC
+        value: 21.59338255067268
+        tol: 1.0e-06
+  checks:
+  - kind: evaluate
+    expr: 5 + 2
+    var: t
+    part: C_x
+  - kind: evaluate
+    expr: -3\cdot 7 + 19
+    var: t
+    part: C_y
+  - kind: evaluate
+    expr: 2\cdot\sqrt{40} + \sqrt{80}
+    var: t
+    part: obwod
+  stated_model:
+    variable: t
+    objective_latex: L = 2\cdot\sqrt{40} + \sqrt{\left(t + 1\right)^2 + \left(-3t + 17\right)^2}
+    goal: value
+    constraint_used: C = (t, -3t + 19) leży na prostej BC prostopadłej do AB, |BC| = |BA| oraz \sqrt{t^2
+      + \left(-3t + 19\right)^2} \le 8
+  skills:
+  - współczynnik kierunkowy z dwóch punktów
+  - wyznaczanie prostej prostopadłej przez dany punkt
+  - parametryzacja punktu na prostej
+  - warunek równości długości odcinków
+  - sprawdzanie warunku dodatkowego (odległość od początku układu)
+  - obliczanie obwodu trójkąta
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''t'': ''L = 2\\cdot\\sqrt{40}
+      + \\sqrt{\\left(t + 1\\right)^2 + \\left(-3t + 17\\right)^2}'') — human review'

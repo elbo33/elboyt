@@ -1,0 +1,843 @@
+section: wyrazenia-wymierne
+name: 'Wyrażenia wymierne: dziedzina, mnożenie i dzielenie'
+scope: Domain of a rational expression; multiplying, dividing and simplifying rational expressions.
+requirements:
+- II.4
+counts:
+  total: 16
+  DETERMINISTIC: 14
+  NOT_MACHINE_CHECKABLE: 2
+exercises:
+- id: g-th-00
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: wyznaczanie dziedziny
+  statement: Dane jest wyrażenie \frac{x+5}{x^{2}-7\cdot x}. Wypisz wszystkie liczby rzeczywiste, które
+    nie należą do dziedziny tego wyrażenia.
+  statement_latex: \frac{x+5}{x^{2}-7\cdot x}
+  solution: |-
+    Na dziedzinę wpływa wyłącznie mianownik. Rozkładamy go na czynniki: x^{2}-7\cdot x = x\cdot\left(x-7\right).
+    Warunek dziedziny: x\cdot\left(x-7\right)\neq 0, czyli x\neq 0 i x\neq 7.
+    Zatem D = \mathbb{R}\setminus\{0,\ 7\}, a liczbami wykluczonymi są 0 oraz 7.
+    Uwaga: licznik x+5 nie nakłada żadnych warunków.
+  solution_steps:
+  - Zauważ, że warunek dotyczy tylko mianownika.
+  - 'Rozłóż mianownik: x^{2}-7\cdot x = x\cdot\left(x-7\right).'
+  - 'Przyrównaj każdy czynnik do zera: x = 0 lub x-7 = 0, czyli x = 7.'
+  - 'Zapisz dziedzinę: D = \mathbb{R}\setminus\{0,\ 7\}.'
+  answer:
+    kind: SET
+    members:
+    - '0'
+    - '7'
+  checks:
+  - kind: solve_equation
+    expr: x^{2}-7\cdot x = 0
+  skills:
+  - rozkład mianownika na czynniki
+  - wyznaczanie dziedziny wyrażenia wymiernego
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 2 members matched'
+- id: g-th-01
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: skracanie ułamka algebraicznego
+  statement: Dane jest wyrażenie \frac{3\cdot x+12}{x^{2}-16}. Wypisz wszystkie liczby rzeczywiste, które
+    nie należą do dziedziny tego wyrażenia, a następnie skróć ułamek do najprostszej postaci.
+  statement_latex: \frac{3\cdot x+12}{x^{2}-16}
+  solution: |-
+    1) Dziedzina: mianownik x^{2}-16 = \left(x-4\right)\cdot\left(x+4\right), więc x\neq 4 i x\neq -4. Liczby wykluczone: -4 oraz 4.
+    2) Rozkład licznika: 3\cdot x+12 = 3\cdot\left(x+4\right).
+    3) Skracamy wspólny czynnik \left(x+4\right), który na mocy założenia jest różny od zera:
+    \frac{3\cdot\left(x+4\right)}{\left(x-4\right)\cdot\left(x+4\right)} = \frac{3}{x-4}.
+    Odpowiedź: wyrażenie równa się \frac{3}{x-4} dla x\in\mathbb{R}\setminus\{-4,\ 4\}.
+  solution_steps:
+  - 'Rozłóż mianownik: x^{2}-16 = \left(x-4\right)\cdot\left(x+4\right).'
+  - 'Zapisz warunki dziedziny: x\neq 4 i x\neq -4.'
+  - 'Wyłącz wspólny czynnik w liczniku: 3\cdot x+12 = 3\cdot\left(x+4\right).'
+  - Skróć czynnik \left(x+4\right) i zapisz wynik \frac{3}{x-4}.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: liczby wykluczone z dziedziny
+      answer:
+        kind: SET
+        members:
+        - '-4'
+        - '4'
+    - name: postać uproszczona
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{3}{x-4}
+  checks:
+  - kind: solve_equation
+    expr: x^{2}-16 = 0
+    part: liczby wykluczone z dziedziny
+  - kind: simplify
+    expr: \frac{3\cdot x+12}{x^{2}-16}
+    part: postać uproszczona
+  skills:
+  - rozkład na czynniki
+  - skracanie ułamka algebraicznego
+  - wyznaczanie dziedziny
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [liczby wykluczone z dziedziny] SymPy solved it fresh: 2 members
+      matched ; [postać uproszczona] SymPy solved it fresh: ''\\frac{3}{x-4}'' vs ''3/(x - 4)'''
+- id: g-th-02
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: mnożenie wyrażeń wymiernych
+  statement: 'Dla każdej liczby rzeczywistej x różnej od 0 oraz różnej od -3 wykonaj mnożenie i podaj
+    wynik w najprostszej postaci: \frac{x^{2}-9}{5\cdot x}\cdot\frac{10}{x+3}.'
+  statement_latex: \frac{x^{2}-9}{5\cdot x}\cdot\frac{10}{x+3}
+  solution: |-
+    1) Rozkładamy licznik pierwszego ułamka: x^{2}-9 = \left(x-3\right)\cdot\left(x+3\right).
+    2) Mnożymy licznik przez licznik i mianownik przez mianownik, nie wymnażając nawiasów:
+    \frac{\left(x-3\right)\cdot\left(x+3\right)\cdot 10}{5\cdot x\cdot\left(x+3\right)}.
+    3) Skracamy czynnik \left(x+3\right) oraz liczbę 5:
+    = \frac{2\cdot\left(x-3\right)}{x}.
+    Odpowiedź: \frac{2\cdot\left(x-3\right)}{x}, czyli \frac{2\cdot x-6}{x}.
+  solution_steps:
+  - Rozłóż x^{2}-9 = \left(x-3\right)\cdot\left(x+3\right).
+  - 'Zapisz jeden ułamek: iloczyn liczników przez iloczyn mianowników.'
+  - Skróć \left(x+3\right) oraz czynnik liczbowy 5 z 10.
+  - 'Zapisz wynik: \frac{2\cdot\left(x-3\right)}{x}.'
+  answer:
+    kind: SYMBOLIC
+    latex: \frac{2\cdot\left(x-3\right)}{x}
+  checks:
+  - kind: simplify
+    expr: \frac{x^{2}-9}{5\cdot x}\cdot\frac{10}{x+3}
+  skills:
+  - mnożenie wyrażeń wymiernych
+  - różnica kwadratów
+  - skracanie czynników
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: ''\\frac{2\\cdot\\left(x-3\\right)}{x}'' vs ''2 - 6/x'''
+- id: g-ex-03
+  slot: EXERCISE
+  ramp_index: 1
+  difficulty: 2
+  exercise_type: dziedzina i wartość wyrażenia
+  statement: Dane jest wyrażenie W\left(x\right)=\frac{2\cdot x-1}{x^{2}-5\cdot x+6}. Wypisz wszystkie
+    liczby rzeczywiste, które nie należą do dziedziny tego wyrażenia, oraz oblicz W\left(1\right).
+  statement_latex: W\left(x\right)=\frac{2\cdot x-1}{x^{2}-5\cdot x+6}
+  solution: |-
+    1) Rozkładamy mianownik: dla x^{2}-5\cdot x+6 mamy \Delta = 25-24 = 1, \sqrt{\Delta}=1, x_{1}=\frac{5-1}{2}=2, x_{2}=\frac{5+1}{2}=3, więc x^{2}-5\cdot x+6 = \left(x-2\right)\cdot\left(x-3\right).
+    2) Warunek dziedziny: \left(x-2\right)\cdot\left(x-3\right)\neq 0, czyli x\neq 2 i x\neq 3. Zatem D = \mathbb{R}\setminus\{2,\ 3\}.
+    3) Liczba 1 należy do dziedziny, więc możemy podstawić:
+    W\left(1\right)=\frac{2\cdot 1-1}{1^{2}-5\cdot 1+6}=\frac{1}{2}.
+    Odpowiedź: liczby wykluczone to 2 i 3, W\left(1\right)=\frac{1}{2}.
+  solution_steps:
+  - 'Oblicz \Delta dla mianownika i wyznacz jego pierwiastki: x=2, x=3.'
+  - 'Zapisz dziedzinę: D = \mathbb{R}\setminus\{2,\ 3\}.'
+  - Sprawdź, że 1 należy do dziedziny.
+  - Podstaw x=1 i oblicz W\left(1\right)=\frac{1}{2}.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: liczby wykluczone z dziedziny
+      answer:
+        kind: SET
+        members:
+        - '2'
+        - '3'
+    - name: W(1)
+      answer:
+        kind: NUMERIC
+        value: 0.5
+  checks:
+  - kind: solve_equation
+    expr: x^{2}-5\cdot x+6 = 0
+    part: liczby wykluczone z dziedziny
+  - kind: evaluate
+    expr: \frac{2\cdot 1-1}{1^{2}-5\cdot 1+6}
+    part: W(1)
+  skills:
+  - rozkład trójmianu kwadratowego
+  - wyznaczanie dziedziny
+  - obliczanie wartości wyrażenia
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [liczby wykluczone z dziedziny] SymPy solved it fresh: 2 members
+      matched ; [W(1)] SymPy solved it fresh: 0.5 vs 0.5 (tol 1e-09)'
+- id: g-ex-04
+  slot: EXERCISE
+  ramp_index: 2
+  difficulty: 3
+  exercise_type: mnożenie wyrażeń wymiernych z dziedziną
+  statement: Dane jest wyrażenie \frac{x^{2}-6\cdot x+9}{2\cdot x+8}\cdot\frac{x^{2}-16}{3\cdot x-9}.
+    Wypisz wszystkie liczby rzeczywiste, które nie należą do dziedziny tego wyrażenia, a następnie wykonaj
+    mnożenie i podaj wynik w najprostszej postaci.
+  statement_latex: \frac{x^{2}-6\cdot x+9}{2\cdot x+8}\cdot\frac{x^{2}-16}{3\cdot x-9}
+  solution: |-
+    1) Rozkłady na czynniki: x^{2}-6\cdot x+9 = \left(x-3\right)^{2}; 2\cdot x+8 = 2\cdot\left(x+4\right); x^{2}-16 = \left(x-4\right)\cdot\left(x+4\right); 3\cdot x-9 = 3\cdot\left(x-3\right).
+    2) Dziedzina: 2\cdot\left(x+4\right)\neq 0 \Rightarrow x\neq -4 oraz 3\cdot\left(x-3\right)\neq 0 \Rightarrow x\neq 3. Zatem D = \mathbb{R}\setminus\{-4,\ 3\}, liczby wykluczone: -4 i 3.
+    3) Zapisujemy jeden ułamek (bez wymnażania nawiasów):
+    \frac{\left(x-3\right)\cdot\left(x-3\right)\cdot\left(x-4\right)\cdot\left(x+4\right)}{2\cdot\left(x+4\right)\cdot 3\cdot\left(x-3\right)}.
+    4) Skracamy \left(x+4\right) oraz jeden czynnik \left(x-3\right):
+    = \frac{\left(x-3\right)\cdot\left(x-4\right)}{6}.
+    Odpowiedź: \frac{\left(x-3\right)\cdot\left(x-4\right)}{6} dla x\in\mathbb{R}\setminus\{-4,\ 3\}.
+  solution_steps:
+  - Rozłóż na czynniki wszystkie liczniki i mianowniki.
+  - 'Z warunków 2\cdot\left(x+4\right)\neq 0 i 3\cdot\left(x-3\right)\neq 0 odczytaj liczby wykluczone:
+    -4 i 3.'
+  - Zapisz iloczyn jako jeden ułamek, nie wymnażając nawiasów.
+  - Skróć wspólne czynniki \left(x+4\right) i \left(x-3\right).
+  - Zapisz wynik \frac{\left(x-3\right)\cdot\left(x-4\right)}{6}.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: liczby wykluczone z dziedziny
+      answer:
+        kind: SET
+        members:
+        - '-4'
+        - '3'
+    - name: postać uproszczona
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{\left(x-3\right)\cdot\left(x-4\right)}{6}
+  checks:
+  - kind: solve_equation
+    expr: \left(2\cdot x+8\right)\cdot\left(3\cdot x-9\right) = 0
+    part: liczby wykluczone z dziedziny
+  - kind: simplify
+    expr: \frac{x^{2}-6\cdot x+9}{2\cdot x+8}\cdot\frac{x^{2}-16}{3\cdot x-9}
+    part: postać uproszczona
+  skills:
+  - wzory skróconego mnożenia
+  - wyłączanie wspólnego czynnika
+  - mnożenie i skracanie wyrażeń wymiernych
+  - wyznaczanie dziedziny
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [liczby wykluczone z dziedziny] SymPy solved it fresh: 2 members
+      matched ; [postać uproszczona] SymPy solved it fresh: ''\\frac{\\left(x-3\\right)\\cdot\\left(x-4\\right)}{6}''
+      vs ''x**2/6 - 7*x/6 + 2'''
+- id: g-ex-05
+  slot: EXERCISE
+  ramp_index: 3
+  difficulty: 4
+  exercise_type: dzielenie wyrażeń wymiernych, dziedzina i wartość
+  statement: Dane jest wyrażenie W\left(x\right)=\dfrac{\frac{x^{3}-9\cdot x}{x^{2}-2\cdot x-8}}{\frac{x^{2}+3\cdot
+    x}{3\cdot x-12}}. Wypisz wszystkie liczby rzeczywiste, które nie należą do dziedziny tego wyrażenia,
+    doprowadź je do najprostszej postaci i oblicz W\left(2\right).
+  statement_latex: W\left(x\right)=\dfrac{\frac{x^{3}-9\cdot x}{x^{2}-2\cdot x-8}}{\frac{x^{2}+3\cdot
+    x}{3\cdot x-12}}
+  solution: |-
+    1) Rozkłady na czynniki:
+     x^{3}-9\cdot x = x\cdot\left(x-3\right)\cdot\left(x+3\right),
+     x^{2}-2\cdot x-8: \Delta = 4+32 = 36, \sqrt{\Delta}=6, x_{1}=-2, x_{2}=4, więc x^{2}-2\cdot x-8 = \left(x+2\right)\cdot\left(x-4\right),
+     x^{2}+3\cdot x = x\cdot\left(x+3\right),
+     3\cdot x-12 = 3\cdot\left(x-4\right).
+    2) Założenia:
+     \left(x+2\right)\cdot\left(x-4\right)\neq 0 \Rightarrow x\neq -2 i x\neq 4,
+     3\cdot\left(x-4\right)\neq 0 \Rightarrow x\neq 4,
+     dzielnik różny od zera: x\cdot\left(x+3\right)\neq 0 \Rightarrow x\neq 0 i x\neq -3.
+     Zatem D = \mathbb{R}\setminus\{-3,\ -2,\ 0,\ 4\}.
+    3) Zamieniamy dzielenie na mnożenie przez odwrotność dzielnika:
+    W\left(x\right)=\frac{x\cdot\left(x-3\right)\cdot\left(x+3\right)}{\left(x+2\right)\cdot\left(x-4\right)}\cdot\frac{3\cdot\left(x-4\right)}{x\cdot\left(x+3\right)}.
+    4) Skracamy x, \left(x+3\right) oraz \left(x-4\right):
+    W\left(x\right)=\frac{3\cdot\left(x-3\right)}{x+2}.
+    5) Liczba 2 należy do dziedziny, więc W\left(2\right)=\frac{3\cdot\left(2-3\right)}{2+2}=-\frac{3}{4}.
+    Odpowiedź: liczby wykluczone: -3, -2, 0, 4; W\left(x\right)=\frac{3\cdot\left(x-3\right)}{x+2}; W\left(2\right)=-\frac{3}{4}.
+  solution_steps:
+  - Rozłóż na czynniki wszystkie cztery wielomiany.
+  - 'Zapisz trzy grupy warunków: mianownik dzielnej, mianownik dzielnika i licznik dzielnika różne od
+    zera.'
+  - 'Odczytaj liczby wykluczone: -3, -2, 0, 4.'
+  - Zamień dzielenie na mnożenie przez odwrotność dolnego ułamka.
+  - Skróć czynniki x, \left(x+3\right), \left(x-4\right) i zapisz W\left(x\right)=\frac{3\cdot\left(x-3\right)}{x+2}.
+  - Sprawdź, że 2\in D, i oblicz W\left(2\right)=-\frac{3}{4}.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: liczby wykluczone z dziedziny
+      answer:
+        kind: SET
+        members:
+        - '-3'
+        - '-2'
+        - '0'
+        - '4'
+    - name: postać uproszczona
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{3\cdot\left(x-3\right)}{x+2}
+    - name: W(2)
+      answer:
+        kind: NUMERIC
+        value: -0.75
+  checks:
+  - kind: solve_equation
+    expr: \left(x^{2}-2\cdot x-8\right)\cdot\left(3\cdot x-12\right)\cdot\left(x^{2}+3\cdot x\right) =
+      0
+    part: liczby wykluczone z dziedziny
+  - kind: simplify
+    expr: \frac{\frac{x^{3}-9\cdot x}{x^{2}-2\cdot x-8}}{\frac{x^{2}+3\cdot x}{3\cdot x-12}}
+    part: postać uproszczona
+  - kind: evaluate
+    expr: \frac{3\cdot\left(2-3\right)}{2+2}
+    part: W(2)
+  skills:
+  - rozkład wielomianu na czynniki
+  - dzielenie wyrażeń wymiernych
+  - warunek dzielnik ≠ 0
+  - obliczanie wartości wyrażenia
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [liczby wykluczone z dziedziny] SymPy solved it fresh: 4 members
+      matched ; [postać uproszczona] SymPy solved it fresh: ''\\frac{3\\cdot\\left(x-3\\right)}{x+2}''
+      vs ''3*(x - 3)/(x + 2)'' ; [W(2)] SymPy solved it fresh: -0.75 vs -0.75 (tol 1e-09)'
+- id: g-ex-t00
+  slot: EXERCISE
+  ramp_index: 6
+  difficulty: 3
+  exercise_type: dzielenie wyrażeń wymiernych z dziedziną i wartością
+  statement: 'Dane jest wyrażenie W\left(x\right) = \frac{x^{2}-25}{x^{2}+2\cdot x} : \frac{2\cdot x-10}{x^{2}-4}.
+    Wyznacz dziedzinę tego wyrażenia, zapisz je w najprostszej postaci i oblicz W\left(3\right).'
+  statement_latex: 'W\left(x\right) = \frac{x^{2}-25}{x^{2}+2\cdot x} : \frac{2\cdot x-10}{x^{2}-4}'
+  solution: |-
+    1) Rozkładamy na czynniki wszystkie liczniki i mianowniki:
+    x^{2}-25=\left(x-5\right)\left(x+5\right),\quad x^{2}+2x=x\left(x+2\right),\quad 2x-10=2\left(x-5\right),\quad x^{2}-4=\left(x-2\right)\left(x+2\right).
+    2) Założenia (dziedzina):
+     • mianownik dzielnej: x\left(x+2\right)\neq 0 \Rightarrow x\neq 0 i x\neq -2,
+     • mianownik dzielnika: \left(x-2\right)\left(x+2\right)\neq 0 \Rightarrow x\neq 2 i x\neq -2,
+     • dzielnik różny od zera: 2\left(x-5\right)\neq 0 \Rightarrow x\neq 5.
+    Zatem D = \mathbb{R}\setminus\{-2,\,0,\,2,\,5\}.
+    3) Dzielenie zamieniamy na mnożenie przez odwrotność dzielnika:
+    W(x)=\frac{\left(x-5\right)\left(x+5\right)}{x\left(x+2\right)}\cdot\frac{\left(x-2\right)\left(x+2\right)}{2\left(x-5\right)}.
+    4) Nie wymnażamy nawiasów — skracamy czynniki \left(x-5\right) oraz \left(x+2\right) (są niezerowe na mocy założeń):
+    W(x)=\frac{\left(x+5\right)\left(x-2\right)}{2x}.
+    5) Liczba 3 należy do dziedziny, więc
+    W(3)=\frac{\left(3+5\right)\left(3-2\right)}{2\cdot 3}=\frac{8}{6}=\frac{4}{3}.
+    Odpowiedź: D=\mathbb{R}\setminus\{-2,0,2,5\}, W(x)=\frac{\left(x+5\right)\left(x-2\right)}{2x}, W(3)=\frac{4}{3}.
+  solution_steps:
+  - 'Rozłóż na czynniki: x^{2}-25=(x-5)(x+5), x^{2}+2x=x(x+2), 2x-10=2(x-5), x^{2}-4=(x-2)(x+2).'
+  - 'Zapisz założenia: x(x+2)\neq 0, (x-2)(x+2)\neq 0 oraz 2(x-5)\neq 0 (dzielnik \neq 0).'
+  - 'Zapisz dziedzinę: D=\mathbb{R}\setminus\{-2,0,2,5\}.'
+  - Zamień dzielenie na mnożenie przez odwrotność dzielnika.
+  - 'Skróć czynniki (x-5) i (x+2); wynik: \frac{(x+5)(x-2)}{2x}.'
+  - 'Sprawdź, że 3\in D i podstaw: W(3)=\frac{8\cdot 1}{6}=\frac{4}{3}.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: liczby_wykluczone_z_dziedziny
+      answer:
+        kind: SET
+        members:
+        - '-2'
+        - '0'
+        - '2'
+        - '5'
+    - name: postac_uproszczona
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{\left(x+5\right)\cdot\left(x-2\right)}{2\cdot x}
+    - name: W_3
+      answer:
+        kind: NUMERIC
+        value: 1.3333333333333333
+  checks:
+  - kind: solve_equation
+    expr: x\cdot\left(x+2\right)\cdot\left(x-2\right)\cdot\left(x-5\right)=0
+    part: liczby_wykluczone_z_dziedziny
+  - kind: simplify
+    expr: \frac{\frac{x^{2}-25}{x^{2}+2\cdot x}}{\frac{2\cdot x-10}{x^{2}-4}}
+    part: postac_uproszczona
+  - kind: evaluate
+    expr: \frac{\frac{3^{2}-25}{3^{2}+2\cdot 3}}{\frac{2\cdot 3-10}{3^{2}-4}}
+    part: W_3
+  skills:
+  - rozkład wielomianu na czynniki
+  - wyznaczanie dziedziny wyrażenia wymiernego
+  - warunek dzielnik ≠ 0
+  - dzielenie wyrażeń wymiernych
+  - obliczanie wartości wyrażenia
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [liczby_wykluczone_z_dziedziny] SymPy solved it fresh: 4 members
+      matched ; [postac_uproszczona] SymPy solved it fresh: ''\\frac{\\left(x+5\\right)\\cdot\\left(x-2\\right)}{2\\cdot
+      x}'' vs ''x/2 + 3/2 - 5/x'' ; [W_3] SymPy solved it fresh: 1.3333333333333333 vs 1.3333333333333333
+      (tol 1e-09)'
+- id: g-ex-t01
+  slot: EXERCISE
+  ramp_index: 7
+  difficulty: 4
+  exercise_type: 'ułamek piętrowy: dziedzina, uproszczenie, równanie'
+  statement: Dane jest wyrażenie W\left(x\right) = \dfrac{\frac{9-x^{2}}{x^{2}-6\cdot x+9}}{\frac{x^{2}+3\cdot
+    x}{2\cdot x-6}}. Wyznacz dziedzinę tego wyrażenia, doprowadź je do najprostszej postaci, a następnie
+    wyznacz wszystkie liczby x z dziedziny, dla których W\left(x\right) = -1.
+  statement_latex: W\left(x\right) = \dfrac{\frac{9-x^{2}}{x^{2}-6\cdot x+9}}{\frac{x^{2}+3\cdot x}{2\cdot
+    x-6}}
+  solution: |-
+    1) Rozkłady na czynniki:
+    9-x^{2}=\left(3-x\right)\left(3+x\right)=-\left(x-3\right)\left(x+3\right),\quad x^{2}-6x+9=\left(x-3\right)^{2},\quad x^{2}+3x=x\left(x+3\right),\quad 2x-6=2\left(x-3\right).
+    2) Ułamek piętrowy to dzielenie: \frac{9-x^{2}}{x^{2}-6x+9} : \frac{x^{2}+3x}{2x-6}. Założenia:
+     • \left(x-3\right)^{2}\neq 0 \Rightarrow x\neq 3,
+     • 2\left(x-3\right)\neq 0 \Rightarrow x\neq 3,
+     • licznik dzielnika \neq 0: x\left(x+3\right)\neq 0 \Rightarrow x\neq 0 i x\neq -3.
+    Zatem D=\mathbb{R}\setminus\{-3,\,0,\,3\}.
+    3) Mnożymy przez odwrotność dzielnika:
+    W(x)=\frac{-\left(x-3\right)\left(x+3\right)}{\left(x-3\right)^{2}}\cdot\frac{2\left(x-3\right)}{x\left(x+3\right)}=\frac{-2\left(x-3\right)^{2}\left(x+3\right)}{\left(x-3\right)^{2}\cdot x\left(x+3\right)}.
+    4) Skracamy \left(x-3\right)^{2} oraz \left(x+3\right):
+    W(x)=-\frac{2}{x}.
+    5) Równanie: -\frac{2}{x}=-1 \Rightarrow \frac{2}{x}=1 \Rightarrow x=2. Liczba 2 należy do dziedziny, więc jest rozwiązaniem.
+    Odpowiedź: D=\mathbb{R}\setminus\{-3,0,3\}, W(x)=-\frac{2}{x}, W(x)=-1 dla x=2.
+  solution_steps:
+  - Zapisz ułamek piętrowy jako dzielenie górnego ułamka przez dolny.
+  - 'Rozłóż na czynniki: 9-x^{2}=-(x-3)(x+3), x^{2}-6x+9=(x-3)^{2}, x^{2}+3x=x(x+3), 2x-6=2(x-3).'
+  - 'Zapisz założenia: (x-3)^{2}\neq 0, 2(x-3)\neq 0, x(x+3)\neq 0; stąd D=\mathbb{R}\setminus\{-3,0,3\}.'
+  - Zamień dzielenie na mnożenie przez odwrotność dolnego ułamka.
+  - 'Skróć (x-3)^{2} i (x+3): W(x)=-\frac{2}{x}.'
+  - Rozwiąż -\frac{2}{x}=-1, otrzymaj x=2 i sprawdź, że 2\in D.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: liczby_wykluczone_z_dziedziny
+      answer:
+        kind: SET
+        members:
+        - '-3'
+        - '0'
+        - '3'
+    - name: postac_uproszczona
+      answer:
+        kind: SYMBOLIC
+        latex: -\frac{2}{x}
+    - name: rozwiazanie_rownania
+      answer:
+        kind: SET
+        members:
+        - '2'
+  checks:
+  - kind: solve_equation
+    expr: x\cdot\left(x+3\right)\cdot\left(x-3\right)=0
+    part: liczby_wykluczone_z_dziedziny
+  - kind: simplify
+    expr: \frac{\frac{9-x^{2}}{x^{2}-6\cdot x+9}}{\frac{x^{2}+3\cdot x}{2\cdot x-6}}
+    part: postac_uproszczona
+  - kind: solve_equation
+    expr: -\frac{2}{x}=-1
+    part: rozwiazanie_rownania
+  skills:
+  - ułamek piętrowy jako dzielenie
+  - zmiana znaku czynnika a-b=-(b-a)
+  - wyznaczanie dziedziny
+  - skracanie ułamka algebraicznego
+  - rozwiązywanie prostego równania wymiernego
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [liczby_wykluczone_z_dziedziny] SymPy solved it fresh: 3 members
+      matched ; [postac_uproszczona] SymPy solved it fresh: ''-\\frac{2}{x}'' vs ''-2/x'' ; [rozwiazanie_rownania]
+      SymPy solved it fresh: 1 members matched'
+- id: g-cm-06
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: wskazanie i poprawienie błędu
+  statement: 'Uczeń upraszczał wyrażenie \frac{x^{2}+6\cdot x}{x^{2}+2\cdot x} (dla x\neq 0 i x\neq -2)
+    i zapisał: „skreślam x^{2} w liczniku i w mianowniku, zostaje \frac{6\cdot x}{2\cdot x}=3”. Wyjaśnij,
+    na czym polega błąd, i podaj poprawną najprostszą postać tego wyrażenia.'
+  statement_latex: \frac{x^{2}+6\cdot x}{x^{2}+2\cdot x}
+  solution: |-
+    Błędne rozumowanie: uczeń „skreśla” x^{2}, traktując je jak wspólny czynnik, i otrzymuje \frac{6\cdot x}{2\cdot x}=3.
+    Dlaczego to źle: x^{2} jest w liczniku i w mianowniku SKŁADNIKIEM sumy, a nie czynnikiem iloczynu. Skracać wolno wyłącznie wspólne czynniki. Kontrola liczbowa dla x=1: \frac{1+6}{1+2}=\frac{7}{3}\neq 3.
+    Poprawne rozwiązanie: najpierw rozkładamy na czynniki
+    licznik: x^{2}+6\cdot x = x\cdot\left(x+6\right),
+    mianownik: x^{2}+2\cdot x = x\cdot\left(x+2\right).
+    Teraz x jest wspólnym CZYNNIKIEM i (na mocy założenia x\neq 0) wolno go skrócić:
+    \frac{x\cdot\left(x+6\right)}{x\cdot\left(x+2\right)}=\frac{x+6}{x+2}.
+    Odpowiedź: \frac{x+6}{x+2}.
+  solution_steps:
+  - 'Nazwij błąd: skreślanie składników sumy zamiast czynników iloczynu.'
+  - 'Pokaż kontrprzykład liczbowy: dla x=1 wyrażenie ma wartość \frac{7}{3}, a nie 3.'
+  - 'Rozłóż licznik i mianownik na iloczyny: x\cdot\left(x+6\right) i x\cdot\left(x+2\right).'
+  - Skróć wspólny czynnik x i zapisz wynik \frac{x+6}{x+2}.
+  answer:
+    kind: SYMBOLIC
+    latex: \frac{x+6}{x+2}
+  checks:
+  - kind: simplify
+    expr: \frac{x^{2}+6\cdot x}{x^{2}+2\cdot x}
+  skills:
+  - skracanie tylko czynników
+  - wyłączanie wspólnego czynnika
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: ''\\frac{x+6}{x+2}'' vs ''(x + 6)/(x + 2)'''
+- id: g-cm-07
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: wskazanie i poprawienie błędu
+  statement: 'Uczeń wyznaczał dziedzinę wyrażenia \dfrac{\frac{x^{2}-4}{x+5}}{\frac{x-3}{x+1}} i napisał:
+    „w mianownikach stoją x+5 oraz x+1, więc D = \mathbb{R}\setminus\{-5,\ -1\}”. Wyjaśnij, jakiego warunku
+    uczeń nie uwzględnił, i wypisz wszystkie liczby rzeczywiste, które nie należą do dziedziny tego wyrażenia.'
+  statement_latex: \dfrac{\frac{x^{2}-4}{x+5}}{\frac{x-3}{x+1}}
+  solution: |-
+    Błędne rozumowanie: uczeń zapisał tylko x+5\neq 0 i x+1\neq 0, czyli x\neq -5 i x\neq -1, i podał D = \mathbb{R}\setminus\{-5,\ -1\}.
+    Dlaczego to źle: całe wyrażenie jest dzieleniem \frac{x^{2}-4}{x+5} przez \frac{x-3}{x+1}, a dzielnik nie może być równy zeru. Ułamek \frac{x-3}{x+1} jest zerem dokładnie wtedy, gdy x-3=0, czyli dla x=3. Widać to też po zamianie na mnożenie przez odwrotność: czynnik \left(x-3\right) trafia wtedy do mianownika.
+    Poprawne założenia: x+5\neq 0, x+1\neq 0 oraz x-3\neq 0, czyli x\neq -5, x\neq -1, x\neq 3.
+    Odpowiedź: D = \mathbb{R}\setminus\{-5,\ -1,\ 3\}; liczby wykluczone to -5, -1 oraz 3.
+  solution_steps:
+  - 'Wypisz mianowniki obu pięter: x+5 i x+1, stąd x\neq -5 i x\neq -1.'
+  - Zauważ, że wyrażenie jest dzieleniem, więc dzielnik \frac{x-3}{x+1} musi być różny od zera.
+  - Z warunku x-3\neq 0 otrzymaj x\neq 3.
+  - 'Zapisz pełną dziedzinę: D = \mathbb{R}\setminus\{-5,\ -1,\ 3\}.'
+  answer:
+    kind: SET
+    members:
+    - '-5'
+    - '-1'
+    - '3'
+  checks:
+  - kind: solve_equation
+    expr: \left(x+5\right)\cdot\left(x+1\right)\cdot\left(x-3\right) = 0
+  skills:
+  - wyznaczanie dziedziny przy dzieleniu
+  - warunek dzielnik ≠ 0
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 3 members matched'
+- id: g-cm-08
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: wskazanie i poprawienie błędu
+  statement: 'Uczeń upraszczał wyrażenie \frac{x^{2}-5\cdot x}{x^{2}-25} i zapisał: „po skróceniu otrzymuję
+    \frac{x}{x+5}, więc dziedziną jest \mathbb{R}\setminus\{-5\}”. Wyjaśnij, na czym polega błąd, wypisz
+    wszystkie liczby rzeczywiste, które nie należą do dziedziny wyrażenia wyjściowego, i podaj jego najprostszą
+    postać.'
+  statement_latex: \frac{x^{2}-5\cdot x}{x^{2}-25}
+  solution: |-
+    Błędne rozumowanie: uczeń najpierw skrócił ułamek, a dopiero potem wyznaczył dziedzinę z postaci uproszczonej \frac{x}{x+5} i podał D = \mathbb{R}\setminus\{-5\}.
+    Dlaczego to źle: dziedzinę wyznacza się ZAWSZE dla postaci wyjściowej, przed skracaniem. Dla x=5 wyjściowy mianownik x^{2}-25 jest równy 0, więc wyrażenie nie ma wtedy sensu, choć w postaci uproszczonej można podstawić 5.
+    Poprawne rozwiązanie:
+    1) Mianownik: x^{2}-25 = \left(x-5\right)\cdot\left(x+5\right)\neq 0, czyli x\neq 5 i x\neq -5. Zatem D = \mathbb{R}\setminus\{-5,\ 5\}.
+    2) Licznik: x^{2}-5\cdot x = x\cdot\left(x-5\right).
+    3) Skracamy czynnik \left(x-5\right):
+    \frac{x\cdot\left(x-5\right)}{\left(x-5\right)\cdot\left(x+5\right)}=\frac{x}{x+5}.
+    Odpowiedź: liczby wykluczone: -5 i 5; wyrażenie równa się \frac{x}{x+5} dla x\in\mathbb{R}\setminus\{-5,\ 5\}.
+  solution_steps:
+  - 'Nazwij błąd: dziedzina została wyznaczona po skróceniu, a nie dla postaci wyjściowej.'
+  - Rozłóż mianownik x^{2}-25 = \left(x-5\right)\cdot\left(x+5\right) i zapisz warunki x\neq 5, x\neq
+    -5.
+  - 'Rozłóż licznik: x^{2}-5\cdot x = x\cdot\left(x-5\right).'
+  - Skróć \left(x-5\right) i zapisz wynik \frac{x}{x+5} wraz z dziedziną D = \mathbb{R}\setminus\{-5,\
+    5\}.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: liczby wykluczone z dziedziny
+      answer:
+        kind: SET
+        members:
+        - '-5'
+        - '5'
+    - name: postać uproszczona
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{x}{x+5}
+  checks:
+  - kind: solve_equation
+    expr: x^{2}-25 = 0
+    part: liczby wykluczone z dziedziny
+  - kind: simplify
+    expr: \frac{x^{2}-5\cdot x}{x^{2}-25}
+    part: postać uproszczona
+  skills:
+  - wyznaczanie dziedziny przed skracaniem
+  - skracanie ułamka algebraicznego
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [liczby wykluczone z dziedziny] SymPy solved it fresh: 2 members
+      matched ; [postać uproszczona] SymPy solved it fresh: ''\\frac{x}{x+5}'' vs ''x/(x + 5)'''
+- id: g-cm-09
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: wskazanie i poprawienie błędu
+  statement: 'Uczeń wykonywał dzielenie \dfrac{\frac{x+2}{x-1}}{\frac{x+2}{2\cdot x-2}} (dla x\neq 1 i
+    x\neq -2) i zapisał: „odwracam pierwszy ułamek, więc mam \frac{x-1}{x+2}\cdot\frac{x+2}{2\cdot x-2}=\frac{1}{2}”.
+    Wyjaśnij, na czym polega błąd, i podaj poprawny wynik tego dzielenia.'
+  statement_latex: \dfrac{\frac{x+2}{x-1}}{\frac{x+2}{2\cdot x-2}}
+  solution: |-
+    Błędne rozumowanie: uczeń odwrócił DZIELNĄ (pierwszy ułamek) i policzył \frac{x-1}{x+2}\cdot\frac{x+2}{2\cdot\left(x-1\right)}=\frac{1}{2}.
+    Dlaczego to źle: dzielenie zamieniamy na mnożenie przez odwrotność DZIELNIKA, czyli drugiego ułamka. Sprawdzenie reguły na liczbach: \frac{1}{2}:\frac{1}{4}=\frac{1}{2}\cdot 4 = 2, a nie \frac{1}{8}.
+    Poprawne rozwiązanie:
+    \frac{x+2}{x-1}\cdot\frac{2\cdot x-2}{x+2}=\frac{x+2}{x-1}\cdot\frac{2\cdot\left(x-1\right)}{x+2}.
+    Skracamy \left(x+2\right) oraz \left(x-1\right) i otrzymujemy 2.
+    Sprawdzenie dla x=3: dzielna \frac{5}{2}, dzielnik \frac{5}{4}, iloraz \frac{5}{2}\cdot\frac{4}{5}=2. Zgadza się.
+    Odpowiedź: wynik dzielenia jest równy 2.
+  solution_steps:
+  - 'Nazwij błąd: odwrócono dzielną zamiast dzielnika.'
+  - 'Zapisz poprawnie: \frac{x+2}{x-1}\cdot\frac{2\cdot x-2}{x+2}.'
+  - Rozłóż 2\cdot x-2 = 2\cdot\left(x-1\right).
+  - Skróć \left(x+2\right) i \left(x-1\right); wynik to 2.
+  answer:
+    kind: NUMERIC
+    value: 2.0
+  checks:
+  - kind: simplify
+    expr: \frac{\frac{x+2}{x-1}}{\frac{x+2}{2\cdot x-2}}
+  skills:
+  - dzielenie przez odwrotność dzielnika
+  - skracanie czynników
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 2.0 vs 2.0 (tol 1e-09)'
+- id: g-cm-10
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: wskazanie i poprawienie błędu
+  statement: 'Uczeń wykonywał mnożenie \frac{x-5}{x+1}\cdot\frac{x+1}{x^{2}-25} (dla x\neq -1, x\neq 5
+    i x\neq -5) i zapisał: „mnożę na krzyż, czyli licznik pierwszego przez mianownik drugiego i licznik
+    drugiego przez mianownik pierwszego, otrzymuję \frac{\left(x-5\right)\cdot\left(x^{2}-25\right)}{\left(x+1\right)\cdot\left(x+1\right)}”.
+    Wyjaśnij, na czym polega błąd, i podaj poprawny wynik w najprostszej postaci.'
+  statement_latex: \frac{x-5}{x+1}\cdot\frac{x+1}{x^{2}-25}
+  solution: |-
+    Błędne rozumowanie: uczeń zastosował schemat „mnożenia na krzyż” i otrzymał \frac{\left(x-5\right)\cdot\left(x^{2}-25\right)}{\left(x+1\right)^{2}}.
+    Dlaczego to źle: mnożenie na krzyż dotyczy proporcji (równań), a nie działań na ułamkach. Mnożąc ułamki, mnożymy licznik przez licznik i mianownik przez mianownik. Kontrola dla x=0: \frac{-5}{1}\cdot\frac{1}{-25}=\frac{1}{5}, a wzór ucznia daje \frac{\left(-5\right)\cdot\left(-25\right)}{1}=125.
+    Poprawne rozwiązanie:
+    \frac{\left(x-5\right)\cdot\left(x+1\right)}{\left(x+1\right)\cdot\left(x-5\right)\cdot\left(x+5\right)},
+    gdzie skorzystaliśmy z rozkładu x^{2}-25 = \left(x-5\right)\cdot\left(x+5\right).
+    Skracamy \left(x+1\right) oraz \left(x-5\right) i otrzymujemy \frac{1}{x+5}.
+    Odpowiedź: \frac{1}{x+5}.
+  solution_steps:
+  - 'Nazwij błąd: mnożenie na krzyż zamiast mnożenia licznik razy licznik i mianownik razy mianownik.'
+  - 'Pokaż kontrolę liczbową dla x=0: poprawna wartość to \frac{1}{5}.'
+  - Rozłóż x^{2}-25 = \left(x-5\right)\cdot\left(x+5\right) i zapisz jeden ułamek.
+  - Skróć \left(x+1\right) i \left(x-5\right); wynik to \frac{1}{x+5}.
+  answer:
+    kind: SYMBOLIC
+    latex: \frac{1}{x+5}
+  checks:
+  - kind: simplify
+    expr: \frac{x-5}{x+1}\cdot\frac{x+1}{x^{2}-25}
+  skills:
+  - mnożenie wyrażeń wymiernych
+  - różnica kwadratów
+  - skracanie czynników
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: ''\\frac{1}{x+5}'' vs ''1/(x + 5)'''
+- id: g-ch-t02
+  slot: CHALLENGE
+  ramp_index: 0
+  difficulty: 4
+  exercise_type: 'zadanie odwrotne: dobór parametru w wyrażeniu wymiernym'
+  statement: Liczba b jest tak dobrana, że dla każdej liczby rzeczywistej x, dla której wyrażenie \frac{x^{2}+b\cdot
+    x-6}{x^{2}-9} ma sens, jest ono równe wyrażeniu \frac{x-2}{x-3}. Oblicz b, wyznacz dziedzinę wyrażenia
+    \frac{x^{2}+b\cdot x-6}{x^{2}-9} oraz jego wartość dla x = 5.
+  statement_latex: \frac{x^{2}+b\cdot x-6}{x^{2}-9} = \frac{x-2}{x-3}
+  solution: |-
+    Kluczowy pomysł: skoro po skróceniu ma zostać \frac{x-2}{x-3}, a mianownik wyjściowy to x^{2}-9=\left(x-3\right)\left(x+3\right), to skrócony musiał zostać czynnik \left(x+3\right). Zatem licznik musi mieć postać iloczynu
+    x^{2}+bx-6=\left(x-2\right)\left(x+3\right).
+    Wymnażamy prawą stronę: \left(x-2\right)\left(x+3\right)=x^{2}+x-6.
+    Porównując współczynniki przy x otrzymujemy b=1 (wyraz wolny -6 się zgadza).
+    Dziedzina wyrażenia wyjściowego: x^{2}-9\neq 0, czyli \left(x-3\right)\left(x+3\right)\neq 0, a więc x\neq 3 i x\neq -3; D=\mathbb{R}\setminus\{-3,\,3\}.
+    Sprawdzenie skrócenia: \frac{\left(x-2\right)\left(x+3\right)}{\left(x-3\right)\left(x+3\right)}=\frac{x-2}{x-3} dla x\in D.
+    Wartość dla x=5 (liczba 5 należy do dziedziny):
+    \frac{5^{2}+1\cdot 5-6}{5^{2}-9}=\frac{24}{16}=\frac{3}{2}.
+    Odpowiedź: b=1, D=\mathbb{R}\setminus\{-3,3\}, wartość dla x=5 wynosi \frac{3}{2}.
+  solution_steps:
+  - 'Rozłóż mianownik: x^{2}-9=(x-3)(x+3).'
+  - Zauważ, że aby po skróceniu został \frac{x-2}{x-3}, licznik musi być równy (x-2)(x+3).
+  - 'Wymnóż: (x-2)(x+3)=x^{2}+x-6, więc b=1.'
+  - 'Wyznacz dziedzinę wyrażenia wyjściowego: (x-3)(x+3)\neq 0, D=\mathbb{R}\setminus\{-3,3\}.'
+  - Sprawdź, że 5\in D i oblicz \frac{5^{2}+5-6}{25-9}=\frac{24}{16}=\frac{3}{2}.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: b
+      answer:
+        kind: NUMERIC
+        value: 1.0
+    - name: liczby_wykluczone_z_dziedziny
+      answer:
+        kind: SET
+        members:
+        - '-3'
+        - '3'
+    - name: wartosc_dla_x_5
+      answer:
+        kind: NUMERIC
+        value: 1.5
+  checks:
+  - kind: solve_equation
+    expr: \frac{1^{2}+b\cdot 1-6}{1^{2}-9}=\frac{1-2}{1-3}
+    var: b
+    part: b
+  - kind: solve_equation
+    expr: x^{2}-9=0
+    part: liczby_wykluczone_z_dziedziny
+  - kind: evaluate
+    expr: \frac{5^{2}+1\cdot 5-6}{5^{2}-9}
+    part: wartosc_dla_x_5
+  skills:
+  - rozkład trójmianu na czynniki
+  - równość wyrażeń w dziedzinie
+  - wyznaczanie dziedziny
+  - porównywanie współczynników
+  - obliczanie wartości wyrażenia
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [b] SymPy solved it fresh: 1.0 vs 1.0 (tol 1e-09) ; [liczby_wykluczone_z_dziedziny]
+      SymPy solved it fresh: 2 members matched ; [wartosc_dla_x_5] SymPy solved it fresh: 1.5 vs 1.5 (tol
+      1e-09)'
+- id: g-ch-t03
+  slot: CHALLENGE
+  ramp_index: 1
+  difficulty: 4
+  exercise_type: modelowanie geometryczne wyrażeniem wymiernym z dziedziną i filtrem
+  statement: "Pole pewnego prostokąta jest równe 2\\cdot x^{2}-8, a jeden z jego boków ma długość x-2.\
+    \ \na) Zapisz wyrażenie opisujące długość drugiego boku tego prostokąta, doprowadź je do najprostszej\
+    \ postaci i podaj zbiór wszystkich wartości x, dla których taki prostokąt istnieje (obie długości\
+    \ boków muszą być dodatnie).\nb) Wyznacz tę wartość x, dla której długość drugiego boku jest równa\
+    \ kwadratowi długości boku x-2."
+  statement_latex: b\left(x\right) = \frac{2\cdot x^{2}-8}{x-2}
+  solution: |-
+    a) Drugi bok obliczamy jako iloraz pola i danego boku:
+    b\left(x\right)=\frac{2x^{2}-8}{x-2}=\frac{2\left(x-2\right)\left(x+2\right)}{x-2}=2\left(x+2\right)=2x+4\quad\text{(dla } x\neq 2\text{)}.
+    Warunki geometryczne: bok x-2>0, czyli x>2; wtedy automatycznie 2x+4>0 oraz pole 2x^{2}-8>0.
+    Zatem opis ma sens dla x\in\left(2,\;+\infty\right).
+    b) Warunek zadania: 2x+4=\left(x-2\right)^{2}, czyli
+    2x+4=x^{2}-4x+4\;\Rightarrow\; x^{2}-6x=0\;\Rightarrow\; x\left(x-6\right)=0\;\Rightarrow\; x=0 \text{ lub } x=6.
+    Liczba x=0 nie należy do zbioru \left(2,+\infty\right) (bok x-2 byłby ujemny), więc ją odrzucamy.
+    Odpowiedź: b\left(x\right)=2x+4 dla x\in\left(2,+\infty\right); warunek z podpunktu b) spełnia x=6 (wtedy boki mają długości 4 i 16).
+  solution_steps:
+  - 'Zapisz drugi bok jako iloraz pola i danego boku: b(x)=\frac{2x^{2}-8}{x-2}.'
+  - 'Rozłóż licznik: 2x^{2}-8=2(x-2)(x+2) i skróć czynnik (x-2): b(x)=2x+4.'
+  - Z warunku dodatniości boku x-2>0 otrzymaj dziedzinę x\in(2,+\infty).
+  - Zapisz równanie 2x+4=(x-2)^{2}.
+  - Przekształć do x^{2}-6x=0, czyli x(x-6)=0, skąd x=0 lub x=6.
+  - Odrzuć x=0 jako niespełniające warunku x>2; odpowiedź x=6.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: drugi_bok
+      answer:
+        kind: SYMBOLIC
+        latex: 2\cdot x+4
+    - name: dziedzina
+      answer:
+        kind: INTERVAL
+        lo: '2'
+        hi: \infty
+    - name: x
+      answer:
+        kind: NUMERIC
+        value: 6.0
+  checks:
+  - kind: simplify
+    expr: \frac{2\cdot x^{2}-8}{x-2}
+    part: drugi_bok
+  stated_model:
+    variable: x
+    objective_latex: b\left(x\right)=\frac{2\cdot x^{2}-8}{x-2}=2\cdot x+4
+    domain_lo: '2'
+    goal: value
+    constraint_used: x-2>0 (długości boków dodatnie)
+  skills:
+  - zapisanie boku prostokąta jako ilorazu pola i boku
+  - skracanie ułamka algebraicznego
+  - dziedzina wymuszona dodatniością długości
+  - rozwiązywanie równania kwadratowego
+  - odrzucanie rozwiązania spoza dziedziny
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (PARSE_ERROR: "UnexpectedCharacters: No terminal
+      matches ''='' in the current parser context, at line 1 col 50") — human review'
+- id: g-ch-t04
+  slot: CHALLENGE
+  ramp_index: 2
+  difficulty: 5
+  exercise_type: łańcuch modelowania geometrycznego + iloraz wyrażeń wymiernych
+  statement: |-
+    Trójkąt T ma pole równe x^{2}-4, a długość jego podstawy jest równa 2\cdot x+4. Prostokąt R ma pole równe x^{2}-2\cdot x, a jeden z jego boków ma długość x-2. Wszystkie występujące w opisie długości i pola są dodatnie.
+    a) Wyznacz wysokość trójkąta T opuszczoną na podaną podstawę oraz długość drugiego boku prostokąta R, zapisz w najprostszej postaci iloraz W\left(x\right) = \frac{\text{wysokość trójkąta } T}{\text{drugi bok prostokąta } R} i podaj zbiór wszystkich wartości x, dla których ten opis ma sens.
+    b) Wyznacz tę wartość x, dla której W\left(x\right) = \frac{3}{5}, i sprawdź, czy należy ona do zbioru wyznaczonego w podpunkcie a).
+  statement_latex: W\left(x\right) = \frac{\frac{2\cdot\left(x^{2}-4\right)}{2\cdot x+4}}{\frac{x^{2}-2\cdot
+    x}{x-2}}
+  solution: |-
+    a) Wysokość trójkąta wyznaczamy ze wzoru na pole P=\frac{1}{2}\cdot a\cdot h, czyli h=\frac{2P}{a}:
+    h\left(x\right)=\frac{2\left(x^{2}-4\right)}{2x+4}=\frac{2\left(x-2\right)\left(x+2\right)}{2\left(x+2\right)}=x-2.
+    Drugi bok prostokąta to iloraz pola i danego boku:
+    b\left(x\right)=\frac{x^{2}-2x}{x-2}=\frac{x\left(x-2\right)}{x-2}=x.
+    Iloraz:
+    W\left(x\right)=\frac{x-2}{x}.
+    Warunki: bok prostokąta x-2>0, czyli x>2; wtedy również x>0, 2x+4>0, x^{2}-4>0 i x^{2}-2x>0, a mianowniki 2x+4, x-2, x są różne od zera. Zatem opis ma sens dla x\in\left(2,\;+\infty\right).
+    b) Rozwiązujemy równanie
+    \frac{x-2}{x}=\frac{3}{5}\;\Rightarrow\; 5\left(x-2\right)=3x\;\Rightarrow\; 5x-10=3x\;\Rightarrow\; 2x=10\;\Rightarrow\; x=5.
+    Sprawdzenie: 5>2, więc x=5 należy do zbioru \left(2,+\infty\right) — rozwiązanie jest dopuszczalne (wysokość trójkąta wynosi 3, drugi bok prostokąta 5, a ich iloraz \frac{3}{5}).
+    Odpowiedź: h(x)=x-2, b(x)=x, W\left(x\right)=\frac{x-2}{x} dla x\in\left(2,+\infty\right); W\left(x\right)=\frac{3}{5} dla x=5.
+  solution_steps:
+  - 'Ze wzoru P=\frac{1}{2}ah wyznacz h=\frac{2\left(x^{2}-4\right)}{2x+4} i skróć: h(x)=x-2.'
+  - 'Drugi bok prostokąta: b=\frac{x^{2}-2x}{x-2}=\frac{x(x-2)}{x-2}=x.'
+  - Zapisz iloraz W(x)=\frac{x-2}{x}.
+  - 'Z warunku dodatniości długości (x-2>0) wyznacz zbiór dopuszczalnych wartości: x\in(2,+\infty).'
+  - 'Rozwiąż równanie \frac{x-2}{x}=\frac{3}{5}: 5(x-2)=3x, stąd x=5.'
+  - 'Sprawdź dopuszczalność: 5\in(2,+\infty), więc x=5 jest odpowiedzią.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wysokosc_trojkata
+      answer:
+        kind: SYMBOLIC
+        latex: x-2
+    - name: drugi_bok_prostokata
+      answer:
+        kind: SYMBOLIC
+        latex: x
+    - name: W
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{x-2}{x}
+    - name: dziedzina
+      answer:
+        kind: INTERVAL
+        lo: '2'
+        hi: \infty
+    - name: x
+      answer:
+        kind: NUMERIC
+        value: 5.0
+  checks:
+  - kind: simplify
+    expr: \frac{2\cdot\left(x^{2}-4\right)}{2\cdot x+4}
+    part: wysokosc_trojkata
+  - kind: simplify
+    expr: \frac{x^{2}-2\cdot x}{x-2}
+    part: drugi_bok_prostokata
+  - kind: simplify
+    expr: \frac{\frac{2\cdot\left(x^{2}-4\right)}{2\cdot x+4}}{\frac{x^{2}-2\cdot x}{x-2}}
+    part: W
+  - kind: solve_equation
+    expr: \frac{x-2}{x}=\frac{3}{5}
+    part: x
+  stated_model:
+    variable: x
+    objective_latex: W\left(x\right)=\frac{\frac{2\cdot\left(x^{2}-4\right)}{2\cdot x+4}}{\frac{x^{2}-2\cdot
+      x}{x-2}}=\frac{x-2}{x}
+    domain_lo: '2'
+    goal: value
+    constraint_used: x-2>0 (dodatnie długości boków i pól)
+  skills:
+  - wysokość trójkąta z pola i podstawy
+  - bok prostokąta z pola
+  - dzielenie i skracanie wyrażeń wymiernych
+  - dziedzina wymuszona dodatniością
+  - równanie wymierne i sprawdzenie dopuszczalności rozwiązania
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (PARSE_ERROR: "UnexpectedCharacters: No terminal
+      matches ''='' in the current parser context, at line 1 col 104") — human review'

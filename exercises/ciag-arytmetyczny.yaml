@@ -1,0 +1,842 @@
+section: ciag-arytmetyczny
+name: 'Ciąg arytmetyczny: n-ty wyraz i suma'
+scope: Recognising an arithmetic sequence; the nth term and the sum of the first n terms.
+requirements:
+- VI.4
+- VI.5
+counts:
+  total: 16
+  DETERMINISTIC: 10
+  REFERENCE_CALL: 2
+  NOT_MACHINE_CHECKABLE: 3
+  STATED_MODEL: 1
+exercises:
+- id: g-th-00
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: obliczenie wyrazu ciągu ze wzoru a_n = a_1 + (n-1)r
+  statement: Ciąg arytmetyczny (a_n) jest określony dla każdej liczby naturalnej n ≥ 1. W tym ciągu pierwszy
+    wyraz jest równy a_1 = 7, a różnica jest równa r = -4. Oblicz dziesiąty wyraz tego ciągu. Zapisz obliczenia.
+  statement_latex: a_{10} = 7 + \left(10 - 1\right)\cdot\left(-4\right)
+  solution: |-
+    Korzystam ze wzoru na n-ty wyraz ciągu arytmetycznego: a_n = a_1 + (n-1)\cdot r.
+    Dla n = 10 wykonuję 10 - 1 = 9 kroków po r, zatem
+    a_{10} = 7 + 9\cdot(-4) = 7 - 36 = -29.
+    Odpowiedź: a_{10} = -29.
+  solution_steps:
+  - Zapisuję wzór a_n = a_1 + (n-1)\cdot r.
+  - 'Podstawiam a_1 = 7, r = -4, n = 10: a_{10} = 7 + 9\cdot(-4).'
+  - 'Obliczam: 7 - 36 = -29.'
+  answer:
+    kind: NUMERIC
+    value: -29.0
+    latex: '-29'
+  checks:
+  - kind: evaluate
+    expr: 7 + \left(10 - 1\right)\cdot\left(-4\right)
+  skills:
+  - stosowanie wzoru na n-ty wyraz
+  - podstawianie do wzoru
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: -29.0 vs -29.0 (tol 1e-09)'
+- id: g-th-01
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: odczytanie różnicy i monotoniczności z wypisanych wyrazów
+  statement: 'Dany jest skończony ciąg arytmetyczny: 13, 9, 5, 1, -3. Wyznacz różnicę r tego ciągu oraz
+    rozstrzygnij, czy ten ciąg jest malejący (odpowiedz Tak albo Nie). Zapisz obliczenia.'
+  statement_latex: r = 9 - 13
+  solution: |-
+    Z definicji różnica to następny wyraz minus poprzedni:
+    r = a_2 - a_1 = 9 - 13 = -4.
+    Kontrola pozostałych par: 5 - 9 = -4, 1 - 5 = -4, -3 - 1 = -4, więc różnica jest stała i r = -4.
+    Ponieważ r = -4 < 0, ciąg jest malejący.
+    Odpowiedź: r = -4; tak, ciąg jest malejący.
+  solution_steps:
+  - 'Stosuję definicję: r = a_{n+1} - a_n (następny minus poprzedni).'
+  - Obliczam r = 9 - 13 = -4.
+  - 'Sprawdzam pozostałe różnice: 5-9 = -4, 1-5 = -4, -3-1 = -4 — wszystkie równe.'
+  - Ponieważ r < 0, ciąg jest malejący.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: r
+      answer:
+        kind: NUMERIC
+        value: -4.0
+        latex: '-4'
+    - name: czy ciąg jest malejący
+      answer:
+        kind: BOOLEAN
+        truth: true
+  checks:
+  - kind: evaluate
+    expr: 9 - 13
+    part: r
+  skills:
+  - wyznaczanie różnicy r
+  - monotoniczność ciągu arytmetycznego
+  verification:
+    checkability: REFERENCE_CALL
+    note: '2 parts matched · det: [r] SymPy solved it fresh: -4.0 vs -4.0 (tol 1e-09)'
+- id: g-th-02
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: suma n początkowych wyrazów z a_1 i a_n
+  statement: Ciąg arytmetyczny (a_n) jest określony dla każdej liczby naturalnej n ≥ 1. W tym ciągu a_1
+    = 3 oraz a_{12} = 36. Oblicz sumę dwunastu początkowych kolejnych wyrazów tego ciągu. Zapisz obliczenia.
+  statement_latex: S_{12} = \frac{3 + 36}{2}\cdot 12
+  solution: |-
+    Znam pierwszy i dwunasty wyraz, więc stosuję wzór S_n = \frac{a_1 + a_n}{2}\cdot n.
+    S_{12} = \frac{3 + 36}{2}\cdot 12 = \frac{39}{2}\cdot 12 = 39\cdot 6 = 234.
+    Odpowiedź: S_{12} = 234.
+  solution_steps:
+  - Zapisuję wzór S_n = \frac{a_1 + a_n}{2}\cdot n.
+  - Podstawiam a_1 = 3, a_{12} = 36, n = 12.
+  - Obliczam \frac{39}{2}\cdot 12 = 234.
+  answer:
+    kind: NUMERIC
+    value: 234.0
+    latex: '234'
+  checks:
+  - kind: evaluate
+    expr: \frac{3 + 36}{2}\cdot 12
+  skills:
+  - stosowanie wzoru S_n = (a_1+a_n)/2 · n
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 234.0 vs 234.0 (tol 1e-09)'
+- id: g-ex-03
+  slot: EXERCISE
+  ramp_index: 1
+  difficulty: 2
+  exercise_type: wyraz i suma z danych a_1 oraz r
+  statement: Ciąg arytmetyczny (a_n) jest określony dla każdej liczby naturalnej n ≥ 1. W tym ciągu a_1
+    = -5 oraz różnica r = 4. Oblicz dwudziesty wyraz tego ciągu oraz sumę dwudziestu początkowych kolejnych
+    wyrazów tego ciągu. Zapisz obliczenia.
+  statement_latex: a_{20} = -5 + \left(20 - 1\right)\cdot 4,\qquad S_{20} = \frac{-5 + a_{20}}{2}\cdot
+    20
+  solution: |-
+    1) Wyraz dwudziesty: a_{20} = a_1 + 19r = -5 + 19\cdot 4 = -5 + 76 = 71.
+    2) Suma: S_{20} = \frac{a_1 + a_{20}}{2}\cdot 20 = \frac{-5 + 71}{2}\cdot 20 = \frac{66}{2}\cdot 20 = 33\cdot 20 = 660.
+    Kontrola drugim wzorem: S_{20} = \frac{2\cdot(-5) + 19\cdot 4}{2}\cdot 20 = \frac{-10 + 76}{2}\cdot 20 = 33\cdot 20 = 660. ✓
+    Odpowiedź: a_{20} = 71, S_{20} = 660.
+  solution_steps:
+  - 'Stosuję a_n = a_1 + (n-1)r dla n = 20: a_{20} = -5 + 19\cdot 4 = 71.'
+  - 'Stosuję S_n = \frac{a_1 + a_n}{2}\cdot n: S_{20} = \frac{-5 + 71}{2}\cdot 20.'
+  - Obliczam S_{20} = 33\cdot 20 = 660.
+  - 'Sprawdzam wynik wzorem z różnicą: \frac{2\cdot(-5) + 19\cdot 4}{2}\cdot 20 = 660.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: a_20
+      answer:
+        kind: NUMERIC
+        value: 71.0
+        latex: '71'
+    - name: S_20
+      answer:
+        kind: NUMERIC
+        value: 660.0
+        latex: '660'
+  checks:
+  - kind: evaluate
+    expr: -5 + \left(20 - 1\right)\cdot 4
+    part: a_20
+  - kind: evaluate
+    expr: \frac{2\cdot\left(-5\right) + 19\cdot 4}{2}\cdot 20
+    part: S_20
+  skills:
+  - wzór na n-ty wyraz
+  - wzór na sumę n początkowych wyrazów
+  - odróżnianie a_n od S_n
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [a_20] SymPy solved it fresh: 71.0 vs 71.0 (tol 1e-09) ; [S_20]
+      SymPy solved it fresh: 660.0 vs 660.0 (tol 1e-09)'
+- id: g-ex-04
+  slot: EXERCISE
+  ramp_index: 2
+  difficulty: 3
+  exercise_type: wyznaczanie a_1 i r z dwóch wyrazów, następnie suma
+  statement: Ciąg arytmetyczny (a_n) jest określony dla każdej liczby naturalnej n ≥ 1. W tym ciągu a_4
+    = -3 oraz a_{11} = 18. Wyznacz różnicę r tego ciągu, jego pierwszy wyraz a_1 oraz oblicz sumę dwudziestu
+    początkowych kolejnych wyrazów tego ciągu. Zapisz obliczenia.
+  statement_latex: a_{11} = a_4 + \left(11 - 4\right)\cdot r,\qquad S_{20} = \frac{2\cdot a_1 + 19\cdot
+    r}{2}\cdot 20
+  solution: |-
+    1) Korzystam ze wzoru a_n = a_k + (n-k)r: a_{11} = a_4 + 7r, czyli 18 = -3 + 7r.
+    2) Stąd 7r = 21, więc r = \frac{18 - \left(-3\right)}{11 - 4} = 3.
+    3) Pierwszy wyraz: a_4 = a_1 + 3r, czyli -3 = a_1 + 9, zatem a_1 = -12.
+    4) Suma: S_{20} = \frac{2\cdot(-12) + 19\cdot 3}{2}\cdot 20 = \frac{-24 + 57}{2}\cdot 20 = \frac{33}{2}\cdot 20 = 330.
+    Kontrola: a_{20} = -12 + 19\cdot 3 = 45, więc S_{20} = \frac{-12 + 45}{2}\cdot 20 = \frac{33}{2}\cdot 20 = 330. ✓
+    Odpowiedź: r = 3, a_1 = -12, S_{20} = 330.
+  solution_steps:
+  - Zapisuję zależność a_{11} = a_4 + 7r, czyli 18 = -3 + 7r.
+  - Obliczam r = \frac{21}{7} = 3.
+  - Z a_4 = a_1 + 3r wyznaczam a_1 = -3 - 9 = -12.
+  - Obliczam S_{20} = \frac{2\cdot(-12) + 19\cdot 3}{2}\cdot 20 = 330.
+  - Sprawdzam wynik, licząc a_{20} = 45 i S_{20} = \frac{-12 + 45}{2}\cdot 20 = 330.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: r
+      answer:
+        kind: NUMERIC
+        value: 3.0
+        latex: '3'
+    - name: a_1
+      answer:
+        kind: NUMERIC
+        value: -12.0
+        latex: '-12'
+    - name: S_20
+      answer:
+        kind: NUMERIC
+        value: 330.0
+        latex: '330'
+  checks:
+  - kind: evaluate
+    expr: \frac{18 - \left(-3\right)}{11 - 4}
+    part: r
+  - kind: evaluate
+    expr: -3 - 3\cdot 3
+    part: a_1
+  - kind: evaluate
+    expr: \frac{2\cdot\left(-12\right) + 19\cdot 3}{2}\cdot 20
+    part: S_20
+  skills:
+  - układ równań na a_1 i r
+  - wzór a_n = a_k + (n-k)r
+  - suma n początkowych wyrazów
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [r] SymPy solved it fresh: 3.0 vs 3.0 (tol 1e-09) ; [a_1] SymPy
+      solved it fresh: -12.0 vs -12.0 (tol 1e-09) ; [S_20] SymPy solved it fresh: 330.0 vs 330.0 (tol
+      1e-09)'
+- id: g-ex-05
+  slot: EXERCISE
+  ramp_index: 3
+  difficulty: 4
+  exercise_type: zadanie tekstowe z sumą ciągu arytmetycznego
+  statement: Pani Ewa spłaciła pożyczkę w wysokości 9000 zł w dwudziestu ratach. Każda kolejna rata była
+    mniejsza od poprzedniej o 20 zł. Oblicz kwotę pierwszej raty oraz kwotę ostatniej (dwudziestej) raty.
+    Zapisz obliczenia.
+  statement_latex: \frac{2\cdot a_1 + 19\cdot\left(-20\right)}{2}\cdot 20 = 9000
+  solution: |-
+    Raty tworzą ciąg arytmetyczny o różnicy r = -20 i liczbie wyrazów n = 20, a suma wszystkich rat wynosi 9000 zł.
+    1) Zapisuję równanie z niewiadomą a_1 (pierwszą ratą):
+    \frac{2\cdot a_1 + 19\cdot(-20)}{2}\cdot 20 = 9000.
+    2) Upraszczam: \left(2a_1 - 380\right)\cdot 10 = 9000, czyli 2a_1 - 380 = 900.
+    3) Stąd 2a_1 = 1280, więc a_1 = 640.
+    4) Ostatnia rata: a_{20} = a_1 + 19\cdot(-20) = 640 - 380 = 260.
+    Kontrola: \frac{640 + 260}{2}\cdot 20 = 450\cdot 20 = 9000. ✓
+    Odpowiedź: pierwsza rata wynosiła 640 zł, ostatnia 260 zł.
+  solution_steps:
+  - Zauważam, że raty tworzą ciąg arytmetyczny o różnicy r = -20 i n = 20 wyrazach, a S_{20} = 9000.
+  - Zapisuję równanie \frac{2\cdot a_1 + 19\cdot(-20)}{2}\cdot 20 = 9000.
+  - 'Rozwiązuję: 2a_1 - 380 = 900, stąd a_1 = 640.'
+  - Obliczam ostatnią ratę a_{20} = 640 - 19\cdot 20 = 260.
+  - 'Sprawdzam: \frac{640 + 260}{2}\cdot 20 = 9000.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: pierwsza rata
+      answer:
+        kind: NUMERIC
+        value: 640.0
+        latex: 640\ \text{zł}
+    - name: ostatnia rata
+      answer:
+        kind: NUMERIC
+        value: 260.0
+        latex: 260\ \text{zł}
+  checks:
+  - kind: solve_equation
+    expr: \frac{2\cdot x + 19\cdot\left(-20\right)}{2}\cdot 20 = 9000
+    part: pierwsza rata
+  - kind: evaluate
+    expr: 640 - 19\cdot 20
+    part: ostatnia rata
+  stated_model:
+    variable: x
+    objective_latex: \frac{2\cdot x + 19\cdot\left(-20\right)}{2}\cdot 20 = 9000
+    domain_lo: '0'
+    goal: value
+    constraint_used: x — pierwsza rata (w zł); raty tworzą 20-wyrazowy ciąg arytmetyczny o różnicy r =
+      -20, suma rat równa 9000 zł
+  skills:
+  - modelowanie sytuacji ciągiem arytmetycznym
+  - równanie z niewiadomą a_1 z wzoru na S_n
+  - wzór na n-ty wyraz
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''x'': ''\\frac{2\\cdot
+      x + 19\\cdot\\left(-20\\right)}{2}\\cdot 20 = 9000'') — human review'
+- id: g-ex-t00
+  slot: EXERCISE
+  ramp_index: 6
+  difficulty: 3
+  exercise_type: wyznaczanie a_1 i r z układu równań
+  statement: Ciąg arytmetyczny \left( a_{n} \right) jest określony dla każdej liczby naturalnej n \geq
+    1. Piąty wyraz tego ciągu jest równy 11, a suma dwunastu początkowych kolejnych wyrazów tego ciągu
+    jest równa 168. Oblicz pierwszy wyraz i różnicę tego ciągu oraz dwudziesty wyraz tego ciągu. Zapisz
+    obliczenia.
+  statement_latex: a_{5} = a_{1} + 4\cdot r = 11, \qquad S_{12} = \frac{2a_{1} + 11\cdot r}{2}\cdot 12
+    = 168
+  solution: |-
+    1) Zapisuję dane wzorami ciągu arytmetycznego:
+    a_{5} = a_{1} + 4\cdot r = 11, czyli a_{1} = 11 - 4\cdot r,
+    S_{12} = \frac{2a_{1} + 11\cdot r}{2}\cdot 12 = 168.
+    2) Podstawiam a_{1} = 11 - 4r do drugiego równania:
+    \frac{2\cdot\left(11 - 4r\right) + 11r}{2}\cdot 12 = 168,
+    \frac{22 - 8r + 11r}{2}\cdot 12 = 168,
+    \left(22 + 3r\right)\cdot 6 = 168, czyli 132 + 18r = 168.
+    3) Stąd 18r = 36, więc r = 2.
+    4) a_{1} = 11 - 4\cdot 2 = 3.
+    5) a_{20} = a_{1} + 19\cdot r = 3 + 19\cdot 2 = 3 + 38 = 41.
+    Sprawdzenie: a_{12} = 3 + 11\cdot 2 = 25, więc S_{12} = \frac{3 + 25}{2}\cdot 12 = 14\cdot 12 = 168. ✓
+    Odpowiedź: a_{1} = 3, r = 2, a_{20} = 41.
+  solution_steps:
+  - 'Zapisz warunki wzorami: a_5 = a_1 + 4r = 11 oraz S_12 = ((2a_1 + 11r)/2)·12 = 168.'
+  - Z pierwszego równania wyznacz a_1 = 11 − 4r i wstaw do drugiego.
+  - 'Uporządkuj: 132 + 18r = 168, stąd r = 2.'
+  - Oblicz a_1 = 11 − 4·2 = 3.
+  - Oblicz a_20 = 3 + 19·2 = 41.
+  - 'Sprawdź kontrolnie: a_12 = 25 i S_12 = (3+25)/2·12 = 168.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: a_1
+      answer:
+        kind: NUMERIC
+        value: 3.0
+    - name: r
+      answer:
+        kind: NUMERIC
+        value: 2.0
+    - name: a_20
+      answer:
+        kind: NUMERIC
+        value: 41.0
+  checks:
+  - kind: solve_equation
+    expr: \frac{2\cdot\left(11 - 4\cdot r\right) + 11\cdot r}{2}\cdot 12 = 168
+    var: r
+    part: r
+  - kind: evaluate
+    expr: 11 - 4\cdot 2
+    part: a_1
+  - kind: evaluate
+    expr: 3 + 19\cdot 2
+    part: a_20
+  skills:
+  - wzór na n-ty wyraz ciągu arytmetycznego
+  - wzór na sumę n początkowych wyrazów
+  - rozwiązywanie układu równań
+  - kontrola wyniku
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [r] SymPy solved it fresh: 2.0 vs 2.0 (tol 1e-09) ; [a_1] SymPy
+      solved it fresh: 3.0 vs 3.0 (tol 1e-09) ; [a_20] SymPy solved it fresh: 41.0 vs 41.0 (tol 1e-09)'
+- id: g-ex-t01
+  slot: EXERCISE
+  ramp_index: 7
+  difficulty: 4
+  exercise_type: równanie na liczbę wyrazów oraz suma fragmentu ciągu
+  statement: |-
+    Ciąg arytmetyczny \left( a_{n} \right) jest określony dla każdej liczby naturalnej n \geq 1. Pierwszy wyraz tego ciągu jest równy 4, a różnica tego ciągu jest równa 3.
+    a) Oblicz, ile początkowych kolejnych wyrazów tego ciągu należy dodać, aby otrzymać sumę równą 1000.
+    b) Oblicz sumę a_{11} + a_{12} + \dots + a_{25}.
+    Zapisz obliczenia.
+  statement_latex: S_{n} = \frac{2\cdot 4 + \left(n-1\right)\cdot 3}{2}\cdot n = 1000, \qquad a_{11} +
+    a_{12} + \dots + a_{25} = S_{25} - S_{10}
+  solution: |-
+    a) 1) Wyznaczam wzór na sumę: S_{n} = \frac{2\cdot 4 + \left(n-1\right)\cdot 3}{2}\cdot n = \frac{8 + 3n - 3}{2}\cdot n = \frac{\left(3n + 5\right)\cdot n}{2}.
+    2) Równanie: \frac{\left(3n + 5\right)\cdot n}{2} = 1000, czyli 3n^{2} + 5n - 2000 = 0.
+    3) \Delta = 5^{2} - 4\cdot 3\cdot\left(-2000\right) = 25 + 24000 = 24025, \sqrt{\Delta} = 155.
+    4) n = \frac{-5 - 155}{6} = -\frac{80}{3} (odrzucam, bo n musi być liczbą naturalną dodatnią) albo n = \frac{-5 + 155}{6} = \frac{150}{6} = 25.
+    5) Sprawdzenie: a_{25} = 4 + 24\cdot 3 = 76, S_{25} = \frac{4 + 76}{2}\cdot 25 = 40\cdot 25 = 1000. ✓
+    b) 1) a_{11} + \dots + a_{25} = S_{25} - S_{10}.
+    2) S_{10} = \frac{\left(3\cdot 10 + 5\right)\cdot 10}{2} = \frac{35\cdot 10}{2} = 175.
+    3) S_{25} - S_{10} = 1000 - 175 = 825.
+    Kontrola: a_{11} = 4 + 10\cdot 3 = 34, a_{25} = 76, wyrazów jest 25 - 11 + 1 = 15, więc suma = \frac{34 + 76}{2}\cdot 15 = 55\cdot 15 = 825. ✓
+    Odpowiedź: a) należy dodać 25 początkowych wyrazów; b) szukana suma jest równa 825.
+  solution_steps:
+  - Zapisz S_n = ((2·4 + (n−1)·3)/2)·n = ((3n+5)·n)/2.
+  - 'Przyrównaj do 1000 i uporządkuj: 3n² + 5n − 2000 = 0.'
+  - Oblicz Δ = 24025, √Δ = 155, stąd n = −80/3 lub n = 25.
+  - Odrzuć n = −80/3, bo n jest liczbą wyrazów; zatem n = 25.
+  - Sumę fragmentu policz jako S_25 − S_10 = 1000 − 175 = 825.
+  - 'Sprawdź kontrolnie: 15 wyrazów od a_11 = 34 do a_25 = 76 daje (34+76)/2·15 = 825.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: n
+      answer:
+        kind: NUMERIC
+        value: 25.0
+    - name: suma_fragmentu
+      answer:
+        kind: NUMERIC
+        value: 825.0
+  checks:
+  - kind: evaluate
+    expr: \frac{-5 + \sqrt{24025}}{6}
+    var: n
+    part: n
+  - kind: evaluate
+    expr: \frac{\left(3\cdot 25 + 5\right)\cdot 25}{2} - \frac{\left(3\cdot 10 + 5\right)\cdot 10}{2}
+    var: n
+    part: suma_fragmentu
+  skills:
+  - wzór na sumę n początkowych wyrazów
+  - rozwiązywanie równania kwadratowego
+  - odrzucanie niedopuszczalnych wartości n
+  - suma fragmentu ciągu jako S_n − S_{k−1}
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [n] SymPy solved it fresh: 25.0 vs 25.0 (tol 1e-09) ; [suma_fragmentu]
+      SymPy solved it fresh: 825.0 vs 825.0 (tol 1e-09)'
+- id: g-cm-06
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: wyznaczanie r, wyrazu i sumy w ciągu malejącym
+  statement: Dany jest ciąg arytmetyczny, którego kolejne początkowe wyrazy to 12, 8, 4, 0, … Wyznacz
+    różnicę r tego ciągu, oblicz a_{15} oraz sumę piętnastu początkowych kolejnych wyrazów. Zapisz obliczenia.
+  statement_latex: r = 8 - 12,\qquad a_{15} = 12 + \left(15 - 1\right)\cdot r,\qquad S_{15} = \frac{12
+    + a_{15}}{2}\cdot 15
+  solution: |-
+    BŁĘDNE ROZUMOWANIE (częsty błąd): uczeń liczy różnicę „w drugą stronę”: r = a_1 - a_2 = 12 - 8 = 4. Wtedy a_{15} = 12 + 14\cdot 4 = 68 i S_{15} = \frac{12 + 68}{2}\cdot 15 = 600. Wyniki są błędne, a ciąg wyszedłby rosnący, choć wypisane liczby wyraźnie maleją.
+
+    KOREKTA: z definicji r = a_{n+1} - a_n, czyli następny minus poprzedni:
+    r = 8 - 12 = -4 (kontrola: 4 - 8 = -4, 0 - 4 = -4).
+    a_{15} = 12 + 14\cdot(-4) = 12 - 56 = -44.
+    S_{15} = \frac{12 + (-44)}{2}\cdot 15 = \frac{-32}{2}\cdot 15 = -16\cdot 15 = -240.
+    Odpowiedź: r = -4, a_{15} = -44, S_{15} = -240 (ciąg jest malejący, bo r < 0).
+  solution_steps:
+  - 'Błąd: przyjęcie r = a_1 - a_2 = 12 - 8 = 4 i wynik a_{15} = 68, S_{15} = 600.'
+  - 'Poprawnie: r = a_2 - a_1 = 8 - 12 = -4 (następny minus poprzedni).'
+  - Obliczam a_{15} = 12 + 14\cdot(-4) = -44.
+  - Obliczam S_{15} = \frac{12 + (-44)}{2}\cdot 15 = -240.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: r
+      answer:
+        kind: NUMERIC
+        value: -4.0
+        latex: '-4'
+    - name: a_15
+      answer:
+        kind: NUMERIC
+        value: -44.0
+        latex: '-44'
+    - name: S_15
+      answer:
+        kind: NUMERIC
+        value: -240.0
+        latex: '-240'
+  checks:
+  - kind: evaluate
+    expr: 8 - 12
+    part: r
+  - kind: evaluate
+    expr: 12 + 14\cdot\left(-4\right)
+    part: a_15
+  - kind: evaluate
+    expr: \frac{12 + \left(-44\right)}{2}\cdot 15
+    part: S_15
+  skills:
+  - poprawne obliczanie różnicy r
+  - wzór na n-ty wyraz
+  - wzór na sumę
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [r] SymPy solved it fresh: -4.0 vs -4.0 (tol 1e-09) ; [a_15]
+      SymPy solved it fresh: -44.0 vs -44.0 (tol 1e-09) ; [S_15] SymPy solved it fresh: -240.0 vs -240.0
+      (tol 1e-09)'
+- id: g-cm-07
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: obliczanie wyrazu ciągu — liczba kroków n-1
+  statement: Ciąg arytmetyczny (a_n) jest określony dla każdej liczby naturalnej n ≥ 1. W tym ciągu a_1
+    = -3 oraz r = 5. Oblicz dwunasty wyraz tego ciągu. Zapisz obliczenia.
+  statement_latex: a_{12} = -3 + \left(12 - 1\right)\cdot 5
+  solution: |-
+    BŁĘDNE ROZUMOWANIE (częsty błąd): uczeń pisze a_n = a_1 + n\cdot r, więc a_{12} = -3 + 12\cdot 5 = -3 + 60 = 57.
+    Dlaczego to źle: sprawdźmy taki wzór dla n = 1. Dostajemy a_1 = -3 + 1\cdot 5 = 2, a przecież a_1 = -3. Wzór z n\cdot r jest zatem fałszywy.
+
+    KOREKTA: przechodząc od a_1 do a_n, wykonujemy n - 1 kroków po r, więc a_n = a_1 + (n-1)r.
+    a_{12} = -3 + 11\cdot 5 = -3 + 55 = 52.
+    Kontrola przez wypisanie: -3, 2, 7, 12, 17, 22, 27, 32, 37, 42, 47, 52 — dwunasty wyraz to 52. ✓
+    Odpowiedź: a_{12} = 52.
+  solution_steps:
+  - 'Błąd: zastosowanie wzoru a_n = a_1 + n\cdot r i wynik a_{12} = -3 + 12\cdot 5 = 57.'
+  - Test wzoru dla n = 1 daje -3 + 5 = 2 ≠ a_1, więc wzór jest zły.
+  - 'Poprawny wzór: a_n = a_1 + (n-1)r, czyli a_{12} = -3 + 11\cdot 5.'
+  - Obliczam a_{12} = 52 i sprawdzam przez wypisanie wyrazów.
+  answer:
+    kind: NUMERIC
+    value: 52.0
+    latex: '52'
+  checks:
+  - kind: evaluate
+    expr: -3 + \left(12 - 1\right)\cdot 5
+  skills:
+  - wzór a_n = a_1 + (n-1)r
+  - kontrola wzoru dla n = 1
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 52.0 vs 52.0 (tol 1e-09)'
+- id: g-cm-08
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: sprawdzanie, czy lista liczb tworzy ciąg arytmetyczny
+  statement: Dany jest czterowyrazowy ciąg (4, 9, 14, 20). Rozstrzygnij, czy jest to ciąg arytmetyczny
+    (odpowiedz Tak albo Nie), a następnie podaj liczbę, którą należy wpisać w miejsce ostatniego wyrazu
+    20, aby otrzymany ciąg był arytmetyczny. Zapisz obliczenia.
+  statement_latex: 9 - 4 = 5,\quad 14 - 9 = 5,\quad 20 - 14 = 6
+  solution: |-
+    BŁĘDNE ROZUMOWANIE (częsty błąd): uczeń sprawdza tylko jedną parę: 9 - 4 = 5, więc stwierdza, że ciąg jest arytmetyczny o różnicy r = 5.
+    Jedna równość niczego nie dowodzi — trzeba porównać wszystkie kolejne różnice.
+
+    KOREKTA: 9 - 4 = 5, 14 - 9 = 5, ale 20 - 14 = 6.
+    Ponieważ 6 ≠ 5, ciąg (4, 9, 14, 20) NIE jest arytmetyczny.
+    Aby ciąg był arytmetyczny o różnicy r = 5, ostatni wyraz musiałby być równy 14 + 5 = 19.
+    Odpowiedź: nie, ciąg nie jest arytmetyczny (bo 20 - 14 = 6 ≠ 5 = 14 - 9); w miejsce 20 należy wpisać 19.
+  solution_steps:
+  - 'Błąd: wniosek o arytmetyczności na podstawie jednej różnicy 9 - 4 = 5.'
+  - 'Poprawnie obliczam wszystkie kolejne różnice: 5, 5, 6.'
+  - Ponieważ 6 ≠ 5, ciąg nie jest arytmetyczny.
+  - Aby różnica była stała i równa 5, ostatni wyraz musi wynosić 14 + 5 = 19.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: czy ciąg jest arytmetyczny
+      answer:
+        kind: BOOLEAN
+        truth: false
+    - name: poprawiony ostatni wyraz
+      answer:
+        kind: NUMERIC
+        value: 19.0
+        latex: '19'
+  checks:
+  - kind: evaluate
+    expr: 14 + \left(9 - 4\right)
+    part: poprawiony ostatni wyraz
+  skills:
+  - badanie wszystkich kolejnych różnic
+  - uzasadnianie kontrprzykładem
+  verification:
+    checkability: REFERENCE_CALL
+    note: '2 parts matched · det: [poprawiony ostatni wyraz] SymPy solved it fresh: 19.0 vs 19.0 (tol
+      1e-09)'
+- id: g-cm-09
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: odróżnienie wyrazu a_n od sumy S_n
+  statement: Ciąg arytmetyczny (a_n) jest określony dla każdej liczby naturalnej n ≥ 1. W tym ciągu a_1
+    = 2 oraz r = 3. Oblicz dziesiąty wyraz tego ciągu oraz sumę dziesięciu początkowych kolejnych wyrazów
+    tego ciągu. Zapisz obliczenia.
+  statement_latex: a_{10} = 2 + \left(10 - 1\right)\cdot 3,\qquad S_{10} = \frac{2 + a_{10}}{2}\cdot 10
+  solution: |-
+    BŁĘDNE ROZUMOWANIE (częsty błąd): uczeń liczy a_{10} = 2 + 9\cdot 3 = 29 i zapisuje jako odpowiedź: „suma dziesięciu początkowych wyrazów wynosi 29”. To pomylenie wyrazu z sumą — 29 to tylko jedna liczba stojąca na dziesiątym miejscu, a nie wynik dodania dziesięciu liczb.
+
+    KOREKTA: a_{10} = 2 + 9\cdot 3 = 29 (to jest wyraz).
+    Suma to S_{10} = \frac{a_1 + a_{10}}{2}\cdot 10 = \frac{2 + 29}{2}\cdot 10 = \frac{31}{2}\cdot 10 = 155.
+    Kontrola drugim wzorem: S_{10} = \frac{2\cdot 2 + 9\cdot 3}{2}\cdot 10 = \frac{31}{2}\cdot 10 = 155. ✓
+    Odpowiedź: a_{10} = 29, S_{10} = 155.
+  solution_steps:
+  - 'Błąd: podanie wartości a_{10} = 29 jako sumy dziesięciu wyrazów.'
+  - 'Poprawnie obliczam wyraz: a_{10} = 2 + 9\cdot 3 = 29.'
+  - 'Wyraz a_{10} podstawiam do wzoru na sumę: S_{10} = \frac{2 + 29}{2}\cdot 10.'
+  - Obliczam S_{10} = 155 i sprawdzam wzorem \frac{2\cdot 2 + 9\cdot 3}{2}\cdot 10.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: a_10
+      answer:
+        kind: NUMERIC
+        value: 29.0
+        latex: '29'
+    - name: S_10
+      answer:
+        kind: NUMERIC
+        value: 155.0
+        latex: '155'
+  checks:
+  - kind: evaluate
+    expr: 2 + \left(10 - 1\right)\cdot 3
+    part: a_10
+  - kind: evaluate
+    expr: \frac{2\cdot 2 + 9\cdot 3}{2}\cdot 10
+    part: S_10
+  skills:
+  - wzór na n-ty wyraz
+  - wzór na sumę n początkowych wyrazów
+  - rozumienie znaczenia S_n
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [a_10] SymPy solved it fresh: 29.0 vs 29.0 (tol 1e-09) ; [S_10]
+      SymPy solved it fresh: 155.0 vs 155.0 (tol 1e-09)'
+- id: g-cm-10
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: badanie ciągu danego wzorem ogólnym
+  statement: Ciąg (a_n) jest określony wzorem a_n = 4 - 7n dla każdej liczby naturalnej n ≥ 1. Wyznacz
+    różnicę r tego ciągu oraz jego pierwszy wyraz a_1, a następnie oblicz sumę dziesięciu początkowych
+    kolejnych wyrazów tego ciągu. Zapisz obliczenia.
+  statement_latex: a_{n+1} - a_n = \left(4 - 7\cdot\left(n+1\right)\right) - \left(4 - 7\cdot n\right)
+  solution: |-
+    BŁĘDNE ROZUMOWANIE (częsty błąd): uczeń podstawia bez nawiasu i pisze a_{n+1} = 4 - 7n + 1 = 5 - 7n. Wtedy a_{n+1} - a_n = (5 - 7n) - (4 - 7n) = 1, więc twierdzi, że r = 1, i liczy S_{10} = \frac{2\cdot(-3) + 9\cdot 1}{2}\cdot 10 = 15. Wynik jest fałszywy.
+
+    KOREKTA: w miejsce n podstawiamy CAŁE wyrażenie (n+1) w nawiasie:
+    a_{n+1} = 4 - 7\cdot(n+1) = 4 - 7n - 7 = -3 - 7n.
+    a_{n+1} - a_n = (-3 - 7n) - (4 - 7n) = -3 - 7n - 4 + 7n = -7 — wartość stała, więc ciąg jest arytmetyczny o różnicy r = -7.
+    a_1 = 4 - 7\cdot 1 = -3.
+    S_{10} = \frac{2\cdot(-3) + 9\cdot(-7)}{2}\cdot 10 = \frac{-6 - 63}{2}\cdot 10 = \frac{-69}{2}\cdot 10 = -345.
+    Kontrola: a_{10} = 4 - 70 = -66, więc S_{10} = \frac{-3 + (-66)}{2}\cdot 10 = -345. ✓
+    Odpowiedź: r = -7, a_1 = -3, S_{10} = -345.
+  solution_steps:
+  - 'Błąd: zapis a_{n+1} = 4 - 7n + 1 (brak nawiasu) i fałszywy wniosek r = 1.'
+  - 'Poprawnie: a_{n+1} = 4 - 7(n+1) = -3 - 7n.'
+  - Obliczam a_{n+1} - a_n = (-3 - 7n) - (4 - 7n) = -7, więc r = -7.
+  - Obliczam a_1 = 4 - 7\cdot 1 = -3.
+  - Obliczam S_{10} = \frac{2\cdot(-3) + 9\cdot(-7)}{2}\cdot 10 = -345 i sprawdzam wzorem z a_{10} = -66.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: r
+      answer:
+        kind: NUMERIC
+        value: -7.0
+        latex: '-7'
+    - name: a_1
+      answer:
+        kind: NUMERIC
+        value: -3.0
+        latex: '-3'
+    - name: S_10
+      answer:
+        kind: NUMERIC
+        value: -345.0
+        latex: '-345'
+  checks:
+  - kind: simplify
+    expr: \left(4 - 7\cdot\left(n+1\right)\right) - \left(4 - 7\cdot n\right)
+    var: n
+    part: r
+  - kind: evaluate
+    expr: 4 - 7\cdot 1
+    part: a_1
+  - kind: evaluate
+    expr: \frac{2\cdot\left(-3\right) + 9\cdot\left(-7\right)}{2}\cdot 10
+    part: S_10
+  skills:
+  - podstawianie (n+1) w nawiasie
+  - obliczanie a_{n+1} - a_n
+  - suma n początkowych wyrazów
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [r] SymPy solved it fresh: -7.0 vs -7.0 (tol 1e-09) ; [a_1]
+      SymPy solved it fresh: -3.0 vs -3.0 (tol 1e-09) ; [S_10] SymPy solved it fresh: -345.0 vs -345.0
+      (tol 1e-09)'
+- id: g-ch-t02
+  slot: CHALLENGE
+  ramp_index: 0
+  difficulty: 4
+  exercise_type: zadanie z treścią geometryczną prowadzące do ciągu arytmetycznego
+  statement: Miary kątów wewnętrznych pewnego pięciokąta wypukłego — uporządkowane od najmniejszej do
+    największej — tworzą ciąg arytmetyczny. Najmniejszy kąt tego pięciokąta ma miarę 84^{\circ}. Oblicz
+    miarę największego kąta tego pięciokąta. Zapisz obliczenia.
+  statement_latex: a_{1} = 84^{\circ}, \qquad S_{5} = \frac{a_{1} + a_{5}}{2}\cdot 5 = 540^{\circ}
+  solution: |-
+    1) Suma miar kątów wewnętrznych pięciokąta wynosi \left(5 - 2\right)\cdot 180^{\circ} = 540^{\circ}.
+    2) Miary kątów to pięć kolejnych wyrazów ciągu arytmetycznego \left(a_{n}\right), przy czym a_{1} = 84^{\circ}, a ich suma S_{5} = 540^{\circ}.
+    3) Korzystam ze wzoru S_{5} = \frac{a_{1} + a_{5}}{2}\cdot 5, czyli \frac{84 + a_{5}}{2}\cdot 5 = 540.
+    4) Stąd 84 + a_{5} = \frac{2\cdot 540}{5} = 216, więc a_{5} = 216 - 84 = 132.
+    5) Kontrola: z a_{5} = a_{1} + 4r mamy 132 = 84 + 4r, czyli r = 12; kąty mają miary 84^{\circ}, 96^{\circ}, 108^{\circ}, 120^{\circ}, 132^{\circ}. Ich suma to 540^{\circ}, a każdy z nich jest mniejszy od 180^{\circ}, więc pięciokąt może być wypukły. ✓
+    Odpowiedź: największy kąt ma miarę 132^{\circ}.
+  solution_steps:
+  - Zauważ, że suma miar kątów wewnętrznych pięciokąta jest równa (5−2)·180° = 540°.
+  - Potraktuj miary kątów jako pięć kolejnych wyrazów ciągu arytmetycznego o a_1 = 84°.
+  - Zapisz S_5 = ((a_1 + a_5)/2)·5 = 540 i wyznacz a_5 = 2·540/5 − 84 = 132.
+  - 'Sprawdź: r = 12, kąty 84°, 96°, 108°, 120°, 132° — suma 540°, każdy mniejszy od 180°.'
+  answer:
+    kind: NUMERIC
+    value: 132.0
+  checks:
+  - kind: evaluate
+    expr: \frac{2\cdot 540}{5} - 84
+  stated_model:
+    variable: a_5
+    objective_latex: \frac{84 + a_{5}}{2}\cdot 5 = 540
+    domain_lo: '84'
+    domain_hi: '180'
+    goal: value
+    constraint_used: suma miar kątów wewnętrznych pięciokąta jest równa 540^{\circ}
+  skills:
+  - suma miar kątów wewnętrznych wielokąta
+  - wzór na sumę n początkowych wyrazów ciągu arytmetycznego
+  - wzór na n-ty wyraz
+  - modelowanie
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''a_5'': ''\\frac{84
+      + a_{5}}{2}\\cdot 5 = 540'') — human review'
+- id: g-ch-t03
+  slot: CHALLENGE
+  ramp_index: 1
+  difficulty: 5
+  exercise_type: geometria + ciąg arytmetyczny, filtrowanie pierwiastka
+  statement: Długości boków pewnego trójkąta prostokątnego — uporządkowane od najkrótszego do najdłuższego
+    — tworzą ciąg arytmetyczny o różnicy 3. Wyznacz długości boków tego trójkąta oraz oblicz jego pole.
+    Następnie, przyjmując te trzy długości (w tej samej kolejności) za trzy początkowe wyrazy pewnego
+    ciągu arytmetycznego \left( a_{n} \right), oblicz sumę dwudziestu początkowych wyrazów tego ciągu.
+    Zapisz obliczenia.
+  statement_latex: x^{2} + \left(x + 3\right)^{2} = \left(x + 6\right)^{2}, \qquad x > 0
+  solution: |-
+    1) Oznaczam przez x długość najkrótszego boku. Wtedy boki mają długości x, x + 3, x + 6, przy czym x > 0.
+    2) Najdłuższy bok x + 6 jest przeciwprostokątną, więc z twierdzenia Pitagorasa:
+    x^{2} + \left(x + 3\right)^{2} = \left(x + 6\right)^{2}.
+    3) x^{2} + x^{2} + 6x + 9 = x^{2} + 12x + 36, czyli x^{2} - 6x - 27 = 0.
+    4) \Delta = \left(-6\right)^{2} - 4\cdot 1\cdot\left(-27\right) = 36 + 108 = 144, \sqrt{\Delta} = 12.
+    5) x = \frac{6 - 12}{2} = -3 (odrzucam, bo długość boku musi być dodatnia) albo x = \frac{6 + 12}{2} = 9.
+    6) Boki mają długości 9, 12, 15 (sprawdzenie: 9^{2} + 12^{2} = 81 + 144 = 225 = 15^{2} ✓).
+    7) Pole: P = \frac{1}{2}\cdot 9\cdot 12 = 54.
+    8) Ciąg \left(a_{n}\right): a_{1} = 9, r = 3, więc S_{20} = \frac{2\cdot 9 + 19\cdot 3}{2}\cdot 20 = \frac{18 + 57}{2}\cdot 20 = 75\cdot 10 = 750.
+    Kontrola: a_{20} = 9 + 19\cdot 3 = 66, S_{20} = \frac{9 + 66}{2}\cdot 20 = \frac{75}{2}\cdot 20 = 750. ✓
+    Odpowiedź: boki mają długości 9, 12 i 15, pole trójkąta wynosi 54, a S_{20} = 750.
+  solution_steps:
+  - Oznacz najkrótszy bok przez x; boki to x, x+3, x+6, przy czym x > 0.
+  - 'Najdłuższy bok jest przeciwprostokątną — zapisz twierdzenie Pitagorasa: x² + (x+3)² = (x+6)².'
+  - Uporządkuj do x² − 6x − 27 = 0, oblicz Δ = 144 i pierwiastki x = −3 oraz x = 9.
+  - Odrzuć x = −3 (długość boku dodatnia); boki mają długości 9, 12, 15.
+  - 'Oblicz pole: P = (1/2)·9·12 = 54.'
+  - Dla a_1 = 9 i r = 3 oblicz S_20 = ((2·9 + 19·3)/2)·20 = 750.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: boki
+      answer:
+        kind: TUPLE
+        items:
+        - '9'
+        - '12'
+        - '15'
+    - name: pole
+      answer:
+        kind: NUMERIC
+        value: 54.0
+    - name: S_20
+      answer:
+        kind: NUMERIC
+        value: 750.0
+  checks:
+  - kind: evaluate
+    expr: \frac{1}{2}\cdot 9\cdot 12
+    part: pole
+  - kind: evaluate
+    expr: \frac{2\cdot 9 + 19\cdot 3}{2}\cdot 20
+    var: n
+    part: S_20
+  stated_model:
+    variable: x
+    objective_latex: P\left(x\right) = \frac{1}{2}\cdot x\cdot\left(x + 3\right)
+    domain_lo: '0'
+    goal: value
+    constraint_used: x^{2} + \left(x + 3\right)^{2} = \left(x + 6\right)^{2}, \ x > 0
+  skills:
+  - twierdzenie Pitagorasa
+  - wprowadzenie niewiadomej
+  - równanie kwadratowe i odrzucanie rozwiązań
+  - pole trójkąta prostokątnego
+  - suma n początkowych wyrazów ciągu arytmetycznego
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''x'': ''P\\left(x\\right)
+      = \\frac{1}{2}\\cdot x\\cdot\\left(x + 3\\right)'') — human review'
+- id: g-ch-t04
+  slot: CHALLENGE
+  ramp_index: 2
+  difficulty: 5
+  exercise_type: 'modelowanie: wzór na sumę z dziedziną oraz ograniczenie zewnętrzne'
+  statement: |-
+    Rury składuje się w stos ułożony warstwami: w najniższej warstwie leży 30 rur, a w każdej kolejnej warstwie leży o jedną rurę mniej niż w warstwie leżącej bezpośrednio pod nią. Stos uznaje się za prawidłowy tylko wtedy, gdy jego najwyższa warstwa zawiera co najmniej 5 rur. Niech n oznacza liczbę warstw stosu (n jest liczbą naturalną, n \geq 1).
+    a) Wyznacz wzór na łączną liczbę rur w stosie złożonym z n warstw oraz podaj wszystkie wartości n, dla których stos jest prawidłowy.
+    b) Do magazynu dostarczono 400 rur. Oblicz największą liczbę warstw prawidłowego stosu, jaki można ułożyć z tych rur.
+    Zapisz obliczenia.
+  statement_latex: S_{n} = \frac{2\cdot 30 + \left(n - 1\right)\cdot\left(-1\right)}{2}\cdot n = \frac{\left(61
+    - n\right)\cdot n}{2}, \qquad S_{n} \leq 400
+  solution: |-
+    a) 1) Liczby rur w kolejnych warstwach (od dołu) tworzą ciąg arytmetyczny o a_{1} = 30 i r = -1, więc liczba rur w n-tej warstwie to a_{n} = 30 + \left(n - 1\right)\cdot\left(-1\right) = 31 - n.
+    2) Łączna liczba rur: S_{n} = \frac{2\cdot 30 + \left(n - 1\right)\cdot\left(-1\right)}{2}\cdot n = \frac{61 - n}{2}\cdot n = \frac{\left(61 - n\right)\cdot n}{2}.
+    3) Warunek prawidłowości: najwyższa warstwa ma a_{n} = 31 - n rur, więc 31 - n \geq 5, czyli n \leq 26. Zatem n \in \left\{1, 2, \dots, 26\right\}.
+    b) 4) Warunek na liczbę rur: \frac{\left(61 - n\right)\cdot n}{2} \leq 400, czyli 61n - n^{2} \leq 800, a stąd n^{2} - 61n + 800 \geq 0.
+    5) \Delta = 61^{2} - 4\cdot 800 = 3721 - 3200 = 521, \sqrt{521} \approx 22{,}83, więc pierwiastki to n = \frac{61 - \sqrt{521}}{2} \approx 19{,}09 oraz n = \frac{61 + \sqrt{521}}{2} \approx 41{,}91.
+    6) Nierówność jest spełniona dla n \leq 19{,}09 lub n \geq 41{,}91; z dziedziny n \leq 26 pozostaje n \leq 19{,}09, czyli n \leq 19.
+    7) Sprawdzenie wykonalności: S_{19} = \frac{\left(61 - 19\right)\cdot 19}{2} = \frac{42\cdot 19}{2} = 399 \leq 400, natomiast S_{20} = \frac{41\cdot 20}{2} = 410 > 400. Ponadto 19 \leq 26, więc taki stos jest prawidłowy.
+    Odpowiedź: a) S_{n} = \frac{\left(61 - n\right)\cdot n}{2} dla n \in \left\{1, 2, \dots, 26\right\}; b) największa liczba warstw to 19 (zużyto 399 rur).
+  solution_steps:
+  - 'Zauważ, że liczby rur w warstwach tworzą ciąg arytmetyczny: a_1 = 30, r = −1, a_n = 31 − n.'
+  - 'Ułóż wzór na łączną liczbę rur: S_n = ((2·30 + (n−1)(−1))/2)·n = ((61 − n)·n)/2.'
+  - 'Z warunku ''stos prawidłowy'' (najwyższa warstwa ≥ 5 rur): 31 − n ≥ 5, czyli n ≤ 26; dziedzina n
+    ∈ {1,…,26}.'
+  - Zapisz nierówność ((61 − n)·n)/2 ≤ 400, czyli n² − 61n + 800 ≥ 0.
+  - Oblicz Δ = 521 i pierwiastki (61 ∓ √521)/2 ≈ 19,09 i 41,91; z uwzględnieniem dziedziny n ≤ 19.
+  - 'Sprawdź: S_19 = 399 ≤ 400, a S_20 = 410 > 400 — największa liczba warstw to 19.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wzor_S_n
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{\left(61 - n\right)\cdot n}{2}
+    - name: dziedzina
+      answer:
+        kind: INTERVAL
+        lo: '1'
+        hi: '26'
+        lo_open: false
+        hi_open: false
+    - name: max_liczba_warstw
+      answer:
+        kind: NUMERIC
+        value: 19.0
+  checks:
+  - kind: simplify
+    expr: \frac{2\cdot 30 + \left(n - 1\right)\cdot\left(-1\right)}{2}\cdot n
+    var: n
+    part: wzor_S_n
+  - kind: evaluate
+    expr: \left\lfloor \frac{61 - \sqrt{521}}{2} \right\rfloor
+    var: n
+    part: max_liczba_warstw
+  stated_model:
+    variable: n
+    objective_latex: S\left(n\right) = \frac{\left(61 - n\right)\cdot n}{2}
+    domain_lo: '1'
+    domain_hi: '26'
+    domain_lo_open: false
+    domain_hi_open: false
+    constraint_used: S\left(n\right) \leq 400 oraz 31 - n \geq 5
+  skills:
+  - układanie wzoru na sumę n początkowych wyrazów
+  - wyznaczanie dziedziny z warunku zadania
+  - nierówność kwadratowa
+  - sprawdzanie warunku wykonalności
+  - interpretacja wyniku
+  verification:
+    checkability: STATED_MODEL
+    note: 'stage 1 inconclusive: SympifyError: SympifyError: "cannot sympify object of type <class ''sympy.core.singleton.SingletonRegistry''>"'

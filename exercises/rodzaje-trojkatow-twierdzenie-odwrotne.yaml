@@ -1,0 +1,865 @@
+section: rodzaje-trojkatow-twierdzenie-odwrotne
+name: Rodzaje trójkątów; twierdzenie odwrotne do twierdzenia Pitagorasa
+scope: Classifying a triangle as acute, right or obtuse from its side lengths, using the converse of the
+  Pythagorean theorem.
+requirements:
+- VIII.2
+counts:
+  total: 16
+  REFERENCE_CALL: 10
+  DETERMINISTIC: 3
+  STATED_MODEL: 3
+exercises:
+- id: g-th-00
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: klasyfikacja trójkąta z długości boków
+  statement: Dany jest trójkąt o bokach długości 9, 12 i 15. Oblicz sumę kwadratów dwóch krótszych boków
+    oraz kwadrat najdłuższego boku, a następnie określ rodzaj tego trójkąta (ostrokątny, prostokątny czy
+    rozwartokątny).
+  statement_latex: 9^{2}+12^{2} \quad\text{oraz}\quad 15^{2}
+  solution: |-
+    Najdłuższym bokiem jest c = 15, krótsze boki to a = 9 i b = 12. Warunek istnienia trójkąta jest spełniony, bo 9 + 12 = 21 > 15.
+    Obliczamy sumę kwadratów krótszych boków: 9² + 12² = 81 + 144 = 225.
+    Obliczamy kwadrat najdłuższego boku: 15² = 225.
+    Ponieważ 225 = 225, czyli a² + b² = c², to na mocy twierdzenia odwrotnego do twierdzenia Pitagorasa trójkąt jest prostokątny, a kąt prosty leży naprzeciw boku długości 15. (To trójka pitagorejska (3, 4, 5) pomnożona przez 3.)
+  solution_steps:
+  - 'Sprawdzam warunek istnienia trójkąta: 9 + 12 = 21 > 15.'
+  - 'Wskazuję najdłuższy bok: c = 15, pozostałe a = 9, b = 12.'
+  - Obliczam a² + b² = 81 + 144 = 225.
+  - Obliczam c² = 15² = 225.
+  - 'Porównuję: 225 = 225, więc z twierdzenia odwrotnego do twierdzenia Pitagorasa trójkąt jest prostokątny.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: suma kwadratów krótszych boków
+      answer:
+        kind: NUMERIC
+        value: 225.0
+    - name: kwadrat najdłuższego boku
+      answer:
+        kind: NUMERIC
+        value: 225.0
+    - name: rodzaj trójkąta
+      answer:
+        kind: SYMBOLIC
+        latex: \text{trójkąt prostokątny}
+  checks:
+  - kind: evaluate
+    expr: 9^{2}+12^{2}
+    part: suma kwadratów krótszych boków
+  - kind: evaluate
+    expr: 15^{2}
+    part: kwadrat najdłuższego boku
+  skills:
+  - twierdzenie odwrotne do twierdzenia Pitagorasa
+  - rozpoznawanie trójki pitagorejskiej
+  - porównywanie kwadratów boków
+  verification:
+    checkability: REFERENCE_CALL
+    note: 'could not compare: part disagrees: NOT_MACHINE_CHECKABLE: ''prose inside the expression'''
+- id: g-th-01
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: klasyfikacja trójkąta z długości boków
+  statement: Boki trójkąta mają długości 7, 9 i 11. Oblicz sumę kwadratów dwóch krótszych boków oraz kwadrat
+    najdłuższego boku i rozstrzygnij, jakiego rodzaju jest ten trójkąt.
+  statement_latex: 7^{2}+9^{2} \quad\text{oraz}\quad 11^{2}
+  solution: |-
+    Porządkuję boki rosnąco: 7 < 9 < 11, więc c = 11 jest najdłuższym bokiem, a = 7, b = 9.
+    Warunek istnienia: 7 + 9 = 16 > 11 — trójkąt istnieje.
+    Suma kwadratów krótszych boków: 7² + 9² = 49 + 81 = 130.
+    Kwadrat najdłuższego boku: 11² = 121.
+    Ponieważ 130 > 121, czyli a² + b² > c², kąt leżący naprzeciw boku 11 jest ostry. Jest to największy kąt trójkąta, więc wszystkie kąty są ostre — trójkąt jest ostrokątny.
+  solution_steps:
+  - 'Porządkuję boki rosnąco: 7 < 9 < 11; najdłuższy bok c = 11.'
+  - 'Sprawdzam warunek istnienia: 7 + 9 = 16 > 11.'
+  - Obliczam 7² + 9² = 130.
+  - Obliczam 11² = 121.
+  - Ponieważ 130 > 121, kąt naprzeciw najdłuższego boku jest ostry, więc trójkąt jest ostrokątny.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: suma kwadratów krótszych boków
+      answer:
+        kind: NUMERIC
+        value: 130.0
+    - name: kwadrat najdłuższego boku
+      answer:
+        kind: NUMERIC
+        value: 121.0
+    - name: rodzaj trójkąta
+      answer:
+        kind: SYMBOLIC
+        latex: \text{trójkąt ostrokątny}
+  checks:
+  - kind: evaluate
+    expr: 7^{2}+9^{2}
+    part: suma kwadratów krótszych boków
+  - kind: evaluate
+    expr: 11^{2}
+    part: kwadrat najdłuższego boku
+  skills:
+  - kryterium ostrokątności
+  - porównywanie kwadratów boków
+  verification:
+    checkability: REFERENCE_CALL
+    note: 'could not compare: part disagrees: NOT_MACHINE_CHECKABLE: ''prose inside the expression'''
+- id: g-th-02
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: warunek istnienia trójkąta
+  statement: 'Rozstrzygnij, czy z odcinków o podanych długościach można zbudować trójkąt: a) 3, 8, 12;
+    b) 5, 7, 9. W każdym przypadku zapisz sprawdzaną nierówność.'
+  statement_latex: 3+8 \ \square\ 12 \qquad\text{oraz}\qquad 5+7 \ \square\ 9
+  solution: |-
+    Wystarczy porównać sumę dwóch krótszych odcinków z najdłuższym.
+    a) Najdłuższy odcinek ma długość 12, a suma dwóch krótszych wynosi 3 + 8 = 11. Ponieważ 11 < 12, nierówność trójkąta nie jest spełniona — trójkąta zbudować NIE można.
+    b) Najdłuższy odcinek ma długość 9, a suma dwóch krótszych wynosi 5 + 7 = 12. Ponieważ 12 > 9, nierówność trójkąta jest spełniona — trójkąt zbudować MOŻNA.
+  solution_steps:
+  - 'a) Wskazuję najdłuższy odcinek: 12; sumuję dwa krótsze: 3 + 8 = 11.'
+  - 'a) Porównuję: 11 < 12, więc nierówność trójkąta nie zachodzi — trójkąt nie istnieje.'
+  - 'b) Wskazuję najdłuższy odcinek: 9; sumuję dwa krótsze: 5 + 7 = 12.'
+  - 'b) Porównuję: 12 > 9, więc trójkąt o takich bokach istnieje.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: a) 3, 8, 12
+      answer:
+        kind: BOOLEAN
+        truth: false
+    - name: b) 5, 7, 9
+      answer:
+        kind: BOOLEAN
+        truth: true
+  skills:
+  - nierówność trójkąta
+  - sprawdzanie warunku istnienia trójkąta
+  verification:
+    checkability: REFERENCE_CALL
+    note: 2 parts matched
+- id: g-ex-03
+  slot: EXERCISE
+  ramp_index: 1
+  difficulty: 2
+  exercise_type: klasyfikacja trójkąta i cosinus największego kąta
+  statement: 'W trójkącie ABC dane są długości boków: |AB| = 14, |BC| = 10, |CA| = 8. Rozstrzygnij, jakiego
+    rodzaju jest ten trójkąt, wskaż wierzchołek, przy którym leży jego największy kąt, oraz oblicz cosinus
+    tego kąta.'
+  statement_latex: \cos\gamma = \frac{10^{2}+8^{2}-14^{2}}{2\cdot 10\cdot 8}
+  solution: |-
+    Warunek istnienia: dwa krótsze boki to 8 i 10, a 8 + 10 = 18 > 14 — trójkąt istnieje.
+    Najdłuższym bokiem jest AB o długości 14. Naprzeciw niego leży kąt przy wierzchołku C, więc to on jest największym kątem trójkąta.
+    Porównuję: 10² + 8² = 100 + 64 = 164 oraz 14² = 196. Ponieważ 164 < 196, kąt przy wierzchołku C jest rozwarty, a trójkąt jest rozwartokątny.
+    Z twierdzenia cosinusów: cos γ = (10² + 8² − 14²)/(2·10·8) = (164 − 196)/160 = −32/160 = −1/5 = −0,2.
+    Ujemna wartość cosinusa potwierdza, że kąt C jest rozwarty.
+  solution_steps:
+  - 'Sprawdzam warunek istnienia: 8 + 10 = 18 > 14.'
+  - Wskazuję najdłuższy bok AB = 14; naprzeciw niego leży kąt przy wierzchołku C.
+  - Obliczam 10² + 8² = 164 i 14² = 196.
+  - Ponieważ 164 < 196, trójkąt jest rozwartokątny, a kąt rozwarty leży przy wierzchołku C.
+  - 'Z twierdzenia cosinusów: cos γ = (100 + 64 − 196)/(2·10·8) = −32/160 = −1/5.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: rodzaj trójkąta
+      answer:
+        kind: SYMBOLIC
+        latex: \text{trójkąt rozwartokątny}
+    - name: wierzchołek największego kąta
+      answer:
+        kind: SYMBOLIC
+        latex: C
+    - name: cosinus największego kąta
+      answer:
+        kind: NUMERIC
+        value: -0.2
+  checks:
+  - kind: evaluate
+    expr: \frac{10^{2}+8^{2}-14^{2}}{2\cdot 10\cdot 8}
+    part: cosinus największego kąta
+  skills:
+  - kryterium rozwartokątności
+  - twierdzenie cosinusów
+  - zależność bok–kąt
+  verification:
+    checkability: REFERENCE_CALL
+    note: 'could not compare: part disagrees: NOT_MACHINE_CHECKABLE: ''prose inside the expression'''
+- id: g-ex-04
+  slot: EXERCISE
+  ramp_index: 2
+  difficulty: 3
+  exercise_type: wyznaczanie brakującego boku trójkąta prostokątnego
+  statement: Dwa boki trójkąta mają długości 9 i 12. Wyznacz wszystkie możliwe długości x trzeciego boku,
+    dla których trójkąt ten jest prostokątny. Rozważ oba położenia szukanego boku i za każdym razem sprawdź
+    nierówność trójkąta.
+  statement_latex: x^{2}=9^{2}+12^{2} \qquad\text{albo}\qquad x^{2}+9^{2}=12^{2}
+  solution: |-
+    Przypadek 1: bok x jest przeciwprostokątną (najdłuższym bokiem). Wtedy x² = 9² + 12² = 81 + 144 = 225, czyli x = 15. Sprawdzenie nierówności trójkąta: 9 + 12 = 21 > 15 ✔ (to trójka pitagorejska 9, 12, 15).
+    Przypadek 2: przeciwprostokątną jest dłuższy z danych boków, czyli 12, a x jest przyprostokątną. Wtedy x² + 9² = 12², więc x² = 144 − 81 = 63 i x = √63 = 3√7 ≈ 7,94. Sprawdzenie: dwa krótsze boki to 3√7 i 9, a 3√7 + 9 ≈ 16,9 > 12 ✔.
+    Przypadek, w którym przeciwprostokątną byłby bok długości 9, jest niemożliwy, bo przeciwprostokątna musi być najdłuższym bokiem, a mamy bok 12 > 9.
+    Odpowiedź: x = 15 lub x = 3√7.
+  solution_steps:
+  - 'Przypadek 1: x jest przeciwprostokątną, więc x² = 9² + 12² = 225 i x = 15.'
+  - 'Sprawdzam nierówność trójkąta dla 9, 12, 15: 9 + 12 = 21 > 15.'
+  - 'Przypadek 2: przeciwprostokątną jest bok 12, więc x² = 12² − 9² = 63 i x = 3√7.'
+  - 'Sprawdzam nierówność trójkąta dla 3√7, 9, 12: 3√7 + 9 > 12.'
+  - Odrzucam przypadek, w którym przeciwprostokątną byłby bok 9 (nie jest najdłuższy).
+  - 'Zapisuję odpowiedź: x = 15 lub x = 3√7.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: x, gdy szukany bok jest przeciwprostokątną
+      answer:
+        kind: NUMERIC
+        value: 15.0
+    - name: x, gdy szukany bok jest przyprostokątną
+      answer:
+        kind: SYMBOLIC
+        latex: 3\sqrt{7}
+  checks:
+  - kind: evaluate
+    expr: \sqrt{9^{2}+12^{2}}
+    part: x, gdy szukany bok jest przeciwprostokątną
+  - kind: evaluate
+    expr: \sqrt{12^{2}-9^{2}}
+    part: x, gdy szukany bok jest przyprostokątną
+  skills:
+  - twierdzenie Pitagorasa
+  - rozważanie dwóch przypadków
+  - nierówność trójkąta
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [x, gdy szukany bok jest przeciwprostokątną] SymPy solved it
+      fresh: 15.0 vs 15.0 (tol 1e-09) ; [x, gdy szukany bok jest przyprostokątną] SymPy solved it fresh:
+      7.937253933193772 vs 7.937253933193772 (tol 1e-09)'
+- id: g-ex-05
+  slot: EXERCISE
+  ramp_index: 3
+  difficulty: 4
+  exercise_type: badanie typu trójkąta zależnego od parametru
+  statement: Boki trójkąta mają długości x, x + 4 oraz x + 8, gdzie x > 0. a) Wyznacz wszystkie wartości
+    x, dla których taki trójkąt istnieje. b) Dla jakiej wartości x trójkąt ten jest prostokątny? c) Dla
+    jakich wartości x trójkąt ten jest rozwartokątny?
+  statement_latex: x^{2}+\left(x+4\right)^{2}=\left(x+8\right)^{2}
+  solution: |-
+    Najdłuższym bokiem jest c = x + 8, bo x < x + 4 < x + 8; pozostałe boki to a = x, b = x + 4.
+    a) Warunek istnienia trójkąta: x + (x + 4) > x + 8, czyli 2x + 4 > x + 8, stąd x > 4. Zatem x ∈ (4, +∞).
+    b) Trójkąt jest prostokątny, gdy x² + (x + 4)² = (x + 8)²:
+    x² + x² + 8x + 16 = x² + 16x + 64
+    x² − 8x − 48 = 0, Δ = 64 + 192 = 256, √Δ = 16,
+    x = (8 − 16)/2 = −4 lub x = (8 + 16)/2 = 12.
+    Wartość x = −4 odrzucamy (musi być x > 4), zostaje x = 12, czyli boki 12, 16, 20 ✔.
+    c) Trójkąt jest rozwartokątny, gdy x² + (x + 4)² < (x + 8)², czyli x² − 8x − 48 < 0, a więc x ∈ (−4, 12). Uwzględniając warunek istnienia x > 4, otrzymujemy x ∈ (4, 12).
+    (Dla x > 12 trójkąt jest ostrokątny.)
+  solution_steps:
+  - Zauważam, że najdłuższym bokiem jest x + 8, a krótsze to x oraz x + 4.
+  - 'Warunek istnienia: x + (x + 4) > x + 8 ⇒ x > 4, czyli x ∈ (4, +∞).'
+  - 'Warunek prostokątności: x² + (x + 4)² = (x + 8)² ⇒ x² − 8x − 48 = 0.'
+  - 'Rozwiązuję: Δ = 256, x = −4 lub x = 12; odrzucam x = −4, bo x > 4.'
+  - 'Warunek rozwartokątności: x² + (x + 4)² < (x + 8)² ⇒ x² − 8x − 48 < 0 ⇒ x ∈ (−4, 12).'
+  - 'Przecinam z warunkiem istnienia: x ∈ (4, 12).'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: a) warunek istnienia trójkąta
+      answer:
+        kind: INTERVAL
+        lo: '4'
+        hi: \infty
+    - name: b) trójkąt prostokątny
+      answer:
+        kind: NUMERIC
+        value: 12.0
+    - name: c) trójkąt rozwartokątny
+      answer:
+        kind: INTERVAL
+        lo: '4'
+        hi: '12'
+  checks:
+  - kind: solve_inequality
+    expr: x+\left(x+4\right) > x+8
+    part: a) warunek istnienia trójkąta
+  skills:
+  - nierówność trójkąta z parametrem
+  - równanie i nierówność kwadratowa
+  - kryterium prostokątności i rozwartokątności
+  verification:
+    checkability: REFERENCE_CALL
+    note: 3 parts matched
+- id: g-ex-t00
+  slot: EXERCISE
+  ramp_index: 6
+  difficulty: 3
+  exercise_type: wyznaczanie brakującej długości boku
+  statement: Dwa boki pewnego trójkąta mają długości 9 cm i 12 cm, a trzeci bok ma długość x cm. Wyznacz
+    wszystkie wartości x, dla których ten trójkąt jest prostokątny. Rozważ oba możliwe położenia boku
+    x (raz jako przeciwprostokątnej, raz jako przyprostokątnej) i w każdym przypadku sprawdź nierówność
+    trójkąta.
+  statement_latex: x^2 = 9^2 + 12^2 \quad \text{lub} \quad x^2 + 9^2 = 12^2
+  solution: |-
+    Przeciwprostokątna jest zawsze najdłuższym bokiem, więc bokiem naprzeciw kąta prostego może być albo x, albo dłuższy z danych boków, czyli 12 (bok długości 9 nie może być przeciwprostokątną, bo 9 < 12).
+
+    Przypadek 1: x jest przeciwprostokątną. Z twierdzenia Pitagorasa x^2 = 9^2 + 12^2 = 81 + 144 = 225, więc x = 15 (odrzucamy x = -15, bo długość jest dodatnia). Nierówność trójkąta: 9 + 12 = 21 > 15 ✔. Otrzymujemy trójkąt o bokach 9, 12, 15 — to trójka (3, 4, 5) pomnożona przez 3.
+
+    Przypadek 2: przeciwprostokątną jest bok długości 12, a x jest przyprostokątną. Wtedy x^2 + 9^2 = 12^2, czyli x^2 = 144 - 81 = 63, więc x = \sqrt{63} = 3\sqrt{7} \approx 7{,}94. Nierówność trójkąta: 9 + 3\sqrt{7} > 12, bo 3\sqrt{7} > 3 (gdyż \sqrt{7} > 1) ✔; pozostałe nierówności są oczywiste.
+
+    Odpowiedź: x = 15 cm albo x = 3\sqrt{7} cm.
+  solution_steps:
+  - 'Zauważ, że przeciwprostokątna musi być najdłuższym bokiem, więc możliwe są tylko dwa przypadki: x
+    jest przeciwprostokątną albo przeciwprostokątną jest bok długości 12.'
+  - 'Przypadek 1: x^2 = 9^2 + 12^2 = 225, stąd x = 15.'
+  - 'Sprawdź nierówność trójkąta: 9 + 12 = 21 > 15 ✔.'
+  - 'Przypadek 2: x^2 + 9^2 = 12^2, stąd x^2 = 63 i x = 3\sqrt{7}.'
+  - 'Sprawdź nierówność trójkąta: 9 + 3\sqrt{7} > 12, bo 3\sqrt{7} > 3 ✔.'
+  - 'Zapisz odpowiedź: x = 15 lub x = 3\sqrt{7}.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: x_jako_przeciwprostokatna
+      answer:
+        kind: NUMERIC
+        value: 15.0
+    - name: x_jako_przyprostokatna
+      answer:
+        kind: NUMERIC
+        value: 7.937253933193772
+        tol: 1.0e-06
+  checks:
+  - kind: evaluate
+    expr: \sqrt{9^2 + 12^2}
+    part: x_jako_przeciwprostokatna
+  - kind: evaluate
+    expr: \sqrt{12^2 - 9^2}
+    part: x_jako_przyprostokatna
+  skills:
+  - twierdzenie odwrotne do twierdzenia Pitagorasa
+  - rozważanie obu położeń nieznanego boku
+  - nierówność trójkąta
+  - działania na pierwiastkach
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [x_jako_przeciwprostokatna] SymPy solved it fresh: 15.0 vs
+      15.0 (tol 1e-09) ; [x_jako_przyprostokatna] SymPy solved it fresh: 7.937253933193772 vs 7.937253933193772
+      (tol 1e-06)'
+- id: g-ex-t01
+  slot: EXERCISE
+  ramp_index: 7
+  difficulty: 4
+  exercise_type: badanie typu trójkąta zależnego od parametru
+  statement: |-
+    Boki trójkąta mają długości x, x + 3 oraz x + 6, gdzie x > 0.
+    a) Wyznacz wszystkie wartości x, dla których taki trójkąt istnieje.
+    b) Wyznacz tę wartość x, dla której trójkąt jest prostokątny.
+    c) Wyznacz wszystkie wartości x, dla których trójkąt jest rozwartokątny.
+  statement_latex: x^2 + \left(x + 3\right)^2 = \left(x + 6\right)^2
+  solution: |-
+    Ponieważ x < x + 3 < x + 6, najdłuższym bokiem jest c = x + 6, a pozostałe boki to a = x oraz b = x + 3.
+
+    a) Warunek istnienia: suma dwóch krótszych boków musi być większa od najdłuższego:
+    x + \left(x + 3\right) > x + 6, czyli 2x + 3 > x + 6, stąd x > 3.
+
+    b) Trójkąt jest prostokątny, gdy x^2 + \left(x + 3\right)^2 = \left(x + 6\right)^2:
+    x^2 + x^2 + 6x + 9 = x^2 + 12x + 36,
+    x^2 - 6x - 27 = 0, \Delta = 36 + 108 = 144, \sqrt{\Delta} = 12,
+    x = \frac{6 - 12}{2} = -3 \ \text{lub}\ x = \frac{6 + 12}{2} = 9.
+    Warunek x > 3 odrzuca x = -3, zostaje x = 9. Boki: 9, 12, 15 ✔ (trójka pitagorejska).
+
+    c) Trójkąt jest rozwartokątny, gdy x^2 + \left(x + 3\right)^2 < \left(x + 6\right)^2, czyli x^2 - 6x - 27 < 0, a więc x \in \left(-3,\ 9\right). Przecinamy z warunkiem istnienia x > 3 i otrzymujemy x \in \left(3,\ 9\right).
+
+    Odpowiedź: trójkąt istnieje dla x \in \left(3,\ +\infty\right), jest prostokątny dla x = 9 i rozwartokątny dla x \in \left(3,\ 9\right) (a ostrokątny dla x > 9).
+  solution_steps:
+  - Ustal, że najdłuższym bokiem jest x + 6, bo x < x + 3 < x + 6.
+  - 'Zapisz warunek istnienia: x + \left(x + 3\right) > x + 6, stąd x > 3.'
+  - 'Zapisz warunek prostokątności: x^2 + \left(x + 3\right)^2 = \left(x + 6\right)^2 i przekształć do
+    x^2 - 6x - 27 = 0.'
+  - 'Rozwiąż równanie: \Delta = 144, x = -3 lub x = 9; odrzuć x = -3 wobec x > 3.'
+  - Zapisz warunek rozwartokątności x^2 - 6x - 27 < 0, czyli x \in \left(-3,\ 9\right).
+  - 'Przetnij z warunkiem istnienia: x \in \left(3,\ 9\right).'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: warunek_istnienia
+      answer:
+        kind: INTERVAL
+        lo: '3'
+    - name: x_prostokatny
+      answer:
+        kind: NUMERIC
+        value: 9.0
+    - name: x_rozwartokatny
+      answer:
+        kind: INTERVAL
+        lo: '3'
+        hi: '9'
+  checks:
+  - kind: solve_inequality
+    expr: x + \left(x + 3\right) > x + 6
+    part: warunek_istnienia
+  - kind: evaluate
+    expr: \frac{6 + \sqrt{36 + 4 \cdot 27}}{2}
+    part: x_prostokatny
+  - kind: solve_inequality
+    expr: \left(x - 3\right) \cdot \left(9 - x\right) > 0
+    part: x_rozwartokatny
+  skills:
+  - nierówność trójkąta z parametrem
+  - kryterium prostokątności i rozwartokątności
+  - rozwiązywanie równania i nierówności kwadratowej
+  - przecinanie zbiorów rozwiązań z warunkiem istnienia
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [warunek_istnienia] SymPy solved it fresh: endpoints matched
+      ; [x_prostokatny] SymPy solved it fresh: 9.0 vs 9.0 (tol 1e-09) ; [x_rozwartokatny] SymPy solved
+      it fresh: endpoints matched'
+- id: g-cm-06
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: analiza błędu — porównywanie kwadratów bez wskazania najdłuższego boku
+  statement: 'Boki trójkąta mają długości 6, 9 i 5 (podane w takiej właśnie kolejności). Uczeń napisał:
+    „6² + 9² = 36 + 81 = 117, a 5² = 25, więc 117 > 25 i trójkąt jest ostrokątny”. Wskaż błąd w tym rozumowaniu,
+    a następnie oblicz poprawnie sumę kwadratów dwóch krótszych boków i kwadrat najdłuższego boku oraz
+    podaj rodzaj trójkąta.'
+  statement_latex: 5^{2}+6^{2} \quad\text{oraz}\quad 9^{2}
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń podniósł do kwadratu boki w kolejności, w jakiej zostały zapisane, i porównał 6² + 9² = 117 z 5² = 25. Otrzymał 117 > 25 i wywnioskował, że trójkąt jest ostrokątny.
+    DLACZEGO TO BŁĄD: w kryterium po prawej stronie musi stać kwadrat NAJDŁUŻSZEGO boku, bo tylko naprzeciw najdłuższego boku może leżeć kąt prosty lub rozwarty (naprzeciw dłuższego boku leży większy kąt). Uczeń wziął jako „c” bok długości 5, który jest najkrótszy — takie porównanie o niczym nie rozstrzyga.
+    POPRAWNIE: porządkuję boki rosnąco: 5 < 6 < 9, więc a = 5, b = 6, c = 9. Warunek istnienia: 5 + 6 = 11 > 9 ✔.
+    Obliczam a² + b² = 25 + 36 = 61 oraz c² = 81. Ponieważ 61 < 81, trójkąt jest ROZWARTOKĄTNY, a kąt rozwarty leży naprzeciw boku długości 9.
+  solution_steps:
+  - 'Odtwarzam błąd: uczeń porównał 6² + 9² = 117 z 5² = 25, biorąc jako „c” bok najkrótszy.'
+  - 'Wskazuję błąd: po prawej stronie kryterium musi stać kwadrat najdłuższego boku.'
+  - 'Porządkuję boki rosnąco: 5 < 6 < 9, czyli c = 9.'
+  - 'Sprawdzam istnienie trójkąta: 5 + 6 = 11 > 9.'
+  - Obliczam 5² + 6² = 61 oraz 9² = 81.
+  - Ponieważ 61 < 81, trójkąt jest rozwartokątny (kąt rozwarty naprzeciw boku 9).
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: suma kwadratów dwóch krótszych boków
+      answer:
+        kind: NUMERIC
+        value: 61.0
+    - name: kwadrat najdłuższego boku
+      answer:
+        kind: NUMERIC
+        value: 81.0
+    - name: rodzaj trójkąta
+      answer:
+        kind: SYMBOLIC
+        latex: \text{trójkąt rozwartokątny}
+  checks:
+  - kind: evaluate
+    expr: 5^{2}+6^{2}
+    part: suma kwadratów dwóch krótszych boków
+  - kind: evaluate
+    expr: 9^{2}
+    part: kwadrat najdłuższego boku
+  skills:
+  - porządkowanie boków
+  - kryterium rozwartokątności
+  - ocena cudzego rozumowania
+  verification:
+    checkability: REFERENCE_CALL
+    note: 'could not compare: part disagrees: NOT_MACHINE_CHECKABLE: ''prose inside the expression'''
+- id: g-cm-07
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: analiza błędu — pominięcie warunku istnienia trójkąta
+  statement: 'Uczeń miał rozstrzygnąć, jakiego rodzaju jest trójkąt o bokach długości 4, 5 i 10. Napisał:
+    „4² + 5² = 16 + 25 = 41, a 10² = 100. Ponieważ 41 < 100, trójkąt jest rozwartokątny”. Rozstrzygnij,
+    czy z odcinków o długościach 4, 5 i 10 można zbudować trójkąt, i wskaż błąd w rozumowaniu ucznia.'
+  statement_latex: 4+5 \ \square\ 10
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń od razu zastosował kryterium kwadratów: 4² + 5² = 41 < 100 = 10², i odpowiedział „trójkąt rozwartokątny”.
+    DLACZEGO TO BŁĄD: zanim zastosujemy kryterium, trzeba sprawdzić, czy trójkąt o takich bokach w ogóle istnieje. Kryterium ostrokątności/rozwartokątności dotyczy wyłącznie istniejących trójkątów.
+    POPRAWNIE: najdłuższy odcinek ma długość 10, a suma dwóch krótszych wynosi 4 + 5 = 9. Ponieważ 9 < 10, nierówność trójkąta nie jest spełniona i takiego trójkąta ZBUDOWAĆ NIE MOŻNA — nie ma więc czego klasyfikować. Odpowiedź „rozwartokątny” jest bezprzedmiotowa.
+  solution_steps:
+  - 'Odtwarzam błąd: uczeń porównał 41 < 100 i orzekł „rozwartokątny”.'
+  - 'Wskazuję błąd: nie sprawdzono warunku istnienia trójkąta.'
+  - 'Sprawdzam nierówność trójkąta: 4 + 5 = 9, a najdłuższy odcinek ma 10.'
+  - Ponieważ 9 < 10, trójkąt nie istnieje, więc klasyfikacja nie ma sensu.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: czy można zbudować trójkąt
+      answer:
+        kind: BOOLEAN
+        truth: false
+    - name: rodzaj trójkąta
+      answer:
+        kind: SYMBOLIC
+        latex: \text{trójkąt nie istnieje — klasyfikacja niemożliwa}
+  skills:
+  - nierówność trójkąta
+  - ocena cudzego rozumowania
+  verification:
+    checkability: REFERENCE_CALL
+    note: 'could not compare: kind mismatch: answer=MULTIPART reference=BOOLEAN'
+- id: g-cm-08
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: analiza błędu — mylenie kierunku nierówności w kryterium
+  statement: 'Boki trójkąta mają długości 4, 7 i 9. Uczeń napisał: „4² + 7² = 65, a 9² = 81, więc suma
+    kwadratów jest mniejsza od 81 — bok 9 jest za krótki na kąt prosty, zatem trójkąt jest ostrokątny”.
+    Wskaż błąd w tym rozumowaniu, podaj poprawny rodzaj trójkąta oraz oblicz cosinus jego największego
+    kąta.'
+  statement_latex: \cos\gamma=\frac{4^{2}+7^{2}-9^{2}}{2\cdot 4\cdot 7}
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń poprawnie policzył 4² + 7² = 16 + 49 = 65 oraz 9² = 81, ale odwrócił wniosek: uznał, że nierówność a² + b² < c² oznacza „za krótki” bok c i kąt ostry.
+    DLACZEGO TO BŁĄD: jest dokładnie odwrotnie. Gdy a² + b² < c², bok c jest ZA DŁUGI jak na kąt prosty, więc kąt leżący naprzeciw niego jest ROZWARTY. Kąt ostry naprzeciw c mamy wtedy, gdy a² + b² > c².
+    POPRAWNIE: 4 + 7 = 11 > 9, więc trójkąt istnieje. Ponieważ 65 < 81, trójkąt jest ROZWARTOKĄTNY, a kąt rozwarty leży naprzeciw boku długości 9.
+    Potwierdzenie rachunkiem: cos γ = (4² + 7² − 9²)/(2·4·7) = (65 − 81)/56 = −16/56 = −2/7 ≈ −0,286. Ujemny cosinus oznacza kąt rozwarty.
+  solution_steps:
+  - 'Odtwarzam błąd: uczeń z 65 < 81 wywnioskował „ostrokątny”.'
+  - 'Wskazuję błąd: a² + b² < c² oznacza kąt rozwarty naprzeciw boku c.'
+  - 'Sprawdzam istnienie trójkąta: 4 + 7 = 11 > 9.'
+  - 'Stwierdzam: 4² + 7² = 65 < 81 = 9², więc trójkąt jest rozwartokątny.'
+  - Obliczam cos γ = (16 + 49 − 81)/(2·4·7) = −16/56 = −2/7 < 0, co potwierdza kąt rozwarty.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: rodzaj trójkąta
+      answer:
+        kind: SYMBOLIC
+        latex: \text{trójkąt rozwartokątny}
+    - name: cosinus największego kąta
+      answer:
+        kind: SYMBOLIC
+        latex: -\frac{2}{7}
+  checks:
+  - kind: evaluate
+    expr: \frac{4^{2}+7^{2}-9^{2}}{2\cdot 4\cdot 7}
+    part: cosinus największego kąta
+  skills:
+  - kryterium rozwartokątności
+  - twierdzenie cosinusów
+  - ocena cudzego rozumowania
+  verification:
+    checkability: REFERENCE_CALL
+    note: 'could not compare: part disagrees: NOT_MACHINE_CHECKABLE: ''prose inside the expression'''
+- id: g-cm-09
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: analiza błędu — mylenie twierdzenia Pitagorasa z twierdzeniem odwrotnym
+  statement: 'Uczeń zapisał: „Ponieważ 20² + 21² = 29², to na mocy twierdzenia Pitagorasa trójkąt o bokach
+    20, 21, 29 jest prostokątny”. Sprawdź rachunek, obliczając 20² + 21² oraz 29², podaj rodzaj tego trójkąta
+    i wskaż, na jakie twierdzenie należało się powołać w uzasadnieniu.'
+  statement_latex: 20^{2}+21^{2} \quad\text{oraz}\quad 29^{2}
+  solution: |-
+    BŁĘDNE UZASADNIENIE: uczeń z równości kwadratów wywnioskował prostokątność i nazwał to twierdzeniem Pitagorasa.
+    DLACZEGO TO BŁĄD: twierdzenie Pitagorasa ZAKŁADA, że trójkąt jest prostokątny, i DAJE równość a² + b² = c². Tutaj rozumujemy w drugą stronę: mamy równość i wnioskujemy o prostokątności — to jest treść twierdzenia ODWROTNEGO do twierdzenia Pitagorasa. Sam wynik ucznia jest dobry, ale nazwa twierdzenia — nie.
+    SPRAWDZENIE RACHUNKU: 20² + 21² = 400 + 441 = 841 oraz 29² = 841. Warunek istnienia: 20 + 21 = 41 > 29 ✔.
+    Ponieważ 841 = 841, na mocy twierdzenia odwrotnego do twierdzenia Pitagorasa trójkąt jest PROSTOKĄTNY, a kąt prosty leży naprzeciw boku długości 29. (Trójka (20, 21, 29) jest trójką pitagorejską.)
+  solution_steps:
+  - 'Odtwarzam błąd: uczeń powołał się na twierdzenie Pitagorasa zamiast na twierdzenie odwrotne.'
+  - 'Wyjaśniam różnicę: twierdzenie Pitagorasa: prostokątność ⇒ równość; twierdzenie odwrotne: równość
+    ⇒ prostokątność.'
+  - Obliczam 20² + 21² = 400 + 441 = 841.
+  - 'Obliczam 29² = 841 i sprawdzam istnienie trójkąta: 20 + 21 = 41 > 29.'
+  - Ponieważ 841 = 841, trójkąt jest prostokątny (kąt prosty naprzeciw boku 29) — na mocy twierdzenia
+    odwrotnego do twierdzenia Pitagorasa.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: suma kwadratów krótszych boków
+      answer:
+        kind: NUMERIC
+        value: 841.0
+    - name: kwadrat najdłuższego boku
+      answer:
+        kind: NUMERIC
+        value: 841.0
+    - name: rodzaj trójkąta
+      answer:
+        kind: SYMBOLIC
+        latex: \text{trójkąt prostokątny}
+    - name: właściwe twierdzenie
+      answer:
+        kind: SYMBOLIC
+        latex: \text{twierdzenie odwrotne do twierdzenia Pitagorasa}
+  checks:
+  - kind: evaluate
+    expr: 20^{2}+21^{2}
+    part: suma kwadratów krótszych boków
+  - kind: evaluate
+    expr: 29^{2}
+    part: kwadrat najdłuższego boku
+  skills:
+  - twierdzenie odwrotne do twierdzenia Pitagorasa
+  - trójki pitagorejskie
+  - poprawność uzasadnienia
+  verification:
+    checkability: REFERENCE_CALL
+    note: 'could not compare: part disagrees: NOT_MACHINE_CHECKABLE: ''prose inside the expression'''
+- id: g-cm-10
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: analiza błędu — sumowanie boków zamiast ich kwadratów
+  statement: 'Uczeń napisał: „Boki mają długości 6, 8 i 14, a 6 + 8 = 14, więc trójkąt jest prostokątny”.
+    Oblicz 6² + 8² oraz 14², rozstrzygnij, czy z odcinków o długościach 6, 8 i 14 można zbudować trójkąt,
+    i wskaż błąd w rozumowaniu ucznia.'
+  statement_latex: 6^{2}+8^{2} \quad\text{oraz}\quad 14^{2}
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń dodał same długości boków (6 + 8 = 14) i uznał to za warunek prostokątności.
+    DLACZEGO TO BŁĄD: warunek z twierdzenia odwrotnego do twierdzenia Pitagorasa dotyczy KWADRATÓW długości, a nie samych długości. Tutaj 6² + 8² = 36 + 64 = 100, natomiast 14² = 196, więc 100 ≠ 196 — równość kwadratów nie zachodzi.
+    CO WIĘCEJ: równość 6 + 8 = 14 oznacza, że suma dwóch krótszych boków jest równa najdłuższemu, czyli nierówność trójkąta NIE jest spełniona (potrzeba 6 + 8 > 14). Punkty leżałyby na jednej prostej — trójkąt jest zdegenerowany, czyli nie istnieje.
+    POPRAWNA ODPOWIEDŹ: 6² + 8² = 100, 14² = 196, trójkąta o takich bokach zbudować nie można.
+  solution_steps:
+  - 'Odtwarzam błąd: uczeń użył równości 6 + 8 = 14 zamiast warunku na kwadratach.'
+  - Obliczam 6² + 8² = 36 + 64 = 100.
+  - Obliczam 14² = 196; ponieważ 100 ≠ 196, warunek prostokątności nie jest spełniony.
+  - 'Sprawdzam nierówność trójkąta: 6 + 8 = 14, a powinno być 6 + 8 > 14.'
+  - 'Wniosek: trójkąt nie istnieje (jest zdegenerowany), więc nie jest prostokątny.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: suma kwadratów krótszych boków
+      answer:
+        kind: NUMERIC
+        value: 100.0
+    - name: kwadrat najdłuższego boku
+      answer:
+        kind: NUMERIC
+        value: 196.0
+    - name: czy można zbudować trójkąt
+      answer:
+        kind: BOOLEAN
+        truth: false
+  checks:
+  - kind: evaluate
+    expr: 6^{2}+8^{2}
+    part: suma kwadratów krótszych boków
+  - kind: evaluate
+    expr: 14^{2}
+    part: kwadrat najdłuższego boku
+  skills:
+  - kryterium prostokątności
+  - nierówność trójkąta
+  - ocena cudzego rozumowania
+  verification:
+    checkability: REFERENCE_CALL
+    note: '3 parts matched · det: [suma kwadratów krótszych boków] SymPy solved it fresh: 100.0 vs 100.0
+      (tol 1e-09) ; [kwadrat najdłuższego boku] SymPy solved it fresh: 196.0 vs 196.0 (tol 1e-09)'
+- id: g-ch-t02
+  slot: CHALLENGE
+  ramp_index: 0
+  difficulty: 4
+  exercise_type: zadanie modelujące — klasyfikacja trójkąta z warunków słownych
+  statement: Obwód pewnego trójkąta równoramiennego jest równy 36 cm, a jego podstawa jest o 3 cm dłuższa
+    od ramienia. Oblicz długość ramienia i długość podstawy tego trójkąta oraz rozstrzygnij, jakiego rodzaju
+    ze względu na kąty jest ten trójkąt (ostrokątny, prostokątny czy rozwartokątny).
+  statement_latex: 2 \cdot x + \left(x + 3\right) = 36
+  solution: |-
+    Oznaczmy przez x długość ramienia (w cm). Wtedy podstawa ma długość x + 3, a trójkąt ma boki x, x, x + 3.
+
+    Z warunku o obwodzie: 2 \cdot x + \left(x + 3\right) = 36, czyli 3x + 3 = 36, stąd 3x = 33 i x = 11.
+    Ramię ma więc długość 11 cm, a podstawa 11 + 3 = 14 cm.
+
+    Sprawdzenie istnienia trójkąta: 11 + 11 = 22 > 14 ✔.
+
+    Najdłuższym bokiem jest podstawa c = 14, więc naprzeciw niej leży największy kąt i to on decyduje o rodzaju trójkąta. Porównujemy:
+    11^2 + 11^2 = 121 + 121 = 242 oraz 14^2 = 196.
+    Ponieważ 242 > 196, czyli a^2 + b^2 > c^2, największy kąt jest ostry, a zatem wszystkie kąty trójkąta są ostre.
+
+    Odpowiedź: ramię ma 11 cm, podstawa 14 cm, trójkąt jest ostrokątny (i równoramienny).
+  solution_steps:
+  - 'Wprowadź zmienną: x — długość ramienia, wtedy podstawa ma długość x + 3.'
+  - 'Zapisz równanie obwodu: 2 \cdot x + \left(x + 3\right) = 36.'
+  - 'Rozwiąż: 3x + 3 = 36, x = 11; podstawa ma długość 14.'
+  - 'Sprawdź nierówność trójkąta: 11 + 11 = 22 > 14 ✔.'
+  - Wskaż najdłuższy bok c = 14 i porównaj 11^2 + 11^2 = 242 z 14^2 = 196.
+  - Ponieważ 242 > 196, kąt naprzeciw najdłuższego boku jest ostry — trójkąt jest ostrokątny.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: ramie
+      answer:
+        kind: NUMERIC
+        value: 11.0
+    - name: podstawa
+      answer:
+        kind: NUMERIC
+        value: 14.0
+    - name: rodzaj
+      answer:
+        kind: SYMBOLIC
+        latex: ostrokątny
+  checks:
+  - kind: solve_equation
+    expr: 2 \cdot x + \left(x + 3\right) = 36
+    part: ramie
+  - kind: evaluate
+    expr: 11 + 3
+    part: podstawa
+  stated_model:
+    variable: x
+    objective_latex: 3 \cdot x + 3
+    domain_lo: '3'
+    goal: value
+    constraint_used: 3 \cdot x + 3 = 36 \ \wedge\ 2 \cdot x > x + 3
+  skills:
+  - wprowadzenie zmiennej
+  - równanie z warunku o obwodzie
+  - nierówność trójkąta
+  - kryterium ostrokątności
+  verification:
+    checkability: STATED_MODEL
+    note: 'stage 1 inconclusive: kind mismatch: answer=SYMBOLIC reference=MULTIPART'
+- id: g-ch-t03
+  slot: CHALLENGE
+  ramp_index: 1
+  difficulty: 5
+  exercise_type: zliczanie rozwiązań całkowitych z podziałem na przypadki
+  statement: Dane są dwa odcinki o długościach 5 i 12 oraz odcinek o długości x, gdzie x jest liczbą całkowitą
+    dodatnią. Wyznacz wszystkie wartości x, dla których z tych trzech odcinków można zbudować trójkąt
+    rozwartokątny, oraz podaj, ile jest takich liczb x. W rozwiązaniu wyznacz też przedział wszystkich
+    x (niekoniecznie całkowitych), dla których trójkąt o bokach 5, 12, x w ogóle istnieje.
+  statement_latex: 5^2 + x^2 < 12^2 \quad \text{lub} \quad 5^2 + 12^2 < x^2
+  solution: |-
+    Krok 1. Warunek istnienia trójkąta. Muszą zachodzić: 5 + 12 > x, 5 + x > 12 oraz 12 + x > 5. Dwie pierwsze dają x < 17 i x > 7, trzecia jest wtedy spełniona. Zatem trójkąt istnieje dokładnie dla x \in \left(7,\ 17\right), a liczby całkowite z tego przedziału to 8, 9, 10, 11, 12, 13, 14, 15, 16.
+
+    Krok 2. Który bok jest najdłuższy? To zależy od x, więc rozpatrujemy dwa przypadki.
+
+    Przypadek A: x > 12, czyli najdłuższym bokiem jest x. Trójkąt jest rozwartokątny, gdy 5^2 + 12^2 < x^2, czyli 169 < x^2, czyli x > 13. Wśród liczb całkowitych mniejszych od 17 daje to x \in \{14, 15, 16\}. (Dla x = 13 mamy równość — trójkąt jest prostokątny, a nie rozwartokątny.)
+
+    Przypadek B: x \le 12, czyli najdłuższym bokiem jest 12. Trójkąt jest rozwartokątny, gdy 5^2 + x^2 < 12^2, czyli x^2 < 119. Ponieważ 10^2 = 100 < 119, a 11^2 = 121 > 119, warunek spełniają liczby całkowite x = 8, 9, 10 (pamiętamy, że musi być x > 7).
+
+    Krok 3. Łącznie x \in \{8, 9, 10, 14, 15, 16\} — jest 6 takich liczb.
+  solution_steps:
+  - Zapisz nierówność trójkąta dla boków 5, 12, x i otrzymaj x \in \left(7,\ 17\right).
+  - Zauważ, że najdłuższym bokiem jest 12 albo x — rozważ oba przypadki.
+  - 'Przypadek x > 12: warunek 5^2 + 12^2 < x^2 daje x > 13, więc x \in \{14, 15, 16\}.'
+  - 'Przypadek x \le 12: warunek 5^2 + x^2 < 12^2 daje x^2 < 119, więc x \in \{8, 9, 10\}.'
+  - Odrzuć x = 13 (trójkąt prostokątny) oraz x = 11, 12 (trójkąt ostrokątny).
+  - 'Zbierz odpowiedź: x \in \{8, 9, 10, 14, 15, 16\}, czyli 6 wartości.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: przedzial_istnienia
+      answer:
+        kind: INTERVAL
+        lo: '7'
+        hi: '17'
+    - name: zbior_x
+      answer:
+        kind: SET
+        members:
+        - '8'
+        - '9'
+        - '10'
+        - '14'
+        - '15'
+        - '16'
+    - name: liczba_wartosci
+      answer:
+        kind: NUMERIC
+        value: 6.0
+  checks:
+  - kind: solve_inequality
+    expr: \left(x - 7\right) \cdot \left(17 - x\right) > 0
+    part: przedzial_istnienia
+  - kind: evaluate
+    expr: \left(10 - 8 + 1\right) + \left(16 - 14 + 1\right)
+    part: liczba_wartosci
+  stated_model:
+    variable: x
+    objective_latex: 5^2 + 12^2 - x^2
+    domain_lo: '7'
+    domain_hi: '17'
+    goal: value
+    constraint_used: 7 < x < 17 \ \wedge\ x \in \mathbb{Z}
+  skills:
+  - nierówność trójkąta
+  - kryterium rozwartokątności
+  - podział na przypadki według najdłuższego boku
+  - wybór rozwiązań całkowitych
+  verification:
+    checkability: STATED_MODEL
+    note: 'stage 1 inconclusive: kind mismatch: answer=SYMBOLIC reference=MULTIPART'
+- id: g-ch-t04
+  slot: CHALLENGE
+  ramp_index: 2
+  difficulty: 5
+  exercise_type: 'zadanie modelowe: wzór i dziedzina, następnie warunek prostokątności'
+  statement: |-
+    Z kawałka drutu o długości 60 cm wygięto model trójkąta równoramiennego, zużywając cały drut (drut tworzy trzy boki trójkąta). Ramię tego trójkąta ma długość x cm.
+    a) Zapisz długość podstawy trójkąta jako wyrażenie zależne od x oraz wyznacz zbiór wszystkich wartości x, dla których taki trójkąt istnieje.
+    b) Wyznacz tę wartość x, dla której otrzymany trójkąt jest prostokątny, i sprawdź, czy należy ona do zbioru wyznaczonego w punkcie a).
+  statement_latex: x^2 + x^2 = \left(60 - 2 \cdot x\right)^2
+  solution: |-
+    a) Trójkąt równoramienny ma dwa ramiona długości x, więc na podstawę zostaje
+    p\left(x\right) = 60 - 2 \cdot x (w centymetrach).
+    Warunki: x > 0 oraz 60 - 2x > 0, czyli x < 30. Ponadto musi być spełniona nierówność trójkąta dla najdłuższego z boków. Gdy podstawa jest najdłuższa, potrzeba x + x > 60 - 2x, czyli 4x > 60, a więc x > 15; gdy najdłuższe jest ramię, druga nierówność x + \left(60 - 2x\right) > x zachodzi automatycznie dla x < 30.
+    Zatem trójkąt istnieje dokładnie dla x \in \left(15,\ 30\right).
+
+    b) Kąt prosty nie może leżeć naprzeciw ramienia: gdyby ramię było przeciwprostokątną, mielibyśmy x^2 = x^2 + \left(60 - 2x\right)^2, czyli \left(60 - 2x\right)^2 = 0, co daje x = 30 — wartość odrzucona (brak podstawy). Zatem przeciwprostokątną musi być podstawa i
+    x^2 + x^2 = \left(60 - 2 \cdot x\right)^2,
+    2x^2 = \left(60 - 2x\right)^2.
+    Dla x \in \left(15,\ 30\right) obie strony są dodatnie i 60 - 2x > 0, więc pierwiastkujemy:
+    x\sqrt{2} = 60 - 2x,
+    x\left(\sqrt{2} + 2\right) = 60,
+    x = \frac{60}{2 + \sqrt{2}} = \frac{60\left(2 - \sqrt{2}\right)}{\left(2 + \sqrt{2}\right)\left(2 - \sqrt{2}\right)} = \frac{60\left(2 - \sqrt{2}\right)}{2} = 60 - 30\sqrt{2}.
+    Sprawdzenie zgodności z dziedziną: 30\sqrt{2} \approx 42{,}43, więc x \approx 17{,}57 i rzeczywiście 15 < x < 30 ✔. Podstawa ma wtedy długość 60 - 2x = 60\sqrt{2} - 60 \approx 24{,}85 cm i jest najdłuższym bokiem, co potwierdza, że to ona jest przeciwprostokątną.
+
+    Odpowiedź: podstawa ma długość 60 - 2x, trójkąt istnieje dla x \in \left(15,\ 30\right), a jest prostokątny dla x = 60 - 30\sqrt{2} \approx 17{,}57 cm.
+  solution_steps:
+  - 'Z obwodu 60 wyznacz podstawę: 60 - x - x = 60 - 2 \cdot x.'
+  - 'Zapisz warunki dodatniości: x > 0 i 60 - 2x > 0, czyli x < 30.'
+  - 'Zapisz nierówność trójkąta x + x > 60 - 2x, stąd x > 15; dziedzina: x \in \left(15,\ 30\right).'
+  - Uzasadnij, że przeciwprostokątną może być tylko podstawa, i zapisz równanie x^2 + x^2 = \left(60 -
+    2x\right)^2.
+  - Pierwiastkując (obie strony dodatnie) otrzymaj x\sqrt{2} = 60 - 2x, czyli x = \frac{60}{2 + \sqrt{2}}
+    = 60 - 30\sqrt{2}.
+  - Sprawdź, że 60 - 30\sqrt{2} \approx 17{,}57 należy do przedziału \left(15,\ 30\right).
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wzor_podstawy
+      answer:
+        kind: SYMBOLIC
+        latex: 60 - 2 \cdot x
+    - name: dziedzina
+      answer:
+        kind: INTERVAL
+        lo: '15'
+        hi: '30'
+    - name: x_prostokatny
+      answer:
+        kind: NUMERIC
+        value: 17.57359312880715
+        tol: 1.0e-06
+  checks:
+  - kind: simplify
+    expr: 60 - x - x
+    part: wzor_podstawy
+  - kind: solve_inequality
+    expr: \left(x - 15\right) \cdot \left(30 - x\right) > 0
+    part: dziedzina
+  - kind: evaluate
+    expr: \frac{60}{2 + \sqrt{2}}
+    part: x_prostokatny
+  stated_model:
+    variable: x
+    objective_latex: 60 - 2 \cdot x
+    domain_lo: '15'
+    domain_hi: '30'
+    goal: value
+    constraint_used: obwód równy 60 oraz nierówność trójkąta 2 \cdot x > 60 - 2 \cdot x
+  skills:
+  - 'modelowanie: wyrażenie boku przez parametr'
+  - wyznaczanie dziedziny z nierówności trójkąta
+  - twierdzenie odwrotne do twierdzenia Pitagorasa
+  - usuwanie niewymierności z mianownika
+  - sprawdzanie zgodności wyniku z dziedziną
+  verification:
+    checkability: STATED_MODEL
+    note: 'stage 1 inconclusive: kind mismatch: answer=SYMBOLIC reference=MULTIPART'

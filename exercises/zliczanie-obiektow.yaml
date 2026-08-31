@@ -1,0 +1,832 @@
+section: zliczanie-obiektow
+name: Zliczanie obiektów w prostych sytuacjach
+scope: Counting objects in simple situations by systematic listing, tree diagrams and tables.
+requirements:
+- XI.1
+counts:
+  total: 16
+  DETERMINISTIC: 11
+  REFERENCE_CALL: 2
+  STATED_MODEL: 1
+  NOT_MACHINE_CHECKABLE: 2
+exercises:
+- id: g-th-00
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: zliczanie regułą mnożenia
+  statement: W kawiarni zestaw popołudniowy składa się z jednego napoju i jednego ciasta. Do wyboru są
+    4 napoje (herbata, kawa, kakao, sok) oraz 3 ciasta (sernik, szarlotka, makowiec). Oblicz, ile różnych
+    zestawów popołudniowych można zamówić.
+  statement_latex: N = 4 \cdot 3
+  solution: |-
+    Jednym liczonym obiektem jest para (napój, ciasto). Zestaw powstaje w dwóch etapach: wybieram napój I wybieram ciasto, więc stosujemy regułę mnożenia.
+    Napój możemy wybrać na 4 sposoby, a do każdego z nich ciasto na 3 sposoby (liczba możliwości w drugim etapie nie zależy od tego, co wybrano w pierwszym).
+    N = 4 \cdot 3 = 12.
+    Kontrola drzewem: z korzenia wychodzą 4 krawędzie, z każdego z 4 wierzchołków po 3 krawędzie, czyli 12 liści. ✓
+    Odpowiedź: 12 zestawów.
+  solution_steps:
+  - Ustal, że jednym obiektem jest para (napój, ciasto) — wybór dwuetapowy.
+  - Zauważ, że etapy łączy spójnik „i”, więc stosujemy regułę mnożenia.
+  - Oblicz N = 4 \cdot 3 = 12.
+  - 'Sprawdź wynik drzewem możliwości: 4 gałęzie po 3 liście dają 12 liści.'
+  answer:
+    kind: NUMERIC
+    value: 12.0
+  checks:
+  - kind: evaluate
+    expr: 4 \cdot 3
+  skills:
+  - reguła mnożenia
+  - analiza sytuacji kombinatorycznej
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 12.0 vs 12.0 (tol 1e-09)'
+- id: g-th-01
+  slot: THEORY_SUPPORT
+  ramp_index: 1
+  difficulty: 1
+  exercise_type: systematyczne wypisywanie
+  statement: Rozważamy wszystkie liczby dwucyfrowe, w których zapisie występują wyłącznie cyfry ze zbioru
+    {2, 5, 7} (cyfry mogą się powtarzać). a) Wypisz systematycznie wszystkie takie liczby (rosnąco, blokami
+    według cyfry dziesiątek). b) Podaj, ile jest wszystkich takich liczb.
+  statement_latex: N = 3^2 = 3 \cdot 3
+  solution: |-
+    a) Wypisujemy blokami: ustalamy cyfrę dziesiątek i zmieniamy tylko cyfrę jedności.
+    Blok „2”: 22, 25, 27.
+    Blok „5”: 52, 55, 57.
+    Blok „7”: 72, 75, 77.
+    b) Mamy 3 bloki po 3 liczby, czyli 3 \cdot 3 = 9 liczb.
+    Kontrola regułą mnożenia: cyfrę dziesiątek wybieramy na 3 sposoby I cyfrę jedności na 3 sposoby, więc N = 3^2 = 9. ✓
+  solution_steps:
+  - 'Ustal porządek wypisywania: blokami według cyfry dziesiątek, wewnątrz bloku rosnąco.'
+  - 'Wypisz blok dla cyfry 2: 22, 25, 27.'
+  - 'Wypisz blok dla cyfry 5: 52, 55, 57.'
+  - 'Wypisz blok dla cyfry 7: 72, 75, 77.'
+  - 'Policz: 3 bloki po 3 liczby, czyli N = 3 \cdot 3 = 9.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: a) wykaz liczb
+      answer:
+        kind: SET
+        members:
+        - '22'
+        - '25'
+        - '27'
+        - '52'
+        - '55'
+        - '57'
+        - '72'
+        - '75'
+        - '77'
+    - name: b) liczba wszystkich
+      answer:
+        kind: NUMERIC
+        value: 9.0
+  checks:
+  - kind: evaluate
+    expr: 3 \cdot 3
+    part: b) liczba wszystkich
+  skills:
+  - systematyczne wypisywanie
+  - ciągi z powtórzeniami
+  verification:
+    checkability: REFERENCE_CALL
+    note: '2 parts matched · det: [b) liczba wszystkich] SymPy solved it fresh: 9.0 vs 9.0 (tol 1e-09)'
+- id: g-th-02
+  slot: THEORY_SUPPORT
+  ramp_index: 2
+  difficulty: 2
+  exercise_type: permutacje
+  statement: Na półce ustawiamy obok siebie 5 różnych książek. Oblicz, na ile sposobów można to zrobić.
+  statement_latex: N = 5! = 1 \cdot 2 \cdot 3 \cdot 4 \cdot 5
+  solution: |-
+    Jednym obiektem jest ustawienie wszystkich 5 książek w rzędzie; kolejność ma znaczenie, a książki się nie powtarzają.
+    Na pierwsze miejsce mamy 5 kandydatek, na drugie 4 (jedna książka jest już wykorzystana), na trzecie 3, na czwarte 2, na piąte 1.
+    N = 5 \cdot 4 \cdot 3 \cdot 2 \cdot 1 = 5! = 120.
+    Odpowiedź: 120 sposobów.
+  solution_steps:
+  - Zauważ, że ustawiamy wszystkie 5 różnych książek, więc kolejność ma znaczenie i nie ma powtórzeń.
+  - 'Zastosuj regułę mnożenia z malejącymi czynnikami: 5 \cdot 4 \cdot 3 \cdot 2 \cdot 1.'
+  - Oblicz N = 5! = 120.
+  answer:
+    kind: NUMERIC
+    value: 120.0
+  checks:
+  - kind: evaluate
+    expr: 5 \cdot 4 \cdot 3 \cdot 2 \cdot 1
+  skills:
+  - silnia
+  - ustawienia w rzędzie
+  - reguła mnożenia bez powtórzeń
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 120.0 vs 120.0 (tol 1e-09)'
+- id: g-ex-03
+  slot: EXERCISE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: tabela możliwości — dwie kostki
+  statement: 'Rzucamy jeden raz dwiema symetrycznymi sześciennymi kostkami do gry: białą i zieloną. Wynikiem
+    rzutu jest para (liczba oczek na kostce białej, liczba oczek na kostce zielonej). a) Oblicz, ile jest
+    wszystkich możliwych wyników. b) Oblicz, w ilu wynikach suma oczek na obu kostkach jest równa 9. c)
+    Oblicz, w ilu wynikach iloczyn oczek na obu kostkach jest liczbą nieparzystą.'
+  statement_latex: N = 6 \cdot 6
+  solution: |-
+    a) Wynik to para uporządkowana, bo kostki są rozróżnialne — para (2,5) to inny wynik niż (5,2). Tabela ma 6 wierszy i 6 kolumn, więc N = 6 \cdot 6 = 36 wyników.
+
+    b) Zaznaczamy w tabeli komórki o sumie 9 i wypisujemy je systematycznie, zwiększając pierwszą współrzędną:
+    (3,6), (4,5), (5,4), (6,3).
+    Par (1,8) i (2,7) nie ma, bo kostka ma tylko 6 ścian. Zatem takich wyników jest 4.
+
+    c) Iloczyn dwóch liczb jest nieparzysty dokładnie wtedy, gdy obie liczby są nieparzyste. Na każdej kostce liczba nieparzysta to jeden z wyników 1, 3, 5 — po 3 możliwości.
+    N = 3 \cdot 3 = 9 wyników.
+    Kontrola sensowności: 9 < 36 ✓.
+
+    Odpowiedź: a) 36, b) 4, c) 9.
+  solution_steps:
+  - Ustal, że jednym obiektem jest para uporządkowana wyników (kostka biała, kostka zielona).
+  - 'a) Policz komórki tabeli: 6 \cdot 6 = 36.'
+  - 'b) Wypisz systematycznie pary o sumie 9: (3,6), (4,5), (5,4), (6,3) — jest ich 4.'
+  - c) Zauważ, że iloczyn jest nieparzysty tylko wtedy, gdy obie liczby oczek są nieparzyste.
+  - 'c) Policz: 3 \cdot 3 = 9 wyników.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: a) wszystkie wyniki
+      answer:
+        kind: NUMERIC
+        value: 36.0
+    - name: b) suma równa 9
+      answer:
+        kind: NUMERIC
+        value: 4.0
+    - name: c) iloczyn nieparzysty
+      answer:
+        kind: NUMERIC
+        value: 9.0
+  checks:
+  - kind: evaluate
+    expr: 6 \cdot 6
+    part: a) wszystkie wyniki
+  - kind: evaluate
+    expr: 3 \cdot 3
+    part: c) iloczyn nieparzysty
+  skills:
+  - tabela możliwości
+  - reguła mnożenia
+  - zliczanie z warunkiem
+  verification:
+    checkability: REFERENCE_CALL
+    note: '3 parts matched · det: [a) wszystkie wyniki] SymPy solved it fresh: 36.0 vs 36.0 (tol 1e-09)
+      ; [c) iloczyn nieparzysty] SymPy solved it fresh: 9.0 vs 9.0 (tol 1e-09)'
+- id: g-ex-04
+  slot: EXERCISE
+  ramp_index: 1
+  difficulty: 3
+  exercise_type: liczby wielocyfrowe z ograniczeniami
+  statement: Rozważamy wszystkie liczby czterocyfrowe o wszystkich cyfrach różnych, utworzone wyłącznie
+    z cyfr ze zbioru {0, 1, 2, 3, 5, 7}. a) Oblicz, ile jest wszystkich takich liczb. b) Oblicz, ile spośród
+    nich jest liczbami parzystymi.
+  statement_latex: N = 5 \cdot 5 \cdot 4 \cdot 3
+  solution: |-
+    Jednym obiektem jest liczba czterocyfrowa; kolejność cyfr ma znaczenie, cyfry nie mogą się powtarzać, a cyfra tysięcy musi być różna od 0.
+
+    a) Obsadzamy najpierw miejsce z ograniczeniem — tysiące: cyfra różna od 0, czyli jedna z {1,2,3,5,7} — 5 możliwości. Setki: zostało 5 cyfr z sześciu (zero jest już dozwolone) — 5 możliwości. Dziesiątki: 4 możliwości. Jedności: 3 możliwości.
+    N = 5 \cdot 5 \cdot 4 \cdot 3 = 300.
+
+    b) Liczba jest parzysta wtedy i tylko wtedy, gdy jej cyfra jedności należy do {0, 2}. Warunek na jedności koliduje z warunkiem na tysiące (oba dotyczą zera), więc dzielimy na dwa rozłączne przypadki.
+    Przypadek A: cyfra jedności = 0 (1 sposób). Tysiące: dowolna z pozostałych 5 cyfr — 5 możliwości. Setki: 4 możliwości, dziesiątki: 3 możliwości. Razem 5 \cdot 4 \cdot 3 = 60.
+    Przypadek B: cyfra jedności = 2 (1 sposób). Tysiące: cyfra różna od 0 i od 2, czyli jedna z {1,3,5,7} — 4 możliwości. Setki: z sześciu cyfr dwie są zużyte — 4 możliwości. Dziesiątki: 3 możliwości. Razem 4 \cdot 4 \cdot 3 = 48.
+    Przypadki są rozłączne, więc dodajemy: 60 + 48 = 108.
+    Kontrola sensowności: 108 < 300 ✓.
+
+    Odpowiedź: a) 300 liczb, b) 108 liczb parzystych.
+  solution_steps:
+  - 'Zapisz warunki: cyfry różne, cyfra tysięcy ≠ 0, cyfry ze zbioru {0,1,2,3,5,7}.'
+  - a) Obsadź tysiące (5 możliwości), potem setki (5), dziesiątki (4) i jedności (3).
+  - a) Oblicz N = 5 \cdot 5 \cdot 4 \cdot 3 = 300.
+  - b) Zauważ, że parzystość wymaga cyfry jedności ze zbioru {0, 2}; podziel na dwa rozłączne przypadki.
+  - 'b) Przypadek jedności = 0: 5 \cdot 4 \cdot 3 = 60.'
+  - 'b) Przypadek jedności = 2: 4 \cdot 4 \cdot 3 = 48.'
+  - 'b) Dodaj przypadki: 60 + 48 = 108.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: a) wszystkie liczby
+      answer:
+        kind: NUMERIC
+        value: 300.0
+    - name: b) liczby parzyste
+      answer:
+        kind: NUMERIC
+        value: 108.0
+  checks:
+  - kind: evaluate
+    expr: 5 \cdot 5 \cdot 4 \cdot 3
+    part: a) wszystkie liczby
+  - kind: evaluate
+    expr: 5 \cdot 4 \cdot 3 + 4 \cdot 4 \cdot 3
+    part: b) liczby parzyste
+  skills:
+  - reguła mnożenia z miejscami
+  - cyfra wiodąca ≠ 0
+  - podział na rozłączne przypadki
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [a) wszystkie liczby] SymPy solved it fresh: 300.0 vs 300.0
+      (tol 1e-09) ; [b) liczby parzyste] SymPy solved it fresh: 108.0 vs 108.0 (tol 1e-09)'
+- id: g-ex-05
+  slot: EXERCISE
+  ramp_index: 2
+  difficulty: 4
+  exercise_type: kody — powtórzenia i dopełnienie
+  statement: Kod dostępu składa się z 5 znaków, a każdym znakiem jest jedna z liter A, B, C, D (litery
+    mogą się powtarzać). a) Oblicz, ile jest wszystkich takich kodów. b) Oblicz, ile jest kodów, w których
+    nie występuje litera A. c) Oblicz, ile jest kodów, w których litera A występuje co najmniej raz. d)
+    Oblicz, ile jest kodów, w których litera A występuje dokładnie raz.
+  statement_latex: N = 4^5,\quad M = 3^5,\quad N - M = 4^5 - 3^5
+  solution: |-
+    Jednym obiektem jest pięcioznakowy ciąg liter; kolejność ma znaczenie, litery mogą się powtarzać.
+
+    a) Na każdym z 5 miejsc mamy 4 możliwości: N = 4^5 = 1024 kody.
+
+    b) Jeśli litera A jest zabroniona, to na każdym miejscu dostępne są tylko litery B, C, D: M = 3^5 = 243 kody.
+
+    c) Zaprzeczeniem warunku „litera A występuje co najmniej raz” jest „litera A nie występuje ani razu”, a takich kodów jest 243 (punkt b). Liczymy przez dopełnienie w tym samym zbiorze wszystkich kodów:
+    1024 − 243 = 781 kodów.
+    (Rozumowanie „wybieram miejsce dla A na 5 sposobów i resztę na 4^4 sposobów”, dające 1280, jest błędne — kody z dwiema lub więcej literami A byłyby policzone wielokrotnie, a 1280 > 1024.)
+
+    d) Wybieramy miejsce dla jedynej litery A — 5 sposobów; na każdym z pozostałych 4 miejsc musi stać litera różna od A, czyli 3 możliwości:
+    5 \cdot 3^4 = 5 \cdot 81 = 405 kodów.
+    Kontrola sensowności: 405 < 781 ✓ (kody z dokładnie jedną literą A stanowią część kodów z co najmniej jedną literą A).
+
+    Odpowiedź: a) 1024, b) 243, c) 781, d) 405.
+  solution_steps:
+  - 'Ustal: obiekt to ciąg 5 liter, kolejność ma znaczenie, powtórzenia dozwolone.'
+  - a) Oblicz N = 4^5 = 1024.
+  - 'b) Ogranicz pulę do liter B, C, D: M = 3^5 = 243.'
+  - 'c) Sformułuj zaprzeczenie warunku „co najmniej jedna litera A” i policz przez dopełnienie: 1024 −
+    243 = 781.'
+  - 'd) Wybierz miejsce dla jedynej litery A (5 sposobów) i obsadź pozostałe 4 miejsca literami różnymi
+    od A: 5 \cdot 3^4 = 405.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: a) wszystkie kody
+      answer:
+        kind: NUMERIC
+        value: 1024.0
+    - name: b) bez litery A
+      answer:
+        kind: NUMERIC
+        value: 243.0
+    - name: c) co najmniej jedna litera A
+      answer:
+        kind: NUMERIC
+        value: 781.0
+    - name: d) dokładnie jedna litera A
+      answer:
+        kind: NUMERIC
+        value: 405.0
+  checks:
+  - kind: evaluate
+    expr: 4^5
+    part: a) wszystkie kody
+  - kind: evaluate
+    expr: 3^5
+    part: b) bez litery A
+  - kind: evaluate
+    expr: 4^5 - 3^5
+    part: c) co najmniej jedna litera A
+  - kind: evaluate
+    expr: 5 \cdot 3^4
+    part: d) dokładnie jedna litera A
+  skills:
+  - ciągi z powtórzeniami
+  - zliczanie przez dopełnienie
+  - podział na rozłączne przypadki
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 4 parts solved fresh · det: [a) wszystkie kody] SymPy solved it fresh: 1024.0 vs 1024.0
+      (tol 1e-09) ; [b) bez litery A] SymPy solved it fresh: 243.0 vs 243.0 (tol 1e-09) ; [c) co najmniej
+      jedna litera A] SymPy solved it fresh: 781.0 vs 781.0 (tol 1e-09) ; [d) dokładnie jedna litera A]
+      SymPy solved it fresh: 405.0 vs 405.0 (tol 1e-09)'
+- id: g-ex-t00
+  slot: EXERCISE
+  ramp_index: 6
+  difficulty: 3
+  exercise_type: zliczanie liczb wielocyfrowych z ograniczeniami na pozycje
+  statement: Rozważamy wszystkie liczby czterocyfrowe o wszystkich cyfrach różnych, w zapisie których
+    występują wyłącznie cyfry ze zbioru {0, 1, 2, 3, 5, 7}. a) Oblicz, ile jest wszystkich takich liczb.
+    b) Oblicz, ile spośród nich jest liczbami nieparzystymi.
+  statement_latex: N = 5 \cdot 5 \cdot 4 \cdot 3, \qquad N_{np} = 4 \cdot 4 \cdot 4 \cdot 3
+  solution: |-
+    Jednym liczonym obiektem jest liczba czterocyfrowa, czyli ciąg czterech pozycji: tysiące, setki, dziesiątki, jedności. Cyfry nie mogą się powtarzać, a kolejność oczywiście ma znaczenie. Do dyspozycji mamy 6 cyfr: 0, 1, 2, 3, 5, 7.
+
+    a) Zaczynamy od miejsca z ograniczeniem. Cyfra tysięcy musi być różna od 0, więc mamy dla niej 5 możliwości (1, 2, 3, 5, 7). Na miejsce setek możemy wziąć każdą z pozostałych 5 cyfr (zero jest już dozwolone), na miejsce dziesiątek — jedną z 4 pozostałych, na miejsce jedności — jedną z 3 pozostałych.
+    Regułą mnożenia: N = 5 \cdot 5 \cdot 4 \cdot 3 = 300.
+
+    b) Liczba jest nieparzysta wtedy i tylko wtedy, gdy jej cyfra jedności należy do zbioru {1, 3, 5, 7} — mamy 4 możliwości. Teraz obsadzamy miejsce tysięcy: odpada 0 oraz cyfra już użyta na miejscu jedności, zostają zatem 4 możliwości. Na setki pozostają 4 cyfry (z sześciu dwie są zużyte), na dziesiątki — 3 cyfry.
+    N_np = 4 \cdot 4 \cdot 4 \cdot 3 = 192.
+
+    Kontrola sensowności. Liczb parzystych jest: przypadek A (jedności = 0): 5 \cdot 4 \cdot 3 = 60; przypadek B (jedności ∈ {2}): 4 \cdot 4 \cdot 3 = 48; razem 108. Ponieważ 192 + 108 = 300, wynik jest zgodny z punktem a). ✓
+
+    Odpowiedź: a) 300 liczb, b) 192 liczby nieparzyste.
+  solution_steps:
+  - Ustal, że obiektem jest ciąg czterech różnych cyfr ze zbioru 6-elementowego, przy czym pierwsza cyfra
+    ≠ 0.
+  - 'Obsadź najpierw miejsce tysięcy: 5 możliwości; potem setki: 5, dziesiątki: 4, jedności: 3.'
+  - 'Pomnóż: 5·5·4·3 = 300.'
+  - 'Dla liczb nieparzystych obsadź najpierw jedności: 4 możliwości (1, 3, 5, 7).'
+  - 'Następnie tysiące (bez 0 i bez cyfry jedności): 4 możliwości, setki: 4, dziesiątki: 3.'
+  - 'Pomnóż: 4·4·4·3 = 192 i sprawdź, że liczb parzystych jest 300 − 192 = 108.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wszystkie
+      answer:
+        kind: NUMERIC
+        value: 300.0
+    - name: nieparzyste
+      answer:
+        kind: NUMERIC
+        value: 192.0
+  checks:
+  - kind: evaluate
+    expr: 5 \cdot 5 \cdot 4 \cdot 3
+    part: wszystkie
+  - kind: evaluate
+    expr: 4 \cdot 4 \cdot 4 \cdot 3
+    part: nieparzyste
+  skills:
+  - reguła mnożenia z miejscami
+  - warunek niezerowej cyfry wiodącej
+  - wybór bez powtórzeń
+  - podział na przypadki i kontrola wyniku
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [wszystkie] SymPy solved it fresh: 300.0 vs 300.0 (tol 1e-09)
+      ; [nieparzyste] SymPy solved it fresh: 192.0 vs 192.0 (tol 1e-09)'
+- id: g-ex-t01
+  slot: EXERCISE
+  ramp_index: 7
+  difficulty: 4
+  exercise_type: 'zliczanie kodów: reguła mnożenia i dopełnienie'
+  statement: Kod dostępu do szafki składa się z trzech znaków, a każdym znakiem jest jedna z liter A,
+    B, C, D, E, F (litery w kodzie mogą się powtarzać; kolejność liter ma znaczenie). a) Oblicz, ile jest
+    wszystkich takich kodów. b) Oblicz, ile jest kodów, w których litera A występuje co najmniej raz.
+    c) Oblicz, ile jest kodów, w których wszystkie trzy litery są różne i wśród nich występuje litera
+    A.
+  statement_latex: N = 6^{3}, \qquad N_{A} = 6^{3} - 5^{3}, \qquad N_{r} = 6 \cdot 5 \cdot 4 - 5 \cdot
+    4 \cdot 3
+  solution: |-
+    Jednym obiektem jest kod, czyli trójwyrazowy ciąg liter ze zbioru 6-elementowego. Kolejność ma znaczenie (kod ABC to inny kod niż BAC).
+
+    a) Powtórzenia są dozwolone, więc na każdym z trzech miejsc mamy po 6 możliwości:
+    N = 6^3 = 216.
+
+    b) Warunek „co najmniej raz” liczymy przez dopełnienie. Zaprzeczeniem zdania „litera A występuje co najmniej raz” jest zdanie „litera A nie występuje ani razu”. Kodów bez litery A jest 5^3 = 125 (na każdym miejscu tylko B, C, D, E, F). Zatem
+    N_A = 216 − 125 = 91.
+    (Uwaga: rozumowanie „wybieram miejsce dla A na 3 sposoby i resztę na 6^2 sposobów”, dające 108, jest błędne — kody z dwiema lub trzema literami A policzylibyśmy wielokrotnie.)
+
+    c) Teraz całością nie są wszystkie kody, lecz tylko kody o różnych literach — dopełnienie musimy liczyć w tym samym zbiorze obiektów. Kodów o wszystkich literach różnych jest 6 \cdot 5 \cdot 4 = 120. Wśród nich kodów bez litery A jest 5 \cdot 4 \cdot 3 = 60. Zatem kodów o różnych literach zawierających A jest
+    N_r = 120 − 60 = 60.
+    Kontrola innym sposobem: literę A można umieścić na jednym z 3 miejsc, a pozostałe dwa miejsca obsadzić różnymi literami spośród 5 pozostałych: 3 \cdot 5 \cdot 4 = 60 ✓ (tu podwójne liczenie nie występuje, bo A występuje dokładnie raz).
+
+    Odpowiedź: a) 216, b) 91, c) 60.
+  solution_steps:
+  - Zauważ, że kod to trójwyrazowy ciąg liter z 6-elementowego zbioru, kolejność ma znaczenie.
+  - 'a) Powtórzenia dozwolone: 6·6·6 = 6³ = 216.'
+  - 'b) Sformułuj zaprzeczenie: „ani jednej litery A” — takich kodów jest 5³ = 125.'
+  - 'b) Odejmij od całości: 216 − 125 = 91.'
+  - 'c) Policz kody o różnych literach: 6·5·4 = 120, a wśród nich kody bez A: 5·4·3 = 60.'
+  - 'c) Odejmij w tym samym zbiorze obiektów: 120 − 60 = 60.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wszystkie
+      answer:
+        kind: NUMERIC
+        value: 216.0
+    - name: co_najmniej_jedno_A
+      answer:
+        kind: NUMERIC
+        value: 91.0
+    - name: rozne_z_A
+      answer:
+        kind: NUMERIC
+        value: 60.0
+  checks:
+  - kind: evaluate
+    expr: 6^{3}
+    part: wszystkie
+  - kind: evaluate
+    expr: 6^{3} - 5^{3}
+    part: co_najmniej_jedno_A
+  - kind: evaluate
+    expr: 6 \cdot 5 \cdot 4 - 5 \cdot 4 \cdot 3
+    part: rozne_z_A
+  skills:
+  - ciągi z powtórzeniami n^k
+  - ciągi bez powtórzeń
+  - zliczanie przez dopełnienie
+  - dopełnienie liczone w tym samym zbiorze obiektów
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [wszystkie] SymPy solved it fresh: 216.0 vs 216.0 (tol 1e-09)
+      ; [co_najmniej_jedno_A] SymPy solved it fresh: 91.0 vs 91.0 (tol 1e-09) ; [rozne_z_A] SymPy solved
+      it fresh: 60.0 vs 60.0 (tol 1e-09)'
+- id: g-cm-06
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: reguła mnożenia a reguła dodawania
+  statement: 'Marek ma w szafie 5 różnych koszulek, 3 różne pary spodni i 2 różne czapki. Strój składa
+    się z jednej koszulki, jednej pary spodni i jednej czapki. Uczeń zapisał: „Możliwości jest 5 + 3 +
+    2 = 10”. Wskaż i wyjaśnij błąd, a następnie oblicz, ile różnych strojów może utworzyć Marek.'
+  statement_latex: N = 5 \cdot 3 \cdot 2
+  solution: |-
+    Błędne rozumowanie: „mam 5 koszulek, 3 pary spodni i 2 czapki, więc strojów jest 5 + 3 + 2 = 10”.
+
+    Dlaczego to jest błędne: reguła dodawania dotyczy sytuacji, w której wybieramy JEDNĄ rzecz z rozłącznych grup („biorę koszulkę ALBO czapkę” — wtedy 5 + 2 = 7 możliwości). Tutaj kompletny obiekt (strój) zawiera element z KAŻDEJ grupy naraz: koszulka I spodnie I czapka. Spójnik „i” oznacza regułę mnożenia. Widać to też na drzewie: z korzenia wychodzi 5 krawędzi (koszulki), z każdego wierzchołka po 3 (spodnie), co daje 15 wierzchołków, a z każdego z nich po 2 (czapki) — razem 30 liści, a nie 10.
+
+    Poprawne rozwiązanie:
+    N = 5 \cdot 3 \cdot 2 = 30.
+    Kontrola: samych par (koszulka, spodnie) jest 15, a każda z nich daje 2 stroje, więc 30 ✓.
+
+    Odpowiedź: 30 różnych strojów (wynik 10 jest błędny).
+  solution_steps:
+  - 'Pokaż błędny tok: dodanie liczb elementów w grupach daje 5 + 3 + 2 = 10.'
+  - Wyjaśnij, że dodajemy tylko przy wyborze jednej rzeczy z rozłącznych grup („albo–albo”).
+  - Zauważ, że strój zawiera element z każdej grupy naraz — spójnik „i”, więc obowiązuje reguła mnożenia.
+  - Oblicz poprawnie N = 5 \cdot 3 \cdot 2 = 30.
+  - 'Sprawdź drzewem: 5 gałęzi × 3 × 2 = 30 liści.'
+  answer:
+    kind: NUMERIC
+    value: 30.0
+  checks:
+  - kind: evaluate
+    expr: 5 \cdot 3 \cdot 2
+  skills:
+  - reguła mnożenia
+  - reguła dodawania
+  - analiza sytuacji kombinatorycznej
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 30.0 vs 30.0 (tol 1e-09)'
+- id: g-cm-07
+  slot: COMMON_MISTAKE
+  ramp_index: 1
+  difficulty: 3
+  exercise_type: cyfra wiodąca różna od zera
+  statement: 'Rozważamy wszystkie liczby trzycyfrowe o wszystkich cyfrach różnych, utworzone wyłącznie
+    z cyfr ze zbioru {0, 2, 4, 6, 8}. Uczeń zapisał: „Na miejsce setek mam 5 cyfr, na dziesiątki 4, na
+    jedności 3, więc takich liczb jest 5 \cdot 4 \cdot 3 = 60”. Wskaż i wyjaśnij błąd, a następnie oblicz
+    poprawnie, ile jest takich liczb.'
+  statement_latex: N = 4 \cdot 4 \cdot 3
+  solution: |-
+    Błędne rozumowanie: 5 \cdot 4 \cdot 3 = 60.
+
+    Dlaczego to jest błędne: wśród 60 policzonych ciągów są takie, które zaczynają się od zera, np. 0-4-6 czy 0-8-2. To nie są liczby trzycyfrowe (0-4-6 to po prostu liczba 46). Ciągów zaczynających się zerem jest 1 \cdot 4 \cdot 3 = 12, i właśnie o tyle wynik jest zawyżony.
+
+    Poprawne rozwiązanie: najpierw obsadzamy miejsce z ograniczeniem, czyli setki.
+    Setki: cyfra różna od 0, czyli jedna z {2,4,6,8} — 4 możliwości.
+    Dziesiątki: zostały 4 cyfry z pięciu (zero jest już dozwolone) — 4 możliwości.
+    Jedności: zostały 3 cyfry — 3 możliwości.
+    N = 4 \cdot 4 \cdot 3 = 48.
+    Kontrola: 60 − 12 = 48 ✓.
+
+    Odpowiedź: 48 liczb (wynik 60 jest błędny).
+  solution_steps:
+  - 'Pokaż błędny tok: 5 \cdot 4 \cdot 3 = 60 — bez uwzględnienia zakazu zera na początku.'
+  - 'Wskaż kontrprzykłady: ciągi 0-4-6, 0-8-2 nie są liczbami trzycyfrowymi.'
+  - 'Policz ciągi zaczynające się zerem: 1 \cdot 4 \cdot 3 = 12.'
+  - Obsadź najpierw setki (4 możliwości), potem dziesiątki (4) i jedności (3).
+  - 'Oblicz N = 4 \cdot 4 \cdot 3 = 48 i sprawdź: 60 − 12 = 48.'
+  answer:
+    kind: NUMERIC
+    value: 48.0
+  checks:
+  - kind: evaluate
+    expr: 4 \cdot 4 \cdot 3
+  skills:
+  - reguła mnożenia z miejscami
+  - cyfra wiodąca ≠ 0
+  - wybór bez powtórzeń
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 48.0 vs 48.0 (tol 1e-09)'
+- id: g-cm-08
+  slot: COMMON_MISTAKE
+  ramp_index: 2
+  difficulty: 3
+  exercise_type: pary nieuporządkowane
+  statement: 'Na spotkaniu klasowym jest 12 osób i każda osoba wita się uściskiem dłoni z każdą inną dokładnie
+    jeden raz. Uczeń zapisał: „Każda z 12 osób podaje rękę 11 osobom, więc uścisków jest 12 \cdot 11 =
+    132”. Wskaż i wyjaśnij błąd, a następnie oblicz, ile uścisków dłoni padło w rzeczywistości.'
+  statement_latex: N = \frac{12 \cdot 11}{2}
+  solution: |-
+    Błędne rozumowanie: 12 \cdot 11 = 132 uściski.
+
+    Dlaczego to jest błędne: iloczyn 12 \cdot 11 zlicza pary uporządkowane (kto komu podaje rękę). Uścisk Ani z Bartkiem i uścisk Bartka z Anią to jednak ten sam uścisk — w liczeniu kolejność nie tworzy nowego obiektu. Każdy uścisk został więc policzony dwukrotnie.
+
+    Poprawne rozwiązanie: dzielimy przez 2:
+    N = \frac{12 \cdot 11}{2} = 66.
+    Kontrola przez wypisywanie „w górę”: osoba 1 wita się z 11 osobami, osoba 2 z pozostałymi 10 (uścisk z osobą 1 już policzono), osoba 3 z 9, …, osoba 11 z 1, osoba 12 z nikim nowym:
+    11 + 10 + 9 + 8 + 7 + 6 + 5 + 4 + 3 + 2 + 1 = 66 ✓.
+
+    Odpowiedź: 66 uścisków dłoni (wynik 132 jest dwukrotnie zawyżony).
+  solution_steps:
+  - 'Pokaż błędny tok: 12 \cdot 11 = 132.'
+  - Wyjaśnij, że uścisk {A, B} to ten sam obiekt co {B, A} — kolejność nie ma znaczenia.
+  - Zauważ podwójne liczenie i podziel przez 2.
+  - Oblicz N = \frac{12 \cdot 11}{2} = 66.
+  - Sprawdź sumą 11 + 10 + \ldots + 1 = 66.
+  answer:
+    kind: NUMERIC
+    value: 66.0
+  checks:
+  - kind: evaluate
+    expr: \frac{12 \cdot 11}{2}
+  skills:
+  - pary nieuporządkowane
+  - podwójne liczenie
+  - reguła mnożenia
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 66.0 vs 66.0 (tol 1e-09)'
+- id: g-cm-09
+  slot: COMMON_MISTAKE
+  ramp_index: 3
+  difficulty: 3
+  exercise_type: pary uporządkowane
+  statement: 'W drużynie jest 10 zawodników. Spośród nich wybieramy kapitana i chorążego, przy czym muszą
+    to być dwie różne osoby. Uczeń zapisał: „To wybór dwóch osób z dziesięciu, więc sposobów jest \frac{10
+    \cdot 9}{2} = 45”. Wskaż i wyjaśnij błąd, a następnie oblicz, na ile sposobów można dokonać takiego
+    wyboru.'
+  statement_latex: N = 10 \cdot 9
+  solution: |-
+    Błędne rozumowanie: \frac{10 \cdot 9}{2} = 45.
+
+    Dlaczego to jest błędne: przez 2 dzielimy tylko wtedy, gdy zamiana dwóch elementów miejscami NIE tworzy nowego obiektu (np. uściski dłoni, mecze „każdy z każdym”). Tutaj role są różne: wybór (Ala — kapitan, Bartek — chorąży) to inny wynik niż (Bartek — kapitan, Ala — chorąży). Nie ma więc żadnego podwójnego liczenia i dzielenie przez 2 gubi połowę możliwości.
+
+    Poprawne rozwiązanie: obiekt to para uporządkowana (kapitan, chorąży).
+    Kapitana wybieramy na 10 sposobów, chorążego spośród pozostałych 9 osób:
+    N = 10 \cdot 9 = 90.
+    Kontrola: samych dwuosobowych zestawów bez ról jest 45, a w każdym zestawie role można rozdzielić na 2 sposoby: 45 \cdot 2 = 90 ✓.
+
+    Odpowiedź: 90 sposobów (wynik 45 jest dwukrotnie zaniżony).
+  solution_steps:
+  - 'Pokaż błędny tok: \frac{10 \cdot 9}{2} = 45.'
+  - 'Sprawdź testem zamiany miejscami: zamiana ról kapitana i chorążego daje inny wynik — kolejność ma
+    znaczenie.'
+  - Stwierdź, że nie ma podwójnego liczenia, więc nie wolno dzielić przez 2.
+  - Oblicz N = 10 \cdot 9 = 90.
+  - 'Sprawdź: 45 zestawów dwuosobowych razy 2 rozdania ról daje 90.'
+  answer:
+    kind: NUMERIC
+    value: 90.0
+  checks:
+  - kind: evaluate
+    expr: 10 \cdot 9
+  skills:
+  - pary uporządkowane
+  - reguła mnożenia bez powtórzeń
+  - rozróżnianie ról
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 90.0 vs 90.0 (tol 1e-09)'
+- id: g-cm-10
+  slot: COMMON_MISTAKE
+  ramp_index: 4
+  difficulty: 4
+  exercise_type: zdarzenia „co najmniej jeden”
+  statement: 'Rzucamy trzy razy symetryczną sześcienną kostką do gry; wynikiem jest trójka kolejnych liczb
+    oczek. Uczeń zapisał: „Chcę wyników, w których co najmniej raz wypadnie szóstka: wybieram rzut, w
+    którym pada szóstka (3 sposoby), a pozostałe dwa rzuty dowolnie (6 \cdot 6 = 36), czyli 3 \cdot 36
+    = 108”. Wskaż i wyjaśnij błąd, a następnie oblicz poprawnie liczbę takich wyników.'
+  statement_latex: N = 6^3 - 5^3
+  solution: |-
+    Błędne rozumowanie: 3 \cdot 6^2 = 108.
+
+    Dlaczego to jest błędne: wynik (6, 6, 2) zostałby policzony dwa razy — raz jako „szóstka w pierwszym rzucie, reszta dowolna”, a raz jako „szóstka w drugim rzucie, reszta dowolna”. Wynik (6, 6, 6) policzono nawet trzy razy. Przypadki „szóstka w rzucie I”, „szóstka w rzucie II”, „szóstka w rzucie III” nie są rozłączne, więc nie wolno ich po prostu dodać (a właśnie dodawaniem jest mnożenie 3 \cdot 36).
+
+    Poprawne rozwiązanie — przez dopełnienie:
+    Wszystkich wyników trzech rzutów: 6^3 = 216.
+    Zaprzeczeniem warunku „co najmniej jedna szóstka” jest „ani razu nie wypadła szóstka”, czyli w każdym rzucie wynik ze zbioru {1,2,3,4,5}: 5^3 = 125.
+    N = 216 − 125 = 91.
+    Kontrola sensowności: 91 < 216 ✓, a błędny wynik 108 jest większy od liczby wszystkich wyników z szóstką i zawyżony właśnie o wyniki policzone wielokrotnie.
+
+    Odpowiedź: 91 wyników (wynik 108 jest błędny).
+  solution_steps:
+  - 'Pokaż błędny tok: 3 \cdot 6^2 = 108.'
+  - Wskaż wynik policzony wielokrotnie, np. (6, 6, 2) — raz dla szóstki w I rzucie, raz w II.
+  - 'Policz wszystkie wyniki trzech rzutów: 6^3 = 216.'
+  - 'Sformułuj zaprzeczenie: „żadna szóstka” i policz 5^3 = 125.'
+  - Oblicz N = 216 − 125 = 91 i sprawdź sensowność wyniku.
+  answer:
+    kind: NUMERIC
+    value: 91.0
+  checks:
+  - kind: evaluate
+    expr: 6^3 - 5^3
+  skills:
+  - zliczanie przez dopełnienie
+  - reguła mnożenia
+  - kontrola sensowności wyniku
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 91.0 vs 91.0 (tol 1e-09)'
+- id: g-ch-t02
+  slot: CHALLENGE
+  ramp_index: 0
+  difficulty: 4
+  exercise_type: 'zadanie odwrotne: z liczby meczów wyznacz liczbę drużyn'
+  statement: 'W pewnej lidze każda drużyna rozgrywa z każdą inną drużyną dokładnie dwa mecze: jeden na
+    własnym boisku i jeden na boisku przeciwnika. W minionym sezonie rozegrano łącznie 90 meczów. Do ligi
+    dołączą teraz 2 nowe drużyny, a zasady rozgrywek pozostaną bez zmian. Oblicz, ile meczów zostanie
+    rozegranych w nowym sezonie.'
+  statement_latex: n \cdot \left(n-1\right) = 90
+  solution: |-
+    Liczba drużyn nie jest podana — oznaczmy ją przez n (n jest liczbą naturalną, n ≥ 2).
+
+    Krok 1. Jednym obiektem jest mecz, czyli para uporządkowana (gospodarz, gość) dwóch różnych drużyn — zamiana ról daje inny mecz, bo mecze rozgrywane są na różnych boiskach. Gospodarza można wybrać na n sposobów, gościa na n − 1 sposobów, więc liczba wszystkich meczów w sezonie wynosi n\cdot\left(n-1\right).
+
+    Krok 2. Z warunków zadania n\cdot\left(n-1\right) = 90, czyli n^2 - n - 90 = 0. Wyróżnik: Δ = 1 + 360 = 361, \sqrt{Δ} = 19, stąd n = \frac{1-19}{2} = -9 albo n = \frac{1+19}{2} = 10. Liczba drużyn musi być liczbą naturalną, więc n = -9 odrzucamy: w lidze grało 10 drużyn.
+    (Kontrola: 10\cdot 9 = 90 ✓.)
+
+    Krok 3. Po dołączeniu 2 drużyn będzie ich 10 + 2 = 12. Liczba meczów w nowym sezonie:
+    12 \cdot 11 = 132.
+
+    Odpowiedź: w nowym sezonie zostanie rozegranych 132 mecze.
+  solution_steps:
+  - 'Wprowadź niewiadomą: n — liczba drużyn w minionym sezonie.'
+  - Ustal, że mecz to para uporządkowana (gospodarz, gość), więc meczów jest n·(n−1) — bez dzielenia przez
+    2.
+  - 'Ułóż równanie n·(n−1) = 90 i rozwiąż: n² − n − 90 = 0, Δ = 361, n = 10 lub n = −9.'
+  - Odrzuć n = −9 (liczba drużyn jest liczbą naturalną); zatem n = 10.
+  - Nowa liczba drużyn to 12; liczba meczów wynosi 12·11 = 132.
+  answer:
+    kind: NUMERIC
+    value: 132.0
+  checks:
+  - kind: evaluate
+    expr: \left(\frac{1+\sqrt{1+4 \cdot 90}}{2}+2\right) \cdot \left(\frac{1+\sqrt{1+4 \cdot 90}}{2}+1\right)
+    var: n
+  stated_model:
+    variable: n
+    objective_latex: n \cdot \left(n-1\right)
+    domain_lo: '2'
+    domain_lo_open: false
+    goal: value
+    constraint_used: n \cdot \left(n-1\right) = 90
+  skills:
+  - modelowanie sytuacji kombinatorycznej równaniem
+  - pary uporządkowane a nieuporządkowane
+  - rozwiązanie równania kwadratowego i odrzucenie rozwiązania niespełniającego warunków
+  - reguła mnożenia
+  verification:
+    checkability: STATED_MODEL
+    note: 'stage 1 inconclusive: kind mismatch: answer=SYMBOLIC reference=NUMERIC'
+- id: g-ch-t03
+  slot: CHALLENGE
+  ramp_index: 1
+  difficulty: 5
+  exercise_type: 'zliczanie z warunkiem „lub”: zasada włączeń i wyłączeń'
+  statement: 'Rzucamy trzykrotnie sześcienną kostką do gry. Z otrzymanych kolejno liczb oczek tworzymy
+    liczbę trzycyfrową w ten sposób, że wynik pierwszego rzutu jest cyfrą setek, wynik drugiego — cyfrą
+    dziesiątek, a wynik trzeciego — cyfrą jedności. Oblicz, ile różnych liczb trzycyfrowych można w ten
+    sposób otrzymać, jeżeli liczba ta ma spełniać co najmniej jeden z warunków: (1) jest podzielna przez
+    5, (2) ma wszystkie cyfry różne.'
+  statement_latex: \left|A \cup B\right| = \left|A\right| + \left|B\right| - \left|A \cap B\right| = 6
+    \cdot 6 \cdot 1 + 6 \cdot 5 \cdot 4 - 5 \cdot 4
+  solution: |-
+    Jednym obiektem jest liczba trzycyfrowa, której cyfry pochodzą ze zbioru {1, 2, 3, 4, 5, 6} (na kostce nie ma zera, więc warunek „pierwsza cyfra ≠ 0” jest spełniony automatycznie). Powtórzenia cyfr są dozwolone, kolejność ma znaczenie; wszystkich takich liczb jest 6^3 = 216. Każdemu wynikowi trzech rzutów odpowiada dokładnie jedna liczba.
+
+    Niech A — zbiór liczb podzielnych przez 5, B — zbiór liczb o wszystkich cyfrach różnych. Warunki mogą zachodzić jednocześnie (np. 235), więc przypadki NIE są rozłączne i samo dodawanie dałoby wynik zawyżony.
+
+    |A|: liczba jest podzielna przez 5 wtedy i tylko wtedy, gdy jej cyfra jedności to 0 albo 5; zero jest niemożliwe, więc cyfra jedności musi być równa 5 (1 możliwość), a cyfry setek i dziesiątek są dowolne: |A| = 6\cdot 6\cdot 1 = 36.
+
+    |B|: cyfry różne, więc setki 6 możliwości, dziesiątki 5, jedności 4: |B| = 6\cdot 5\cdot 4 = 120.
+
+    |A ∩ B|: cyfra jedności równa 5, a pozostałe cyfry różne i różne od 5: setki 5 możliwości, dziesiątki 4 możliwości: |A ∩ B| = 5\cdot 4 = 20.
+
+    Z zasady włączeń i wyłączeń:
+    |A ∪ B| = 36 + 120 − 20 = 136.
+
+    Kontrola sensowności: 136 < 216 ✓ oraz 136 > 120 = |B| ✓.
+
+    Odpowiedź: 136 liczb.
+  solution_steps:
+  - Zauważ, że cyframi mogą być tylko 1, 2, 3, 4, 5, 6, a wszystkich otrzymywanych liczb jest 6³ = 216.
+  - 'Wprowadź zbiory: A — liczby podzielne przez 5, B — liczby o wszystkich cyfrach różnych; stwierdź,
+    że A i B mają część wspólną.'
+  - 'Policz |A|: cyfra jedności musi być równa 5, więc |A| = 6·6·1 = 36.'
+  - 'Policz |B|: 6·5·4 = 120.'
+  - 'Policz |A ∩ B|: jedności = 5, setki 5 możliwości, dziesiątki 4, czyli 20.'
+  - Zastosuj |A ∪ B| = 36 + 120 − 20 = 136 i sprawdź, że wynik nie przekracza 216.
+  answer:
+    kind: NUMERIC
+    value: 136.0
+  checks:
+  - kind: evaluate
+    expr: 6 \cdot 6 \cdot 1 + 6 \cdot 5 \cdot 4 - 5 \cdot 4
+  stated_model:
+    variable: n
+    objective_latex: \left|A \cup B\right| = 6 \cdot 6 \cdot 1 + 6 \cdot 5 \cdot 4 - 5 \cdot 4
+    goal: value
+    constraint_used: cyfry ze zbioru \{1,2,3,4,5,6\}, powtórzenia dozwolone
+  skills:
+  - identyfikacja liczonego obiektu
+  - reguła mnożenia z ograniczeniem na ostatnią pozycję
+  - ciągi bez powtórzeń
+  - zasada włączeń i wyłączeń |A ∪ B| = |A| + |B| − |A ∩ B|
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (PARSE_ERROR: "UnexpectedCharacters: No terminal
+      matches ''\\'' in the current parser context, at line 1 col 9") — human review'
+- id: g-ch-t04
+  slot: CHALLENGE
+  ramp_index: 2
+  difficulty: 5
+  exercise_type: przekątne wielokąta wypukłego — wzór, dziedzina i zadanie odwrotne
+  statement: W pewnym wielokącie wypukłym liczba wszystkich przekątnych jest o 25 większa od liczby jego
+    boków. a) Wyznacz wzór na liczbę wszystkich przekątnych wielokąta wypukłego o n bokach oraz podaj,
+    dla jakich n ten wzór ma sens. b) Oblicz, ile boków i ile przekątnych ma opisany wielokąt.
+  statement_latex: \frac{n \cdot \left(n-1\right)}{2} - n = \frac{n \cdot \left(n-3\right)}{2}, \qquad
+    \frac{n \cdot \left(n-3\right)}{2} = n + 25
+  solution: |-
+    a) Wielokąt wypukły o n bokach ma n wierzchołków. Każdy odcinek o końcach w dwóch różnych wierzchołkach jest bokiem albo przekątną, a odcinek o końcach A, B to ten sam odcinek co B, A — liczymy więc pary nieuporządkowane:
+    liczba wszystkich odcinków = \frac{n\cdot\left(n-1\right)}{2}.
+    Od tej liczby odejmujemy n boków:
+    d\left(n\right) = \frac{n\cdot\left(n-1\right)}{2} - n = \frac{n^2 - n - 2n}{2} = \frac{n\cdot\left(n-3\right)}{2}.
+    Wzór ma sens dla n będących liczbami naturalnymi spełniającymi n ≥ 3 (najmniejszy wielokąt to trójkąt; dla n = 3 otrzymujemy d = 0, co jest zgodne z tym, że trójkąt nie ma przekątnych).
+
+    b) Warunek zadania: liczba przekątnych jest o 25 większa od liczby boków, czyli
+    \frac{n\cdot\left(n-3\right)}{2} = n + 25.
+    Mnożymy obie strony przez 2: n^2 - 3n = 2n + 50, stąd n^2 - 5n - 50 = 0.
+    Δ = 25 + 200 = 225, \sqrt{Δ} = 15, więc n = \frac{5-15}{2} = -5 albo n = \frac{5+15}{2} = 10.
+    Sprawdzamy zgodność z dziedziną: n = -5 odrzucamy, bo n musi być liczbą naturalną i n ≥ 3. Zostaje n = 10.
+    Liczba przekątnych: d\left(10\right) = \frac{10\cdot 7}{2} = 35.
+    Kontrola: 35 = 10 + 25 ✓.
+
+    Odpowiedź: a) d(n) = \frac{n\cdot\left(n-3\right)}{2} dla n ∈ N, n ≥ 3; b) wielokąt ma 10 boków i 35 przekątnych (jest to dziesięciokąt wypukły).
+  solution_steps:
+  - 'Zauważ, że odcinek łączący dwa wierzchołki to para nieuporządkowana: wszystkich takich odcinków jest
+    n(n−1)/2.'
+  - 'Odejmij n boków i uprość: d(n) = n(n−1)/2 − n = n(n−3)/2.'
+  - 'Podaj dziedzinę wzoru: n ∈ N, n ≥ 3.'
+  - 'Zapisz warunek zadania jako równanie: n(n−3)/2 = n + 25.'
+  - 'Przekształć do postaci n² − 5n − 50 = 0 i rozwiąż: Δ = 225, n = 10 lub n = −5.'
+  - Odrzuć n = −5 jako sprzeczne z dziedziną; oblicz liczbę przekątnych d(10) = 10·7/2 = 35 i sprawdź
+    warunek 35 = 10 + 25.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wzor
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{n \cdot \left(n-3\right)}{2}
+    - name: dziedzina
+      answer:
+        kind: SYMBOLIC
+        latex: n \in \mathbb{N}, \; n \geqslant 3
+    - name: liczba_bokow
+      answer:
+        kind: NUMERIC
+        value: 10.0
+    - name: liczba_przekatnych
+      answer:
+        kind: NUMERIC
+        value: 35.0
+  checks:
+  - kind: simplify
+    expr: \frac{n \cdot \left(n-1\right)}{2} - n
+    var: n
+    part: wzor
+  - kind: evaluate
+    expr: \frac{5+\sqrt{25+4 \cdot 50}}{2}
+    var: n
+    part: liczba_bokow
+  - kind: evaluate
+    expr: \frac{10 \cdot \left(10-3\right)}{2}
+    var: n
+    part: liczba_przekatnych
+  stated_model:
+    variable: n
+    objective_latex: d\left(n\right) = \frac{n \cdot \left(n-3\right)}{2}
+    domain_lo: '3'
+    domain_lo_open: false
+    goal: value
+    constraint_used: \frac{n \cdot \left(n-3\right)}{2} = n + 25
+  skills:
+  - zliczanie par nieuporządkowanych
+  - wyprowadzenie wzoru zależnego od n i podanie dziedziny
+  - układanie i rozwiązywanie równania kwadratowego
+  - odrzucanie rozwiązań sprzecznych z warunkami zadania
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''n'': ''d\\left(n\\right)
+      = \\frac{n \\cdot \\left(n-3\\right)}{2}'') — human review'

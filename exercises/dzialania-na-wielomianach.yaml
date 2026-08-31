@@ -1,0 +1,821 @@
+section: dzialania-na-wielomianach
+name: Działania na wielomianach
+scope: Adding, subtracting and multiplying polynomials in one and several variables; ordering and collecting
+  terms.
+requirements:
+- II.2
+counts:
+  total: 16
+  REFERENCE_CALL: 6
+  DETERMINISTIC: 7
+  NOT_MACHINE_CHECKABLE: 3
+exercises:
+- id: g-th-00
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: porządkowanie i redukcja wielomianu
+  statement: Dane jest wyrażenie W(x)=3x^{2}-5+2x^{3}-7x^{2}+4. Zredukuj wyrazy podobne i zapisz wielomian
+    W w postaci uporządkowanej (według malejących potęg zmiennej). Podaj stopień wielomianu W, jego wyraz
+    wolny oraz współczynnik przy x.
+  statement_latex: W(x)=3x^{2}-5+2x^{3}-7x^{2}+4
+  solution: |-
+    Grupujemy wyrazy podobne. Wyraz z x^{3} jest tylko jeden: 2x^{3}. Wyrazy z x^{2}: 3x^{2}-7x^{2}=\left(3-7\right)x^{2}=-4x^{2}. Wyrazy wolne: -5+4=-1. Wyrazu z x w ogóle nie ma, więc jego współczynnik jest równy 0.
+    Po uporządkowaniu: W(x)=2x^{3}-4x^{2}-1.
+    Najwyższa potęga zmiennej to x^{3}, więc stopień wielomianu wynosi 3. Wyraz wolny to -1 (można też obliczyć W\left(0\right)=-1), a współczynnik przy x wynosi 0.
+  solution_steps:
+  - 'Pogrupuj wyrazy podobne: osobno x^{3}, osobno x^{2}, osobno wyrazy wolne.'
+  - 'Dodaj współczynniki w każdej grupie: 3x^{2}-7x^{2}=-4x^{2}, -5+4=-1.'
+  - 'Zapisz wynik malejąco: W(x)=2x^{3}-4x^{2}-1.'
+  - 'Odczytaj: stopień 3, wyraz wolny -1, współczynnik przy x równy 0 (brak wyrazu z x).'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: postac uporzadkowana
+      answer:
+        kind: SYMBOLIC
+        latex: 2x^{3}-4x^{2}-1
+    - name: stopien
+      answer:
+        kind: NUMERIC
+        value: 3.0
+    - name: wyraz wolny
+      answer:
+        kind: NUMERIC
+        value: -1.0
+    - name: wspolczynnik przy x
+      answer:
+        kind: NUMERIC
+        value: 0.0
+  checks:
+  - kind: simplify
+    expr: 3x^{2}-5+2x^{3}-7x^{2}+4
+    part: postac uporzadkowana
+  - kind: evaluate
+    expr: 3\cdot 0^{2}-5+2\cdot 0^{3}-7\cdot 0^{2}+4
+    part: wyraz wolny
+  skills:
+  - redukcja wyrazów podobnych
+  - porządkowanie wielomianu
+  - odczytywanie stopnia i współczynników
+  verification:
+    checkability: REFERENCE_CALL
+    note: 'could not compare: part disagrees: AMBIGUOUS: ''parser returned an unresolved ambiguity (_ambig)'''
+- id: g-th-01
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: dodawanie wielomianów
+  statement: Dane są wielomiany W(x)=x^{3}-4x+2 oraz P(x)=3x^{2}+4x-9. Wyznacz wielomian S(x)=W(x)+P(x)
+    i zapisz go w postaci uporządkowanej.
+  statement_latex: S(x)=\left(x^{3}-4x+2\right)+\left(3x^{2}+4x-9\right)
+  solution: |-
+    Zapisujemy sumę w nawiasach: S(x)=\left(x^{3}-4x+2\right)+\left(3x^{2}+4x-9\right). Przed drugim nawiasem stoi znak +, więc opuszczamy nawiasy bez zmiany znaków: x^{3}-4x+2+3x^{2}+4x-9.
+    Redukujemy: x^{3} (bez pary), 3x^{2} (bez pary), -4x+4x=0, 2-9=-7.
+    Po uporządkowaniu S(x)=x^{3}+3x^{2}-7.
+    Kontrola dla x=1: W\left(1\right)=1-4+2=-1, P\left(1\right)=3+4-9=-2, suma -3; z wyniku 1+3-7=-3 ✔.
+  solution_steps:
+  - Zapisz sumę w nawiasach i opuść je bez zmiany znaków (przed nawiasem jest +).
+  - Pogrupuj wyrazy podobne.
+  - 'Zredukuj: -4x+4x=0, 2-9=-7.'
+  - 'Zapisz wynik malejąco: S(x)=x^{3}+3x^{2}-7 i sprawdź dla x=1.'
+  answer:
+    kind: SYMBOLIC
+    latex: x^{3}+3x^{2}-7
+  checks:
+  - kind: simplify
+    expr: \left(x^{3}-4x+2\right)+\left(3x^{2}+4x-9\right)
+  skills:
+  - dodawanie wielomianów
+  - redukcja wyrazów podobnych
+  - kontrola przez podstawienie
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: ''x^{3}+3x^{2}-7'' vs ''x**3 + 3*x**2 - 7'''
+- id: g-th-02
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: mnożenie jednomianu przez wielomian
+  statement: Wykonaj mnożenie -3x^{2}\cdot\left(4x^{3}-2x+5\right), zapisz wynik w postaci uporządkowanej
+    i podaj stopień otrzymanego wielomianu.
+  statement_latex: -3x^{2}\cdot\left(4x^{3}-2x+5\right)
+  solution: |-
+    Korzystamy z rozdzielności mnożenia względem dodawania — mnożymy jednomian przez każdy wyraz nawiasu:
+    -3x^{2}\cdot 4x^{3}=-12x^{5},
+    -3x^{2}\cdot\left(-2x\right)=6x^{3} (minus razy minus daje plus),
+    -3x^{2}\cdot 5=-15x^{2}.
+    Zatem -3x^{2}\cdot\left(4x^{3}-2x+5\right)=-12x^{5}+6x^{3}-15x^{2}.
+    Stopień iloczynu jest sumą stopni czynników: 2+3=5 ✔.
+  solution_steps:
+  - Pomnóż -3x^{2} przez każdy wyraz nawiasu osobno.
+  - 'Współczynniki mnóż, wykładniki dodawaj: -3\cdot 4=-12, x^{2}\cdot x^{3}=x^{5}.'
+  - 'Pilnuj znaków: -3x^{2}\cdot\left(-2x\right)=6x^{3}.'
+  - 'Zapisz wynik malejąco: -12x^{5}+6x^{3}-15x^{2}; stopień 2+3=5.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: iloczyn
+      answer:
+        kind: SYMBOLIC
+        latex: -12x^{5}+6x^{3}-15x^{2}
+    - name: stopien
+      answer:
+        kind: NUMERIC
+        value: 5.0
+  checks:
+  - kind: simplify
+    expr: -3x^{2}\cdot\left(4x^{3}-2x+5\right)
+    part: iloczyn
+  skills:
+  - rozdzielność mnożenia
+  - mnożenie jednomianów
+  - stopień iloczynu
+  verification:
+    checkability: REFERENCE_CALL
+    note: 2 parts matched
+- id: g-ex-03
+  slot: EXERCISE
+  ramp_index: 1
+  difficulty: 2
+  exercise_type: odejmowanie wielomianów
+  statement: Dane są wielomiany W(x)=4x^{3}-2x^{2}+x-6 oraz P(x)=4x^{3}+5x^{2}-3. Wyznacz wielomian R(x)=W(x)-P(x),
+    zapisz go w postaci uporządkowanej i podaj jego stopień.
+  statement_latex: R(x)=\left(4x^{3}-2x^{2}+x-6\right)-\left(4x^{3}+5x^{2}-3\right)
+  solution: |-
+    Zapisujemy różnicę w nawiasach: R(x)=\left(4x^{3}-2x^{2}+x-6\right)-\left(4x^{3}+5x^{2}-3\right).
+    Minus przed nawiasem zmienia znak KAŻDEGO wyrazu odejmowanego wielomianu:
+    4x^{3}-2x^{2}+x-6-4x^{3}-5x^{2}+3.
+    Redukujemy: 4x^{3}-4x^{3}=0, -2x^{2}-5x^{2}=-7x^{2}, x pozostaje, -6+3=-3.
+    Zatem R(x)=-7x^{2}+x-3.
+    Wyrazy z x^{3} się zredukowały, więc stopień różnicy wynosi 2 (jest mniejszy niż stopnie obu wielomianów — dla różnicy i sumy zachodzi tylko nierówność \deg\le\max).
+    Kontrola dla x=1: W\left(1\right)=4-2+1-6=-3, P\left(1\right)=4+5-3=6, różnica -9; z wyniku -7+1-3=-9 ✔.
+  solution_steps:
+  - 'Zapisz różnicę w nawiasach: (W)-(P).'
+  - Zmień znak każdego wyrazu wielomianu P.
+  - Zredukuj wyrazy podobne — wyrazy 4x^{3} i -4x^{3} znoszą się.
+  - 'Zapisz wynik: R(x)=-7x^{2}+x-3 i odczytaj stopień 2.'
+  - Sprawdź rachunki, podstawiając x=1.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: roznica
+      answer:
+        kind: SYMBOLIC
+        latex: -7x^{2}+x-3
+    - name: stopien
+      answer:
+        kind: NUMERIC
+        value: 2.0
+  checks:
+  - kind: simplify
+    expr: \left(4x^{3}-2x^{2}+x-6\right)-\left(4x^{3}+5x^{2}-3\right)
+    part: roznica
+  skills:
+  - odejmowanie wielomianów
+  - opuszczanie nawiasu ze znakiem minus
+  - stopień sumy i różnicy
+  verification:
+    checkability: REFERENCE_CALL
+    note: 2 parts matched
+- id: g-ex-04
+  slot: EXERCISE
+  ramp_index: 2
+  difficulty: 3
+  exercise_type: upraszczanie wyrażenia wielomianowego
+  statement: Wyrażenie F(x)=\left(3x-2\right)\cdot\left(x^{2}+2x-4\right)-\left(x-1\right)^{2} zapisz
+    w postaci uporządkowanego wielomianu, a następnie oblicz jego wartość dla x=2.
+  statement_latex: F(x)=\left(3x-2\right)\cdot\left(x^{2}+2x-4\right)-\left(x-1\right)^{2}
+  solution: |-
+    Najpierw iloczyn — 2\cdot 3=6 iloczynów cząstkowych:
+    3x\cdot x^{2}=3x^{3},\quad 3x\cdot 2x=6x^{2},\quad 3x\cdot\left(-4\right)=-12x,
+    \left(-2\right)\cdot x^{2}=-2x^{2},\quad \left(-2\right)\cdot 2x=-4x,\quad \left(-2\right)\cdot\left(-4\right)=8.
+    Po redukcji: \left(3x-2\right)\left(x^{2}+2x-4\right)=3x^{3}+4x^{2}-16x+8.
+    Drugi składnik ze wzoru na kwadrat różnicy: \left(x-1\right)^{2}=x^{2}-2x+1.
+    Odejmujemy CAŁE to wyrażenie, zmieniając znak każdego wyrazu:
+    3x^{3}+4x^{2}-16x+8-x^{2}+2x-1.
+    Redukcja: 4x^{2}-x^{2}=3x^{2}, -16x+2x=-14x, 8-1=7.
+    Zatem F(x)=3x^{3}+3x^{2}-14x+7.
+    Wartość dla x=2: F\left(2\right)=3\cdot 8+3\cdot 4-28+7=24+12-28+7=15.
+    Kontrola z postaci wyjściowej: \left(6-2\right)\left(4+4-4\right)-\left(2-1\right)^{2}=4\cdot 4-1=15 ✔.
+  solution_steps:
+  - Wymnóż nawiasy metodą 'każdy z każdym' — 6 iloczynów cząstkowych.
+  - 'Zredukuj: 3x^{3}+4x^{2}-16x+8.'
+  - Zastosuj wzór \left(x-1\right)^{2}=x^{2}-2x+1.
+  - 'Odejmij ten kwadrat, zmieniając znak każdego wyrazu, i zredukuj: F(x)=3x^{3}+3x^{2}-14x+7.'
+  - 'Podstaw x=2: F\left(2\right)=24+12-28+7=15 i sprawdź z wyrażeniem wyjściowym.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: postac uporzadkowana
+      answer:
+        kind: SYMBOLIC
+        latex: 3x^{3}+3x^{2}-14x+7
+    - name: wartosc dla x=2
+      answer:
+        kind: NUMERIC
+        value: 15.0
+  checks:
+  - kind: simplify
+    expr: \left(3x-2\right)\cdot\left(x^{2}+2x-4\right)-\left(x-1\right)^{2}
+    part: postac uporzadkowana
+  - kind: evaluate
+    expr: \left(3\cdot 2-2\right)\cdot\left(2^{2}+2\cdot 2-4\right)-\left(2-1\right)^{2}
+    part: wartosc dla x=2
+  skills:
+  - mnożenie wielomianów
+  - wzór na kwadrat różnicy
+  - opuszczanie nawiasu ze znakiem minus
+  - obliczanie wartości wielomianu
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [postac uporzadkowana] SymPy solved it fresh: ''3x^{3}+3x^{2}-14x+7''
+      vs ''3*x**3 + 3*x**2 - 14*x + 7'' ; [wartosc dla x=2] SymPy solved it fresh: 15.0 vs 15.0 (tol 1e-09)'
+- id: g-ex-05
+  slot: EXERCISE
+  ramp_index: 3
+  difficulty: 4
+  exercise_type: dobieranie parametru z warunku na współczynniki
+  statement: Dany jest wielomian W(x)=\left(2x^{2}+kx-3\right)\cdot\left(x+4\right)-5x^{2}, gdzie k jest
+    parametrem rzeczywistym. Wyznacz taką wartość k, dla której wielomian W nie zawiera wyrazu z x^{2}.
+    Dla znalezionej wartości k zapisz wzór wielomianu W w postaci uporządkowanej i podaj jego wyraz wolny.
+  statement_latex: W(x)=\left(2x^{2}+kx-3\right)\cdot\left(x+4\right)-5x^{2}
+  solution: |-
+    Wykonujemy mnożenie (6 iloczynów cząstkowych):
+    2x^{2}\cdot x=2x^{3},\quad 2x^{2}\cdot 4=8x^{2},\quad kx\cdot x=kx^{2},\quad kx\cdot 4=4kx,\quad \left(-3\right)\cdot x=-3x,\quad \left(-3\right)\cdot 4=-12.
+    Zatem \left(2x^{2}+kx-3\right)\left(x+4\right)=2x^{3}+\left(8+k\right)x^{2}+\left(4k-3\right)x-12.
+    Po odjęciu 5x^{2}: W(x)=2x^{3}+\left(k+3\right)x^{2}+\left(4k-3\right)x-12.
+    Brak wyrazu z x^{2} oznacza, że współczynnik przy x^{2} jest równy zeru: k+3=0, czyli k=-3.
+    Dla k=-3 mamy 4k-3=-12-3=-15, więc W(x)=2x^{3}-15x-12. Wyraz wolny wynosi -12 (to W\left(0\right)).
+    Kontrola dla x=1, k=-3: \left(2-3-3\right)\left(1+4\right)-5=\left(-4\right)\cdot 5-5=-25 oraz 2-15-12=-25 ✔.
+  solution_steps:
+  - Wymnóż nawiasy i uporządkuj wynik według potęg x.
+  - 'Zapisz współczynnik przy x^{2} z uwzględnieniem składnika -5x^{2}: 8+k-5=k+3.'
+  - 'Przyrównaj go do zera: k+3=0, stąd k=-3.'
+  - Podstaw k=-3 i zapisz W(x)=2x^{3}-15x-12.
+  - 'Odczytaj wyraz wolny: -12; sprawdź wynik, podstawiając x=1.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: parametr k
+      answer:
+        kind: NUMERIC
+        value: -3.0
+    - name: wzor wielomianu
+      answer:
+        kind: SYMBOLIC
+        latex: 2x^{3}-15x-12
+    - name: wyraz wolny
+      answer:
+        kind: NUMERIC
+        value: -12.0
+  checks:
+  - kind: solve_equation
+    expr: k+3=0
+    var: k
+    part: parametr k
+  - kind: simplify
+    expr: \left(2x^{2}-3x-3\right)\cdot\left(x+4\right)-5x^{2}
+    part: wzor wielomianu
+  - kind: evaluate
+    expr: \left(2\cdot 0^{2}-3\cdot 0-3\right)\cdot\left(0+4\right)-5\cdot 0^{2}
+    part: wyraz wolny
+  skills:
+  - mnożenie wielomianów
+  - porównywanie współczynników
+  - dobieranie parametru
+  - wyraz wolny
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [parametr k] SymPy solved it fresh: -3.0 vs -3.0 (tol 1e-09)
+      ; [wzor wielomianu] SymPy solved it fresh: ''2x^{3}-15x-12'' vs ''2*x**3 - 15*x - 12'' ; [wyraz
+      wolny] SymPy solved it fresh: -12.0 vs -12.0 (tol 1e-09)'
+- id: g-ex-t00
+  slot: EXERCISE
+  ramp_index: 6
+  difficulty: 3
+  exercise_type: upraszczanie wyrażenia wielomianowego i odczytanie jego charakterystyk
+  statement: Dany jest wielomian W\left(x\right)=\left(2\cdot x-1\right)\cdot\left(x^{2}+3\cdot x-4\right)-2\cdot\left(x-3\right)^{2}+5\cdot
+    x. Zapisz wielomian W w postaci uporządkowanej (według malejących potęg zmiennej), a następnie podaj
+    jego stopień, współczynnik przy x^{2} oraz wyraz wolny.
+  statement_latex: W\left(x\right)=\left(2\cdot x-1\right)\cdot\left(x^{2}+3\cdot x-4\right)-2\cdot\left(x-3\right)^{2}+5\cdot
+    x
+  solution: |-
+    Wykonujemy mnożenie „każdy z każdym” (2\cdot 3=6 iloczynów):
+    \left(2\cdot x-1\right)\cdot\left(x^{2}+3\cdot x-4\right)=2\cdot x^{3}+6\cdot x^{2}-8\cdot x-x^{2}-3\cdot x+4=2\cdot x^{3}+5\cdot x^{2}-11\cdot x+4.
+    Korzystamy ze wzoru na kwadrat różnicy: \left(x-3\right)^{2}=x^{2}-6\cdot x+9, zatem 2\cdot\left(x-3\right)^{2}=2\cdot x^{2}-12\cdot x+18.
+    Odejmujemy CAŁE wyrażenie, więc zmieniamy znak każdego jego wyrazu:
+    W\left(x\right)=2\cdot x^{3}+5\cdot x^{2}-11\cdot x+4-2\cdot x^{2}+12\cdot x-18+5\cdot x.
+    Redukcja wyrazów podobnych: x^{3}: 2\cdot x^{3};\; x^{2}: 5-2=3, czyli 3\cdot x^{2};\; x: -11+12+5=6, czyli 6\cdot x;\; wyrazy wolne: 4-18=-14.
+    Stąd W\left(x\right)=2\cdot x^{3}+3\cdot x^{2}+6\cdot x-14. Stopień wielomianu to 3, współczynnik przy x^{2} wynosi 3, a wyraz wolny -14.
+    Kontrola dla x=1: \left(2-1\right)\cdot\left(1+3-4\right)-2\cdot\left(1-3\right)^{2}+5=0-8+5=-3 oraz 2+3+6-14=-3 ✔.
+  solution_steps:
+  - Wymnóż \left(2\cdot x-1\right)\cdot\left(x^{2}+3\cdot x-4\right)=2\cdot x^{3}+5\cdot x^{2}-11\cdot
+    x+4.
+  - Rozwiń 2\cdot\left(x-3\right)^{2}=2\cdot x^{2}-12\cdot x+18.
+  - Opuść nawias ze znakiem minus, zmieniając znak każdego wyrazu.
+  - 'Zredukuj wyrazy podobne i uporządkuj: W\left(x\right)=2\cdot x^{3}+3\cdot x^{2}+6\cdot x-14.'
+  - 'Odczytaj: stopień 3, współczynnik przy x^{2} równy 3, wyraz wolny -14.'
+  - Sprawdź wynik, podstawiając x=1 do obu postaci.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: postac_uporzadkowana
+      answer:
+        kind: SYMBOLIC
+        latex: 2x^{3}+3x^{2}+6x-14
+    - name: stopien
+      answer:
+        kind: NUMERIC
+        value: 3.0
+    - name: wspolczynnik_przy_x2
+      answer:
+        kind: NUMERIC
+        value: 3.0
+    - name: wyraz_wolny
+      answer:
+        kind: NUMERIC
+        value: -14.0
+  checks:
+  - kind: simplify
+    expr: \left(2\cdot x-1\right)\cdot\left(x^{2}+3\cdot x-4\right)-2\cdot\left(x-3\right)^{2}+5\cdot
+      x
+    part: postac_uporzadkowana
+  - kind: evaluate
+    expr: 2\cdot 3+\left(-1\right)\cdot 1-2\cdot 1
+    part: wspolczynnik_przy_x2
+  - kind: evaluate
+    expr: \left(2\cdot 0-1\right)\cdot\left(0^{2}+3\cdot 0-4\right)-2\cdot\left(0-3\right)^{2}+5\cdot
+      0
+    part: wyraz_wolny
+  skills:
+  - mnożenie wielomianu przez wielomian
+  - wzór na kwadrat różnicy
+  - opuszczanie nawiasu ze znakiem minus
+  - redukcja wyrazów podobnych i porządkowanie
+  - odczytywanie stopnia, współczynnika i wyrazu wolnego
+  verification:
+    checkability: REFERENCE_CALL
+    note: 4 parts matched
+- id: g-ex-t01
+  slot: EXERCISE
+  ramp_index: 7
+  difficulty: 4
+  exercise_type: dobieranie parametru z warunku na współczynnik
+  statement: Dany jest wielomian W\left(x\right)=\left(x^{2}+a\cdot x-3\right)\cdot\left(2\cdot x-1\right)+5\cdot
+    x^{2}, gdzie a jest liczbą rzeczywistą. Wyznacz tę wartość a, dla której wielomian W nie zawiera wyrazu
+    z x^{2}. Dla znalezionej wartości a zapisz wielomian W w postaci uporządkowanej oraz oblicz W\left(-1\right).
+  statement_latex: W\left(x\right)=\left(x^{2}+a\cdot x-3\right)\cdot\left(2\cdot x-1\right)+5\cdot x^{2}
+  solution: |-
+    Wykonujemy mnożenie (6 iloczynów):
+    \left(x^{2}+a\cdot x-3\right)\cdot\left(2\cdot x-1\right)=2\cdot x^{3}-x^{2}+2\cdot a\cdot x^{2}-a\cdot x-6\cdot x+3.
+    Po dodaniu 5\cdot x^{2} i uporządkowaniu:
+    W\left(x\right)=2\cdot x^{3}+\left(2\cdot a+4\right)\cdot x^{2}+\left(-a-6\right)\cdot x+3.
+    Brak wyrazu z x^{2} oznacza, że współczynnik przy x^{2} jest równy zeru:
+    2\cdot a+4=0, czyli a=-2.
+    Dla a=-2 mamy -a-6=2-6=-4, zatem W\left(x\right)=2\cdot x^{3}-4\cdot x+3.
+    Wartość: W\left(-1\right)=2\cdot\left(-1\right)^{3}-4\cdot\left(-1\right)+3=-2+4+3=5.
+    Kontrola bezpośrednio ze wzoru wyjściowego dla a=-2 i x=-1: \left(1+2-3\right)\cdot\left(-3\right)+5=0+5=5 ✔.
+  solution_steps:
+  - Wymnóż \left(x^{2}+a\cdot x-3\right)\cdot\left(2\cdot x-1\right) i dodaj 5\cdot x^{2}.
+  - 'Uporządkuj wynik: W\left(x\right)=2\cdot x^{3}+\left(2\cdot a+4\right)\cdot x^{2}+\left(-a-6\right)\cdot
+    x+3.'
+  - 'Zapisz warunek braku wyrazu z x^{2}: 2\cdot a+4=0.'
+  - 'Rozwiąż równanie: a=-2.'
+  - 'Podstaw a=-2: W\left(x\right)=2\cdot x^{3}-4\cdot x+3.'
+  - Oblicz W\left(-1\right)=-2+4+3=5.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: a
+      answer:
+        kind: NUMERIC
+        value: -2.0
+    - name: wielomian_W
+      answer:
+        kind: SYMBOLIC
+        latex: 2x^{3}-4x+3
+    - name: W_minus_1
+      answer:
+        kind: NUMERIC
+        value: 5.0
+  checks:
+  - kind: solve_equation
+    expr: 2\cdot a+4=0
+    var: a
+    part: a
+  - kind: simplify
+    expr: \left(x^{2}-2\cdot x-3\right)\cdot\left(2\cdot x-1\right)+5\cdot x^{2}
+    part: wielomian_W
+  - kind: evaluate
+    expr: \left(\left(-1\right)^{2}-2\cdot\left(-1\right)-3\right)\cdot\left(2\cdot\left(-1\right)-1\right)+5\cdot\left(-1\right)^{2}
+    part: W_minus_1
+  skills:
+  - mnożenie wielomianów z parametrem
+  - porządkowanie wielomianu według potęg
+  - zapisanie warunku na współczynnik i rozwiązanie równania liniowego
+  - obliczanie wartości wielomianu
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [a] SymPy solved it fresh: -2.0 vs -2.0 (tol 1e-09) ; [wielomian_W]
+      SymPy solved it fresh: ''2x^{3}-4x+3'' vs ''2*x**3 - 4*x + 3'' ; [W_minus_1] SymPy solved it fresh:
+      5.0 vs 5.0 (tol 1e-09)'
+- id: g-cm-06
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: odejmowanie wielomianów — analiza błędu
+  statement: Dane są wielomiany W(x)=5x^{2}-2x+1 oraz P(x)=3x^{2}-6x-4. Uczeń obliczył W(x)-P(x) i otrzymał
+    2x^{2}-8x-3. Wskaż błąd w jego rachunku i podaj poprawny wynik W(x)-P(x) w postaci uporządkowanej.
+  statement_latex: W(x)-P(x)=\left(5x^{2}-2x+1\right)-\left(3x^{2}-6x-4\right)
+  solution: |-
+    BŁĘDNE ROZUMOWANIE UCZNIA: opuszczając nawias, uczeń zmienił znak tylko pierwszego wyrazu:
+    \left(5x^{2}-2x+1\right)-\left(3x^{2}-6x-4\right)=5x^{2}-2x+1-3x^{2}-6x-4=2x^{2}-8x-3.
+    BŁĄD: minus przed nawiasem to mnożenie całego nawiasu przez -1, więc zmienia znak KAŻDEGO wyrazu, a nie tylko pierwszego. Wyrazy -6x i -4 powinny zmienić znak na +6x i +4.
+    POPRAWNIE: \left(5x^{2}-2x+1\right)-\left(3x^{2}-6x-4\right)=5x^{2}-2x+1-3x^{2}+6x+4.
+    Redukcja: 5x^{2}-3x^{2}=2x^{2}, -2x+6x=4x, 1+4=5.
+    Wynik: W(x)-P(x)=2x^{2}+4x+5.
+    Kontrola dla x=1: W\left(1\right)=4, P\left(1\right)=-7, różnica 11; z wyniku 2+4+5=11 ✔ (błędna odpowiedź dawała 2-8-3=-9).
+  solution_steps:
+  - Zauważ, że uczeń zmienił znak tylko przy 3x^{2}, a wyrazy -6x i -4 przepisał bez zmiany.
+  - 'Przypomnij regułę: -\left(a+b-c\right)=-a-b+c — znak zmienia KAŻDY wyraz.'
+  - 'Zapisz poprawnie: 5x^{2}-2x+1-3x^{2}+6x+4.'
+  - 'Zredukuj: 2x^{2}+4x+5.'
+  - 'Sprawdź podstawieniem x=1: obie strony dają 11.'
+  answer:
+    kind: SYMBOLIC
+    latex: 2x^{2}+4x+5
+  checks:
+  - kind: simplify
+    expr: \left(5x^{2}-2x+1\right)-\left(3x^{2}-6x-4\right)
+  skills:
+  - opuszczanie nawiasu ze znakiem minus
+  - odejmowanie wielomianów
+  - kontrola przez podstawienie
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: ''2x^{2}+4x+5'' vs ''2*x**2 + 4*x + 5'''
+- id: g-cm-07
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: redukcja wyrazów podobnych — analiza błędu
+  statement: Uprość wyrażenie 6x^{3}+5x^{3}-2x^{2}\cdot 3x. Uczeń otrzymał wynik 11x^{6}-6x^{3}. Wyjaśnij,
+    na czym polega jego błąd, i podaj poprawny wynik.
+  statement_latex: 6x^{3}+5x^{3}-2x^{2}\cdot 3x
+  solution: |-
+    BŁĘDNE ROZUMOWANIE UCZNIA: przy dodawaniu wyrazów podobnych dodał zarówno współczynniki, jak i wykładniki: 6x^{3}+5x^{3}=11x^{6}. Otrzymał 11x^{6}-6x^{3}.
+    BŁĄD: przy dodawaniu wyrazów podobnych dodajemy TYLKO współczynniki, część literowa pozostaje bez zmian: ax^{k}+bx^{k}=\left(a+b\right)x^{k}. Wykładniki dodaje się dopiero przy MNOŻENIU jednomianów.
+    POPRAWNIE: 6x^{3}+5x^{3}=11x^{3} (dodajemy 6+5=11, wykładnik zostaje 3).
+    Mnożenie wykonujemy zgodnie z regułą \left(ax^{m}\right)\cdot\left(bx^{n}\right)=ab\,x^{m+n}: 2x^{2}\cdot 3x=6x^{3} — tutaj wykładniki się dodają.
+    Zatem 6x^{3}+5x^{3}-2x^{2}\cdot 3x=11x^{3}-6x^{3}=5x^{3}.
+    Kontrola dla x=1: 6+5-2\cdot 3=5 oraz 5\cdot 1^{3}=5 ✔.
+  solution_steps:
+  - Zauważ, że uczeń dodał wykładniki przy dodawaniu wyrazów podobnych.
+  - 'Zastosuj regułę ax^{k}+bx^{k}=\left(a+b\right)x^{k}: 6x^{3}+5x^{3}=11x^{3}.'
+  - 'Wykonaj mnożenie: 2x^{2}\cdot 3x=6x^{3} (tu wykładniki dodajemy).'
+  - 'Zredukuj: 11x^{3}-6x^{3}=5x^{3}.'
+  - 'Sprawdź dla x=1: 6+5-6=5 ✔.'
+  answer:
+    kind: SYMBOLIC
+    latex: 5x^{3}
+  checks:
+  - kind: simplify
+    expr: 6x^{3}+5x^{3}-2x^{2}\cdot 3x
+  skills:
+  - redukcja wyrazów podobnych
+  - mnożenie jednomianów
+  - rozróżnianie dodawania i mnożenia potęg
+  verification:
+    checkability: REFERENCE_CALL
+    note: '''5x^{3}'' vs ''5x^{3}'''
+- id: g-cm-08
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: wielomian wielu zmiennych — analiza błędu
+  statement: Uprość wyrażenie 5x^{2}y-3xy+2xy^{2}+xy-x^{2}y. Uczeń zredukował wszystkie wyrazy zawierające
+    x i y i otrzymał 4x^{2}y^{2}. Wyjaśnij, na czym polega błąd, podaj poprawnie uproszczone wyrażenie
+    oraz jego stopień.
+  statement_latex: 5x^{2}y-3xy+2xy^{2}+xy-x^{2}y
+  solution: |-
+    BŁĘDNE ROZUMOWANIE UCZNIA: uczeń potraktował wszystkie wyrazy jako podobne (bo wszystkie zawierają x i y) i dodał ich współczynniki: 5-3+2+1-1=4, dopisując część literową x^{2}y^{2}. Otrzymał 4x^{2}y^{2}.
+    BŁĄD: wyrazy podobne muszą mieć IDENTYCZNĄ część literową — te same zmienne w tych samych potęgach przy KAŻDEJ zmiennej. Wyrazy x^{2}y, xy oraz xy^{2} są trzema różnymi rodzajami wyrazów i nie wolno ich łączyć.
+    POPRAWNIE grupujemy osobno:
+    x^{2}y:\ 5x^{2}y-x^{2}y=4x^{2}y;
+    xy:\ -3xy+xy=-2xy;
+    xy^{2}:\ 2xy^{2} (bez pary).
+    Wynik: 4x^{2}y+2xy^{2}-2xy.
+    Stopnie jednomianów to sumy wykładników: dla 4x^{2}y jest to 2+1=3, dla 2xy^{2} też 1+2=3, dla -2xy jest to 2. Największy z nich to 3, więc stopień wielomianu wynosi 3.
+    Kontrola dla x=1, y=1: 5-3+2+1-1=4 oraz 4+2-2=4 ✔ (błędny wynik też daje 4 — dlatego warto sprawdzić dla x=2, y=1: 20-6+4+2-4=16 oraz 16+4-4=16 ✔, natomiast 4\cdot 2^{2}\cdot 1^{2}=16... sprawdzamy jeszcze x=1, y=2: 10-6+8+2-2=12 oraz 8+8-4=12, a błędny wynik dawałby 16).
+  solution_steps:
+  - Zauważ, że uczeń połączył wyrazy o różnych częściach literowych.
+  - 'Wypisz osobno grupy wyrazów podobnych: x^{2}y, xy, xy^{2}.'
+  - 'Zredukuj w każdej grupie: 5x^{2}y-x^{2}y=4x^{2}y, -3xy+xy=-2xy, wyraz 2xy^{2} zostaje.'
+  - 'Zapisz wynik: 4x^{2}y+2xy^{2}-2xy.'
+  - 'Policz stopnie jednomianów jako sumy wykładników: 3, 3, 2 — stopień wielomianu to 3.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: uproszczone wyrazenie
+      answer:
+        kind: SYMBOLIC
+        latex: 4x^{2}y+2xy^{2}-2xy
+    - name: stopien
+      answer:
+        kind: NUMERIC
+        value: 3.0
+  checks:
+  - kind: simplify
+    expr: 5x^{2}y-3xy+2xy^{2}+xy-x^{2}y
+    part: uproszczone wyrazenie
+  skills:
+  - wyrazy podobne w wielu zmiennych
+  - redukcja wyrazów podobnych
+  - stopień jednomianu wielu zmiennych
+  verification:
+    checkability: REFERENCE_CALL
+    note: 'could not compare: part disagrees: PARSE_ERROR: "UnexpectedCharacters: No terminal matches
+      ''y'' in the current parser context, at line 1 col 7"'
+- id: g-cm-09
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: wzory skróconego mnożenia — analiza błędu
+  statement: Uprość wyrażenie \left(3x+4\right)^{2}-9x^{2}. Uczeń zapisał \left(3x+4\right)^{2}=9x^{2}+16
+    i otrzymał wynik 16. Wyjaśnij, na czym polega błąd, i podaj poprawny wynik w postaci uporządkowanej.
+  statement_latex: \left(3x+4\right)^{2}-9x^{2}
+  solution: |-
+    BŁĘDNE ROZUMOWANIE UCZNIA: uczeń podniósł do kwadratu każdy składnik osobno: \left(3x+4\right)^{2}=\left(3x\right)^{2}+4^{2}=9x^{2}+16, a następnie 9x^{2}+16-9x^{2}=16.
+    BŁĄD: kwadrat sumy to iloczyn \left(3x+4\right)\cdot\left(3x+4\right), a więc 'każdy z każdym'. W wyniku pojawia się jeszcze podwojony iloczyn 2ab, którego uczeń nie uwzględnił.
+    POPRAWNIE: \left(3x+4\right)^{2}=\left(3x\right)^{2}+2\cdot 3x\cdot 4+4^{2}=9x^{2}+24x+16.
+    Stąd \left(3x+4\right)^{2}-9x^{2}=9x^{2}+24x+16-9x^{2}=24x+16.
+    Kontrola dla x=1: \left(3+4\right)^{2}-9=49-9=40 oraz 24+16=40 ✔ (błędna odpowiedź dawała 16).
+  solution_steps:
+  - Zauważ, że uczeń pominął podwojony iloczyn 2ab we wzorze na kwadrat sumy.
+  - 'Zastosuj wzór \left(a+b\right)^{2}=a^{2}+2ab+b^{2} dla a=3x, b=4: 9x^{2}+24x+16.'
+  - 'Odejmij 9x^{2} i zredukuj: 24x+16.'
+  - 'Sprawdź dla x=1: 49-9=40 oraz 24+16=40 ✔.'
+  answer:
+    kind: SYMBOLIC
+    latex: 24x+16
+  checks:
+  - kind: simplify
+    expr: \left(3x+4\right)^{2}-9x^{2}
+  skills:
+  - kwadrat sumy
+  - mnożenie dwumianów
+  - redukcja wyrazów podobnych
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: ''24x+16'' vs ''24*x + 16'''
+- id: g-cm-10
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: mnożenie wielomianów — analiza błędu
+  statement: Wykonaj mnożenie \left(3x-4\right)\cdot\left(2x^{2}-x+5\right) i zapisz wynik w postaci uporządkowanej.
+    Uczeń pomnożył 'pierwszy wyraz przez pierwszy, a ostatni przez ostatni' i otrzymał 6x^{3}-20. Wyjaśnij,
+    na czym polega błąd, i podaj poprawny wynik.
+  statement_latex: \left(3x-4\right)\cdot\left(2x^{2}-x+5\right)
+  solution: |-
+    BŁĘDNE ROZUMOWANIE UCZNIA: 3x\cdot 2x^{2}=6x^{3} oraz \left(-4\right)\cdot 5=-20, stąd rzekomo \left(3x-4\right)\left(2x^{2}-x+5\right)=6x^{3}-20.
+    BŁĄD: mnożenie wielomianów to wielokrotne zastosowanie rozdzielności — trzeba pomnożyć KAŻDY wyraz pierwszego nawiasu przez KAŻDY wyraz drugiego. Przy 2 i 3 wyrazach musi powstać 2\cdot 3=6 iloczynów cząstkowych, a uczeń zapisał tylko 2.
+    POPRAWNIE:
+    3x\cdot 2x^{2}=6x^{3},\quad 3x\cdot\left(-x\right)=-3x^{2},\quad 3x\cdot 5=15x,
+    \left(-4\right)\cdot 2x^{2}=-8x^{2},\quad \left(-4\right)\cdot\left(-x\right)=4x,\quad \left(-4\right)\cdot 5=-20.
+    Redukcja: x^{3}:\ 6x^{3};\ x^{2}:\ -3x^{2}-8x^{2}=-11x^{2};\ x:\ 15x+4x=19x;\ wyraz wolny: -20.
+    Wynik: 6x^{3}-11x^{2}+19x-20. Stopień 1+2=3 ✔.
+    Kontrola dla x=1: \left(3-4\right)\left(2-1+5\right)=-6 oraz 6-11+19-20=-6 ✔ (błędna odpowiedź dawała 6-20=-14).
+  solution_steps:
+  - Zauważ, że uczeń zapisał tylko 2 iloczyny zamiast 2\cdot 3=6.
+  - 'Pomnóż 3x przez każdy wyraz drugiego nawiasu: 6x^{3}, -3x^{2}, 15x.'
+  - 'Pomnóż -4 przez każdy wyraz drugiego nawiasu: -8x^{2}, 4x, -20 (uwaga na znaki).'
+  - 'Zredukuj wyrazy podobne i uporządkuj: 6x^{3}-11x^{2}+19x-20.'
+  - 'Sprawdź dla x=1: obie strony dają -6.'
+  answer:
+    kind: SYMBOLIC
+    latex: 6x^{3}-11x^{2}+19x-20
+  checks:
+  - kind: simplify
+    expr: \left(3x-4\right)\cdot\left(2x^{2}-x+5\right)
+  skills:
+  - mnożenie wielomianów 'każdy z każdym'
+  - kontrola liczby iloczynów cząstkowych
+  - porządkowanie wyniku
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: ''6x^{3}-11x^{2}+19x-20'' vs ''(3*x - 4)*(2*x**2 - x + 5)'''
+- id: g-ch-t02
+  slot: CHALLENGE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: zadanie tekstowe z modelowaniem wielomianowym (odwrotne)
+  statement: Prostokątny ogród ma jeden bok o 5 m dłuższy od drugiego. Wokół ogrodu, na zewnątrz, wykonano
+    ścieżkę o stałej szerokości 1 m, otaczającą ogród ze wszystkich czterech stron (ścieżka nie zmniejsza
+    powierzchni ogrodu). Pole powierzchni ścieżki jest równe 38 m^{2}. Oblicz długości boków tego ogrodu.
+  statement_latex: P_{s}=\left(x+2\right)\cdot\left(x+7\right)-x\cdot\left(x+5\right)=38
+  solution: |-
+    Oznaczmy przez x (w metrach) długość krótszego boku ogrodu, x>0. Wtedy dłuższy bok ma długość x+5, a pole ogrodu jest równe x\cdot\left(x+5\right)=x^{2}+5\cdot x.
+    Ścieżka o szerokości 1 m otacza ogród z każdej strony, więc zewnętrzny prostokąt (ogród razem ze ścieżką) ma boki o długościach x+2 oraz x+5+2=x+7, a jego pole to
+    \left(x+2\right)\cdot\left(x+7\right)=x^{2}+7\cdot x+2\cdot x+14=x^{2}+9\cdot x+14.
+    Pole ścieżki to różnica tych pól:
+    P_{s}\left(x\right)=\left(x^{2}+9\cdot x+14\right)-\left(x^{2}+5\cdot x\right)=4\cdot x+14.
+    Z warunku zadania 4\cdot x+14=38, czyli 4\cdot x=24 i x=6.
+    Boki ogrodu mają więc długości 6 m i 6+5=11 m.
+    Sprawdzenie: prostokąt zewnętrzny 8\cdot 13=104, ogród 6\cdot 11=66, różnica 104-66=38 ✔.
+  solution_steps:
+  - Oznacz przez x długość krótszego boku ogrodu; drugi bok ma długość x+5.
+  - 'Zapisz pole ogrodu: x\cdot\left(x+5\right)=x^{2}+5\cdot x.'
+  - 'Zauważ, że prostokąt zewnętrzny ma boki x+2 oraz x+7, i zapisz jego pole: x^{2}+9\cdot x+14.'
+  - 'Odejmij wielomiany: pole ścieżki P_{s}\left(x\right)=4\cdot x+14.'
+  - Rozwiąż równanie 4\cdot x+14=38, otrzymując x=6.
+  - 'Podaj wymiary ogrodu: 6 m i 11 m; sprawdź rachunki (104-66=38).'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: krotszy_bok
+      answer:
+        kind: NUMERIC
+        value: 6.0
+    - name: dluzszy_bok
+      answer:
+        kind: NUMERIC
+        value: 11.0
+  checks:
+  - kind: solve_equation
+    expr: 4\cdot x+14=38
+    part: krotszy_bok
+  - kind: evaluate
+    expr: \frac{38-14}{4}+5
+    part: dluzszy_bok
+  stated_model:
+    variable: x
+    objective_latex: P_{s}\left(x\right)=\left(x+2\right)\cdot\left(x+7\right)-x\cdot\left(x+5\right)=4\cdot
+      x+14
+    domain_lo: '0'
+    goal: value
+    constraint_used: krótszy bok x, dłuższy bok x+5, ścieżka szerokości 1 m dookoła
+  skills:
+  - wprowadzenie zmiennej do opisu geometrycznego
+  - zapisanie pól prostokątów jako wielomianów
+  - redukcja wyrazów podobnych przy odejmowaniu wielomianów
+  - rozwiązanie równania liniowego i interpretacja wyniku
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (PARSE_ERROR: "UnexpectedCharacters: No terminal
+      matches ''='' in the current parser context, at line 1 col 81") — human review'
+- id: g-ch-t03
+  slot: CHALLENGE
+  ramp_index: 1
+  difficulty: 4
+  exercise_type: modelowanie bryły wielomianem z filtrowaniem rozwiązania
+  statement: Suma długości wszystkich krawędzi pewnego prostopadłościanu o podstawie kwadratowej jest
+    równa 48 cm, a pole powierzchni całkowitej tego prostopadłościanu jest równe 90 cm^{2}. Wysokość tego
+    prostopadłościanu jest większa od długości krawędzi jego podstawy. Oblicz długość krawędzi podstawy
+    oraz wysokość tego prostopadłościanu.
+  statement_latex: P_{c}\left(x\right)=2\cdot x^{2}+4\cdot x\cdot\left(12-2\cdot x\right)=90
+  solution: |-
+    Oznaczmy przez x (w centymetrach) długość krawędzi podstawy, a przez h wysokość prostopadłościanu, x>0, h>0.
+    Prostopadłościan o podstawie kwadratowej ma 8 krawędzi podstaw o długości x i 4 krawędzie boczne o długości h, więc
+    8\cdot x+4\cdot h=48, czyli h=12-2\cdot x (stąd dodatkowo 0<x<6).
+    Pole powierzchni całkowitej to dwie podstawy i cztery jednakowe ściany boczne:
+    P_{c}=2\cdot x^{2}+4\cdot x\cdot h=2\cdot x^{2}+4\cdot x\cdot\left(12-2\cdot x\right)=2\cdot x^{2}+48\cdot x-8\cdot x^{2}=-6\cdot x^{2}+48\cdot x.
+    Z warunku zadania -6\cdot x^{2}+48\cdot x=90, czyli po podzieleniu przez -6: x^{2}-8\cdot x+15=0.
+    Wyróżnik: \Delta=64-60=4, \sqrt{\Delta}=2, więc x=\frac{8-2}{2}=3 albo x=\frac{8+2}{2}=5.
+    Sprawdzamy warunek h>x: dla x=3 mamy h=12-6=6 i 6>3 ✔; dla x=5 mamy h=12-10=2 i 2<5 ✘ — tę wartość odrzucamy.
+    Odpowiedź: krawędź podstawy ma 3 cm, a wysokość 6 cm.
+    Sprawdzenie: krawędzie 8\cdot 3+4\cdot 6=48 ✔, pole 2\cdot 9+4\cdot 3\cdot 6=18+72=90 ✔.
+  solution_steps:
+  - Oznacz krawędź podstawy przez x, wysokość przez h.
+  - Z sumy krawędzi 8\cdot x+4\cdot h=48 wyznacz h=12-2\cdot x oraz warunek 0<x<6.
+  - 'Zapisz pole powierzchni całkowitej: P_{c}=2\cdot x^{2}+4\cdot x\cdot\left(12-2\cdot x\right)=-6\cdot
+    x^{2}+48\cdot x.'
+  - Rozwiąż równanie -6\cdot x^{2}+48\cdot x=90, czyli x^{2}-8\cdot x+15=0; otrzymasz x=3 lub x=5.
+  - 'Sprawdź warunek „wysokość większa od krawędzi podstawy”: x=5 daje h=2<5, więc odpada.'
+  - 'Podaj odpowiedź: x=3 cm, h=12-2\cdot 3=6 cm i sprawdź oba warunki zadania.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: krawedz_podstawy
+      answer:
+        kind: NUMERIC
+        value: 3.0
+    - name: wysokosc
+      answer:
+        kind: NUMERIC
+        value: 6.0
+  checks:
+  - kind: evaluate
+    expr: \frac{8-\sqrt{8^{2}-4\cdot 15}}{2}
+    part: krawedz_podstawy
+  - kind: evaluate
+    expr: 12-2\cdot 3
+    part: wysokosc
+  stated_model:
+    variable: x
+    objective_latex: P_{c}\left(x\right)=2\cdot x^{2}+4\cdot x\cdot\left(12-2\cdot x\right)=-6\cdot x^{2}+48\cdot
+      x
+    domain_lo: '0'
+    domain_hi: '6'
+    goal: value
+    constraint_used: 8\cdot x+4\cdot h=48 oraz h>x
+  skills:
+  - wprowadzenie zmiennej i wyrażenie wysokości przez krawędź podstawy
+  - zapisanie pola powierzchni całkowitej jako wielomianu
+  - redukcja wyrazów podobnych
+  - rozwiązanie równania kwadratowego
+  - odrzucenie rozwiązania sprzecznego z warunkiem zadania
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (PARSE_ERROR: "UnexpectedCharacters: No terminal
+      matches ''='' in the current parser context, at line 1 col 71") — human review'
+- id: g-ch-t04
+  slot: CHALLENGE
+  ramp_index: 2
+  difficulty: 5
+  exercise_type: 'modelowanie wielomianowe: wzór, dziedzina, wartość i ocena wykonalności'
+  statement: Z prostokątnego arkusza kartonu o wymiarach 24 cm i 16 cm wycięto w każdym z czterech narożników
+    jednakowy kwadrat, a następnie powstałe wystające paski zagięto do góry wzdłuż krawędzi wycięć i sklejono,
+    otrzymując pudełko w kształcie prostopadłościanu bez przykrywki. Wysokość pudełka jest równa długości
+    boku wyciętego kwadratu; oznacz ją przez x (w centymetrach). a) Wyznacz wzór na objętość V\left(x\right)
+    tego pudełka, zapisz go w postaci wielomianu uporządkowanego i podaj dziedzinę. b) Wyznacz wzór na
+    pole powierzchni pudełka (dno i cztery ściany boczne) i zapisz go w postaci uporządkowanej. c) Oblicz
+    objętość pudełka o wysokości 3 cm. d) Rozstrzygnij, czy w opisany sposób można otrzymać z tego arkusza
+    pudełko o wysokości 9 cm.
+  statement_latex: V\left(x\right)=x\cdot\left(24-2\cdot x\right)\cdot\left(16-2\cdot x\right)
+  solution: |-
+    a) Po wycięciu w narożnikach kwadratów o boku x dno pudełka jest prostokątem o bokach 24-2\cdot x oraz 16-2\cdot x, a wysokość pudełka wynosi x. Zatem
+    V\left(x\right)=x\cdot\left(24-2\cdot x\right)\cdot\left(16-2\cdot x\right).
+    Najpierw mnożymy dwa nawiasy: \left(24-2\cdot x\right)\cdot\left(16-2\cdot x\right)=384-48\cdot x-32\cdot x+4\cdot x^{2}=4\cdot x^{2}-80\cdot x+384.
+    Po pomnożeniu przez x: V\left(x\right)=4\cdot x^{3}-80\cdot x^{2}+384\cdot x.
+    Dziedzina: wszystkie wymiary muszą być dodatnie, więc x>0, 24-2\cdot x>0 (czyli x<12) oraz 16-2\cdot x>0 (czyli x<8). Warunkiem najostrzejszym jest x<8, zatem x\in\left(0,\;8\right).
+    b) Pole powierzchni to dno oraz cztery ściany boczne: dwie o wymiarach x na 24-2\cdot x i dwie o wymiarach x na 16-2\cdot x:
+    P\left(x\right)=\left(24-2\cdot x\right)\cdot\left(16-2\cdot x\right)+2\cdot x\cdot\left(24-2\cdot x\right)+2\cdot x\cdot\left(16-2\cdot x\right)=
+    \left(4\cdot x^{2}-80\cdot x+384\right)+\left(48\cdot x-4\cdot x^{2}\right)+\left(32\cdot x-4\cdot x^{2}\right).
+    Redukujemy: x^{2}: 4-4-4=-4;\; x: -80+48+32=0;\; wyraz wolny: 384. Zatem P\left(x\right)=-4\cdot x^{2}+384 (to pole arkusza pomniejszone o cztery wycięte kwadraty: 384-4\cdot x^{2} ✔).
+    c) Dla x=3: V\left(3\right)=3\cdot\left(24-6\right)\cdot\left(16-6\right)=3\cdot 18\cdot 10=540, czyli 540 cm^{3} (kontrola ze wzoru: 4\cdot 27-80\cdot 9+384\cdot 3=108-720+1152=540 ✔).
+    d) Dla x=9 mielibyśmy 16-2\cdot 9=-2<0, czyli 9 nie należy do dziedziny \left(0,\;8\right) — z krótszego boku arkusza nie da się wyciąć dwóch pasów po 9 cm. Takiego pudełka otrzymać nie można.
+  solution_steps:
+  - Zauważ, że po wycięciu narożnych kwadratów o boku x dno ma wymiary 24-2\cdot x oraz 16-2\cdot x, a
+    wysokość wynosi x.
+  - 'Zapisz V\left(x\right)=x\cdot\left(24-2\cdot x\right)\cdot\left(16-2\cdot x\right) i wymnóż: V\left(x\right)=4\cdot
+    x^{3}-80\cdot x^{2}+384\cdot x.'
+  - Z warunków x>0, 24-2\cdot x>0, 16-2\cdot x>0 wyznacz dziedzinę x\in\left(0,\;8\right).
+  - 'Złóż pole powierzchni z dna i czterech ścian bocznych i zredukuj wyrazy podobne: P\left(x\right)=384-4\cdot
+    x^{2}.'
+  - Oblicz V\left(3\right)=3\cdot 18\cdot 10=540 cm^{3}.
+  - 'Sprawdź x=9 względem dziedziny: 9\notin\left(0,\;8\right), więc takiego pudełka nie można wykonać.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wzor_objetosci
+      answer:
+        kind: SYMBOLIC
+        latex: 4x^{3}-80x^{2}+384x
+    - name: dziedzina
+      answer:
+        kind: INTERVAL
+        lo: '0'
+        hi: '8'
+    - name: wzor_pola_powierzchni
+      answer:
+        kind: SYMBOLIC
+        latex: 384-4x^{2}
+    - name: objetosc_dla_x_3
+      answer:
+        kind: NUMERIC
+        value: 540.0
+    - name: czy_wysokosc_9
+      answer:
+        kind: BOOLEAN
+        truth: false
+  checks:
+  - kind: simplify
+    expr: x\cdot\left(24-2\cdot x\right)\cdot\left(16-2\cdot x\right)
+    part: wzor_objetosci
+  - kind: simplify
+    expr: \left(24-2\cdot x\right)\cdot\left(16-2\cdot x\right)+2\cdot x\cdot\left(24-2\cdot x\right)+2\cdot
+      x\cdot\left(16-2\cdot x\right)
+    part: wzor_pola_powierzchni
+  - kind: evaluate
+    expr: 3\cdot\left(24-2\cdot 3\right)\cdot\left(16-2\cdot 3\right)
+    part: objetosc_dla_x_3
+  stated_model:
+    variable: x
+    objective_latex: V\left(x\right)=x\cdot\left(24-2\cdot x\right)\cdot\left(16-2\cdot x\right)=4\cdot
+      x^{3}-80\cdot x^{2}+384\cdot x
+    domain_lo: '0'
+    domain_hi: '8'
+    goal: value
+    constraint_used: wycięte narożne kwadraty o boku x z arkusza 24 cm na 16 cm; wszystkie wymiary dodatnie
+  skills:
+  - zapisanie wymiarów bryły w zależności od jednej zmiennej
+  - mnożenie trzech czynników i porządkowanie wielomianu
+  - wyznaczanie dziedziny z warunków dodatniości
+  - składanie pola powierzchni z pięciu ścian i redukcja wyrazów podobnych
+  - obliczanie wartości wielomianu i sprawdzanie wykonalności
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (PARSE_ERROR: "UnexpectedCharacters: No terminal
+      matches ''='' in the current parser context, at line 1 col 83") — human review'

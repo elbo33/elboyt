@@ -1,0 +1,1034 @@
+section: punkty-szczegolne-trojkata
+name: Punkty szczególne trójkąta
+scope: 'Incentre, circumcentre, orthocentre and centroid: definitions and how to locate them.'
+requirements:
+- VIII.10
+counts:
+  total: 16
+  DETERMINISTIC: 8
+  NOT_MACHINE_CHECKABLE: 3
+  REFERENCE_CALL: 5
+exercises:
+- id: g-th-00
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: obliczenie długości odcinków środkowej
+  statement: W trójkącie ABC odcinek AD jest środkową poprowadzoną z wierzchołka A (punkt D jest środkiem
+    boku BC), a jej długość wynosi 21 cm. Punkt S jest środkiem ciężkości tego trójkąta. Oblicz długości
+    odcinków AS oraz SD.
+  statement_latex: '|AS|=\frac{2}{3}\cdot 21,\qquad |SD|=\frac{1}{3}\cdot 21'
+  solution: |-
+    Środek ciężkości trójkąta dzieli każdą środkową w stosunku 2:1, licząc od wierzchołka. Zatem odcinek od wierzchołka A do punktu S stanowi \frac{2}{3} długości środkowej, a odcinek od S do środka boku D stanowi \frac{1}{3} tej długości.
+    |AS| = \frac{2}{3}\cdot 21 = 14 (cm),
+    |SD| = \frac{1}{3}\cdot 21 = 7 (cm).
+    Sprawdzenie: 14 + 7 = 21 ✓ oraz |AS| : |SD| = 14 : 7 = 2 : 1 ✓.
+  solution_steps:
+  - 'Zapisz własność: S dzieli środkową w stosunku 2:1 od wierzchołka.'
+  - Oblicz |AS| = \frac{2}{3}\cdot 21 = 14 cm.
+  - Oblicz |SD| = \frac{1}{3}\cdot 21 = 7 cm.
+  - 'Sprawdź: 14 + 7 = 21 cm.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: '|AS|'
+      answer:
+        kind: NUMERIC
+        value: 14.0
+    - name: '|SD|'
+      answer:
+        kind: NUMERIC
+        value: 7.0
+  checks:
+  - kind: evaluate
+    expr: \frac{2}{3}\cdot 21
+    part: '|AS|'
+  - kind: evaluate
+    expr: \frac{1}{3}\cdot 21
+    part: '|SD|'
+  skills:
+  - podział środkowej w stosunku 2:1
+  - rozpoznawanie środka ciężkości
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [|AS|] SymPy solved it fresh: 14.0 vs 14.0 (tol 1e-09) ; [|SD|]
+      SymPy solved it fresh: 7.0 vs 7.0 (tol 1e-09)'
+- id: g-th-01
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: promienie okręgów w trójkącie prostokątnym
+  statement: Dany jest trójkąt prostokątny, którego przyprostokątne mają długości 5 i 12. Oblicz promień
+    R okręgu opisanego na tym trójkącie oraz promień r okręgu wpisanego w ten trójkąt.
+  statement_latex: R=\frac{c}{2},\qquad r=\frac{a+b-c}{2},\qquad c=\sqrt{5^{2}+12^{2}}
+  solution: |-
+    Z twierdzenia Pitagorasa przeciwprostokątna ma długość c = \sqrt{5^{2}+12^{2}} = \sqrt{169} = 13.
+    W trójkącie prostokątnym kąt prosty jest kątem wpisanym opartym na przeciwprostokątnej, więc przeciwprostokątna jest średnicą okręgu opisanego, a środek O tego okręgu leży w jej środku:
+    R = \frac{13}{2} = 6{,}5.
+    Promień okręgu wpisanego liczymy ze wzoru szczególnego:
+    r = \frac{5+12-13}{2} = \frac{4}{2} = 2.
+    Sprawdzenie ogólnym wzorem: P = \frac{1}{2}\cdot 5\cdot 12 = 30, p = \frac{5+12+13}{2} = 15, r = \frac{30}{15} = 2 ✓. Zauważ, że r < R ✓.
+  solution_steps:
+  - 'Oblicz przeciwprostokątną: c = \sqrt{5^{2}+12^{2}} = 13.'
+  - 'Skorzystaj z faktu, że przeciwprostokątna jest średnicą okręgu opisanego: R = \frac{13}{2} = 6{,}5.'
+  - Zastosuj wzór r = \frac{a+b-c}{2} = \frac{5+12-13}{2} = 2.
+  - Sprawdź wynik wzorem r = \frac{P}{p} = \frac{30}{15} = 2.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: R
+      answer:
+        kind: NUMERIC
+        value: 6.5
+    - name: r
+      answer:
+        kind: NUMERIC
+        value: 2.0
+  checks:
+  - kind: evaluate
+    expr: \frac{\sqrt{5^{2}+12^{2}}}{2}
+    part: R
+  - kind: evaluate
+    expr: \frac{5+12-\sqrt{5^{2}+12^{2}}}{2}
+    part: r
+  skills:
+  - wzór R = c/2 w trójkącie prostokątnym
+  - wzór r = (a+b-c)/2
+  - twierdzenie Pitagorasa
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [R] SymPy solved it fresh: 6.5 vs 6.5 (tol 1e-09) ; [r] SymPy
+      solved it fresh: 2.0 vs 2.0 (tol 1e-09)'
+- id: g-th-02
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: współrzędne środka ciężkości
+  statement: W kartezjańskim układzie współrzędnych (x, y) dane są punkty A = (-2, 1), B = (4, -3) oraz
+    C = (7, 8), które są wierzchołkami trójkąta ABC. Oblicz odciętą i rzędną środka ciężkości S tego trójkąta.
+  statement_latex: S=\left(\frac{-2+4+7}{3},\ \frac{1+\left(-3\right)+8}{3}\right)
+  solution: |-
+    Środek ciężkości trójkąta o wierzchołkach A, B, C ma współrzędne będące średnimi arytmetycznymi odpowiednich współrzędnych wierzchołków:
+    x_S = \frac{-2+4+7}{3} = \frac{9}{3} = 3,
+    y_S = \frac{1+\left(-3\right)+8}{3} = \frac{6}{3} = 2.
+    Zatem S = (3, 2).
+  solution_steps:
+  - Zapisz wzór S = \left(\frac{x_A+x_B+x_C}{3},\ \frac{y_A+y_B+y_C}{3}\right).
+  - 'Oblicz odciętą: \frac{-2+4+7}{3} = 3.'
+  - 'Oblicz rzędną: \frac{1+\left(-3\right)+8}{3} = 2.'
+  - 'Zapisz odpowiedź: S = (3, 2).'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: odcieta punktu S
+      answer:
+        kind: NUMERIC
+        value: 3.0
+    - name: rzedna punktu S
+      answer:
+        kind: NUMERIC
+        value: 2.0
+  checks:
+  - kind: evaluate
+    expr: \frac{-2+4+7}{3}
+    part: odcieta punktu S
+  - kind: evaluate
+    expr: \frac{1+\left(-3\right)+8}{3}
+    part: rzedna punktu S
+  skills:
+  - wzór na współrzędne środka ciężkości
+  - rachunek w układzie współrzędnych
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [odcieta punktu S] SymPy solved it fresh: 3.0 vs 3.0 (tol 1e-09)
+      ; [rzedna punktu S] SymPy solved it fresh: 2.0 vs 2.0 (tol 1e-09)'
+- id: g-ex-03
+  slot: EXERCISE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: promienie r i R w trójkącie równoramiennym
+  statement: 'Trójkąt ABC jest równoramienny: |AC| = |BC| = 10 oraz podstawa |AB| = 12. Oblicz promień
+    r okręgu wpisanego w ten trójkąt, promień R okręgu opisanego na tym trójkącie oraz odległość środka
+    O okręgu opisanego od podstawy AB.'
+  statement_latex: r=\frac{P}{p},\qquad R=\frac{10\cdot 10\cdot 12}{4\cdot P},\qquad P=\frac{1}{2}\cdot
+    12\cdot h
+  solution: |-
+    Wysokość CD poprowadzona z wierzchołka C na podstawę AB dzieli ją na połowy (trójkąt jest równoramienny), więc |AD| = 6 i
+    h = \sqrt{10^{2}-6^{2}} = \sqrt{64} = 8.
+    Pole: P = \frac{1}{2}\cdot 12\cdot 8 = 48. Połowa obwodu: p = \frac{10+10+12}{2} = 16.
+    Promień okręgu wpisanego: r = \frac{P}{p} = \frac{48}{16} = 3.
+    Promień okręgu opisanego: R = \frac{10\cdot 10\cdot 12}{4\cdot 48} = \frac{1200}{192} = \frac{25}{4} = 6{,}25.
+    Wszystkie punkty szczególne leżą na osi symetrii, czyli na prostej CD. Środek O jest oddalony od wierzchołka C o R = 6{,}25, a wierzchołek C leży 8 jednostek nad podstawą, więc odległość O od podstawy wynosi 8 - \frac{25}{4} = \frac{7}{4} = 1{,}75.
+    Sprawdzenie: odległość O od wierzchołka A wynosi \sqrt{\left(\frac{7}{4}\right)^{2}+6^{2}} = \sqrt{\frac{625}{16}} = \frac{25}{4} = R ✓. Ponadto r < R oraz 2r \le R ✓, a O leży wewnątrz trójkąta (trójkąt jest ostrokątny).
+  solution_steps:
+  - 'Oblicz wysokość opuszczoną na podstawę: h = \sqrt{10^{2}-6^{2}} = 8.'
+  - Oblicz pole P = \frac{1}{2}\cdot 12\cdot 8 = 48 i połowę obwodu p = 16.
+  - Wyznacz r = \frac{48}{16} = 3.
+  - Wyznacz R = \frac{10\cdot 10\cdot 12}{4\cdot 48} = \frac{25}{4}.
+  - 'Odległość O od podstawy: 8 - \frac{25}{4} = \frac{7}{4}.'
+  - Sprawdź, że odległość O od wierzchołka podstawy też wynosi \frac{25}{4}.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: r
+      answer:
+        kind: NUMERIC
+        value: 3.0
+    - name: R
+      answer:
+        kind: NUMERIC
+        value: 6.25
+    - name: odleglosc O od AB
+      answer:
+        kind: NUMERIC
+        value: 1.75
+  checks:
+  - kind: evaluate
+    expr: \frac{\frac{1}{2}\cdot 12\cdot 8}{\frac{10+10+12}{2}}
+    part: r
+  - kind: evaluate
+    expr: \frac{10\cdot 10\cdot 12}{4\cdot \frac{1}{2}\cdot 12\cdot 8}
+    part: R
+  - kind: evaluate
+    expr: 8-\frac{10\cdot 10\cdot 12}{4\cdot \frac{1}{2}\cdot 12\cdot 8}
+    part: odleglosc O od AB
+  skills:
+  - wzór r = P/p
+  - wzór R = abc/(4P)
+  - oś symetrii trójkąta równoramiennego
+  - twierdzenie Pitagorasa
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [r] SymPy solved it fresh: 3.0 vs 3.0 (tol 1e-09) ; [R] SymPy
+      solved it fresh: 6.25 vs 6.25 (tol 1e-09) ; [odleglosc O od AB] SymPy solved it fresh: 1.75 vs 1.75
+      (tol 1e-09)'
+- id: g-ex-04
+  slot: EXERCISE
+  ramp_index: 1
+  difficulty: 3
+  exercise_type: kąty przy punktach szczególnych
+  statement: 'W trójkącie ABC kąt przy wierzchołku A ma miarę 64°, a kąt przy wierzchołku B ma miarę 76°.
+    Punkt I jest środkiem okręgu wpisanego w ten trójkąt, a punkt O jest środkiem okręgu opisanego na
+    tym trójkącie. Oblicz miary kątów: |∢BIC|, |∢AOB| oraz |∢OAB|.'
+  statement_latex: '|\sphericalangle BIC|=90^\circ+\frac{64^\circ}{2},\qquad |\sphericalangle AOB|=2\cdot\left(180^\circ-64^\circ-76^\circ\right)'
+  solution: |-
+    Najpierw trzeci kąt trójkąta: \gamma = 180^\circ - 64^\circ - 76^\circ = 40^\circ.
+    Kąt BIC: odcinki BI i CI leżą na dwusiecznych, więc w trójkącie BIC kąty przy B i C mają miary \frac{76^\circ}{2} = 38^\circ i \frac{40^\circ}{2} = 20^\circ, zatem
+    |\sphericalangle BIC| = 180^\circ - 38^\circ - 20^\circ = 122^\circ.
+    Sprawdzenie wzorem: 90^\circ + \frac{64^\circ}{2} = 122^\circ ✓.
+    Kąt AOB jest kątem środkowym opartym na łuku AB, na którym oparty jest kąt wpisany ACB o mierze 40^\circ, więc
+    |\sphericalangle AOB| = 2\cdot 40^\circ = 80^\circ.
+    Trójkąt AOB jest równoramienny, bo |OA| = |OB| = R, więc kąty przy jego podstawie są równe:
+    |\sphericalangle OAB| = \frac{180^\circ - 80^\circ}{2} = 50^\circ.
+    Sprawdzenie: |\sphericalangle OAB| = 90^\circ - \gamma = 90^\circ - 40^\circ = 50^\circ ✓.
+  solution_steps:
+  - 'Oblicz trzeci kąt: \gamma = 180^\circ - 64^\circ - 76^\circ = 40^\circ.'
+  - 'W trójkącie BIC kąty przy B i C to połowy kątów trójkąta: 38^\circ i 20^\circ, więc |∢BIC| = 122^\circ.'
+  - 'Zastosuj zależność kąt środkowy = 2 · kąt wpisany: |∢AOB| = 2\cdot 40^\circ = 80^\circ.'
+  - 'Z równoramienności trójkąta AOB: |∢OAB| = \frac{180^\circ-80^\circ}{2} = 50^\circ.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: kat BIC (w stopniach)
+      answer:
+        kind: NUMERIC
+        value: 122.0
+    - name: kat AOB (w stopniach)
+      answer:
+        kind: NUMERIC
+        value: 80.0
+    - name: kat OAB (w stopniach)
+      answer:
+        kind: NUMERIC
+        value: 50.0
+  checks:
+  - kind: evaluate
+    expr: 90+\frac{64}{2}
+    part: kat BIC (w stopniach)
+  - kind: evaluate
+    expr: 2\cdot\left(180-64-76\right)
+    part: kat AOB (w stopniach)
+  - kind: evaluate
+    expr: \frac{180-2\cdot\left(180-64-76\right)}{2}
+    part: kat OAB (w stopniach)
+  skills:
+  - kąt BIC = 90 + alfa/2
+  - kąt środkowy BOC = 2 alfa
+  - trójkąt równoramienny o ramionach R
+  - suma kątów w trójkącie
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [kat BIC (w stopniach)] SymPy solved it fresh: 122.0 vs 122.0
+      (tol 1e-09) ; [kat AOB (w stopniach)] SymPy solved it fresh: 80.0 vs 80.0 (tol 1e-09) ; [kat OAB
+      (w stopniach)] SymPy solved it fresh: 50.0 vs 50.0 (tol 1e-09)'
+- id: g-ex-05
+  slot: EXERCISE
+  ramp_index: 2
+  difficulty: 4
+  exercise_type: punkty szczególne w układzie współrzędnych
+  statement: W kartezjańskim układzie współrzędnych (x, y) punkty A = (-1, -2), B = (7, -2) oraz C = (3,
+    6) są wierzchołkami trójkąta ABC. a) Wyznacz współrzędne środka ciężkości S tego trójkąta. b) Wyznacz
+    współrzędne środka O okręgu opisanego na tym trójkącie. c) Oblicz promień R tego okręgu. d) Uzasadnij,
+    że trójkąt ABC jest ostrokątny.
+  statement_latex: S=\left(\frac{-1+7+3}{3},\ \frac{-2+\left(-2\right)+6}{3}\right),\qquad R=\sqrt{\left(3-\left(-1\right)\right)^{2}+\left(1-\left(-2\right)\right)^{2}}
+  solution: |-
+    a) S = \left(\frac{-1+7+3}{3},\ \frac{-2+\left(-2\right)+6}{3}\right) = \left(3,\ \frac{2}{3}\right).
+    b) Bok AB leży na prostej y = -2, jego środek to (3, -2), więc symetralna boku AB to prosta x = 3. (Ten sam wniosek daje spostrzeżenie, że |AC| = |BC| = \sqrt{16+64} = 4\sqrt5, więc trójkąt jest równoramienny i prosta x = 3 jest jego osią symetrii.)
+    Środek O leży na tej prostej: O = (3, y). Z warunku |OA| = |OC|:
+    \left(3-\left(-1\right)\right)^{2}+\left(y+2\right)^{2} = \left(y-6\right)^{2},
+    16 + y^{2}+4y+4 = y^{2}-12y+36,
+    16y = 16, czyli y = 1. Zatem O = (3, 1).
+    c) R = |OA| = \sqrt{\left(3-\left(-1\right)\right)^{2}+\left(1-\left(-2\right)\right)^{2}} = \sqrt{16+9} = 5.
+    Sprawdzenie: |OB| = \sqrt{4^{2}+3^{2}} = 5, |OC| = \sqrt{0+5^{2}} = 5 ✓.
+    d) Punkt O = (3, 1) leży wewnątrz trójkąta: jego odcięta 3 mieści się między -1 a 7, a rzędna 1 jest większa od -2 (poziom podstawy) i mniejsza od rzędnych boków AC i BC nad punktem x = 3 (tam trójkąt sięga do y = 6). Skoro środek okręgu opisanego leży wewnątrz trójkąta, to trójkąt jest ostrokątny. Zauważmy też, że S = \left(3, \frac{2}{3}\right) \ne O, więc trójkąt nie jest równoboczny.
+  solution_steps:
+  - Oblicz S = \left(\frac{-1+7+3}{3},\ \frac{-2-2+6}{3}\right) = \left(3, \frac{2}{3}\right).
+  - Zauważ, że AB leży na prostej y = -2, jego środek to (3,-2), więc symetralna AB ma równanie x = 3.
+  - Z warunku |OA| = |OC| dla O = (3, y) rozwiąż równanie 16+\left(y+2\right)^{2} = \left(y-6\right)^{2},
+    skąd y = 1.
+  - Zapisz O = (3, 1).
+  - Oblicz R = \sqrt{4^{2}+3^{2}} = 5 i sprawdź, że |OB| = |OC| = 5.
+  - Uzasadnij, że O leży wewnątrz trójkąta, więc trójkąt jest ostrokątny.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: S
+      answer:
+        kind: TUPLE
+        items:
+        - '3'
+        - \frac{2}{3}
+    - name: O
+      answer:
+        kind: TUPLE
+        items:
+        - '3'
+        - '1'
+    - name: R
+      answer:
+        kind: NUMERIC
+        value: 5.0
+    - name: uzasadnienie ostrokatnosci
+      answer:
+        kind: NOT_MACHINE_CHECKABLE
+        reason: Należy uzasadnić, że środek O = (3,1) okręgu opisanego leży wewnątrz trójkąta ABC (np.
+          porównując jego położenie z bokami trójkąta), a stąd wywnioskować, że trójkąt jest ostrokątny.
+  checks:
+  - kind: evaluate
+    expr: \sqrt{\left(3-\left(-1\right)\right)^{2}+\left(1-\left(-2\right)\right)^{2}}
+    part: R
+  skills:
+  - współrzędne środka ciężkości
+  - wyznaczanie środka okręgu opisanego z symetralnych
+  - obliczanie długości odcinka
+  - rozpoznawanie rodzaju trójkąta
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'part(s) need a human: uzasadnienie ostrokatnosci · 1/3 other parts solved fresh'
+- id: g-ex-t00
+  slot: EXERCISE
+  ramp_index: 6
+  difficulty: 4
+  exercise_type: punkty szczególne w układzie współrzędnych (trójkąt prostokątny)
+  statement: W kartezjańskim układzie współrzędnych (x, y) dane są punkty A = (1, 2), B = (9, 2) oraz
+    C = (1, 8). Punkty te są wierzchołkami trójkąta prostokątnego o kącie prostym przy wierzchołku A (bok
+    AB jest równoległy do osi OX, a bok AC do osi OY). Wyznacz współrzędne środka ciężkości S trójkąta
+    ABC, współrzędne środka O okręgu opisanego na tym trójkącie oraz współrzędne ortocentrum H, a następnie
+    oblicz promień r okręgu wpisanego i promień R okręgu opisanego.
+  statement_latex: A=\left(1,\ 2\right),\quad B=\left(9,\ 2\right),\quad C=\left(1,\ 8\right),\quad S=\left(\frac{x_A+x_B+x_C}{3},\
+    \frac{y_A+y_B+y_C}{3}\right)
+  solution: |-
+    Długości przyprostokątnych: |AB| = 9 − 1 = 8 oraz |AC| = 8 − 2 = 6. Przeciwprostokątna: |BC| = \sqrt{8^2+6^2} = \sqrt{100} = 10.
+
+    Środek ciężkości: S = \left(\frac{1+9+1}{3},\ \frac{2+2+8}{3}\right) = \left(\frac{11}{3},\ 4\right).
+
+    Środek okręgu opisanego: kąt prosty jest kątem wpisanym opartym na boku BC, więc BC jest średnicą okręgu opisanego, a O jest środkiem przeciwprostokątnej: O = \left(\frac{9+1}{2},\ \frac{2+8}{2}\right) = (5,\ 5). Stąd R = \frac{|BC|}{2} = 5.
+
+    Ortocentrum: w trójkącie prostokątnym dwie wysokości to przyprostokątne AB i AC (każda jest prostopadła do drugiej), więc przecinają się w wierzchołku kąta prostego: H = A = (1, 2).
+
+    Promień okręgu wpisanego: r = \frac{a+b-c}{2} = \frac{8+6-10}{2} = 2 (kontrola: P = \frac{1}{2}\cdot 8\cdot 6 = 24, p = \frac{8+6+10}{2} = 12, r = \frac{24}{12} = 2 ✓).
+
+    Sprawdzenie sensowności: r = 2 < R = 5 ✓.
+  solution_steps:
+  - 'Oblicz długości boków: |AB| = 8, |AC| = 6, |BC| = \sqrt{8^2+6^2} = 10.'
+  - 'Wyznacz S ze wzoru na środek ciężkości: S = \left(\frac{11}{3},\ 4\right).'
+  - Zauważ, że przeciwprostokątna BC jest średnicą okręgu opisanego, więc O = (5, 5) oraz R = \frac{10}{2}
+    = 5.
+  - Zauważ, że przyprostokątne są wysokościami, więc H = A = (1, 2).
+  - Oblicz r = \frac{8+6-10}{2} = 2 i sprawdź warunek r < R.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: S_x
+      answer:
+        kind: NUMERIC
+        value: 3.6666666666666665
+        tol: 1.0e-06
+        latex: \frac{11}{3}
+    - name: S_y
+      answer:
+        kind: NUMERIC
+        value: 4.0
+        latex: '4'
+    - name: O_x
+      answer:
+        kind: NUMERIC
+        value: 5.0
+        latex: '5'
+    - name: O_y
+      answer:
+        kind: NUMERIC
+        value: 5.0
+        latex: '5'
+    - name: H_x
+      answer:
+        kind: NUMERIC
+        value: 1.0
+        latex: '1'
+    - name: H_y
+      answer:
+        kind: NUMERIC
+        value: 2.0
+        latex: '2'
+    - name: r
+      answer:
+        kind: NUMERIC
+        value: 2.0
+        latex: '2'
+    - name: R
+      answer:
+        kind: NUMERIC
+        value: 5.0
+        latex: '5'
+  checks:
+  - kind: evaluate
+    expr: \frac{1+9+1}{3}
+    part: S_x
+  - kind: evaluate
+    expr: \frac{2+2+8}{3}
+    part: S_y
+  - kind: evaluate
+    expr: \frac{9+1}{2}
+    part: O_x
+  - kind: evaluate
+    expr: \frac{2+8}{2}
+    part: O_y
+  - kind: evaluate
+    expr: '1'
+    part: H_x
+  - kind: evaluate
+    expr: '2'
+    part: H_y
+  - kind: evaluate
+    expr: \frac{8+6-10}{2}
+    part: r
+  - kind: evaluate
+    expr: \frac{\sqrt{8^{2}+6^{2}}}{2}
+    part: R
+  skills:
+  - wyznaczanie współrzędnych środka ciężkości
+  - lokalizowanie ortocentrum i środka okręgu opisanego w trójkącie prostokątnym
+  - obliczanie promieni r i R
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 8 parts solved fresh · det: [S_x] SymPy solved it fresh: 3.6666666666666665 vs 3.6666666666666665
+      (tol 1e-06) ; [S_y] SymPy solved it fresh: 4.0 vs 4.0 (tol 1e-09) ; [O_x] SymPy solved it fresh:
+      5.0 vs 5.0 (tol 1e-09) ; [O_y] SymPy solved it fresh: 5.0 vs 5.0 (tol 1e-09) ; [H_x] SymPy solved
+      it fresh: 1.0 vs 1.0 (tol 1e-09) ; [H_y] SymPy solved it fresh: 2.0 vs 2.0 (tol 1e-09) ; [r] SymPy
+      solved it fresh: 2.0 vs 2.0 (tol 1e-09) ; [R] SymPy solved it fresh: 5.0 vs 5.0 (tol 1e-09)'
+- id: g-ex-t01
+  slot: EXERCISE
+  ramp_index: 7
+  difficulty: 4
+  exercise_type: promienie r i R oraz położenie środka okręgu opisanego w trójkącie równoramiennym rozwartokątnym
+  statement: W trójkącie równoramiennym ABC podstawa AB ma długość 24, a ramiona AC i BC mają długość
+    13. Oblicz promień r okręgu wpisanego w ten trójkąt oraz promień R okręgu opisanego na tym trójkącie.
+    Oblicz odległość środka O okręgu opisanego od prostej AB i rozstrzygnij, czy punkt O leży wewnątrz
+    trójkąta ABC.
+  statement_latex: '|AB| = 24,\quad |AC| = |BC| = 13,\quad r = \frac{P}{p},\quad R = \frac{a\cdot b\cdot
+    c}{4\cdot P}'
+  solution: |-
+    Wysokość CD poprowadzona z wierzchołka C na podstawę dzieli ją na połowy, więc |AD| = 12 oraz h = |CD| = \sqrt{13^2-12^2} = \sqrt{25} = 5.
+
+    Pole: P = \frac{1}{2}\cdot 24\cdot 5 = 60. Połowa obwodu: p = \frac{13+13+24}{2} = 25.
+
+    Promień okręgu wpisanego: r = \frac{P}{p} = \frac{60}{25} = \frac{12}{5} = 2{,}4.
+
+    Promień okręgu opisanego: R = \frac{13\cdot 13\cdot 24}{4\cdot 60} = \frac{4056}{240} = \frac{169}{10} = 16{,}9.
+
+    Wszystkie punkty szczególne leżą na osi symetrii, czyli na prostej CD. Punkt O jest odległy od wierzchołka C o R = 16,9, a wierzchołek C leży 5 jednostek nad podstawą. Ponieważ 16,9 > 5, punkt O leży po przeciwnej stronie prostej AB niż wierzchołek C, w odległości 16,9 − 5 = 11,9 od tej prostej.
+
+    Sprawdzenie: odległość O od końca podstawy wynosi \sqrt{11{,}9^2+12^2} = \sqrt{141{,}61+144} = \sqrt{285{,}61} = 16{,}9 = R ✓.
+
+    Zatem O nie leży wewnątrz trójkąta (trójkąt jest rozwartokątny, bo 13^2+13^2 = 338 < 24^2 = 576). Kontrola: r = 2{,}4 < R = 16{,}9 ✓.
+  solution_steps:
+  - 'Oblicz wysokość opuszczoną na podstawę: h = \sqrt{13^{2}-12^{2}} = 5.'
+  - Oblicz pole P = \frac{1}{2}\cdot 24\cdot 5 = 60 i połowę obwodu p = 25.
+  - Wyznacz r = \frac{60}{25} = 2{,}4.
+  - Wyznacz R = \frac{13\cdot 13\cdot 24}{4\cdot 60} = 16{,}9.
+  - 'Na osi symetrii odmierz R od wierzchołka C: skoro 16{,}9 > 5, punkt O leży po drugiej stronie podstawy,
+    w odległości 16{,}9-5 = 11{,}9 od prostej AB.'
+  - 'Wyciągnij wniosek: trójkąt jest rozwartokątny, więc O leży na zewnątrz trójkąta.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: r
+      answer:
+        kind: NUMERIC
+        value: 2.4
+        latex: \frac{12}{5}
+    - name: R
+      answer:
+        kind: NUMERIC
+        value: 16.9
+        latex: \frac{169}{10}
+    - name: odleglosc_O_od_AB
+      answer:
+        kind: NUMERIC
+        value: 11.9
+        latex: \frac{119}{10}
+    - name: czy_O_wewnatrz
+      answer:
+        kind: BOOLEAN
+        truth: false
+  checks:
+  - kind: evaluate
+    expr: \frac{\frac{1}{2}\cdot 24\cdot 5}{\frac{13+13+24}{2}}
+    part: r
+  - kind: evaluate
+    expr: \frac{13\cdot 13\cdot 24}{4\cdot 60}
+    part: R
+  - kind: evaluate
+    expr: \frac{169}{10}-5
+    part: odleglosc_O_od_AB
+  skills:
+  - obliczanie pola i promieni r = P/p oraz R = abc/(4P)
+  - wykorzystanie osi symetrii trójkąta równoramiennego
+  - określanie położenia środka okręgu opisanego względem trójkąta
+  verification:
+    checkability: REFERENCE_CALL
+    note: 4 parts matched
+- id: g-cm-06
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: środek okręgu opisanego w trójkącie prostokątnym
+  statement: 'W kartezjańskim układzie współrzędnych (x, y) dane są punkty A = (0, 0), B = (8, 0) oraz
+    C = (0, 6), które są wierzchołkami trójkąta prostokątnego o kącie prostym przy wierzchołku A. Uczeń
+    rozwiązał zadanie tak: „Środek okręgu opisanego to punkt przecięcia dwusiecznych kątów trójkąta. Promień
+    okręgu wpisanego wynosi r = \frac{8+6-10}{2} = 2, a dwusieczne przecinają się w punkcie odległym o
+    2 od obu przyprostokątnych, czyli w punkcie (2, 2). Zatem środek okręgu opisanego to (2, 2)”. Wskaż
+    błąd w tym rozumowaniu, a następnie podaj poprawne współrzędne środka O okręgu opisanego na trójkącie
+    ABC oraz oblicz promień R tego okręgu.'
+  statement_latex: R=\frac{|BC|}{2}=\frac{\sqrt{8^{2}+6^{2}}}{2}
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń pomylił dwusieczną z symetralną. Przecięcie dwusiecznych daje punkt jednakowo odległy od BOKÓW, czyli środek okręgu WPISANEGO. Wyliczył poprawnie r = 2 i punkt (2, 2) — ale to jest incentrum I, a nie środek okręgu opisanego. Błędna odpowiedź: O = (2, 2).
+    SPRAWDZENIE, ŻE TO NIEPRAWDA: |IA| = \sqrt{2^{2}+2^{2}} = 2\sqrt2 \approx 2{,}83, a |IB| = \sqrt{6^{2}+2^{2}} = \sqrt{40} \approx 6{,}32 — odległości od wierzchołków nie są równe, więc (2,2) nie może być środkiem okręgu opisanego.
+    POPRAWNIE: środek okręgu opisanego to punkt przecięcia SYMETRALNYCH boków, czyli punkt jednakowo odległy od wierzchołków. Symetralna boku AB (leżącego na osi x) to prosta x = 4, symetralna boku AC (leżącego na osi y) to prosta y = 3, więc O = (4, 3). Jest to środek przeciwprostokątnej BC — zgodnie z zasadą, że w trójkącie prostokątnym przeciwprostokątna jest średnicą okręgu opisanego.
+    Promień: |BC| = \sqrt{8^{2}+6^{2}} = 10, więc R = \frac{10}{2} = 5.
+    Sprawdzenie: |OA| = \sqrt{4^{2}+3^{2}} = 5 = |OB| = |OC| ✓.
+  solution_steps:
+  - 'Nazwij błąd: dwusieczne dają środek okręgu WPISANEGO (równe odległości od boków), a nie opisanego.'
+  - 'Pokaż, że punkt (2,2) nie jest równo odległy od wierzchołków: |IA| = 2\sqrt2, |IB| = \sqrt{40}.'
+  - 'Wyznacz symetralne boków AB i AC: x = 4 oraz y = 3, więc O = (4, 3) — środek przeciwprostokątnej.'
+  - Oblicz |BC| = \sqrt{8^{2}+6^{2}} = 10 i R = \frac{10}{2} = 5.
+  - 'Sprawdź: |OA| = |OB| = |OC| = 5.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: srodek O
+      answer:
+        kind: TUPLE
+        items:
+        - '4'
+        - '3'
+    - name: R
+      answer:
+        kind: NUMERIC
+        value: 5.0
+  checks:
+  - kind: evaluate
+    expr: \frac{\sqrt{8^{2}+6^{2}}}{2}
+    part: R
+  skills:
+  - odróżnianie dwusiecznej od symetralnej
+  - środek okręgu opisanego na trójkącie prostokątnym
+  - obliczanie promienia R
+  verification:
+    checkability: REFERENCE_CALL
+    note: '2 parts matched · det: [R] SymPy solved it fresh: 5.0 vs 5.0 (tol 1e-09)'
+- id: g-cm-07
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: podział środkowej przez środek ciężkości
+  statement: 'W trójkącie ABC odcinek CE jest środkową poprowadzoną z wierzchołka C (punkt E jest środkiem
+    boku AB), a punkt S jest środkiem ciężkości tego trójkąta. Uczeń napisał: „Środek ciężkości dzieli
+    środkową w stosunku 1:2, licząc od wierzchołka, zatem gdy |CE| = 18, to |CS| = \frac{1}{3}\cdot 18
+    = 6”. Wskaż błąd i podaj poprawną długość |CS| dla |CE| = 18. Oblicz też długość całej środkowej CE
+    w innym trójkącie, w którym |SE| = 5.'
+  statement_latex: '|CS|=\frac{2}{3}\cdot 18,\qquad |CE|=3\cdot 5'
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń odwrócił stosunek podziału. Przyjął |CS| : |SE| = 1 : 2 i otrzymał |CS| = \frac{1}{3}\cdot 18 = 6 (a więc |SE| = 12). Błędna odpowiedź: |CS| = 6.
+    DLACZEGO JEST ŹLE: dłuższa część środkowej leży przy WIERZCHOŁKU — środek ciężkości leży bliżej boku niż wierzchołka. Poprawnie |CS| : |SE| = 2 : 1.
+    POPRAWNIE: |CS| = \frac{2}{3}\cdot 18 = 12 (i wtedy |SE| = \frac{1}{3}\cdot 18 = 6, a 12 + 6 = 18 ✓).
+    Druga część: skoro |SE| stanowi \frac{1}{3} środkowej, to |CE| = 3\cdot 5 = 15 (wówczas |CS| = 10 i rzeczywiście 10 : 5 = 2 : 1 ✓).
+  solution_steps:
+  - 'Nazwij błąd: prawidłowy stosunek to |CS| : |SE| = 2 : 1, licząc od wierzchołka.'
+  - Oblicz poprawnie |CS| = \frac{2}{3}\cdot 18 = 12.
+  - 'Sprawdź: |SE| = \frac{1}{3}\cdot 18 = 6 oraz 12 + 6 = 18.'
+  - Z warunku |SE| = 5 wyznacz |CE| = 3\cdot 5 = 15.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: '|CS| dla |CE|=18'
+      answer:
+        kind: NUMERIC
+        value: 12.0
+    - name: '|CE| dla |SE|=5'
+      answer:
+        kind: NUMERIC
+        value: 15.0
+  checks:
+  - kind: evaluate
+    expr: \frac{2}{3}\cdot 18
+    part: '|CS| dla |CE|=18'
+  - kind: evaluate
+    expr: 3\cdot 5
+    part: '|CE| dla |SE|=5'
+  skills:
+  - stosunek podziału środkowej 2:1 od wierzchołka
+  - obliczanie długości odcinków
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [|CS| dla |CE|=18] SymPy solved it fresh: 12.0 vs 12.0 (tol
+      1e-09) ; [|CE| dla |SE|=5] SymPy solved it fresh: 15.0 vs 15.0 (tol 1e-09)'
+- id: g-cm-08
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: rozróżnianie środka ciężkości i środka okręgu opisanego
+  statement: 'W kartezjańskim układzie współrzędnych (x, y) dane są punkty A = (0, 0), B = (6, 0), C =
+    (0, 8) — wierzchołki trójkąta prostokątnego o kącie prostym przy wierzchołku A. Uczeń stwierdził:
+    „Środek okręgu opisanego na trójkącie to jego środek ciężkości S = \left(2, \frac{8}{3}\right), a
+    promień R = |SA|”. Oblicz |SA| oraz |SB| i wykaż w ten sposób, że rozumowanie ucznia jest błędne,
+    a następnie podaj poprawne współrzędne środka O okręgu opisanego oraz jego promień R.'
+  statement_latex: '|SA|=\sqrt{2^{2}+\left(\frac{8}{3}\right)^{2}},\qquad |SB|=\sqrt{\left(6-2\right)^{2}+\left(\frac{8}{3}\right)^{2}}'
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń założył, że środek ciężkości jest jednakowo odległy od wierzchołków. Policzył S = \left(\frac{0+6+0}{3}, \frac{0+0+8}{3}\right) = \left(2, \frac{8}{3}\right) i przyjął R = |SA| = \frac{10}{3} \approx 3{,}33. Błędna odpowiedź: O = \left(2, \frac{8}{3}\right), R = \frac{10}{3}.
+    SPRAWDZENIE: |SA| = \sqrt{2^{2}+\left(\frac{8}{3}\right)^{2}} = \sqrt{4+\frac{64}{9}} = \sqrt{\frac{100}{9}} = \frac{10}{3},
+    |SB| = \sqrt{\left(6-2\right)^{2}+\left(\frac{8}{3}\right)^{2}} = \sqrt{16+\frac{64}{9}} = \sqrt{\frac{208}{9}} = \frac{4\sqrt{13}}{3} \approx 4{,}81.
+    Skoro |SA| \ne |SB|, punkt S NIE jest równo odległy od wierzchołków, więc nie jest środkiem okręgu opisanego. Równe odległości od wierzchołków ma tylko punkt przecięcia symetralnych (O), a równe odległości od boków — tylko incentrum I. Pokrywają się one ze środkiem ciężkości jedynie w trójkącie równobocznym.
+    POPRAWNIE: kąt prosty jest przy A, więc przeciwprostokątna BC jest średnicą okręgu opisanego. O jest środkiem BC: O = \left(\frac{6+0}{2}, \frac{0+8}{2}\right) = (3, 4), a R = \frac{|BC|}{2} = \frac{\sqrt{6^{2}+8^{2}}}{2} = \frac{10}{2} = 5.
+    Sprawdzenie: |OA| = \sqrt{3^{2}+4^{2}} = 5 = |OB| = |OC| ✓.
+  solution_steps:
+  - Oblicz S = \left(2, \frac{8}{3}\right) i odległości |SA| = \frac{10}{3} oraz |SB| = \frac{4\sqrt{13}}{3}.
+  - Zauważ, że |SA| \ne |SB|, więc S nie jest równo odległy od wierzchołków — nie jest środkiem okręgu
+    opisanego.
+  - Wskaż, że środek okręgu opisanego to punkt przecięcia symetralnych; w trójkącie prostokątnym jest
+    to środek przeciwprostokątnej.
+  - Oblicz O = (3, 4) oraz R = \frac{\sqrt{6^{2}+8^{2}}}{2} = 5.
+  - 'Sprawdź: |OA| = |OB| = |OC| = 5.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: '|SA|'
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{10}{3}
+    - name: '|SB|'
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{4\sqrt{13}}{3}
+    - name: srodek O
+      answer:
+        kind: TUPLE
+        items:
+        - '3'
+        - '4'
+    - name: R
+      answer:
+        kind: NUMERIC
+        value: 5.0
+  checks:
+  - kind: evaluate
+    expr: \sqrt{2^{2}+\left(\frac{8}{3}\right)^{2}}
+    part: '|SA|'
+  - kind: evaluate
+    expr: \sqrt{\left(6-2\right)^{2}+\left(\frac{8}{3}\right)^{2}}
+    part: '|SB|'
+  - kind: evaluate
+    expr: \frac{\sqrt{6^{2}+8^{2}}}{2}
+    part: R
+  skills:
+  - współrzędne środka ciężkości
+  - odległość punktów w układzie współrzędnych
+  - środek okręgu opisanego na trójkącie prostokątnym
+  verification:
+    checkability: REFERENCE_CALL
+    note: '4 parts matched · det: [|SA|] SymPy solved it fresh: 3.3333333333333335 vs 3.3333333333333335
+      (tol 1e-09) ; [|SB|] SymPy solved it fresh: 4.8074017006186525 vs 4.8074017006186525 (tol 1e-09)
+      ; [R] SymPy solved it fresh: 5.0 vs 5.0 (tol 1e-09)'
+- id: g-cm-09
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: położenie środka okręgu opisanego w trójkącie rozwartokątnym
+  statement: 'Trójkąt ABC jest równoramienny: |AC| = |BC| = 10 oraz podstawa |AB| = 16. Uczeń napisał:
+    „Środek O okręgu opisanego leży zawsze wewnątrz trójkąta, na wysokości poprowadzonej z wierzchołka
+    C, więc jego odległość od podstawy AB jest mniejsza od wysokości trójkąta”. Oblicz promień R okręgu
+    opisanego na tym trójkącie oraz odległość punktu O od prostej AB, a następnie rozstrzygnij (podaj
+    TAK albo NIE), czy punkt O leży wewnątrz trójkąta ABC.'
+  statement_latex: R=\frac{10\cdot 10\cdot 16}{4\cdot P},\qquad P=\frac{1}{2}\cdot 16\cdot 6
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń przyjął z góry, że O leży wewnątrz trójkąta, i szukał punktu na odcinku wysokości, np. twierdząc, że O leży 2 jednostki nad podstawą. Tymczasem położenie O zależy od rodzaju trójkąta: wewnątrz leży tylko w trójkącie ostrokątnym.
+    POPRAWNIE: wysokość opuszczona na podstawę: h = \sqrt{10^{2}-8^{2}} = \sqrt{36} = 6. Pole: P = \frac{1}{2}\cdot 16\cdot 6 = 48.
+    R = \frac{10\cdot 10\cdot 16}{4\cdot 48} = \frac{1600}{192} = \frac{25}{3} \approx 8{,}33.
+    Punkt O leży na osi symetrii, czyli na prostej zawierającej wysokość CD, i jest odległy od wierzchołka C o R = \frac{25}{3}. Ponieważ \frac{25}{3} > 6, punkt O leży po przeciwnej stronie prostej AB niż wierzchołek C, w odległości
+    \frac{25}{3} - 6 = \frac{7}{3} \approx 2{,}33 od tej prostej.
+    Zatem O leży NA ZEWNĄTRZ trójkąta — odpowiedź: NIE. Jest to zgodne z tym, że trójkąt jest rozwartokątny: 10^{2}+10^{2} = 200 < 16^{2} = 256, więc kąt przy wierzchołku C jest rozwarty.
+    Sprawdzenie: odległość O od wierzchołka A wynosi \sqrt{8^{2}+\left(\frac{7}{3}\right)^{2}} = \sqrt{\frac{625}{9}} = \frac{25}{3} = R ✓.
+  solution_steps:
+  - Oblicz wysokość h = \sqrt{10^{2}-8^{2}} = 6 i pole P = \frac{1}{2}\cdot 16\cdot 6 = 48.
+  - Oblicz R = \frac{10\cdot 10\cdot 16}{4\cdot 48} = \frac{25}{3}.
+  - Zauważ, że R > h, więc O leży po drugiej stronie podstawy niż wierzchołek C.
+  - 'Odległość O od prostej AB: \frac{25}{3} - 6 = \frac{7}{3}.'
+  - 'Rozstrzygnij: O nie leży wewnątrz trójkąta (trójkąt jest rozwartokątny, bo 10^{2}+10^{2} < 16^{2}).'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: R
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{25}{3}
+    - name: odleglosc O od prostej AB
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{7}{3}
+    - name: czy O lezy wewnatrz trojkata
+      answer:
+        kind: BOOLEAN
+        truth: false
+  checks:
+  - kind: evaluate
+    expr: \frac{10\cdot 10\cdot 16}{4\cdot \frac{1}{2}\cdot 16\cdot 6}
+    part: R
+  - kind: evaluate
+    expr: \frac{10\cdot 10\cdot 16}{4\cdot \frac{1}{2}\cdot 16\cdot 6}-6
+    part: odleglosc O od prostej AB
+  skills:
+  - wzór R = abc/(4P)
+  - położenie O zależnie od rodzaju trójkąta
+  - oś symetrii trójkąta równoramiennego
+  verification:
+    checkability: REFERENCE_CALL
+    note: '3 parts matched · det: [R] SymPy solved it fresh: 8.333333333333334 vs 8.333333333333334 (tol
+      1e-09) ; [odleglosc O od prostej AB] SymPy solved it fresh: 2.3333333333333335 vs 2.3333333333333335
+      (tol 1e-09)'
+- id: g-cm-10
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: odróżnianie wysokości od środkowej
+  statement: 'W kartezjańskim układzie współrzędnych (x, y) punkty A = (0, 0), B = (8, 0), C = (2, 6)
+    są wierzchołkami trójkąta ABC. Uczeń napisał: „Wysokość poprowadzona z wierzchołka C dzieli bok AB
+    na połowy, więc jest jednocześnie środkową; zatem ortocentrum H pokrywa się ze środkiem ciężkości
+    S”. Wskaż błąd, a następnie wyznacz współrzędne ortocentrum H i środka ciężkości S oraz oblicz długość
+    odcinka HS.'
+  statement_latex: S=\left(\frac{0+8+2}{3},\ \frac{0+0+6}{3}\right),\qquad |HS|=\sqrt{\left(\frac{10}{3}-2\right)^{2}+\left(2-2\right)^{2}}
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń utożsamił wysokość ze środkową. Spodek wysokości z C to rzut punktu C na prostą AB (oś x), czyli punkt (2, 0), natomiast środek boku AB to punkt (4, 0). To dwa różne punkty, więc wysokość z C nie jest środkową — pokrywają się one tylko wtedy, gdy trójkąt jest równoramienny względem wierzchołka C (tu |AC| = \sqrt{40}, |BC| = \sqrt{72}, więc nie jest). Wniosek ucznia, że H = S, jest fałszywy.
+    POPRAWNIE:
+    Wysokość z C: bok AB leży na prostej y = 0, więc wysokość z C to prosta x = 2.
+    Wysokość z A: prosta BC ma współczynnik kierunkowy \frac{6-0}{2-8} = -1, więc prosta prostopadła do niej ma współczynnik 1; przechodzi przez A = (0,0), zatem jej równanie to y = x.
+    Punkt wspólny: x = 2, y = 2, czyli H = (2, 2).
+    Środek ciężkości: S = \left(\frac{0+8+2}{3}, \frac{0+0+6}{3}\right) = \left(\frac{10}{3}, 2\right).
+    Widać, że H \ne S. Długość odcinka:
+    |HS| = \sqrt{\left(\frac{10}{3}-2\right)^{2}+\left(2-2\right)^{2}} = \frac{4}{3}.
+  solution_steps:
+  - 'Nazwij błąd: spodek wysokości z C to (2,0), a środek boku AB to (4,0) — wysokość nie jest środkową.'
+  - 'Wyznacz wysokość z C: prosta x = 2 (bo AB leży na osi x).'
+  - 'Wyznacz wysokość z A: prosta BC ma współczynnik -1, więc wysokość ma równanie y = x.'
+  - 'Rozwiąż układ: H = (2, 2).'
+  - Oblicz S = \left(\frac{10}{3}, 2\right).
+  - Oblicz |HS| = \sqrt{\left(\frac{10}{3}-2\right)^{2}} = \frac{4}{3}.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: H
+      answer:
+        kind: TUPLE
+        items:
+        - '2'
+        - '2'
+    - name: S
+      answer:
+        kind: TUPLE
+        items:
+        - \frac{10}{3}
+        - '2'
+    - name: '|HS|'
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{4}{3}
+  checks:
+  - kind: evaluate
+    expr: \sqrt{\left(\frac{10}{3}-2\right)^{2}+\left(2-2\right)^{2}}
+    part: '|HS|'
+  skills:
+  - wyznaczanie ortocentrum
+  - współrzędne środka ciężkości
+  - proste prostopadłe w układzie współrzędnych
+  verification:
+    checkability: REFERENCE_CALL
+    note: '3 parts matched · det: [|HS|] SymPy solved it fresh: 1.3333333333333333 vs 1.3333333333333333
+      (tol 1e-09)'
+- id: g-ch-t02
+  slot: CHALLENGE
+  ramp_index: 0
+  difficulty: 4
+  exercise_type: 'zadanie odwrotne: z promienia okręgu wpisanego wyznacz bok trójkąta'
+  statement: Promień okręgu wpisanego w trójkąt równoramienny o podstawie długości 18 jest równy 4,5.
+    Oblicz długość ramienia tego trójkąta.
+  statement_latex: r = \frac{P}{p} = \frac{\frac{1}{2}\cdot 18\cdot\sqrt{x^{2}-81}}{\frac{x+x+18}{2}}
+    = \frac{9}{2}
+  solution: |-
+    Oznaczmy przez x długość ramienia trójkąta (x > 9, bo suma połówek podstawy musi być mniejsza od sumy ramion). Wysokość opuszczona na podstawę dzieli ją na połowy po 9, więc h = \sqrt{x^{2}-81}.
+
+    Pole: P = \frac{1}{2}\cdot 18\cdot\sqrt{x^{2}-81} = 9\sqrt{x^{2}-81}.
+    Połowa obwodu: p = \frac{x+x+18}{2} = x+9.
+
+    Z warunku r = \frac{P}{p}:
+    \frac{9\cdot\sqrt{x^{2}-81}}{x+9} = \frac{9}{2}.
+
+    Dzielimy obie strony przez 9 i mnożymy przez 2(x+9) > 0:
+    2\sqrt{x^{2}-81} = x+9.
+
+    Obie strony są dodatnie, więc możemy podnieść do kwadratu:
+    4\left(x^{2}-81\right) = x^{2}+18x+81,
+    3x^{2}-18x-405 = 0,
+    x^{2}-6x-135 = 0,
+    \Delta = 36+540 = 576,\ \sqrt{\Delta} = 24,
+    x = \frac{6-24}{2} = -9 \text{ (odrzucamy)} \quad\text{lub}\quad x = \frac{6+24}{2} = 15.
+
+    Sprawdzenie: dla x = 15 mamy h = \sqrt{225-81} = 12, P = \frac{1}{2}\cdot 18\cdot 12 = 108, p = \frac{15+15+18}{2} = 24, r = \frac{108}{24} = 4{,}5 ✓.
+
+    Ramię ma długość 15.
+  solution_steps:
+  - 'Wprowadź niewiadomą: x – długość ramienia, x > 9.'
+  - 'Wyznacz wysokość na podstawę: h = \sqrt{x^{2}-81} (wysokość dzieli podstawę na połowy).'
+  - Zapisz P = 9\sqrt{x^{2}-81} oraz p = x+9 i podstaw do wzoru r = \frac{P}{p}.
+  - Rozwiąż równanie 2\sqrt{x^{2}-81} = x+9, otrzymując x^{2}-6x-135 = 0.
+  - Odrzuć ujemny pierwiastek i podaj x = 15; sprawdź, że wtedy r = 4{,}5.
+  answer:
+    kind: NUMERIC
+    value: 15.0
+    latex: '15'
+  checks:
+  - kind: solve_equation
+    expr: \frac{9\cdot\sqrt{x^{2}-81}}{x+9}=\frac{9}{2}
+  stated_model:
+    variable: x
+    objective_latex: \frac{9\cdot\sqrt{x^{2}-81}}{x+9} = \frac{9}{2}
+    domain_lo: '9'
+    goal: value
+    constraint_used: x – długość ramienia trójkąta równoramiennego o podstawie 18
+  skills:
+  - wprowadzenie niewiadomej do opisu geometrycznego
+  - zastosowanie wzoru r = P/p
+  - rozwiązanie równania z pierwiastkiem
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''x'': ''\\frac{9\\cdot\\sqrt{x^{2}-81}}{x+9}
+      = \\frac{9}{2}'') — human review'
+- id: g-ch-t03
+  slot: CHALLENGE
+  ramp_index: 1
+  difficulty: 4
+  exercise_type: punkty szczególne w układzie współrzędnych – warunek kąta prostego
+  statement: W kartezjańskim układzie współrzędnych (x, y) dane są punkty A = (0, 0) oraz B = (8, 0).
+    Punkt C ma odciętą równą 2 i dodatnią rzędną, a kąt trójkąta ABC przy wierzchołku C jest kątem prostym.
+    Wyznacz rzędną punktu C, oblicz promień r okręgu wpisanego w trójkąt ABC oraz podaj współrzędne ortocentrum
+    H tego trójkąta.
+  statement_latex: A=\left(0,\ 0\right),\ B=\left(8,\ 0\right),\ C=\left(2,\ y\right),\ y>0,\qquad r=\frac{a+b-c}{2}
+  solution: |-
+    Skoro kąt przy wierzchołku C jest prosty, to bok AB jest średnicą okręgu opisanego na trójkącie ABC (kąt wpisany oparty na średnicy jest prosty). Środek O tego okręgu to środek odcinka AB, czyli O = (4, 0), a promień R = \frac{|AB|}{2} = 4.
+
+    Punkt C leży na tym okręgu, więc \left(2-4\right)^{2}+y^{2} = 16, czyli y^{2} = 12 oraz y = 2\sqrt{3} lub y = -2\sqrt{3}. Warunek „dodatnia rzędna” pozostawia tylko y = 2\sqrt{3}, zatem C = \left(2,\ 2\sqrt{3}\right).
+
+    (Ten sam wynik daje warunek prostopadłości: \vec{CA}\circ\vec{CB} = \left(-2\right)\cdot 6+\left(-y\right)\cdot\left(-y\right) = y^{2}-12 = 0.)
+
+    Długości boków:
+    |AC| = \sqrt{2^{2}+\left(2\sqrt{3}\right)^{2}} = \sqrt{4+12} = 4,
+    |BC| = \sqrt{6^{2}+\left(2\sqrt{3}\right)^{2}} = \sqrt{36+12} = 4\sqrt{3},
+    |AB| = 8 (przeciwprostokątna).
+
+    Promień okręgu wpisanego: r = \frac{4+4\sqrt{3}-8}{2} = 2\sqrt{3}-2.
+
+    Ortocentrum: w trójkącie prostokątnym wysokości poprowadzone z wierzchołków A i B zawierają przyprostokątne CA i CB, więc przecinają się w wierzchołku kąta prostego: H = C = \left(2,\ 2\sqrt{3}\right).
+
+    Kontrola: r = 2\sqrt{3}-2 \approx 1{,}46 < R = 4 ✓.
+  solution_steps:
+  - Zauważ, że kąt prosty przy C oznacza, iż C leży na okręgu o średnicy AB; jego środek to O = (4, 0),
+    promień R = 4.
+  - Zapisz warunek \left(2-4\right)^{2}+y^{2}=16 i wyznacz y^{2}=12.
+  - 'Wybierz pierwiastek dodatni: y = 2\sqrt{3}, więc C = \left(2,\ 2\sqrt{3}\right).'
+  - 'Oblicz długości boków: |AC| = 4, |BC| = 4\sqrt{3}, |AB| = 8.'
+  - 'Podstaw do wzoru r = \frac{a+b-c}{2}: r = \frac{4+4\sqrt{3}-8}{2} = 2\sqrt{3}-2.'
+  - 'Wskaż ortocentrum: w trójkącie prostokątnym H jest wierzchołkiem kąta prostego, czyli H = \left(2,\
+    2\sqrt{3}\right).'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: y_C
+      answer:
+        kind: SYMBOLIC
+        latex: 2\sqrt{3}
+    - name: r
+      answer:
+        kind: SYMBOLIC
+        latex: 2\sqrt{3}-2
+    - name: H_x
+      answer:
+        kind: NUMERIC
+        value: 2.0
+        latex: '2'
+    - name: H_y
+      answer:
+        kind: SYMBOLIC
+        latex: 2\sqrt{3}
+  checks:
+  - kind: evaluate
+    expr: \sqrt{16-\left(2-4\right)^{2}}
+    part: y_C
+  - kind: evaluate
+    expr: \frac{4+4\cdot\sqrt{3}-8}{2}
+    part: r
+  - kind: evaluate
+    expr: '2'
+    part: H_x
+  - kind: evaluate
+    expr: \sqrt{16-\left(2-4\right)^{2}}
+    part: H_y
+  skills:
+  - wykorzystanie warunku prostopadłości / twierdzenia Talesa o kącie wpisanym
+  - wybór pierwiastka zgodnego z warunkiem geometrycznym
+  - obliczanie promienia okręgu wpisanego w trójkąt prostokątny
+  - lokalizowanie ortocentrum
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 4 parts solved fresh · det: [y_C] SymPy solved it fresh: 3.4641016151377544 vs 3.4641016151377544
+      (tol 1e-09) ; [r] SymPy solved it fresh: 1.4641016151377546 vs 1.4641016151377546 (tol 1e-09) ;
+      [H_x] SymPy solved it fresh: 2.0 vs 2.0 (tol 1e-09) ; [H_y] SymPy solved it fresh: 3.4641016151377544
+      vs 3.4641016151377544 (tol 1e-09)'
+- id: g-ch-t04
+  slot: CHALLENGE
+  ramp_index: 2
+  difficulty: 5
+  exercise_type: optymalizacja pola trójkąta prostokątnego z warunkiem na przeciwprostokątną i obliczeniem
+    r oraz R
+  statement: |-
+    W trójkącie prostokątnym suma długości przyprostokątnych jest równa 14, a przeciwprostokątna ma długość nie większą niż 10. Jedna z przyprostokątnych ma długość x.
+    a) Wyznacz wzór na pole P tego trójkąta jako funkcję zmiennej x oraz wyznacz dziedzinę tej funkcji (uwzględniając warunek nałożony na przeciwprostokątną).
+    b) Wyznacz długości przyprostokątnych trójkąta o największym polu, podaj to największe pole oraz oblicz promień R okręgu opisanego na tym trójkącie i promień r okręgu w niego wpisanego.
+  statement_latex: P\left(x\right)=\frac{x\cdot\left(14-x\right)}{2},\qquad \sqrt{x^{2}+\left(14-x\right)^{2}}\le
+    10
+  solution: |-
+    a) Jeżeli jedna przyprostokątna ma długość x, to druga ma długość 14 − x, więc
+    P\left(x\right) = \frac{x\cdot\left(14-x\right)}{2}.
+
+    Dziedzina: z warunku dodatniości boków x > 0 oraz 14 − x > 0, czyli x \in \left(0,\ 14\right). Warunek na przeciwprostokątną:
+    \sqrt{x^{2}+\left(14-x\right)^{2}} \le 10 \iff x^{2}+\left(14-x\right)^{2} \le 100 \iff 2x^{2}-28x+196 \le 100 \iff x^{2}-14x+48 \le 0.
+    \Delta = 196-192 = 4, pierwiastki: x = 6 oraz x = 8, więc x \in \left\langle 6,\ 8\right\rangle. Przecięcie z przedziałem (0, 14) daje dziedzinę D = \left\langle 6,\ 8\right\rangle.
+
+    b) P\left(x\right) = -\frac{1}{2}x^{2}+7x to funkcja kwadratowa o ujemnym współczynniku przy x^{2}, więc największą wartość przyjmuje w wierzchołku paraboli:
+    x_{w} = \frac{-7}{2\cdot\left(-\frac{1}{2}\right)} = 7.
+    Sprawdzamy wykonalność: 7 \in \left\langle 6,\ 8\right\rangle ✓ (przeciwprostokątna wynosi wtedy \sqrt{49+49} = 7\sqrt{2}\approx 9{,}9 \le 10 ✓).
+
+    Zatem obie przyprostokątne mają długość 7, a największe pole to
+    P\left(7\right) = \frac{7\cdot 7}{2} = \frac{49}{2} = 24{,}5.
+
+    Przeciwprostokątna: c = \sqrt{7^{2}+7^{2}} = 7\sqrt{2}. W trójkącie prostokątnym środek okręgu opisanego leży w środku przeciwprostokątnej, więc
+    R = \frac{c}{2} = \frac{7\sqrt{2}}{2},
+    oraz
+    r = \frac{a+b-c}{2} = \frac{7+7-7\sqrt{2}}{2} = 7-\frac{7\sqrt{2}}{2}.
+
+    Kontrola: r \approx 2{,}05 < R \approx 4{,}95 ✓ (oraz P = p\cdot r = \left(7+\frac{7\sqrt{2}}{2}\right)\left(7-\frac{7\sqrt{2}}{2}\right) = 49-\frac{49}{2} = 24{,}5 ✓).
+  solution_steps:
+  - Oznacz przyprostokątne przez x i 14 − x i zapisz P\left(x\right)=\frac{x\cdot\left(14-x\right)}{2}.
+  - 'Z warunku boków dodatnich: x \in \left(0,\ 14\right).'
+  - Z warunku \sqrt{x^{2}+\left(14-x\right)^{2}}\le 10 otrzymaj nierówność x^{2}-14x+48 \le 0, czyli x
+    \in \left\langle 6,\ 8\right\rangle – to jest dziedzina.
+  - Zauważ, że P jest funkcją kwadratową o ramionach skierowanych w dół i wyznacz odciętą wierzchołka
+    x_{w}=7.
+  - Sprawdź, że 7 należy do dziedziny \left\langle 6,\ 8\right\rangle (warunek na przeciwprostokątną jest
+    spełniony).
+  - Oblicz P\left(7\right)=24{,}5 oraz c=7\sqrt{2}, a następnie R=\frac{7\sqrt{2}}{2} i r=\frac{7+7-7\sqrt{2}}{2}=7-\frac{7\sqrt{2}}{2}.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wzor_P
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{x\cdot\left(14-x\right)}{2}
+    - name: dziedzina
+      answer:
+        kind: INTERVAL
+        lo: '6'
+        hi: '8'
+        lo_open: false
+        hi_open: false
+    - name: x_max
+      answer:
+        kind: NUMERIC
+        value: 7.0
+        latex: '7'
+    - name: P_max
+      answer:
+        kind: NUMERIC
+        value: 24.5
+        latex: \frac{49}{2}
+    - name: R
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{7\sqrt{2}}{2}
+    - name: r
+      answer:
+        kind: SYMBOLIC
+        latex: 7-\frac{7\sqrt{2}}{2}
+  checks:
+  - kind: simplify
+    expr: \frac{x\cdot\left(14-x\right)}{2}
+    part: wzor_P
+  - kind: solve_inequality
+    expr: x^{2}-14\cdot x+48\le 0
+    part: dziedzina
+  - kind: evaluate
+    expr: \frac{-7}{2\cdot\left(-\frac{1}{2}\right)}
+    part: x_max
+  - kind: evaluate
+    expr: \frac{7\cdot\left(14-7\right)}{2}
+    part: P_max
+  - kind: evaluate
+    expr: \frac{\sqrt{7^{2}+7^{2}}}{2}
+    part: R
+  - kind: evaluate
+    expr: \frac{7+7-\sqrt{7^{2}+7^{2}}}{2}
+    part: r
+  stated_model:
+    variable: x
+    objective_latex: P\left(x\right)=\frac{x\cdot\left(14-x\right)}{2}
+    domain_lo: '6'
+    domain_hi: '8'
+    domain_lo_open: false
+    domain_hi_open: false
+    constraint_used: x + (14-x) = 14 oraz \sqrt{x^{2}+\left(14-x\right)^{2}}\le 10
+  skills:
+  - budowa funkcji opisującej pole i wyznaczenie dziedziny
+  - rozwiązanie nierówności kwadratowej jako warunku dziedziny
+  - wyznaczenie maksimum funkcji kwadratowej przez wierzchołek paraboli
+  - obliczanie promieni r i R w trójkącie prostokątnym
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''x'': ''P\\left(x\\right)=\\frac{x\\cdot\\left(14-x\\right)}{2}'')
+      — human review'

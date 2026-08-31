@@ -1,0 +1,873 @@
+section: funkcja-liniowa
+name: 'Funkcja liniowa: współczynniki i wyznaczanie wzoru'
+scope: Meaning of a and b in y = ax + b; finding the formula from a graph or from stated properties; parallel
+  and perpendicular lines via slope.
+requirements:
+- V.5
+- V.6
+counts:
+  total: 16
+  REFERENCE_CALL: 7
+  DETERMINISTIC: 5
+  NOT_MACHINE_CHECKABLE: 4
+exercises:
+- id: g-th-00
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: odczyt współczynników ze wzoru
+  statement: Funkcja liniowa f jest określona wzorem f(x) = -3x + 5. Podaj współczynnik kierunkowy a oraz
+    wyraz wolny b tej funkcji, a następnie oblicz jej miejsce zerowe.
+  statement_latex: f(x) = -3\cdot x + 5
+  solution: |-
+    We wzorze f(x) = ax + b liczba stojąca przy x to współczynnik kierunkowy, a liczba dodawana to wyraz wolny.
+    Stąd a = -3 oraz b = 5 (wykres przecina oś Oy w punkcie (0, 5)).
+    Miejsce zerowe to rozwiązanie równania f(x) = 0:
+    -3x + 5 = 0
+    -3x = -5
+    x = \frac{5}{3}.
+    Sprawdzenie: f\left(\frac{5}{3}\right) = -3\cdot\frac{5}{3} + 5 = -5 + 5 = 0 ✓.
+  solution_steps:
+  - Porównaj wzór f(x) = -3x + 5 z postacią f(x) = ax + b.
+  - Odczytaj a = -3 (liczba przy x) oraz b = 5 (wyraz wolny).
+  - Rozwiąż równanie -3x + 5 = 0.
+  - Otrzymaj x = \frac{5}{3} i sprawdź, podstawiając do wzoru.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: a
+      answer:
+        kind: NUMERIC
+        value: -3.0
+    - name: b
+      answer:
+        kind: NUMERIC
+        value: 5.0
+    - name: miejsce zerowe
+      answer:
+        kind: NUMERIC
+        value: 1.6666666666666667
+  checks:
+  - kind: solve_equation
+    expr: -3\cdot x + 5 = 0
+    part: miejsce zerowe
+  skills:
+  - identyfikacja współczynnika kierunkowego i wyrazu wolnego
+  - obliczanie miejsca zerowego funkcji liniowej
+  verification:
+    checkability: REFERENCE_CALL
+    note: '3 parts matched · det: [miejsce zerowe] SymPy solved it fresh: 1.6666666666666667 vs 1.6666666666666667
+      (tol 1e-09)'
+- id: g-th-01
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: współczynnik kierunkowy z dwóch punktów
+  statement: Do wykresu pewnej funkcji liniowej należą punkty A = (-1, 4) oraz B = (3, -2). Oblicz współczynnik
+    kierunkowy a tej funkcji.
+  statement_latex: a = \frac{-2 - 4}{3 - \left(-1\right)}
+  solution: |-
+    Korzystamy ze wzoru na współczynnik kierunkowy prostej przechodzącej przez dwa punkty:
+    a = \frac{y_2 - y_1}{x_2 - x_1} = \frac{-2 - 4}{3 - \left(-1\right)} = \frac{-6}{4} = -\frac{3}{2}.
+    W liczniku i mianowniku odejmowaliśmy w tej samej kolejności (od B do A), więc znak jest poprawny.
+    Ponieważ a = -\frac{3}{2} < 0, funkcja jest malejąca.
+  solution_steps:
+  - Oznacz A = (x_1, y_1) = (-1, 4) oraz B = (x_2, y_2) = (3, -2).
+  - Podstaw do wzoru a = \frac{y_2 - y_1}{x_2 - x_1}.
+  - Oblicz a = \frac{-6}{4} = -\frac{3}{2}.
+  answer:
+    kind: NUMERIC
+    value: -1.5
+  checks:
+  - kind: evaluate
+    expr: \frac{-2 - 4}{3 - \left(-1\right)}
+  skills:
+  - obliczanie a jako ilorazu przyrostów
+  - wnioskowanie o monotoniczności ze znaku a
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: -1.5 vs -1.5 (tol 1e-09)'
+- id: g-th-02
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: warunki równoległości i prostopadłości
+  statement: Dana jest prosta k o równaniu y = -\frac{2}{5}x + 7. Podaj współczynnik kierunkowy prostej
+    równoległej do prostej k oraz współczynnik kierunkowy prostej prostopadłej do prostej k.
+  statement_latex: k:\; y = -\frac{2}{5}\cdot x + 7
+  solution: |-
+    Prosta k ma współczynnik kierunkowy a_1 = -\frac{2}{5}.
+    Proste równoległe mają ten sam współczynnik kierunkowy, więc dla prostej równoległej a = -\frac{2}{5}.
+    Dla prostej prostopadłej musi zachodzić a_1\cdot a = -1, czyli a = -\frac{1}{a_1} = -\frac{1}{-\frac{2}{5}} = \frac{5}{2}.
+    Sprawdzenie: \left(-\frac{2}{5}\right)\cdot\frac{5}{2} = -1 ✓.
+  solution_steps:
+  - 'Odczytaj współczynnik kierunkowy prostej k: a_1 = -\frac{2}{5}.'
+  - Dla równoległej przyjmij a = a_1 = -\frac{2}{5}.
+  - Dla prostopadłej oblicz a = -\frac{1}{a_1} = \frac{5}{2}.
+  - Sprawdź warunek a_1\cdot a = -1.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wspolczynnik prostej rownoleglej
+      answer:
+        kind: NUMERIC
+        value: -0.4
+    - name: wspolczynnik prostej prostopadlej
+      answer:
+        kind: NUMERIC
+        value: 2.5
+  checks:
+  - kind: evaluate
+    expr: -\frac{2}{5}
+    part: wspolczynnik prostej rownoleglej
+  - kind: evaluate
+    expr: -\frac{1}{-\frac{2}{5}}
+    part: wspolczynnik prostej prostopadlej
+  skills:
+  - warunek równoległości a_1 = a_2
+  - warunek prostopadłości a_1\cdot a_2 = -1
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [wspolczynnik prostej rownoleglej] SymPy solved it fresh: -0.4
+      vs -0.4 (tol 1e-09) ; [wspolczynnik prostej prostopadlej] SymPy solved it fresh: 2.5 vs 2.5 (tol
+      1e-09)'
+- id: g-ex-03
+  slot: EXERCISE
+  ramp_index: 1
+  difficulty: 2
+  exercise_type: wyznaczanie wzoru z dwóch warunków
+  statement: 'Funkcja liniowa f spełnia warunki: f(-2) = 9 oraz f(3) = -1. Wyznacz wzór funkcji f, oblicz
+    jej miejsce zerowe oraz rozstrzygnij, czy punkt P = (4, -3) należy do wykresu funkcji f.'
+  statement_latex: f(-2) = 9,\qquad f(3) = -1
+  solution: |-
+    Warunki oznaczają, że do wykresu należą punkty A = (-2, 9) i B = (3, -1).
+    Współczynnik kierunkowy:
+    a = \frac{-1 - 9}{3 - \left(-2\right)} = \frac{-10}{5} = -2.
+    Wyraz wolny wyznaczamy z punktu A:
+    b = y_A - a\cdot x_A = 9 - \left(-2\right)\cdot\left(-2\right) = 9 - 4 = 5.
+    Zatem f(x) = -2x + 5.
+    Sprawdzenie na punkcie B: f(3) = -6 + 5 = -1 ✓.
+    Miejsce zerowe: -2x + 5 = 0, czyli x = \frac{5}{2}.
+    Punkt P: f(4) = -8 + 5 = -3, a więc rzeczywiście f(4) = -3 i punkt P = (4, -3) należy do wykresu funkcji f.
+  solution_steps:
+  - 'Zamień warunki na punkty wykresu: A = (-2, 9), B = (3, -1).'
+  - Oblicz a = \frac{-1 - 9}{3 - \left(-2\right)} = -2.
+  - Oblicz b = 9 - \left(-2\right)\cdot\left(-2\right) = 5 i zapisz f(x) = -2x + 5.
+  - Rozwiąż -2x + 5 = 0, otrzymując miejsce zerowe x = \frac{5}{2}.
+  - Oblicz f(4) = -3 i stwierdź, że punkt P należy do wykresu.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wzor funkcji
+      answer:
+        kind: SYMBOLIC
+        latex: f(x) = -2x + 5
+    - name: miejsce zerowe
+      answer:
+        kind: NUMERIC
+        value: 2.5
+    - name: czy P nalezy do wykresu
+      answer:
+        kind: BOOLEAN
+        truth: true
+  checks:
+  - kind: solve_equation
+    expr: -2\cdot x + 5 = 0
+    part: miejsce zerowe
+  skills:
+  - układanie równań z warunków f(x_1)=y_1
+  - wyznaczanie wzoru funkcji liniowej
+  - sprawdzanie przynależności punktu do wykresu
+  verification:
+    checkability: REFERENCE_CALL
+    note: 'could not compare: part disagrees: AMBIGUOUS: ''parser returned an unresolved ambiguity (_ambig)'''
+- id: g-ex-04
+  slot: EXERCISE
+  ramp_index: 2
+  difficulty: 3
+  exercise_type: proste równoległe i prostopadłe przez dany punkt
+  statement: Dana jest prosta k o równaniu 4x - 3y + 12 = 0 oraz punkt A = (6, -1). Wyznacz wzór funkcji
+    liniowej g, której wykres jest równoległy do prostej k i przechodzi przez punkt A, wyznacz wzór funkcji
+    liniowej h, której wykres jest prostopadły do prostej k i przechodzi przez punkt A, a następnie oblicz
+    miejsce zerowe funkcji h.
+  statement_latex: k:\; 4\cdot x - 3\cdot y + 12 = 0,\qquad A = \left(6,\; -1\right)
+  solution: |-
+    Krok 1. Postać kierunkowa prostej k: 3y = 4x + 12, czyli y = \frac{4}{3}x + 4. Zatem a_1 = \frac{4}{3}.
+    Krok 2. Prosta równoległa ma a = \frac{4}{3}. Z warunku przejścia przez A:
+    b = -1 - \frac{4}{3}\cdot 6 = -1 - 8 = -9, więc g(x) = \frac{4}{3}x - 9 (wyrazy wolne -9 i 4 są różne, więc proste są równoległe i różne).
+    Krok 3. Prosta prostopadła ma a = -\frac{1}{\frac{4}{3}} = -\frac{3}{4}. Z warunku przejścia przez A:
+    b = -1 + \frac{3}{4}\cdot 6 = -1 + \frac{9}{2} = \frac{7}{2}, więc h(x) = -\frac{3}{4}x + \frac{7}{2}.
+    Krok 4. Miejsce zerowe funkcji h: -\frac{3}{4}x + \frac{7}{2} = 0, stąd \frac{3}{4}x = \frac{7}{2}, czyli x = \frac{14}{3}.
+    Sprawdzenie: \frac{4}{3}\cdot\left(-\frac{3}{4}\right) = -1 ✓ oraz h(6) = -\frac{9}{2} + \frac{7}{2} = -1 ✓.
+  solution_steps:
+  - Przekształć 4x - 3y + 12 = 0 do postaci y = \frac{4}{3}x + 4 i odczytaj a_1 = \frac{4}{3}.
+  - Dla równoległej przyjmij a = \frac{4}{3} i oblicz b = -1 - \frac{4}{3}\cdot 6 = -9.
+  - Zapisz g(x) = \frac{4}{3}x - 9.
+  - Dla prostopadłej przyjmij a = -\frac{3}{4} i oblicz b = -1 - \left(-\frac{3}{4}\right)\cdot 6 = \frac{7}{2}.
+  - Zapisz h(x) = -\frac{3}{4}x + \frac{7}{2}.
+  - Rozwiąż -\frac{3}{4}x + \frac{7}{2} = 0 i otrzymaj x = \frac{14}{3}.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wzor g
+      answer:
+        kind: SYMBOLIC
+        latex: g(x) = \frac{4}{3}x - 9
+    - name: wzor h
+      answer:
+        kind: SYMBOLIC
+        latex: h(x) = -\frac{3}{4}x + \frac{7}{2}
+    - name: miejsce zerowe h
+      answer:
+        kind: NUMERIC
+        value: 4.666666666666667
+  checks:
+  - kind: solve_equation
+    expr: -\frac{3}{4}\cdot x + \frac{7}{2} = 0
+    part: miejsce zerowe h
+  skills:
+  - zamiana postaci ogólnej na kierunkową
+  - wyznaczanie prostej równoległej i prostopadłej przez punkt
+  - obliczanie miejsca zerowego
+  verification:
+    checkability: REFERENCE_CALL
+    note: 'could not compare: part disagrees: AMBIGUOUS: ''parser returned an unresolved ambiguity (_ambig)'''
+- id: g-ex-05
+  slot: EXERCISE
+  ramp_index: 3
+  difficulty: 4
+  exercise_type: wzajemne położenie prostych z parametrem
+  statement: 'Dane są proste: k o równaniu y = \left(2m + 1\right)x - 3 oraz l o równaniu 4x + 2y - 7
+    = 0, gdzie m jest liczbą rzeczywistą. Wyznacz tę wartość m, dla której proste k i l są równoległe,
+    i uzasadnij, że dla tej wartości m proste te są równoległe i różne. Wyznacz też tę wartość m, dla
+    której proste k i l są prostopadłe.'
+  statement_latex: k:\; y = \left(2\cdot m + 1\right)\cdot x - 3,\qquad l:\; 4\cdot x + 2\cdot y - 7 =
+    0
+  solution: |-
+    Krok 1. Postać kierunkowa prostej l: 2y = -4x + 7, czyli y = -2x + \frac{7}{2}. Zatem a_l = -2 oraz b_l = \frac{7}{2}.
+    Krok 2. Równoległość: 2m + 1 = -2, stąd 2m = -3 i m = -\frac{3}{2}.
+    Uzasadnienie różności: dla m = -\frac{3}{2} prosta k ma równanie y = -2x - 3, a prosta l równanie y = -2x + \frac{7}{2}. Współczynniki kierunkowe są równe, a wyrazy wolne różne \left(-3 \neq \frac{7}{2}\right), więc proste są równoległe i nie pokrywają się.
+    Krok 3. Prostopadłość: \left(2m + 1\right)\cdot\left(-2\right) = -1, czyli 2m + 1 = \frac{1}{2}, stąd 2m = -\frac{1}{2} i m = -\frac{1}{4}.
+    Sprawdzenie: dla m = -\frac{1}{4} prosta k ma współczynnik \frac{1}{2}, a \frac{1}{2}\cdot\left(-2\right) = -1 ✓.
+  solution_steps:
+  - 'Doprowadź prostą l do postaci kierunkowej: y = -2x + \frac{7}{2}, więc a_l = -2.'
+  - Z warunku równoległości rozwiąż równanie 2m + 1 = -2 i otrzymaj m = -\frac{3}{2}.
+  - 'Porównaj wyrazy wolne: -3 \neq \frac{7}{2}, więc proste są równoległe i różne.'
+  - Z warunku prostopadłości rozwiąż równanie \left(2m + 1\right)\cdot\left(-2\right) = -1.
+  - Otrzymaj m = -\frac{1}{4} i sprawdź iloczyn współczynników kierunkowych.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: m dla rownoleglosci
+      answer:
+        kind: NUMERIC
+        value: -1.5
+    - name: uzasadnienie roznosci prostych
+      answer:
+        kind: NOT_MACHINE_CHECKABLE
+        reason: Uczeń musi zapisać, że dla m = -\frac{3}{2} obie proste mają współczynnik kierunkowy -2,
+          a ich wyrazy wolne -3 i \frac{7}{2} są różne, więc proste są równoległe i nie pokrywają się.
+    - name: m dla prostopadlosci
+      answer:
+        kind: NUMERIC
+        value: -0.25
+  checks:
+  - kind: solve_equation
+    expr: 2\cdot m + 1 = -2
+    var: m
+    part: m dla rownoleglosci
+  - kind: solve_equation
+    expr: \left(2\cdot m + 1\right)\cdot\left(-2\right) = -1
+    var: m
+    part: m dla prostopadlosci
+  skills:
+  - zamiana postaci ogólnej na kierunkową
+  - warunek równoległości z parametrem
+  - warunek prostopadłości z parametrem
+  - sprawdzenie, czy proste równoległe są różne
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'part(s) need a human: uzasadnienie roznosci prostych · 2/2 other parts solved fresh'
+- id: g-ex-t00
+  slot: EXERCISE
+  ramp_index: 6
+  difficulty: 3
+  exercise_type: wyznaczanie wzoru prostej prostopadłej przez punkt przecięcia dwóch prostych
+  statement: 'Dane są proste k oraz l o równaniach: k: 2x - 3y - 6 = 0 oraz l: 2x + y - 6 = 0. Oblicz
+    współrzędne punktu P, w którym proste k i l się przecinają, a następnie wyznacz wzór funkcji liniowej
+    g, której wykres jest prostą prostopadłą do prostej k i przechodzącą przez punkt P. Zapisz obliczenia.'
+  statement_latex: k:\ 2x - 3y - 6 = 0,\qquad l:\ 2x + y - 6 = 0
+  solution: |-
+    Doprowadzamy obie proste do postaci kierunkowej.
+    k: 2x - 3y - 6 = 0 \Rightarrow 3y = 2x - 6 \Rightarrow y = \frac{2}{3}\cdot x - 2, więc a_k = \frac{2}{3}.
+    l: 2x + y - 6 = 0 \Rightarrow y = -2\cdot x + 6.
+    Punkt wspólny: \frac{2}{3}\cdot x - 2 = -2\cdot x + 6, czyli \frac{2}{3}\cdot x + 2\cdot x = 8, \frac{8}{3}\cdot x = 8, stąd x = 3.
+    Wtedy y = \frac{2}{3}\cdot 3 - 2 = 0, zatem P = \left(3,\ 0\right).
+    Z warunku prostopadłości: a_g = -\frac{1}{a_k} = -\frac{1}{\frac{2}{3}} = -\frac{3}{2}.
+    Wyraz wolny: b_g = y_P - a_g\cdot x_P = 0 - \left(-\frac{3}{2}\right)\cdot 3 = \frac{9}{2}.
+    Zatem g\left(x\right) = -\frac{3}{2}\cdot x + \frac{9}{2}.
+    Sprawdzenie: a_k\cdot a_g = \frac{2}{3}\cdot\left(-\frac{3}{2}\right) = -1 oraz g\left(3\right) = -\frac{9}{2} + \frac{9}{2} = 0.
+  solution_steps:
+  - 'Zapisz prostą k w postaci kierunkowej: y = \frac{2}{3}\cdot x - 2, więc a_k = \frac{2}{3}.'
+  - 'Zapisz prostą l w postaci kierunkowej: y = -2\cdot x + 6.'
+  - 'Porównaj wzory: \frac{2}{3}\cdot x - 2 = -2\cdot x + 6 i wyznacz x = 3.'
+  - 'Oblicz drugą współrzędną: y = \frac{2}{3}\cdot 3 - 2 = 0, więc P = \left(3,\ 0\right).'
+  - Z warunku prostopadłości oblicz a_g = -\frac{1}{\frac{2}{3}} = -\frac{3}{2}.
+  - Oblicz b_g = 0 - \left(-\frac{3}{2}\right)\cdot 3 = \frac{9}{2} i zapisz wzór g\left(x\right) = -\frac{3}{2}\cdot
+    x + \frac{9}{2}.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: P_x
+      answer:
+        kind: NUMERIC
+        value: 3.0
+    - name: P_y
+      answer:
+        kind: NUMERIC
+        value: 0.0
+    - name: a_g
+      answer:
+        kind: NUMERIC
+        value: -1.5
+    - name: b_g
+      answer:
+        kind: NUMERIC
+        value: 4.5
+    - name: wzor_g
+      answer:
+        kind: SYMBOLIC
+        latex: g\left(x\right) = -\frac{3}{2}\cdot x + \frac{9}{2}
+  checks:
+  - kind: solve_equation
+    expr: \frac{2}{3}\cdot x - 2 = -2\cdot x + 6
+    part: P_x
+  - kind: evaluate
+    expr: \frac{2}{3}\cdot 3 - 2
+    part: P_y
+  - kind: evaluate
+    expr: -\frac{1}{\frac{2}{3}}
+    part: a_g
+  - kind: evaluate
+    expr: 0 - \left(-\frac{3}{2}\right)\cdot 3
+    part: b_g
+  skills:
+  - zamiana postaci ogólnej na kierunkową
+  - punkt przecięcia dwóch prostych
+  - warunek prostopadłości
+  - wyznaczanie wyrazu wolnego z punktu
+  verification:
+    checkability: REFERENCE_CALL
+    note: 'could not compare: reference produced 2 outputs, answer has 5'
+- id: g-ex-t01
+  slot: EXERCISE
+  ramp_index: 7
+  difficulty: 4
+  exercise_type: badanie wzajemnego położenia prostych z parametrem
+  statement: Funkcja liniowa f jest określona wzorem f(x) = (m - 1)x + m + 5, gdzie m jest liczbą rzeczywistą.
+    Dana jest też prosta l o równaniu 4x + 2y - 7 = 0. a) Wyznacz tę wartość m, dla której wykres funkcji
+    f jest prostą równoległą do prostej l i różną od niej, a następnie dla tej wartości m oblicz miejsce
+    zerowe funkcji f. b) Wyznacz tę wartość m, dla której wykres funkcji f jest prostą prostopadłą do
+    prostej l. Zapisz obliczenia.
+  statement_latex: f\left(x\right) = \left(m - 1\right)\cdot x + m + 5,\qquad l:\ 4x + 2y - 7 = 0
+  solution: |-
+    Postać kierunkowa prostej l: 2y = -4x + 7, czyli y = -2\cdot x + \frac{7}{2}, więc a_l = -2, b_l = \frac{7}{2}.
+    a) Równoległość: m - 1 = -2, stąd m = -1.
+    Dla m = -1 mamy f\left(x\right) = -2\cdot x + 4. Wyraz wolny 4 \neq \frac{7}{2}, więc proste są równoległe i różne.
+    Miejsce zerowe: -2\cdot x + 4 = 0, czyli x = 2.
+    b) Prostopadłość: \left(m - 1\right)\cdot\left(-2\right) = -1, czyli m - 1 = \frac{1}{2}, stąd m = \frac{3}{2}.
+    Sprawdzenie: dla m = \frac{3}{2} współczynnik kierunkowy f wynosi \frac{1}{2} oraz \frac{1}{2}\cdot\left(-2\right) = -1.
+  solution_steps:
+  - 'Zapisz prostą l w postaci kierunkowej: y = -2\cdot x + \frac{7}{2}, odczytaj a_l = -2 oraz b_l =
+    \frac{7}{2}.'
+  - 'Warunek równoległości: m - 1 = -2, stąd m = -1.'
+  - 'Sprawdź różność prostych: dla m = -1 wyraz wolny f jest równy 4 i 4 \neq \frac{7}{2}, więc proste
+    są równoległe i różne.'
+  - Dla m = -1 rozwiąż równanie -2\cdot x + 4 = 0 i otrzymaj miejsce zerowe x = 2.
+  - 'Warunek prostopadłości: \left(m - 1\right)\cdot\left(-2\right) = -1, stąd m = \frac{3}{2}.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: m_rownolegle
+      answer:
+        kind: NUMERIC
+        value: -1.0
+    - name: miejsce_zerowe
+      answer:
+        kind: NUMERIC
+        value: 2.0
+    - name: m_prostopadle
+      answer:
+        kind: NUMERIC
+        value: 1.5
+  checks:
+  - kind: solve_equation
+    expr: m - 1 = -2
+    var: m
+    part: m_rownolegle
+  - kind: solve_equation
+    expr: -2\cdot x + 4 = 0
+    part: miejsce_zerowe
+  - kind: solve_equation
+    expr: \left(m - 1\right)\cdot\left(-2\right) = -1
+    var: m
+    part: m_prostopadle
+  skills:
+  - postać ogólna a kierunkowa
+  - warunek równoległości i różności prostych
+  - warunek prostopadłości
+  - miejsce zerowe funkcji liniowej
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [m_rownolegle] SymPy solved it fresh: -1.0 vs -1.0 (tol 1e-09)
+      ; [miejsce_zerowe] SymPy solved it fresh: 2.0 vs 2.0 (tol 1e-09) ; [m_prostopadle] SymPy solved
+      it fresh: 1.5 vs 1.5 (tol 1e-09)'
+- id: g-cm-06
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: 'demonstracja błędu: wyraz wolny a miejsce zerowe'
+  statement: 'Funkcja liniowa f jest określona wzorem f(x) = 4x - 6. Uczeń napisał: „Liczba -6 to miejsce
+    zerowe funkcji f, więc wykres przecina oś Ox w punkcie (-6, 0)”. Wyjaśnij, na czym polega błąd ucznia,
+    a następnie podaj poprawne miejsce zerowe funkcji f oraz rzędną punktu przecięcia wykresu funkcji
+    f z osią Oy.'
+  statement_latex: f(x) = 4\cdot x - 6
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń utożsamił wyraz wolny b = -6 z miejscem zerowym i otrzymał punkt przecięcia z osią Ox równy (-6, 0). Sprawdźmy: f(-6) = 4\cdot\left(-6\right) - 6 = -30 \neq 0, więc punkt (-6, 0) w ogóle nie leży na wykresie.
+    NA CZYM POLEGA BŁĄD: we wzorze f(x) = ax + b liczba b jest wartością funkcji dla x = 0, czyli rzędną punktu przecięcia wykresu z osią Oy — nie ma nic wspólnego z miejscem zerowym.
+    POPRAWNIE:
+    – punkt przecięcia z osią Oy: f(0) = -6, czyli punkt (0, -6), zatem szukana rzędna jest równa -6;
+    – miejsce zerowe: rozwiązujemy 4x - 6 = 0, czyli 4x = 6, x = \frac{3}{2}. Wykres przecina oś Ox w punkcie \left(\frac{3}{2},\, 0\right).
+    Sprawdzenie: f\left(\frac{3}{2}\right) = 6 - 6 = 0 ✓.
+  solution_steps:
+  - Zauważ, że uczeń pomylił wyraz wolny b = -6 z miejscem zerowym.
+  - 'Sprawdź kontrolnie: f(-6) = -30 \neq 0, więc punkt (-6, 0) nie należy do wykresu.'
+  - Oblicz f(0) = -6 — to rzędna punktu przecięcia z osią Oy.
+  - Rozwiąż równanie 4x - 6 = 0 i otrzymaj miejsce zerowe x = \frac{3}{2}.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: miejsce zerowe
+      answer:
+        kind: NUMERIC
+        value: 1.5
+    - name: rzedna punktu przeciecia z osia Oy
+      answer:
+        kind: NUMERIC
+        value: -6.0
+  checks:
+  - kind: solve_equation
+    expr: 4\cdot x - 6 = 0
+    part: miejsce zerowe
+  - kind: evaluate
+    expr: 4\cdot 0 - 6
+    part: rzedna punktu przeciecia z osia Oy
+  skills:
+  - rozróżnianie wyrazu wolnego i miejsca zerowego
+  - wyznaczanie punktów przecięcia z osiami
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [miejsce zerowe] SymPy solved it fresh: 1.5 vs 1.5 (tol 1e-09)
+      ; [rzedna punktu przeciecia z osia Oy] SymPy solved it fresh: -6.0 vs -6.0 (tol 1e-09)'
+- id: g-cm-07
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: 'demonstracja błędu: odwrócony iloraz przyrostów'
+  statement: Do wykresu funkcji liniowej f należą punkty A = (-2, 1) oraz B = (2, 7). Uczeń obliczył współczynnik
+    kierunkowy jako a = \frac{2 - \left(-2\right)}{7 - 1} = \frac{2}{3}. Wskaż błąd w rozumowaniu ucznia,
+    a następnie oblicz poprawną wartość współczynnika a i podaj wzór funkcji f.
+  statement_latex: A = \left(-2,\; 1\right),\qquad B = \left(2,\; 7\right)
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń podzielił przyrost argumentów przez przyrost wartości („w prawo na w górę”) i otrzymał a = \frac{2}{3}. Wtedy z punktu A wyszłoby b = 1 - \frac{2}{3}\cdot\left(-2\right) = \frac{7}{3}, a dla x = 2 dostalibyśmy \frac{4}{3} + \frac{7}{3} = \frac{11}{3} \neq 7 — punkt B nie leżałby na tak wyznaczonej prostej.
+    NA CZYM POLEGA BŁĄD: we wzorze a = \frac{y_2 - y_1}{x_2 - x_1} w liczniku jest przyrost wartości (pionowy), a w mianowniku przyrost argumentów (poziomy). Uczeń zapisał ten iloraz odwrotnie.
+    POPRAWNIE:
+    a = \frac{7 - 1}{2 - \left(-2\right)} = \frac{6}{4} = \frac{3}{2},
+    b = 1 - \frac{3}{2}\cdot\left(-2\right) = 1 + 3 = 4,
+    czyli f(x) = \frac{3}{2}x + 4.
+    Sprawdzenie: f(2) = 3 + 4 = 7 ✓.
+  solution_steps:
+  - Zauważ, że uczeń zamienił licznik z mianownikiem we wzorze na a.
+  - Oblicz poprawnie a = \frac{7 - 1}{2 - \left(-2\right)} = \frac{3}{2}.
+  - Wyznacz b = 1 - \frac{3}{2}\cdot\left(-2\right) = 4.
+  - Zapisz f(x) = \frac{3}{2}x + 4 i sprawdź na punkcie B.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wspolczynnik a
+      answer:
+        kind: NUMERIC
+        value: 1.5
+    - name: wzor funkcji
+      answer:
+        kind: SYMBOLIC
+        latex: f(x) = \frac{3}{2}x + 4
+  checks:
+  - kind: evaluate
+    expr: \frac{7 - 1}{2 - \left(-2\right)}
+    part: wspolczynnik a
+  skills:
+  - poprawne stosowanie wzoru a = \frac{y_2-y_1}{x_2-x_1}
+  - wyznaczanie wzoru funkcji liniowej z dwóch punktów
+  verification:
+    checkability: REFERENCE_CALL
+    note: 'could not compare: part disagrees: AMBIGUOUS: ''parser returned an unresolved ambiguity (_ambig)'''
+- id: g-cm-08
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: 'demonstracja błędu: niekonsekwentna kolejność punktów'
+  statement: Do wykresu funkcji liniowej f należą punkty A = (-3, 5) oraz B = (1, -3). Uczeń policzył
+    a = \frac{-3 - 5}{-3 - 1} = \frac{-8}{-4} = 2 i stwierdził, że funkcja f jest rosnąca. Wskaż błąd
+    ucznia, a następnie oblicz poprawne wartości współczynników a i b we wzorze f(x) = ax + b.
+  statement_latex: A = \left(-3,\; 5\right),\qquad B = \left(1,\; -3\right)
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: w liczniku uczeń odjął rzędne w kolejności od B do A (-3 - 5), a w mianowniku odciął w kolejności od A do B (-3 - 1). Kolejność odejmowania nie była ta sama, więc znak wyniku się odwrócił i wyszło a = 2 (funkcja rosnąca).
+    NA CZYM POLEGA BŁĄD: w liczniku i mianowniku trzeba odejmować w tej samej kolejności; zamiana kolejności tylko w jednym miejscu zmienia znak a na przeciwny.
+    POPRAWNIE (obie różnice liczone od A do B):
+    a = \frac{-3 - 5}{1 - \left(-3\right)} = \frac{-8}{4} = -2,
+    b = 5 - \left(-2\right)\cdot\left(-3\right) = 5 - 6 = -1.
+    Zatem f(x) = -2x - 1 i ponieważ a = -2 < 0, funkcja jest malejąca (a nie rosnąca).
+    Sprawdzenie: f(1) = -2 - 1 = -3 ✓.
+  solution_steps:
+  - Zauważ, że uczeń liczył licznik od B do A, a mianownik od A do B.
+  - Oblicz a = \frac{-3 - 5}{1 - \left(-3\right)} = -2 (obie różnice w tej samej kolejności).
+  - Oblicz b = 5 - \left(-2\right)\cdot\left(-3\right) = -1.
+  - Stwierdź, że a < 0, więc funkcja jest malejąca; sprawdź wzór na punkcie B.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wspolczynnik a
+      answer:
+        kind: NUMERIC
+        value: -2.0
+    - name: wyraz wolny b
+      answer:
+        kind: NUMERIC
+        value: -1.0
+  checks:
+  - kind: evaluate
+    expr: \frac{-3 - 5}{1 - \left(-3\right)}
+    part: wspolczynnik a
+  - kind: evaluate
+    expr: 5 - \left(-2\right)\cdot\left(-3\right)
+    part: wyraz wolny b
+  skills:
+  - konsekwentna kolejność odejmowania we wzorze na a
+  - wyznaczanie wyrazu wolnego z punktu
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [wspolczynnik a] SymPy solved it fresh: -2.0 vs -2.0 (tol 1e-09)
+      ; [wyraz wolny b] SymPy solved it fresh: -1.0 vs -1.0 (tol 1e-09)'
+- id: g-cm-09
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: 'demonstracja błędu: warunek prostopadłości'
+  statement: Dana jest prosta k o równaniu y = \frac{4}{5}x - 2 oraz punkt P = (4, -1). Uczeń stwierdził,
+    że prosta prostopadła do k ma współczynnik kierunkowy a = \frac{5}{4} („wystarczy odwrócić ułamek”).
+    Wyjaśnij, dlaczego to rozumowanie jest błędne, a następnie podaj poprawny współczynnik kierunkowy
+    prostej prostopadłej do k oraz wzór funkcji liniowej, której wykres jest prostopadły do k i przechodzi
+    przez punkt P.
+  statement_latex: k:\; y = \frac{4}{5}\cdot x - 2,\qquad P = \left(4,\; -1\right)
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń tylko odwrócił ułamek i przyjął a = \frac{5}{4}. Sprawdźmy warunek prostopadłości: \frac{4}{5}\cdot\frac{5}{4} = 1 \neq -1, więc takie proste wcale nie są prostopadłe (są nachylone „w tę samą stronę”). Tak samo błędne byłoby a = -\frac{4}{5}, bo \frac{4}{5}\cdot\left(-\frac{4}{5}\right) = -\frac{16}{25} \neq -1.
+    NA CZYM POLEGA BŁĄD: trzeba zrobić dwie rzeczy naraz — odwrócić ułamek i zmienić znak: a_2 = -\frac{1}{a_1}.
+    POPRAWNIE:
+    a_2 = -\frac{1}{\frac{4}{5}} = -\frac{5}{4}, bo \frac{4}{5}\cdot\left(-\frac{5}{4}\right) = -1 ✓.
+    Wyraz wolny z warunku przejścia przez P:
+    b = -1 - \left(-\frac{5}{4}\right)\cdot 4 = -1 + 5 = 4.
+    Szukany wzór: y = -\frac{5}{4}x + 4.
+    Sprawdzenie: dla x = 4 mamy -5 + 4 = -1 ✓.
+  solution_steps:
+  - Sprawdź iloczyn \frac{4}{5}\cdot\frac{5}{4} = 1 \neq -1 — proste ucznia nie są prostopadłe.
+  - Zastosuj poprawny warunek a_2 = -\frac{1}{a_1} i oblicz a_2 = -\frac{5}{4}.
+  - Wyznacz b = -1 - \left(-\frac{5}{4}\right)\cdot 4 = 4.
+  - Zapisz wzór y = -\frac{5}{4}x + 4 i sprawdź, że punkt P na nim leży.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wspolczynnik prostej prostopadlej
+      answer:
+        kind: NUMERIC
+        value: -1.25
+    - name: wzor funkcji
+      answer:
+        kind: SYMBOLIC
+        latex: y = -\frac{5}{4}x + 4
+  checks:
+  - kind: evaluate
+    expr: -\frac{1}{\frac{4}{5}}
+    part: wspolczynnik prostej prostopadlej
+  skills:
+  - stosowanie warunku a_1\cdot a_2 = -1
+  - wyznaczanie prostej prostopadłej przez dany punkt
+  verification:
+    checkability: REFERENCE_CALL
+    note: '2 parts matched · det: [wspolczynnik prostej prostopadlej] SymPy solved it fresh: -1.25 vs
+      -1.25 (tol 1e-09)'
+- id: g-cm-10
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: 'demonstracja błędu: prostopadła do prostej poziomej'
+  statement: 'Dana jest prosta k o równaniu y = -2 oraz punkt P = (3, 5). Uczeń napisał: „Prosta prostopadła
+    do k ma współczynnik a = -\frac{1}{0}, a takiej liczby nie ma, więc prosta prostopadła do k przechodząca
+    przez punkt P nie istnieje”. Wyjaśnij błąd ucznia, podaj równanie prostej prostopadłej do k przechodzącej
+    przez punkt P oraz rozstrzygnij, czy ta prosta jest wykresem pewnej funkcji liniowej.'
+  statement_latex: k:\; y = 0\cdot x - 2,\qquad P = \left(3,\; 5\right)
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń zastosował wzór a_2 = -\frac{1}{a_1} dla a_1 = 0 i z niemożliwości dzielenia przez zero wywnioskował, że prosta prostopadła nie istnieje.
+    NA CZYM POLEGA BŁĄD: warunek a_1\cdot a_2 = -1 obowiązuje tylko wtedy, gdy obie proste są wykresami funkcji liniowych o niezerowych współczynnikach kierunkowych (a_1 \neq 0 i a_2 \neq 0). Prosta k: y = -2 jest pozioma, więc wzoru użyć nie wolno. Prosta prostopadła do prostej poziomej istnieje — jest to prosta pionowa.
+    POPRAWNIE: prosta pionowa przechodząca przez P = (3, 5) ma równanie x = 3. Jest ona prostopadła do prostej k: y = -2.
+    Prosta x = 3 nie jest wykresem żadnej funkcji, bo zawiera nieskończenie wiele punktów o tej samej odciętej x = 3 (np. (3, 0) i (3, 5)), a wykres funkcji nie może mieć dwóch punktów o tej samej odciętej. W szczególności nie da się jej zapisać w postaci y = ax + b.
+  solution_steps:
+  - 'Zauważ, że k: y = -2 jest prostą poziomą, więc a_1 = 0 i wzór a_2 = -\frac{1}{a_1} nie ma zastosowania.'
+  - Stwierdź, że prostopadła do prostej poziomej jest prosta pionowa.
+  - 'Zapisz równanie prostej pionowej przez P = (3, 5): x = 3.'
+  - Uzasadnij, że prosta x = 3 nie jest wykresem funkcji (dwa punkty o tej samej odciętej).
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: rownanie prostej prostopadlej
+      answer:
+        kind: SYMBOLIC
+        latex: x = 3
+    - name: czy jest wykresem funkcji liniowej
+      answer:
+        kind: BOOLEAN
+        truth: false
+  skills:
+  - rozpoznawanie prostej poziomej i pionowej
+  - granice stosowalności warunku a_1\cdot a_2 = -1
+  - rozpoznanie, kiedy prosta nie jest wykresem funkcji
+  verification:
+    checkability: REFERENCE_CALL
+    note: 2 parts matched
+- id: g-ch-t02
+  slot: CHALLENGE
+  ramp_index: 0
+  difficulty: 4
+  exercise_type: wyznaczanie wzoru funkcji liniowej z warunku na pole trójkąta
+  statement: Funkcja liniowa f jest rosnąca. Wykres funkcji f przecina oś OY w punkcie B = (0, 4), a oś
+    OX — w punkcie A. Pole trójkąta o wierzchołkach A, B oraz O = (0, 0) jest równe 12. Wyznacz wzór funkcji
+    f. Zapisz obliczenia.
+  statement_latex: B = \left(0,\ 4\right),\qquad O = \left(0,\ 0\right),\qquad P_{AOB} = 12
+  solution: |-
+    Z punktu przecięcia z osią OY odczytujemy b = 4, zatem f\left(x\right) = a\cdot x + 4 oraz \left|OB\right| = 4.
+    Trójkąt AOB ma kąt prosty w punkcie O, a jego przyprostokątne leżą na osiach, więc
+    P = \frac{1}{2}\cdot\left|OA\right|\cdot\left|OB\right| = \frac{1}{2}\cdot\left|OA\right|\cdot 4 = 12, stąd \left|OA\right| = \frac{2\cdot 12}{4} = 6.
+    Punkt A leży na osi OX, więc A = \left(6,\ 0\right) albo A = \left(-6,\ 0\right).
+    Funkcja f jest rosnąca, więc a > 0, a ponieważ b = 4 > 0, miejsce zerowe x_0 = -\frac{4}{a} jest liczbą ujemną. Zatem A = \left(-6,\ 0\right).
+    Współczynnik kierunkowy: a = \frac{4 - 0}{0 - \left(-6\right)} = \frac{4}{6} = \frac{2}{3}.
+    Odpowiedź: f\left(x\right) = \frac{2}{3}\cdot x + 4.
+    Sprawdzenie: f\left(-6\right) = -4 + 4 = 0 oraz \frac{1}{2}\cdot 6\cdot 4 = 12.
+  solution_steps:
+  - Odczytaj z punktu B, że b = 4, więc f\left(x\right) = a\cdot x + 4 i \left|OB\right| = 4.
+  - 'Zapisz pole trójkąta prostokątnego AOB: \frac{1}{2}\cdot\left|OA\right|\cdot 4 = 12.'
+  - Wyznacz \left|OA\right| = 6, czyli A = \left(6,\ 0\right) lub A = \left(-6,\ 0\right).
+  - Z założenia, że f jest rosnąca (a > 0) przy b = 4 > 0 wynika, że miejsce zerowe jest ujemne, więc
+    A = \left(-6,\ 0\right).
+  - Oblicz a = \frac{4 - 0}{0 - \left(-6\right)} = \frac{2}{3} i zapisz wzór f\left(x\right) = \frac{2}{3}\cdot
+    x + 4.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: x_A
+      answer:
+        kind: NUMERIC
+        value: -6.0
+    - name: a
+      answer:
+        kind: NUMERIC
+        value: 0.6666666666666666
+        tol: 1.0e-06
+    - name: wzor
+      answer:
+        kind: SYMBOLIC
+        latex: f\left(x\right) = \frac{2}{3}\cdot x + 4
+  checks:
+  - kind: evaluate
+    expr: -\frac{2\cdot 12}{4}
+    part: x_A
+  - kind: evaluate
+    expr: \frac{4 - 0}{0 - \left(-6\right)}
+    part: a
+  stated_model:
+    variable: a
+    objective_latex: P\left(a\right) = \frac{1}{2}\cdot\left|-\frac{4}{a}\right|\cdot 4 = 12
+    goal: value
+    constraint_used: a > 0,\ b = 4
+  skills:
+  - interpretacja wyrazu wolnego
+  - pole trójkąta o wierzchołkach na osiach
+  - monotoniczność a znak współczynnika a
+  - współczynnik kierunkowy z dwóch punktów
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (PARSE_ERROR: "UnexpectedCharacters: No terminal
+      matches ''='' in the current parser context, at line 1 col 75") — human review'
+- id: g-ch-t03
+  slot: CHALLENGE
+  ramp_index: 1
+  difficulty: 5
+  exercise_type: wyznaczanie wzoru funkcji liniowej z warunku na pole i odrzucenie rozwiązania
+  statement: Wykres funkcji liniowej f przechodzi przez punkt P = (2, 4), przecina oś OX w punkcie A oraz
+    oś OY w punkcie B. Funkcja f jest malejąca, pole trójkąta o wierzchołkach A, B i O = (0, 0) jest równe
+    18, a trójkąt AOB nie jest trójkątem równoramiennym. Wyznacz wzór funkcji f. Zapisz obliczenia.
+  statement_latex: f\left(x\right) = a\cdot x + b,\qquad P = \left(2,\ 4\right),\qquad P_{AOB} = 18
+  solution: |-
+    Niech f\left(x\right) = a\cdot x + b. Z warunku P należy do wykresu: 4 = 2\cdot a + b, czyli b = 4 - 2\cdot a.
+    Funkcja jest malejąca, więc a < 0; wtedy b = 4 - 2\cdot a > 0 oraz miejsce zerowe x_0 = -\frac{b}{a} > 0.
+    A = \left(-\frac{b}{a},\ 0\right), B = \left(0,\ b\right), a trójkąt AOB ma kąt prosty w O, więc
+    P_{AOB} = \frac{1}{2}\cdot\left(-\frac{b}{a}\right)\cdot b = -\frac{b^{2}}{2\cdot a} = 18, czyli b^{2} = -36\cdot a.
+    Podstawiamy b = 4 - 2\cdot a: \left(4 - 2\cdot a\right)^{2} = -36\cdot a, czyli 4\cdot a^{2} - 16\cdot a + 16 + 36\cdot a = 0, a stąd 4\cdot a^{2} + 20\cdot a + 16 = 0, czyli a^{2} + 5\cdot a + 4 = 0.
+    \Delta = 25 - 16 = 9, więc a = -4 albo a = -1 (oba są ujemne).
+    Dla a = -1: b = 6, A = \left(6,\ 0\right), B = \left(0,\ 6\right), więc \left|OA\right| = \left|OB\right| = 6 — trójkąt jest równoramienny, tę wartość odrzucamy.
+    Dla a = -4: b = 4 - 2\cdot\left(-4\right) = 12, A = \left(3,\ 0\right), B = \left(0,\ 12\right); \left|OA\right| = 3, \left|OB\right| = 12, \left|AB\right| = \sqrt{153}, więc trójkąt nie jest równoramienny.
+    Sprawdzenie pola: \frac{1}{2}\cdot 3\cdot 12 = 18.
+    Odpowiedź: f\left(x\right) = -4\cdot x + 12.
+  solution_steps:
+  - Przyjmij f\left(x\right) = a\cdot x + b i z warunku 4 = 2\cdot a + b wyznacz b = 4 - 2\cdot a.
+  - Zauważ, że a < 0 (funkcja malejąca), więc b > 0 i miejsce zerowe x_0 = -\frac{b}{a} > 0.
+  - 'Zapisz pole trójkąta prostokątnego AOB: \frac{1}{2}\cdot\left(-\frac{b}{a}\right)\cdot b = 18, czyli
+    b^{2} = -36\cdot a.'
+  - Podstaw b = 4 - 2\cdot a i otrzymaj równanie a^{2} + 5\cdot a + 4 = 0.
+  - 'Rozwiąż je: a = -4 lub a = -1.'
+  - Odrzuć a = -1, bo wtedy \left|OA\right| = \left|OB\right| = 6 i trójkąt AOB jest równoramienny.
+  - Dla a = -4 oblicz b = 12 i zapisz wzór f\left(x\right) = -4\cdot x + 12.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: kandydaci_a
+      answer:
+        kind: SET
+        members:
+        - '-4'
+        - '-1'
+    - name: a
+      answer:
+        kind: NUMERIC
+        value: -4.0
+    - name: b
+      answer:
+        kind: NUMERIC
+        value: 12.0
+    - name: wzor
+      answer:
+        kind: SYMBOLIC
+        latex: f\left(x\right) = -4\cdot x + 12
+  checks:
+  - kind: solve_equation
+    expr: a^{2} + 5\cdot a + 4 = 0
+    var: a
+    part: kandydaci_a
+  - kind: evaluate
+    expr: 4 - 2\cdot\left(-4\right)
+    var: a
+    part: b
+  stated_model:
+    variable: a
+    objective_latex: P\left(a\right) = -\frac{\left(4 - 2\cdot a\right)^{2}}{2\cdot a} = 18
+    domain_hi: '0'
+    goal: value
+    constraint_used: a < 0 oraz \left|OA\right| \neq \left|OB\right|
+  skills:
+  - punkt należący do wykresu
+  - miejsce zerowe i punkt przecięcia z OY
+  - pole trójkąta o wierzchołkach na osiach
+  - rozwiązywanie równania kwadratowego
+  - odrzucanie rozwiązania niespełniającego warunku
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (PARSE_ERROR: "UnexpectedCharacters: No terminal
+      matches ''='' in the current parser context, at line 1 col 74") — human review'
+- id: g-ch-t04
+  slot: CHALLENGE
+  ramp_index: 2
+  difficulty: 5
+  exercise_type: 'modelowanie funkcją liniową: wzór, dziedzina i kontrola ograniczenia'
+  statement: Do pustoszejącego basenu ogrodowego w kształcie prostopadłościanu o wymiarach dna 2 m × 1,5
+    m i wysokości 1,8 m wlewa się wodę ze stałą wydajnością. W chwili rozpoczęcia nalewania (t = 0) wysokość
+    słupa wody wynosiła 20 cm, a po 12 minutach nalewania — 50 cm. Wysokość h słupa wody (w centymetrach)
+    jest funkcją liniową czasu t nalewania (w minutach). a) Wyznacz wzór funkcji h oraz jej dziedzinę,
+    czyli przedział czasu, w którym ten wzór opisuje napełnianie tego zbiornika (od chwili t = 0 do chwili,
+    w której woda sięgnie górnej krawędzi zbiornika). b) Oblicz, po ilu minutach od rozpoczęcia nalewania
+    woda sięgnie górnej krawędzi zbiornika, i rozstrzygnij, czy przy nieprzerwanym nalewaniu woda zacznie
+    się przelewać przed upływem 70 minut. Zapisz obliczenia.
+  statement_latex: h\left(t\right) = a\cdot t + b,\qquad h\left(0\right) = 20,\qquad h\left(12\right)
+    = 50,\qquad h\left(t\right) \le 180
+  solution: |-
+    Przyjmujemy h\left(t\right) = a\cdot t + b, gdzie t — czas w minutach, h — wysokość w centymetrach.
+    Z warunku h\left(0\right) = 20 mamy b = 20.
+    Z warunku h\left(12\right) = 50: a = \frac{50 - 20}{12 - 0} = \frac{30}{12} = \frac{5}{2}, czyli woda przybywa o 2,5 cm na minutę.
+    Zatem h\left(t\right) = \frac{5}{2}\cdot t + 20.
+    Wysokość zbiornika to 1,8 m = 180 cm, więc wzór opisuje napełnianie dopóki h\left(t\right) \le 180.
+    Rozwiązujemy \frac{5}{2}\cdot t + 20 = 180: \frac{5}{2}\cdot t = 160, stąd t = 64.
+    Dziedziną jest więc przedział \left\langle 0,\ 64 \right\rangle (t w minutach).
+    Woda sięgnie górnej krawędzi po 64 minutach, a ponieważ 64 < 70, przy nieprzerwanym nalewaniu woda zacznie się przelewać przed upływem 70 minut.
+    Sprawdzenie: h\left(64\right) = \frac{5}{2}\cdot 64 + 20 = 160 + 20 = 180.
+  solution_steps:
+  - Wprowadź zmienną t (czas w minutach) i przyjmij h\left(t\right) = a\cdot t + b, gdzie h jest wysokością
+    w centymetrach.
+  - Z warunku h\left(0\right) = 20 odczytaj b = 20.
+  - Oblicz a = \frac{50 - 20}{12 - 0} = \frac{5}{2}.
+  - Zapisz wzór h\left(t\right) = \frac{5}{2}\cdot t + 20.
+  - 'Zamień wysokość zbiornika na centymetry: 1,8 m = 180 cm, i rozwiąż \frac{5}{2}\cdot t + 20 = 180,
+    otrzymując t = 64.'
+  - 'Zapisz dziedzinę \left\langle 0,\ 64 \right\rangle i porównaj 64 z 70: 64 < 70, więc woda zacznie
+    się przelewać przed upływem 70 minut.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: a
+      answer:
+        kind: NUMERIC
+        value: 2.5
+    - name: wzor
+      answer:
+        kind: SYMBOLIC
+        latex: h\left(t\right) = \frac{5}{2}\cdot t + 20
+    - name: dziedzina
+      answer:
+        kind: INTERVAL
+        lo: '0'
+        hi: '64'
+        lo_open: false
+        hi_open: false
+    - name: t_krawedz
+      answer:
+        kind: NUMERIC
+        value: 64.0
+    - name: czy_przeleje_przed_70
+      answer:
+        kind: BOOLEAN
+        truth: true
+  checks:
+  - kind: evaluate
+    expr: \frac{50 - 20}{12 - 0}
+    var: t
+    part: a
+  - kind: solve_equation
+    expr: \frac{5}{2}\cdot t + 20 = 180
+    var: t
+    part: t_krawedz
+  stated_model:
+    variable: t
+    objective_latex: h\left(t\right) = \frac{5}{2}\cdot t + 20
+    domain_lo: '0'
+    domain_hi: '64'
+    domain_lo_open: false
+    domain_hi_open: false
+    goal: value
+    constraint_used: 20 \le h\left(t\right) \le 180
+  skills:
+  - układanie wzoru funkcji liniowej z dwóch danych
+  - interpretacja współczynnika kierunkowego jako tempa zmian
+  - wyznaczanie dziedziny z warunków zadania
+  - rozwiązywanie równania liniowego
+  - kontrola warunku brzegowego
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''t'': ''h\\left(t\\right)
+      = \\frac{5}{2}\\cdot t + 20'') — human review'

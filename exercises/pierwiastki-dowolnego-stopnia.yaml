@@ -1,0 +1,745 @@
+section: pierwiastki-dowolnego-stopnia
+name: Pierwiastki dowolnego stopnia
+scope: Properties of roots of any degree, including odd-degree roots of negative numbers; simplifying
+  root expressions.
+requirements:
+- I.3
+counts:
+  total: 16
+  DETERMINISTIC: 10
+  REFERENCE_CALL: 3
+  NOT_MACHINE_CHECKABLE: 3
+exercises:
+- id: g-th-00
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: obliczanie pierwiastka dowolnego stopnia
+  statement: 'Oblicz: a) \sqrt[3]{-64}, b) \sqrt[4]{625}.'
+  statement_latex: \text{a) } \sqrt[3]{-64}, \qquad \text{b) } \sqrt[4]{625}
+  solution: |-
+    a) Stopień pierwiastka wynosi 3, jest więc nieparzysty — pierwiastek z liczby ujemnej istnieje i ma ten sam znak co liczba podpierwiastkowa. Korzystamy ze wzoru \sqrt[3]{-a}=-\sqrt[3]{a}: \sqrt[3]{-64}=-\sqrt[3]{64}. Ponieważ 64=4^{3}, mamy \sqrt[3]{64}=4, czyli \sqrt[3]{-64}=-4. Sprawdzenie: \left(-4\right)^{3}=-64.
+    b) Stopień 4 jest parzysty, a liczba podpierwiastkowa jest dodatnia, więc pierwiastek istnieje i jest liczbą nieujemną. Ponieważ 625=5^{4}, otrzymujemy \sqrt[4]{625}=5 (a nie \pm 5). Sprawdzenie: 5^{4}=625.
+  solution_steps:
+  - Sprawdź parzystość stopnia pierwiastka w każdym podpunkcie.
+  - 'a) stopień 3 nieparzysty: \sqrt[3]{-64}=-\sqrt[3]{64}.'
+  - Zauważ, że 64=4^{3}, więc \sqrt[3]{64}=4 i \sqrt[3]{-64}=-4.
+  - 'b) stopień 4 parzysty, liczba podpierwiastkowa dodatnia: szukamy liczby nieujemnej.'
+  - Zauważ, że 625=5^{4}, więc \sqrt[4]{625}=5.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: a
+      answer:
+        kind: NUMERIC
+        value: -4.0
+        latex: '-4'
+    - name: b
+      answer:
+        kind: NUMERIC
+        value: 5.0
+        latex: '5'
+  checks:
+  - kind: evaluate
+    expr: -\sqrt[3]{64}
+    part: a
+  - kind: evaluate
+    expr: \sqrt[4]{625}
+    part: b
+  skills:
+  - definicja pierwiastka stopnia n
+  - pierwiastek stopnia nieparzystego z liczby ujemnej
+  - rozkład na czynniki pierwsze
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [a] SymPy solved it fresh: -4.0 vs -4.0 (tol 1e-09) ; [b] SymPy
+      solved it fresh: 5.0 vs 5.0 (tol 1e-09)'
+- id: g-th-01
+  slot: THEORY_SUPPORT
+  ramp_index: 1
+  difficulty: 2
+  exercise_type: wyłączanie czynnika przed znak pierwiastka
+  statement: Wyłącz czynnik przed znak pierwiastka i zapisz liczbę \sqrt[3]{40} w postaci najprostszej.
+  statement_latex: \sqrt[3]{40}
+  solution: 'Pod pierwiastkiem stopnia trzeciego szukamy czynnika będącego sześcianem. Rozkładamy liczbę
+    podpierwiastkową na czynniki pierwsze: 40=2^{3}\cdot 5. Wykładnik przy dwójce jest podzielny przez
+    3, więc dwójkę wyprowadzamy przed pierwiastek: \sqrt[3]{40}=\sqrt[3]{2^{3}\cdot 5}=2\cdot\sqrt[3]{5}.
+    Pod pierwiastkiem została liczba 5, która nie ma już dzielnika będącego sześcianem, więc postać 2\sqrt[3]{5}
+    jest najprostsza. Sprawdzenie: \left(2\cdot\sqrt[3]{5}\right)^{3}=8\cdot 5=40.'
+  solution_steps:
+  - 'Rozłóż liczbę podpierwiastkową na czynniki pierwsze: 40=2^{3}\cdot 5.'
+  - Zastosuj wzór \sqrt[3]{k^{3}\cdot b}=k\cdot\sqrt[3]{b} dla k=2, b=5.
+  - 'Zapisz wynik: \sqrt[3]{40}=2\cdot\sqrt[3]{5}.'
+  - Sprawdź, że pod pierwiastkiem nie ma już czynnika będącego sześcianem.
+  answer:
+    kind: SYMBOLIC
+    latex: 2\cdot\sqrt[3]{5}
+  checks:
+  - kind: simplify
+    expr: \sqrt[3]{40}
+  skills:
+  - wyłączanie czynnika przed pierwiastek
+  - rozkład na czynniki pierwsze
+  - postać najprostsza wyrażenia pierwiastkowego
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: ''2\\cdot\\sqrt[3]{5}'' vs ''2*5**(1/3)'''
+- id: g-th-02
+  slot: THEORY_SUPPORT
+  ramp_index: 2
+  difficulty: 2
+  exercise_type: własności pierwiastków
+  statement: 'Oblicz: a) \sqrt[4]{2}\cdot\sqrt[4]{128}, b) \sqrt{\sqrt[3]{64}}.'
+  statement_latex: \text{a) } \sqrt[4]{2}\cdot\sqrt[4]{128}, \qquad \text{b) } \sqrt{\sqrt[3]{64}}
+  solution: |-
+    a) Oba pierwiastki mają ten sam stopień 4, a liczby podpierwiastkowe są dodatnie, więc wolno zastosować wzór \sqrt[n]{a}\cdot\sqrt[n]{b}=\sqrt[n]{a\cdot b}: \sqrt[4]{2}\cdot\sqrt[4]{128}=\sqrt[4]{2\cdot 128}=\sqrt[4]{256}. Ponieważ 256=4^{4}, otrzymujemy \sqrt[4]{256}=4.
+    b) Korzystamy ze wzoru \sqrt[m]{\sqrt[n]{a}}=\sqrt[m\cdot n]{a}: \sqrt{\sqrt[3]{64}}=\sqrt[6]{64}. Ponieważ 64=2^{6}, mamy \sqrt[6]{64}=2. Można też krócej: \sqrt[3]{64}=4, a \sqrt{4}=2.
+  solution_steps:
+  - a) Sprawdź, że stopnie pierwiastków są równe (oba stopnia 4).
+  - 'Połącz je w jeden pierwiastek: \sqrt[4]{2\cdot 128}=\sqrt[4]{256}.'
+  - Zauważ, że 256=4^{4}, więc wynik to 4.
+  - 'b) Zastosuj wzór na pierwiastek z pierwiastka: \sqrt{\sqrt[3]{64}}=\sqrt[6]{64}.'
+  - Zauważ, że 64=2^{6}, więc wynik to 2.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: a
+      answer:
+        kind: NUMERIC
+        value: 4.0
+        latex: '4'
+    - name: b
+      answer:
+        kind: NUMERIC
+        value: 2.0
+        latex: '2'
+  checks:
+  - kind: evaluate
+    expr: \sqrt[4]{2}\cdot\sqrt[4]{128}
+    part: a
+  - kind: evaluate
+    expr: \sqrt{\sqrt[3]{64}}
+    part: b
+  skills:
+  - pierwiastek z iloczynu
+  - pierwiastek z pierwiastka
+  - obliczanie pierwiastków
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [a] SymPy solved it fresh: 4.0 vs 4.0 (tol 1e-09) ; [b] SymPy
+      solved it fresh: 2.0 vs 2.0 (tol 1e-09)'
+- id: g-ex-03
+  slot: EXERCISE
+  ramp_index: 1
+  difficulty: 2
+  exercise_type: redukcja sumy wyrażeń pierwiastkowych
+  statement: Uprość wyrażenie \sqrt[3]{128}-2\cdot\sqrt[3]{54}+\sqrt[3]{250}.
+  statement_latex: \sqrt[3]{128}-2\cdot\sqrt[3]{54}+\sqrt[3]{250}
+  solution: |-
+    Wszystkie pierwiastki są stopnia trzeciego, więc po wyłączeniu czynników przed pierwiastek mogą okazać się podobne.
+    128=2^{7}=\left(2^{2}\right)^{3}\cdot 2=4^{3}\cdot 2, więc \sqrt[3]{128}=4\cdot\sqrt[3]{2}.
+    54=27\cdot 2=3^{3}\cdot 2, więc \sqrt[3]{54}=3\cdot\sqrt[3]{2}, czyli 2\cdot\sqrt[3]{54}=6\cdot\sqrt[3]{2}.
+    250=125\cdot 2=5^{3}\cdot 2, więc \sqrt[3]{250}=5\cdot\sqrt[3]{2}.
+    Wszystkie składniki mają teraz ten sam stopień i tę samą liczbę podpierwiastkową, więc dodajemy współczynniki: 4\cdot\sqrt[3]{2}-6\cdot\sqrt[3]{2}+5\cdot\sqrt[3]{2}=\left(4-6+5\right)\cdot\sqrt[3]{2}=3\cdot\sqrt[3]{2}.
+  solution_steps:
+  - Sprawdź, że wszystkie pierwiastki są stopnia 3.
+  - 'Wyłącz czynniki przed pierwiastek: \sqrt[3]{128}=4\sqrt[3]{2}, \sqrt[3]{54}=3\sqrt[3]{2}, \sqrt[3]{250}=5\sqrt[3]{2}.'
+  - 'Uwzględnij współczynnik: 2\cdot\sqrt[3]{54}=6\cdot\sqrt[3]{2}.'
+  - 'Zredukuj wyrazy podobne: \left(4-6+5\right)\cdot\sqrt[3]{2}.'
+  - 'Zapisz wynik: 3\cdot\sqrt[3]{2}.'
+  answer:
+    kind: SYMBOLIC
+    latex: 3\cdot\sqrt[3]{2}
+  checks:
+  - kind: simplify
+    expr: \sqrt[3]{128}-2\cdot\sqrt[3]{54}+\sqrt[3]{250}
+  skills:
+  - wyłączanie czynnika przed pierwiastek
+  - pierwiastki podobne
+  - redukcja wyrazów podobnych
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: ''3\\cdot\\sqrt[3]{2}'' vs ''3*2**(1/3)'''
+- id: g-ex-04
+  slot: EXERCISE
+  ramp_index: 2
+  difficulty: 3
+  exercise_type: usuwanie niewymierności z mianownika
+  statement: 'Usuń niewymierność z mianownika i zapisz wynik w postaci najprostszej: a) \frac{12}{\sqrt[3]{2}},
+    b) \frac{6}{\sqrt[4]{27}}.'
+  statement_latex: \text{a) } \frac{12}{\sqrt[3]{2}}, \qquad \text{b) } \frac{6}{\sqrt[4]{27}}
+  solution: |-
+    a) W mianowniku stoi \sqrt[3]{2^{1}}. Aby dopełnić wykładnik do 3, mnożymy licznik i mianownik przez \sqrt[3]{2^{2}}=\sqrt[3]{4}:
+    \frac{12}{\sqrt[3]{2}}=\frac{12\cdot\sqrt[3]{4}}{\sqrt[3]{2}\cdot\sqrt[3]{4}}=\frac{12\cdot\sqrt[3]{4}}{\sqrt[3]{8}}=\frac{12\cdot\sqrt[3]{4}}{2}=6\cdot\sqrt[3]{4}.
+    b) Zapisujemy mianownik jako potęgę trójki: 27=3^{3}, więc \sqrt[4]{27}=\sqrt[4]{3^{3}}. Brakuje jednej trójki do 3^{4}, więc mnożymy licznik i mianownik przez \sqrt[4]{3}:
+    \frac{6}{\sqrt[4]{3^{3}}}=\frac{6\cdot\sqrt[4]{3}}{\sqrt[4]{3^{4}}}=\frac{6\cdot\sqrt[4]{3}}{3}=2\cdot\sqrt[4]{3}.
+    W obu przypadkach mianownik jest liczbą wymierną, a pod pierwiastkiem nie ma czynników będących odpowiednio sześcianem ani czwartą potęgą.
+  solution_steps:
+  - a) Zauważ, że mianownik to \sqrt[3]{2^{1}} — brakuje wykładnika 2 do stopnia 3.
+  - Pomnóż licznik i mianownik przez \sqrt[3]{2^{2}}=\sqrt[3]{4}.
+  - 'Uprość mianownik: \sqrt[3]{2}\cdot\sqrt[3]{4}=\sqrt[3]{8}=2, skróć ułamek i otrzymaj 6\cdot\sqrt[3]{4}.'
+  - b) Zapisz 27=3^{3}, czyli \sqrt[4]{27}=\sqrt[4]{3^{3}}.
+  - Pomnóż licznik i mianownik przez \sqrt[4]{3}, aby otrzymać \sqrt[4]{3^{4}}=3.
+  - 'Skróć ułamek: \frac{6\cdot\sqrt[4]{3}}{3}=2\cdot\sqrt[4]{3}.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: a
+      answer:
+        kind: SYMBOLIC
+        latex: 6\cdot\sqrt[3]{4}
+    - name: b
+      answer:
+        kind: SYMBOLIC
+        latex: 2\cdot\sqrt[4]{3}
+  checks:
+  - kind: simplify
+    expr: \frac{12}{\sqrt[3]{2}}
+    part: a
+  - kind: simplify
+    expr: \frac{6}{\sqrt[4]{27}}
+    part: b
+  skills:
+  - usuwanie niewymierności przy pierwiastku stopnia n
+  - dobór czynnika dopełniającego wykładnik
+  - postać najprostsza
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [a] SymPy solved it fresh: ''6\\cdot\\sqrt[3]{4}'' vs ''6*2**(2/3)''
+      ; [b] SymPy solved it fresh: ''2\\cdot\\sqrt[4]{3}'' vs ''2*3**(1/4)'''
+- id: g-ex-05
+  slot: EXERCISE
+  ramp_index: 3
+  difficulty: 4
+  exercise_type: upraszczanie wyrażenia pierwiastkowego z parametrem
+  statement: Dane jest wyrażenie W\left(x\right)=\sqrt[4]{81\cdot x^{4}}+\sqrt[3]{-27\cdot x^{3}}-2\cdot
+    x, gdzie x jest dowolną liczbą rzeczywistą. Zapisz W\left(x\right) w postaci bez pierwiastków osobno
+    dla x\geqslant 0 i osobno dla x<0, a następnie oblicz W\left(-2\right).
+  statement_latex: W\left(x\right)=\sqrt[4]{81\cdot x^{4}}+\sqrt[3]{-27\cdot x^{3}}-2\cdot x
+  solution: |-
+    Pierwszy składnik ma stopień 4 (parzysty): \sqrt[4]{81\cdot x^{4}}=\sqrt[4]{\left(3\cdot x\right)^{4}}=\left|3\cdot x\right|=3\cdot\left|x\right|. Wartości bezwzględnej nie wolno pominąć, bo wynik pierwiastka parzystego stopnia jest nieujemny.
+    Drugi składnik ma stopień 3 (nieparzysty): \sqrt[3]{-27\cdot x^{3}}=\sqrt[3]{\left(-3\cdot x\right)^{3}}=-3\cdot x, tutaj wartość bezwzględna nie występuje.
+    Zatem W\left(x\right)=3\cdot\left|x\right|-3\cdot x-2\cdot x=3\cdot\left|x\right|-5\cdot x.
+    Dla x\geqslant 0 mamy \left|x\right|=x, więc W\left(x\right)=3\cdot x-5\cdot x=-2\cdot x.
+    Dla x<0 mamy \left|x\right|=-x, więc W\left(x\right)=-3\cdot x-5\cdot x=-8\cdot x.
+    Dla x=-2 korzystamy z drugiego wzoru: W\left(-2\right)=-8\cdot\left(-2\right)=16. Sprawdzenie bezpośrednie: \sqrt[4]{81\cdot 16}+\sqrt[3]{-27\cdot\left(-8\right)}-2\cdot\left(-2\right)=\sqrt[4]{1296}+\sqrt[3]{216}+4=6+6+4=16.
+  solution_steps:
+  - 'Zapisz 81\cdot x^{4}=\left(3\cdot x\right)^{4} i zastosuj \sqrt[4]{a^{4}}=\left|a\right|: pierwszy
+    składnik to 3\cdot\left|x\right|.'
+  - 'Zapisz -27\cdot x^{3}=\left(-3\cdot x\right)^{3} i zastosuj \sqrt[3]{a^{3}}=a: drugi składnik to
+    -3\cdot x.'
+  - 'Zsumuj: W\left(x\right)=3\cdot\left|x\right|-5\cdot x.'
+  - 'Dla x\geqslant 0 opuść wartość bezwzględną: W\left(x\right)=-2\cdot x.'
+  - 'Dla x<0 zastosuj \left|x\right|=-x: W\left(x\right)=-8\cdot x.'
+  - 'Podstaw x=-2 do wzoru dla x<0: W\left(-2\right)=16.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wzor dla x>=0
+      answer:
+        kind: SYMBOLIC
+        latex: -2\cdot x
+    - name: wzor dla x<0
+      answer:
+        kind: SYMBOLIC
+        latex: -8\cdot x
+    - name: W(-2)
+      answer:
+        kind: NUMERIC
+        value: 16.0
+        latex: '16'
+  checks:
+  - kind: evaluate
+    expr: \sqrt[4]{81\cdot\left(-2\right)^{4}}+\sqrt[3]{216}-2\cdot\left(-2\right)
+    part: W(-2)
+  skills:
+  - \sqrt[n]{a^{n}} dla n parzystego i nieparzystego
+  - wartość bezwzględna
+  - rozważanie przypadków
+  - obliczanie wartości wyrażenia
+  verification:
+    checkability: REFERENCE_CALL
+    note: '3 parts matched · det: [W(-2)] SymPy solved it fresh: 16.0 vs 16.0 (tol 1e-09)'
+- id: g-ex-t00
+  slot: EXERCISE
+  ramp_index: 6
+  difficulty: 3
+  exercise_type: upraszczanie wyrażenia pierwiastkowego
+  statement: Oblicz wartość wyrażenia \[W=\sqrt[3]{54}-\sqrt[3]{16}+\frac{6}{\sqrt[3]{4}}.\] Wynik zapisz
+    w najprostszej postaci (bez pierwiastka w mianowniku i bez czynnika będącego sześcianem pod pierwiastkiem).
+  statement_latex: W=\sqrt[3]{54}-\sqrt[3]{16}+\frac{6}{\sqrt[3]{4}}
+  solution: |-
+    Wszystkie pierwiastki są stopnia trzeciego, więc pod pierwiastkiem szukamy sześcianów.
+
+    1) \(54=27\cdot 2=3^{3}\cdot 2\), zatem \(\sqrt[3]{54}=3\cdot\sqrt[3]{2}\).
+
+    2) \(16=8\cdot 2=2^{3}\cdot 2\), zatem \(\sqrt[3]{16}=2\cdot\sqrt[3]{2}\).
+
+    3) W trzecim składniku usuwamy niewymierność z mianownika. Mianownik to \(\sqrt[3]{4}=\sqrt[3]{2^{2}}\); aby dopełnić wykładnik do 3, mnożymy licznik i mianownik przez \(\sqrt[3]{2}\):
+    \[\frac{6}{\sqrt[3]{4}}=\frac{6\cdot\sqrt[3]{2}}{\sqrt[3]{4}\cdot\sqrt[3]{2}}=\frac{6\cdot\sqrt[3]{2}}{\sqrt[3]{8}}=\frac{6\cdot\sqrt[3]{2}}{2}=3\cdot\sqrt[3]{2}.\]
+
+    4) Wszystkie składniki są teraz pierwiastkami podobnymi (stopień 3, liczba podpierwiastkowa 2):
+    \[W=3\cdot\sqrt[3]{2}-2\cdot\sqrt[3]{2}+3\cdot\sqrt[3]{2}=\left(3-2+3\right)\cdot\sqrt[3]{2}=4\cdot\sqrt[3]{2}.\]
+
+    Odpowiedź: \(W=4\sqrt[3]{2}\).
+  solution_steps:
+  - 'Rozłóż liczby podpierwiastkowe: 54=3^3·2 oraz 16=2^3·2.'
+  - 'Wyłącz czynniki przed pierwiastek: ∛54=3∛2, ∛16=2∛2.'
+  - 'Usuń niewymierność: pomnóż licznik i mianownik ułamka 6/∛4 przez ∛2, otrzymując 3∛2.'
+  - 'Zredukuj pierwiastki podobne: (3−2+3)∛2.'
+  - 'Zapisz wynik: 4∛2.'
+  answer:
+    kind: SYMBOLIC
+    latex: 4\sqrt[3]{2}
+  checks:
+  - kind: evaluate
+    expr: \sqrt[3]{54}-\sqrt[3]{16}+\frac{6}{\sqrt[3]{4}}
+  skills:
+  - wyłączanie czynnika przed pierwiastek stopnia n
+  - usuwanie niewymierności z mianownika
+  - redukcja pierwiastków podobnych
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 5.039684199579493 vs 5.039684199579493 (tol 1e-09)'
+- id: g-ex-t01
+  slot: EXERCISE
+  ramp_index: 7
+  difficulty: 4
+  exercise_type: wyrażenie pierwiastkowe z parametrem, wartość bezwzględna
+  statement: |-
+    Dane jest wyrażenie \[W\left(x\right)=\sqrt[6]{64\cdot x^{6}}-\sqrt[5]{-32\cdot x^{5}},\] gdzie \(x\) jest dowolną liczbą rzeczywistą.
+    a) Zapisz \(W\left(x\right)\) w postaci niezawierającej pierwiastków — osobno dla \(x\ge 0\) i osobno dla \(x<0\).
+    b) Oblicz \(W\left(2\right)\) oraz \(W\left(-3\right)\).
+  statement_latex: W\left(x\right)=\sqrt[6]{64\cdot x^{6}}-\sqrt[5]{-32\cdot x^{5}}
+  solution: |-
+    Pierwszy składnik: stopień 6 jest parzysty, a \(64\cdot x^{6}=\left(2x\right)^{6}\), więc
+    \[\sqrt[6]{64\cdot x^{6}}=\left|2x\right|=2\left|x\right|.\]
+    Drugi składnik: stopień 5 jest nieparzysty, a \(-32\cdot x^{5}=\left(-2x\right)^{5}\), więc
+    \[\sqrt[5]{-32\cdot x^{5}}=-2x\]
+    (bez wartości bezwzględnej i bez ograniczeń na \(x\)).
+    Stąd
+    \[W\left(x\right)=2\left|x\right|-\left(-2x\right)=2\left|x\right|+2x.\]
+    a) Dla \(x\ge 0\): \(\left|x\right|=x\), więc \(W\left(x\right)=2x+2x=4x\).
+    Dla \(x<0\): \(\left|x\right|=-x\), więc \(W\left(x\right)=-2x+2x=0\).
+    b) \(W\left(2\right)=4\cdot 2=8\) (sprawdzenie: \(\sqrt[6]{64\cdot 64}-\sqrt[5]{-32\cdot 32}=4-\left(-4\right)=8\)).
+    \(W\left(-3\right)=0\) (sprawdzenie: \(\sqrt[6]{64\cdot 729}-\sqrt[5]{-32\cdot\left(-243\right)}=6-6=0\)).
+  solution_steps:
+  - 'Zauważ, że 64·x⁶=(2x)⁶ i zastosuj ⁶√(a⁶)=|a| (stopień parzysty): ⁶√(64x⁶)=2|x|.'
+  - 'Zauważ, że −32·x⁵=(−2x)⁵ i zastosuj ⁵√(a⁵)=a (stopień nieparzysty): ⁵√(−32x⁵)=−2x.'
+  - Zapisz W(x)=2|x|+2x.
+  - 'Dla x≥0 opuść wartość bezwzględną: W(x)=4x.'
+  - 'Dla x<0 podstaw |x|=−x: W(x)=0.'
+  - Oblicz W(2)=8 oraz W(−3)=0.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: W_dla_x_nieujemnych
+      answer:
+        kind: SYMBOLIC
+        latex: 4x
+    - name: W_dla_x_ujemnych
+      answer:
+        kind: SYMBOLIC
+        latex: '0'
+    - name: W_w_2
+      answer:
+        kind: NUMERIC
+        value: 8.0
+    - name: W_w_minus3
+      answer:
+        kind: NUMERIC
+        value: 0.0
+  checks:
+  - kind: evaluate
+    expr: 2\cdot\left|2\right|+2\cdot 2
+    part: W_w_2
+  - kind: evaluate
+    expr: 2\cdot\left|-3\right|+2\cdot\left(-3\right)
+    part: W_w_minus3
+  skills:
+  - ⁿ√(aⁿ)=a lub |a| w zależności od parzystości stopnia
+  - wyłączanie czynnika przed pierwiastek
+  - obliczanie wartości wyrażenia z parametrem
+  verification:
+    checkability: REFERENCE_CALL
+    note: 4 parts matched
+- id: g-cm-06
+  slot: COMMON_MISTAKE
+  ramp_index: 4
+  difficulty: 2
+  exercise_type: obliczanie pierwiastków, istnienie pierwiastka
+  statement: 'Oblicz \sqrt[5]{-32}. Następnie rozstrzygnij, czy istnieje liczba rzeczywista równa \sqrt[4]{-81},
+    i uzasadnij odpowiedź. Uczeń rozumował tak: „Skoro \sqrt[3]{-8}=-2, to minus zawsze można wyprowadzić
+    przed pierwiastek, więc \sqrt[4]{-81}=-\sqrt[4]{81}=-3”. Wskaż błąd w tym rozumowaniu.'
+  statement_latex: \sqrt[5]{-32}, \qquad \sqrt[4]{-81}
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: „Reguła \sqrt[n]{-a}=-\sqrt[n]{a} działa zawsze, więc \sqrt[4]{-81}=-\sqrt[4]{81}=-3”. Otrzymana odpowiedź: -3.
+    DLACZEGO JEST BŁĘDNE: sprawdźmy ją zgodnie z definicją pierwiastka: liczba b=\sqrt[4]{-81} musiałaby spełniać b^{4}=-81. Tymczasem \left(-3\right)^{4}=81, a nie -81. Co więcej, każda liczba rzeczywista podniesiona do potęgi parzystej jest nieujemna, więc nie istnieje żadna liczba rzeczywista, której czwarta potęga jest równa -81. Reguła \sqrt[n]{-a}=-\sqrt[n]{a} obowiązuje wyłącznie dla n nieparzystego.
+    POPRAWNE ROZWIĄZANIE: stopień 5 jest nieparzysty, więc \sqrt[5]{-32}=-\sqrt[5]{32}=-2, bo 2^{5}=32 i \left(-2\right)^{5}=-32. Natomiast \sqrt[4]{-81} nie istnieje w zbiorze liczb rzeczywistych, bo stopień pierwiastka jest parzysty, a liczba podpierwiastkowa ujemna.
+  solution_steps:
+  - 'Zapisz definicję: b=\sqrt[n]{a} oznacza b^{n}=a, przy czym dla n parzystego wymagamy a\geqslant 0
+    i b\geqslant 0.'
+  - 'Stopień 5 jest nieparzysty, więc \sqrt[5]{-32}=-\sqrt[5]{32}=-2 (sprawdzenie: \left(-2\right)^{5}=-32).'
+  - 'Pokaż błąd: gdyby \sqrt[4]{-81}=-3, to \left(-3\right)^{4}=-81, a przecież \left(-3\right)^{4}=81.'
+  - 'Uzasadnij ogólnie: każda potęga parzystego stopnia liczby rzeczywistej jest nieujemna.'
+  - 'Wniosek: \sqrt[4]{-81} nie istnieje w zbiorze liczb rzeczywistych.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wartosc piatego pierwiastka z -32
+      answer:
+        kind: NUMERIC
+        value: -2.0
+        latex: '-2'
+    - name: czy istnieje czwarty pierwiastek z -81
+      answer:
+        kind: BOOLEAN
+        latex: \text{nie istnieje w }\mathbb{R}
+        truth: false
+  checks:
+  - kind: evaluate
+    expr: -\sqrt[5]{32}
+    part: wartosc piatego pierwiastka z -32
+  skills:
+  - dziedzina wyrażenia z pierwiastkiem
+  - pierwiastek stopnia nieparzystego z liczby ujemnej
+  - uzasadnianie nieistnienia pierwiastka
+  verification:
+    checkability: REFERENCE_CALL
+    note: '2 parts matched · det: [wartosc piatego pierwiastka z -32] SymPy solved it fresh: -2.0 vs -2.0
+      (tol 1e-09)'
+- id: g-cm-07
+  slot: COMMON_MISTAKE
+  ramp_index: 5
+  difficulty: 3
+  exercise_type: wartość wyrażenia z pierwiastkami parzystego i nieparzystego stopnia
+  statement: 'Oblicz wartość wyrażenia \sqrt[4]{a^{4}}+\sqrt[3]{a^{3}} dla a=-5. Pewien uczeń zapisał:
+    „pierwiastek znosi potęgę, więc \sqrt[4]{a^{4}}=a oraz \sqrt[3]{a^{3}}=a, czyli wartość wyrażenia
+    wynosi 2\cdot a=-10”. Wyjaśnij, na czym polega błąd, i podaj poprawny wynik.'
+  statement_latex: \sqrt[4]{a^{4}}+\sqrt[3]{a^{3}}, \qquad a=-5
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: \sqrt[4]{a^{4}}=a i \sqrt[3]{a^{3}}=a, zatem dla a=-5 wynik to \left(-5\right)+\left(-5\right)=-10.
+    DLACZEGO JEST BŁĘDNE: pierwiastek parzystego stopnia jest z definicji liczbą nieujemną, więc nie może być równy liczbie ujemnej. Policzmy wprost: \left(-5\right)^{4}=625 oraz \sqrt[4]{625}=5, a nie -5. Poprawna zależność to \sqrt[4]{a^{4}}=\left|a\right|, a wzór \sqrt[n]{a^{n}}=a obowiązuje tylko dla n nieparzystego.
+    POPRAWNE ROZWIĄZANIE: \sqrt[4]{a^{4}}=\left|a\right|=\left|-5\right|=5, natomiast \sqrt[3]{a^{3}}=a=-5 (stopień nieparzysty, znak się zachowuje). Zatem \sqrt[4]{\left(-5\right)^{4}}+\sqrt[3]{\left(-5\right)^{3}}=5+\left(-5\right)=0.
+  solution_steps:
+  - 'Przypomnij wzór: \sqrt[n]{a^{n}}=\left|a\right| dla n parzystego oraz \sqrt[n]{a^{n}}=a dla n nieparzystego.'
+  - 'Pokaż błąd: \left(-5\right)^{4}=625, a \sqrt[4]{625}=5\neq -5.'
+  - 'Oblicz poprawnie pierwszy składnik: \sqrt[4]{\left(-5\right)^{4}}=\left|-5\right|=5.'
+  - 'Oblicz drugi składnik: \sqrt[3]{\left(-5\right)^{3}}=-\sqrt[3]{125}=-5.'
+  - 'Dodaj: 5+\left(-5\right)=0.'
+  answer:
+    kind: NUMERIC
+    value: 0.0
+    latex: '0'
+  checks:
+  - kind: evaluate
+    expr: \sqrt[4]{\left(-5\right)^{4}}-\sqrt[3]{125}
+  skills:
+  - \sqrt[n]{a^{n}}=|a| dla n parzystego
+  - \sqrt[n]{a^{n}}=a dla n nieparzystego
+  - obliczanie wartości wyrażenia
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 0.0 vs 0.0 (tol 1e-09)'
+- id: g-cm-08
+  slot: COMMON_MISTAKE
+  ramp_index: 6
+  difficulty: 2
+  exercise_type: pierwiastek a rozwiązania równania
+  statement: 'Rozwiąż równanie x^{4}=81, a następnie oblicz \sqrt[4]{81}. Uczeń napisał: „skoro 3^{4}=81
+    i \left(-3\right)^{4}=81, to \sqrt[4]{81}=\pm 3”. Wyjaśnij, dlaczego taki zapis jest niepoprawny.'
+  statement_latex: x^{4}=81, \qquad \sqrt[4]{81}
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: „\sqrt[4]{81}=\pm 3, bo obie liczby podniesione do czwartej potęgi dają 81”. Otrzymana odpowiedź: \pm 3.
+    DLACZEGO JEST BŁĘDNE: symbol \sqrt[4]{81} oznacza dokładnie jedną liczbę — tę nieujemną, której czwarta potęga wynosi 81. Znak \pm pojawia się dopiero przy rozwiązywaniu równania, gdzie szukamy wszystkich x spełniających warunek, a nie wartości symbolu pierwiastka.
+    POPRAWNE ROZWIĄZANIE: równanie x^{4}=81 zapisujemy jako x^{4}-81=0, czyli \left(x^{2}-9\right)\cdot\left(x^{2}+9\right)=0. Ponieważ x^{2}+9>0 dla każdego x, otrzymujemy x^{2}=9, czyli x=3 lub x=-3. Zbiór rozwiązań to \left\{-3,\ 3\right\}. Natomiast \sqrt[4]{81}=3, bo 3\geqslant 0 oraz 3^{4}=81.
+  solution_steps:
+  - 'Rozwiąż równanie: x^{4}-81=\left(x^{2}-9\right)\cdot\left(x^{2}+9\right)=0.'
+  - Zauważ, że x^{2}+9>0, więc x^{2}=9 i x\in\left\{-3,\ 3\right\}.
+  - 'Przypomnij definicję: \sqrt[4]{81} to jedyna liczba nieujemna b, dla której b^{4}=81.'
+  - 'Wskaż błąd: zapis \pm 3 miesza zbiór rozwiązań równania z wartością pierwiastka.'
+  - 'Podaj wartość: \sqrt[4]{81}=3.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: rozwiazania rownania
+      answer:
+        kind: SET
+        latex: \left\{-3,\ 3\right\}
+        members:
+        - '-3'
+        - '3'
+    - name: wartosc pierwiastka
+      answer:
+        kind: NUMERIC
+        value: 3.0
+        latex: '3'
+  checks:
+  - kind: solve_equation
+    expr: x^{4}=81
+    part: rozwiazania rownania
+  - kind: evaluate
+    expr: \sqrt[4]{81}
+    part: wartosc pierwiastka
+  skills:
+  - definicja pierwiastka parzystego stopnia
+  - rozwiązywanie równania x^{4}=a
+  - odróżnianie wartości pierwiastka od zbioru rozwiązań
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [rozwiazania rownania] SymPy solved it fresh: 2 members matched
+      ; [wartosc pierwiastka] SymPy solved it fresh: 3.0 vs 3.0 (tol 1e-09)'
+- id: g-cm-09
+  slot: COMMON_MISTAKE
+  ramp_index: 7
+  difficulty: 2
+  exercise_type: pierwiastek z sumy — kontrprzykład
+  statement: 'Oblicz \sqrt[3]{27+37}. Uczeń zapisał: „\sqrt[3]{27+37}=\sqrt[3]{27}+\sqrt[3]{37}=3+\sqrt[3]{37}”.
+    Wyjaśnij, dlaczego takie przekształcenie jest niepoprawne, i podaj poprawny wynik.'
+  statement_latex: \sqrt[3]{27+37}
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: „pierwiastek rozdziela się na składniki”, czyli \sqrt[3]{27+37}=\sqrt[3]{27}+\sqrt[3]{37}=3+\sqrt[3]{37}\approx 3+3{,}33=6{,}33.
+    DLACZEGO JEST BŁĘDNE: wzory \sqrt[n]{a\cdot b}=\sqrt[n]{a}\cdot\sqrt[n]{b} oraz \sqrt[n]{\frac{a}{b}}=\frac{\sqrt[n]{a}}{\sqrt[n]{b}} dotyczą wyłącznie mnożenia i dzielenia — dla dodawania analogiczny wzór nie zachodzi. Wystarczy jeden kontrprzykład: gdyby był prawdziwy, otrzymalibyśmy około 6{,}33, tymczasem sześcian tej liczby to około 254, a nie 64.
+    POPRAWNE ROZWIĄZANIE: najpierw wykonujemy działanie pod pierwiastkiem: 27+37=64, a następnie \sqrt[3]{64}=4, bo 4^{3}=64.
+  solution_steps:
+  - Zauważ, że wzory na pierwiastek z iloczynu i ilorazu nie mają odpowiednika dla sumy.
+  - 'Wykonaj najpierw dodawanie pod pierwiastkiem: 27+37=64.'
+  - Oblicz \sqrt[3]{64}=4, bo 4^{3}=64.
+  - Porównaj z błędnym wynikiem 3+\sqrt[3]{37}\approx 6{,}33 — to kontrprzykład obalający regułę \sqrt[3]{a+b}=\sqrt[3]{a}+\sqrt[3]{b}.
+  answer:
+    kind: NUMERIC
+    value: 4.0
+    latex: '4'
+  checks:
+  - kind: evaluate
+    expr: \sqrt[3]{27+37}
+  skills:
+  - kolejność działań pod pierwiastkiem
+  - brak rozdzielności pierwiastka względem dodawania
+  - obliczanie pierwiastka stopnia 3
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 4.0 vs 4.0 (tol 1e-09)'
+- id: g-cm-10
+  slot: COMMON_MISTAKE
+  ramp_index: 8
+  difficulty: 3
+  exercise_type: mnożenie pierwiastków różnych stopni
+  statement: 'Zapisz iloczyn \sqrt[3]{5}\cdot\sqrt[6]{5} w postaci jednego pierwiastka o możliwie najmniejszym
+    stopniu. Uczeń zapisał: „mnożę liczby podpierwiastkowe i dodaję stopnie, więc \sqrt[3]{5}\cdot\sqrt[6]{5}=\sqrt[9]{25}”.
+    Wskaż błąd i podaj poprawny wynik.'
+  statement_latex: \sqrt[3]{5}\cdot\sqrt[6]{5}
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: „\sqrt[3]{5}\cdot\sqrt[6]{5}=\sqrt[3+6]{5\cdot 5}=\sqrt[9]{25}”. Otrzymana odpowiedź: \sqrt[9]{25}\approx 1{,}42.
+    DLACZEGO JEST BŁĘDNE: wzór \sqrt[n]{a}\cdot\sqrt[n]{b}=\sqrt[n]{a\cdot b} wymaga, aby oba pierwiastki miały ten sam stopień; stopni nigdy się nie dodaje. Tu stopnie są różne (3 i 6), więc najpierw trzeba sprowadzić je do wspólnego stopnia \mathrm{NWW}\left(3,6\right)=6.
+    POPRAWNE ROZWIĄZANIE: \sqrt[3]{5}=\sqrt[6]{5^{2}}=\sqrt[6]{25} (mnożymy stopień i wykładnik przez 2), a \sqrt[6]{5} pozostaje bez zmian. Zatem \sqrt[3]{5}\cdot\sqrt[6]{5}=\sqrt[6]{25}\cdot\sqrt[6]{5}=\sqrt[6]{125}=\sqrt[6]{5^{3}}=\sqrt[2]{5}=\sqrt{5}. Stopień pierwiastka skróciliśmy z wykładnikiem (dzieląc oba przez 3). Wynik: \sqrt{5}\approx 2{,}24, a więc zupełnie inna liczba niż \sqrt[9]{25}.
+  solution_steps:
+  - Zauważ, że stopnie pierwiastków są różne (3 i 6), więc nie wolno od razu mnożyć liczb podpierwiastkowych.
+  - 'Wyznacz wspólny stopień: \mathrm{NWW}\left(3,6\right)=6.'
+  - 'Zamień: \sqrt[3]{5}=\sqrt[6]{5^{2}}=\sqrt[6]{25}.'
+  - 'Pomnóż pierwiastki tego samego stopnia: \sqrt[6]{25}\cdot\sqrt[6]{5}=\sqrt[6]{125}.'
+  - 'Skróć stopień z wykładnikiem: \sqrt[6]{5^{3}}=\sqrt{5}.'
+  answer:
+    kind: SYMBOLIC
+    latex: \sqrt{5}
+  checks:
+  - kind: simplify
+    expr: \sqrt[3]{5}\cdot\sqrt[6]{5}
+  skills:
+  - sprowadzanie pierwiastków do wspólnego stopnia
+  - pierwiastek z iloczynu
+  - skracanie stopnia pierwiastka
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: ''\\sqrt{5}'' vs ''sqrt(5)'''
+- id: g-ch-t02
+  slot: CHALLENGE
+  ramp_index: 0
+  difficulty: 4
+  exercise_type: modelowanie geometryczne z pierwiastkiem stopnia trzeciego
+  statement: Prostopadłościan ma podstawę, która jest kwadratem, a jego wysokość jest dwa razy większa
+    od krawędzi podstawy. Objętość tego prostopadłościanu jest równa \(32\ \mathrm{cm}^{3}\). Oblicz sumę
+    długości wszystkich krawędzi tego prostopadłościanu. Wynik zapisz w najprostszej postaci.
+  statement_latex: 2\cdot x^{3}=32,\qquad L=8\cdot x+4\cdot\left(2\cdot x\right)=16\cdot x
+  solution: |-
+    Oznaczmy przez \(x\) (w cm) długość krawędzi podstawy, \(x>0\). Wtedy wysokość jest równa \(2x\).
+
+    Objętość: \(V=x^{2}\cdot 2x=2x^{3}\). Z warunku zadania
+    \[2\cdot x^{3}=32,\qquad x^{3}=16,\qquad x=\sqrt[3]{16}.\]
+    Ponieważ \(16=2^{3}\cdot 2\), mamy \(x=2\cdot\sqrt[3]{2}\ \mathrm{cm}\), a wysokość \(2x=4\cdot\sqrt[3]{2}\ \mathrm{cm}\).
+
+    Prostopadłościan ma 8 krawędzi długości \(x\) (cztery w dolnej i cztery w górnej podstawie) oraz 4 krawędzie boczne długości \(2x\), zatem suma długości krawędzi wynosi
+    \[L=8\cdot x+4\cdot 2x=16\cdot x=16\cdot 2\cdot\sqrt[3]{2}=32\cdot\sqrt[3]{2}\ \mathrm{cm}.\]
+
+    Odpowiedź: \(L=32\sqrt[3]{2}\ \mathrm{cm}\ \left(\approx 40{,}3\ \mathrm{cm}\right)\).
+  solution_steps:
+  - 'Wprowadź zmienną: x — krawędź kwadratowej podstawy (x>0), wysokość równa 2x.'
+  - 'Zapisz objętość: V = x²·2x = 2x³.'
+  - Z równania 2x³ = 32 wyznacz x³ = 16, czyli x = ∛16 = 2∛2.
+  - 'Ułóż wyrażenie na sumę krawędzi: L = 8x + 4·(2x) = 16x.'
+  - Podstaw x = 2∛2 i otrzymaj L = 32∛2 cm.
+  answer:
+    kind: SYMBOLIC
+    latex: 32\sqrt[3]{2}
+  checks:
+  - kind: evaluate
+    expr: 16\cdot\sqrt[3]{16}
+  stated_model:
+    variable: x
+    objective_latex: L\left(x\right)=8\cdot x+4\cdot\left(2\cdot x\right)=16\cdot x
+    domain_lo: '0'
+    goal: value
+    constraint_used: 2\cdot x^{3}=32
+  skills:
+  - wprowadzenie zmiennej
+  - objętość prostopadłościanu
+  - pierwiastek stopnia trzeciego z liczby całkowitej
+  - wyłączanie czynnika przed pierwiastek
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (PARSE_ERROR: "UnexpectedCharacters: No terminal
+      matches ''='' in the current parser context, at line 1 col 60") — human review'
+- id: g-ch-t03
+  slot: CHALLENGE
+  ramp_index: 1
+  difficulty: 4
+  exercise_type: modelowanie geometryczne + porównanie liczb niewymiernych
+  statement: |-
+    Otwarte pudełko (bez górnej ścianki) ma kształt prostopadłościanu, którego podstawa jest kwadratem, a wysokość jest dwa razy mniejsza od krawędzi podstawy. Objętość tego pudełka jest równa \(2\ \mathrm{dm}^{3}\).
+    a) Oblicz pole powierzchni pudełka, czyli łączne pole podstawy i czterech ścian bocznych. Wynik zapisz w najprostszej postaci.
+    b) Rozstrzygnij, czy to pudełko można postawić na półce, nad którą jest wolne miejsce o wysokości \(1\ \mathrm{dm}\).
+  statement_latex: x^{2}\cdot\frac{x}{2}=2,\qquad P=x^{2}+4\cdot x\cdot\frac{x}{2}=3\cdot x^{2}
+  solution: |-
+    Oznaczmy przez \(x\) (w dm) długość krawędzi podstawy, \(x>0\). Wysokość pudełka jest równa \(\frac{x}{2}\).
+
+    Objętość: \(V=x^{2}\cdot\frac{x}{2}=\frac{x^{3}}{2}\). Z warunku zadania
+    \[\frac{x^{3}}{2}=2,\qquad x^{3}=4,\qquad x=\sqrt[3]{4}\ \mathrm{dm}.\]
+
+    a) Pudełko nie ma górnej ścianki, więc
+    \[P=x^{2}+4\cdot x\cdot\frac{x}{2}=x^{2}+2x^{2}=3\cdot x^{2}.\]
+    Stąd
+    \[P=3\cdot\left(\sqrt[3]{4}\right)^{2}=3\cdot\sqrt[3]{16}=3\cdot 2\cdot\sqrt[3]{2}=6\cdot\sqrt[3]{2}\ \mathrm{dm}^{2}\ \left(\approx 7{,}56\ \mathrm{dm}^{2}\right).\]
+
+    b) Wysokość pudełka jest równa \(h=\frac{x}{2}=\frac{\sqrt[3]{4}}{2}\). Porównujemy ją z \(1\ \mathrm{dm}\):
+    \[\frac{\sqrt[3]{4}}{2}<1\iff\sqrt[3]{4}<2=\sqrt[3]{8},\]
+    a to jest prawdą, bo \(4<8\), a pierwiastki są tego samego stopnia i liczby podpierwiastkowe są dodatnie. Zatem \(h<1\ \mathrm{dm}\) — pudełko zmieści się.
+
+    Odpowiedź: a) \(6\sqrt[3]{2}\ \mathrm{dm}^{2}\); b) tak, zmieści się.
+  solution_steps:
+  - 'Wprowadź zmienną: x — krawędź podstawy (x>0), wysokość równa x/2.'
+  - 'Zapisz objętość: V = x²·(x/2) = x³/2 i z równania x³/2 = 2 wyznacz x = ∛4.'
+  - 'Ułóż wyrażenie na pole powierzchni bez górnej ścianki: P = x² + 4·x·(x/2) = 3x².'
+  - 'Podstaw x = ∛4: P = 3·∛16 = 6∛2 dm².'
+  - 'Wyznacz wysokość h = ∛4/2 i porównaj z 1: ∛4 < ∛8 = 2, więc h < 1 dm.'
+  - 'Wniosek: pudełko zmieści się pod półką.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: pole_powierzchni
+      answer:
+        kind: SYMBOLIC
+        latex: 6\sqrt[3]{2}
+    - name: czy_zmiesci_sie
+      answer:
+        kind: BOOLEAN
+        truth: true
+  checks:
+  - kind: evaluate
+    expr: 3\cdot\left(\sqrt[3]{4}\right)^{2}
+    part: pole_powierzchni
+  stated_model:
+    variable: x
+    objective_latex: P\left(x\right)=x^{2}+4\cdot x\cdot\frac{x}{2}=3\cdot x^{2}
+    domain_lo: '0'
+    goal: value
+    constraint_used: x^{2}\cdot\frac{x}{2}=2
+  skills:
+  - wprowadzenie zmiennej
+  - układanie wyrażenia na pole powierzchni
+  - pierwiastek stopnia trzeciego
+  - porównywanie liczb za pomocą pierwiastków tego samego stopnia
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (PARSE_ERROR: "UnexpectedCharacters: No terminal
+      matches ''='' in the current parser context, at line 1 col 54") — human review'
+- id: g-ch-t04
+  slot: CHALLENGE
+  ramp_index: 2
+  difficulty: 5
+  exercise_type: wzór z parametrem naturalnym + obliczenia i ocena wykonalności
+  statement: |-
+    Metalowy sześcian o krawędzi \(12\ \mathrm{cm}\) przetopiono — bez strat materiału — na \(n\) jednakowych sześciennych kostek.
+    a) Wyznacz wzór na długość krawędzi jednej kostki w zależności od \(n\) oraz podaj, jakie wartości może przyjmować \(n\).
+    b) Oblicz długość krawędzi jednej kostki oraz sumę pól powierzchni wszystkich kostek dla \(n=4\). Wyniki zapisz w najprostszej postaci.
+    c) Rozstrzygnij, czy kostka otrzymana dla \(n=4\) zmieściłaby się w sześciennym pudełku o krawędzi \(7{,}5\ \mathrm{cm}\).
+  statement_latex: a\left(n\right)=\sqrt[3]{\frac{12^{3}}{n}}=\frac{12}{\sqrt[3]{n}}
+  solution: |-
+    a) Objętość dużego sześcianu wynosi \(V=12^{3}=1728\ \mathrm{cm}^{3}\). Po przetopieniu każda z \(n\) jednakowych kostek ma objętość \(\frac{1728}{n}\), więc jej krawędź jest równa
+    \[a\left(n\right)=\sqrt[3]{\frac{1728}{n}}=\frac{\sqrt[3]{1728}}{\sqrt[3]{n}}=\frac{12}{\sqrt[3]{n}}\ \mathrm{cm}.\]
+    Liczba kostek jest liczbą naturalną, a kostek jest kilka, zatem \(n\in\mathbb{N}\) oraz \(n\ge 2\).
+
+    b) Dla \(n=4\):
+    \[a=\frac{12}{\sqrt[3]{4}}=\frac{12\cdot\sqrt[3]{2}}{\sqrt[3]{4}\cdot\sqrt[3]{2}}=\frac{12\cdot\sqrt[3]{2}}{2}=6\cdot\sqrt[3]{2}\ \mathrm{cm}\ \left(\approx 7{,}56\ \mathrm{cm}\right).\]
+    Pole powierzchni jednej kostki: \(6a^{2}=6\cdot 36\cdot\sqrt[3]{4}=216\cdot\sqrt[3]{4}\), więc suma pól powierzchni czterech kostek wynosi
+    \[P=4\cdot 216\cdot\sqrt[3]{4}=864\cdot\sqrt[3]{4}\ \mathrm{cm}^{2}\ \left(\approx 1371{,}7\ \mathrm{cm}^{2}\right).\]
+
+    c) Kostka o krawędzi \(a=6\sqrt[3]{2}\) zmieści się w pudełku o krawędzi \(7{,}5\), gdy \(6\cdot\sqrt[3]{2}\le 7{,}5\), czyli gdy \(\sqrt[3]{2}\le 1{,}25\). Ponieważ \(1{,}25^{3}=1{,}953125<2\), mamy \(1{,}25<\sqrt[3]{2}\), a więc \(6\sqrt[3]{2}>7{,}5\). Kostka jest za duża — nie zmieści się.
+
+    Odpowiedź: a) \(a\left(n\right)=\frac{12}{\sqrt[3]{n}}\) cm, \(n\in\mathbb{N},\ n\ge 2\); b) \(6\sqrt[3]{2}\ \mathrm{cm}\) oraz \(864\sqrt[3]{4}\ \mathrm{cm}^{2}\); c) nie.
+  solution_steps:
+  - 'Oblicz objętość dużego sześcianu: V = 12³ = 1728 cm³.'
+  - Objętość jednej kostki to 1728/n, więc jej krawędź a(n) = ∛(1728/n) = 12/∛n.
+  - 'Podaj dopuszczalne n: n liczba naturalna, n ≥ 2.'
+  - 'Dla n = 4: a = 12/∛4; usuń niewymierność z mianownika — a = 6∛2 cm.'
+  - 'Pole jednej kostki: 6a² = 216∛4; suma pól czterech kostek: P = 864∛4 cm².'
+  - 'Porównaj a = 6∛2 z 7,5: 1,25³ = 1,953125 < 2, więc ∛2 > 1,25 i 6∛2 > 7,5.'
+  - 'Wniosek: kostka nie zmieści się w pudełku o krawędzi 7,5 cm.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wzor_na_krawedz
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{12}{\sqrt[3]{n}}
+    - name: dopuszczalne_n
+      answer:
+        kind: SYMBOLIC
+        latex: n \in \mathbb{N},\ n \ge 2
+    - name: krawedz_dla_n4
+      answer:
+        kind: SYMBOLIC
+        latex: 6\sqrt[3]{2}
+    - name: suma_pol_dla_n4
+      answer:
+        kind: SYMBOLIC
+        latex: 864\sqrt[3]{4}
+    - name: czy_zmiesci_sie
+      answer:
+        kind: BOOLEAN
+        truth: false
+  checks:
+  - kind: evaluate
+    expr: \frac{12}{\sqrt[3]{4}}
+    var: n
+    part: krawedz_dla_n4
+  - kind: evaluate
+    expr: 4\cdot 6\cdot\left(\frac{12}{\sqrt[3]{4}}\right)^{2}
+    var: n
+    part: suma_pol_dla_n4
+  stated_model:
+    variable: n
+    objective_latex: a\left(n\right)=\sqrt[3]{\frac{12^{3}}{n}}=\frac{12}{\sqrt[3]{n}}
+    domain_lo: '2'
+    domain_lo_open: false
+    goal: value
+    constraint_used: n\cdot a^{3}=12^{3}
+  skills:
+  - układanie wzoru z pierwiastkiem stopnia n
+  - dziedzina parametru
+  - objętość i pole powierzchni sześcianu
+  - usuwanie niewymierności z mianownika
+  - porównywanie liczb niewymiernych
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (PARSE_ERROR: "UnexpectedCharacters: No terminal
+      matches ''='' in the current parser context, at line 1 col 50") — human review'

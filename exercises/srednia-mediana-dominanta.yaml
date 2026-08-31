@@ -1,0 +1,808 @@
+section: srednia-mediana-dominanta
+name: Średnia, mediana, dominanta
+scope: Arithmetic mean and weighted mean; median and mode, and reading them from a small data set.
+requirements:
+- XII.2
+counts:
+  total: 16
+  DETERMINISTIC: 6
+  REFERENCE_CALL: 7
+  STATED_MODEL: 3
+exercises:
+- id: g-th-00
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: obliczenie średniej arytmetycznej
+  statement: 'W ciągu pięciu kolejnych dni pewna wypożyczalnia wypożyczyła kolejno: 7, 11, 4, 9 oraz 14
+    rowerów. Oblicz średnią arytmetyczną dziennej liczby wypożyczonych rowerów.'
+  statement_latex: \bar{x}=\frac{7+11+4+9+14}{5}
+  solution: |-
+    Liczebność zestawu wynosi n = 5.
+    Suma danych: 7 + 11 + 4 + 9 + 14 = 45.
+    Średnia arytmetyczna: \bar{x}=\frac{45}{5}=9.
+    Sprawdzenie: 4 \le 9 \le 14, więc wynik mieści się między najmniejszą a największą daną.
+    Odpowiedź: średnio 9 rowerów dziennie.
+  solution_steps:
+  - 'Policz liczebność zestawu: n = 5.'
+  - 'Zsumuj dane: 7 + 11 + 4 + 9 + 14 = 45.'
+  - 'Podziel sumę przez liczebność: \frac{45}{5}=9.'
+  - Sprawdź, czy 4 \le 9 \le 14.
+  answer:
+    kind: NUMERIC
+    value: 9.0
+    latex: '9'
+  checks:
+  - kind: evaluate
+    expr: \frac{7+11+4+9+14}{5}
+  skills:
+  - obliczanie średniej arytmetycznej
+  - sumowanie danych
+  - kontrola zakresu wyniku
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 9.0 vs 9.0 (tol 1e-09)'
+- id: g-th-01
+  slot: THEORY_SUPPORT
+  ramp_index: 1
+  difficulty: 1
+  exercise_type: wyznaczanie mediany (n parzyste)
+  statement: 'Sześciu zawodników pokonało pewien tor przeszkód w czasach (w minutach): 14, 9, 6, 11, 9,
+    20. Wyznacz medianę tych czasów.'
+  statement_latex: \mathrm{Me}=\frac{9+11}{2}
+  solution: |-
+    Porządkujemy dane niemalejąco, wypisując wszystkie powtórzenia: 6, 9, 9, 11, 14, 20.
+    Liczebność n = 6 jest parzysta, więc mediana jest średnią arytmetyczną elementów o numerach \frac{n}{2}=3 oraz \frac{n}{2}+1=4, czyli liczb 9 i 11.
+    \mathrm{Me}=\frac{9+11}{2}=10.
+    Po obu stronach mediany leżą po trzy dane, co potwierdza poprawność.
+    Odpowiedź: mediana wynosi 10 minut.
+  solution_steps:
+  - 'Uporządkuj dane niemalejąco: 6, 9, 9, 11, 14, 20.'
+  - Zauważ, że n = 6 jest parzyste, więc mediana to średnia elementów 3. i 4.
+  - 'Odczytaj te elementy: 9 i 11.'
+  - Oblicz \mathrm{Me}=\frac{9+11}{2}=10.
+  answer:
+    kind: NUMERIC
+    value: 10.0
+    latex: '10'
+  checks:
+  - kind: evaluate
+    expr: \frac{9+11}{2}
+  skills:
+  - porządkowanie danych niemalejąco
+  - mediana dla parzystej liczebności
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 10.0 vs 10.0 (tol 1e-09)'
+- id: g-th-02
+  slot: THEORY_SUPPORT
+  ramp_index: 2
+  difficulty: 1
+  exercise_type: wyznaczanie dominanty
+  statement: 'W sklepie sprzedano w ciągu godziny dziewięć par butów w rozmiarach: 38, 40, 39, 40, 41,
+    40, 38, 39, 40. Podaj dominantę rozmiaru sprzedanych butów.'
+  statement_latex: D=40
+  solution: |-
+    Zliczamy wystąpienia poszczególnych rozmiarów:
+    rozmiar 38 – 2 razy, rozmiar 39 – 2 razy, rozmiar 40 – 4 razy, rozmiar 41 – 1 raz.
+    Razem 2 + 2 + 4 + 1 = 9 danych, co zgadza się z liczebnością zestawu.
+    Największa liczebność to 4 i odpowiada ona rozmiarowi 40.
+    Dominantą jest sama wartość występująca najczęściej, czyli D = 40 (liczba 4 to tylko jej liczebność).
+    Odpowiedź: D = 40.
+  solution_steps:
+  - 'Zlicz wystąpienia każdego rozmiaru: 38 – 2, 39 – 2, 40 – 4, 41 – 1.'
+  - Sprawdź, że suma liczebności wynosi 9.
+  - 'Wskaż największą liczebność: 4.'
+  - 'Podaj wartość o tej liczebności: D = 40.'
+  answer:
+    kind: NUMERIC
+    value: 40.0
+    latex: '40'
+  skills:
+  - zliczanie wystąpień wartości
+  - wyznaczanie dominanty
+  verification:
+    checkability: REFERENCE_CALL
+    note: 40.0 vs 40.0 (tol 1e-09)
+- id: g-ex-03
+  slot: EXERCISE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: średnia, mediana i dominanta z tabeli liczebności
+  statement: 'W konkursie matematycznym wzięło udział 24 uczniów. Rozkład uzyskanych przez nich liczb
+    punktów przedstawia zestawienie: 5 punktów uzyskało 3 uczniów, 6 punktów – 5 uczniów, 7 punktów –
+    10 uczniów, 8 punktów – 4 uczniów, 9 punktów – 2 uczniów. Oblicz średnią arytmetyczną liczby punktów
+    oraz wyznacz medianę i dominantę.'
+  statement_latex: \bar{x}=\frac{5\cdot 3+6\cdot 5+7\cdot 10+8\cdot 4+9\cdot 2}{3+5+10+4+2}
+  solution: |-
+    Sprawdzamy liczebność: 3 + 5 + 10 + 4 + 2 = 24 ✓.
+
+    Średnia: suma iloczynów wartość·liczebność wynosi
+    5\cdot 3+6\cdot 5+7\cdot 10+8\cdot 4+9\cdot 2 = 15+30+70+32+18 = 165,
+    zatem \bar{x}=\frac{165}{24}=6{,}875. Mianownikiem jest łączna liczba uczniów (24), a nie liczba różnych wyników.
+
+    Mediana: n = 24 jest parzyste, więc szukamy elementów o numerach 12 i 13 w szeregu uporządkowanym. Liczebności skumulowane: do 5 punktów – 3, do 6 punktów – 3 + 5 = 8, do 7 punktów – 8 + 10 = 18. Pozycje od 9. do 18. zajmuje wartość 7, więc element 12. i 13. to 7 i 7, czyli \mathrm{Me}=\frac{7+7}{2}=7.
+
+    Dominanta: największa liczebność to 10 i odpowiada wartości 7 punktów, więc D = 7.
+
+    Sprawdzenie: 5 \le 6{,}875 \le 9 ✓.
+    Odpowiedź: \bar{x}=6{,}875, \mathrm{Me}=7, D=7.
+  solution_steps:
+  - 'Sprawdź łączną liczebność: 3 + 5 + 10 + 4 + 2 = 24.'
+  - 'Oblicz sumę iloczynów wartość·liczebność: 15 + 30 + 70 + 32 + 18 = 165.'
+  - 'Podziel przez łączną liczebność: \bar{x}=\frac{165}{24}=6{,}875.'
+  - 'Dla mediany wyznacz pozycje 12. i 13. i utwórz liczebności skumulowane: 3, 8, 18.'
+  - 'Odczytaj wartości na pozycjach 12. i 13.: 7 i 7, więc \mathrm{Me}=\frac{7+7}{2}=7.'
+  - 'Wskaż wartość o największej liczebności (10): D = 7.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: srednia
+      answer:
+        kind: NUMERIC
+        value: 6.875
+        latex: 6{,}875
+    - name: mediana
+      answer:
+        kind: NUMERIC
+        value: 7.0
+        latex: '7'
+    - name: dominanta
+      answer:
+        kind: NUMERIC
+        value: 7.0
+        latex: '7'
+  checks:
+  - kind: evaluate
+    expr: \frac{5\cdot 3+6\cdot 5+7\cdot 10+8\cdot 4+9\cdot 2}{3+5+10+4+2}
+    part: srednia
+  - kind: evaluate
+    expr: \frac{7+7}{2}
+    part: mediana
+  skills:
+  - odczyt tabeli liczebności
+  - średnia ważona liczebnościami
+  - liczebność skumulowana
+  - dominanta
+  verification:
+    checkability: REFERENCE_CALL
+    note: '3 parts matched · det: [srednia] SymPy solved it fresh: 6.875 vs 6.875 (tol 1e-09) ; [mediana]
+      SymPy solved it fresh: 7.0 vs 7.0 (tol 1e-09)'
+- id: g-ex-04
+  slot: EXERCISE
+  ramp_index: 1
+  difficulty: 3
+  exercise_type: średnia ważona i średnia połączonych grup
+  statement: 'W pewnej szkole ocena semestralna jest średnią ważoną ocen cząstkowych: sprawdziany mają
+    wagę 4, odpowiedzi ustne wagę 2, a aktywność wagę 1. Marek napisał dwa sprawdziany, z których otrzymał
+    oceny 3 i 5, odpowiadał ustnie trzy razy i otrzymał oceny 4, 2, 5, a za aktywność dostał ocenę 6.
+    (a) Oblicz średnią ważoną ocen Marka. (b) W grupie A jest 12 uczniów, a średnia ich ocen semestralnych
+    wynosi 4,5; w grupie B jest 18 uczniów o średniej 3,5. Oblicz średnią ocen wszystkich 30 uczniów.'
+  statement_latex: \bar{x}_w=\frac{3\cdot 4+5\cdot 4+4\cdot 2+2\cdot 2+5\cdot 2+6\cdot 1}{4+4+2+2+2+1},\qquad
+    \bar{x}=\frac{12\cdot 4{,}5+18\cdot 3{,}5}{12+18}
+  solution: |-
+    (a) Wypisujemy pary (ocena; waga): (3;4), (5;4), (4;2), (2;2), (5;2), (6;1).
+    Suma iloczynów: 3\cdot 4+5\cdot 4+4\cdot 2+2\cdot 2+5\cdot 2+6\cdot 1 = 12+20+8+4+10+6 = 60.
+    Suma wag: 4+4+2+2+2+1 = 15 (w mianowniku stoi suma wag, a nie liczba ocen).
+    \bar{x}_w=\frac{60}{15}=4.
+    Sprawdzenie: 2 \le 4 \le 6 ✓.
+
+    (b) Łączna suma ocen obu grup: 12\cdot 4{,}5 + 18\cdot 3{,}5 = 54 + 63 = 117. Łączna liczba uczniów: 12 + 18 = 30.
+    \bar{x}=\frac{117}{30}=3{,}9.
+    Uwaga: zwykła średnia obu średnich dałaby \frac{4{,}5+3{,}5}{2}=4 – to wynik błędny, bo grupy mają różne liczebności i wynik musi być bliżej średniej grupy liczniejszej.
+
+    Odpowiedź: (a) 4; (b) 3,9.
+  solution_steps:
+  - Wypisz pary (ocena; waga) dla wszystkich ocen Marka.
+  - 'Oblicz sumę iloczynów ocena·waga: 12 + 20 + 8 + 4 + 10 + 6 = 60.'
+  - 'Oblicz sumę wag: 4 + 4 + 2 + 2 + 2 + 1 = 15.'
+  - 'Podziel: \bar{x}_w=\frac{60}{15}=4.'
+  - 'W punkcie (b) oblicz sumy ocen w grupach: 12\cdot 4{,}5=54 oraz 18\cdot 3{,}5=63.'
+  - 'Podziel łączną sumę przez łączną liczebność: \frac{117}{30}=3{,}9.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: srednia_wazona
+      answer:
+        kind: NUMERIC
+        value: 4.0
+        latex: '4'
+    - name: srednia_laczna
+      answer:
+        kind: NUMERIC
+        value: 3.9
+        latex: 3{,}9
+  checks:
+  - kind: evaluate
+    expr: \frac{3\cdot 4+5\cdot 4+4\cdot 2+2\cdot 2+5\cdot 2+6\cdot 1}{4+4+2+2+2+1}
+    part: srednia_wazona
+  - kind: evaluate
+    expr: \frac{12\cdot 4.5+18\cdot 3.5}{12+18}
+    part: srednia_laczna
+  skills:
+  - średnia ważona
+  - suma wag w mianowniku
+  - średnia dwóch połączonych zestawów
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [srednia_wazona] SymPy solved it fresh: 4.0 vs 4.0 (tol 1e-09)
+      ; [srednia_laczna] SymPy solved it fresh: 3.9 vs 3.9 (tol 1e-09)'
+- id: g-ex-05
+  slot: EXERCISE
+  ramp_index: 2
+  difficulty: 4
+  exercise_type: parametr w zestawie danych – analiza przypadków
+  statement: 'Dany jest zestaw czterech liczb: 3, 7, 9, x. Wyznacz wszystkie wartości x, dla których mediana
+    tego zestawu jest równa jego średniej arytmetycznej.'
+  statement_latex: \frac{3+7+9+x}{4}=\mathrm{Me}
+  solution: |-
+    Średnia zestawu nie zależy od położenia x: \bar{x}=\frac{3+7+9+x}{4}=\frac{19+x}{4}.
+    Mediana zależy od tego, gdzie w szeregu uporządkowanym znajdzie się x; n = 4 jest parzyste, więc mediana jest średnią dwóch środkowych elementów. Rozważamy przypadki wyznaczone przez znane dane 3, 7, 9.
+
+    Przypadek 1: x \le 3. Szereg: x, 3, 7, 9, więc \mathrm{Me}=\frac{3+7}{2}=5.
+    Równanie: \frac{19+x}{4}=5, czyli 19+x=20, stąd x=1. Warunek x \le 3 jest spełniony, więc x = 1 jest rozwiązaniem.
+
+    Przypadek 2: 3 \le x \le 7. Szereg: 3, x, 7, 9, więc \mathrm{Me}=\frac{x+7}{2}.
+    Równanie: \frac{19+x}{4}=\frac{x+7}{2}, czyli 19+x=2x+14, stąd x=5. Warunek 3 \le 5 \le 7 jest spełniony, więc x = 5 jest rozwiązaniem.
+
+    Przypadek 3: 7 \le x \le 9. Szereg: 3, 7, x, 9, więc \mathrm{Me}=\frac{7+x}{2} – to samo równanie co wyżej, x = 5, ale 5 nie należy do przedziału \langle 7; 9 \rangle, więc w tym przypadku nie ma nowych rozwiązań.
+
+    Przypadek 4: x \ge 9. Szereg: 3, 7, 9, x, więc \mathrm{Me}=\frac{7+9}{2}=8.
+    Równanie: \frac{19+x}{4}=8, czyli 19+x=32, stąd x=13. Warunek x \ge 9 jest spełniony, więc x = 13 jest rozwiązaniem.
+
+    Sprawdzenie dla x = 13: \bar{x}=\frac{32}{4}=8, szereg 3, 7, 9, 13, \mathrm{Me}=\frac{7+9}{2}=8 ✓.
+    Odpowiedź: x \in \{1; 5; 13\}.
+  solution_steps:
+  - 'Zapisz średnią zestawu: \bar{x}=\frac{19+x}{4}.'
+  - 'Uporządkuj znane dane: 3, 7, 9 i rozważ przypadki położenia x.'
+  - 'Przypadek x \le 3: \mathrm{Me}=5, z równania \frac{19+x}{4}=5 otrzymujesz x = 1 (zgodne z założeniem).'
+  - 'Przypadek 3 \le x \le 7 (oraz 7 \le x \le 9): \mathrm{Me}=\frac{x+7}{2}, z równania otrzymujesz x
+    = 5 (zgodne tylko w pierwszym z tych przedziałów).'
+  - 'Przypadek x \ge 9: \mathrm{Me}=8, z równania \frac{19+x}{4}=8 otrzymujesz x = 13 (zgodne z założeniem).'
+  - 'Zbierz rozwiązania: x \in \{1; 5; 13\}.'
+  answer:
+    kind: SET
+    latex: \{1;5;13\}
+    members:
+    - '1'
+    - '5'
+    - '13'
+  skills:
+  - mediana z parametrem
+  - analiza przypadków
+  - równania liniowe
+  - porównanie średniej i mediany
+  verification:
+    checkability: REFERENCE_CALL
+    note: 3 members matched
+- id: g-ex-t00
+  slot: EXERCISE
+  ramp_index: 6
+  difficulty: 4
+  exercise_type: obliczenia z tabeli liczebności z niewiadomymi liczebnościami
+  statement: W klasie liczącej 25 uczniów przeprowadzono sprawdzian oceniany w skali od 1 do 6. Ocenę
+    2 otrzymało 4 uczniów, ocenę 3 otrzymało k uczniów, ocenę 4 otrzymało 7 uczniów, ocenę 5 otrzymało
+    m uczniów, a ocenę 6 otrzymało 2 uczniów. Nikt z tej klasy nie otrzymał oceny 1. Średnia arytmetyczna
+    wszystkich ocen z tego sprawdzianu w tej klasie jest równa 3,92. Wyznacz liczby k oraz m, a następnie
+    oblicz medianę i podaj dominantę ocen uzyskanych z tego sprawdzianu.
+  statement_latex: 4 + k + 7 + m + 2 = 25, \qquad \frac{2 \cdot 4 + 3 \cdot k + 4 \cdot 7 + 5 \cdot m
+    + 6 \cdot 2}{25} = 3{,}92
+  solution: |-
+    Z liczebności klasy: 4 + k + 7 + m + 2 = 25, czyli k + m = 12, a więc m = 12 − k.
+
+    Z warunku na średnią (mianownikiem jest łączna liczba uczniów, czyli 25):
+    (2·4 + 3·k + 4·7 + 5·m + 6·2) / 25 = 3,92, zatem suma ocen wynosi 25 · 3,92 = 98.
+    Stąd 8 + 3k + 28 + 5m + 12 = 98, czyli 3k + 5m = 50.
+    Podstawiamy m = 12 − k: 3k + 5(12 − k) = 50, czyli 60 − 2k = 50, więc k = 5 oraz m = 12 − 5 = 7.
+
+    Rozkład ocen: 2 – 4 uczniów, 3 – 5 uczniów, 4 – 7 uczniów, 5 – 7 uczniów, 6 – 2 uczniów (razem 25 ✓).
+    Sprawdzenie średniej: (8 + 15 + 28 + 35 + 12)/25 = 98/25 = 3,92 ✓.
+
+    Mediana: n = 25 jest nieparzyste, więc mediana to element o numerze (25+1)/2 = 13 w szeregu uporządkowanym. Liczebności skumulowane: do oceny 2 – 4, do oceny 3 – 9, do oceny 4 – 16. Pozycje od 10. do 16. zajmuje ocena 4, więc element 13. to 4, czyli Me = 4.
+
+    Dominanta: największa liczebność wynosi 7 i odpowiada dwóm wartościom: ocenie 4 oraz ocenie 5. Zestaw ma zatem dwie dominanty: 4 i 5.
+  solution_steps:
+  - 'Zapisz warunek liczebności: 4 + k + 7 + m + 2 = 25, stąd k + m = 12.'
+  - 'Zapisz sumę ocen z warunku na średnią: suma = 25 · 3,92 = 98.'
+  - Ułóż równanie 8 + 3k + 28 + 5m + 12 = 98, czyli 3k + 5m = 50.
+  - 'Podstaw m = 12 − k i rozwiąż: 60 − 2k = 50, więc k = 5, m = 7.'
+  - 'Wyznacz medianę: pozycja (25+1)/2 = 13; liczebności skumulowane 4, 9, 16 – pozycja 13. to ocena 4,
+    więc Me = 4.'
+  - 'Wyznacz dominantę: największa liczebność 7 występuje dla ocen 4 i 5, więc są dwie dominanty: 4 i
+    5.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: k
+      answer:
+        kind: NUMERIC
+        value: 5.0
+    - name: m
+      answer:
+        kind: NUMERIC
+        value: 7.0
+    - name: mediana
+      answer:
+        kind: NUMERIC
+        value: 4.0
+    - name: dominanta
+      answer:
+        kind: SET
+        members:
+        - '4'
+        - '5'
+  checks:
+  - kind: solve_equation
+    expr: \frac{2 \cdot 4 + 3 \cdot k + 4 \cdot 7 + 5 \cdot \left(12 - k\right) + 6 \cdot 2}{25} = 3.92
+    var: k
+    part: k
+  - kind: evaluate
+    expr: 25 - \left(4 + 5 + 7 + 2\right)
+    var: m
+    part: m
+  skills:
+  - średnia z tabeli liczebności
+  - układanie i rozwiązywanie równania z warunku na średnią
+  - mediana z liczebności skumulowanych
+  - wyznaczanie dominanty (także kilku dominant)
+  verification:
+    checkability: REFERENCE_CALL
+    note: 4 parts matched
+- id: g-ex-t01
+  slot: EXERCISE
+  ramp_index: 7
+  difficulty: 4
+  exercise_type: parametr w zestawie danych – analiza przypadków dla mediany
+  statement: 'Dany jest zestaw pięciu liczb: 2, 5, 9, 12, x. Wyznacz wszystkie wartości x, dla których
+    mediana tego zestawu jest równa jego średniej arytmetycznej.'
+  statement_latex: \bar{x} = \frac{2 + 5 + 9 + 12 + x}{5} = \frac{28 + x}{5}, \qquad \mathrm{Me} = x_{\left(3\right)}
+  solution: |-
+    Średnia zestawu nie zależy od położenia x w szeregu: x̄ = (2 + 5 + 9 + 12 + x)/5 = (28 + x)/5.
+    Zestaw ma n = 5 elementów, więc mediana jest elementem o numerze (5+1)/2 = 3 w szeregu uporządkowanym niemalejąco. Położenie x zależy od jego wartości, więc rozważamy przypadki wyznaczone przez znane dane 2, 5, 9, 12.
+
+    Przypadek 1: x ≤ 2. Szereg: x, 2, 5, 9, 12, więc Me = 5.
+    Równanie: (28 + x)/5 = 5, czyli 28 + x = 25, stąd x = −3. Warunek x ≤ 2 jest spełniony, więc x = −3 jest rozwiązaniem.
+
+    Przypadek 2: 2 ≤ x ≤ 5. Szereg: 2, x, 5, 9, 12, więc Me = 5 i znów x = −3. Ta wartość nie należy do przedziału [2; 5], więc w tym przypadku nie ma rozwiązań.
+
+    Przypadek 3: 5 ≤ x ≤ 9. Szereg: 2, 5, x, 9, 12, więc Me = x.
+    Równanie: (28 + x)/5 = x, czyli 28 + x = 5x, stąd 4x = 28 i x = 7. Warunek 5 ≤ 7 ≤ 9 jest spełniony, więc x = 7 jest rozwiązaniem.
+
+    Przypadek 4: 9 ≤ x ≤ 12. Szereg: 2, 5, 9, x, 12, więc Me = 9.
+    Równanie: (28 + x)/5 = 9, czyli 28 + x = 45, stąd x = 17. Wartość 17 nie należy do [9; 12], więc brak rozwiązań w tym przypadku.
+
+    Przypadek 5: x ≥ 12. Szereg: 2, 5, 9, 12, x, więc Me = 9 i x = 17. Warunek x ≥ 12 jest spełniony, więc x = 17 jest rozwiązaniem.
+
+    Sprawdzenie dla x = 17: średnia = 45/5 = 9, szereg 2, 5, 9, 12, 17, mediana = 9 ✓.
+    Odpowiedź: x ∈ {−3, 7, 17}.
+  solution_steps:
+  - 'Zapisz średnią zależną od x: x̄ = (28 + x)/5.'
+  - Zauważ, że n = 5, więc mediana to trzeci element szeregu uporządkowanego.
+  - 'Rozważ przypadek x ≤ 5: Me = 5, równanie (28 + x)/5 = 5 daje x = −3 (zgodne tylko z x ≤ 2).'
+  - 'Rozważ przypadek 5 ≤ x ≤ 9: Me = x, równanie (28 + x)/5 = x daje x = 7 (zgodne).'
+  - 'Rozważ przypadek x ≥ 9: Me = 9, równanie (28 + x)/5 = 9 daje x = 17 (zgodne tylko z x ≥ 12).'
+  - 'Zbierz rozwiązania zgodne ze swoimi przypadkami: x ∈ {−3, 7, 17}.'
+  answer:
+    kind: SET
+    members:
+    - '-3'
+    - '7'
+    - '17'
+  skills:
+  - średnia arytmetyczna z parametrem
+  - mediana dla nieparzystej liczby danych
+  - analiza przypadków położenia parametru w szeregu
+  - sprawdzanie zgodności rozwiązania z warunkiem przypadku
+  verification:
+    checkability: REFERENCE_CALL
+    note: 3 members matched
+- id: g-cm-06
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: demonstracja błędu – mediana bez uporządkowania
+  statement: 'Sześć paczek miało masy (w kilogramach): 15, 9, 22, 11, 9, 30. Uczeń zapisał: „Danych jest
+    sześć, więc biorę dwie środkowe liczby z podanego zapisu, czyli 22 i 11, i otrzymuję medianę \frac{22+11}{2}=16{,}5”.
+    Wyjaśnij, na czym polega błąd w tym rozumowaniu, i podaj poprawną medianę mas tych paczek.'
+  statement_latex: \mathrm{Me}=\frac{11+15}{2}
+  solution: |-
+    Błędne rozumowanie: uczeń odczytał „środkowe” liczby z kolejności, w jakiej dane zostały wypisane (15, 9, 22, 11, 9, 30) – wskazał 22 i 11 i otrzymał \frac{22+11}{2}=16{,}5.
+
+    Dlaczego to źle: mediana to wartość środkowa szeregu uporządkowanego, a nie liczby stojące w środku dowolnego zapisu danych. Zanim wskażemy elementy środkowe, trzeba dane uporządkować niemalejąco.
+
+    Poprawnie: porządkujemy dane (wszystkie powtórzenia zapisujemy osobno): 9, 9, 11, 15, 22, 30.
+    n = 6 jest parzyste, więc mediana to średnia elementów o numerach 3 i 4, czyli liczb 11 i 15:
+    \mathrm{Me}=\frac{11+15}{2}=13.
+
+    Odpowiedź: poprawna mediana wynosi 13 kg (a nie 16,5 kg).
+  solution_steps:
+  - Zauważ, że uczeń wziął liczby ze środka nieuporządkowanego zapisu danych.
+  - 'Przypomnij definicję: mediana to wartość środkowa szeregu uporządkowanego niemalejąco.'
+  - 'Uporządkuj dane: 9, 9, 11, 15, 22, 30.'
+  - 'Dla n = 6 weź elementy 3. i 4.: 11 i 15.'
+  - Oblicz \mathrm{Me}=\frac{11+15}{2}=13.
+  answer:
+    kind: NUMERIC
+    value: 13.0
+    latex: '13'
+  checks:
+  - kind: evaluate
+    expr: \frac{11+15}{2}
+  skills:
+  - porządkowanie danych niemalejąco
+  - mediana dla parzystej liczebności
+  - wykrywanie błędu w rozwiązaniu
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 13.0 vs 13.0 (tol 1e-09)'
+- id: g-cm-07
+  slot: COMMON_MISTAKE
+  ramp_index: 1
+  difficulty: 2
+  exercise_type: demonstracja błędu – dominanta a liczebność
+  statement: 'W klasie liczącej 22 uczniów oceny z kartkówki rozłożyły się następująco: ocenę 3 otrzymało
+    5 uczniów, ocenę 4 – 9 uczniów, ocenę 5 – 6 uczniów, a ocenę 6 – 2 uczniów. Uczeń stwierdził: „Najwięcej,
+    bo 9 razy, wystąpiła ocena 4, zatem dominanta jest równa 9”. Wyjaśnij błąd i podaj poprawną dominantę
+    ocen.'
+  statement_latex: D=4
+  solution: |-
+    Błędne rozumowanie: uczeń poprawnie zauważył, że najwyższa liczebność to 9, ale jako dominantę podał właśnie tę liczebność, otrzymując D = 9.
+
+    Dlaczego to źle: dominanta to wartość występująca najczęściej, a nie liczba jej wystąpień. Ponadto ocena 9 w ogóle nie występuje w zestawie – to sygnał, że wynik jest niemożliwy (dominanta zawsze jest jedną z danych).
+
+    Poprawnie: liczebności to 5, 9, 6, 2 (razem 22 ✓). Największa z nich, 9, odpowiada ocenie 4, więc dominantą jest D = 4, a liczba 9 to tylko liczebność tej oceny.
+
+    Odpowiedź: D = 4.
+  solution_steps:
+  - 'Zapisz liczebności ocen: 3 – 5 uczniów, 4 – 9, 5 – 6, 6 – 2 (razem 22).'
+  - 'Wskaż największą liczebność: 9.'
+  - Zauważ, że 9 to liczba wystąpień, a nie wartość danej – ocena 9 nie istnieje w zestawie.
+  - 'Podaj wartość odpowiadającą największej liczebności: D = 4.'
+  answer:
+    kind: NUMERIC
+    value: 4.0
+    latex: '4'
+  skills:
+  - wyznaczanie dominanty
+  - odczyt tabeli liczebności
+  - rozróżnianie wartości i liczebności
+  verification:
+    checkability: REFERENCE_CALL
+    note: 4.0 vs 4.0 (tol 1e-09)
+- id: g-cm-08
+  slot: COMMON_MISTAKE
+  ramp_index: 2
+  difficulty: 2
+  exercise_type: demonstracja błędu – mediana jako numer pozycji
+  statement: 'Dziewięciu uczniów uzyskało na teście następujące liczby punktów: 12, 7, 15, 7, 20, 9, 12,
+    18, 9. Uczeń napisał: „n = 9, więc \frac{9+1}{2}=5 i mediana jest równa 5”. Wyjaśnij, na czym polega
+    błąd, i wyznacz poprawną medianę liczby punktów.'
+  statement_latex: \mathrm{Me}=x_{\left(\frac{9+1}{2}\right)}=x_{(5)}
+  solution: |-
+    Błędne rozumowanie: uczeń obliczył \frac{n+1}{2}=\frac{9+1}{2}=5 i podał 5 jako medianę.
+
+    Dlaczego to źle: wzór \frac{n+1}{2} podaje NUMER elementu w szeregu uporządkowanym, a nie wartość mediany. Trzeba jeszcze odczytać, jaka liczba stoi na tej pozycji. Dodatkowo w zestawie nie ma w ogóle wyniku 5.
+
+    Poprawnie: porządkujemy dane niemalejąco (z powtórzeniami): 7, 7, 9, 9, 12, 12, 15, 18, 20.
+    n = 9 jest nieparzyste, więc mediana to element o numerze \frac{9+1}{2}=5, czyli piąta liczba w tym szeregu: \mathrm{Me}=x_{(5)}=12.
+    Po obu stronach mediany są po cztery dane ✓.
+
+    Odpowiedź: mediana wynosi 12 punktów.
+  solution_steps:
+  - Zauważ, że \frac{n+1}{2} wyznacza numer pozycji, a nie wartość mediany.
+  - 'Uporządkuj dane niemalejąco: 7, 7, 9, 9, 12, 12, 15, 18, 20.'
+  - 'Oblicz numer środkowej pozycji: \frac{9+1}{2}=5.'
+  - 'Odczytaj piąty element szeregu: \mathrm{Me}=12.'
+  answer:
+    kind: NUMERIC
+    value: 12.0
+    latex: '12'
+  skills:
+  - mediana dla nieparzystej liczebności
+  - porządkowanie danych
+  - odczyt elementu szeregu
+  verification:
+    checkability: REFERENCE_CALL
+    note: 12.0 vs 12.0 (tol 1e-09)
+- id: g-cm-09
+  slot: COMMON_MISTAKE
+  ramp_index: 3
+  difficulty: 2
+  exercise_type: demonstracja błędu – zły mianownik średniej z tabeli
+  statement: 'W grupie 20 osób przeprowadzono test oceniany w skali od 1 do 5 punktów. Wyniki: 1 punkt
+    uzyskały 2 osoby, 2 punkty – 3 osoby, 3 punkty – 10 osób, 4 punkty – 4 osoby, 5 punktów – 1 osoba.
+    Uczeń zapisał: „W zestawieniu występuje pięć wartości: 1, 2, 3, 4, 5, więc średnia wynosi \frac{1+2+3+4+5}{5}=3”.
+    Wyjaśnij błąd i oblicz poprawną średnią liczbę punktów.'
+  statement_latex: \bar{x}=\frac{1\cdot 2+2\cdot 3+3\cdot 10+4\cdot 4+5\cdot 1}{2+3+10+4+1}
+  solution: |-
+    Błędne rozumowanie: uczeń dodał różne wartości występujące w tabeli i podzielił przez ich liczbę (5), otrzymując \frac{1+2+3+4+5}{5}=3.
+
+    Dlaczego to źle: każdą wartość trzeba uwzględnić tyle razy, ile razy wystąpiła, a mianownikiem średniej jest ŁĄCZNA liczba danych (tu 20), a nie liczba różnych wartości (5). Metoda ucznia traktowałaby wynik 5 punktów (jedna osoba) tak samo ważnie jak wynik 3 punkty (dziesięć osób).
+
+    Poprawnie: łączna liczebność n = 2 + 3 + 10 + 4 + 1 = 20.
+    Suma iloczynów: 1\cdot 2+2\cdot 3+3\cdot 10+4\cdot 4+5\cdot 1 = 2+6+30+16+5 = 59.
+    \bar{x}=\frac{59}{20}=2{,}95.
+    Sprawdzenie: 1 \le 2{,}95 \le 5 ✓, a wynik jest bliżej 3, bo tę wartość uzyskało najwięcej osób.
+
+    Odpowiedź: średnia wynosi 2,95 punktu (a nie 3).
+  solution_steps:
+  - Zauważ, że uczeń podzielił przez liczbę różnych wartości, a nie przez liczbę danych.
+  - 'Oblicz łączną liczebność: 2 + 3 + 10 + 4 + 1 = 20.'
+  - 'Oblicz sumę iloczynów wartość·liczebność: 2 + 6 + 30 + 16 + 5 = 59.'
+  - 'Podziel przez 20: \bar{x}=\frac{59}{20}=2{,}95.'
+  answer:
+    kind: NUMERIC
+    value: 2.95
+    latex: 2{,}95
+  checks:
+  - kind: evaluate
+    expr: \frac{1\cdot 2+2\cdot 3+3\cdot 10+4\cdot 4+5\cdot 1}{2+3+10+4+1}
+  skills:
+  - średnia z tabeli liczebności
+  - uwzględnianie powtórzeń
+  - kontrola poprawności wyniku
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 2.95 vs 2.95 (tol 1e-09)'
+- id: g-cm-10
+  slot: COMMON_MISTAKE
+  ramp_index: 4
+  difficulty: 3
+  exercise_type: demonstracja błędu – zły mianownik średniej ważonej
+  statement: 'Kasia otrzymała następujące oceny wraz z wagami: sprawdzian 5 (waga 3), sprawdzian 3 (waga
+    3), odpowiedź ustna 4 (waga 2), kartkówka 2 (waga 1), kartkówka 5 (waga 1). Uczeń obliczył: „Suma
+    iloczynów ocena·waga wynosi 39, a ocen jest 5, więc średnia ważona to \frac{39}{5}=7{,}8”. Wyjaśnij
+    błąd i oblicz poprawną średnią ważoną ocen Kasi.'
+  statement_latex: \bar{x}_w=\frac{5\cdot 3+3\cdot 3+4\cdot 2+2\cdot 1+5\cdot 1}{3+3+2+1+1}
+  solution: |-
+    Błędne rozumowanie: uczeń podzielił sumę iloczynów przez liczbę ocen: \frac{39}{5}=7{,}8.
+
+    Dlaczego to źle: w mianowniku średniej ważonej stoi SUMA WAG, a nie liczba danych. Natychmiastowa kontrola: średnia musi mieścić się między najmniejszą a największą daną, a 7,8 leży poza zakresem ocen \langle 2; 5 \rangle – to niemożliwe.
+
+    Poprawnie: suma iloczynów ocena·waga: 5\cdot 3+3\cdot 3+4\cdot 2+2\cdot 1+5\cdot 1 = 15+9+8+2+5 = 39.
+    Suma wag: 3+3+2+1+1 = 10.
+    \bar{x}_w=\frac{39}{10}=3{,}9.
+    Sprawdzenie: 2 \le 3{,}9 \le 5 ✓.
+
+    Odpowiedź: średnia ważona wynosi 3,9.
+  solution_steps:
+  - Zauważ, że uczeń podzielił przez liczbę ocen zamiast przez sumę wag.
+  - 'Sprawdź zakres: 7,8 nie mieści się między najmniejszą (2) a największą (5) oceną – wynik jest na
+    pewno błędny.'
+  - 'Oblicz sumę iloczynów ocena·waga: 15 + 9 + 8 + 2 + 5 = 39.'
+  - 'Oblicz sumę wag: 3 + 3 + 2 + 1 + 1 = 10.'
+  - 'Podziel: \bar{x}_w=\frac{39}{10}=3{,}9.'
+  answer:
+    kind: NUMERIC
+    value: 3.9
+    latex: 3{,}9
+  checks:
+  - kind: evaluate
+    expr: \frac{5\cdot 3+3\cdot 3+4\cdot 2+2\cdot 1+5\cdot 1}{3+3+2+1+1}
+  skills:
+  - średnia ważona
+  - suma wag jako mianownik
+  - kontrola zakresu wyniku
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 3.9 vs 3.9 (tol 1e-09)'
+- id: g-ch-t02
+  slot: CHALLENGE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: zadanie odwrotne o średniej z warunkiem nierównościowym
+  statement: Adam otrzymał do tej pory z matematyki 8 ocen, a ich średnia arytmetyczna jest równa 3,5.
+    Do końca semestru Adam może otrzymać jeszcze pewną liczbę ocen celujących, czyli ocen 6, i żadnych
+    innych ocen. Oblicz, ile co najmniej ocen celujących musi jeszcze otrzymać Adam, aby średnia arytmetyczna
+    wszystkich jego ocen z matematyki była nie mniejsza niż 4.
+  statement_latex: \frac{8 \cdot 3{,}5 + 6 \cdot k}{8 + k} \ge 4
+  solution: |-
+    Oznaczmy przez k liczbę dodatkowych ocen celujących, k jest liczbą całkowitą nieujemną.
+
+    Suma dotychczasowych ocen jest równa 8 · 3,5 = 28. Po otrzymaniu k szóstek suma ocen wynosi 28 + 6k, a liczba ocen 8 + k. Warunek zadania:
+    (28 + 6k)/(8 + k) ≥ 4.
+
+    Mianownik 8 + k jest dodatni, więc mnożymy obie strony przez 8 + k:
+    28 + 6k ≥ 32 + 4k, czyli 2k ≥ 4, a stąd k ≥ 2.
+
+    Najmniejsza liczba całkowita spełniająca ten warunek to k = 2.
+
+    Sprawdzenie: dla k = 2 średnia wynosi (28 + 12)/10 = 40/10 = 4 ≥ 4 ✓, a dla k = 1 mamy (28 + 6)/9 = 34/9 ≈ 3,78 < 4.
+
+    Odpowiedź: Adam musi otrzymać co najmniej 2 oceny celujące.
+  solution_steps:
+  - 'Wprowadź zmienną: k – liczba dodatkowych ocen 6, k całkowite nieujemne.'
+  - 'Oblicz sumę dotychczasowych ocen: 8 · 3,5 = 28.'
+  - 'Zapisz średnią po dopisaniu k szóstek: (28 + 6k)/(8 + k).'
+  - Ułóż i rozwiąż nierówność (28 + 6k)/(8 + k) ≥ 4, otrzymując 2k ≥ 4, czyli k ≥ 2.
+  - 'Wybierz najmniejszą liczbę całkowitą spełniającą warunek: k = 2, i sprawdź wynik.'
+  answer:
+    kind: NUMERIC
+    value: 2.0
+  checks:
+  - kind: evaluate
+    expr: \left\lceil \frac{4}{2} \right\rceil
+    var: k
+  stated_model:
+    variable: k
+    objective_latex: \frac{8 \cdot 3.5 + 6 \cdot k}{8 + k}
+    domain_lo: '0'
+    domain_lo_open: false
+    goal: value
+    constraint_used: \frac{28 + 6 \cdot k}{8 + k} \ge 4,\ k \in \mathbb{N}
+  skills:
+  - suma danych jako n·x̄
+  - wprowadzenie zmiennej opisującej liczbę dopisanych danych
+  - nierówność z niewiadomą w mianowniku (liniowa po przekształceniu)
+  - wybór najmniejszej liczby całkowitej spełniającej warunek
+  verification:
+    checkability: STATED_MODEL
+    note: 'stage 1 inconclusive: kind mismatch: answer=SYMBOLIC reference=NUMERIC'
+- id: g-ch-t03
+  slot: CHALLENGE
+  ramp_index: 1
+  difficulty: 5
+  exercise_type: modelowanie średniej – równanie wymierne z odrzuceniem pierwiastka
+  statement: W teście z matematyki wzięła udział pewna grupa uczniów. Łączna liczba punktów uzyskanych
+    przez wszystkich uczniów tej grupy jest równa 300. Gdyby w tym teście wzięło udział o 5 uczniów mniej,
+    a łączna liczba punktów pozostałaby taka sama, to średnia liczba punktów przypadająca na jednego ucznia
+    byłaby o 2 punkty większa. Oblicz, ilu uczniów pisało ten test, oraz wyznacz średnią liczbę punktów
+    przypadającą na jednego ucznia.
+  statement_latex: \frac{300}{n - 5} = \frac{300}{n} + 2
+  solution: |-
+    Oznaczmy przez n liczbę uczniów piszących test; n jest liczbą całkowitą i n > 5 (inaczej druga sytuacja nie miałaby sensu).
+
+    Średnia liczba punktów w rzeczywistej sytuacji to 300/n, a w sytuacji hipotetycznej 300/(n − 5). Z treści zadania:
+    300/(n − 5) = 300/n + 2.
+
+    Mnożymy obie strony przez n(n − 5) ≠ 0:
+    300n = 300(n − 5) + 2n(n − 5),
+    300n = 300n − 1500 + 2n² − 10n,
+    0 = 2n² − 10n − 1500,
+    n² − 5n − 750 = 0.
+
+    Δ = (−5)² − 4·1·(−750) = 25 + 3000 = 3025, √Δ = 55.
+    n = (5 − 55)/2 = −25 albo n = (5 + 55)/2 = 30.
+
+    Liczba uczniów musi być dodatnia i większa od 5, więc odrzucamy n = −25. Zatem n = 30.
+
+    Średnia liczba punktów: 300/30 = 10 punktów.
+    Sprawdzenie: przy 25 uczniach średnia wynosiłaby 300/25 = 12, czyli o 2 punkty więcej ✓.
+
+    Odpowiedź: test pisało 30 uczniów, a średnia liczba punktów wynosi 10.
+  solution_steps:
+  - Wprowadź niewiadomą n – liczbę uczniów, przy założeniu n > 5 i n całkowite.
+  - 'Zapisz obie średnie: rzeczywistą 300/n oraz hipotetyczną 300/(n − 5).'
+  - Ułóż równanie 300/(n − 5) = 300/n + 2.
+  - Sprowadź je do postaci n² − 5n − 750 = 0 i oblicz Δ = 3025, √Δ = 55.
+  - Wyznacz pierwiastki n = −25 oraz n = 30 i odrzuć ujemny, bo liczba uczniów jest dodatnia.
+  - 'Oblicz średnią: 300/30 = 10 punktów i sprawdź warunek zadania.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: liczba_uczniow
+      answer:
+        kind: NUMERIC
+        value: 30.0
+    - name: srednia
+      answer:
+        kind: NUMERIC
+        value: 10.0
+  checks:
+  - kind: evaluate
+    expr: \frac{5 + \sqrt{25 + 4 \cdot 750}}{2}
+    var: n
+    part: liczba_uczniow
+  - kind: evaluate
+    expr: \frac{300}{30}
+    var: n
+    part: srednia
+  stated_model:
+    variable: n
+    objective_latex: \frac{300}{n}
+    domain_lo: '5'
+    goal: value
+    constraint_used: \frac{300}{n - 5} = \frac{300}{n} + 2,\ n > 5,\ n \in \mathbb{N}
+  skills:
+  - wprowadzenie niewiadomej opisującej liczebność zestawu
+  - zapis średniej jako iloraz sumy przez liczebność
+  - równanie wymierne sprowadzone do kwadratowego
+  - odrzucenie pierwiastka niezgodnego z warunkami zadania
+  verification:
+    checkability: STATED_MODEL
+    note: 'stage 1 inconclusive: kind mismatch: answer=SYMBOLIC reference=MULTIPART'
+- id: g-ch-t04
+  slot: CHALLENGE
+  ramp_index: 2
+  difficulty: 5
+  exercise_type: modelowanie zestawu danych opisanego słownie – średnia, mediana, dominanta i interpretacja
+  statement: 'W pewnej małej firmie pracuje 10 osób: 7 pracowników szeregowych, 2 kierowników i dyrektor.
+    Każdy pracownik szeregowy otrzymuje miesięcznie tę samą płacę, każdy kierownik otrzymuje miesięcznie
+    o 1000 zł więcej niż pracownik szeregowy, a dyrektor otrzymuje miesięcznie dwa razy tyle, co pracownik
+    szeregowy. Średnia miesięczna płaca w tej firmie jest równa 4600 zł. a) Oblicz miesięczną płacę pracownika
+    szeregowego oraz miesięczną płacę dyrektora. b) Wyznacz medianę i dominantę miesięcznych płac w tej
+    firmie. c) Oblicz, jaki procent pracowników tej firmy zarabia miesięcznie mniej niż średnia płaca
+    w firmie, i uzasadnij, że mediana lepiej niż średnia opisuje typową płacę w tej firmie.'
+  statement_latex: \frac{7 \cdot x + 2 \cdot \left(x + 1000\right) + 2 \cdot x}{10} = 4600
+  solution: |-
+    a) Oznaczmy przez x (w złotych) miesięczną płacę pracownika szeregowego, x > 0. Wtedy każdy kierownik zarabia x + 1000, a dyrektor 2x.
+    Łączna płaca wszystkich 10 osób jest równa 10 · 4600 = 46000 zł, więc
+    7x + 2(x + 1000) + 2x = 46000,
+    7x + 2x + 2000 + 2x = 46000,
+    11x = 44000,
+    x = 4000.
+    Zatem pracownik szeregowy zarabia 4000 zł, kierownik 4000 + 1000 = 5000 zł, a dyrektor 2 · 4000 = 8000 zł.
+    Sprawdzenie: (7 · 4000 + 2 · 5000 + 8000)/10 = (28000 + 10000 + 8000)/10 = 46000/10 = 4600 ✓.
+
+    b) Szereg uporządkowany płac (10 danych): 4000, 4000, 4000, 4000, 4000, 4000, 4000, 5000, 5000, 8000.
+    n = 10 jest parzyste, więc mediana to średnia elementów o numerach 5 i 6: Me = (4000 + 4000)/2 = 4000 zł.
+    Dominanta: płaca 4000 zł występuje 7 razy, czyli najczęściej, więc D = 4000 zł.
+
+    c) Mniej niż średnia 4600 zł zarabia 7 pracowników szeregowych (4000 < 4600), czyli 7/10 · 100% = 70% wszystkich zatrudnionych.
+    Uzasadnienie: aż 70% osób w firmie zarabia mniej niż średnia, bo jedna wysoka płaca dyrektora (8000 zł) i dwie płace kierowników podnoszą sumę, a więc i średnią. Mediana (4000 zł) jest odporna na taką wartość odstającą i pokrywa się z płacą, którą otrzymuje większość zatrudnionych, więc to ona lepiej opisuje typową płacę w tej firmie.
+  solution_steps:
+  - 'Wprowadź zmienną x – miesięczną płacę pracownika szeregowego; kierownik: x + 1000, dyrektor: 2x.'
+  - 'Zapisz łączną płacę: 10 · 4600 = 46000 zł.'
+  - 'Ułóż równanie 7x + 2(x + 1000) + 2x = 46000 i rozwiąż: 11x = 44000, x = 4000.'
+  - 'Wyznacz pozostałe płace: kierownik 5000 zł, dyrektor 8000 zł.'
+  - 'Ustaw płace w szereg niemalejący i wyznacz medianę jako średnią 5. i 6. elementu: Me = 4000 zł.'
+  - 'Wskaż dominantę: 4000 zł występuje 7 razy, czyli najczęściej.'
+  - 'Policz, ilu pracowników zarabia mniej niż 4600 zł: 7 osób, czyli 70%, i sformułuj wniosek o odporności
+    mediany na wartość odstającą.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: placa_szeregowego
+      answer:
+        kind: NUMERIC
+        value: 4000.0
+    - name: placa_dyrektora
+      answer:
+        kind: NUMERIC
+        value: 8000.0
+    - name: mediana
+      answer:
+        kind: NUMERIC
+        value: 4000.0
+    - name: dominanta
+      answer:
+        kind: NUMERIC
+        value: 4000.0
+    - name: procent_ponizej_sredniej
+      answer:
+        kind: NUMERIC
+        value: 70.0
+    - name: uzasadnienie
+      answer:
+        kind: NOT_MACHINE_CHECKABLE
+        reason: 'Uczeń musi uzasadnić, że mediana lepiej opisuje typową płacę: wskazać, że wysoka płaca
+          dyrektora (wartość odstająca) podnosi średnią, przez co 70% zatrudnionych zarabia mniej niż
+          średnia, natomiast mediana 4000 zł jest odporna na tę wartość i równa płacie większości pracowników.'
+  checks:
+  - kind: solve_equation
+    expr: \frac{7 \cdot x + 2 \cdot \left(x + 1000\right) + 2 \cdot x}{10} = 4600
+    part: placa_szeregowego
+  - kind: evaluate
+    expr: 2 \cdot 4000
+    part: placa_dyrektora
+  - kind: evaluate
+    expr: \frac{4000 + 4000}{2}
+    part: mediana
+  - kind: evaluate
+    expr: \frac{7}{10} \cdot 100
+    part: procent_ponizej_sredniej
+  stated_model:
+    variable: x
+    objective_latex: \frac{7 \cdot x + 2 \cdot \left(x + 1000\right) + 2 \cdot x}{10}
+    domain_lo: '0'
+    goal: value
+    constraint_used: \frac{7 \cdot x + 2 \cdot \left(x + 1000\right) + 2 \cdot x}{10} = 4600,\ x > 0
+  skills:
+  - wprowadzenie zmiennej opisującej nieznaną wartość danych
+  - zapis sumy danych z opisu słownego
+  - równanie z warunku na średnią
+  - mediana i dominanta zestawu z powtórzeniami
+  - porównanie średniej z medianą przy wartości odstającej
+  verification:
+    checkability: STATED_MODEL
+    note: 'stage 1 inconclusive: kind mismatch: answer=SYMBOLIC reference=MULTIPART'

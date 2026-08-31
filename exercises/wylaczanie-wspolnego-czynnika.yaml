@@ -1,0 +1,740 @@
+section: wylaczanie-wspolnego-czynnika
+name: Wyłączanie wspólnego czynnika przed nawias
+scope: Taking a common monomial factor out of an algebraic sum; recognising a common factor and factoring
+  by grouping in simple cases.
+requirements:
+- II.3
+counts:
+  total: 16
+  DETERMINISTIC: 12
+  NOT_MACHINE_CHECKABLE: 3
+  STATED_MODEL: 1
+exercises:
+- id: g-th-00
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: wyłączanie wspólnego czynnika liczbowego
+  statement: Wyłącz przed nawias największy wspólny czynnik wyrażenia 8a + 12.
+  statement_latex: 8\cdot a + 12
+  solution: 'Suma ma dwa wyrazy: 8a oraz 12. Litera a występuje tylko w pierwszym wyrazie, więc nie można
+    jej wyłączyć. Zostaje część liczbowa: NWD(8, 12) = 4. Dzielimy każdy wyraz przez 4: 8a : 4 = 2a oraz
+    12 : 4 = 3. Zatem 8a + 12 = 4\left(2a + 3\right). Sprawdzenie: 4·2a + 4·3 = 8a + 12. ✓'
+  solution_steps:
+  - 'Wypisz wyrazy sumy: 8a oraz 12.'
+  - 'Sprawdź litery: a nie występuje w wyrazie 12, więc litery nie wyłączamy.'
+  - Wyznacz NWD(8, 12) = 4.
+  - 'Podziel wyrazy przez 4: 8a : 4 = 2a, 12 : 4 = 3.'
+  - 'Zapisz iloczyn: 8a + 12 = 4(2a + 3).'
+  - 'Sprawdź przez wymnożenie: 4·2a + 4·3 = 8a + 12.'
+  answer:
+    kind: SYMBOLIC
+    latex: 4\left(2\cdot a + 3\right)
+  checks:
+  - kind: simplify
+    expr: 8\cdot a + 12
+    var: a
+  skills:
+  - wyznaczanie NWD współczynników
+  - wyłączanie jednomianu przed nawias
+  - sprawdzanie rozkładu przez wymnożenie
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: ''4\\left(2\\cdot a + 3\\right)'' vs ''8*a + 12'''
+- id: g-th-01
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: wyłączanie potęgi zmiennej
+  statement: Zapisz w postaci iloczynu wyrażenie x^7 + x^4, wyłączając przed nawias zmienną x w najniższej
+    występującej potędze.
+  statement_latex: x^{7} + x^{4}
+  solution: 'Wykładniki zmiennej x to 7 i 4, najmniejszy z nich to 4, więc wyłączamy x^{4}. Dzielimy wyrazy
+    (wykładniki odejmujemy): x^{7} : x^{4} = x^{3}, x^{4} : x^{4} = 1. Zatem x^{7} + x^{4} = x^{4}\left(x^{3}
+    + 1\right). Sprawdzenie: x^{4}·x^{3} + x^{4}·1 = x^{7} + x^{4}. ✓'
+  solution_steps:
+  - 'Odczytaj wykładniki zmiennej x: 7 oraz 4.'
+  - 'Wybierz najmniejszy wykładnik: k = 4, wyłączasz x^4.'
+  - 'Podziel wyrazy, odejmując wykładniki: x^7 : x^4 = x^3, x^4 : x^4 = 1.'
+  - 'Zapisz wynik: x^7 + x^4 = x^4(x^3 + 1).'
+  - Sprawdź przez wymnożenie.
+  answer:
+    kind: SYMBOLIC
+    latex: x^{4}\left(x^{3} + 1\right)
+  checks:
+  - kind: simplify
+    expr: x^{7} + x^{4}
+  skills:
+  - rozpoznanie najniższego wykładnika
+  - wyłączanie potęgi zmiennej przed nawias
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: ''x^{4}\\left(x^{3} + 1\\right)'' vs ''x**7 + x**4'''
+- id: g-th-02
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: obliczanie wartości liczbowej przez wyłączenie czynnika
+  statement: Oblicz bez użycia kalkulatora wartość wyrażenia 53\cdot 17 + 53\cdot 83.
+  statement_latex: 53\cdot 17 + 53\cdot 83
+  solution: 'W obu wyrazach powtarza się czynnik 53, więc wyłączamy go przed nawias: 53·17 + 53·83 = 53\left(17
+    + 83\right) = 53\cdot 100 = 5300.'
+  solution_steps:
+  - Zauważ, że w obu iloczynach powtarza się czynnik 53.
+  - 'Wyłącz 53 przed nawias: 53(17 + 83).'
+  - 'Uprość zawartość nawiasu: 17 + 83 = 100.'
+  - 'Wykonaj mnożenie: 53·100 = 5300.'
+  answer:
+    kind: NUMERIC
+    value: 5300.0
+  checks:
+  - kind: evaluate
+    expr: 53\cdot 17 + 53\cdot 83
+  skills:
+  - rozpoznanie wspólnego czynnika liczbowego
+  - obliczenia bez kalkulatora
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 5300.0 vs 5300.0 (tol 1e-09)'
+- id: g-ex-03
+  slot: EXERCISE
+  ramp_index: 1
+  difficulty: 2
+  exercise_type: wyłączanie największego wspólnego czynnika jednomianowego
+  statement: 'Zapisz w postaci iloczynu, wyłączając przed nawias największy wspólny czynnik: a) 12x^2y
+    - 30xy^2, b) 5a^3 + 5a^2 - 10a.'
+  statement_latex: \text{a) } 12\cdot x^{2}\cdot y - 30\cdot x\cdot y^{2},\qquad \text{b) } 5\cdot a^{3}
+    + 5\cdot a^{2} - 10\cdot a
+  solution: |-
+    a) Współczynniki: 12 i 30, NWD(12, 30) = 6. Litera x: wykładniki 2 i 1, bierzemy x. Litera y: wykładniki 1 i 2, bierzemy y. Wyłączany jednomian to 6xy. Dzielimy: 12x^{2}y : 6xy = 2x, \left(-30xy^{2}\right) : 6xy = -5y. Zatem 12x^{2}y - 30xy^{2} = 6xy\left(2x - 5y\right). Sprawdzenie: 6xy·2x - 6xy·5y = 12x^{2}y - 30xy^{2}. ✓
+    b) Współczynniki: 5, 5, 10, NWD = 5. Litera a występuje we wszystkich wyrazach, najniższy wykładnik to 1, więc wyłączamy 5a. Dzielimy: 5a^{3} : 5a = a^{2}, 5a^{2} : 5a = a, \left(-10a\right) : 5a = -2. Zatem 5a^{3} + 5a^{2} - 10a = 5a\left(a^{2} + a - 2\right). W nawiasie są trzy wyrazy — tyle, ile w sumie wyjściowej. Sprawdzenie: 5a·a^{2} + 5a·a - 5a·2 = 5a^{3} + 5a^{2} - 10a. ✓
+  solution_steps:
+  - a) Oblicz NWD(12, 30) = 6.
+  - 'a) Weź x i y w najniższych wykładnikach: x^1 i y^1, czyli czynnik 6xy.'
+  - 'a) Podziel wyrazy: 12x^2y : 6xy = 2x, (−30xy^2) : 6xy = −5y, więc 12x^2y − 30xy^2 = 6xy(2x − 5y).'
+  - 'b) Oblicz NWD(5, 5, 10) = 5 i weź a w najniższym wykładniku: czynnik 5a.'
+  - 'b) Podziel wyrazy: 5a^3 : 5a = a^2, 5a^2 : 5a = a, (−10a) : 5a = −2.'
+  - 'b) Zapisz wynik: 5a^3 + 5a^2 − 10a = 5a(a^2 + a − 2) i sprawdź przez wymnożenie.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: a
+      answer:
+        kind: SYMBOLIC
+        latex: 6\cdot x\cdot y\left(2\cdot x - 5\cdot y\right)
+    - name: b
+      answer:
+        kind: SYMBOLIC
+        latex: 5\cdot a\left(a^{2} + a - 2\right)
+  checks:
+  - kind: simplify
+    expr: 12\cdot x^{2}\cdot y - 30\cdot x\cdot y^{2}
+    part: a
+  - kind: simplify
+    expr: 5\cdot a^{3} + 5\cdot a^{2} - 10\cdot a
+    var: a
+    part: b
+  skills:
+  - NWD współczynników
+  - najniższe wykładniki zmiennych
+  - poprawny zapis jedynki w nawiasie
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [a] SymPy solved it fresh: ''6\\cdot x\\cdot y\\left(2\\cdot
+      x - 5\\cdot y\\right)'' vs ''6*x*y*(2*x - 5*y)'' ; [b] SymPy solved it fresh: ''5\\cdot a\\left(a^{2}
+      + a - 2\\right)'' vs ''5*a*(a**2 + a - 2)'''
+- id: g-ex-04
+  slot: EXERCISE
+  ramp_index: 2
+  difficulty: 3
+  exercise_type: wyłączanie czynnika ujemnego, wspólnego nawiasu i potęgi liczby
+  statement: a) Zapisz wyrażenie -8x^3y + 12x^2y^2 - 4x^2y w postaci iloczynu, wyłączając przed nawias
+    czynnik ujemny. b) Rozłóż na czynniki wyrażenie 3a(a + 7) - (a + 7). c) Oblicz wartość liczby 3^{21}
+    - 3^{19} i zapisz wynik w postaci iloczynu liczby naturalnej i potęgi liczby 3.
+  statement_latex: \text{a) } -8\cdot x^{3}\cdot y + 12\cdot x^{2}\cdot y^{2} - 4\cdot x^{2}\cdot y,\qquad
+    \text{b) } 3\cdot a\left(a + 7\right) - \left(a + 7\right),\qquad \text{c) } 3^{21} - 3^{19}
+  solution: |-
+    a) Współczynniki 8, 12, 4 mają NWD = 4. Litera x: wykładniki 3, 2, 2 → x^{2}. Litera y: wykładniki 1, 2, 1 → y. Największy wspólny jednomian to 4x^{2}y, a ponieważ mamy wyłączyć czynnik ujemny, bierzemy -4x^{2}y. Dzielimy: \left(-8x^{3}y\right) : \left(-4x^{2}y\right) = 2x, \;12x^{2}y^{2} : \left(-4x^{2}y\right) = -3y, \;\left(-4x^{2}y\right) : \left(-4x^{2}y\right) = 1. Zatem -8x^{3}y + 12x^{2}y^{2} - 4x^{2}y = -4x^{2}y\left(2x - 3y + 1\right). Sprawdzenie: -4x^{2}y·2x = -8x^{3}y, -4x^{2}y·(-3y) = 12x^{2}y^{2}, -4x^{2}y·1 = -4x^{2}y. ✓
+    b) Drugi wyraz to 1·(a + 7). Wspólnym czynnikiem jest nawias (a + 7): 3a(a + 7) - 1·(a + 7) = \left(a + 7\right)\left(3a - 1\right). Sprawdzenie: (a+7)(3a-1) = 3a^{2} - a + 21a - 7 = 3a^{2} + 20a - 7 oraz 3a(a+7) - (a+7) = 3a^{2} + 21a - a - 7. ✓
+    c) Najniższa potęga to 3^{19}, a 3^{21} = 3^{19}\cdot 3^{2} = 9\cdot 3^{19}. Stąd 3^{21} - 3^{19} = 3^{19}\left(9 - 1\right) = 8\cdot 3^{19}.
+  solution_steps:
+  - 'a) Wyznacz największy wspólny jednomian: NWD(8,12,4) = 4, x w potędze 2, y w potędze 1 — czyli 4x^2y.'
+  - 'a) Dopisz minus: wyłączasz −4x^2y i dzielisz przez niego każdy wyraz (znaki się zmieniają).'
+  - 'a) Zapisz wynik: −8x^3y + 12x^2y^2 − 4x^2y = −4x^2y(2x − 3y + 1); pamiętaj o jedynce.'
+  - b) Zauważ, że drugi wyraz to 1·(a + 7), więc wspólnym czynnikiem jest nawias (a + 7).
+  - 'b) Wyłącz (a + 7): 3a(a + 7) − 1·(a + 7) = (a + 7)(3a − 1).'
+  - 'c) Wyłącz najniższą potęgę 3^19: 3^21 − 3^19 = 3^19(3^2 − 1) = 3^19·8 = 8·3^19.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: a
+      answer:
+        kind: SYMBOLIC
+        latex: -4\cdot x^{2}\cdot y\left(2\cdot x - 3\cdot y + 1\right)
+    - name: b
+      answer:
+        kind: SYMBOLIC
+        latex: \left(a + 7\right)\left(3\cdot a - 1\right)
+    - name: c
+      answer:
+        kind: SYMBOLIC
+        latex: 8\cdot 3^{19}
+  checks:
+  - kind: simplify
+    expr: -8\cdot x^{3}\cdot y + 12\cdot x^{2}\cdot y^{2} - 4\cdot x^{2}\cdot y
+    part: a
+  - kind: simplify
+    expr: 3\cdot a\left(a + 7\right) - \left(a + 7\right)
+    var: a
+    part: b
+  - kind: evaluate
+    expr: 3^{21} - 3^{19}
+    part: c
+  skills:
+  - wyłączanie czynnika ujemnego
+  - wspólny czynnik w postaci nawiasu
+  - wyłączanie potęgi liczby
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [a] SymPy solved it fresh: ''-4\\cdot x^{2}\\cdot y\\left(2\\cdot
+      x - 3\\cdot y + 1\\right)'' vs ''4*x**2*y*(-2*x + 3*y - 1)'' ; [b] SymPy solved it fresh: ''\\left(a
+      + 7\\right)\\left(3\\cdot a - 1\\right)'' vs ''3*a*(a + 7) - a - 7'' ; [c] SymPy solved it fresh:
+      9298091736.0 vs 9298091736.0 (tol 1e-09)'
+- id: g-ex-05
+  slot: EXERCISE
+  ramp_index: 3
+  difficulty: 4
+  exercise_type: grupowanie i równanie iloczynowe
+  statement: a) Rozłóż na czynniki metodą grupowania wyrażenie x^3 + 3x^2 + 4x + 12. b) Rozwiąż równanie
+    3x^2 = 12x. c) Wyjaśnij, dlaczego przy rozwiązywaniu równania z punktu b) nie wolno podzielić obu
+    jego stron przez x.
+  statement_latex: \text{a) } x^{3} + 3\cdot x^{2} + 4\cdot x + 12,\qquad \text{b) } 3\cdot x^{2} = 12\cdot
+    x
+  solution: |-
+    a) Wszystkie cztery wyrazy nie mają wspólnego czynnika, więc grupujemy pierwsze dwa i ostatnie dwa: \left(x^{3} + 3x^{2}\right) + \left(4x + 12\right). W pierwszej grupie wyłączamy x^{2}: x^{2}\left(x + 3\right); w drugiej wyłączamy 4: 4\left(x + 3\right). Powstał ten sam nawias (x + 3), więc wyłączamy go: x^{2}(x+3) + 4(x+3) = \left(x + 3\right)\left(x^{2} + 4\right). Sprawdzenie: (x+3)(x^{2}+4) = x^{3} + 4x + 3x^{2} + 12. ✓
+    b) Przenosimy wszystko na jedną stronę: 3x^{2} - 12x = 0. Wyłączamy 3x: 3x\left(x - 4\right) = 0. Iloczyn jest zerem, gdy 3x = 0 lub x - 4 = 0, czyli x = 0 lub x = 4.
+    c) Dzielenie obu stron przez x jest dozwolone tylko wtedy, gdy x \neq 0. Liczba 0 spełnia to równanie (3·0^{2} = 12·0), więc po podzieleniu przez x rozwiązanie x = 0 zostałoby zgubione i otrzymalibyśmy tylko x = 4.
+  solution_steps:
+  - a) Sprawdź, że wszystkie cztery wyrazy nie mają wspólnego czynnika.
+  - 'a) Pogrupuj: (x^3 + 3x^2) + (4x + 12).'
+  - 'a) Wyłącz w grupach: x^2(x + 3) + 4(x + 3).'
+  - 'a) Wyłącz wspólny nawias: (x + 3)(x^2 + 4) i sprawdź przez wymnożenie.'
+  - 'b) Przenieś wszystko na jedną stronę: 3x^2 − 12x = 0.'
+  - 'b) Wyłącz 3x: 3x(x − 4) = 0.'
+  - 'b) Zastosuj warunek iloczyn = 0: x = 0 lub x = 4.'
+  - c) Uzasadnij, że dzielenie przez x wymaga założenia x ≠ 0 i gubi rozwiązanie x = 0.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: a
+      answer:
+        kind: SYMBOLIC
+        latex: \left(x + 3\right)\left(x^{2} + 4\right)
+    - name: b
+      answer:
+        kind: SET
+        members:
+        - '0'
+        - '4'
+    - name: c
+      answer:
+        kind: NOT_MACHINE_CHECKABLE
+        reason: Uczeń ma wyjaśnić, że dzielenie stron równania przez x wymaga założenia x ≠ 0, a liczba
+          0 spełnia to równanie, więc dzielenie prowadzi do utraty rozwiązania x = 0.
+  checks:
+  - kind: simplify
+    expr: x^{3} + 3\cdot x^{2} + 4\cdot x + 12
+    part: a
+  - kind: solve_equation
+    expr: 3\cdot x^{2} = 12\cdot x
+    part: b
+  skills:
+  - rozkład przez grupowanie
+  - równanie iloczynowe
+  - uzasadnianie zakazu dzielenia przez niewiadomą
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'part(s) need a human: c · 2/2 other parts solved fresh'
+- id: g-ex-t00
+  slot: EXERCISE
+  ramp_index: 6
+  difficulty: 4
+  exercise_type: rozkład na czynniki przez grupowanie + równanie iloczynowe
+  statement: |-
+    Dane jest wyrażenie W\left(x\right)=2x^{3}-6x^{2}-5x+15.
+    a) Rozłóż wyrażenie W\left(x\right) na czynniki, stosując metodę grupowania wyrazów.
+    b) Rozwiąż równanie W\left(x\right)=0.
+  statement_latex: W\left(x\right)=2\cdot x^{3}-6\cdot x^{2}-5\cdot x+15
+  solution: |-
+    a) Grupujemy dwa pierwsze i dwa ostatnie wyrazy:
+    2x^{3}-6x^{2}-5x+15=\left(2x^{3}-6x^{2}\right)+\left(-5x+15\right).
+    W pierwszej grupie wspólnym czynnikiem jest 2x^{2}: 2x^{3}-6x^{2}=2x^{2}\left(x-3\right).
+    W drugiej grupie wyłączamy czynnik ujemny -5, aby otrzymać ten sam nawias: -5x+15=-5\left(x-3\right).
+    Zatem W\left(x\right)=2x^{2}\left(x-3\right)-5\left(x-3\right)=\left(x-3\right)\left(2x^{2}-5\right).
+    Sprawdzenie: \left(x-3\right)\left(2x^{2}-5\right)=2x^{3}-5x-6x^{2}+15=2x^{3}-6x^{2}-5x+15. ✓
+
+    b) Iloczyn jest równy zeru, gdy co najmniej jeden czynnik jest zerem:
+    x-3=0 lub 2x^{2}-5=0.
+    Z pierwszego równania x=3.
+    Z drugiego: 2x^{2}=5, czyli x^{2}=\frac{5}{2}, więc x=\sqrt{\frac{5}{2}}=\frac{\sqrt{10}}{2} lub x=-\frac{\sqrt{10}}{2}.
+    Równanie ma trzy rozwiązania: x=3,\ x=\frac{\sqrt{10}}{2},\ x=-\frac{\sqrt{10}}{2}.
+  solution_steps:
+  - 'Podziel cztery wyrazy na dwie grupy: (2x^3 - 6x^2) oraz (-5x + 15).'
+  - W pierwszej grupie wyłącz 2x^2, otrzymując 2x^2(x-3).
+  - W drugiej grupie wyłącz czynnik ujemny -5, otrzymując -5(x-3) — nawiasy są teraz identyczne.
+  - 'Wyłącz wspólny nawias: W(x) = (x-3)(2x^2-5); sprawdź rozkład przez wymnożenie.'
+  - Zapisz równanie iloczynowe (x-3)(2x^2-5)=0 i przyrównaj każdy czynnik do zera.
+  - Rozwiąż x-3=0 oraz 2x^2-5=0, otrzymując x=3, x=\frac{\sqrt{10}}{2}, x=-\frac{\sqrt{10}}{2}.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: rozklad
+      answer:
+        kind: SYMBOLIC
+        latex: \left(x-3\right)\left(2\cdot x^{2}-5\right)
+    - name: rozwiazania
+      answer:
+        kind: SET
+        members:
+        - '3'
+        - \frac{\sqrt{10}}{2}
+        - -\frac{\sqrt{10}}{2}
+  checks:
+  - kind: simplify
+    expr: 2\cdot x^{2}\cdot\left(x-3\right)-5\cdot\left(x-3\right)
+    part: rozklad
+  - kind: solve_equation
+    expr: 2\cdot x^{3}-6\cdot x^{2}-5\cdot x+15=0
+    part: rozwiazania
+  skills:
+  - grupowanie wyrazów
+  - wyłączanie czynnika ujemnego
+  - rozkład na czynniki
+  - równanie iloczynowe
+  - sprawdzenie rozkładu przez wymnożenie
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [rozklad] SymPy solved it fresh: ''\\left(x-3\\right)\\left(2\\cdot
+      x^{2}-5\\right)'' vs ''2*x**2*(x - 3) - 5*x + 15'' ; [rozwiazania] SymPy solved it fresh: 3 members
+      matched'
+- id: g-ex-t01
+  slot: EXERCISE
+  ramp_index: 7
+  difficulty: 4
+  exercise_type: wyłączanie jednomianu ujemnego, wartość liczbowa, potęgi
+  statement: |-
+    a) Zapisz wyrażenie -8a^{3}b^{2}+12a^{2}b^{3}-4a^{2}b^{2} w postaci iloczynu, wyłączając przed nawias czynnik ujemny.
+    b) Korzystając z otrzymanej postaci iloczynowej, oblicz wartość tego wyrażenia dla a=2 oraz b=-1.
+    c) Oblicz bez użycia kalkulatora wartość wyrażenia \frac{5^{21}-5^{19}}{24\cdot 5^{18}}.
+  statement_latex: -8\cdot a^{3}\cdot b^{2}+12\cdot a^{2}\cdot b^{3}-4\cdot a^{2}\cdot b^{2},\qquad \frac{5^{21}-5^{19}}{24\cdot
+    5^{18}}
+  solution: |-
+    a) Współczynniki: 8, 12, 4 — NWD(8,12,4)=4. Litera a występuje w wykładnikach 3, 2, 2, więc bierzemy a^{2}. Litera b występuje w wykładnikach 2, 3, 2, więc bierzemy b^{2}. Największy wspólny czynnik jednomianowy to 4a^{2}b^{2}; ponieważ pierwszy wyraz jest ujemny, wyłączamy -4a^{2}b^{2}.
+    Dzielimy każdy wyraz przez -4a^{2}b^{2}:
+    \left(-8a^{3}b^{2}\right):\left(-4a^{2}b^{2}\right)=2a,\quad 12a^{2}b^{3}:\left(-4a^{2}b^{2}\right)=-3b,\quad \left(-4a^{2}b^{2}\right):\left(-4a^{2}b^{2}\right)=1.
+    Zatem -8a^{3}b^{2}+12a^{2}b^{3}-4a^{2}b^{2}=-4a^{2}b^{2}\left(2a-3b+1\right).
+    Sprawdzenie: -4a^{2}b^{2}\cdot 2a=-8a^{3}b^{2}; -4a^{2}b^{2}\cdot\left(-3b\right)=12a^{2}b^{3}; -4a^{2}b^{2}\cdot 1=-4a^{2}b^{2}. ✓
+
+    b) Dla a=2, b=-1: -4\cdot 2^{2}\cdot\left(-1\right)^{2}\cdot\left(2\cdot 2-3\cdot\left(-1\right)+1\right)=-16\cdot\left(4+3+1\right)=-16\cdot 8=-128.
+
+    c) W liczniku najniższa potęga to 5^{19}: 5^{21}-5^{19}=5^{19}\left(5^{2}-1\right)=5^{19}\cdot 24.
+    Zatem \frac{5^{21}-5^{19}}{24\cdot 5^{18}}=\frac{24\cdot 5^{19}}{24\cdot 5^{18}}=5.
+  solution_steps:
+  - 'Wyznacz NWD współczynników: NWD(8,12,4)=4.'
+  - 'Weź każdą literę w najniższym występującym wykładniku: a^2 oraz b^2.'
+  - Ponieważ pierwszy wyraz jest ujemny, wyłącz -4a^2b^2 i podziel przez niego każdy wyraz (pamiętaj o
+    1 w ostatnim wyrazie).
+  - 'Zapisz wynik: -4a^2b^2(2a-3b+1) i sprawdź go przez wymnożenie.'
+  - 'Podstaw a=2, b=-1 do postaci iloczynowej: -16·8 = -128.'
+  - 'W liczniku wyłącz 5^{19}: 5^{21}-5^{19}=5^{19}(25-1)=24·5^{19}, po skróceniu otrzymasz 5.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: postac_iloczynowa
+      answer:
+        kind: SYMBOLIC
+        latex: -4\cdot a^{2}\cdot b^{2}\left(2\cdot a-3\cdot b+1\right)
+    - name: wartosc
+      answer:
+        kind: NUMERIC
+        value: -128.0
+    - name: potegi
+      answer:
+        kind: NUMERIC
+        value: 5.0
+  checks:
+  - kind: simplify
+    expr: -4\cdot a^{2}\cdot b^{2}\cdot\left(2\cdot a-3\cdot b+1\right)
+    var: a
+    part: postac_iloczynowa
+  - kind: evaluate
+    expr: -4\cdot 2^{2}\cdot\left(-1\right)^{2}\cdot\left(2\cdot 2-3\cdot\left(-1\right)+1\right)
+    var: a
+    part: wartosc
+  - kind: evaluate
+    expr: \frac{5^{21}-5^{19}}{24\cdot 5^{18}}
+    part: potegi
+  skills:
+  - wyznaczanie największego wspólnego czynnika jednomianowego
+  - wyłączanie czynnika ujemnego
+  - obliczanie wartości wyrażenia algebraicznego
+  - wyłączanie potęgi liczby
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [postac_iloczynowa] SymPy solved it fresh: ''-4\\cdot a^{2}\\cdot
+      b^{2}\\left(2\\cdot a-3\\cdot b+1\\right)'' vs ''a**2*b**2*(-8*a + 12*b - 4)'' ; [wartosc] SymPy
+      solved it fresh: -128.0 vs -128.0 (tol 1e-09) ; [potegi] SymPy solved it fresh: 5.0 vs 5.0 (tol
+      1e-09)'
+- id: g-cm-06
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: wykrycie błędu w cudzym rozkładzie
+  statement: 'Uczeń rozkładał na czynniki wyrażenie 7b^2 - 7b i zapisał: 7b^2 - 7b = 7b\cdot b, tłumacząc,
+    że „po wyłączeniu 7b z wyrazu -7b nic nie zostaje". Wskaż błąd w tym rozumowaniu i podaj poprawny
+    rozkład wyrażenia 7b^2 - 7b na czynniki.'
+  statement_latex: 7\cdot b^{2} - 7\cdot b
+  solution: |-
+    Błędne rozumowanie: uczeń dzieli 7b^{2} przez 7b, dostaje b, a drugi wyraz „znika", więc otrzymuje 7b\cdot b = 7b^{2}. Wystarczy wymnożyć: 7b·b = 7b^{2}, a to nie jest wyrażenie wyjściowe — brakuje składnika -7b. Ponadto w nawiasie musi być tyle wyrazów, ile było w sumie wyjściowej, czyli dwa.
+    Poprawnie: wyłączanie czynnika to dzielenie, a wyraz podzielony przez samego siebie daje 1, a nie 0: \left(-7b\right) : \left(7b\right) = -1. Zatem 7b^{2} - 7b = 7b\left(b - 1\right). Sprawdzenie: 7b·b - 7b·1 = 7b^{2} - 7b. ✓
+  solution_steps:
+  - 'Wypisz błędny wynik ucznia: 7b·b i wymnóż go: 7b·b = 7b^2 ≠ 7b^2 − 7b.'
+  - 'Nazwij błąd: zgubiona jedynka — wyraz równy wyłączanemu czynnikowi daje w nawiasie 1, nie 0.'
+  - 'Podziel poprawnie: 7b^2 : 7b = b, (−7b) : 7b = −1.'
+  - 'Zapisz poprawny rozkład: 7b^2 − 7b = 7b(b − 1).'
+  - 'Sprawdź przez wymnożenie: 7b·b − 7b·1 = 7b^2 − 7b.'
+  answer:
+    kind: SYMBOLIC
+    latex: 7\cdot b\left(b - 1\right)
+  checks:
+  - kind: simplify
+    expr: 7\cdot b^{2} - 7\cdot b
+    var: b
+  skills:
+  - wyłączanie jednomianu
+  - poprawny zapis jedynki w nawiasie
+  - sprawdzanie rozkładu przez wymnożenie
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: ''7\\cdot b\\left(b - 1\\right)'' vs ''7*b*(b - 1)'''
+- id: g-cm-07
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: wykrycie błędu w cudzym rozkładzie
+  statement: 'Uczeń zapisał: 5x^2 + 3x^5 = x^5\left(5x^{-3} + 3\right), tłumacząc, że „wyłącza się największą
+    potęgę zmiennej". Wyjaśnij, dlaczego taki zapis nie jest poprawnym rozkładem sumy algebraicznej na
+    czynniki, i podaj poprawną postać iloczynową wyrażenia 5x^2 + 3x^5.'
+  statement_latex: 5\cdot x^{2} + 3\cdot x^{5}
+  solution: |-
+    Błędne rozumowanie: uczeń wyłącza x^{5}, więc pierwszy wyraz dzieli przez x^{5}: 5x^{2} : x^{5} = 5x^{-3}. Wynik jest wprawdzie równy wyjściowemu wyrażeniu dla x \neq 0, ale w nawiasie pojawił się ujemny wykładnik — a to nie jest już wielomian i taki zapis nie jest przyjętym rozkładem na czynniki. Ujemny wykładnik jest sygnałem, że wybrano zły czynnik.
+    Poprawnie: wykładniki zmiennej x to 2 i 5, najmniejszy z nich to 2, więc wyłączamy x^{2}: 5x^{2} : x^{2} = 5, \;3x^{5} : x^{2} = 3x^{3}. Zatem 5x^{2} + 3x^{5} = x^{2}\left(5 + 3x^{3}\right). Sprawdzenie: x^{2}·5 + x^{2}·3x^{3} = 5x^{2} + 3x^{5}. ✓
+  solution_steps:
+  - Zauważ, że po wyłączeniu x^5 w nawiasie powstał ujemny wykładnik (5x^{-3}) — to sygnał złego wyboru
+    czynnika.
+  - 'Przypomnij zasadę: wyłączamy zmienną w najniższym występującym wykładniku.'
+  - Najniższy wykładnik to 2, więc wyłącz x^2.
+  - 'Podziel wyrazy: 5x^2 : x^2 = 5, 3x^5 : x^2 = 3x^3.'
+  - 'Zapisz poprawny rozkład: 5x^2 + 3x^5 = x^2(5 + 3x^3) i sprawdź przez wymnożenie.'
+  answer:
+    kind: SYMBOLIC
+    latex: x^{2}\left(5 + 3\cdot x^{3}\right)
+  checks:
+  - kind: simplify
+    expr: 5\cdot x^{2} + 3\cdot x^{5}
+  skills:
+  - wybór najniższego wykładnika
+  - wyłączanie potęgi zmiennej
+  - sprawdzanie rozkładu
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: ''x^{2}\\left(5 + 3\\cdot x^{3}\\right)'' vs ''x**2*(3*x**3
+      + 5)'''
+- id: g-cm-08
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: wykrycie błędu w cudzym rozkładzie
+  statement: Uczeń rozłożył wyrażenie 4x^2 + 10 i otrzymał 2x\left(2x + 5\right). Sprawdź ten rozkład
+    przez wymnożenie, wskaż popełniony błąd i podaj poprawną postać iloczynową wyrażenia 4x^2 + 10.
+  statement_latex: 4\cdot x^{2} + 10
+  solution: |-
+    Błędne rozumowanie: uczeń wyłączył 2x, choć w drugim wyrazie, czyli w liczbie 10, litery x w ogóle nie ma. Sprawdzenie przez wymnożenie: 2x\left(2x + 5\right) = 4x^{2} + 10x \neq 4x^{2} + 10. Otrzymaliśmy 10x zamiast 10, więc rozkład jest błędny.
+    Poprawnie: wspólny czynnik musi dzielić KAŻDY wyraz. Litery x nie wyłączamy; zostaje część liczbowa NWD(4, 10) = 2. Dzielimy: 4x^{2} : 2 = 2x^{2}, \;10 : 2 = 5. Zatem 4x^{2} + 10 = 2\left(2x^{2} + 5\right). Sprawdzenie: 2·2x^{2} + 2·5 = 4x^{2} + 10. ✓
+  solution_steps:
+  - 'Wymnóż wynik ucznia: 2x(2x + 5) = 4x^2 + 10x — to nie jest wyrażenie wyjściowe.'
+  - 'Nazwij błąd: wyłączono literę x, której nie ma w wyrazie 10.'
+  - 'Ustal poprawny wspólny czynnik: tylko liczba, NWD(4, 10) = 2.'
+  - 'Podziel wyrazy przez 2: 4x^2 : 2 = 2x^2, 10 : 2 = 5.'
+  - 'Zapisz poprawny rozkład: 4x^2 + 10 = 2(2x^2 + 5) i sprawdź przez wymnożenie.'
+  answer:
+    kind: SYMBOLIC
+    latex: 2\left(2\cdot x^{2} + 5\right)
+  checks:
+  - kind: simplify
+    expr: 4\cdot x^{2} + 10
+  skills:
+  - sprawdzanie, czy litera występuje we wszystkich wyrazach
+  - wyłączanie NWD współczynników
+  - weryfikacja przez wymnożenie
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: ''2\\left(2\\cdot x^{2} + 5\\right)'' vs ''4*x**2 + 10'''
+- id: g-cm-09
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: wykrycie błędu w cudzym rozkładzie
+  statement: 'Uczeń wyłączył przed nawias czynnik -3 z wyrażenia -6x + 15 i zapisał: -6x + 15 = -3\left(2x
+    + 5\right), tłumacząc, że „minus dotyczy tylko pierwszego wyrazu". Wskaż błąd i podaj poprawny rozkład
+    wyrażenia -6x + 15 z wyłączonym czynnikiem ujemnym.'
+  statement_latex: -6\cdot x + 15
+  solution: |-
+    Błędne rozumowanie: uczeń zmienił znak tylko przy pierwszym wyrazie. Sprawdzenie: -3\left(2x + 5\right) = -6x - 15 \neq -6x + 15 — drugi wyraz wyszedł ze złym znakiem.
+    Poprawnie: wyłączenie czynnika ujemnego oznacza podzielenie KAŻDEGO wyrazu przez -3, więc znak zmienia się w każdym wyrazie: \left(-6x\right) : \left(-3\right) = 2x, \;15 : \left(-3\right) = -5. Zatem -6x + 15 = -3\left(2x - 5\right). Sprawdzenie: -3·2x + \left(-3\right)\cdot\left(-5\right) = -6x + 15. ✓
+  solution_steps:
+  - 'Wymnóż zapis ucznia: −3(2x + 5) = −6x − 15 — znak przy 15 jest zły.'
+  - 'Nazwij błąd: wyłączenie minusa zmienia znak każdego wyrazu, nie tylko pierwszego.'
+  - 'Podziel oba wyrazy przez −3: (−6x) : (−3) = 2x, 15 : (−3) = −5.'
+  - 'Zapisz poprawny rozkład: −6x + 15 = −3(2x − 5).'
+  - 'Sprawdź przez wymnożenie: −3·2x + (−3)·(−5) = −6x + 15.'
+  answer:
+    kind: SYMBOLIC
+    latex: -3\left(2\cdot x - 5\right)
+  checks:
+  - kind: simplify
+    expr: -6\cdot x + 15
+  skills:
+  - wyłączanie czynnika ujemnego
+  - zmiana znaków w nawiasie
+  - weryfikacja przez wymnożenie
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: ''-3\\left(2\\cdot x - 5\\right)'' vs ''15 - 6*x'''
+- id: g-cm-10
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: wykrycie błędu w cudzym rozkładzie
+  statement: 'Uczeń rozkładał na czynniki wyrażenie a(x - 4) + b(4 - x) i zapisał: a(x - 4) + b(4 - x)
+    = (x - 4)(a + b), tłumacząc, że „to ten sam nawias, tylko z przestawionymi wyrazami". Wyjaśnij, na
+    czym polega błąd, i podaj poprawną postać iloczynową tego wyrażenia.'
+  statement_latex: a\cdot\left(x - 4\right) + b\cdot\left(4 - x\right)
+  solution: |-
+    Błędne rozumowanie: uczeń uznał, że (4 - x) to to samo co (x - 4). Sprawdzenie przez wymnożenie: \left(x-4\right)\left(a+b\right) = ax + bx - 4a - 4b, natomiast a(x-4) + b(4-x) = ax - 4a + 4b - bx. Wyrażenia te są różne (np. dla x = 0, a = 1, b = 1 pierwsze daje -8, a drugie 4).
+    Przestawianie wyrazów jest dozwolone przy dodawaniu, ale nie przy odejmowaniu: 4 - x = -\left(x - 4\right). Zatem b\left(4 - x\right) = -b\left(x - 4\right) i całe wyrażenie zapisujemy jako a\left(x - 4\right) - b\left(x - 4\right) = \left(x - 4\right)\left(a - b\right). Sprawdzenie: (x-4)(a-b) = ax - bx - 4a + 4b, czyli dokładnie a(x-4) + b(4-x). ✓
+  solution_steps:
+  - 'Zauważ, że nawiasy (x − 4) i (4 − x) nie są równe, lecz przeciwne: 4 − x = −(x − 4).'
+  - 'Pokaż błąd liczbowo lub przez wymnożenie: (x − 4)(a + b) = ax + bx − 4a − 4b ≠ ax − 4a + 4b − bx.'
+  - 'Zamień drugi wyraz: b(4 − x) = −b(x − 4).'
+  - 'Wyłącz wspólny nawias: a(x − 4) − b(x − 4) = (x − 4)(a − b).'
+  - Sprawdź wynik przez wymnożenie.
+  answer:
+    kind: SYMBOLIC
+    latex: \left(x - 4\right)\left(a - b\right)
+  checks:
+  - kind: simplify
+    expr: a\cdot\left(x - 4\right) + b\cdot\left(4 - x\right)
+  skills:
+  - nawiasy przeciwne b − a = −(a − b)
+  - wyłączanie wspólnego nawiasu
+  - weryfikacja przez wymnożenie
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: ''\\left(x - 4\\right)\\left(a - b\\right)'' vs ''(a - b)*(x
+      - 4)'''
+- id: g-ch-t02
+  slot: CHALLENGE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: modelowanie geometryczne + równanie rozwiązywane przez wyłączenie czynnika
+  statement: Dłuższy bok pewnego prostokąta jest trzy razy dłuższy od jego boku krótszego. Pole tego prostokąta,
+    wyrażone w centymetrach kwadratowych, jest liczbowo równe potrojonemu obwodowi tego prostokąta, wyrażonemu
+    w centymetrach. Oblicz długość krótszego boku oraz pole tego prostokąta.
+  statement_latex: 3\cdot x^{2}=3\cdot\left(2\cdot x+2\cdot 3\cdot x\right)
+  solution: |-
+    Oznaczmy przez x długość krótszego boku prostokąta (w centymetrach), przy czym x>0. Wtedy dłuższy bok ma długość 3x.
+    Pole prostokąta: P=x\cdot 3x=3x^{2}.
+    Obwód prostokąta: L=2\cdot\left(x+3x\right)=8x, więc potrojony obwód to 3\cdot 8x=24x.
+    Z warunku zadania: 3x^{2}=24x.
+    Przenosimy wszystko na jedną stronę i wyłączamy wspólny czynnik (nie wolno dzielić przez x, bo x jest niewiadomą):
+    3x^{2}-24x=0,\qquad 3x\left(x-8\right)=0.
+    Stąd 3x=0 lub x-8=0, czyli x=0 albo x=8. Wartość x=0 odrzucamy, bo bok prostokąta ma długość dodatnią.
+    Zatem krótszy bok ma długość 8 cm, dłuższy 3\cdot 8=24 cm, a pole wynosi P=8\cdot 24=192 cm^{2}.
+    Sprawdzenie: obwód L=2\cdot\left(8+24\right)=64, a 3\cdot 64=192=P. ✓
+  solution_steps:
+  - 'Wprowadź zmienną: x — długość krótszego boku (x > 0), dłuższy bok ma długość 3x.'
+  - Zapisz pole P = 3x^2 oraz obwód L = 8x, a więc potrojony obwód 24x.
+  - Ułóż równanie 3x^2 = 24x wynikające z warunku zadania.
+  - 'Przenieś wszystko na jedną stronę i wyłącz wspólny czynnik: 3x(x-8)=0.'
+  - Z równania iloczynowego x = 0 lub x = 8; odrzuć x = 0 jako sprzeczne z warunkami zadania.
+  - 'Oblicz pole: P = 8·24 = 192 cm^2.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: krotszy_bok
+      answer:
+        kind: NUMERIC
+        value: 8.0
+    - name: pole
+      answer:
+        kind: NUMERIC
+        value: 192.0
+  checks:
+  - kind: solve_equation
+    expr: 3\cdot x-24=0
+    part: krotszy_bok
+  - kind: evaluate
+    expr: 3\cdot 8^{2}
+    part: pole
+  stated_model:
+    variable: x
+    objective_latex: P\left(x\right)=3\cdot x^{2}
+    domain_lo: '0'
+    goal: value
+    constraint_used: 3\cdot x^{2}=24\cdot x
+  skills:
+  - wprowadzenie zmiennej
+  - układanie równania
+  - wyłączanie wspólnego czynnika
+  - równanie iloczynowe
+  - odrzucanie rozwiązania sprzecznego z warunkami zadania
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''x'': ''P\\left(x\\right)=3\\cdot
+      x^{2}'') — human review'
+- id: g-ch-t03
+  slot: CHALLENGE
+  ramp_index: 1
+  difficulty: 4
+  exercise_type: modelowanie bryły + rozkład przez grupowanie + filtr rozwiązań
+  statement: Podstawą pewnego prostopadłościanu jest kwadrat, a wysokość tego prostopadłościanu jest o
+    2 cm większa od długości krawędzi podstawy. Objętość tego prostopadłościanu, wyrażona w centymetrach
+    sześciennych, jest liczbowo równa pięciokrotności jego wysokości, wyrażonej w centymetrach. Oblicz
+    długość krawędzi podstawy oraz objętość tego prostopadłościanu.
+  statement_latex: x^{2}\cdot\left(x+2\right)=5\cdot\left(x+2\right)
+  solution: |-
+    Oznaczmy przez x długość krawędzi podstawy (w centymetrach), x>0. Wysokość jest równa x+2.
+    Objętość prostopadłościanu o kwadratowej podstawie: V=x^{2}\cdot\left(x+2\right)=x^{3}+2x^{2}.
+    Pięciokrotność wysokości to 5\left(x+2\right)=5x+10.
+    Warunek zadania daje równanie:
+    x^{3}+2x^{2}=5x+10,\qquad x^{3}+2x^{2}-5x-10=0.
+    Rozkładamy lewą stronę metodą grupowania:
+    \left(x^{3}+2x^{2}\right)-\left(5x+10\right)=x^{2}\left(x+2\right)-5\left(x+2\right)=\left(x+2\right)\left(x^{2}-5\right).
+    Zatem \left(x+2\right)\left(x^{2}-5\right)=0, czyli x=-2 lub x^{2}=5, więc x=\sqrt{5} albo x=-\sqrt{5}.
+    Warunek x>0 pozostawia tylko x=\sqrt{5}.
+    Krawędź podstawy ma długość \sqrt{5} cm, wysokość \sqrt{5}+2 cm, a objętość
+    V=\left(\sqrt{5}\right)^{2}\cdot\left(\sqrt{5}+2\right)=5\left(\sqrt{5}+2\right)=5\sqrt{5}+10\ \left(\approx 21{,}18\right) cm^{3}.
+    Sprawdzenie: pięciokrotność wysokości to 5\left(\sqrt{5}+2\right) — zgadza się z objętością. ✓
+  solution_steps:
+  - 'Wprowadź zmienną: x — krawędź kwadratowej podstawy (x > 0); wysokość wynosi x + 2.'
+  - Zapisz objętość V = x^2(x+2) oraz pięciokrotność wysokości 5(x+2).
+  - Ułóż równanie x^3 + 2x^2 - 5x - 10 = 0.
+  - 'Rozłóż lewą stronę przez grupowanie: x^2(x+2) - 5(x+2) = (x+2)(x^2-5).'
+  - Z równania iloczynowego otrzymaj x = -2, x = \sqrt{5}, x = -\sqrt{5}; odrzuć wartości niedodatnie.
+  - 'Oblicz objętość: V = 5(\sqrt{5}+2) = 5\sqrt{5}+10 cm^3.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: krawedz_podstawy
+      answer:
+        kind: NUMERIC
+        value: 2.23606797749979
+        tol: 1.0e-06
+    - name: objetosc
+      answer:
+        kind: NUMERIC
+        value: 21.18033988749895
+        tol: 1.0e-06
+  checks:
+  - kind: evaluate
+    expr: \sqrt{\frac{5\cdot\left(2+2\right)}{2+2}}
+    part: krawedz_podstawy
+  - kind: evaluate
+    expr: \left(\sqrt{5}\right)^{2}\cdot\left(\sqrt{5}+2\right)
+    part: objetosc
+  stated_model:
+    variable: x
+    objective_latex: V\left(x\right)=x^{2}\cdot\left(x+2\right)
+    domain_lo: '0'
+    goal: value
+    constraint_used: x^{2}\cdot\left(x+2\right)=5\cdot\left(x+2\right)
+  skills:
+  - wprowadzenie zmiennej
+  - objętość prostopadłościanu
+  - rozkład przez grupowanie
+  - równanie iloczynowe
+  - odrzucanie rozwiązań spoza warunków zadania
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''x'': ''V\\left(x\\right)=x^{2}\\cdot\\left(x+2\\right)'')
+      — human review'
+- id: g-ch-t04
+  slot: CHALLENGE
+  ramp_index: 2
+  difficulty: 5
+  exercise_type: 'modelowanie: wzór + dziedzina, rozkład na czynniki, równanie i kontrola dziedziny'
+  statement: |-
+    Z kwadratowego arkusza tektury o boku długości 12 cm wycięto w każdym z czterech narożników jednakowy kwadrat o boku długości x cm, a następnie wystające paski zagięto ku górze wzdłuż linii cięcia i sklejono, otrzymując otwarte pudełko w kształcie prostopadłościanu o kwadratowej podstawie i wysokości x cm.
+    a) Wyznacz wzór na pole powierzchni S\left(x\right) tego pudełka, będące sumą pola dna i pól czterech ścian bocznych; zapisz je w postaci iloczynu oraz podaj dziedzinę tego wzoru.
+    b) Oblicz, dla jakiej wartości x pole powierzchni pudełka jest równe 96 cm^{2}, i sprawdź, czy otrzymana wartość należy do wyznaczonej dziedziny.
+  statement_latex: S\left(x\right)=\left(12-2\cdot x\right)^{2}+4\cdot x\cdot\left(12-2\cdot x\right)
+  solution: |-
+    a) Po wycięciu narożników dno pudełka jest kwadratem o boku 12-2x, a każda z czterech ścian bocznych jest prostokątem o wymiarach \left(12-2x\right)\times x.
+    Zatem
+    S\left(x\right)=\left(12-2x\right)^{2}+4\cdot x\cdot\left(12-2x\right).
+    Wyłączamy wspólny czynnik \left(12-2x\right):
+    S\left(x\right)=\left(12-2x\right)\left[\left(12-2x\right)+4x\right]=\left(12-2x\right)\left(12+2x\right)=4\left(6-x\right)\left(6+x\right)=144-4x^{2}.
+    Dziedzina: musi być x>0 (wycinamy kwadraty o dodatnim boku) oraz 12-2x>0, czyli x<6. Zatem x\in\left(0;6\right).
+
+    b) Rozwiązujemy równanie 144-4x^{2}=96:
+    4x^{2}=48,\qquad x^{2}=12,\qquad x=2\sqrt{3}\ \text{lub}\ x=-2\sqrt{3}.
+    Wartość ujemna nie należy do dziedziny. Ponieważ 2\sqrt{3}\approx 3{,}46 oraz 0<3{,}46<6, wartość x=2\sqrt{3} należy do dziedziny \left(0;6\right) — jest to rozwiązanie zadania.
+    Sprawdzenie: dla x=2\sqrt{3} mamy S=144-4\cdot 12=144-48=96 cm^{2}. ✓
+  solution_steps:
+  - Zauważ, że dno pudełka jest kwadratem o boku 12-2x, a wysokość pudełka wynosi x.
+  - Zapisz pole dna (12-2x)^2 i pole czterech ścian bocznych 4x(12-2x); dodaj je.
+  - 'Wyłącz wspólny czynnik (12-2x): S(x) = (12-2x)[(12-2x)+4x] = (12-2x)(12+2x) = 4(6-x)(6+x) = 144-4x^2.'
+  - Wyznacz dziedzinę z warunków x > 0 oraz 12-2x > 0, czyli x ∈ (0; 6).
+  - Rozwiąż równanie 144-4x^2 = 96, otrzymując x^2 = 12, czyli x = 2\sqrt{3} lub x = -2\sqrt{3}.
+  - 'Sprawdź zgodność z dziedziną: 2\sqrt{3} ≈ 3,46 należy do (0;6), wartość ujemna odpada.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wzor
+      answer:
+        kind: SYMBOLIC
+        latex: 4\left(6-x\right)\left(6+x\right)
+    - name: dziedzina
+      answer:
+        kind: INTERVAL
+        lo: '0'
+        hi: '6'
+    - name: x
+      answer:
+        kind: NUMERIC
+        value: 3.4641016151377544
+        tol: 1.0e-06
+  checks:
+  - kind: simplify
+    expr: \left(12-2\cdot x\right)^{2}+4\cdot x\cdot\left(12-2\cdot x\right)
+    part: wzor
+  - kind: evaluate
+    expr: \sqrt{\frac{144-96}{4}}
+    part: x
+  stated_model:
+    variable: x
+    objective_latex: S\left(x\right)=\left(12-2\cdot x\right)^{2}+4\cdot x\cdot\left(12-2\cdot x\right)
+    domain_lo: '0'
+    domain_hi: '6'
+    goal: value
+    constraint_used: S\left(x\right)=96
+  skills:
+  - układanie wzoru funkcji z opisu geometrycznego
+  - wyłączanie wspólnego czynnika (nawiasu)
+  - wyznaczanie dziedziny z warunków geometrycznych
+  - rozwiązywanie równania
+  - sprawdzanie zgodności rozwiązania z dziedziną
+  verification:
+    checkability: STATED_MODEL
+    note: 'stage 1 inconclusive: SympifyError: SympifyError: "cannot sympify object of type <class ''sympy.core.singleton.SingletonRegistry''>"'

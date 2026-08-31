@@ -1,0 +1,927 @@
+section: trygonometria-w-figurach-plaskich
+name: Trygonometria w figurach płaskich
+scope: Using trig functions to find segment lengths and to compute areas of plane figures.
+requirements:
+- VIII.12
+counts:
+  total: 16
+  DETERMINISTIC: 12
+  NOT_MACHINE_CHECKABLE: 2
+  REFERENCE_CALL: 2
+exercises:
+- id: g-th-00
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: obliczenie boku w trójkącie prostokątnym
+  statement: W trójkącie prostokątnym ABC kąt prosty jest przy wierzchołku C, przeciwprostokątna AB ma
+    długość 12, a kąt ostry przy wierzchołku A ma miarę 30°. Oblicz długość boku BC.
+  statement_latex: '|AB|=12,\quad |\angle BAC|=30^\circ,\quad |\angle ACB|=90^\circ,\quad |BC|=12\cdot\sin
+    30^\circ'
+  solution: |-
+    Bok BC leży naprzeciw kąta o mierze 30°, a AB jest przeciwprostokątną, więc łączy je sinus:
+    \[\sin 30^\circ=\frac{|BC|}{|AB|}=\frac{|BC|}{12}.\]
+    Ponieważ \(\sin 30^\circ=\frac{1}{2}\), mamy
+    \[|BC|=12\cdot\frac{1}{2}=6.\]
+    Kontrola sensowności: 6 < 12, czyli przyprostokątna jest krótsza od przeciwprostokątnej. ✓
+  solution_steps:
+  - 'Zaznacz kąt 30° przy wierzchołku A i opisz boki: AB — przeciwprostokątna, BC — bok naprzeciw kąta
+    30°.'
+  - 'Bok naprzeciw i przeciwprostokątna → sinus: sin 30° = |BC| / 12.'
+  - Podstaw sin 30° = 1/2 i wyznacz |BC| = 12 · 1/2 = 6.
+  - 'Sprawdź sensowność: przyprostokątna krótsza od przeciwprostokątnej.'
+  answer:
+    kind: NUMERIC
+    value: 6.0
+  checks:
+  - kind: evaluate
+    expr: 12\cdot\frac{1}{2}
+  skills:
+  - definicje funkcji trygonometrycznych kąta ostrego
+  - wartości dla kąta 30°
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 6.0 vs 6.0 (tol 1e-09)'
+- id: g-th-01
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: pole trójkąta z dwóch boków i kąta między nimi
+  statement: W trójkącie ABC dane są |AB| = 10, |AC| = 6 oraz kąt BAC o mierze 45°. Oblicz pole tego trójkąta.
+    Wynik podaj w postaci dokładnej.
+  statement_latex: P=\frac{1}{2}\cdot 10\cdot 6\cdot\sin 45^\circ
+  solution: |-
+    Kąt o mierze 45° leży MIĘDZY danymi bokami AB i AC, więc stosujemy wzór
+    \[P=\tfrac12\cdot a\cdot b\cdot\sin\gamma .\]
+    Stąd
+    \[P=\frac{1}{2}\cdot 10\cdot 6\cdot\sin 45^\circ=30\cdot\frac{\sqrt2}{2}=15\sqrt2 .\]
+    Odpowiedź: \(P=15\sqrt2\) (w przybliżeniu 21,2).
+  solution_steps:
+  - Sprawdź, że kąt 45° leży między bokami AB i AC.
+  - Zapisz wzór P = ½·|AB|·|AC|·sin(∠BAC).
+  - 'Podstaw dane: P = ½·10·6·(√2/2).'
+  - 'Uprość: P = 15√2.'
+  answer:
+    kind: SYMBOLIC
+    latex: 15\sqrt{2}
+  checks:
+  - kind: evaluate
+    expr: \frac{1}{2}\cdot 10\cdot 6\cdot\frac{\sqrt{2}}{2}
+  skills:
+  - wzór P = ½ab sin γ
+  - wartości funkcji dla 45°
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 21.213203435596427 vs 21.213203435596427 (tol 1e-09)'
+- id: g-th-02
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: wysokość figury wyrażona przez sinus
+  statement: Ramię trapezu ma długość 10 i tworzy z dłuższą podstawą kąt o mierze 60°. Oblicz wysokość
+    tego trapezu. Wynik podaj w postaci dokładnej.
+  statement_latex: h=10\cdot\sin 60^\circ
+  solution: |-
+    Z końca ramienia opuszczamy prostopadłą na dłuższą podstawę — powstaje trójkąt prostokątny, w którym ramię (długości 10) jest przeciwprostokątną, a wysokość h leży NAPRZECIW kąta 60°.
+    Bok naprzeciw i przeciwprostokątna → sinus:
+    \[\sin 60^\circ=\frac{h}{10}\ \Rightarrow\ h=10\cdot\frac{\sqrt3}{2}=5\sqrt3 .\]
+    Kontrola: \(5\sqrt3\approx 8{,}66<10\) — wysokość jest krótsza od ramienia. ✓
+  solution_steps:
+  - Dorysuj wysokość z końca ramienia na dłuższą podstawę — powstaje trójkąt prostokątny.
+  - Zauważ, że wysokość leży naprzeciw kąta 60°, a ramię jest przeciwprostokątną.
+  - Zapisz sin 60° = h/10.
+  - Wyznacz h = 10·(√3/2) = 5√3.
+  answer:
+    kind: SYMBOLIC
+    latex: 5\sqrt{3}
+  checks:
+  - kind: evaluate
+    expr: 10\cdot\frac{\sqrt{3}}{2}
+  skills:
+  - h = c·sin α
+  - trójkąt pomocniczy w trapezie
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 8.660254037844387 vs 8.660254037844387 (tol 1e-09)'
+- id: g-ex-03
+  slot: EXERCISE
+  ramp_index: 1
+  difficulty: 2
+  exercise_type: trapez równoramienny — ramię, wysokość, pole
+  statement: W trapezie równoramiennym ABCD podstawy mają długości |AB| = 12 i |CD| = 6, a kąty przy dłuższej
+    podstawie AB mają miarę 60°. Oblicz długość ramienia, wysokość oraz pole tego trapezu. Wyniki podaj
+    w postaci dokładnej.
+  statement_latex: '|AB|=12,\ |CD|=6,\ \alpha=60^\circ,\quad p=\frac{12-6}{2},\quad \cos 60^\circ=\frac{p}{c},\quad
+    h=c\cdot\sin 60^\circ,\quad P=\frac{1}{2}\cdot\left(12+6\right)\cdot h'
+  solution: |-
+    Z wierzchołków C i D prowadzimy wysokości na podstawę AB. Odcinają one na AB środkowy odcinek długości 6 oraz dwa przystające trójkąty prostokątne.
+
+    1) Rzut ramienia na dłuższą podstawę:
+    \[p=\frac{12-6}{2}=3.\]
+
+    2) Ramię c: odcinek p leży PRZY kącie 60°, a c jest przeciwprostokątną, więc
+    \[\cos 60^\circ=\frac{3}{c}\ \Rightarrow\ \frac{1}{2}=\frac{3}{c}\ \Rightarrow\ c=\frac{3}{\frac{1}{2}}=6.\]
+
+    3) Wysokość:
+    \[h=c\cdot\sin 60^\circ=6\cdot\frac{\sqrt3}{2}=3\sqrt3 .\]
+    Kontrola Pitagorasem: \(3^2+\left(3\sqrt3\right)^2=9+27=36=6^2\). ✓
+
+    4) Pole:
+    \[P=\frac{1}{2}\cdot\left(12+6\right)\cdot 3\sqrt3=9\cdot 3\sqrt3=27\sqrt3 .\]
+
+    Odpowiedź: ramię 6, wysokość \(3\sqrt3\), pole \(27\sqrt3\).
+  solution_steps:
+  - Poprowadź wysokości z C i D na AB; rzut ramienia p = (12 − 6)/2 = 3.
+  - 'W trójkącie prostokątnym p leży przy kącie 60°, ramię jest przeciwprostokątną: cos 60° = 3/c, stąd
+    c = 6.'
+  - 'Oblicz wysokość: h = 6·sin 60° = 3√3 (kontrola twierdzeniem Pitagorasa).'
+  - 'Podstaw do wzoru na pole trapezu: P = ½·(12+6)·3√3 = 27√3.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: ramie
+      answer:
+        kind: NUMERIC
+        value: 6.0
+    - name: wysokosc
+      answer:
+        kind: SYMBOLIC
+        latex: 3\sqrt{3}
+    - name: pole
+      answer:
+        kind: SYMBOLIC
+        latex: 27\sqrt{3}
+  checks:
+  - kind: evaluate
+    expr: \frac{\frac{12-6}{2}}{\frac{1}{2}}
+    part: ramie
+  - kind: evaluate
+    expr: 6\cdot\frac{\sqrt{3}}{2}
+    part: wysokosc
+  - kind: evaluate
+    expr: \frac{1}{2}\cdot\left(12+6\right)\cdot 3\cdot\sqrt{3}
+    part: pole
+  skills:
+  - rzut ramienia (cos)
+  - wysokość (sin)
+  - pole trapezu
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [ramie] SymPy solved it fresh: 6.0 vs 6.0 (tol 1e-09) ; [wysokosc]
+      SymPy solved it fresh: 5.196152422706632 vs 5.196152422706632 (tol 1e-09) ; [pole] SymPy solved
+      it fresh: 46.76537180435969 vs 46.76537180435969 (tol 1e-09)'
+- id: g-ex-04
+  slot: EXERCISE
+  ramp_index: 2
+  difficulty: 3
+  exercise_type: romb — przekątne i pole
+  statement: W rombie ABCD bok ma długość 8, a kąt przy wierzchołku A ma miarę 120°. Oblicz długości obu
+    przekątnych AC i BD oraz pole tego rombu. Wyniki podaj w postaci dokładnej.
+  statement_latex: a=8,\ |\angle DAB|=120^\circ,\quad |BD|=2\cdot 8\cdot\sin 60^\circ,\quad |AC|=2\cdot
+    8\cdot\sin 30^\circ,\quad P=8^{2}\cdot\sin 120^\circ
+  solution: |-
+    W rombie przekątne są prostopadłe, przecinają się w środku S i dzielą kąty rombu na połowy.
+
+    1) Kąt przy A ma miarę 120°, więc przekątna AC dzieli go na dwa kąty po 60°. Kąt przy B ma miarę \(180^\circ-120^\circ=60^\circ\), a przekątna BD dzieli go na dwa kąty po 30°.
+
+    2) W trójkącie prostokątnym ABS (kąt prosty przy S) przeciwprostokątną jest bok AB = 8, a kąt przy A wynosi 60°:
+    \[|BS|=8\cdot\sin 60^\circ=4\sqrt3,\qquad |AS|=8\cdot\cos 60^\circ=4.\]
+
+    3) Przekątne to podwojone te odcinki:
+    \[|BD|=2\cdot 4\sqrt3=8\sqrt3,\qquad |AC|=2\cdot 4=8.\]
+    Dłuższa przekątna \(BD=8\sqrt3\) leży naprzeciw kątów rozwartych.
+
+    4) Pole:
+    \[P=a^2\sin\alpha=8^2\cdot\sin 120^\circ=64\cdot\frac{\sqrt3}{2}=32\sqrt3 .\]
+    Kontrola drugim wzorem: \(P=\tfrac12 d_1d_2=\tfrac12\cdot 8\cdot 8\sqrt3=32\sqrt3\). ✓
+
+    Odpowiedź: \(|AC|=8\), \(|BD|=8\sqrt3\), \(P=32\sqrt3\).
+  solution_steps:
+  - 'Zauważ, że przekątne rombu są prostopadłe i dzielą kąty na połowy: przy A powstaje kąt 60°.'
+  - 'W trójkącie prostokątnym z bokiem rombu jako przeciwprostokątną oblicz połowy przekątnych: 8·sin
+    60° = 4√3 i 8·cos 60° = 4.'
+  - 'Podwój: |BD| = 8√3 (dłuższa), |AC| = 8 (krótsza).'
+  - 'Oblicz pole: P = 8²·sin 120° = 32√3 i sprawdź wzorem P = ½·d₁·d₂.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: AC
+      answer:
+        kind: NUMERIC
+        value: 8.0
+    - name: BD
+      answer:
+        kind: SYMBOLIC
+        latex: 8\sqrt{3}
+    - name: pole
+      answer:
+        kind: SYMBOLIC
+        latex: 32\sqrt{3}
+  checks:
+  - kind: evaluate
+    expr: 2\cdot 8\cdot\frac{1}{2}
+    part: AC
+  - kind: evaluate
+    expr: 2\cdot 8\cdot\frac{\sqrt{3}}{2}
+    part: BD
+  - kind: evaluate
+    expr: 8^{2}\cdot\frac{\sqrt{3}}{2}
+    part: pole
+  skills:
+  - połowienie kąta przez przekątną rombu
+  - d = 2a·sin(α/2)
+  - pole rombu
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [AC] SymPy solved it fresh: 8.0 vs 8.0 (tol 1e-09) ; [BD] SymPy
+      solved it fresh: 13.856406460551018 vs 13.856406460551018 (tol 1e-09) ; [pole] SymPy solved it fresh:
+      55.42562584220407 vs 55.42562584220407 (tol 1e-09)'
+- id: g-ex-05
+  slot: EXERCISE
+  ramp_index: 3
+  difficulty: 4
+  exercise_type: zadanie praktyczne — dwa punkty obserwacji
+  statement: Wieża stoi na poziomym terenie. Punkty A, B oraz spodek S wieży leżą na jednej prostej, przy
+    czym B leży między A a S. Z punktu A wierzchołek wieży widać pod kątem wzniesienia o mierze 30°, a
+    z punktu B — pod kątem 45°. Odległość |AB| wynosi 30 m. Oblicz wysokość wieży w postaci dokładnej
+    oraz podaj jej przybliżenie z dokładnością do 0,01 m (przyjmij √3 ≈ 1,7321).
+  statement_latex: \operatorname{tg}45^\circ=\frac{h}{x},\qquad \operatorname{tg}30^\circ=\frac{h}{x+30},\qquad
+    h=\frac{30\cdot\sqrt{3}}{3-\sqrt{3}}
+  solution: |-
+    Oznaczmy: h — wysokość wieży, S — jej spodek, x = |BS|. Wtedy |AS| = x + 30. Mamy dwa trójkąty prostokątne o wspólnej przyprostokątnej h.
+
+    1) Z trójkąta przy B:
+    \[\operatorname{tg}45^\circ=\frac{h}{x}\ \Rightarrow\ h=x .\]
+
+    2) Z trójkąta przy A:
+    \[\operatorname{tg}30^\circ=\frac{h}{x+30}\ \Rightarrow\ \frac{\sqrt3}{3}=\frac{h}{h+30}.\]
+
+    3) Rozwiązujemy równanie:
+    \[3h=\sqrt3\left(h+30\right)\ \Rightarrow\ h\left(3-\sqrt3\right)=30\sqrt3\ \Rightarrow\ h=\frac{30\sqrt3}{3-\sqrt3}.\]
+    Usuwamy niewymierność:
+    \[h=\frac{30\sqrt3\left(3+\sqrt3\right)}{\left(3-\sqrt3\right)\left(3+\sqrt3\right)}=\frac{90\sqrt3+90}{6}=15\sqrt3+15 .\]
+
+    4) Przybliżenie: \(h\approx 15\cdot 1{,}7321+15=25{,}98+15=40{,}98\) m.
+
+    Odpowiedź: \(h=15+15\sqrt3\ \text{m}\approx 40{,}98\ \text{m}\).
+  solution_steps:
+  - 'Wprowadź niewiadome: h — wysokość wieży, x = |BS|, wtedy |AS| = x + 30.'
+  - 'Z trójkąta przy B: tg 45° = h/x, czyli h = x.'
+  - 'Z trójkąta przy A: tg 30° = h/(h + 30), czyli √3/3 = h/(h+30).'
+  - 'Rozwiąż równanie: 3h = √3(h+30), h(3 − √3) = 30√3.'
+  - 'Usuń niewymierność: h = 15 + 15√3.'
+  - 'Oblicz przybliżenie: h ≈ 40,98 m.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wysokosc_dokladna
+      answer:
+        kind: SYMBOLIC
+        latex: 15+15\sqrt{3}
+    - name: wysokosc_przyblizona
+      answer:
+        kind: NUMERIC
+        value: 40.98
+        tol: 0.01
+  checks:
+  - kind: evaluate
+    expr: \frac{30\cdot\sqrt{3}}{3-\sqrt{3}}
+    part: wysokosc_dokladna
+  - kind: evaluate
+    expr: \frac{30\cdot\sqrt{3}}{3-\sqrt{3}}
+    part: wysokosc_przyblizona
+  stated_model:
+    variable: h
+    objective_latex: \frac{h}{h+30}=\frac{\sqrt{3}}{3}
+    domain_lo: '0'
+    goal: value
+    constraint_used: h>0, wspólna przyprostokątna dwóch trójkątów prostokątnych o kątach 45^\circ i 30^\circ,
+      |AB|=30
+  skills:
+  - kąt wzniesienia
+  - układanie równania z tangensem
+  - usuwanie niewymierności
+  - zaokrąglanie na końcu
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''h'': ''\\frac{h}{h+30}=\\frac{\\sqrt{3}}{3}'')
+      — human review'
+- id: g-ex-t00
+  slot: EXERCISE
+  ramp_index: 6
+  difficulty: 3
+  exercise_type: obliczeniowe (trapez równoramienny)
+  statement: W trapezie równoramiennym ABCD podstawy mają długości |AB| = 14 oraz |CD| = 6, przy czym
+    AB jest podstawą dłuższą, a ramiona AD i BC są równej długości. Kąty przy dłuższej podstawie AB mają
+    miarę 45^\circ. Oblicz długość ramienia, wysokość, pole oraz obwód tego trapezu. Wyniki podaj w postaci
+    dokładnej.
+  statement_latex: '|AB|=14,\quad |CD|=6,\quad \alpha=45^\circ,\quad p=\frac{14-6}{2},\quad c=\frac{p}{\cos
+    45^\circ},\quad h=c\cdot\sin 45^\circ,\quad P=\frac{1}{2}\cdot\left(14+6\right)\cdot h'
+  solution: |-
+    Z wierzchołków C i D prowadzimy wysokości na podstawę AB. Odcinają one na AB środkowy prostokąt o długości 6 oraz dwa przystające trójkąty prostokątne o kącie ostrym 45^\circ.
+
+    1) Rzut ramienia na dłuższą podstawę: p = \frac{14-6}{2} = 4.
+
+    2) Rzut p leży PRZY kącie 45^\circ, a ramię c jest przeciwprostokątną, więc \cos 45^\circ = \frac{4}{c}, czyli \frac{\sqrt{2}}{2} = \frac{4}{c}, stąd c = \frac{4}{\frac{\sqrt{2}}{2}} = \frac{8}{\sqrt{2}} = 4\sqrt{2}.
+
+    3) Wysokość leży naprzeciw kąta 45^\circ: h = c\cdot\sin 45^\circ = 4\sqrt{2}\cdot\frac{\sqrt{2}}{2} = 4.
+    (Kontrola Pitagorasem: 4^2+4^2 = 32 = \left(4\sqrt{2}\right)^2. ✓)
+
+    4) Pole: P = \frac{1}{2}\cdot\left(14+6\right)\cdot 4 = 40.
+
+    5) Obwód: L = 14 + 6 + 2\cdot 4\sqrt{2} = 20 + 8\sqrt{2}.
+
+    Odpowiedź: ramię 4\sqrt{2}, wysokość 4, pole 40, obwód 20+8\sqrt{2}.
+  solution_steps:
+  - Poprowadź wysokości z C i D na AB — powstają dwa przystające trójkąty prostokątne o kącie 45^\circ.
+  - 'Oblicz rzut ramienia: p = \frac{14-6}{2} = 4.'
+  - Z \cos 45^\circ = \frac{4}{c} wyznacz ramię c = 4\sqrt{2}.
+  - Z h = c\cdot\sin 45^\circ oblicz wysokość h = 4.
+  - Policz pole P = \frac{1}{2}\cdot\left(14+6\right)\cdot 4 = 40.
+  - Policz obwód L = 14+6+2\cdot 4\sqrt{2} = 20+8\sqrt{2}.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: ramie
+      answer:
+        kind: SYMBOLIC
+        latex: 4\sqrt{2}
+    - name: wysokosc
+      answer:
+        kind: NUMERIC
+        value: 4.0
+    - name: pole
+      answer:
+        kind: NUMERIC
+        value: 40.0
+    - name: obwod
+      answer:
+        kind: SYMBOLIC
+        latex: 20+8\sqrt{2}
+  checks:
+  - kind: evaluate
+    expr: \frac{4}{\frac{\sqrt{2}}{2}}
+    part: ramie
+  - kind: evaluate
+    expr: 4\sqrt{2}\cdot\frac{\sqrt{2}}{2}
+    part: wysokosc
+  - kind: evaluate
+    expr: \frac{1}{2}\cdot\left(14+6\right)\cdot 4
+    part: pole
+  - kind: evaluate
+    expr: 14+6+2\cdot 4\sqrt{2}
+    part: obwod
+  skills:
+  - metoda pomocniczych trójkątów prostokątnych
+  - wysokość i rzut ramienia
+  - pole trapezu
+  - wartości funkcji dla 45°
+  verification:
+    checkability: REFERENCE_CALL
+    note: 4 parts matched
+- id: g-ex-t01
+  slot: EXERCISE
+  ramp_index: 7
+  difficulty: 4
+  exercise_type: obliczeniowe (trójkąt, dana wartość sinusa)
+  statement: W trójkącie ABC dane są |AB| = 10 oraz |AC| = 12. Kąt BAC jest kątem ostrym i \sin\left(\angle
+    BAC\right) = \frac{3}{5}. Oblicz pole trójkąta ABC, długość wysokości opuszczonej z wierzchołka C
+    na bok AB oraz długość boku BC.
+  statement_latex: P=\frac{1}{2}\cdot 10\cdot 12\cdot\frac{3}{5},\qquad h=\frac{2\cdot P}{10},\qquad |BC|=\sqrt{\left(10-12\cdot\frac{4}{5}\right)^{2}+\left(12\cdot\frac{3}{5}\right)^{2}}
+  solution: |-
+    1) Pole. Kąt BAC leży między bokami AB i AC, więc
+    P = \frac{1}{2}\cdot |AB|\cdot |AC|\cdot\sin\left(\angle BAC\right) = \frac{1}{2}\cdot 10\cdot 12\cdot\frac{3}{5} = 36.
+
+    2) Wysokość z C na AB. Z P = \frac{1}{2}\cdot |AB|\cdot h mamy 36 = \frac{1}{2}\cdot 10\cdot h, czyli h = \frac{2\cdot 36}{10} = 7{,}2.
+
+    3) Bok BC. Kąt BAC jest ostry, więc \cos\left(\angle BAC\right) = \sqrt{1-\left(\frac{3}{5}\right)^{2}} = \frac{4}{5}.
+    Niech D będzie spodkiem wysokości z C na AB. Wtedy |AD| = 12\cdot\frac{4}{5} = 9{,}6 oraz |CD| = h = 12\cdot\frac{3}{5} = 7{,}2.
+    Ponieważ 9{,}6 < 10, punkt D leży wewnątrz odcinka AB i |DB| = 10 - 9{,}6 = 0{,}4.
+    Z twierdzenia Pitagorasa w trójkącie BDC:
+    |BC| = \sqrt{0{,}4^{2}+7{,}2^{2}} = \sqrt{0{,}16+51{,}84} = \sqrt{52} = 2\sqrt{13}.
+
+    Odpowiedź: P = 36, h = 7{,}2, |BC| = 2\sqrt{13}.
+  solution_steps:
+  - Zastosuj wzór P = \frac{1}{2}\cdot 10\cdot 12\cdot\sin\left(\angle BAC\right) i oblicz P = 36.
+  - Z P = \frac{1}{2}\cdot 10\cdot h wyznacz h = 7{,}2.
+  - Z jedynki trygonometrycznej wyznacz \cos\left(\angle BAC\right) = \frac{4}{5} (kąt ostry — pierwiastek
+    dodatni).
+  - Oblicz rzut |AD| = 12\cdot\frac{4}{5} = 9{,}6 oraz |DB| = 10-9{,}6 = 0{,}4.
+  - 'Z twierdzenia Pitagorasa: |BC| = \sqrt{0{,}4^{2}+7{,}2^{2}} = 2\sqrt{13}.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: pole
+      answer:
+        kind: NUMERIC
+        value: 36.0
+    - name: wysokosc
+      answer:
+        kind: NUMERIC
+        value: 7.2
+    - name: BC
+      answer:
+        kind: SYMBOLIC
+        latex: 2\sqrt{13}
+  checks:
+  - kind: evaluate
+    expr: \frac{1}{2}\cdot 10\cdot 12\cdot\frac{3}{5}
+    part: pole
+  - kind: evaluate
+    expr: \frac{2\cdot 36}{10}
+    part: wysokosc
+  - kind: evaluate
+    expr: \sqrt{\left(10-12\cdot\frac{4}{5}\right)^{2}+\left(12\cdot\frac{3}{5}\right)^{2}}
+    part: BC
+  skills:
+  - jedynka trygonometryczna
+  - pole ze wzoru \frac{1}{2}ab\sin\gamma
+  - wysokość z pola
+  - twierdzenie Pitagorasa
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [pole] SymPy solved it fresh: 36.0 vs 36.0 (tol 1e-09) ; [wysokosc]
+      SymPy solved it fresh: 7.2 vs 7.2 (tol 1e-09) ; [BC] SymPy solved it fresh: 7.211102550927978 vs
+      7.211102550927978 (tol 1e-09)'
+- id: g-cm-06
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: praca z błędem — trygonometria bez kąta prostego
+  statement: 'W trójkącie ABC dane są |AB| = 8, |AC| = 6 oraz kąt BAC o mierze 30°. Trójkąt ten nie ma
+    kąta prostego. Oblicz długość wysokości opuszczonej z wierzchołka C na bok AB oraz pole tego trójkąta.
+    Wyjaśnij przy tym, dlaczego zapis „sin 30° = |BC| : |AB|” jest w tym trójkącie błędny.'
+  statement_latex: '|AB|=8,\ |AC|=6,\ |\angle BAC|=30^\circ,\qquad h=6\cdot\sin 30^\circ,\qquad P=\frac{1}{2}\cdot
+    8\cdot h'
+  solution: |-
+    BŁĘDNE ROZUMOWANIE (typowy błąd):
+    Uczeń traktuje trójkąt ABC tak, jakby był prostokątny, i pisze
+    \[\sin 30^\circ=\frac{|BC|}{|AB|}=\frac{|BC|}{8}\ \Rightarrow\ |BC|=4,\]
+    a następnie „pole = ½·|AB|·|BC| = ½·8·4 = 16”. Otrzymuje h = 4 i P = 16 — obie liczby są błędne.
+
+    DLACZEGO TO BŁĄD:
+    Definicje sin, cos, tg jako stosunki boków obowiązują WYŁĄCZNIE w trójkącie prostokątnym. W trójkącie ABC nie ma kąta prostego, więc AB nie jest żadną przeciwprostokątną i stosunek |BC| : |AB| nie ma nic wspólnego z sin 30°.
+
+    POPRAWNE ROZWIĄZANIE:
+    Dorysowujemy wysokość CD z wierzchołka C na prostą AB — dopiero wtedy powstaje trójkąt prostokątny ACD, w którym AC = 6 jest przeciwprostokątną, a h = |CD| leży naprzeciw kąta 30°:
+    \[h=6\cdot\sin 30^\circ=6\cdot\frac{1}{2}=3 .\]
+    Pole:
+    \[P=\frac{1}{2}\cdot|AB|\cdot h=\frac{1}{2}\cdot 8\cdot 3=12 .\]
+    Kontrola wzorem na pole z dwóch boków i kąta między nimi:
+    \[P=\frac{1}{2}\cdot 8\cdot 6\cdot\sin 30^\circ=24\cdot\frac{1}{2}=12 .\] ✓
+
+    Odpowiedź: h = 3, P = 12.
+  solution_steps:
+  - 'Rozpoznaj błąd: użycie sin 30° = |BC|/|AB| w trójkącie, który nie jest prostokątny (daje h = 4, P
+    = 16).'
+  - Przypomnij, że definicje sin/cos/tg dotyczą tylko trójkąta prostokątnego.
+  - Dorysuj wysokość CD na bok AB — powstaje trójkąt prostokątny ACD z przeciwprostokątną AC = 6.
+  - Oblicz h = 6·sin 30° = 3.
+  - Oblicz pole P = ½·8·3 = 12 i sprawdź wzorem P = ½·8·6·sin 30°.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wysokosc
+      answer:
+        kind: NUMERIC
+        value: 3.0
+    - name: pole
+      answer:
+        kind: NUMERIC
+        value: 12.0
+  checks:
+  - kind: evaluate
+    expr: 6\cdot\frac{1}{2}
+    part: wysokosc
+  - kind: evaluate
+    expr: \frac{1}{2}\cdot 8\cdot 6\cdot\frac{1}{2}
+    part: pole
+  skills:
+  - definicje tylko w trójkącie prostokątnym
+  - wprowadzanie wysokości pomocniczej
+  - pole trójkąta
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [wysokosc] SymPy solved it fresh: 3.0 vs 3.0 (tol 1e-09) ;
+      [pole] SymPy solved it fresh: 12.0 vs 12.0 (tol 1e-09)'
+- id: g-cm-07
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: praca z błędem — bok przyległy a przeciwległy
+  statement: W trapezie równoramiennym ABCD krótsza podstawa CD ma długość 7, ramię ma długość 10, a kąty
+    przy dłuższej podstawie AB mają miarę 60°. Oblicz długość dłuższej podstawy AB oraz wysokość trapezu.
+    Wyjaśnij, dlaczego rzutu ramienia na podstawę nie wolno liczyć jako 10·sin 60°.
+  statement_latex: p=10\cdot\cos 60^\circ,\qquad |AB|=7+2\cdot 10\cdot\cos 60^\circ,\qquad h=10\cdot\sin
+    60^\circ
+  solution: |-
+    BŁĘDNE ROZUMOWANIE (typowy błąd):
+    Uczeń „zawsze liczy sinusem” i zapisuje rzut ramienia na dłuższą podstawę jako
+    \[p=10\cdot\sin 60^\circ=5\sqrt3,\]
+    skąd \(|AB|=7+2\cdot 5\sqrt3=7+10\sqrt3\approx 24{,}3\). To wynik błędny.
+
+    DLACZEGO TO BŁĄD:
+    Wybór funkcji zależy od położenia boku WZGLĘDEM kąta. Po opuszczeniu wysokości z D na AB powstaje trójkąt prostokątny, w którym ramię (10) jest przeciwprostokątną, wysokość leży NAPRZECIW kąta 60° (więc h = 10·sin 60°), a rzut ramienia leży PRZY tym kącie (więc p = 10·cos 60°). Uczeń zamienił te dwa boki rolami.
+
+    POPRAWNE ROZWIĄZANIE:
+    \[p=10\cdot\cos 60^\circ=10\cdot\frac{1}{2}=5,\]
+    \[|AB|=|CD|+2p=7+2\cdot 5=17,\]
+    \[h=10\cdot\sin 60^\circ=10\cdot\frac{\sqrt3}{2}=5\sqrt3 .\]
+    Kontrola Pitagorasem: \(5^2+\left(5\sqrt3\right)^2=25+75=100=10^2\). ✓
+
+    Odpowiedź: |AB| = 17, h = 5√3.
+  solution_steps:
+  - 'Rozpoznaj błąd: rzut ramienia policzony jako 10·sin 60° = 5√3 (daje |AB| = 7 + 10√3).'
+  - 'Ustal położenie boków względem kąta 60°: wysokość naprzeciw, rzut przy kącie.'
+  - 'Popraw: p = 10·cos 60° = 5.'
+  - Oblicz |AB| = 7 + 2·5 = 17.
+  - Oblicz h = 10·sin 60° = 5√3 i sprawdź twierdzeniem Pitagorasa.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: AB
+      answer:
+        kind: NUMERIC
+        value: 17.0
+    - name: wysokosc
+      answer:
+        kind: SYMBOLIC
+        latex: 5\sqrt{3}
+  checks:
+  - kind: evaluate
+    expr: 7+2\cdot 10\cdot\frac{1}{2}
+    part: AB
+  - kind: evaluate
+    expr: 10\cdot\frac{\sqrt{3}}{2}
+    part: wysokosc
+  skills:
+  - rzut ramienia p = c·cos α
+  - wysokość h = c·sin α
+  - trapez równoramienny
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [AB] SymPy solved it fresh: 17.0 vs 17.0 (tol 1e-09) ; [wysokosc]
+      SymPy solved it fresh: 8.660254037844387 vs 8.660254037844387 (tol 1e-09)'
+- id: g-cm-08
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: praca z błędem — kąt zawarty między bokami
+  statement: W trójkącie ABC dane są |AB| = 10, |AC| = 6, |∠ABC| = 105° oraz |∠ACB| = 45°. Oblicz pole
+    tego trójkąta. Wyjaśnij, dlaczego zapis P = ½·10·6·sin 45° jest błędny.
+  statement_latex: '|\angle BAC|=180^\circ-105^\circ-45^\circ,\qquad P=\frac{1}{2}\cdot 10\cdot 6\cdot\sin
+    30^\circ'
+  solution: |-
+    BŁĘDNE ROZUMOWANIE (typowy błąd):
+    Uczeń bierze dwa dane boki i „jakiś dany kąt”:
+    \[P=\frac{1}{2}\cdot 10\cdot 6\cdot\sin 45^\circ=30\cdot\frac{\sqrt2}{2}=15\sqrt2\approx 21{,}2 .\]
+
+    DLACZEGO TO BŁĄD:
+    We wzorze \(P=\tfrac12ab\sin\gamma\) kąt γ musi leżeć MIĘDZY bokami a i b. Kąt o mierze 45° jest kątem przy wierzchołku C, czyli kątem między bokami CA i CB — a nie między AB i AC. Użyta para boków i kąt do siebie nie pasują.
+
+    POPRAWNE ROZWIĄZANIE:
+    Kątem między bokami AB i AC jest kąt przy wierzchołku A. Z sumy kątów trójkąta:
+    \[|\angle BAC|=180^\circ-105^\circ-45^\circ=30^\circ .\]
+    Stąd
+    \[P=\frac{1}{2}\cdot 10\cdot 6\cdot\sin 30^\circ=30\cdot\frac{1}{2}=15 .\]
+
+    Odpowiedź: P = 15.
+  solution_steps:
+  - 'Rozpoznaj błąd: kąt 45° leży przy wierzchołku C, a nie między bokami AB i AC (błędny wynik 15√2).'
+  - 'Wyznacz kąt między danymi bokami z sumy kątów trójkąta: ∠BAC = 180° − 105° − 45° = 30°.'
+  - Podstaw do wzoru P = ½·|AB|·|AC|·sin(∠BAC).
+  - Oblicz P = ½·10·6·½ = 15.
+  answer:
+    kind: NUMERIC
+    value: 15.0
+  checks:
+  - kind: evaluate
+    expr: \frac{1}{2}\cdot 10\cdot 6\cdot\frac{1}{2}
+  skills:
+  - kąt włączony we wzorze ½ab sin γ
+  - suma kątów trójkąta
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 15.0 vs 15.0 (tol 1e-09)'
+- id: g-cm-09
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: praca z błędem — pole przy kącie rozwartym
+  statement: Dany jest równoległobok o bokach długości 7 i 8 oraz o kącie między nimi o mierze 135°. Oblicz
+    pole tego równoległoboku w postaci dokładnej. Wyjaśnij, dlaczego rozumowanie „sin 135° = −sin 45°,
+    więc pole wychodzi ujemne” jest błędne.
+  statement_latex: P=7\cdot 8\cdot\sin 135^\circ
+  solution: |-
+    BŁĘDNE ROZUMOWANIE (typowy błąd):
+    Uczeń pisze „\(\sin 135^\circ=-\sin 45^\circ=-\frac{\sqrt2}{2}\)”, skąd
+    \[P=7\cdot 8\cdot\left(-\frac{\sqrt2}{2}\right)=-28\sqrt2,\]
+    czyli pole ujemne — i stwierdza, że dla kąta rozwartego wzoru nie wolno stosować.
+
+    DLACZEGO TO BŁĄD:
+    Dla \(0^\circ<\gamma<180^\circ\) sinus jest DODATNI i zachodzi \(\sin\left(180^\circ-\alpha\right)=\sin\alpha\). Ujemny jest dopiero cosinus kąta rozwartego: \(\cos 135^\circ=-\cos 45^\circ\). Zatem
+    \[\sin 135^\circ=\sin\left(180^\circ-135^\circ\right)=\sin 45^\circ=\frac{\sqrt2}{2}.\]
+
+    POPRAWNE ROZWIĄZANIE:
+    \[P=a\cdot b\cdot\sin\alpha=7\cdot 8\cdot\frac{\sqrt2}{2}=56\cdot\frac{\sqrt2}{2}=28\sqrt2 .\]
+    Kontrola przez wysokość: wysokość opuszczona na bok długości 8 wynosi \(h=7\cdot\sin 45^\circ=\frac{7\sqrt2}{2}\), więc \(P=8\cdot\frac{7\sqrt2}{2}=28\sqrt2\). ✓
+
+    Odpowiedź: \(P=28\sqrt2\) (≈ 39,6).
+  solution_steps:
+  - 'Rozpoznaj błąd: przyjęcie sin 135° = −sin 45° i pole ujemne −28√2.'
+  - 'Popraw wartość: sin(180° − α) = sin α, więc sin 135° = sin 45° = √2/2 (ujemny jest cosinus).'
+  - Podstaw do wzoru P = a·b·sin α = 7·8·(√2/2).
+  - 'Uprość: P = 28√2 i sprawdź przez wysokość h = 7·sin 45°.'
+  answer:
+    kind: SYMBOLIC
+    latex: 28\sqrt{2}
+  checks:
+  - kind: evaluate
+    expr: 7\cdot 8\cdot\frac{\sqrt{2}}{2}
+  skills:
+  - sin(180° − α) = sin α
+  - pole równoległoboku
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 39.59797974644666 vs 39.59797974644666 (tol 1e-09)'
+- id: g-cm-10
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: praca z błędem — jedynka trygonometryczna
+  statement: W trójkącie prostokątnym ABC kąt prosty jest przy wierzchołku C, przeciwprostokątna AB ma
+    długość 20, a dla kąta ostrego α = ∠BAC zachodzi sin α = 3/5. Oblicz cos α, długość przyprostokątnej
+    AC oraz pole tego trójkąta. Wyjaśnij, dlaczego z jedynki trygonometrycznej nie wynika cos α = 2/5.
+  statement_latex: \sin\alpha=\frac{3}{5},\qquad \cos\alpha=\sqrt{1-\left(\frac{3}{5}\right)^{2}},\qquad
+    |AC|=20\cdot\cos\alpha,\qquad P=\frac{1}{2}\cdot 12\cdot 16
+  solution: |-
+    BŁĘDNE ROZUMOWANIE (typowy błąd):
+    Uczeń „upraszcza” jedynkę trygonometryczną do \(\sin\alpha+\cos\alpha=1\) i pisze
+    \[\cos\alpha=1-\frac{3}{5}=\frac{2}{5}=0{,}4,\]
+    stąd \(|AC|=20\cdot 0{,}4=8\) oraz \(|BC|=20\cdot 0{,}6=12\) i \(P=\tfrac12\cdot 12\cdot 8=48\). Wyniki błędne — dodatkowo \(8^2+12^2=208\ne 400\), więc twierdzenie Pitagorasa się nie zgadza.
+
+    DLACZEGO TO BŁĄD:
+    Wzór brzmi \(\sin^2\alpha+\cos^2\alpha=1\) — istotne są KWADRATY, a nie same wartości; z sumy kwadratów nie wolno „ściągać” potęg.
+
+    POPRAWNE ROZWIĄZANIE:
+    \[\cos^2\alpha=1-\left(\frac{3}{5}\right)^2=1-\frac{9}{25}=\frac{16}{25}\ \Rightarrow\ \cos\alpha=\frac{4}{5}=0{,}8\]
+    (kąt ostry, więc pierwiastek dodatni).
+    \[|BC|=20\cdot\sin\alpha=20\cdot\frac{3}{5}=12,\qquad |AC|=20\cdot\cos\alpha=20\cdot\frac{4}{5}=16 .\]
+    Kontrola: \(12^2+16^2=144+256=400=20^2\). ✓ (To trójkąt podobny do trójkąta o bokach 3, 4, 5.)
+    \[P=\frac{1}{2}\cdot 12\cdot 16=96 .\]
+
+    Odpowiedź: cos α = 4/5, |AC| = 16, P = 96.
+  solution_steps:
+  - 'Rozpoznaj błąd: zapis sin α + cos α = 1 i wynik cos α = 0,4 (stąd |AC| = 8, P = 48).'
+  - 'Zastosuj poprawnie jedynkę: cos²α = 1 − (3/5)² = 16/25.'
+  - 'Weź pierwiastek dodatni (kąt ostry): cos α = 4/5.'
+  - 'Oblicz przyprostokątne: |BC| = 20·(3/5) = 12, |AC| = 20·(4/5) = 16; sprawdź Pitagorasem.'
+  - 'Oblicz pole: P = ½·12·16 = 96.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: cos_alfa
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{4}{5}
+    - name: AC
+      answer:
+        kind: NUMERIC
+        value: 16.0
+    - name: pole
+      answer:
+        kind: NUMERIC
+        value: 96.0
+  checks:
+  - kind: evaluate
+    expr: \sqrt{1-\left(\frac{3}{5}\right)^{2}}
+    part: cos_alfa
+  - kind: evaluate
+    expr: 20\cdot\frac{4}{5}
+    part: AC
+  - kind: evaluate
+    expr: \frac{1}{2}\cdot 12\cdot 16
+    part: pole
+  skills:
+  - sin²α + cos²α = 1
+  - wyznaczanie boków z funkcji kąta
+  - pole trójkąta prostokątnego
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [cos_alfa] SymPy solved it fresh: 0.8 vs 0.8 (tol 1e-09) ;
+      [AC] SymPy solved it fresh: 16.0 vs 16.0 (tol 1e-09) ; [pole] SymPy solved it fresh: 96.0 vs 96.0
+      (tol 1e-09)'
+- id: g-ch-t02
+  slot: CHALLENGE
+  ramp_index: 0
+  difficulty: 4
+  exercise_type: zadanie odwrotne (dane pole, szukane podstawy)
+  statement: W trapezie równoramiennym ABCD ramiona AD i BC mają długość 8, a kąty przy dłuższej podstawie
+    AB mają miarę 60^\circ. Pole tego trapezu jest równe 56\sqrt{3}. Oblicz długości obu podstaw tego
+    trapezu.
+  statement_latex: h=8\cdot\sin 60^\circ,\qquad \frac{1}{2}\cdot\left(|AB|+|CD|\right)\cdot h=56\sqrt{3},\qquad
+    |AB|=|CD|+2\cdot 8\cdot\cos 60^\circ
+  solution: |-
+    Oznaczmy |AB| = a (podstawa dłuższa), |CD| = b (podstawa krótsza).
+
+    1) Wysokość trapezu: prowadząc wysokość z wierzchołka D na AB otrzymujemy trójkąt prostokątny, w którym ramię 8 jest przeciwprostokątną, a wysokość leży naprzeciw kąta 60^\circ:
+    h = 8\cdot\sin 60^\circ = 8\cdot\frac{\sqrt{3}}{2} = 4\sqrt{3}.
+
+    2) Z pola: \frac{1}{2}\cdot\left(a+b\right)\cdot 4\sqrt{3} = 56\sqrt{3}, czyli 2\sqrt{3}\cdot\left(a+b\right) = 56\sqrt{3}, więc
+    a+b = 28.
+
+    3) Rzuty ramion na dłuższą podstawę (po jednym z każdej strony) mają długość
+    p = 8\cdot\cos 60^\circ = 8\cdot\frac{1}{2} = 4, zatem a = b + 2\cdot 4, czyli
+    a-b = 8.
+
+    4) Rozwiązujemy układ: a = \frac{28+8}{2} = 18, b = \frac{28-8}{2} = 10.
+
+    Kontrola: h = 4\sqrt{3}, P = \frac{1}{2}\cdot\left(18+10\right)\cdot 4\sqrt{3} = 56\sqrt{3}. ✓ Ponadto 18 > 10, więc AB rzeczywiście jest podstawą dłuższą.
+
+    Odpowiedź: |AB| = 18, |CD| = 10.
+  solution_steps:
+  - 'Oznacz podstawy: |AB| = a, |CD| = b.'
+  - Oblicz wysokość h = 8\cdot\sin 60^\circ = 4\sqrt{3}.
+  - Z warunku na pole otrzymaj a+b = 28.
+  - Z rzutu ramienia p = 8\cdot\cos 60^\circ = 4 otrzymaj a-b = 8.
+  - 'Rozwiąż układ: a = 18, b = 10, i sprawdź, że a > b.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: AB
+      answer:
+        kind: NUMERIC
+        value: 18.0
+    - name: CD
+      answer:
+        kind: NUMERIC
+        value: 10.0
+  checks:
+  - kind: evaluate
+    expr: \frac{1}{2}\cdot\left(\frac{2\cdot 56\sqrt{3}}{4\sqrt{3}}+2\cdot 8\cdot\frac{1}{2}\right)
+    part: AB
+  - kind: evaluate
+    expr: \frac{1}{2}\cdot\left(\frac{2\cdot 56\sqrt{3}}{4\sqrt{3}}-2\cdot 8\cdot\frac{1}{2}\right)
+    part: CD
+  skills:
+  - wysokość i rzut ramienia
+  - pole trapezu
+  - układ dwóch równań na podstawy
+  - wartości funkcji dla 60°
+  verification:
+    checkability: REFERENCE_CALL
+    note: 'could not compare: kind mismatch: answer=MULTIPART reference=TUPLE'
+- id: g-ch-t03
+  slot: CHALLENGE
+  ramp_index: 1
+  difficulty: 4
+  exercise_type: zadanie z filtrowaniem rozwiązania (kąt rozwarty)
+  statement: Punkty A, B, C są wierzchołkami trójkąta, w którym |AB| = 12, |AC| = 5, a kąt BAC jest kątem
+    rozwartym. Pole trójkąta ABC jest równe 15. Niech D będzie spodkiem wysokości opuszczonej z wierzchołka
+    C na prostą AB. Wyznacz miarę kąta BAC, odległość punktu C od prostej AB oraz długość odcinka BD.
+  statement_latex: 15=\frac{1}{2}\cdot 12\cdot 5\cdot\sin\left(\angle BAC\right),\qquad |CD|=\frac{2\cdot
+    15}{12},\qquad |BD|=12+5\cdot\cos\left(180^\circ-\angle BAC\right)
+  solution: |-
+    1) Miara kąta. Kąt BAC leży między bokami AB i AC, więc
+    15 = \frac{1}{2}\cdot 12\cdot 5\cdot\sin\left(\angle BAC\right) = 30\cdot\sin\left(\angle BAC\right),
+    stąd \sin\left(\angle BAC\right) = \frac{1}{2}.
+    Dla kątów z przedziału \left(0^\circ,180^\circ\right) warunek ten spełniają dwa kąty: 30^\circ oraz 150^\circ. Ponieważ w zadaniu kąt BAC jest rozwarty, odrzucamy 30^\circ i przyjmujemy \angle BAC = 150^\circ.
+
+    2) Odległość C od prostej AB to długość wysokości h = |CD|. Z P = \frac{1}{2}\cdot |AB|\cdot h mamy
+    h = \frac{2\cdot 15}{12} = 2{,}5.
+    (Kontrola: h = 5\cdot\sin 150^\circ = 5\cdot\frac{1}{2} = 2{,}5. ✓)
+
+    3) Odcinek BD. Ponieważ kąt przy A jest rozwarty, spodek D leży poza odcinkiem AB — na przedłużeniu za punkt A. W trójkącie prostokątnym ADC kąt przy A wynosi 180^\circ - 150^\circ = 30^\circ, a przeciwprostokątną jest AC = 5, więc
+    |AD| = 5\cdot\cos 30^\circ = 5\cdot\frac{\sqrt{3}}{2} = \frac{5\sqrt{3}}{2}.
+    Punkty D i B leżą po przeciwnych stronach punktu A, zatem
+    |BD| = |BA| + |AD| = 12 + \frac{5\sqrt{3}}{2}.
+
+    Odpowiedź: \angle BAC = 150^\circ, odległość C od prostej AB wynosi 2{,}5, a |BD| = 12+\frac{5\sqrt{3}}{2}.
+  solution_steps:
+  - Z wzoru na pole P = \frac{1}{2}\cdot 12\cdot 5\cdot\sin\left(\angle BAC\right) wyznacz \sin\left(\angle
+    BAC\right) = \frac{1}{2}.
+  - 'Zauważ dwa kandydaty 30^\circ i 150^\circ i odrzuć 30^\circ, bo kąt ma być rozwarty: \angle BAC =
+    150^\circ.'
+  - Z P = \frac{1}{2}\cdot |AB|\cdot |CD| oblicz |CD| = 2{,}5.
+  - Stwierdź, że przy kącie rozwartym spodek D leży na przedłużeniu AB za punkt A, a kąt DAC ma miarę
+    30^\circ.
+  - 'Oblicz |AD| = 5\cdot\cos 30^\circ = \frac{5\sqrt{3}}{2} i dodaj: |BD| = 12+\frac{5\sqrt{3}}{2}.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: kat_BAC_stopnie
+      answer:
+        kind: NUMERIC
+        value: 150.0
+    - name: odleglosc_C_od_AB
+      answer:
+        kind: NUMERIC
+        value: 2.5
+    - name: BD
+      answer:
+        kind: SYMBOLIC
+        latex: 12+\frac{5\sqrt{3}}{2}
+  checks:
+  - kind: evaluate
+    expr: 180-30
+    part: kat_BAC_stopnie
+  - kind: evaluate
+    expr: \frac{2\cdot 15}{12}
+    part: odleglosc_C_od_AB
+  - kind: evaluate
+    expr: 12+5\cdot\frac{\sqrt{3}}{2}
+    part: BD
+  skills:
+  - pole ze wzoru \frac{1}{2}ab\sin\gamma
+  - kąt rozwarty i sin(180^\circ-\alpha)
+  - spodek wysokości poza bokiem
+  - rzut odcinka
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [kat_BAC_stopnie] SymPy solved it fresh: 150.0 vs 150.0 (tol
+      1e-09) ; [odleglosc_C_od_AB] SymPy solved it fresh: 2.5 vs 2.5 (tol 1e-09) ; [BD] SymPy solved it
+      fresh: 16.330127018922195 vs 16.330127018922195 (tol 1e-09)'
+- id: g-ch-t04
+  slot: CHALLENGE
+  ramp_index: 2
+  difficulty: 5
+  exercise_type: optymalizacja z ograniczeniem (wzór + dziedzina, wartość największa)
+  statement: "Z drutu o długości 60 cm wykonano (bez odpadu i bez zakładek) ramkę w kształcie równoległoboku,\
+    \ którego kąt ostry ma miarę 30^\\circ. Dłuższy bok tej ramki ma długość x cm i jest co najmniej o\
+    \ 8 cm dłuższy od boku sąsiedniego. \na) Wyznacz wzór funkcji P opisującej pole ramki (w cm^2) w zależności\
+    \ od x i podaj dziedzinę tej funkcji. \nb) Oblicz, dla jakiej długości x pole ramki jest największe,\
+    \ i wyznacz to największe pole."
+  statement_latex: P\left(x\right)=x\cdot\left(30-x\right)\cdot\sin 30^\circ=\frac{1}{2}\cdot x\cdot\left(30-x\right),\qquad
+    x-\left(30-x\right)\ge 8
+  solution: |-
+    a) Obwód równoległoboku wynosi 60 cm, a sąsiednie boki to x i drugi bok, więc 2\cdot x + 2\cdot\left(\text{drugi bok}\right) = 60, skąd drugi bok ma długość 30-x.
+    Pole równoległoboku o bokach x i 30-x oraz kącie 30^\circ między nimi:
+    P\left(x\right) = x\cdot\left(30-x\right)\cdot\sin 30^\circ = \frac{1}{2}\cdot x\cdot\left(30-x\right) = 15x-\frac{x^{2}}{2}.
+
+    Dziedzina. Oba boki muszą być dodatnie: x>0 i 30-x>0, czyli 0<x<30. Dodatkowo bok x jest co najmniej o 8 cm dłuższy od sąsiedniego:
+    x-\left(30-x\right)\ge 8 \Rightarrow 2x\ge 38 \Rightarrow x\ge 19.
+    (Wtedy automatycznie x>30-x, więc x jest bokiem dłuższym.)
+    Ostatecznie dziedziną jest przedział \left\langle 19,\,30\right).
+
+    b) Funkcja P\left(x\right)=-\frac{1}{2}x^{2}+15x jest funkcją kwadratową o ujemnym współczynniku przy x^{2}; jej wierzchołek ma pierwszą współrzędną
+    x_{w} = \frac{-15}{2\cdot\left(-\frac{1}{2}\right)} = 15.
+    Liczba 15 NIE należy do dziedziny (15<19). Dla x>15 funkcja jest malejąca, więc na przedziale \left\langle 19,30\right) największą wartość przyjmuje na jego lewym końcu, czyli dla x = 19.
+    Wtedy drugi bok ma długość 30-19 = 11 cm oraz
+    P\left(19\right) = \frac{1}{2}\cdot 19\cdot\left(30-19\right) = \frac{209}{2} = 104{,}5.
+
+    Odpowiedź: P\left(x\right)=15x-\frac{x^{2}}{2} dla x\in\left\langle 19,30\right); największe pole 104{,}5\ \text{cm}^{2} dla x = 19 cm.
+  solution_steps:
+  - 'Z obwodu 60 cm wyznacz drugi bok: 30-x.'
+  - 'Zapisz pole równoległoboku: P\left(x\right)=x\cdot\left(30-x\right)\cdot\sin 30^\circ=15x-\frac{x^{2}}{2}.'
+  - Z warunków x>0 i 30-x>0 oraz x-\left(30-x\right)\ge 8 wyznacz dziedzinę \left\langle 19,30\right).
+  - 'Wyznacz wierzchołek paraboli: x_{w}=15 — nie należy do dziedziny.'
+  - Ponieważ dla x>15 funkcja maleje, największa wartość jest w x=19.
+  - Oblicz P\left(19\right)=\frac{1}{2}\cdot 19\cdot 11=104{,}5 cm^2.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wzor
+      answer:
+        kind: SYMBOLIC
+        latex: 15x-\frac{x^{2}}{2}
+    - name: dziedzina
+      answer:
+        kind: INTERVAL
+        lo: '19'
+        hi: '30'
+        lo_open: false
+    - name: x_optymalne
+      answer:
+        kind: NUMERIC
+        value: 19.0
+    - name: najwieksze_pole
+      answer:
+        kind: NUMERIC
+        value: 104.5
+  checks:
+  - kind: simplify
+    expr: \frac{1}{2}\cdot x\cdot\left(30-x\right)
+    part: wzor
+  - kind: evaluate
+    expr: \frac{30+8}{2}
+    part: x_optymalne
+  - kind: evaluate
+    expr: \frac{1}{2}\cdot 19\cdot\left(30-19\right)
+    part: najwieksze_pole
+  stated_model:
+    variable: x
+    objective_latex: P\left(x\right)=\frac{1}{2}\cdot x\cdot\left(30-x\right)
+    domain_lo: '19'
+    domain_hi: '30'
+    domain_lo_open: false
+    constraint_used: 2\cdot x+2\cdot\left(30-x\right)=60,\quad x-\left(30-x\right)\ge 8
+  skills:
+  - wprowadzenie zmiennej
+  - pole równoległoboku P = ab\sin\alpha
+  - dziedzina wyznaczona warunkami zadania
+  - funkcja kwadratowa — wierzchołek i monotoniczność
+  - sprawdzenie dopuszczalności wierzchołka
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''x'': ''P\\left(x\\right)=\\frac{1}{2}\\cdot
+      x\\cdot\\left(30-x\\right)'') — human review'

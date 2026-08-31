@@ -1,0 +1,686 @@
+section: stozek
+name: Stożek
+scope: Volume and surface area of a right cone; slant height, apex angle and the axial cross-section;
+  the circular sector that unrolls to the lateral surface.
+requirements:
+- X.5
+counts:
+  total: 16
+  DETERMINISTIC: 10
+  REFERENCE_CALL: 5
+  NOT_MACHINE_CHECKABLE: 1
+exercises:
+- id: g-th-00
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: obliczenie wielkości liniowej stożka
+  statement: Promień podstawy stożka obrotowego ma długość 6, a wysokość tego stożka jest równa 8. Oblicz
+    długość tworzącej tego stożka. Zapisz obliczenia.
+  statement_latex: r=6,\quad H=8,\quad l=\sqrt{r^2+H^2}
+  solution: |-
+    Wysokość stożka pada w środek podstawy, więc promień r, wysokość H i tworząca l tworzą trójkąt prostokątny, w którym tworząca jest przeciwprostokątną.
+    Stąd l^2 = r^2 + H^2 = 6^2 + 8^2 = 36 + 64 = 100.
+    Zatem l = \sqrt{100} = 10.
+    Sprawdzenie sensowności: l = 10 > 8 = H oraz l = 10 > 6 = r. ✓
+  solution_steps:
+  - Zauważ, że r, H i l tworzą trójkąt prostokątny o przeciwprostokątnej l.
+  - Zapisz l^2 = r^2 + H^2 = 36 + 64 = 100.
+  - Wyznacz l = 10 (bierzemy pierwiastek dodatni).
+  answer:
+    kind: NUMERIC
+    value: 10.0
+  checks:
+  - kind: evaluate
+    expr: \sqrt{6^2+8^2}
+  skills:
+  - związek l^2=r^2+H^2
+  - twierdzenie Pitagorasa w przekroju osiowym
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 10.0 vs 10.0 (tol 1e-09)'
+- id: g-th-01
+  slot: THEORY_SUPPORT
+  ramp_index: 1
+  difficulty: 1
+  exercise_type: objętość stożka z r i H
+  statement: Promień podstawy stożka obrotowego jest równy 5, a jego wysokość jest równa 9. Oblicz objętość
+    tego stożka. Wynik podaj w postaci dokładnej (z liczbą \pi). Zapisz obliczenia.
+  statement_latex: V=\frac{1}{3}\cdot\pi\cdot 5^2\cdot 9
+  solution: |-
+    Pole podstawy: P_p = \pi r^2 = \pi\cdot 5^2 = 25\pi.
+    Objętość stożka: V = \frac{1}{3}\cdot P_p\cdot H = \frac{1}{3}\cdot 25\pi\cdot 9 = 75\pi.
+    Odpowiedź: V = 75\pi.
+  solution_steps:
+  - Oblicz pole podstawy P_p = \pi\cdot 5^2 = 25\pi.
+  - Podstaw do wzoru V = \frac{1}{3}\cdot P_p\cdot H.
+  - Otrzymujesz V = \frac{1}{3}\cdot 25\pi\cdot 9 = 75\pi.
+  answer:
+    kind: SYMBOLIC
+    latex: 75\pi
+  checks:
+  - kind: evaluate
+    expr: \frac{1}{3}\cdot\pi\cdot 5^2\cdot 9
+  skills:
+  - wzór V=1/3 pi r^2 H
+  - rachunek na liczbach z pi
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 235.61944901923448 vs 235.61944901923448 (tol 1e-09)'
+- id: g-th-02
+  slot: THEORY_SUPPORT
+  ramp_index: 2
+  difficulty: 2
+  exercise_type: pola powierzchni stożka z r i l
+  statement: Promień podstawy stożka obrotowego ma długość 3, a jego tworząca ma długość 7. Oblicz pole
+    powierzchni bocznej oraz pole powierzchni całkowitej tego stożka. Wyniki podaj w postaci dokładnej
+    (z liczbą \pi).
+  statement_latex: P_b=\pi\cdot r\cdot l,\qquad P_c=\pi\cdot r\cdot\left(r+l\right),\quad r=3,\ l=7
+  solution: |-
+    Pole powierzchni bocznej: P_b = \pi r l = \pi\cdot 3\cdot 7 = 21\pi.
+    Pole podstawy: P_p = \pi r^2 = \pi\cdot 3^2 = 9\pi.
+    Pole powierzchni całkowitej: P_c = P_p + P_b = 9\pi + 21\pi = 30\pi, co zgadza się ze wzorem P_c = \pi r(r+l) = \pi\cdot 3\cdot(3+7) = 30\pi.
+  solution_steps:
+  - Zastosuj P_b = \pi\cdot r\cdot l = \pi\cdot 3\cdot 7 = 21\pi.
+  - Oblicz pole podstawy P_p = \pi\cdot 3^2 = 9\pi.
+  - 'Dodaj oba pola: P_c = 9\pi + 21\pi = 30\pi.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: pole powierzchni bocznej
+      answer:
+        kind: SYMBOLIC
+        latex: 21\pi
+    - name: pole powierzchni całkowitej
+      answer:
+        kind: SYMBOLIC
+        latex: 30\pi
+  checks:
+  - kind: evaluate
+    expr: \pi\cdot 3\cdot 7
+    part: pole powierzchni bocznej
+  - kind: evaluate
+    expr: \pi\cdot 3\cdot\left(3+7\right)
+    part: pole powierzchni całkowitej
+  skills:
+  - wzór P_b=pi r l
+  - wzór P_c=pi r (r+l)
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [pole powierzchni bocznej] SymPy solved it fresh: 65.97344572538566
+      vs 65.97344572538566 (tol 1e-09) ; [pole powierzchni całkowitej] SymPy solved it fresh: 94.2477796076938
+      vs 94.2477796076938 (tol 1e-09)'
+- id: g-ex-03
+  slot: EXERCISE
+  ramp_index: 1
+  difficulty: 2
+  exercise_type: objętość i pole całkowite z średnicy i wysokości
+  statement: Średnica podstawy stożka obrotowego ma długość 16 cm, a wysokość tego stożka jest równa 15
+    cm. Oblicz objętość oraz pole powierzchni całkowitej tego stożka. Zapisz obliczenia i pamiętaj o jednostkach.
+  statement_latex: 2r=16\ \mathrm{cm},\quad H=15\ \mathrm{cm},\quad V=\frac{1}{3}\cdot\pi\cdot r^2\cdot
+    H,\quad P_c=\pi\cdot r\cdot\left(r+l\right)
+  solution: |-
+    Ze średnicy wyznaczamy promień: r = \frac{16}{2} = 8 (cm).
+    Tworząca: l^2 = r^2 + H^2 = 8^2 + 15^2 = 64 + 225 = 289, więc l = 17 (cm).
+    Objętość: V = \frac{1}{3}\pi r^2 H = \frac{1}{3}\cdot\pi\cdot 64\cdot 15 = 320\pi\ \mathrm{cm}^3.
+    Pole całkowite: P_c = \pi r(r+l) = \pi\cdot 8\cdot(8+17) = 200\pi\ \mathrm{cm}^2.
+    Odpowiedź: V = 320\pi\ \mathrm{cm}^3, P_c = 200\pi\ \mathrm{cm}^2.
+  solution_steps:
+  - 'Podziel średnicę przez 2: r = 8 cm.'
+  - Z twierdzenia Pitagorasa l = \sqrt{8^2+15^2} = 17 cm.
+  - Oblicz objętość V = \frac{1}{3}\cdot\pi\cdot 8^2\cdot 15 = 320\pi\ \mathrm{cm}^3.
+  - Oblicz pole całkowite P_c = \pi\cdot 8\cdot\left(8+17\right) = 200\pi\ \mathrm{cm}^2.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: objętość
+      answer:
+        kind: SYMBOLIC
+        latex: 320\pi
+    - name: pole powierzchni całkowitej
+      answer:
+        kind: SYMBOLIC
+        latex: 200\pi
+  checks:
+  - kind: evaluate
+    expr: \frac{1}{3}\cdot\pi\cdot\left(\frac{16}{2}\right)^2\cdot 15
+    part: objętość
+  - kind: evaluate
+    expr: \pi\cdot 8\cdot\left(8+\sqrt{8^2+15^2}\right)
+    part: pole powierzchni całkowitej
+  skills:
+  - przejście ze średnicy na promień
+  - l^2=r^2+H^2
+  - V=1/3 pi r^2 H
+  - P_c=pi r (r+l)
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [objętość] SymPy solved it fresh: 1005.3096491487338 vs 1005.3096491487338
+      (tol 1e-09) ; [pole powierzchni całkowitej] SymPy solved it fresh: 628.3185307179587 vs 628.3185307179587
+      (tol 1e-09)'
+- id: g-ex-04
+  slot: EXERCISE
+  ramp_index: 2
+  difficulty: 3
+  exercise_type: siatka stożka (wycinek koła) → stożek
+  statement: Powierzchnia boczna pewnego stożka obrotowego po rozwinięciu na płaszczyznę jest wycinkiem
+    koła o promieniu 15 i kącie środkowym 216^\circ. Oblicz promień podstawy, wysokość oraz objętość tego
+    stożka. Zapisz obliczenia.
+  statement_latex: l=15,\quad \varphi=216^\circ,\quad \frac{\varphi}{360^\circ}=\frac{r}{l}
+  solution: |-
+    Promień wycinka jest tworzącą stożka: l = 15.
+    Długość łuku wycinka równa się obwodowi podstawy, czyli \frac{\varphi}{360^\circ}\cdot 2\pi l = 2\pi r, stąd r = l\cdot\frac{\varphi}{360^\circ} = 15\cdot\frac{216}{360} = 9.
+    Wysokość: H = \sqrt{l^2-r^2} = \sqrt{225-81} = \sqrt{144} = 12.
+    Objętość: V = \frac{1}{3}\pi r^2 H = \frac{1}{3}\cdot\pi\cdot 81\cdot 12 = 324\pi.
+    Kontrola: P_b = \pi r l = 135\pi oraz pole wycinka = \frac{216}{360}\cdot\pi\cdot 15^2 = 135\pi. ✓
+  solution_steps:
+  - 'Zapisz, że promień wycinka to tworząca: l = 15.'
+  - 'Z równości łuku i obwodu podstawy: r = 15\cdot\frac{216}{360} = 9.'
+  - Oblicz wysokość H = \sqrt{15^2-9^2} = 12.
+  - 'Podstaw do wzoru: V = \frac{1}{3}\cdot\pi\cdot 9^2\cdot 12 = 324\pi.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: promień podstawy
+      answer:
+        kind: NUMERIC
+        value: 9.0
+    - name: wysokość
+      answer:
+        kind: NUMERIC
+        value: 12.0
+    - name: objętość
+      answer:
+        kind: SYMBOLIC
+        latex: 324\pi
+  checks:
+  - kind: evaluate
+    expr: 15\cdot\frac{216}{360}
+    part: promień podstawy
+  - kind: evaluate
+    expr: \sqrt{15^2-\left(15\cdot\frac{216}{360}\right)^2}
+    part: wysokość
+  - kind: evaluate
+    expr: \frac{1}{3}\cdot\pi\cdot 9^2\cdot 12
+    part: objętość
+  skills:
+  - kąt wycinka phi=360 r/l
+  - l^2=r^2+H^2
+  - objętość stożka
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [promień podstawy] SymPy solved it fresh: 9.0 vs 9.0 (tol 1e-09)
+      ; [wysokość] SymPy solved it fresh: 12.0 vs 12.0 (tol 1e-09) ; [objętość] SymPy solved it fresh:
+      1017.876019763093 vs 1017.876019763093 (tol 1e-09)'
+- id: g-ex-05
+  slot: EXERCISE
+  ramp_index: 3
+  difficulty: 4
+  exercise_type: trygonometria w przekroju osiowym + siatka
+  statement: Tworząca stożka obrotowego ma długość 12 i jest nachylona do płaszczyzny podstawy pod kątem
+    60^\circ. Oblicz objętość tego stożka, pole jego powierzchni całkowitej oraz miarę kąta środkowego
+    wycinka koła, który jest rozwinięciem powierzchni bocznej tego stożka. Zapisz obliczenia.
+  statement_latex: l=12,\quad \beta=60^\circ,\quad r=l\cdot\cos\beta,\quad H=l\cdot\sin\beta,\quad \varphi=360^\circ\cdot\frac{r}{l}
+  solution: |-
+    W przekroju osiowym (trójkąt równoramienny o ramionach l i podstawie 2r) wysokość H dzieli go na dwa trójkąty prostokątne o bokach r, H, l; kąt przy podstawie to \beta = 60^\circ.
+    r = l\cdot\cos 60^\circ = 12\cdot\frac{1}{2} = 6,
+    H = l\cdot\sin 60^\circ = 12\cdot\frac{\sqrt{3}}{2} = 6\sqrt{3}.
+    Sprawdzenie: r^2 + H^2 = 36 + 108 = 144 = l^2. ✓
+    Objętość: V = \frac{1}{3}\pi r^2 H = \frac{1}{3}\cdot\pi\cdot 36\cdot 6\sqrt{3} = 72\sqrt{3}\pi.
+    Pole całkowite: P_c = \pi r(r+l) = \pi\cdot 6\cdot(6+12) = 108\pi.
+    Kąt wycinka: \varphi = 360^\circ\cdot\frac{r}{l} = 360^\circ\cdot\frac{6}{12} = 180^\circ.
+  solution_steps:
+  - W trójkącie prostokątnym o bokach r, H, l kąt przy podstawie wynosi 60^\circ.
+  - Oblicz r = 12\cdot\cos 60^\circ = 6 oraz H = 12\cdot\sin 60^\circ = 6\sqrt{3}.
+  - Oblicz V = \frac{1}{3}\cdot\pi\cdot 6^2\cdot 6\sqrt{3} = 72\sqrt{3}\pi.
+  - Oblicz P_c = \pi\cdot 6\cdot\left(6+12\right) = 108\pi.
+  - Oblicz \varphi = 360^\circ\cdot\frac{6}{12} = 180^\circ.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: objętość
+      answer:
+        kind: SYMBOLIC
+        latex: 72\sqrt{3}\pi
+    - name: pole powierzchni całkowitej
+      answer:
+        kind: SYMBOLIC
+        latex: 108\pi
+    - name: kąt środkowy wycinka
+      answer:
+        kind: NUMERIC
+        value: 180.0
+  checks:
+  - kind: evaluate
+    expr: \frac{1}{3}\cdot\pi\cdot 6^2\cdot 6\cdot\sqrt{3}
+    part: objętość
+  - kind: evaluate
+    expr: \pi\cdot 6\cdot\left(6+12\right)
+    part: pole powierzchni całkowitej
+  - kind: evaluate
+    expr: 360\cdot\frac{6}{12}
+    part: kąt środkowy wycinka
+  skills:
+  - r=l cos beta, H=l sin beta
+  - objętość i pole całkowite
+  - kąt środkowy wycinka
+  verification:
+    checkability: REFERENCE_CALL
+    note: 3 parts matched
+- id: g-ex-t00
+  slot: EXERCISE
+  ramp_index: 6
+  difficulty: 3
+  exercise_type: obliczanie objętości i pól z przekroju osiowego
+  statement: Pole przekroju osiowego pewnego stożka jest równe 48, a wysokość tego stożka jest równa 6.
+    Oblicz objętość oraz pole powierzchni całkowitej tego stożka. Zapisz obliczenia.
+  statement_latex: P_{\triangle}=\frac{1}{2}\cdot 2\cdot r\cdot H=r\cdot H=48,\qquad H=6
+  solution: |-
+    Przekrój osiowy stożka jest trójkątem równoramiennym o podstawie 2r i wysokości H, więc jego pole wynosi P_{\triangle}=\frac{1}{2}\cdot 2r\cdot H=r\cdot H.
+    Stąd r\cdot 6=48, czyli r=8.
+    Tworząca: l^{2}=r^{2}+H^{2}=64+36=100, więc l=10 (l>0).
+    Objętość: V=\frac{1}{3}\pi r^{2}H=\frac{1}{3}\pi\cdot 64\cdot 6=128\pi.
+    Pole całkowite: P_c=\pi r\left(r+l\right)=\pi\cdot 8\cdot\left(8+10\right)=144\pi.
+    Odpowiedź: V=128\pi, P_c=144\pi (pole boczne \pi rl=80\pi, podstawa 64\pi).
+  solution_steps:
+  - 'Zapisz pole przekroju osiowego: P_{\triangle}=\frac{1}{2}\cdot 2\cdot r\cdot H=r\cdot H.'
+  - Z równania r\cdot 6=48 wyznacz r=8.
+  - Z twierdzenia Pitagorasa l^{2}=8^{2}+6^{2}=100, więc l=10.
+  - Oblicz V=\frac{1}{3}\pi\cdot 8^{2}\cdot 6=128\pi.
+  - Oblicz P_c=\pi\cdot 8\cdot\left(8+10\right)=144\pi.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: objetosc
+      answer:
+        kind: SYMBOLIC
+        latex: 128\pi
+    - name: pole_calkowite
+      answer:
+        kind: SYMBOLIC
+        latex: 144\pi
+  checks:
+  - kind: evaluate
+    expr: \frac{1}{3}\cdot\pi\cdot 8^{2}\cdot 6
+    part: objetosc
+  - kind: evaluate
+    expr: \pi\cdot 8\cdot\left(8+10\right)
+    part: pole_calkowite
+  skills:
+  - przekrój osiowy stożka
+  - zależność l^2=r^2+H^2
+  - objętość stożka
+  - pole powierzchni całkowitej
+  verification:
+    checkability: REFERENCE_CALL
+    note: 2 parts matched
+- id: g-ex-t01
+  slot: EXERCISE
+  ramp_index: 7
+  difficulty: 4
+  exercise_type: siatka stożka – zadanie odwrotne
+  statement: Powierzchnia boczna pewnego stożka po rozwinięciu na płaszczyznę jest półkolem o polu równym
+    18\pi. Oblicz objętość oraz pole powierzchni całkowitej tego stożka. Zapisz obliczenia.
+  statement_latex: \frac{180^\circ}{360^\circ}\cdot\pi\cdot l^{2}=18\pi,\qquad \frac{\varphi}{360^\circ}=\frac{r}{l}
+  solution: |-
+    Promieniem wycinka jest tworząca l, a kąt środkowy półkola wynosi \varphi=180^\circ.
+    Pole wycinka: \frac{180^\circ}{360^\circ}\cdot\pi l^{2}=18\pi, czyli \frac{1}{2}\pi l^{2}=18\pi, stąd l^{2}=36 i l=6.
+    Z zależności \frac{\varphi}{360^\circ}=\frac{r}{l} mamy \frac{1}{2}=\frac{r}{6}, więc r=3 (łuk półkola 6\pi jest równy obwodowi podstawy 2\pi r).
+    Wysokość: H=\sqrt{l^{2}-r^{2}}=\sqrt{36-9}=\sqrt{27}=3\sqrt{3}.
+    Objętość: V=\frac{1}{3}\pi r^{2}H=\frac{1}{3}\pi\cdot 9\cdot 3\sqrt{3}=9\sqrt{3}\pi.
+    Pole całkowite: P_c=\pi r\left(r+l\right)=\pi\cdot 3\cdot\left(3+6\right)=27\pi (kontrola: pole boczne \pi rl=18\pi, tyle co pole półkola).
+    Odpowiedź: V=9\sqrt{3}\pi, P_c=27\pi.
+  solution_steps:
+  - Zauważ, że promień wycinka to tworząca, a kąt wycinka to \varphi=180^\circ.
+  - Z pola półkola \frac{1}{2}\pi l^{2}=18\pi wyznacz l=6.
+  - Z proporcji \frac{\varphi}{360^\circ}=\frac{r}{l} otrzymaj r=6\cdot\frac{1}{2}=3.
+  - Oblicz wysokość H=\sqrt{36-9}=3\sqrt{3}.
+  - Oblicz V=\frac{1}{3}\pi\cdot 3^{2}\cdot 3\sqrt{3}=9\sqrt{3}\pi.
+  - Oblicz P_c=\pi\cdot 3\cdot\left(3+6\right)=27\pi.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: objetosc
+      answer:
+        kind: SYMBOLIC
+        latex: 9\sqrt{3}\pi
+    - name: pole_calkowite
+      answer:
+        kind: SYMBOLIC
+        latex: 27\pi
+  checks:
+  - kind: evaluate
+    expr: \frac{1}{3}\cdot\pi\cdot 3^{2}\cdot 3\cdot\sqrt{3}
+    part: objetosc
+  - kind: evaluate
+    expr: \pi\cdot 3\cdot\left(3+6\right)
+    part: pole_calkowite
+  skills:
+  - rozwinięcie powierzchni bocznej
+  - kąt środkowy wycinka
+  - pole wycinka koła
+  - objętość i pole całkowite stożka
+  verification:
+    checkability: REFERENCE_CALL
+    note: 2 parts matched
+- id: g-cm-06
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: pole powierzchni bocznej – tworząca kontra wysokość
+  statement: 'Promień podstawy stożka obrotowego jest równy 5, a wysokość tego stożka wynosi 12. Uczeń
+    obliczył pole powierzchni bocznej tak: P_b = \pi\cdot 5\cdot 12 = 60\pi. Wyjaśnij, na czym polega
+    błąd, i podaj poprawne pole powierzchni bocznej tego stożka.'
+  statement_latex: r=5,\quad H=12,\quad P_b=\pi\cdot r\cdot l
+  solution: |-
+    Błędne rozumowanie: uczeń podstawił do wzoru na pole boczne wysokość H = 12 zamiast tworzącej, otrzymując P_b = \pi\cdot 5\cdot 12 = 60\pi.
+    Dlaczego to źle: powierzchnia boczna po rozwinięciu jest wycinkiem koła o promieniu równym TWORZĄCEJ l, a nie wysokości. Wysokość występuje wyłącznie we wzorze na objętość.
+    Poprawnie: najpierw l = \sqrt{r^2+H^2} = \sqrt{25+144} = \sqrt{169} = 13.
+    Dopiero teraz P_b = \pi r l = \pi\cdot 5\cdot 13 = 65\pi.
+    Odpowiedź: P_b = 65\pi (a nie 60\pi).
+  solution_steps:
+  - Zauważ, że we wzorze P_b = \pi r l występuje tworząca, a nie wysokość.
+  - 'Oblicz tworzącą: l = \sqrt{5^2+12^2} = 13.'
+  - 'Podstaw: P_b = \pi\cdot 5\cdot 13 = 65\pi.'
+  answer:
+    kind: SYMBOLIC
+    latex: 65\pi
+  checks:
+  - kind: evaluate
+    expr: \pi\cdot 5\cdot\sqrt{5^2+12^2}
+  skills:
+  - P_b=pi r l
+  - wyznaczanie tworzącej z Pitagorasa
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 204.20352248333657 vs 204.20352248333657 (tol 1e-09)'
+- id: g-cm-07
+  slot: COMMON_MISTAKE
+  ramp_index: 1
+  difficulty: 2
+  exercise_type: objętość stożka – czynnik 1/3
+  statement: Promień podstawy stożka obrotowego jest równy 6, a jego wysokość wynosi 10. Uczeń zapisał,
+    że objętość tego stożka jest równa V = \pi\cdot 6^2\cdot 10 = 360\pi. Wyjaśnij błąd i oblicz poprawną
+    objętość stożka.
+  statement_latex: r=6,\quad H=10,\quad V=\frac{1}{3}\cdot\pi\cdot r^2\cdot H
+  solution: |-
+    Błędne rozumowanie: uczeń użył wzoru na objętość WALCA, V = \pi r^2 H = \pi\cdot 36\cdot 10 = 360\pi.
+    Dlaczego to źle: stożek jest „ostrosłupem o podstawie kołowej”, a dla ostrosłupa i stożka V = \frac{1}{3}P_p\cdot H. Objętość stożka jest trzy razy mniejsza od objętości walca o tej samej podstawie i wysokości.
+    Poprawnie: V = \frac{1}{3}\cdot\pi\cdot 6^2\cdot 10 = \frac{1}{3}\cdot 360\pi = 120\pi.
+    Odpowiedź: V = 120\pi (a nie 360\pi).
+  solution_steps:
+  - Rozpoznaj, że 360\pi to objętość walca o tej samej podstawie i wysokości.
+  - Zastosuj wzór stożka V = \frac{1}{3}\cdot P_p\cdot H, gdzie P_p = \pi\cdot 6^2 = 36\pi.
+  - Oblicz V = \frac{1}{3}\cdot 36\pi\cdot 10 = 120\pi.
+  answer:
+    kind: SYMBOLIC
+    latex: 120\pi
+  checks:
+  - kind: evaluate
+    expr: \frac{1}{3}\cdot\pi\cdot 6^2\cdot 10
+  skills:
+  - V=1/3 pi r^2 H
+  - porównanie stożka i walca
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 376.9911184307752 vs 376.9911184307752 (tol 1e-09)'
+- id: g-cm-08
+  slot: COMMON_MISTAKE
+  ramp_index: 2
+  difficulty: 2
+  exercise_type: związek r, H, l
+  statement: Promień podstawy stożka obrotowego jest równy 9, a jego wysokość wynosi 12. Uczeń przyjął,
+    że tworząca jest równa l = 9 + 12 = 21, i obliczył pole powierzchni bocznej P_b = \pi\cdot 9\cdot
+    21 = 189\pi. Wyjaśnij błąd i podaj poprawne pole powierzchni bocznej.
+  statement_latex: r=9,\quad H=12,\quad l^2=r^2+H^2
+  solution: |-
+    Błędne rozumowanie: uczeń dodał r i H, przyjmując l = r + H = 21, i otrzymał P_b = \pi\cdot 9\cdot 21 = 189\pi.
+    Dlaczego to źle: r, H i l są bokami trójkąta prostokątnego (połowa przekroju osiowego), w którym l jest przeciwprostokątną, więc l^2 = r^2 + H^2, a nie l = r + H. W trójkącie przeciwprostokątna jest zawsze krótsza od sumy przyprostokątnych.
+    Poprawnie: l^2 = 9^2 + 12^2 = 81 + 144 = 225, więc l = 15.
+    P_b = \pi r l = \pi\cdot 9\cdot 15 = 135\pi.
+    Odpowiedź: P_b = 135\pi (a nie 189\pi).
+  solution_steps:
+  - Zauważ, że l jest przeciwprostokątną trójkąta o przyprostokątnych r i H.
+  - Oblicz l = \sqrt{9^2+12^2} = 15 (a nie 9+12=21).
+  - 'Podstaw: P_b = \pi\cdot 9\cdot 15 = 135\pi.'
+  answer:
+    kind: SYMBOLIC
+    latex: 135\pi
+  checks:
+  - kind: evaluate
+    expr: \pi\cdot 9\cdot\sqrt{9^2+12^2}
+  skills:
+  - l^2=r^2+H^2
+  - P_b=pi r l
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 424.1150082346221 vs 424.1150082346221 (tol 1e-09)'
+- id: g-cm-09
+  slot: COMMON_MISTAKE
+  ramp_index: 3
+  difficulty: 3
+  exercise_type: kąt rozwarcia stożka a kąt w trójkącie prostokątnym
+  statement: Kąt rozwarcia stożka obrotowego (kąt przy wierzchołku jego przekroju osiowego) ma miarę 60^\circ,
+    a tworząca tego stożka ma długość 10. Uczeń zapisał r = 10\cdot\sin 60^\circ = 5\sqrt{3} oraz H =
+    10\cdot\cos 60^\circ = 5 i stąd obliczył objętość. Wyjaśnij błąd i oblicz poprawną objętość stożka.
+  statement_latex: 2\alpha=60^\circ,\quad l=10,\quad r=l\cdot\sin\alpha,\quad H=l\cdot\cos\alpha
+  solution: |-
+    Błędne rozumowanie: uczeń użył całego kąta rozwarcia 60^\circ jako kąta trójkąta prostokątnego i otrzymał r = 5\sqrt{3}, H = 5, a więc V = \frac{1}{3}\pi\cdot 75\cdot 5 = 125\pi.
+    Dlaczego to źle: wysokość stożka dzieli przekrój osiowy (trójkąt równoramienny) na dwa przystające trójkąty prostokątne, a więc dzieli kąt rozwarcia NA POŁOWĘ. W trójkącie prostokątnym o bokach r, H, l pracujemy z kątem \alpha = \frac{60^\circ}{2} = 30^\circ.
+    Poprawnie: r = l\cdot\sin 30^\circ = 10\cdot\frac{1}{2} = 5, H = l\cdot\cos 30^\circ = 10\cdot\frac{\sqrt{3}}{2} = 5\sqrt{3}.
+    Sprawdzenie: r^2+H^2 = 25+75 = 100 = l^2 ✓, a ponieważ kąt rozwarcia jest mały (60^\circ), stożek jest „smukły”, czyli H > r — zgadza się.
+    V = \frac{1}{3}\pi r^2 H = \frac{1}{3}\cdot\pi\cdot 25\cdot 5\sqrt{3} = \frac{125\sqrt{3}}{3}\pi.
+    Odpowiedź: V = \frac{125\sqrt{3}}{3}\pi (a nie 125\pi).
+  solution_steps:
+  - 'Podziel kąt rozwarcia na pół: \alpha = 30^\circ.'
+  - Oblicz r = 10\cdot\sin 30^\circ = 5 oraz H = 10\cdot\cos 30^\circ = 5\sqrt{3}.
+  - Oblicz V = \frac{1}{3}\cdot\pi\cdot 5^2\cdot 5\sqrt{3} = \frac{125\sqrt{3}}{3}\pi.
+  answer:
+    kind: SYMBOLIC
+    latex: \frac{125\sqrt{3}}{3}\pi
+  checks:
+  - kind: evaluate
+    expr: \frac{1}{3}\cdot\pi\cdot 5^2\cdot 5\cdot\sqrt{3}
+  skills:
+  - podział kąta rozwarcia przez wysokość
+  - r=l sin alpha, H=l cos alpha
+  - objętość stożka
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 226.72492052927723 vs 226.72492052927723 (tol 1e-09)'
+- id: g-cm-10
+  slot: COMMON_MISTAKE
+  ramp_index: 4
+  difficulty: 3
+  exercise_type: kąt nachylenia tworzącej do podstawy
+  statement: Promień podstawy stożka obrotowego jest równy 4, a tworząca tego stożka jest nachylona do
+    płaszczyzny podstawy pod kątem 60^\circ. Uczeń zapisał \operatorname{tg} 60^\circ = \frac{r}{H} i
+    stąd wyznaczył wysokość H = \frac{4}{\sqrt{3}}. Wyjaśnij błąd i oblicz poprawną objętość stożka.
+  statement_latex: r=4,\quad \beta=60^\circ,\quad \operatorname{tg}\beta=\frac{H}{r}
+  solution: |-
+    Błędne rozumowanie: uczeń przyjął \operatorname{tg}\beta = \frac{r}{H}, czyli traktował \beta tak, jakby był kątem przy wierzchołku (między osią a tworzącą). Otrzymał H = \frac{4}{\sqrt{3}} = \frac{4\sqrt{3}}{3} i objętość \frac{1}{3}\pi\cdot 16\cdot\frac{4\sqrt{3}}{3} = \frac{64\sqrt{3}}{9}\pi.
+    Dlaczego to źle: kąt \beta leży PRZY PODSTAWIE trójkąta prostokątnego o bokach r, H, l. Przyprostokątna przyległa do \beta to r, a naprzeciw leży H, więc \operatorname{tg}\beta = \frac{H}{r}. Zauważ też, że dla \beta = 60^\circ musi być H > r, a wynik ucznia daje H < r.
+    Poprawnie: H = r\cdot\operatorname{tg} 60^\circ = 4\sqrt{3}.
+    V = \frac{1}{3}\pi r^2 H = \frac{1}{3}\cdot\pi\cdot 16\cdot 4\sqrt{3} = \frac{64\sqrt{3}}{3}\pi.
+    Odpowiedź: V = \frac{64\sqrt{3}}{3}\pi.
+  solution_steps:
+  - Ustal, że \beta jest kątem przy podstawie, więc \operatorname{tg}\beta = \frac{H}{r}.
+  - 'Wyznacz H = 4\cdot\operatorname{tg} 60^\circ = 4\sqrt{3} (i sprawdź: H > r, jak być powinno).'
+  - Oblicz V = \frac{1}{3}\cdot\pi\cdot 4^2\cdot 4\sqrt{3} = \frac{64\sqrt{3}}{3}\pi.
+  answer:
+    kind: SYMBOLIC
+    latex: \frac{64\sqrt{3}}{3}\pi
+  checks:
+  - kind: evaluate
+    expr: \frac{1}{3}\cdot\pi\cdot 4^2\cdot 4\cdot\sqrt{3}
+  skills:
+  - tg beta = H/r
+  - objętość stożka
+  - trygonometria w przekroju osiowym
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 116.08315931098994 vs 116.08315931098994 (tol 1e-09)'
+- id: g-ch-t02
+  slot: CHALLENGE
+  ramp_index: 0
+  difficulty: 4
+  exercise_type: zadanie odwrotne z ukrytym warunkiem geometrycznym
+  statement: Przekrój osiowy pewnego stożka jest trójkątem prostokątnym, a objętość tego stożka jest równa
+    72\pi. Oblicz pole powierzchni całkowitej tego stożka. Zapisz obliczenia.
+  statement_latex: V=\frac{1}{3}\cdot\pi\cdot r^{2}\cdot H=72\pi,\qquad H=r
+  solution: |-
+    Przekrój osiowy jest trójkątem równoramiennym o ramionach l i podstawie 2r. Kąty przy podstawie są równe, więc kąt prosty może być tylko kątem przy wierzchołku stożka.
+    Wysokość H poprowadzona do przeciwprostokątnej trójkąta prostokątnego równoramiennego jest równa połowie tej przeciwprostokątnej, czyli H=\frac{1}{2}\cdot 2r=r.
+    Podstawiamy do wzoru na objętość: \frac{1}{3}\pi r^{2}\cdot r=72\pi, czyli r^{3}=216, więc r=6, a zatem H=6.
+    Tworząca: l^{2}=r^{2}+H^{2}=36+36=72, więc l=6\sqrt{2}.
+    Pole całkowite: P_c=\pi r\left(r+l\right)=\pi\cdot 6\cdot\left(6+6\sqrt{2}\right)=36\pi\left(1+\sqrt{2}\right).
+    Odpowiedź: P_c=36\pi\left(1+\sqrt{2}\right)=36\pi+36\sqrt{2}\pi.
+  solution_steps:
+  - Zauważ, że w trójkącie równoramiennym kąt prosty musi być kątem przy wierzchołku stożka.
+  - 'Wywnioskuj, że wysokość do przeciwprostokątnej jest jej połową: H=r.'
+  - Z równania \frac{1}{3}\pi r^{3}=72\pi wyznacz r^{3}=216, czyli r=6 oraz H=6.
+  - 'Oblicz tworzącą: l=\sqrt{36+36}=6\sqrt{2}.'
+  - Oblicz P_c=\pi\cdot 6\cdot\left(6+6\sqrt{2}\right)=36\pi\left(1+\sqrt{2}\right).
+  answer:
+    kind: SYMBOLIC
+    latex: 36\pi\left(1+\sqrt{2}\right)
+  checks:
+  - kind: evaluate
+    expr: \pi\cdot 6\cdot\left(6+6\cdot\sqrt{2}\right)
+  skills:
+  - interpretacja przekroju osiowego
+  - warunek H=r dla przekroju prostokątnego
+  - wyznaczanie r z objętości
+  - pole powierzchni całkowitej
+  verification:
+    checkability: REFERENCE_CALL
+    note: '''36\\pi\\left(1+\\sqrt{2}\\right)'' vs ''36\\pi(1+\\sqrt{2})'' (as text)'
+- id: g-ch-t03
+  slot: CHALLENGE
+  ramp_index: 1
+  difficulty: 4
+  exercise_type: równanie kwadratowe z odrzuceniem rozwiązania niegeometrycznego
+  statement: Suma długości promienia podstawy i tworzącej pewnego stożka jest równa 18, a pole powierzchni
+    bocznej tego stożka jest równe 65\pi. Oblicz objętość oraz pole powierzchni całkowitej tego stożka.
+    Zapisz obliczenia.
+  statement_latex: r+l=18,\qquad \pi\cdot r\cdot l=65\pi
+  solution: |-
+    Oznaczmy przez r promień podstawy; wtedy tworząca l=18-r.
+    Z pola powierzchni bocznej: \pi r l=65\pi, czyli r\left(18-r\right)=65, co daje r^{2}-18r+65=0.
+    Wyróżnik: \Delta=324-260=64, \sqrt{\Delta}=8, więc r=\frac{18-8}{2}=5 albo r=\frac{18+8}{2}=13.
+    Dla r=13 mamy l=18-13=5, czyli l<r — to niemożliwe, bo tworząca jest przeciwprostokątną w trójkącie o przyprostokątnych r i H, więc zawsze l>r. Ten przypadek odrzucamy.
+    Zostaje r=5 oraz l=13. Wysokość: H=\sqrt{l^{2}-r^{2}}=\sqrt{169-25}=\sqrt{144}=12.
+    Objętość: V=\frac{1}{3}\pi r^{2}H=\frac{1}{3}\pi\cdot 25\cdot 12=100\pi.
+    Pole całkowite: P_c=\pi r\left(r+l\right)=\pi\cdot 5\cdot 18=90\pi.
+    Odpowiedź: V=100\pi, P_c=90\pi.
+  solution_steps:
+  - 'Wprowadź niewiadomą: r – promień podstawy, wtedy l=18-r.'
+  - 'Zapisz równanie z pola bocznego: r\left(18-r\right)=65, czyli r^{2}-18r+65=0.'
+  - 'Rozwiąż równanie: \Delta=64, r=5 lub r=13.'
+  - Odrzuć r=13, bo wtedy l=5<r, a musi być l>r.
+  - Dla r=5, l=13 oblicz H=\sqrt{169-25}=12.
+  - Oblicz V=\frac{1}{3}\pi\cdot 5^{2}\cdot 12=100\pi oraz P_c=\pi\cdot 5\cdot\left(5+13\right)=90\pi.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: objetosc
+      answer:
+        kind: SYMBOLIC
+        latex: 100\pi
+    - name: pole_calkowite
+      answer:
+        kind: SYMBOLIC
+        latex: 90\pi
+  checks:
+  - kind: evaluate
+    expr: \frac{1}{3}\cdot\pi\cdot 5^{2}\cdot 12
+    part: objetosc
+  - kind: evaluate
+    expr: \pi\cdot 5\cdot\left(5+13\right)
+    part: pole_calkowite
+  skills:
+  - wprowadzenie niewiadomej
+  - pole powierzchni bocznej P_b=\pi rl
+  - rozwiązywanie równania kwadratowego
+  - warunek l>r
+  - objętość stożka
+  verification:
+    checkability: REFERENCE_CALL
+    note: 2 parts matched
+- id: g-ch-t04
+  slot: CHALLENGE
+  ramp_index: 2
+  difficulty: 5
+  exercise_type: modelowanie i optymalizacja kwadratowa z ograniczeniem
+  statement: |-
+    Projektowany jest zbiornik w kształcie stożka prostego. Suma długości promienia podstawy i wysokości tego zbiornika ma być równa 12 dm, a ze względów konstrukcyjnych wysokość zbiornika musi być co najmniej dwa razy większa od promienia jego podstawy. Promień podstawy zbiornika oznaczamy przez x (w decymetrach).
+    a) Wyznacz wzór funkcji P opisującej pole przekroju osiowego tego zbiornika w zależności od x oraz podaj dziedzinę tej funkcji.
+    b) Wyznacz tę wartość x, dla której pole przekroju osiowego jest największe, i oblicz objętość zbiornika o takim promieniu podstawy. Zapisz obliczenia.
+  statement_latex: P\left(x\right)=x\cdot\left(12-x\right),\qquad 12-x\geq 2\cdot x,\qquad V=\frac{1}{3}\cdot\pi\cdot
+    x^{2}\cdot\left(12-x\right)
+  solution: |-
+    a) Niech x będzie promieniem podstawy. Z warunku r+H=12 wysokość wynosi H=12-x.
+    Przekrój osiowy to trójkąt równoramienny o podstawie 2x i wysokości H, więc jego pole to P=\frac{1}{2}\cdot 2x\cdot H=x\cdot\left(12-x\right)=12x-x^{2}.
+    Dziedzina: musi być x>0 oraz H>0, a ponadto H\geq 2x, czyli 12-x\geq 2x, stąd 12\geq 3x, czyli x\leq 4 (warunek x\leq 4 pociąga H=12-x\geq 8>0).
+    Zatem P\left(x\right)=12x-x^{2} dla x\in\left(0,\;4\right\rangle.
+    b) Funkcja P jest funkcją kwadratową o ujemnym współczynniku przy x^{2}, więc jej wykresem jest parabola o ramionach skierowanych w dół, a wierzchołek ma pierwszą współrzędną x_w=\frac{-12}{2\cdot\left(-1\right)}=6.
+    Wierzchołek nie należy do dziedziny (6>4). Na przedziale \left(0,\;4\right\rangle funkcja P jest rosnąca (bo 4<6), więc największą wartość przyjmuje na końcu przedziału, dla x=4.
+    Wtedy P\left(4\right)=4\cdot 8=32, czyli największe pole przekroju osiowego to 32 dm^{2}.
+    Dla x=4 mamy r=4 dm i H=12-4=8 dm, zatem V=\frac{1}{3}\pi\cdot 4^{2}\cdot 8=\frac{128\pi}{3} dm^{3}\approx 134,0 dm^{3}.
+    Odpowiedź: P\left(x\right)=12x-x^{2}, x\in\left(0,\;4\right\rangle; największe pole dla x=4 dm, a objętość takiego zbiornika wynosi \frac{128\pi}{3} dm^{3}.
+  solution_steps:
+  - Oznacz r=x, wtedy z warunku r+H=12 otrzymujesz H=12-x.
+  - 'Zapisz pole przekroju osiowego: P=\frac{1}{2}\cdot 2x\cdot\left(12-x\right)=12x-x^{2}.'
+  - 'Wyznacz dziedzinę: x>0 oraz 12-x\geq 2x, czyli x\leq 4; stąd x\in\left(0,\;4\right\rangle.'
+  - 'Znajdź wierzchołek paraboli: x_w=6 — leży poza dziedziną.'
+  - Ponieważ na \left(0,\;4\right\rangle funkcja jest rosnąca, największe pole jest dla x=4 (i wynosi
+    32).
+  - Dla r=4 i H=8 oblicz V=\frac{1}{3}\pi\cdot 4^{2}\cdot 8=\frac{128\pi}{3} dm^{3}.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wzor_funkcji
+      answer:
+        kind: SYMBOLIC
+        latex: P\left(x\right)=12x-x^{2}
+    - name: dziedzina
+      answer:
+        kind: INTERVAL
+        lo: '0'
+        hi: '4'
+        hi_open: false
+    - name: x_optymalne
+      answer:
+        kind: NUMERIC
+        value: 4.0
+    - name: objetosc
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{128\pi}{3}
+  checks:
+  - kind: simplify
+    expr: x\cdot\left(12-x\right)
+    part: wzor_funkcji
+  - kind: solve_equation
+    expr: 12-x=2\cdot x
+    part: x_optymalne
+  - kind: evaluate
+    expr: \frac{1}{3}\cdot\pi\cdot 4^{2}\cdot 8
+    part: objetosc
+  stated_model:
+    variable: x
+    objective_latex: P\left(x\right)=12\cdot x-x^{2}
+    domain_lo: '0'
+    domain_hi: '4'
+    domain_hi_open: false
+    constraint_used: r+H=12 oraz H\geq 2\cdot r, r>0
+  skills:
+  - budowanie funkcji celu
+  - pole przekroju osiowego r\cdot H
+  - dziedzina z warunków geometrycznych
+  - wierzchołek paraboli i kontrola ograniczenia
+  - objętość stożka
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''x'': ''P\\left(x\\right)=12\\cdot
+      x-x^{2}'') — human review'

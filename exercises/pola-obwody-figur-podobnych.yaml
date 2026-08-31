@@ -1,0 +1,728 @@
+section: pola-obwody-figur-podobnych
+name: Pola i obwody figur podobnych
+scope: Ratio of perimeters and ratio of areas of similar figures, and problems that use them.
+requirements:
+- VIII.9
+counts:
+  total: 16
+  DETERMINISTIC: 13
+  NOT_MACHINE_CHECKABLE: 3
+exercises:
+- id: g-th-00
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: obliczenie obwodu figury podobnej
+  statement: Wielokąt W' jest podobny do wielokąta W w skali k = 3. Obwód wielokąta W jest równy 14 cm.
+    Oblicz obwód wielokąta W'. Zapisz obliczenia.
+  statement_latex: \mathrm{Obw}(W')=k\cdot \mathrm{Obw}(W)=3\cdot 14
+  solution: |-
+    Obwód jest wielkością liniową, więc przy podobieństwie w skali k mnoży się przez k.
+    Zatem Obw(W') = 3 \cdot 14 = 42 cm.
+    Sprawdzenie sensowności: k = 3 > 1, więc figura W' jest większa i jej obwód musi być większy — 42 > 14. Zgadza się.
+    Odpowiedź: 42 cm.
+  solution_steps:
+  - 'Zapisz zależność obwodów figur podobnych: Obw(W'') = k·Obw(W).'
+  - Podstaw k = 3 i Obw(W) = 14 cm.
+  - Oblicz 3·14 = 42.
+  - 'Podaj wynik z jednostką liniową: 42 cm.'
+  answer:
+    kind: NUMERIC
+    value: 42.0
+    latex: 42\ \text{cm}
+  checks:
+  - kind: evaluate
+    expr: 3\cdot 14
+  skills:
+  - stosowanie zależności obwodów figur podobnych
+  - mnożenie przez skalę
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 42.0 vs 42.0 (tol 1e-09)'
+- id: g-th-01
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: obliczenie pola figury podobnej
+  statement: Czworokąt F' jest podobny do czworokąta F w skali k = \frac{5}{2}. Pole czworokąta F jest
+    równe 8 cm². Oblicz pole czworokąta F'. Zapisz obliczenia.
+  statement_latex: P(F')=k^{2}\cdot P(F)=\left(\frac{5}{2}\right)^{2}\cdot 8
+  solution: |-
+    Pola figur podobnych są w stosunku k², więc P(F') = k²·P(F).
+    k² = \left(\frac{5}{2}\right)^{2} = \frac{25}{4}.
+    Zatem P(F') = \frac{25}{4}\cdot 8 = 50 cm².
+    Sprawdzenie: k = 2,5 > 1, więc pole musi wzrosnąć — 50 > 8. Zgadza się.
+    Odpowiedź: 50 cm².
+  solution_steps:
+  - 'Zapisz zależność pól figur podobnych: P(F'') = k²·P(F).'
+  - Oblicz k² = (5/2)² = 25/4.
+  - 'Podstaw: P(F'') = (25/4)·8 = 50.'
+  - 'Podaj wynik z jednostką kwadratową: 50 cm².'
+  answer:
+    kind: NUMERIC
+    value: 50.0
+    latex: 50\ \text{cm}^{2}
+  checks:
+  - kind: evaluate
+    expr: \left(\frac{5}{2}\right)^{2}\cdot 8
+  skills:
+  - stosowanie zależności pól figur podobnych
+  - podnoszenie skali do kwadratu
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 50.0 vs 50.0 (tol 1e-09)'
+- id: g-th-02
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: wyznaczanie skali ze stosunku pól
+  statement: Trójkąt KLM jest podobny do trójkąta ABC. Pole trójkąta ABC jest równe 9 cm², a pole trójkąta
+    KLM jest równe 49 cm². Wyznacz skalę podobieństwa trójkąta KLM do trójkąta ABC. Zapisz obliczenia.
+  statement_latex: k=\sqrt{\frac{P(KLM)}{P(ABC)}}=\sqrt{\frac{49}{9}}
+  solution: |-
+    Stosunek pól figur podobnych jest równy kwadratowi skali: \frac{P(KLM)}{P(ABC)} = k^{2}.
+    Stąd k^{2} = \frac{49}{9}, a ponieważ k > 0, mamy k = \sqrt{\frac{49}{9}} = \frac{7}{3}.
+    Sprawdzenie: \left(\frac{7}{3}\right)^{2} = \frac{49}{9}. Zgadza się.
+    Odpowiedź: k = \frac{7}{3}.
+  solution_steps:
+  - 'Zapisz stosunek pól: P(KLM)/P(ABC) = 49/9.'
+  - Skorzystaj z zależności P'/P = k².
+  - Wyznacz k = √(49/9) = 7/3 (bierzemy pierwiastek arytmetyczny, bo k > 0).
+  answer:
+    kind: SYMBOLIC
+    latex: \frac{7}{3}
+  checks:
+  - kind: evaluate
+    expr: \sqrt{\frac{49}{9}}
+  skills:
+  - wyznaczanie skali ze stosunku pól
+  - pierwiastkowanie ułamka
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 2.3333333333333335 vs 2.3333333333333335 (tol 1e-09)'
+- id: g-ex-03
+  slot: EXERCISE
+  ramp_index: 1
+  difficulty: 2
+  exercise_type: obwód i pole trójkąta podobnego
+  statement: Trójkąty prostokątne T_{1} i T_{2} są podobne. Przyprostokątne trójkąta T_{1} mają długości
+    6 cm i 8 cm. Przeciwprostokątna trójkąta T_{2} ma długość 15 cm. Oblicz obwód oraz pole trójkąta T_{2}.
+    Zapisz obliczenia.
+  statement_latex: k=\frac{15}{10},\qquad \mathrm{Obw}(T_{2})=k\cdot\left(6+8+10\right),\qquad P(T_{2})=k^{2}\cdot\frac{1}{2}\cdot
+    6\cdot 8
+  solution: |-
+    Z twierdzenia Pitagorasa przeciwprostokątna trójkąta T_{1} ma długość \sqrt{6^{2}+8^{2}} = \sqrt{100} = 10 cm.
+    Przeciwprostokątne odpowiadają sobie, więc skala podobieństwa trójkąta T_{2} do trójkąta T_{1} wynosi k = \frac{15}{10} = \frac{3}{2}.
+    Obwód trójkąta T_{1}: 6 + 8 + 10 = 24 cm, więc Obw(T_{2}) = \frac{3}{2}\cdot 24 = 36 cm.
+    Pole trójkąta T_{1}: \frac{1}{2}\cdot 6\cdot 8 = 24 cm², więc P(T_{2}) = \left(\frac{3}{2}\right)^{2}\cdot 24 = \frac{9}{4}\cdot 24 = 54 cm².
+    Sprawdzenie: przyprostokątne T_{2} to 9 cm i 12 cm, obwód 9 + 12 + 15 = 36 cm, pole \frac{1}{2}\cdot 9\cdot 12 = 54 cm². Zgadza się.
+    Odpowiedź: obwód 36 cm, pole 54 cm².
+  solution_steps:
+  - 'Oblicz przeciwprostokątną T₁: √(6²+8²) = 10 cm.'
+  - Wyznacz skalę k = 15/10 = 3/2 (od T₁ do T₂).
+  - 'Oblicz obwód T₁ = 24 cm i pomnóż przez k: 36 cm.'
+  - 'Oblicz pole T₁ = 24 cm² i pomnóż przez k² = 9/4: 54 cm².'
+  - 'Sprawdź wynik, wyznaczając boki T₂: 9, 12, 15.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: obwod
+      answer:
+        kind: NUMERIC
+        value: 36.0
+        latex: 36\ \text{cm}
+    - name: pole
+      answer:
+        kind: NUMERIC
+        value: 54.0
+        latex: 54\ \text{cm}^{2}
+  checks:
+  - kind: evaluate
+    expr: \frac{15}{10}\cdot\left(6+8+10\right)
+    part: obwod
+  - kind: evaluate
+    expr: \left(\frac{15}{10}\right)^{2}\cdot\frac{1}{2}\cdot 6\cdot 8
+    part: pole
+  skills:
+  - wyznaczanie skali podobieństwa
+  - obliczanie obwodu i pola figury podobnej
+  - twierdzenie Pitagorasa
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [obwod] SymPy solved it fresh: 36.0 vs 36.0 (tol 1e-09) ; [pole]
+      SymPy solved it fresh: 54.0 vs 54.0 (tol 1e-09)'
+- id: g-ex-04
+  slot: EXERCISE
+  ramp_index: 2
+  difficulty: 3
+  exercise_type: trójkąt przecięty prostą równoległą do boku
+  statement: W trójkącie ABC pole jest równe 63 cm², a bok AB ma długość 15 cm. Punkt D leży na boku CA,
+    a punkt E leży na boku CB, przy czym odcinek DE jest równoległy do boku AB i ma długość 10 cm. a)
+    Uzasadnij, że trójkąty CDE i CAB są podobne. b) Oblicz pole trójkąta CDE. c) Oblicz pole trapezu ABED.
+    Zapisz obliczenia.
+  statement_latex: k=\frac{DE}{AB}=\frac{10}{15},\qquad P_{CDE}=k^{2}\cdot 63,\qquad P_{ABED}=63-k^{2}\cdot
+    63
+  solution: |-
+    a) Kąt przy wierzchołku C jest wspólny dla trójkątów CDE i CAB. Ponadto DE ∥ AB, więc kąt CDE jest równy kątowi CAB jako kąty odpowiadające przy prostych równoległych DE i AB przeciętych prostą CA. Dwa kąty trójkąta CDE są odpowiednio równe dwóm kątom trójkąta CAB, zatem na mocy cechy (kk) trójkąty CDE i CAB są podobne.
+    b) Boki DE i AB są bokami odpowiadającymi sobie, więc skala podobieństwa trójkąta CDE do trójkąta CAB wynosi k = \frac{10}{15} = \frac{2}{3}.
+    Stąd P(CDE) = k^{2}\cdot P(CAB) = \frac{4}{9}\cdot 63 = 28 cm².
+    c) Trapez ABED jest różnicą trójkąta CAB i trójkąta CDE, więc P(ABED) = 63 − 28 = 35 cm².
+    Odpowiedź: P(CDE) = 28 cm², P(ABED) = 35 cm².
+  solution_steps:
+  - Wskaż kąt wspólny przy wierzchołku C oraz równe kąty odpowiadające przy DE ∥ AB — cecha (kk).
+  - Wyznacz skalę k = DE/AB = 10/15 = 2/3.
+  - Oblicz pole trójkąta CDE = (2/3)²·63 = 28 cm².
+  - Oblicz pole trapezu ABED = 63 − 28 = 35 cm².
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: uzasadnienie_podobienstwa
+      answer:
+        kind: NOT_MACHINE_CHECKABLE
+        reason: Uczeń musi wskazać kąt wspólny przy wierzchołku C oraz równość kątów CDE i CAB jako kątów
+          odpowiadających przy prostych równoległych DE ∥ AB i powołać się na cechę (kk) podobieństwa
+          trójkątów.
+    - name: pole_CDE
+      answer:
+        kind: NUMERIC
+        value: 28.0
+        latex: 28\ \text{cm}^{2}
+    - name: pole_trapezu
+      answer:
+        kind: NUMERIC
+        value: 35.0
+        latex: 35\ \text{cm}^{2}
+  checks:
+  - kind: evaluate
+    expr: \left(\frac{10}{15}\right)^{2}\cdot 63
+    part: pole_CDE
+  - kind: evaluate
+    expr: 63-\left(\frac{10}{15}\right)^{2}\cdot 63
+    part: pole_trapezu
+  skills:
+  - uzasadnianie podobieństwa cechą kk
+  - stosunek pól trójkątów podobnych
+  - pole trapezu jako różnica pól
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'part(s) need a human: uzasadnienie_podobienstwa · 2/2 other parts solved fresh'
+- id: g-ex-05
+  slot: EXERCISE
+  ramp_index: 3
+  difficulty: 4
+  exercise_type: stosunek obwodów i suma pól (metoda parametru)
+  statement: 'Obwody dwóch podobnych wielokątów są w stosunku 4 : 7, a suma ich pól jest równa 260 cm².
+    Oblicz pole każdego z tych wielokątów. Zapisz obliczenia.'
+  statement_latex: k=\frac{7}{4},\quad k^{2}=\frac{49}{16},\quad 16t+49t=260
+  solution: |-
+    Stosunek obwodów figur podobnych jest równy skali podobieństwa, więc (od mniejszego wielokąta do większego) k = \frac{7}{4}.
+    Stosunek pól jest równy k^{2} = \frac{49}{16}, czyli P_{mniejsze} : P_{większe} = 16 : 49.
+    Wprowadzamy parametr t > 0: P_{mniejsze} = 16t, P_{większe} = 49t.
+    Z warunku na sumę pól: 16t + 49t = 260, czyli 65t = 260, więc t = 4.
+    Stąd P_{mniejsze} = 16\cdot 4 = 64 cm², P_{większe} = 49\cdot 4 = 196 cm².
+    Sprawdzenie: 64 + 196 = 260 oraz \frac{64}{196} = \frac{16}{49} = \left(\frac{4}{7}\right)^{2}. Zgadza się.
+    Odpowiedź: 64 cm² i 196 cm².
+  solution_steps:
+  - 'Odczytaj skalę ze stosunku obwodów: k = 7/4.'
+  - 'Oblicz stosunek pól: k² = 49/16, czyli pola mają się jak 16 : 49.'
+  - Zapisz pola jako 16t i 49t.
+  - Ułóż i rozwiąż równanie 16t + 49t = 260, skąd t = 4.
+  - 'Podaj pola: 64 cm² i 196 cm²; sprawdź sumę i stosunek.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: pole_mniejszego
+      answer:
+        kind: NUMERIC
+        value: 64.0
+        latex: 64\ \text{cm}^{2}
+    - name: pole_wiekszego
+      answer:
+        kind: NUMERIC
+        value: 196.0
+        latex: 196\ \text{cm}^{2}
+  checks:
+  - kind: evaluate
+    expr: 16\cdot\frac{260}{16+49}
+    var: t
+    part: pole_mniejszego
+  - kind: evaluate
+    expr: 49\cdot\frac{260}{16+49}
+    var: t
+    part: pole_wiekszego
+  skills:
+  - przejście od stosunku obwodów do stosunku pól
+  - metoda parametru t
+  - rozwiązywanie równania liniowego
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [pole_mniejszego] SymPy solved it fresh: 64.0 vs 64.0 (tol
+      1e-09) ; [pole_wiekszego] SymPy solved it fresh: 196.0 vs 196.0 (tol 1e-09)'
+- id: g-ex-t00
+  slot: EXERCISE
+  ramp_index: 6
+  difficulty: 4
+  exercise_type: stosunek obwodów i pól figur podobnych — metoda parametru t
+  statement: Dwa wielokąty są podobne. Obwód pierwszego z nich jest równy 24 cm, a obwód drugiego jest
+    równy 60 cm. Suma pól tych wielokątów jest równa 116 cm². Oblicz pole każdego z tych wielokątów. Zapisz
+    obliczenia.
+  statement_latex: k=\frac{60}{24}=\frac{5}{2},\qquad k^{2}=\frac{25}{4},\qquad 4t+25t=116
+  solution: |-
+    Obwody figur podobnych są w stosunku równym skali podobieństwa, więc skala podobieństwa drugiego wielokąta do pierwszego wynosi k = \frac{60}{24} = \frac{5}{2}.
+    Stosunek pól jest równy kwadratowi skali: k^{2} = \left(\frac{5}{2}\right)^{2} = \frac{25}{4}, czyli pola mają się jak 4 : 25.
+    Wprowadzamy parametr t > 0 i zapisujemy pola: P_{1} = 4t (mniejszy wielokąt), P_{2} = 25t (większy wielokąt).
+    Z warunku na sumę pól: 4t + 25t = 116, czyli 29t = 116, stąd t = 4.
+    Zatem P_{1} = 4 \cdot 4 = 16 cm², P_{2} = 25 \cdot 4 = 100 cm².
+    Sprawdzenie: 16 + 100 = 116 oraz \frac{100}{16} = \frac{25}{4} = \left(\frac{5}{2}\right)^{2}. Zgadza się.
+    Odpowiedź: pola wynoszą 16 cm² i 100 cm².
+  solution_steps:
+  - 'Wyznacz skalę ze stosunku obwodów: k = \frac{60}{24} = \frac{5}{2}.'
+  - 'Oblicz stosunek pól: k^{2} = \frac{25}{4}, czyli P_{1} : P_{2} = 4 : 25.'
+  - Zapisz pola jako 4t i 25t z parametrem t > 0.
+  - 'Ułóż równanie 4t + 25t = 116 i rozwiąż: t = 4.'
+  - 'Podaj pola: 16 cm² oraz 100 cm²; sprawdź stosunek pól.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: pole_mniejszego
+      answer:
+        kind: NUMERIC
+        value: 16.0
+        latex: 16\ \mathrm{cm}^{2}
+    - name: pole_wiekszego
+      answer:
+        kind: NUMERIC
+        value: 100.0
+        latex: 100\ \mathrm{cm}^{2}
+  checks:
+  - kind: evaluate
+    expr: 4 \cdot \frac{116}{4 + 25}
+    var: t
+    part: pole_mniejszego
+  - kind: evaluate
+    expr: 25 \cdot \frac{116}{4 + 25}
+    var: t
+    part: pole_wiekszego
+  skills:
+  - wyznaczanie skali ze stosunku obwodów
+  - stosunek pól równy k²
+  - układanie i rozwiązywanie równania z parametrem t
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [pole_mniejszego] SymPy solved it fresh: 16.0 vs 16.0 (tol
+      1e-09) ; [pole_wiekszego] SymPy solved it fresh: 100.0 vs 100.0 (tol 1e-09)'
+- id: g-ex-t01
+  slot: EXERCISE
+  ramp_index: 7
+  difficulty: 5
+  exercise_type: trójkąt odcięty prostą równoległą do boku — pole trapezu
+  statement: 'W trójkącie ABC punkt D leży na boku CA, a punkt E leży na boku CB, przy czym odcinek DE
+    jest równoległy do boku AB oraz |CD| : |DA| = 3 : 2. Pole trapezu ABED jest równe 64 cm². Oblicz pole
+    trójkąta CDE oraz pole trójkąta ABC. Zapisz obliczenia.'
+  statement_latex: k=\frac{|CD|}{|CA|}=\frac{3}{3+2}=\frac{3}{5},\qquad P_{ABED}=P_{CAB}\cdot\left(1-k^{2}\right)=64
+  solution: |-
+    Trójkąty CDE i CAB są podobne: kąt przy wierzchołku C jest wspólny, a kąty CDE i CAB są równe jako kąty odpowiadające przy prostych równoległych DE ∥ AB (cecha kk).
+    Skala podobieństwa to stosunek CAŁYCH odpowiadających sobie boków, a nie stosunek odcinków na boku CA:
+    k = \frac{|CD|}{|CA|} = \frac{3}{3+2} = \frac{3}{5}.
+    Stąd \frac{P_{CDE}}{P_{CAB}} = k^{2} = \frac{9}{25}.
+    Trapez ABED jest różnicą trójkąta CAB i trójkąta CDE, więc
+    P_{ABED} = P_{CAB} - P_{CDE} = P_{CAB}\left(1-\frac{9}{25}\right) = \frac{16}{25}P_{CAB}.
+    Z warunku \frac{16}{25}P_{CAB} = 64 otrzymujemy P_{CAB} = 64 \cdot \frac{25}{16} = 100 cm².
+    Wtedy P_{CDE} = \frac{9}{25} \cdot 100 = 36 cm².
+    Sprawdzenie: 100 - 36 = 64. Zgadza się.
+    Odpowiedź: P_{CDE} = 36 cm², P_{ABC} = 100 cm².
+  solution_steps:
+  - Uzasadnij podobieństwo trójkątów CDE i CAB (kąt wspólny przy C oraz kąty odpowiadające przy DE ∥ AB).
+  - 'Wyznacz skalę jako stosunek całych boków: k = \frac{|CD|}{|CA|} = \frac{3}{5}.'
+  - 'Zapisz stosunek pól: k^{2} = \frac{9}{25}.'
+  - 'Zapisz pole trapezu jako różnicę: P_{ABED} = P_{CAB}\left(1-\frac{9}{25}\right) = \frac{16}{25}P_{CAB}.'
+  - Rozwiąż \frac{16}{25}P_{CAB} = 64, otrzymując P_{CAB} = 100 cm².
+  - Oblicz P_{CDE} = \frac{9}{25}\cdot 100 = 36 cm² i sprawdź różnicę pól.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: pole_CDE
+      answer:
+        kind: NUMERIC
+        value: 36.0
+        latex: 36\ \mathrm{cm}^{2}
+    - name: pole_ABC
+      answer:
+        kind: NUMERIC
+        value: 100.0
+        latex: 100\ \mathrm{cm}^{2}
+  checks:
+  - kind: evaluate
+    expr: \frac{\left(\frac{3}{5}\right)^{2} \cdot 64}{1 - \left(\frac{3}{5}\right)^{2}}
+    part: pole_CDE
+  - kind: evaluate
+    expr: \frac{64}{1 - \left(\frac{3}{5}\right)^{2}}
+    part: pole_ABC
+  skills:
+  - uzasadnianie podobieństwa (cecha kk)
+  - skala jako stosunek całych boków, a nie odcinków na boku
+  - pole trapezu jako różnica pól trójkątów podobnych
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [pole_CDE] SymPy solved it fresh: 36.0 vs 36.0 (tol 1e-09)
+      ; [pole_ABC] SymPy solved it fresh: 100.0 vs 100.0 (tol 1e-09)'
+- id: g-cm-06
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: ocena rozumowania — pole a skala
+  statement: 'Trójkąt T_{2} jest podobny do trójkąta T_{1} w skali k = 4. Pole trójkąta T_{1} jest równe
+    12 cm². Uczeń zapisał: „Skala wynosi 4, więc pole trójkąta T_{2} jest równe 4 \cdot 12 = 48 cm²”.
+    Wyjaśnij, na czym polega błąd ucznia, i oblicz poprawne pole trójkąta T_{2}.'
+  statement_latex: P(T_{2})=k^{2}\cdot P(T_{1})=4^{2}\cdot 12
+  solution: |-
+    Błędne rozumowanie: uczeń pomnożył pole przez skalę k = 4 i otrzymał P(T_{2}) = 4\cdot 12 = 48 cm².
+    Na czym polega błąd: w skali k mnożą się tylko wielkości liniowe — boki, wysokości, przekątne i obwód. Pole jest iloczynem dwóch długości (np. \frac{1}{2}\cdot a\cdot h), więc każda z tych długości mnoży się przez k i pole mnoży się przez k \cdot k = k^{2}.
+    Poprawne rozwiązanie: P(T_{2}) = k^{2}\cdot P(T_{1}) = 4^{2}\cdot 12 = 16\cdot 12 = 192 cm².
+    Kontrola na przykładzie: jeśli T_{1} ma podstawę 6 i wysokość 4 (pole 12), to T_{2} ma podstawę 24 i wysokość 16, więc jego pole to \frac{1}{2}\cdot 24\cdot 16 = 192 cm². Zgadza się.
+    Odpowiedź: 192 cm² (a nie 48 cm²).
+  solution_steps:
+  - 'Odtwórz błędne rozumowanie: pomnożenie pola przez k daje 4·12 = 48 cm².'
+  - 'Wskaż błąd: przez k mnożą się tylko długości i obwód; pole mnoży się przez k².'
+  - 'Oblicz poprawnie: P(T₂) = 4²·12 = 192 cm².'
+  - Sprawdź na przykładzie konkretnych wymiarów trójkąta.
+  answer:
+    kind: NUMERIC
+    value: 192.0
+    latex: 192\ \text{cm}^{2}
+  checks:
+  - kind: evaluate
+    expr: 4^{2}\cdot 12
+  skills:
+  - stosowanie mnożnika k² do pola
+  - ocena poprawności cudzego rozumowania
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 192.0 vs 192.0 (tol 1e-09)'
+- id: g-cm-07
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: ocena rozumowania — od pól do obwodów
+  statement: 'Dwa wielokąty są podobne. Pole mniejszego z nich jest równe 27 cm², a pole większego 75
+    cm². Obwód mniejszego wielokąta jest równy 18 cm. Uczeń zapisał: „Pola mają się jak 75 do 27, więc
+    obwód większego wielokąta jest równy \frac{75}{27}\cdot 18 = 50 cm”. Wyjaśnij, na czym polega błąd
+    ucznia, i oblicz poprawny obwód większego wielokąta.'
+  statement_latex: k=\sqrt{\frac{75}{27}}=\frac{5}{3},\qquad \mathrm{Obw}'=k\cdot 18
+  solution: |-
+    Błędne rozumowanie: uczeń przyjął, że obwody są w takim samym stosunku jak pola, i otrzymał \frac{75}{27}\cdot 18 = \frac{25}{9}\cdot 18 = 50 cm.
+    Na czym polega błąd: stosunek pól jest równy kwadratowi skali, a nie samej skali. Żeby przejść od pól do wielkości liniowych (boków, obwodów), trzeba wyciągnąć pierwiastek kwadratowy.
+    Poprawne rozwiązanie: k^{2} = \frac{75}{27} = \frac{25}{9}, więc k = \sqrt{\frac{25}{9}} = \frac{5}{3}.
+    Obwody są w stosunku k, zatem Obw' = \frac{5}{3}\cdot 18 = 30 cm.
+    Sprawdzenie: \left(\frac{30}{18}\right)^{2} = \left(\frac{5}{3}\right)^{2} = \frac{25}{9} = \frac{75}{27}. Zgadza się.
+    Odpowiedź: 30 cm (a nie 50 cm).
+  solution_steps:
+  - 'Odtwórz błędne rozumowanie: pomnożenie obwodu przez stosunek pól daje 50 cm.'
+  - 'Wskaż błąd: stosunek pól to k², więc skalę otrzymuje się przez pierwiastkowanie.'
+  - Oblicz k = √(75/27) = 5/3.
+  - 'Oblicz obwód większego wielokąta: (5/3)·18 = 30 cm.'
+  - Sprawdź, że (30/18)² = 75/27.
+  answer:
+    kind: NUMERIC
+    value: 30.0
+    latex: 30\ \text{cm}
+  checks:
+  - kind: evaluate
+    expr: \sqrt{\frac{75}{27}}\cdot 18
+  skills:
+  - wyznaczanie skali ze stosunku pól
+  - obliczanie obwodu figury podobnej
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 30.0 vs 30.0 (tol 1e-09)'
+- id: g-cm-08
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: ocena rozumowania — kierunek skali
+  statement: 'Czworokąt F_{2} jest podobny do czworokąta F_{1} w skali k = \frac{3}{2}. Pole czworokąta
+    F_{2} jest równe 45 cm². Uczeń zapisał: „Skala wynosi \frac{3}{2}, więc pole czworokąta F_{1} jest
+    równe \left(\frac{3}{2}\right)^{2}\cdot 45 = 101,25 cm²”. Wyjaśnij, na czym polega błąd ucznia, i
+    oblicz poprawne pole czworokąta F_{1}.'
+  statement_latex: P(F_{1})=\frac{P(F_{2})}{k^{2}}=\frac{45}{\left(\frac{3}{2}\right)^{2}}
+  solution: |-
+    Błędne rozumowanie: uczeń pomnożył pole czworokąta F_{2} przez k^{2}, otrzymując \frac{9}{4}\cdot 45 = 101,25 cm².
+    Na czym polega błąd: odwrócony kierunek skali. Zapis „F_{2} jest podobny do F_{1} w skali k” oznacza P(F_{2}) = k^{2}\cdot P(F_{1}), a więc szukane pole jest w mianowniku, a nie w liczniku. Skoro k = \frac{3}{2} > 1, czworokąt F_{2} jest większy, więc pole F_{1} musi być mniejsze niż 45 cm², a nie większe.
+    Poprawne rozwiązanie: P(F_{1}) = \frac{P(F_{2})}{k^{2}} = \frac{45}{\frac{9}{4}} = 45\cdot\frac{4}{9} = 20 cm².
+    Równoważnie: F_{1} jest podobny do F_{2} w skali \frac{1}{k} = \frac{2}{3}, więc P(F_{1}) = \left(\frac{2}{3}\right)^{2}\cdot 45 = 20 cm².
+    Odpowiedź: 20 cm² (a nie 101,25 cm²).
+  solution_steps:
+  - 'Odtwórz błędne rozumowanie: (3/2)²·45 = 101,25 cm².'
+  - 'Wskaż błąd: zapis skali określa kierunek — P(F₂) = k²·P(F₁), więc P(F₁) trzeba wyznaczyć przez dzielenie.'
+  - 'Zauważ kontrolę sensowności: k > 1, więc F₁ ma mniejsze pole niż F₂.'
+  - 'Oblicz P(F₁) = 45 : (9/4) = 20 cm².'
+  answer:
+    kind: NUMERIC
+    value: 20.0
+    latex: 20\ \text{cm}^{2}
+  checks:
+  - kind: evaluate
+    expr: \frac{45}{\left(\frac{3}{2}\right)^{2}}
+  skills:
+  - kontrola kierunku skali podobieństwa
+  - skala odwrotna
+  - obliczanie pola figury podobnej
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 20.0 vs 20.0 (tol 1e-09)'
+- id: g-cm-09
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: ocena rozumowania — skala mapy i pole
+  statement: 'Na mapie w skali 1 : 50 000 pewien las jest przedstawiony jako figura o polu 6 cm². Uczeń
+    zapisał: „Skala wynosi 1 : 50 000, więc rzeczywiste pole lasu jest równe 6 \cdot 50\,000 = 300\,000
+    cm²”. Wyjaśnij, na czym polega błąd ucznia, i oblicz rzeczywiste pole lasu w kilometrach kwadratowych.'
+  statement_latex: P_{\text{teren}}=s^{2}\cdot P_{\text{mapa}}=\frac{6\cdot 50000^{2}}{10^{10}}\ \text{km}^{2}
+  solution: |-
+    Błędne rozumowanie: uczeń pomnożył pole z mapy przez skalę s = 50 000 i otrzymał 300 000 cm², czyli tylko 30 m² — las wielkości małego mieszkania, co jest oczywiście bezsensowne.
+    Na czym polega błąd: skala 1 : 50 000 dotyczy długości (1 cm na mapie to 50 000 cm w terenie). Mapa i teren są figurami podobnymi w skali s, więc pola przelicza się mnożąc przez s², a nie przez s.
+    Poprawne rozwiązanie: P_{teren} = 6\cdot 50\,000^{2} cm² = 6\cdot 2{,}5\cdot 10^{9} cm² = 1{,}5\cdot 10^{10} cm².
+    Zamiana jednostek: 1 m² = 10^{4} cm², więc P_{teren} = 1{,}5\cdot 10^{10} : 10^{4} = 1{,}5\cdot 10^{6} m².
+    Dalej 1 km² = 10^{6} m², zatem P_{teren} = 1{,}5 km².
+    Odpowiedź: 1,5 km² (a nie 300 000 cm²).
+  solution_steps:
+  - 'Odtwórz błędne rozumowanie: pomnożenie pola przez s = 50 000.'
+  - 'Wskaż błąd: skala dotyczy długości, pola mnoży się przez s².'
+  - Oblicz P_teren = 6·50 000² cm² = 1,5·10¹⁰ cm².
+  - 'Zamień jednostki: 1,5·10¹⁰ cm² = 1,5·10⁶ m² = 1,5 km².'
+  answer:
+    kind: NUMERIC
+    value: 1.5
+    latex: 1{,}5\ \text{km}^{2}
+  checks:
+  - kind: evaluate
+    expr: \frac{6\cdot 50000^{2}}{10^{10}}
+  skills:
+  - przeliczanie pól przy skali mapy
+  - stosowanie kwadratu skali
+  - zamiana jednostek pola
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 1.5 vs 1.5 (tol 1e-09)'
+- id: g-cm-10
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: ocena rozumowania — zamiana jednostek pola
+  statement: 'Na planie w skali 1 : 200 prostokątna sala gimnastyczna ma pole 45 cm². Uczeń policzył poprawnie,
+    że rzeczywiste pole sali jest równe 45 \cdot 200^{2} = 1\,800\,000 cm², a następnie zapisał: „1 m
+    = 100 cm, więc 1 m² = 100 cm² i rzeczywiste pole sali wynosi 18\,000 m²”. Wyjaśnij, na czym polega
+    błąd ucznia, i podaj rzeczywiste pole sali w metrach kwadratowych.'
+  statement_latex: P_{\text{teren}}=\frac{45\cdot 200^{2}}{10\,000}\ \text{m}^{2}
+  solution: |-
+    Błędne rozumowanie: uczeń przyjął, że 1 m² = 100 cm², i podzielił 1 800 000 przez 100, otrzymując 18 000 m². Taki wynik jest bezsensowny — sala gimnastyczna nie ma pola dwóch hektarów.
+    Na czym polega błąd: przelicznik długości podnosi się do kwadratu. Ponieważ 1 m = 100 cm, to 1 m² = 100 cm \cdot 100 cm = 10\,000 cm².
+    Poprawne rozwiązanie: P_{teren} = \frac{1\,800\,000}{10\,000} = 180 m², czyli P_{teren} = \frac{45\cdot 200^{2}}{10\,000} = 180 m².
+    Kontrola: sala o wymiarach 12 m × 15 m ma pole 180 m² — to realistyczny wynik.
+    Odpowiedź: 180 m² (a nie 18 000 m²).
+  solution_steps:
+  - 'Odtwórz błędne rozumowanie: przyjęcie 1 m² = 100 cm² i wynik 18 000 m².'
+  - 'Wskaż błąd: jednostki pola przelicza się przez kwadrat przelicznika długości, więc 1 m² = 10 000
+    cm².'
+  - 'Podziel 1 800 000 cm² przez 10 000: 180 m².'
+  - Sprawdź sensowność wyniku (np. sala 12 m × 15 m).
+  answer:
+    kind: NUMERIC
+    value: 180.0
+    latex: 180\ \text{m}^{2}
+  checks:
+  - kind: evaluate
+    expr: \frac{45\cdot 200^{2}}{10000}
+  skills:
+  - przeliczanie pól przy skali planu
+  - zamiana cm² na m²
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 180.0 vs 180.0 (tol 1e-09)'
+- id: g-ch-t02
+  slot: CHALLENGE
+  ramp_index: 0
+  difficulty: 4
+  exercise_type: skala planu — od pola na planie do kosztu ogrodzenia
+  statement: 'Działka w kształcie kwadratu jest przedstawiona na planie sporządzonym w skali 1 : 2000
+    jako kwadrat o polu równym 9 cm². Właściciel zamierza ogrodzić całą działkę wzdłuż jej brzegu. Wykonanie
+    1 metra ogrodzenia kosztuje 40 zł. Oblicz koszt wykonania całego ogrodzenia. Zapisz obliczenia.'
+  statement_latex: P_{\text{teren}}=2000^{2}\cdot 9\ \mathrm{cm}^{2},\qquad K=40\cdot 4\cdot\sqrt{\frac{2000^{2}\cdot
+    9}{10000}}
+  solution: |-
+    Plan i teren są figurami podobnymi w skali s = 2000 (1 cm na planie to 2000 cm w terenie).
+    Pola są w stosunku s^{2}, więc:
+    P_{\text{teren}} = 9 \cdot 2000^{2} \ \mathrm{cm}^{2} = 9 \cdot 4\cdot 10^{6}\ \mathrm{cm}^{2} = 3{,}6\cdot 10^{7}\ \mathrm{cm}^{2}.
+    Zamiana jednostek: 1 m² = 10 000 cm², zatem P_{\text{teren}} = \frac{3{,}6\cdot 10^{7}}{10^{4}} = 3600\ \mathrm{m}^{2}.
+    Działka jest kwadratem, więc jej bok ma długość a = \sqrt{3600} = 60 m.
+    Obwód działki: Obw = 4 \cdot 60 = 240 m.
+    Koszt ogrodzenia: K = 240 \cdot 40 = 9600 zł.
+    Sprawdzenie inną drogą: bok kwadratu na planie to \sqrt{9} = 3 cm, w terenie 3\cdot 2000 = 6000 cm = 60 m — ta sama wartość.
+    Odpowiedź: 9600 zł.
+  solution_steps:
+  - 'Zapisz skalę planu jako liczbę: s = 2000.'
+  - 'Przelicz pole: P_{\text{teren}} = 9 \cdot 2000^{2}\ \mathrm{cm}^{2} = 3{,}6\cdot 10^{7}\ \mathrm{cm}^{2}.'
+  - 'Zamień na metry kwadratowe: 3{,}6\cdot 10^{7}\ \mathrm{cm}^{2} = 3600\ \mathrm{m}^{2}.'
+  - 'Wyznacz bok kwadratu: a = \sqrt{3600} = 60 m.'
+  - 'Oblicz obwód: 4 \cdot 60 = 240 m.'
+  - 'Oblicz koszt: 240 \cdot 40 = 9600 zł.'
+  answer:
+    kind: NUMERIC
+    value: 9600.0
+    latex: 9600\ \mathrm{z\ell}
+  checks:
+  - kind: evaluate
+    expr: 40 \cdot 4 \cdot \sqrt{\frac{9 \cdot 2000^{2}}{10000}}
+  skills:
+  - przeliczanie pól przy skali planu (kwadrat skali)
+  - zamiana jednostek pola
+  - wyznaczanie boku kwadratu z pola
+  - układanie wielkości kosztu
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 9600.0 vs 9600.0 (tol 1e-09)'
+- id: g-ch-t03
+  slot: CHALLENGE
+  ramp_index: 1
+  difficulty: 5
+  exercise_type: trójkąt równoramienny odcięty prostą równoległą — skala z pól, obwód trapezu
+  statement: 'Trójkąt ABC jest równoramienny: |AB| = 12 cm, |CA| = |CB| = 10 cm. Punkt D leży na ramieniu
+    CA, punkt E leży na ramieniu CB, a odcinek DE jest równoległy do podstawy AB. Pole trapezu ABED jest
+    równe 21 cm². Oblicz długość odcinka DE oraz obwód trapezu ABED. Zapisz obliczenia.'
+  statement_latex: P_{ABC}=\frac{1}{2}\cdot 12\cdot\sqrt{10^{2}-6^{2}}=48,\qquad k=\sqrt{1-\frac{21}{48}}
+  solution: |-
+    Najpierw pole całego trójkąta. Wysokość opuszczona z C na AB dzieli podstawę na połowy, więc
+    h = \sqrt{10^{2}-6^{2}} = \sqrt{100-36} = 8 cm, a P_{ABC} = \frac{1}{2}\cdot 12 \cdot 8 = 48 cm².
+    Trójkąty CDE i CAB są podobne (kąt przy C wspólny, kąty odpowiadające przy DE ∥ AB). Niech k będzie skalą podobieństwa trójkąta CDE do trójkąta CAB, k > 0.
+    Trapez ABED jest różnicą tych trójkątów, więc P_{ABED} = P_{ABC}\left(1-k^{2}\right):
+    48\left(1-k^{2}\right) = 21, stąd 1-k^{2} = \frac{21}{48} = \frac{7}{16}, czyli k^{2} = \frac{9}{16}.
+    Ponieważ k > 0 (i dodatkowo 0 < k < 1, bo odcięty trójkąt jest mniejszy), przyjmujemy k = \frac{3}{4}; wartość k = -\frac{3}{4} odrzucamy.
+    Wtedy |DE| = k \cdot |AB| = \frac{3}{4}\cdot 12 = 9 cm oraz |CD| = |CE| = \frac{3}{4}\cdot 10 = 7{,}5 cm.
+    Stąd |DA| = |EB| = 10 - 7{,}5 = 2{,}5 cm.
+    Obwód trapezu ABED = |AB| + |BE| + |ED| + |DA| = 12 + 2{,}5 + 9 + 2{,}5 = 26 cm.
+    Sprawdzenie: pole trójkąta CDE = \left(\frac{3}{4}\right)^{2}\cdot 48 = 27 cm², a 48 - 27 = 21 cm². Zgadza się.
+    Odpowiedź: |DE| = 9 cm, obwód trapezu ABED = 26 cm.
+  solution_steps:
+  - 'Oblicz wysokość trójkąta ABC: h = \sqrt{10^{2}-6^{2}} = 8 cm, a następnie P_{ABC} = \frac{1}{2}\cdot
+    12\cdot 8 = 48 cm².'
+  - Zauważ podobieństwo trójkątów CDE i CAB i oznacz skalę k > 0.
+  - 'Zapisz pole trapezu jako różnicę pól: 48\left(1-k^{2}\right) = 21.'
+  - 'Rozwiąż: k^{2} = \frac{9}{16}, więc k = \frac{3}{4} (wartość ujemną odrzucamy, bo skala jest dodatnia).'
+  - Oblicz |DE| = \frac{3}{4}\cdot 12 = 9 cm oraz |CD| = |CE| = 7{,}5 cm, stąd |DA| = |EB| = 2{,}5 cm.
+  - 'Zsumuj boki trapezu: 12 + 2{,}5 + 9 + 2{,}5 = 26 cm.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: DE
+      answer:
+        kind: NUMERIC
+        value: 9.0
+        latex: 9\ \mathrm{cm}
+    - name: obwod_trapezu
+      answer:
+        kind: NUMERIC
+        value: 26.0
+        latex: 26\ \mathrm{cm}
+  checks:
+  - kind: evaluate
+    expr: 12 \cdot \sqrt{1 - \frac{21}{48}}
+    var: k
+    part: DE
+  - kind: evaluate
+    expr: 12 + 2 \cdot 10 \cdot \left(1 - \sqrt{1 - \frac{21}{48}}\right) + 12 \cdot \sqrt{1 - \frac{21}{48}}
+    var: k
+    part: obwod_trapezu
+  stated_model:
+    variable: k
+    objective_latex: P_{ABED}\left(k\right)=48\cdot\left(1-k^{2}\right)
+    domain_lo: '0'
+    domain_hi: '1'
+    goal: value
+    constraint_used: P_{ABED}=21
+  skills:
+  - twierdzenie Pitagorasa i pole trójkąta równoramiennego
+  - wyznaczanie skali ze stosunku pól (pierwiastkowanie)
+  - składanie obwodu trapezu z odcinków wyrażonych przez skalę
+  - odrzucenie niedopuszczalnej wartości skali
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (AMBIGUOUS: ''parser returned an unresolved ambiguity
+      (_ambig)'') — human review'
+- id: g-ch-t04
+  slot: CHALLENGE
+  ramp_index: 2
+  difficulty: 5
+  exercise_type: 'modelowanie: koszt figury podobnej w skali k z ograniczeniem wymiarów'
+  statement: |-
+    Zakład reklamowy wycina metalowe tabliczki podobne do wzoru, którym jest trójkąt prostokątny o przyprostokątnych długości 6 cm i 8 cm. Tabliczkę wykonuje się w skali podobieństwa k > 0 względem wzoru. Materiał kosztuje 0,50 zł za każdy centymetr kwadratowy pola tabliczki, a oklejenie krawędzi kosztuje 2 zł za każdy centymetr obwodu tabliczki. Gotowa tabliczka musi zmieścić się w prostokątnej ramce o wymiarach 15 cm × 20 cm, przy czym krótsza przyprostokątna tabliczki jest równoległa do boku ramki o długości 15 cm, a dłuższa — do boku o długości 20 cm.
+    a) Wyznacz wzór na łączny koszt K wykonania jednej tabliczki jako funkcję skali k oraz podaj dziedzinę tej funkcji wynikającą z warunków zadania.
+    b) Oblicz koszt najdroższej tabliczki, jaką można wykonać.
+  statement_latex: K\left(k\right)=\frac{1}{2}\cdot 24\cdot k^{2}+2\cdot 24\cdot k=12k^{2}+48k,\qquad
+    6k\le 15\ \wedge\ 8k\le 20
+  solution: |-
+    Wzór jest trójkątem prostokątnym o przyprostokątnych 6 cm i 8 cm, więc jego przeciwprostokątna ma długość \sqrt{6^{2}+8^{2}} = 10 cm.
+    Stąd pole wzoru: P = \frac{1}{2}\cdot 6\cdot 8 = 24 cm², a obwód wzoru: Obw = 6+8+10 = 24 cm.
+    Tabliczka jest figurą podobną do wzoru w skali k, zatem
+    pole tabliczki = k^{2}\cdot 24, obwód tabliczki = k\cdot 24.
+    a) Koszt materiału: \frac{1}{2}\cdot 24k^{2} = 12k^{2}, koszt oklejenia krawędzi: 2\cdot 24k = 48k. Łącznie
+    K\left(k\right) = 12k^{2}+48k.
+    Dziedzina: skala musi być dodatnia, czyli k > 0. Przyprostokątne tabliczki mają długości 6k i 8k, a warunek zmieszczenia w ramce daje
+    6k \le 15 oraz 8k \le 20, czyli k \le \frac{15}{6} = \frac{5}{2} oraz k \le \frac{20}{8} = \frac{5}{2}.
+    Zatem dziedziną jest przedział \left(0;\ \frac{5}{2}\right\rangle.
+    b) Dla k > 0 funkcja K\left(k\right) = 12k^{2}+48k jest rosnąca (ramiona paraboli skierowane w górę, wierzchołek dla k = -2 leży na lewo od dziedziny), więc największy koszt odpowiada największej dopuszczalnej skali k = \frac{5}{2}:
+    K\left(\frac{5}{2}\right) = 12\cdot\frac{25}{4} + 48\cdot\frac{5}{2} = 75 + 120 = 195 zł.
+    Sprawdzenie: dla k = \frac{5}{2} przyprostokątne mają 15 cm i 20 cm — tabliczka dokładnie wypełnia ramkę; pole wynosi 150 cm² (koszt 75 zł), obwód 60 cm (koszt 120 zł), razem 195 zł.
+    Odpowiedź: a) K\left(k\right)=12k^{2}+48k dla k\in\left(0;\ \frac{5}{2}\right\rangle; b) 195 zł.
+  solution_steps:
+  - 'Oblicz przeciwprostokątną wzoru: \sqrt{6^{2}+8^{2}} = 10 cm.'
+  - 'Oblicz pole i obwód wzoru: P = 24 cm², Obw = 24 cm.'
+  - 'Zapisz pole i obwód tabliczki w skali k: 24k^{2} oraz 24k.'
+  - 'Złóż koszt: K\left(k\right) = \frac{1}{2}\cdot 24k^{2} + 2\cdot 24k = 12k^{2}+48k.'
+  - 'Wyznacz dziedzinę z warunków 6k \le 15 i 8k \le 20 oraz k > 0: k\in\left(0;\ \frac{5}{2}\right\rangle.'
+  - Zauważ, że K jest rosnąca na tym przedziale, więc maksimum jest w k = \frac{5}{2}.
+  - Oblicz K\left(\frac{5}{2}\right) = 75 + 120 = 195 zł.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wzor_K
+      answer:
+        kind: SYMBOLIC
+        latex: 12k^{2}+48k
+    - name: dziedzina
+      answer:
+        kind: INTERVAL
+        latex: \left(0;\ \frac{5}{2}\right\rangle
+        lo: '0'
+        hi: \frac{5}{2}
+        hi_open: false
+    - name: koszt_maksymalny
+      answer:
+        kind: NUMERIC
+        value: 195.0
+        latex: 195\ \mathrm{z\ell}
+  checks:
+  - kind: simplify
+    expr: \frac{1}{2} \cdot 24 \cdot k^{2} + 2 \cdot 24 \cdot k
+    var: k
+    part: wzor_K
+  - kind: evaluate
+    expr: 12 \cdot \left(\frac{5}{2}\right)^{2} + 48 \cdot \frac{5}{2}
+    var: k
+    part: koszt_maksymalny
+  stated_model:
+    variable: k
+    objective_latex: K\left(k\right)=12k^{2}+48k
+    domain_lo: '0'
+    domain_hi: \frac{5}{2}
+    domain_hi_open: false
+    constraint_used: 6k\le 15\ \wedge\ 8k\le 20
+  skills:
+  - wyrażanie pola i obwodu figury podobnej przez skalę k
+  - składanie funkcji kosztu z dwóch składników
+  - wyznaczanie dziedziny z warunku geometrycznego (zmieszczenie w ramce)
+  - obliczanie wartości funkcji rosnącej na końcu przedziału
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''k'': ''K\\left(k\\right)=12k^{2}+48k'')
+      — human review'

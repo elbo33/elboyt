@@ -1,0 +1,848 @@
+section: postac-iloczynowa-rownania-wielomianowe
+name: Postać iloczynowa wielomianu i równania wielomianowe
+scope: Bringing a polynomial to product form; solving polynomial equations once factored.
+requirements:
+- III.5
+counts:
+  total: 16
+  DETERMINISTIC: 9
+  NOT_MACHINE_CHECKABLE: 3
+  REFERENCE_CALL: 4
+exercises:
+- id: g-th-00
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: równanie w postaci iloczynowej
+  statement: Rozwiąż równanie \left(x+5\right)\left(3x-2\right)=0. Zapisz obliczenia.
+  statement_latex: \left(x+5\right)\cdot\left(3x-2\right)=0
+  solution: |-
+    Lewa strona jest iloczynem dwóch czynników, a po prawej stronie stoi 0, więc korzystamy z własności iloczynu zerowego: iloczyn jest równy zeru wtedy i tylko wtedy, gdy co najmniej jeden z czynników jest równy zeru.
+    Zatem x+5=0 lub 3x-2=0.
+    1) x+5=0, czyli x=-5.
+    2) 3x-2=0, czyli 3x=2, a stąd x=\frac{2}{3}.
+    Sprawdzenie dla x=\frac{2}{3}: pierwszy czynnik jest równy \frac{2}{3}+5=\frac{17}{3}, drugi 3\cdot\frac{2}{3}-2=0, więc iloczyn jest równy 0.
+    Odpowiedź: x=-5 lub x=\frac{2}{3}.
+  solution_steps:
+  - Zauważ, że równanie jest już w postaci iloczynowej, a po prawej stronie stoi 0.
+  - 'Zastosuj własność iloczynu zerowego: x+5=0 lub 3x-2=0.'
+  - 'Rozwiąż pierwsze równanie: x=-5.'
+  - 'Rozwiąż drugie równanie: 3x=2, czyli x=\frac{2}{3}.'
+  - Zapisz odpowiedź, łącząc rozwiązania spójnikiem 'lub'.
+  answer:
+    kind: SET
+    members:
+    - '-5'
+    - \frac{2}{3}
+  checks:
+  - kind: solve_equation
+    expr: \left(x+5\right)\cdot\left(3x-2\right)=0
+  skills:
+  - własność iloczynu zerowego
+  - rozwiązywanie równań liniowych
+  - odczyt pierwiastka z czynnika
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 2 members matched'
+- id: g-th-01
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: równanie iloczynowe z czynnikiem nierozkładalnym
+  statement: Dane jest równanie \left(x-4\right)\left(x^{2}+9\right)=0. Rozwiąż to równanie oraz uzasadnij,
+    że czynnik x^{2}+9 nie ma pierwiastków rzeczywistych.
+  statement_latex: \left(x-4\right)\cdot\left(x^{2}+9\right)=0
+  solution: |-
+    Po prawej stronie stoi 0, więc z własności iloczynu zerowego: x-4=0 lub x^{2}+9=0.
+    1) x-4=0 daje x=4.
+    2) x^{2}+9=0 daje x^{2}=-9. Kwadrat liczby rzeczywistej nie jest ujemny, zatem x^{2}\ge 0, więc x^{2}+9\ge 9>0 dla każdego x rzeczywistego. To równanie nie ma rozwiązań (można też policzyć \Delta=0^{2}-4\cdot1\cdot9=-36<0).
+    Czynnika x^{2}+9 nie wolno zatem 'skracać' bez komentarza — po prostu nie wnosi on żadnych rozwiązań.
+    Odpowiedź: jedynym rozwiązaniem jest x=4.
+  solution_steps:
+  - 'Zastosuj własność iloczynu zerowego: x-4=0 lub x^{2}+9=0.'
+  - Z pierwszego równania otrzymaj x=4.
+  - Zauważ, że x^{2}\ge 0, więc x^{2}+9\ge 9>0 — drugi czynnik nigdy nie jest zerem (\Delta=-36<0).
+  - Zapisz, że jedynym rozwiązaniem równania jest x=4.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: rozwiązania
+      answer:
+        kind: SET
+        members:
+        - '4'
+    - name: uzasadnienie
+      answer:
+        kind: NOT_MACHINE_CHECKABLE
+        reason: Uczeń musi uzasadnić, że x^{2}+9>0 dla każdego x rzeczywistego (np. z nierówności x^{2}\ge
+          0 albo z \Delta=-36<0), a więc czynnik ten nie ma pierwiastków rzeczywistych.
+  checks:
+  - kind: solve_equation
+    expr: \left(x-4\right)\cdot\left(x^{2}+9\right)=0
+    part: rozwiązania
+  skills:
+  - własność iloczynu zerowego
+  - rozpoznanie czynnika bez pierwiastków rzeczywistych
+  - uzasadnianie
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'part(s) need a human: uzasadnienie · 1/1 other parts solved fresh'
+- id: g-th-02
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: postać iloczynowa przez wyłączenie wspólnego czynnika
+  statement: Dany jest wielomian W\left(x\right)=6x^{4}-9x^{3}. Doprowadź ten wielomian do postaci iloczynowej,
+    a następnie podaj wszystkie pierwiastki wielomianu W.
+  statement_latex: W\left(x\right)=6x^{4}-9x^{3}
+  solution: |-
+    Wyłączamy przed nawias największy wspólny czynnik liczbowy (3) oraz najniższą potęgę x (czyli x^{3}):
+    6x^{4}-9x^{3}=3x^{3}\left(2x-3\right).
+    Sprawdzenie przez wymnożenie: 3x^{3}\cdot 2x=6x^{4} oraz 3x^{3}\cdot\left(-3\right)=-9x^{3} — zgadza się.
+    Równanie 3x^{3}\left(2x-3\right)=0 daje x^{3}=0 lub 2x-3=0, czyli x=0 lub x=\frac{3}{2}.
+    Odpowiedź: W\left(x\right)=3x^{3}\left(2x-3\right); pierwiastkami są liczby 0 (pierwiastek trzykrotny) oraz \frac{3}{2}.
+  solution_steps:
+  - Wyłącz przed nawias wspólny czynnik liczbowy 3 i najniższą potęgę x, czyli x^{3}.
+  - Zapisz W\left(x\right)=3x^{3}\left(2x-3\right) i sprawdź rozkład przez wymnożenie.
+  - 'Przyrównaj czynniki do zera: x^{3}=0 lub 2x-3=0.'
+  - Otrzymaj pierwiastki x=0 oraz x=\frac{3}{2} (każdy wypisz raz).
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: postać iloczynowa
+      answer:
+        kind: SYMBOLIC
+        latex: 3x^{3}\left(2x-3\right)
+    - name: pierwiastki
+      answer:
+        kind: SET
+        members:
+        - '0'
+        - \frac{3}{2}
+  checks:
+  - kind: solve_equation
+    expr: 6x^{4}-9x^{3}=0
+    part: pierwiastki
+  skills:
+  - wyłączanie wspólnego czynnika przed nawias
+  - odczyt pierwiastków z postaci iloczynowej
+  verification:
+    checkability: REFERENCE_CALL
+    note: 'could not compare: part disagrees: PARSE_ERROR: "UnexpectedCharacters: No terminal matches
+      ''('' in the current parser context, at line 1 col 7"'
+- id: g-ex-03
+  slot: EXERCISE
+  ramp_index: 1
+  difficulty: 2
+  exercise_type: równanie wielomianowe
+  statement: Rozwiąż równanie x^{4}-25x^{2}=0. Zapisz obliczenia.
+  statement_latex: x^{4}-25x^{2}=0
+  solution: |-
+    Wyłączamy przed nawias x^{2}:
+    x^{4}-25x^{2}=x^{2}\left(x^{2}-25\right)=0.
+    Czynnik x^{2}-25 to różnica kwadratów: x^{2}-5^{2}=\left(x-5\right)\left(x+5\right). Zatem
+    x^{2}\left(x-5\right)\left(x+5\right)=0.
+    Stąd x^{2}=0 lub x-5=0 lub x+5=0, czyli x=0 lub x=5 lub x=-5.
+    Kontrola: wielomian jest stopnia czwartego, więc może mieć co najwyżej cztery różne pierwiastki — mamy trzy (0 jest pierwiastkiem dwukrotnym, ale w odpowiedzi zapisujemy go raz).
+    Odpowiedź: x\in\left\{-5,0,5\right\}.
+  solution_steps:
+  - 'Wyłącz przed nawias wspólny czynnik x^{2}: x^{2}\left(x^{2}-25\right)=0.'
+  - 'Rozłóż różnicę kwadratów: x^{2}-25=\left(x-5\right)\left(x+5\right).'
+  - 'Zastosuj własność iloczynu zerowego: x^{2}=0 lub x-5=0 lub x+5=0.'
+  - 'Wypisz różne rozwiązania: x=-5, x=0, x=5.'
+  answer:
+    kind: SET
+    members:
+    - '-5'
+    - '0'
+    - '5'
+  checks:
+  - kind: solve_equation
+    expr: x^{4}-25x^{2}=0
+  skills:
+  - wyłączanie wspólnego czynnika
+  - różnica kwadratów
+  - własność iloczynu zerowego
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 3 members matched'
+- id: g-ex-04
+  slot: EXERCISE
+  ramp_index: 2
+  difficulty: 3
+  exercise_type: równanie wielomianowe z niewiadomą po obu stronach
+  statement: Rozwiąż równanie 2x^{3}-5x^{2}=18x-45. Zapisz obliczenia.
+  statement_latex: 2x^{3}-5x^{2}=18x-45
+  solution: |-
+    Przenosimy wszystkie wyrazy na lewą stronę:
+    2x^{3}-5x^{2}-18x+45=0.
+    Grupujemy w pary:
+    \left(2x^{3}-5x^{2}\right)+\left(-18x+45\right)=x^{2}\left(2x-5\right)-9\left(2x-5\right)=\left(2x-5\right)\left(x^{2}-9\right)=0.
+    Czynnik x^{2}-9 rozkładamy jako różnicę kwadratów: \left(x-3\right)\left(x+3\right). Zatem
+    \left(2x-5\right)\left(x-3\right)\left(x+3\right)=0.
+    Stąd 2x-5=0 lub x-3=0 lub x+3=0, czyli x=\frac{5}{2} lub x=3 lub x=-3.
+    Sprawdzenie dla x=3: lewa strona równania wyjściowego 2\cdot27-5\cdot9=9, prawa 18\cdot3-45=9 — zgadza się.
+    Odpowiedź: x\in\left\{-3,\frac{5}{2},3\right\}.
+  solution_steps:
+  - 'Przenieś wszystko na lewą stronę: 2x^{3}-5x^{2}-18x+45=0.'
+  - 'Pogrupuj wyrazy w pary i wyłącz czynniki: x^{2}\left(2x-5\right)-9\left(2x-5\right).'
+  - 'Wyłącz wspólny nawias: \left(2x-5\right)\left(x^{2}-9\right)=0.'
+  - 'Rozłóż różnicę kwadratów: \left(2x-5\right)\left(x-3\right)\left(x+3\right)=0.'
+  - Z własności iloczynu zerowego otrzymaj x=\frac{5}{2}, x=3, x=-3 i sprawdź jedno z rozwiązań.
+  answer:
+    kind: SET
+    members:
+    - '-3'
+    - \frac{5}{2}
+    - '3'
+  checks:
+  - kind: solve_equation
+    expr: 2x^{3}-5x^{2}=18x-45
+  skills:
+  - przenoszenie wyrazów na jedną stronę
+  - metoda grupowania
+  - różnica kwadratów
+  - własność iloczynu zerowego
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 3 members matched'
+- id: g-ex-05
+  slot: EXERCISE
+  ramp_index: 3
+  difficulty: 4
+  exercise_type: równanie dwukwadratowe i rozkład na czynniki
+  statement: Dany jest wielomian W\left(x\right)=x^{4}-7x^{2}+12. Rozłóż wielomian W na czynniki liniowe,
+    a następnie rozwiąż równanie W\left(x\right)=0. Zapisz obliczenia.
+  statement_latex: W\left(x\right)=x^{4}-7x^{2}+12
+  solution: |-
+    Rozbijamy środkowy wyraz: -7x^{2}=-3x^{2}-4x^{2}, więc
+    x^{4}-3x^{2}-4x^{2}+12=x^{2}\left(x^{2}-3\right)-4\left(x^{2}-3\right)=\left(x^{2}-3\right)\left(x^{2}-4\right).
+    (Ten sam wynik daje podstawienie t=x^{2}: t^{2}-7t+12 ma \Delta=49-48=1, więc t=3 lub t=4.)
+    Każdy z czynników jest różnicą kwadratów:
+    x^{2}-3=\left(x-\sqrt{3}\right)\left(x+\sqrt{3}\right), \quad x^{2}-4=\left(x-2\right)\left(x+2\right).
+    Zatem W\left(x\right)=\left(x-\sqrt{3}\right)\left(x+\sqrt{3}\right)\left(x-2\right)\left(x+2\right).
+    Równanie W\left(x\right)=0 daje x=\sqrt{3} lub x=-\sqrt{3} lub x=2 lub x=-2.
+    Kontrola: stopień wielomianu wynosi 4 i otrzymaliśmy dokładnie 4 różne pierwiastki.
+    Odpowiedź: W\left(x\right)=\left(x-2\right)\left(x+2\right)\left(x-\sqrt{3}\right)\left(x+\sqrt{3}\right); x\in\left\{-2,-\sqrt{3},\sqrt{3},2\right\}.
+  solution_steps:
+  - 'Rozbij środkowy wyraz: -7x^{2}=-3x^{2}-4x^{2} (albo podstaw t=x^{2}).'
+  - 'Zgrupuj i wyłącz wspólny nawias: \left(x^{2}-3\right)\left(x^{2}-4\right).'
+  - 'Rozłóż każdy czynnik jako różnicę kwadratów: \left(x-\sqrt{3}\right)\left(x+\sqrt{3}\right)\left(x-2\right)\left(x+2\right).'
+  - 'Przyrównaj czynniki do zera i wróć do zmiennej x: x^{2}=3 daje x=\pm\sqrt{3}, x^{2}=4 daje x=\pm
+    2.'
+  - Sprawdź, że liczba różnych pierwiastków (4) nie przekracza stopnia wielomianu.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: postać iloczynowa
+      answer:
+        kind: SYMBOLIC
+        latex: \left(x-2\right)\left(x+2\right)\left(x-\sqrt{3}\right)\left(x+\sqrt{3}\right)
+    - name: rozwiązania
+      answer:
+        kind: SET
+        members:
+        - '-2'
+        - '2'
+        - -\sqrt{3}
+        - \sqrt{3}
+  checks:
+  - kind: solve_equation
+    expr: x^{4}-7x^{2}+12=0
+    part: rozwiązania
+  skills:
+  - rozkład wielomianu dwukwadratowego
+  - powrót od zmiennej pomocniczej do x
+  - kontrola liczby pierwiastków
+  verification:
+    checkability: REFERENCE_CALL
+    note: 'could not compare: part disagrees: PARSE_ERROR: "UnexpectedCharacters: No terminal matches
+      ''('' in the current parser context, at line 1 col 25"'
+- id: g-ex-t00
+  slot: EXERCISE
+  ramp_index: 6
+  difficulty: 4
+  exercise_type: rozkład wielomianu na czynniki i rozwiązanie równania wielomianowego
+  statement: |-
+    Dany jest wielomian W(x)=2x^{4}+5x^{3}-18x^{2}-45x.
+    a) Doprowadź wielomian W do postaci iloczynu czynników stopnia co najwyżej pierwszego.
+    b) Rozwiąż równanie W(x)=0.
+    c) Oblicz sumę wszystkich rozwiązań tego równania.
+    Zapisz obliczenia.
+  statement_latex: W(x)=2x^{4}+5x^{3}-18x^{2}-45x
+  solution: |-
+    Każdy składnik zawiera x, więc najpierw wyłączamy x przed nawias:
+    W(x)=x\cdot\left(2x^{3}+5x^{2}-18x-45\right).
+    W nawiasie mamy cztery składniki — stosujemy grupowanie:
+    2x^{3}+5x^{2}-18x-45=\left(2x^{3}+5x^{2}\right)+\left(-18x-45\right)=x^{2}\cdot\left(2x+5\right)-9\cdot\left(2x+5\right)=\left(2x+5\right)\cdot\left(x^{2}-9\right).
+    (Uwaga na znak: -18x-45=-9\cdot\left(2x+5\right), bo -9\cdot5=-45.)
+    Czynnik x^{2}-9 to różnica kwadratów: x^{2}-3^{2}=\left(x-3\right)\cdot\left(x+3\right). Zatem
+    W(x)=x\cdot\left(2x+5\right)\cdot\left(x-3\right)\cdot\left(x+3\right).
+    Równanie W(x)=0 ma postać iloczynową, więc z własności iloczynu zerowego:
+    x=0 lub 2x+5=0 lub x-3=0 lub x+3=0,
+    czyli x=0 lub x=-\frac{5}{2} lub x=3 lub x=-3.
+    Stopień wielomianu wynosi 4 i otrzymaliśmy dokładnie 4 różne pierwiastki — wynik jest zgodny z kontrolą.
+    Suma wszystkich rozwiązań: 0+\left(-\frac{5}{2}\right)+3+\left(-3\right)=-\frac{5}{2}.
+    Odpowiedź: W(x)=x\left(2x+5\right)\left(x-3\right)\left(x+3\right), x\in\left\{-3,-\frac{5}{2},0,3\right\}, suma rozwiązań wynosi -\frac{5}{2}.
+  solution_steps:
+  - 'Wyłącz wspólny czynnik x: W(x)=x\cdot\left(2x^{3}+5x^{2}-18x-45\right).'
+  - 'Zgrupuj składniki w nawiasie: \left(2x^{3}+5x^{2}\right)+\left(-18x-45\right)=x^{2}\cdot\left(2x+5\right)-9\cdot\left(2x+5\right).'
+  - 'Wyłącz wspólny nawias: \left(2x+5\right)\cdot\left(x^{2}-9\right).'
+  - 'Rozłóż różnicę kwadratów: x^{2}-9=\left(x-3\right)\cdot\left(x+3\right), więc W(x)=x\left(2x+5\right)\left(x-3\right)\left(x+3\right).'
+  - 'Zastosuj własność iloczynu zerowego: x=0 lub 2x+5=0 lub x-3=0 lub x+3=0.'
+  - 'Rozwiąż równania cząstkowe: x=0, x=-\frac{5}{2}, x=3, x=-3.'
+  - 'Oblicz sumę rozwiązań: 0+\left(-\frac{5}{2}\right)+3+\left(-3\right)=-\frac{5}{2}.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: postac_iloczynowa
+      answer:
+        kind: SYMBOLIC
+        latex: x\left(2x+5\right)\left(x-3\right)\left(x+3\right)
+    - name: rozwiazania
+      answer:
+        kind: SET
+        members:
+        - '-3'
+        - -\frac{5}{2}
+        - '0'
+        - '3'
+    - name: suma_rozwiazan
+      answer:
+        kind: NUMERIC
+        value: -2.5
+  checks:
+  - kind: solve_equation
+    expr: 2x^{4}+5x^{3}-18x^{2}-45x
+    part: rozwiazania
+  - kind: evaluate
+    expr: 0+\left(-\frac{5}{2}\right)+3+\left(-3\right)
+    part: suma_rozwiazan
+  skills:
+  - wyłączanie wspólnego czynnika przed nawias
+  - metoda grupowania
+  - różnica kwadratów
+  - własność iloczynu zerowego
+  - kontrola liczby pierwiastków a stopień wielomianu
+  verification:
+    checkability: REFERENCE_CALL
+    note: 3 parts matched
+- id: g-ex-t01
+  slot: EXERCISE
+  ramp_index: 7
+  difficulty: 5
+  exercise_type: równanie dwukwadratowe i pełny rozkład na czynniki liniowe
+  statement: |-
+    Dane jest równanie 4x^{4}+4=17x^{2}.
+    a) Przekształć to równanie do postaci W(x)=0 i zapisz wielomian W w postaci iloczynu czterech czynników liniowych.
+    b) Rozwiąż to równanie.
+    c) Podaj największe rozwiązanie tego równania.
+    Zapisz obliczenia.
+  statement_latex: 4x^{4}+4=17x^{2}
+  solution: |-
+    Przenosimy wszystko na lewą stronę:
+    4x^{4}-17x^{2}+4=0.
+    Podstawiamy t=x^{2}, przy czym t\ge 0. Otrzymujemy równanie kwadratowe
+    4t^{2}-17t+4=0,
+    \Delta=\left(-17\right)^{2}-4\cdot4\cdot4=289-64=225, \sqrt{\Delta}=15,
+    t_{1}=\frac{17-15}{2\cdot4}=\frac{2}{8}=\frac{1}{4}, \qquad t_{2}=\frac{17+15}{2\cdot4}=\frac{32}{8}=4.
+    Stąd 4t^{2}-17t+4=4\cdot\left(t-\frac{1}{4}\right)\cdot\left(t-4\right), czyli po powrocie do x:
+    4x^{4}-17x^{2}+4=4\cdot\left(x^{2}-\frac{1}{4}\right)\cdot\left(x^{2}-4\right)=\left(4x^{2}-1\right)\cdot\left(x^{2}-4\right).
+    Oba czynniki są różnicami kwadratów:
+    4x^{2}-1=\left(2x-1\right)\cdot\left(2x+1\right), \qquad x^{2}-4=\left(x-2\right)\cdot\left(x+2\right).
+    Zatem W(x)=\left(2x-1\right)\left(2x+1\right)\left(x-2\right)\left(x+2\right).
+    Z własności iloczynu zerowego:
+    2x-1=0 lub 2x+1=0 lub x-2=0 lub x+2=0,
+    czyli x=\frac{1}{2} lub x=-\frac{1}{2} lub x=2 lub x=-2.
+    (Równoważnie: x^{2}=\frac{1}{4} daje x=\pm\frac{1}{2}, a x^{2}=4 daje x=\pm 2 — pamiętamy o obu znakach.)
+    Stopień wielomianu wynosi 4 i mamy 4 różne pierwiastki. Największym rozwiązaniem jest x=2.
+    Sprawdzenie dla x=2: lewa strona 4\cdot16+4=68, prawa 17\cdot4=68.
+    Odpowiedź: W(x)=\left(2x-1\right)\left(2x+1\right)\left(x-2\right)\left(x+2\right), x\in\left\{-2,-\frac{1}{2},\frac{1}{2},2\right\}, największe rozwiązanie to 2.
+  solution_steps:
+  - 'Przenieś wszystko na lewą stronę: 4x^{4}-17x^{2}+4=0.'
+  - 'Podstaw t=x^{2} i rozwiąż 4t^{2}-17t+4=0: \Delta=225, t_{1}=\frac{1}{4}, t_{2}=4.'
+  - 'Zapisz rozkład: 4x^{4}-17x^{2}+4=\left(4x^{2}-1\right)\cdot\left(x^{2}-4\right).'
+  - 'Rozłóż obie różnice kwadratów: W(x)=\left(2x-1\right)\left(2x+1\right)\left(x-2\right)\left(x+2\right).'
+  - 'Zastosuj własność iloczynu zerowego i rozwiąż cztery równania liniowe: x=\frac{1}{2}, x=-\frac{1}{2},
+    x=2, x=-2.'
+  - 'Sprawdź kontrolę: stopień 4, cztery różne pierwiastki; największe rozwiązanie to x=\sqrt{4}=2.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: postac_iloczynowa
+      answer:
+        kind: SYMBOLIC
+        latex: \left(2x-1\right)\left(2x+1\right)\left(x-2\right)\left(x+2\right)
+    - name: rozwiazania
+      answer:
+        kind: SET
+        members:
+        - '-2'
+        - -\frac{1}{2}
+        - \frac{1}{2}
+        - '2'
+    - name: najwieksze_rozwiazanie
+      answer:
+        kind: NUMERIC
+        value: 2.0
+  checks:
+  - kind: solve_equation
+    expr: 4x^{4}+4-17x^{2}
+    part: rozwiazania
+  - kind: evaluate
+    expr: \sqrt{\frac{17+15}{2\cdot 4}}
+    part: najwieksze_rozwiazanie
+  skills:
+  - przekształcenie równania do postaci W(x)=0
+  - podstawienie t=x^{2} w równaniu dwukwadratowym
+  - rozkład trójmianu kwadratowego a(x-x_1)(x-x_2)
+  - powrót od zmiennej pomocniczej do x i uwzględnienie dwóch znaków
+  - własność iloczynu zerowego
+  verification:
+    checkability: REFERENCE_CALL
+    note: 'answer and reference disagree: part disagrees: ''\\left(2x-1\\right)\\left(2x+1\\right)\\left(x-2\\right)\\left(x+2\\right)''
+      vs ''4x^{4}-17x^{2}+4=(x-2)(x+2)(2x-1)(2x+1)=0'' (as text)'
+- id: g-cm-06
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: analiza błędu — dzielenie obu stron przez x
+  statement: Rozwiąż równanie 2x^{3}=18x. Uczeń podzielił obie strony tego równania przez x i otrzymał
+    dwa rozwiązania. Wyjaśnij, na czym polega jego błąd, i podaj poprawny zbiór rozwiązań.
+  statement_latex: 2x^{3}=18x
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń dzieli obie strony przez x, otrzymuje 2x^{2}=18, czyli x^{2}=9, a stąd x=3 lub x=-3. Jego (niepełna) odpowiedź to x\in\left\{-3,3\right\}.
+    GDZIE JEST BŁĄD: dzielenie obu stron przez wyrażenie zawierające niewiadomą nie jest przekształceniem równoważnym — jeśli x=0, dzielimy przez zero. W ten sposób uczeń zgubił rozwiązanie x=0 (sprawdzenie: 2\cdot 0^{3}=0 oraz 18\cdot 0=0, więc 0 spełnia równanie).
+    POPRAWNE ROZWIĄZANIE: przenosimy wszystko na lewą stronę i wyłączamy wspólny czynnik:
+    2x^{3}-18x=0,
+    2x\left(x^{2}-9\right)=0,
+    2x\left(x-3\right)\left(x+3\right)=0.
+    Stąd x=0 lub x=3 lub x=-3.
+    Odpowiedź: x\in\left\{-3,0,3\right\} — równanie ma trzy rozwiązania, a nie dwa.
+  solution_steps:
+  - 'Pokaż błędne rozumowanie: podzielenie przez x daje x^{2}=9 i tylko x=3 lub x=-3.'
+  - 'Wskaż błąd: nie wolno dzielić przez wyrażenie, które może być równe zeru — gubimy x=0.'
+  - 'Przenieś wszystko na lewą stronę: 2x^{3}-18x=0.'
+  - 'Wyłącz wspólny czynnik i rozłóż różnicę kwadratów: 2x\left(x-3\right)\left(x+3\right)=0.'
+  - 'Zapisz poprawny zbiór rozwiązań: x\in\left\{-3,0,3\right\}.'
+  answer:
+    kind: SET
+    members:
+    - '-3'
+    - '0'
+    - '3'
+  checks:
+  - kind: solve_equation
+    expr: 2x^{3}=18x
+  skills:
+  - równoważność przekształceń
+  - wyłączanie wspólnego czynnika
+  - własność iloczynu zerowego
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 3 members matched'
+- id: g-cm-07
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: analiza błędu — iloczyn różny od zera
+  statement: 'Rozwiąż równanie \left(x-2\right)\left(x+5\right)=8. Uczeń zapisał: „x-2=8 lub x+5=8”. Wyjaśnij,
+    dlaczego takie rozumowanie jest błędne, i podaj poprawny zbiór rozwiązań.'
+  statement_latex: \left(x-2\right)\cdot\left(x+5\right)=8
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń pisze x-2=8 lub x+5=8, skąd x=10 lub x=3, i podaje odpowiedź x\in\left\{3,10\right\}.
+    GDZIE JEST BŁĄD: własność iloczynu zerowego działa wyłącznie wtedy, gdy po prawej stronie stoi 0. Liczbę 8 można otrzymać na nieskończenie wiele sposobów jako iloczyn dwóch liczb, więc z równości iloczynu 8 nic nie wynika o pojedynczych czynnikach. Sprawdzenie x=10: \left(10-2\right)\left(10+5\right)=8\cdot15=120\neq 8, więc 10 nie jest rozwiązaniem.
+    POPRAWNE ROZWIĄZANIE: wymnażamy i przenosimy wszystko na lewą stronę:
+    \left(x-2\right)\left(x+5\right)=x^{2}+3x-10, więc x^{2}+3x-10-8=0, czyli x^{2}+3x-18=0.
+    \Delta=3^{2}-4\cdot1\cdot\left(-18\right)=9+72=81, \sqrt{\Delta}=9,
+    x=\frac{-3-9}{2}=-6 lub x=\frac{-3+9}{2}=3.
+    Sprawdzenie x=-6: \left(-6-2\right)\left(-6+5\right)=\left(-8\right)\cdot\left(-1\right)=8 — zgadza się.
+    Odpowiedź: x\in\left\{-6,3\right\}.
+  solution_steps:
+  - 'Pokaż błędne rozumowanie: x-2=8 lub x+5=8 daje x=10 lub x=3.'
+  - 'Wskaż błąd: własność iloczynu zerowego wymaga zera po prawej stronie; sprawdzenie pokazuje, że x=10
+    nie spełnia równania.'
+  - 'Wymnóż nawiasy i przenieś 8 na lewą stronę: x^{2}+3x-18=0.'
+  - Oblicz \Delta=81 i pierwiastki x=-6 oraz x=3.
+  - 'Zapisz poprawną odpowiedź: x\in\left\{-6,3\right\}.'
+  answer:
+    kind: SET
+    members:
+    - '-6'
+    - '3'
+  checks:
+  - kind: solve_equation
+    expr: \left(x-2\right)\cdot\left(x+5\right)=8
+  skills:
+  - własność iloczynu zerowego i jej założenia
+  - przekształcanie do postaci W(x)=0
+  - równanie kwadratowe
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 2 members matched'
+- id: g-cm-08
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: analiza błędu — iloczyn zerowy jako koniunkcja
+  statement: 'Rozwiąż równanie \left(2x-1\right)\left(x+4\right)=0. Uczeń stwierdził: „musiałoby być jednocześnie
+    2x-1=0 i x+4=0, a to niemożliwe, więc równanie nie ma rozwiązań”. Wyjaśnij, na czym polega jego błąd,
+    i podaj poprawny zbiór rozwiązań.'
+  statement_latex: \left(2x-1\right)\cdot\left(x+4\right)=0
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń żąda, by oba czynniki znikały jednocześnie: 2x-1=0 i x+4=0, czyli x=\frac{1}{2} i x=-4. Ponieważ jedna liczba nie może być równocześnie równa \frac{1}{2} i -4, uczeń pisze: „brak rozwiązań”.
+    GDZIE JEST BŁĄD: własność iloczynu zerowego to alternatywa, a nie koniunkcja — iloczyn jest równy zeru, gdy przynajmniej jeden czynnik jest zerem. Wystarczy, że zeruje się jeden z nich, bo 0 pomnożone przez cokolwiek daje 0.
+    POPRAWNE ROZWIĄZANIE: 2x-1=0 lub x+4=0, czyli x=\frac{1}{2} lub x=-4.
+    Sprawdzenie x=-4: \left(2\cdot\left(-4\right)-1\right)\left(-4+4\right)=\left(-9\right)\cdot 0=0 — zgadza się.
+    Odpowiedź: x\in\left\{-4,\frac{1}{2}\right\}.
+  solution_steps:
+  - 'Pokaż błędne rozumowanie: żądanie 2x-1=0 i jednocześnie x+4=0 prowadzi do wniosku o braku rozwiązań.'
+  - 'Wskaż błąd: iloczyn jest zerem, gdy PRZYNAJMNIEJ JEDEN czynnik jest zerem — to alternatywa.'
+  - Rozwiąż 2x-1=0, otrzymując x=\frac{1}{2}.
+  - Rozwiąż x+4=0, otrzymując x=-4, i sprawdź to rozwiązanie przez podstawienie.
+  - 'Zapisz odpowiedź: x\in\left\{-4,\frac{1}{2}\right\}.'
+  answer:
+    kind: SET
+    members:
+    - '-4'
+    - \frac{1}{2}
+  checks:
+  - kind: solve_equation
+    expr: \left(2x-1\right)\cdot\left(x+4\right)=0
+  skills:
+  - własność iloczynu zerowego
+  - rozumienie spójnika 'lub'
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 2 members matched'
+- id: g-cm-09
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: analiza błędu — znak przy odczycie pierwiastka
+  statement: Dany jest wielomian W\left(x\right)=\left(x+6\right)\left(x-1\right)\left(2x+5\right). Uczeń
+    podał, że pierwiastkami tego wielomianu są liczby 6, -1 oraz 5. Wyjaśnij, na czym polega jego błąd,
+    i podaj wszystkie pierwiastki wielomianu W.
+  statement_latex: W\left(x\right)=\left(x+6\right)\left(x-1\right)\left(2x+5\right)
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń „zmienia znak w pamięci”: z czynnika \left(x+6\right) odczytuje 6, z \left(x-1\right) odczytuje -1, a z \left(2x+5\right) — liczbę 5. Jego odpowiedź to 6, -1, 5.
+    GDZIE JEST BŁĄD: sprawdzenie dla x=6 daje W\left(6\right)=\left(6+6\right)\left(6-1\right)\left(2\cdot6+5\right)=12\cdot5\cdot17\neq 0, więc 6 nie jest pierwiastkiem. Pierwiastek zawsze wyznaczamy, rozwiązując równanie „czynnik = 0”, a nie przez samo odwrócenie znaku liczby stojącej w nawiasie (w czynniku z współczynnikiem 2 trzeba jeszcze podzielić).
+    POPRAWNE ROZWIĄZANIE:
+    x+6=0 daje x=-6,
+    x-1=0 daje x=1,
+    2x+5=0 daje 2x=-5, czyli x=-\frac{5}{2}.
+    Sprawdzenie dla x=-6: \left(-6+6\right)\left(-6-1\right)\left(2\cdot\left(-6\right)+5\right)=0\cdot\left(-7\right)\cdot\left(-7\right)=0 — zgadza się.
+    Odpowiedź: pierwiastkami są liczby -6, -\frac{5}{2} oraz 1.
+  solution_steps:
+  - 'Pokaż błędne rozumowanie: odczyt 6, -1, 5 przez samo ''odwrócenie znaku''.'
+  - 'Wskaż błąd: podstawienie x=6 daje wartość różną od zera, więc 6 nie jest pierwiastkiem.'
+  - Rozwiąż x+6=0, x-1=0 oraz 2x+5=0.
+  - Otrzymaj pierwiastki x=-6, x=1, x=-\frac{5}{2} i sprawdź jeden z nich przez podstawienie.
+  answer:
+    kind: SET
+    members:
+    - '-6'
+    - '1'
+    - -\frac{5}{2}
+  checks:
+  - kind: solve_equation
+    expr: \left(x+6\right)\cdot\left(x-1\right)\cdot\left(2x+5\right)=0
+  skills:
+  - odczyt pierwiastków z postaci iloczynowej
+  - rozwiązywanie równań liniowych
+  - sprawdzanie przez podstawienie
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 3 members matched'
+- id: g-cm-10
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: analiza błędu — znak przy grupowaniu
+  statement: Rozwiąż równanie x^{3}+4x^{2}-25x-100=0. Uczeń w trakcie grupowania zapisał, że -25x-100=-25\left(x-4\right),
+    po czym stwierdził, że nawiasy się nie zgadzają i metoda grupowania tu nie działa. Wyjaśnij, gdzie
+    popełnił błąd, i podaj poprawny zbiór rozwiązań.
+  statement_latex: x^{3}+4x^{2}-25x-100=0
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń grupuje \left(x^{3}+4x^{2}\right)+\left(-25x-100\right), z pierwszej pary wyłącza poprawnie x^{2}\left(x+4\right), ale z drugiej pary pisze -25\left(x-4\right). Nawiasy \left(x+4\right) i \left(x-4\right) są różne, więc uczeń nie może wyłączyć wspólnego nawiasu i uznaje, że grupowanie zawiodło.
+    GDZIE JEST BŁĄD: sprawdźmy wyłączenie przez wymnożenie: -25\left(x-4\right)=-25x+100, a mieliśmy -25x-100. Poprawnie jest -25\left(x+4\right), bo -25\cdot4=-100.
+    POPRAWNE ROZWIĄZANIE:
+    x^{3}+4x^{2}-25x-100=x^{2}\left(x+4\right)-25\left(x+4\right)=\left(x+4\right)\left(x^{2}-25\right).
+    Czynnik x^{2}-25 to różnica kwadratów: \left(x-5\right)\left(x+5\right), więc
+    \left(x+4\right)\left(x-5\right)\left(x+5\right)=0.
+    Stąd x=-4 lub x=5 lub x=-5.
+    Sprawdzenie dla x=5: 125+100-125-100=0 — zgadza się.
+    Odpowiedź: x\in\left\{-5,-4,5\right\}.
+  solution_steps:
+  - 'Pokaż błędne wyłączenie: -25x-100=-25\left(x-4\right) i wynikający z niego wniosek, że grupowanie
+    nie działa.'
+  - 'Sprawdź to wyłączenie przez wymnożenie: -25\left(x-4\right)=-25x+100\neq -25x-100.'
+  - 'Popraw znak: -25x-100=-25\left(x+4\right).'
+  - 'Wyłącz wspólny nawias: \left(x+4\right)\left(x^{2}-25\right)=0 i rozłóż różnicę kwadratów.'
+  - Z własności iloczynu zerowego otrzymaj x\in\left\{-5,-4,5\right\} i sprawdź jedno rozwiązanie.
+  answer:
+    kind: SET
+    members:
+    - '-5'
+    - '-4'
+    - '5'
+  checks:
+  - kind: solve_equation
+    expr: x^{3}+4x^{2}-25x-100=0
+  skills:
+  - metoda grupowania
+  - wyłączanie czynnika ujemnego
+  - różnica kwadratów
+  - własność iloczynu zerowego
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 3 members matched'
+- id: g-ch-t02
+  slot: CHALLENGE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: zadanie tekstowe prowadzące do równania wielomianowego
+  statement: Trzy kolejne dodatnie liczby parzyste są takie, że ich iloczyn jest równy czterokrotności
+    ich sumy. Wyznacz te trzy liczby. Zapisz obliczenia.
+  statement_latex: \left(x-2\right)\cdot x\cdot\left(x+2\right)=4\cdot\left(\left(x-2\right)+x+\left(x+2\right)\right)
+  solution: |-
+    Oznaczmy przez x środkową z trzech kolejnych liczb parzystych. Wtedy te liczby to x-2,\ x,\ x+2, przy czym z warunku, że wszystkie są dodatnie, wynika x-2>0, czyli x>2.
+
+    Iloczyn tych liczb: \left(x-2\right)\cdot x\cdot\left(x+2\right)=x\cdot\left(x^2-4\right)=x^3-4x.
+    Suma tych liczb: \left(x-2\right)+x+\left(x+2\right)=3x, więc jej czterokrotność to 4\cdot 3x=12x.
+
+    Z warunku zadania otrzymujemy równanie
+    x^3-4x=12x.
+
+    Przenosimy wszystko na lewą stronę (nie wolno dzielić obu stron przez x):
+    x^3-16x=0,
+    x\cdot\left(x^2-16\right)=0,
+    x\cdot\left(x-4\right)\cdot\left(x+4\right)=0.
+
+    Stąd x=0 lub x=4 lub x=-4. Warunek x>2 spełnia tylko x=4.
+
+    Szukane liczby to 2,\ 4,\ 6.
+    Sprawdzenie: 2\cdot 4\cdot 6=48 oraz 4\cdot\left(2+4+6\right)=4\cdot 12=48 — zgadza się.
+  solution_steps:
+  - Oznacz środkową liczbę przez x; trzy kolejne liczby parzyste to x-2, x, x+2, a z dodatniości wynika
+    x>2.
+  - 'Zapisz iloczyn: \left(x-2\right)\cdot x\cdot\left(x+2\right)=x^3-4x oraz sumę: 3x.'
+  - 'Ułóż równanie x^3-4x=12x i przenieś wszystko na lewą stronę: x^3-16x=0.'
+  - 'Doprowadź do postaci iloczynowej: x\cdot\left(x-4\right)\cdot\left(x+4\right)=0, skąd x=0 lub x=4
+    lub x=-4.'
+  - Odrzuć x=0 i x=-4 (warunek x>2) i wypisz liczby 2, 4, 6; sprawdź warunek zadania.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: najmniejsza
+      answer:
+        kind: NUMERIC
+        value: 2.0
+    - name: srodkowa
+      answer:
+        kind: NUMERIC
+        value: 4.0
+    - name: najwieksza
+      answer:
+        kind: NUMERIC
+        value: 6.0
+  checks:
+  - kind: evaluate
+    expr: \sqrt{16}-2
+    part: najmniejsza
+  - kind: evaluate
+    expr: \sqrt{16}
+    part: srodkowa
+  - kind: evaluate
+    expr: \sqrt{16}+2
+    part: najwieksza
+  stated_model:
+    variable: x
+    objective_latex: \left(x-2\right)\cdot x\cdot\left(x+2\right)=4\cdot 3\cdot x
+    domain_lo: '2'
+    goal: value
+    constraint_used: x-2>0 (liczby dodatnie), x — liczba parzysta
+  skills:
+  - wprowadzenie zmiennej i zapisanie zależności
+  - doprowadzanie wielomianu do postaci iloczynowej
+  - własność iloczynu zerowego
+  - odrzucanie rozwiązań niespełniających warunków zadania
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''x'': ''\\left(x-2\\right)\\cdot
+      x\\cdot\\left(x+2\\right)=4\\cdot 3\\cdot x'') — human review'
+- id: g-ch-t03
+  slot: CHALLENGE
+  ramp_index: 1
+  difficulty: 4
+  exercise_type: wyznaczanie współczynników wielomianu z jego pierwiastków i rozwiązanie równania
+  statement: Dany jest wielomian W(x)=x^{3}+a x^{2}+b x+12, gdzie a i b są pewnymi liczbami rzeczywistymi.
+    Wiadomo, że liczby 2 oraz \left(-3\right) są pierwiastkami tego wielomianu. Wyznacz a i b, a następnie
+    podaj wszystkie rozwiązania równania W(x)=0. Zapisz obliczenia.
+  statement_latex: W(x)=x^{3}+a\cdot x^{2}+b\cdot x+12,\qquad W\left(2\right)=0,\quad W\left(-3\right)=0
+  solution: |-
+    Skoro 2 jest pierwiastkiem, to W\left(2\right)=0:
+    2^3+a\cdot 2^2+b\cdot 2+12=0, czyli 8+4a+2b+12=0, a po uproszczeniu 2a+b=-10.
+
+    Skoro \left(-3\right) jest pierwiastkiem, to W\left(-3\right)=0:
+    \left(-3\right)^3+a\cdot\left(-3\right)^2+b\cdot\left(-3\right)+12=0, czyli -27+9a-3b+12=0, a po uproszczeniu 3a-b=5.
+
+    Dodając stronami równania 2a+b=-10 oraz 3a-b=5, otrzymujemy 5a=-5, czyli a=-1. Wtedy b=-10-2\cdot\left(-1\right)=-8.
+
+    Zatem W(x)=x^{3}-x^{2}-8x+12.
+
+    Wielomian jest stopnia trzeciego, ma współczynnik przy x^3 równy 1 i pierwiastki 2 oraz \left(-3\right), więc można go zapisać w postaci
+    W(x)=\left(x-2\right)\cdot\left(x+3\right)\cdot\left(x-c\right)
+    dla pewnej liczby rzeczywistej c. Porównujemy wyrazy wolne obu postaci: \left(-2\right)\cdot 3\cdot\left(-c\right)=12, czyli 6c=12, skąd c=2.
+
+    Zatem W(x)=\left(x-2\right)^{2}\cdot\left(x+3\right) (sprawdzenie przez wymnożenie: \left(x^2-4x+4\right)\left(x+3\right)=x^3-x^2-8x+12).
+
+    Równanie \left(x-2\right)^{2}\cdot\left(x+3\right)=0 daje x-2=0 lub x+3=0, czyli x=2 (pierwiastek dwukrotny) lub x=-3. Krotność nie mnoży odpowiedzi, więc równanie ma dokładnie dwa różne rozwiązania.
+
+    Odpowiedź: a=-1, b=-8, x\in\{-3,2\}.
+  solution_steps:
+  - Z warunku W\left(2\right)=0 otrzymaj 8+4a+2b+12=0, czyli 2a+b=-10.
+  - Z warunku W\left(-3\right)=0 otrzymaj -27+9a-3b+12=0, czyli 3a-b=5.
+  - 'Rozwiąż układ: 5a=-5, więc a=-1 oraz b=-8; zatem W(x)=x^{3}-x^{2}-8x+12.'
+  - Zapisz W(x)=\left(x-2\right)\left(x+3\right)\left(x-c\right) i z porównania wyrazów wolnych 6c=12
+    wyznacz c=2.
+  - 'Z postaci iloczynowej W(x)=\left(x-2\right)^{2}\left(x+3\right) odczytaj rozwiązania: x=2 (dwukrotny)
+    oraz x=-3 — dwa różne rozwiązania.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: a
+      answer:
+        kind: NUMERIC
+        value: -1.0
+    - name: b
+      answer:
+        kind: NUMERIC
+        value: -8.0
+    - name: rozwiazania
+      answer:
+        kind: SET
+        members:
+        - '-3'
+        - '2'
+  checks:
+  - kind: solve_equation
+    expr: \left(-3\right)^{3}+a\cdot\left(-3\right)^{2}+\left(-8\right)\cdot\left(-3\right)+12=0
+    var: a
+    part: a
+  - kind: solve_equation
+    expr: 2^{3}+\left(-1\right)\cdot 2^{2}+b\cdot 2+12=0
+    var: b
+    part: b
+  - kind: solve_equation
+    expr: x^{3}-x^{2}-8\cdot x+12=0
+    part: rozwiazania
+  skills:
+  - wykorzystanie warunku W(x_0)=0
+  - rozwiązywanie układu równań liniowych
+  - zapis wielomianu w postaci iloczynowej z nieznanym pierwiastkiem
+  - krotność pierwiastka a liczba różnych rozwiązań
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [a] SymPy solved it fresh: -1.0 vs -1.0 (tol 1e-09) ; [b] SymPy
+      solved it fresh: -8.0 vs -8.0 (tol 1e-09) ; [rozwiazania] SymPy solved it fresh: 2 members matched'
+- id: g-ch-t04
+  slot: CHALLENGE
+  ramp_index: 2
+  difficulty: 5
+  exercise_type: modelowanie geometryczne prowadzące do równania wielomianowego (wzór + dziedzina, potem
+    obliczenia)
+  statement: |-
+    Podstawą pewnego prostopadłościanu jest prostokąt. Jeden bok tej podstawy jest o 5 cm dłuższy od wysokości tego prostopadłościanu, a drugi bok tej podstawy jest o 5 cm krótszy od tej wysokości. Wysokość prostopadłościanu oznaczamy przez x (w centymetrach).
+    a) Zapisz wzór na objętość V(x) tego prostopadłościanu (w cm^{3}) w zależności od x oraz podaj dziedzinę tak określonej funkcji, uwzględniając warunki wynikające z opisu bryły.
+    b) Wiadomo, że objętość tego prostopadłościanu jest równa objętości prostopadłościanu o krawędziach długości 4 cm, 6 cm oraz x cm. Oblicz wysokość opisanego prostopadłościanu, długości boków jego podstawy oraz jego objętość. Zapisz obliczenia.
+  statement_latex: V(x)=x\cdot\left(x+5\right)\cdot\left(x-5\right),\qquad x\cdot\left(x+5\right)\cdot\left(x-5\right)=4\cdot
+    6\cdot x
+  solution: |-
+    a) Niech x oznacza wysokość prostopadłościanu (w cm). Boki podstawy mają wtedy długości x+5 oraz x-5.
+    Długości boków muszą być dodatnie: x+5>0 oraz x-5>0, a ponadto x>0. Najmocniejszy z tych warunków to x>5, więc dziedziną jest przedział \left(5,+\infty\right).
+    Objętość:
+    V(x)=x\cdot\left(x+5\right)\cdot\left(x-5\right)=x\cdot\left(x^{2}-25\right)=x^{3}-25x.
+
+    b) Objętość drugiego prostopadłościanu wynosi 4\cdot 6\cdot x=24x. Z warunku zadania:
+    x^{3}-25x=24x.
+    Przenosimy wszystko na lewą stronę (nie dzielimy przez x!):
+    x^{3}-49x=0,
+    x\cdot\left(x^{2}-49\right)=0,
+    x\cdot\left(x-7\right)\cdot\left(x+7\right)=0.
+    Stąd x=0 lub x=7 lub x=-7. Do dziedziny \left(5,+\infty\right) należy wyłącznie x=7 (liczby 0 i -7 odrzucamy).
+
+    Zatem wysokość wynosi 7 cm, boki podstawy mają długości 7-5=2 cm oraz 7+5=12 cm, a objętość
+    V\left(7\right)=7^{3}-25\cdot 7=343-175=168.
+    Sprawdzenie: 2\cdot 12\cdot 7=168 oraz 4\cdot 6\cdot 7=168 — objętości są równe.
+
+    Odpowiedź: V(x)=x^{3}-25x dla x\in\left(5,+\infty\right); wysokość 7 cm, boki podstawy 2 cm i 12 cm, objętość 168 cm^{3}.
+  solution_steps:
+  - Oznacz wysokość przez x; boki podstawy to x+5 oraz x-5.
+  - 'Z warunków x+5>0 i x-5>0 wyznacz dziedzinę: x\in\left(5,+\infty\right).'
+  - Zapisz wzór V(x)=x\cdot\left(x+5\right)\cdot\left(x-5\right)=x^{3}-25x.
+  - Zapisz objętość drugiej bryły 4\cdot 6\cdot x=24x i ułóż równanie x^{3}-25x=24x.
+  - 'Przenieś wszystko na lewą stronę i rozłóż: x\cdot\left(x-7\right)\cdot\left(x+7\right)=0, skąd x=0
+    lub x=7 lub x=-7.'
+  - 'Sprawdź kandydatów względem dziedziny: zostaje x=7; oblicz boki podstawy 2 cm i 12 cm oraz objętość
+    7^{3}-25\cdot 7=168 cm^{3}.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wzor_V
+      answer:
+        kind: SYMBOLIC
+        latex: x^{3}-25x
+    - name: dziedzina
+      answer:
+        kind: INTERVAL
+        lo: '5'
+        hi: \infty
+    - name: wysokosc
+      answer:
+        kind: NUMERIC
+        value: 7.0
+    - name: bok_krotszy
+      answer:
+        kind: NUMERIC
+        value: 2.0
+    - name: bok_dluzszy
+      answer:
+        kind: NUMERIC
+        value: 12.0
+    - name: objetosc
+      answer:
+        kind: NUMERIC
+        value: 168.0
+  checks:
+  - kind: simplify
+    expr: x\cdot\left(x+5\right)\cdot\left(x-5\right)
+    part: wzor_V
+  - kind: evaluate
+    expr: \sqrt{49}
+    part: wysokosc
+  - kind: evaluate
+    expr: \sqrt{49}-5
+    part: bok_krotszy
+  - kind: evaluate
+    expr: \sqrt{49}+5
+    part: bok_dluzszy
+  - kind: evaluate
+    expr: 7^{3}-25\cdot 7
+    part: objetosc
+  stated_model:
+    variable: x
+    objective_latex: V(x)=x\cdot\left(x+5\right)\cdot\left(x-5\right)
+    domain_lo: '5'
+    goal: value
+    constraint_used: 'boki podstawy dodatnie: x-5>0; równość objętości: x^{3}-25x=24x'
+  skills:
+  - wprowadzenie zmiennej i zapisanie wzoru na objętość
+  - wyznaczanie dziedziny z warunków geometrycznych
+  - doprowadzanie wielomianu do postaci iloczynowej (wspólny czynnik, różnica kwadratów)
+  - własność iloczynu zerowego
+  - weryfikacja rozwiązań względem dziedziny
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (AMBIGUOUS: ''parser returned an unresolved ambiguity
+      (_ambig)'') — human review'

@@ -1,0 +1,807 @@
+section: trojkaty-prostokatne-trygonometria
+name: Rozwiązywanie trójkątów prostokątnych
+scope: sin, cos, tan in a right triangle; finding sides and angles from the given data.
+requirements:
+- VII.4
+counts:
+  total: 16
+  DETERMINISTIC: 12
+  REFERENCE_CALL: 2
+  NOT_MACHINE_CHECKABLE: 2
+exercises:
+- id: g-th-00
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: obliczanie wartości funkcji trygonometrycznych z danych boków
+  statement: Dany jest trójkąt prostokątny ABC, w którym kąt przy wierzchołku A jest kątem prostym, |AB|
+    = 8, |AC| = 15, a przeciwprostokątna |BC| = 17. Kąt ABC oznaczmy przez \beta. Oblicz \sin\beta, \cos\beta
+    oraz \operatorname{tg}\beta.
+  statement_latex: \sin\beta=\frac{|AC|}{|BC|},\qquad \cos\beta=\frac{|AB|}{|BC|},\qquad \operatorname{tg}\beta=\frac{|AC|}{|AB|}
+  solution: |-
+    Kąt prosty jest przy wierzchołku A, więc przyprostokątnymi są AB oraz AC, a przeciwprostokątną jest BC.
+    Patrzymy z wierzchołka B (na kąt \beta):
+    – naprzeciw kąta \beta leży przyprostokątna AC o długości 15,
+    – przy kącie \beta leży przyprostokątna AB o długości 8,
+    – przeciwprostokątna to BC o długości 17.
+    Stąd z definicji:
+    \sin\beta=\frac{15}{17}\approx 0{,}88, \qquad \cos\beta=\frac{8}{17}\approx 0{,}47, \qquad \operatorname{tg}\beta=\frac{15}{8}=1{,}875.
+    Kontrola: sinus i cosinus wyszły z przedziału (0,1). ✓
+  solution_steps:
+  - 'Wskaż przeciwprostokątną: leży naprzeciw kąta prostego, czyli |BC| = 17.'
+  - 'Podpisz boki względem kąta \beta: naprzeciw AC = 15, przy AB = 8.'
+  - Zapisz sin\beta = \frac{15}{17} (naprzeciw przez przeciwprostokątną).
+  - Zapisz cos\beta = \frac{8}{17} (przy przez przeciwprostokątną).
+  - Zapisz tg\beta = \frac{15}{8} (naprzeciw przez przy).
+  - Sprawdź, że sinus i cosinus są mniejsze od 1.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: sin beta
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{15}{17}
+    - name: cos beta
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{8}{17}
+    - name: tg beta
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{15}{8}
+  checks:
+  - kind: evaluate
+    expr: \frac{15}{17}
+    part: sin beta
+  - kind: evaluate
+    expr: \frac{8}{17}
+    part: cos beta
+  - kind: evaluate
+    expr: \frac{15}{8}
+    part: tg beta
+  skills:
+  - rozpoznawanie boku naprzeciw i przy kącie
+  - definicje sin, cos, tg kąta ostrego
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [sin beta] SymPy solved it fresh: 0.8823529411764706 vs 0.8823529411764706
+      (tol 1e-09) ; [cos beta] SymPy solved it fresh: 0.47058823529411764 vs 0.47058823529411764 (tol
+      1e-09) ; [tg beta] SymPy solved it fresh: 1.875 vs 1.875 (tol 1e-09)'
+- id: g-th-01
+  slot: THEORY_SUPPORT
+  ramp_index: 1
+  difficulty: 1
+  exercise_type: wyznaczanie boku z danego kąta (ekierka 30-60-90)
+  statement: W trójkącie prostokątnym KLM kąt przy wierzchołku M jest prosty, przeciwprostokątna |KL|
+    = 12, a kąt LKM ma miarę 30^\circ. Oblicz długość przyprostokątnej LM, leżącej naprzeciw kąta o mierze
+    30^\circ.
+  statement_latex: \sin 30^\circ=\frac{|LM|}{12}\ \Rightarrow\ |LM|=12\cdot\frac{1}{2}
+  solution: |-
+    Bok LM leży naprzeciw kąta o mierze 30^\circ, a dana jest przeciwprostokątna KL — para „naprzeciw i przeciwprostokątna” to sinus.
+    \sin 30^\circ=\frac{|LM|}{|KL|}=\frac{|LM|}{12}.
+    Ponieważ \sin 30^\circ=\frac{1}{2}, to |LM|=12\cdot\frac{1}{2}=6.
+    Kontrola: naprzeciw kąta 30^\circ leży połowa przeciwprostokątnej — zgadza się (6 to połowa z 12). ✓
+  solution_steps:
+  - Zauważ, że LM leży naprzeciw kąta 30°, a KL to przeciwprostokątna.
+  - 'Wybierz sinus: sin30° = \frac{|LM|}{12}.'
+  - Wstaw sin30° = \frac{1}{2}.
+  - Wyznacz |LM| = 12\cdot\frac{1}{2} = 6.
+  answer:
+    kind: NUMERIC
+    value: 6.0
+  checks:
+  - kind: evaluate
+    expr: 12\cdot\frac{1}{2}
+  skills:
+  - dobór funkcji metodą mam–szukam
+  - dokładne wartości dla 30°
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 6.0 vs 6.0 (tol 1e-09)'
+- id: g-th-02
+  slot: THEORY_SUPPORT
+  ramp_index: 2
+  difficulty: 2
+  exercise_type: jedynka trygonometryczna
+  statement: Kąt \alpha jest kątem ostrym oraz \cos\alpha=\frac{5}{13}. Oblicz \sin\alpha.
+  statement_latex: \sin\alpha=\sqrt{1-\left(\frac{5}{13}\right)^2}
+  solution: |-
+    Sposób I (trójkąt pomocniczy): rozważmy trójkąt prostokątny, w którym przy kącie \alpha leży przyprostokątna długości 5, a przeciwprostokątna ma długość 13. Z twierdzenia Pitagorasa druga przyprostokątna (naprzeciw \alpha) ma długość \sqrt{13^2-5^2}=\sqrt{169-25}=\sqrt{144}=12. Stąd \sin\alpha=\frac{12}{13}.
+    Sposób II (rachunkowy): z jedynki trygonometrycznej \sin^2\alpha=1-\cos^2\alpha=1-\frac{25}{169}=\frac{144}{169}, a ponieważ \alpha jest kątem ostrym, bierzemy pierwiastek dodatni: \sin\alpha=\frac{12}{13}.
+    Kontrola: \frac{12}{13}\approx 0{,}92 należy do przedziału (0,1). ✓
+  solution_steps:
+  - 'Zapisz jedynkę trygonometryczną: sin²α + cos²α = 1.'
+  - 'Podstaw cosα = \frac{5}{13}: sin²α = 1 - \frac{25}{169} = \frac{144}{169}.'
+  - 'Dla kąta ostrego weź pierwiastek dodatni: sinα = \frac{12}{13}.'
+  - Sprawdź, że wynik leży w przedziale (0,1).
+  answer:
+    kind: SYMBOLIC
+    latex: \frac{12}{13}
+  checks:
+  - kind: evaluate
+    expr: \sqrt{1-\left(\frac{5}{13}\right)^{2}}
+  skills:
+  - jedynka trygonometryczna
+  - trójkąt pomocniczy
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 0.9230769230769231 vs 0.9230769230769231 (tol 1e-09)'
+- id: g-ex-03
+  slot: EXERCISE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: 'rozwiązywanie trójkąta: dany bok i kąt ostry'
+  statement: Dany jest trójkąt prostokątny ABC, w którym kąt przy wierzchołku C jest prosty, |AC| = 9,
+    a kąt BAC ma miarę 60^\circ. Oblicz dokładne długości boków BC oraz AB.
+  statement_latex: \operatorname{tg}60^\circ=\frac{|BC|}{9},\qquad \cos 60^\circ=\frac{9}{|AB|}
+  solution: |-
+    Kąt prosty jest przy C, więc przyprostokątne to AC i BC, a przeciwprostokątną jest AB.
+    Względem kąta BAC = 60^\circ: przy nim leży AC = 9, naprzeciw niego leży BC, przeciwprostokątną jest AB.
+    1) Bok BC (dwie przyprostokątne → tangens): \operatorname{tg}60^\circ=\frac{|BC|}{9}, czyli |BC|=9\cdot\sqrt{3}=9\sqrt{3}\approx 15{,}59.
+    2) Bok AB (bok przy i przeciwprostokątna → cosinus): \cos 60^\circ=\frac{9}{|AB|}, czyli \frac{1}{2}=\frac{9}{|AB|}, stąd |AB|=\frac{9}{\frac{1}{2}}=18.
+    Kontrola Pitagorasem: 9^2+\left(9\sqrt{3}\right)^2=81+243=324=18^2. ✓ Przeciwprostokątna wyszła najdłuższa. ✓
+  solution_steps:
+  - 'Ustal role boków względem kąta 60°: przy — AC = 9, naprzeciw — BC, przeciwprostokątna — AB.'
+  - 'Dla BC użyj tangensa: tg60° = \frac{|BC|}{9}.'
+  - Podstaw tg60° = \sqrt{3} i oblicz |BC| = 9\sqrt{3}.
+  - 'Dla AB użyj cosinusa: cos60° = \frac{9}{|AB|}, czyli |AB| = \frac{9}{\frac{1}{2}}.'
+  - Oblicz |AB| = 18 i sprawdź wynik twierdzeniem Pitagorasa.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: '|BC|'
+      answer:
+        kind: SYMBOLIC
+        latex: 9\sqrt{3}
+    - name: '|AB|'
+      answer:
+        kind: NUMERIC
+        value: 18.0
+  checks:
+  - kind: evaluate
+    expr: 9\cdot\sqrt{3}
+    part: '|BC|'
+  - kind: evaluate
+    expr: \frac{9}{\frac{1}{2}}
+    part: '|AB|'
+  skills:
+  - dobór funkcji metodą mam–szukam
+  - dokładne wartości dla 60°
+  - przekształcanie równania
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [|BC|] SymPy solved it fresh: 15.588457268119896 vs 15.588457268119896
+      (tol 1e-09) ; [|AB|] SymPy solved it fresh: 18.0 vs 18.0 (tol 1e-09)'
+- id: g-ex-04
+  slot: EXERCISE
+  ramp_index: 1
+  difficulty: 3
+  exercise_type: zadanie praktyczne z kątem wzniesienia
+  statement: Geodeta stoi na poziomym placu w odległości 40 m od pionowego masztu. Przyrząd pomiarowy
+    znajduje się na wysokości 1,6 m nad podłożem, a wierzchołek masztu geodeta widzi pod kątem wzniesienia
+    38^\circ (kąt między poziomą linią patrzenia a kierunkiem na wierzchołek masztu). Oblicz wysokość
+    masztu oraz odległość przyrządu od wierzchołka masztu. Wyniki podaj w metrach z zaokrągleniem do 0,1
+    m. Przyjmij \operatorname{tg}38^\circ\approx 0{,}7813 oraz \cos 38^\circ\approx 0{,}7880.
+  statement_latex: h=40\cdot 0{,}7813+1{,}6,\qquad d=\frac{40}{0{,}7880}
+  solution: |-
+    Model: pozioma linia patrzenia (długości 40 m) i pionowy odcinek masztu powyżej poziomu przyrządu tworzą trójkąt prostokątny; kąt ostry przy przyrządzie ma miarę 38^\circ.
+    1) Odcinek x — część masztu powyżej poziomu przyrządu — leży naprzeciw kąta 38^\circ, a bok przy tym kącie ma długość 40 m, więc używamy tangensa:
+    \operatorname{tg}38^\circ=\frac{x}{40}, czyli x=40\cdot 0{,}7813=31{,}252 m.
+    Cała wysokość masztu: h=31{,}252+1{,}6=32{,}852\approx 32{,}9 m (pamiętamy o wysokości przyrządu!).
+    2) Odległość przyrządu od wierzchołka masztu to przeciwprostokątna d. Znany bok 40 m leży PRZY kącie 38^\circ, więc:
+    \cos 38^\circ=\frac{40}{d}, stąd d=\frac{40}{0{,}7880}\approx 50{,}76\approx 50{,}8 m.
+    Kontrola: przeciwprostokątna (50,8 m) jest dłuższa od przyprostokątnej 40 m. ✓
+    Odpowiedź: maszt ma około 32,9 m wysokości, a wierzchołek masztu jest oddalony od przyrządu o około 50,8 m.
+  solution_steps:
+  - 'Zbuduj model: trójkąt prostokątny o przyprostokątnej poziomej 40 m i kącie ostrym 38° przy obserwatorze.'
+  - 'Oblicz część masztu nad poziomem przyrządu: x = 40·tg38° = 40·0,7813 = 31,252 m.'
+  - 'Dodaj wysokość przyrządu: h = 31,252 + 1,6 = 32,852 ≈ 32,9 m.'
+  - 'Dla odległości użyj cosinusa: cos38° = \frac{40}{d}, więc d = \frac{40}{0,7880} ≈ 50,76 m.'
+  - Zaokrąglij d do 50,8 m i sprawdź, że przeciwprostokątna jest najdłuższa.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wysokosc masztu (m)
+      answer:
+        kind: NUMERIC
+        value: 32.9
+        tol: 0.06
+    - name: odleglosc przyrzadu od wierzcholka (m)
+      answer:
+        kind: NUMERIC
+        value: 50.8
+        tol: 0.06
+  checks:
+  - kind: evaluate
+    expr: 40\cdot 0.7813+1.6
+    part: wysokosc masztu (m)
+  - kind: evaluate
+    expr: \frac{40}{0.7880}
+    part: odleglosc przyrzadu od wierzcholka (m)
+  skills:
+  - model z trójkątem prostokątnym
+  - kąt wzniesienia
+  - uwzględnienie wysokości obserwatora
+  - zaokrąglanie wyniku
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [wysokosc masztu (m)] SymPy solved it fresh: 32.9 vs 32.852
+      (tol 0.06) ; [odleglosc przyrzadu od wierzcholka (m)] SymPy solved it fresh: 50.8 vs 50.761421319797
+      (tol 0.06)'
+- id: g-ex-05
+  slot: EXERCISE
+  ramp_index: 2
+  difficulty: 4
+  exercise_type: rozbicie figury na trójkąty prostokątne
+  statement: W trapezie równoramiennym ABCD podstawy AB i CD są równoległe, |AB| = 14, |CD| = 6, a kąt
+    DAB (przy dłuższej podstawie) ma miarę 45^\circ. Oblicz wysokość trapezu, dokładną długość ramienia
+    AD oraz pole trapezu.
+  statement_latex: x=\frac{14-6}{2},\qquad h=x\cdot\operatorname{tg}45^\circ,\qquad |AD|=\frac{x}{\cos
+    45^\circ},\qquad P=\frac{14+6}{2}\cdot h
+  solution: |-
+    Poprowadźmy wysokości z wierzchołków D i C na podstawę AB; ich spodki oznaczmy E i F. Odcinek EF ma długość 6 (jak CD), a odcinki AE i FB są równe, bo trapez jest równoramienny.
+    1) 2x+6=14, więc x=|AE|=\frac{14-6}{2}=4.
+    2) W trójkącie prostokątnym AED kąt przy A ma 45^\circ, przy nim leży AE = 4, naprzeciw leży wysokość h:
+    \operatorname{tg}45^\circ=\frac{h}{4}, czyli h=4\cdot 1=4.
+    3) Ramię AD jest przeciwprostokątną tego trójkąta; bok AE = 4 leży PRZY kącie 45^\circ, więc
+    \cos 45^\circ=\frac{4}{|AD|}, stąd |AD|=\frac{4}{\frac{\sqrt{2}}{2}}=4\sqrt{2}\approx 5{,}66.
+    (Kontrola Pitagorasem: 4^2+4^2=32=\left(4\sqrt{2}\right)^2. ✓)
+    4) Pole: P=\frac{14+6}{2}\cdot 4=10\cdot 4=40.
+    Odpowiedź: wysokość wynosi 4, ramię 4\sqrt{2}, a pole trapezu 40.
+  solution_steps:
+  - Poprowadź wysokości z D i C na AB; odetną one na AB odcinki równe x = \frac{14-6}{2} = 4.
+  - W trójkącie prostokątnym o kącie 45° zapisz tg45° = \frac{h}{4} i oblicz h = 4.
+  - 'Ramię wyznacz z cosinusa: cos45° = \frac{4}{|AD|}, więc |AD| = \frac{4}{\frac{\sqrt{2}}{2}} = 4\sqrt{2}.'
+  - 'Sprawdź wynik twierdzeniem Pitagorasa: 4² + 4² = (4√2)².'
+  - 'Oblicz pole: P = \frac{14+6}{2}\cdot 4 = 40.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wysokosc
+      answer:
+        kind: NUMERIC
+        value: 4.0
+    - name: ramie AD
+      answer:
+        kind: SYMBOLIC
+        latex: 4\sqrt{2}
+    - name: pole
+      answer:
+        kind: NUMERIC
+        value: 40.0
+  checks:
+  - kind: evaluate
+    expr: \frac{14-6}{2}\cdot 1
+    part: wysokosc
+  - kind: evaluate
+    expr: \frac{\frac{14-6}{2}}{\frac{\sqrt{2}}{2}}
+    part: ramie AD
+  - kind: evaluate
+    expr: \frac{14+6}{2}\cdot 4
+    part: pole
+  skills:
+  - rozbijanie trapezu na trójkąty prostokątne
+  - dokładne wartości dla 45°
+  - pole trapezu
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [wysokosc] SymPy solved it fresh: 4.0 vs 4.0 (tol 1e-09) ;
+      [ramie AD] SymPy solved it fresh: 5.656854249492381 vs 5.656854249492381 (tol 1e-09) ; [pole] SymPy
+      solved it fresh: 40.0 vs 40.0 (tol 1e-09)'
+- id: g-ex-t00
+  slot: EXERCISE
+  ramp_index: 6
+  difficulty: 3
+  exercise_type: rozbicie figury na trójkąty prostokątne (trapez równoramienny)
+  statement: W trapezie równoramiennym ABCD podstawy AB i CD są równoległe, przy czym |AB| = 16 oraz |CD|
+    = 6. Kąt ostry trapezu przy dłuższej podstawie AB (czyli kąt DAB) ma miarę 60°. Oblicz dokładną długość
+    wysokości trapezu, dokładną długość ramienia AD oraz dokładne pole tego trapezu.
+  statement_latex: '|AB|=16,\quad |CD|=6,\quad \sphericalangle DAB = 60^\circ,\quad x=\frac{16-6}{2}'
+  solution: |-
+    Z wierzchołków C i D prowadzimy wysokości na podstawę AB; ich spodki dzielą AB na trzy odcinki o długościach x, 6, x, przy czym 2x + 6 = 16, więc x = 5.
+    Powstał trójkąt prostokątny o kącie ostrym 60° przy wierzchołku A, w którym odcinek x = 5 leży PRZY tym kącie, wysokość h leży NAPRZECIW niego, a ramię AD jest przeciwprostokątną.
+    Wysokość: tg 60° = h/5, więc h = 5·√3 = 5√3.
+    Ramię: cos 60° = 5/|AD|, czyli 1/2 = 5/|AD|, stąd |AD| = 10 (szukana wielkość stoi w mianowniku, więc dzielimy: |AD| = 5 : (1/2)).
+    Kontrola twierdzeniem Pitagorasa: 5² + (5√3)² = 25 + 75 = 100 = 10². ✓
+    Pole: P = ((16 + 6)/2)·5√3 = 11·5√3 = 55√3 ≈ 95,3.
+    Odpowiedź: wysokość 5√3, ramię 10, pole 55√3.
+  solution_steps:
+  - 'Poprowadź obie wysokości z końców krótszej podstawy: 2x + 6 = 16, więc x = 5.'
+  - 'W powstałym trójkącie prostokątnym: x = 5 leży przy kącie 60°, h naprzeciw, ramię to przeciwprostokątna.'
+  - tg 60° = h/5, więc h = 5√3.
+  - 'cos 60° = 5/|AD|, więc |AD| = 5 : (1/2) = 10.'
+  - P = ((16+6)/2)·5√3 = 55√3.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wysokosc
+      answer:
+        kind: SYMBOLIC
+        latex: 5\sqrt{3}
+    - name: ramie_AD
+      answer:
+        kind: NUMERIC
+        value: 10.0
+    - name: pole
+      answer:
+        kind: SYMBOLIC
+        latex: 55\sqrt{3}
+  checks:
+  - kind: evaluate
+    expr: \frac{16-6}{2}\cdot\sqrt{3}
+    part: wysokosc
+  - kind: evaluate
+    expr: \frac{\frac{16-6}{2}}{\frac{1}{2}}
+    part: ramie_AD
+  - kind: evaluate
+    expr: \frac{16+6}{2}\cdot 5\sqrt{3}
+    part: pole
+  skills:
+  - rozbijanie figury na trójkąty prostokątne
+  - dokładne wartości funkcji dla 60°
+  - obliczanie pola trapezu
+  verification:
+    checkability: REFERENCE_CALL
+    note: 3 parts matched
+- id: g-ex-t01
+  slot: EXERCISE
+  ramp_index: 7
+  difficulty: 4
+  exercise_type: rozwiązywanie trójkąta prostokątnego z danej wartości funkcji
+  statement: Dany jest trójkąt prostokątny ABC, w którym kąt przy wierzchołku C jest prosty, |AC| = 9,
+    a sinus kąta ABC jest równy \frac{3}{5}. Punkt D jest spodkiem wysokości poprowadzonej z wierzchołka
+    C na przeciwprostokątną AB. Oblicz długość przeciwprostokątnej AB, długość przyprostokątnej BC, pole
+    trójkąta ABC oraz długość odcinka CD.
+  statement_latex: \sin\left(\sphericalangle ABC\right)=\frac{|AC|}{|AB|}=\frac{3}{5},\qquad |AC|=9
+  solution: |-
+    1) Względem kąta ABC bok AC leży NAPRZECIW, a AB jest przeciwprostokątną, więc sin(ABC) = |AC| : |AB|.
+     Stąd 3/5 = 9/|AB|, a ponieważ szukana wielkość stoi w mianowniku: |AB| = 9 : (3/5) = 9·(5/3) = 15.
+     Kontrola: przeciwprostokątna wyszła dłuższa niż 9. ✓
+    2) Druga przyprostokątna z twierdzenia Pitagorasa: |BC|² = 15² − 9² = 225 − 81 = 144, więc |BC| = 12.
+    3) Pole: P = ½·|AC|·|BC| = ½·9·12 = 54.
+    4) Wysokość na przeciwprostokątną z zależności a·b = c·h: 9·12 = 15·|CD|, więc |CD| = 108/15 = 7,2.
+     Kontrola: 7,2 < 9 < 12 < 15 — wysokość jest krótsza od obu przyprostokątnych. ✓
+    Odpowiedź: |AB| = 15, |BC| = 12, P = 54, |CD| = 7,2.
+  solution_steps:
+  - Zapisz sin(ABC) = |AC|/|AB| = 3/5, czyli 3/5 = 9/|AB|.
+  - 'Wyznacz |AB| = 9 : (3/5) = 15.'
+  - Z twierdzenia Pitagorasa |BC| = √(225 − 81) = 12.
+  - Pole P = ½·9·12 = 54.
+  - 'Z zależności a·b = c·h: |CD| = (9·12)/15 = 7,2.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: AB
+      answer:
+        kind: NUMERIC
+        value: 15.0
+    - name: BC
+      answer:
+        kind: NUMERIC
+        value: 12.0
+    - name: pole
+      answer:
+        kind: NUMERIC
+        value: 54.0
+    - name: CD
+      answer:
+        kind: NUMERIC
+        value: 7.2
+  checks:
+  - kind: evaluate
+    expr: \frac{9}{\frac{3}{5}}
+    part: AB
+  - kind: evaluate
+    expr: \sqrt{15^{2}-9^{2}}
+    part: BC
+  - kind: evaluate
+    expr: \frac{1}{2}\cdot 9\cdot 12
+    part: pole
+  - kind: evaluate
+    expr: \frac{9\cdot 12}{15}
+    part: CD
+  skills:
+  - odczytanie roli boków względem kąta
+  - przekształcanie równania z niewiadomą w mianowniku
+  - twierdzenie Pitagorasa
+  - pole trójkąta prostokątnego
+  - wysokość na przeciwprostokątną
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 4 parts solved fresh · det: [AB] SymPy solved it fresh: 15.0 vs 15.0 (tol 1e-09) ; [BC]
+      SymPy solved it fresh: 12.0 vs 12.0 (tol 1e-09) ; [pole] SymPy solved it fresh: 54.0 vs 54.0 (tol
+      1e-09) ; [CD] SymPy solved it fresh: 7.2 vs 7.2 (tol 1e-09)'
+- id: g-cm-06
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: 'demonstracja błędu: bok naprzeciw a bok przy kącie'
+  statement: Dany jest trójkąt prostokątny ABC, w którym kąt przy wierzchołku C jest prosty, |AC| = 8,
+    |BC| = 6 oraz |AB| = 10. Kąt ABC oznaczmy przez \beta. Uczeń zapisał \cos\beta=\frac{8}{10}=\frac{4}{5}.
+    Wyjaśnij, na czym polega błąd, i podaj poprawną wartość \cos\beta.
+  statement_latex: \cos\beta=\frac{|BC|}{|AB|}=\frac{6}{10}
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń podpisał boki raz na zawsze względem kąta przy wierzchołku A (naprzeciw — BC, przy — AC) i tych samych oznaczeń użył dla kąta \beta przy wierzchołku B. Otrzymał \cos\beta=\frac{|AC|}{|AB|}=\frac{8}{10}=\frac{4}{5}, co jest w rzeczywistości cosinusem kąta BAC, a nie kąta \beta.
+    DLACZEGO ŹLE: role przyprostokątnych zmieniają się wraz z wyborem kąta. Przyprostokątna AC leży naprzeciw kąta przy A, a więc PRZY kącie \beta leży druga przyprostokątna, czyli BC.
+    POPRAWNIE: względem kąta \beta: przy nim leży BC = 6, naprzeciw niego leży AC = 8, przeciwprostokątną jest AB = 10. Zatem
+    \cos\beta=\frac{|BC|}{|AB|}=\frac{6}{10}=\frac{3}{5}=0{,}6.
+    Kontrola: obliczona przez ucznia wartość \frac{4}{5} to \sin\beta, bo \sin\beta=\cos(90^\circ-\beta). ✓
+  solution_steps:
+  - Zauważ, że uczeń użył oznaczeń boków ustalonych dla drugiego kąta ostrego.
+  - 'Podpisz boki na nowo względem kąta β: przy — BC = 6, naprzeciw — AC = 8, przeciwprostokątna — AB
+    = 10.'
+  - 'Zastosuj definicję: cosβ = \frac{|BC|}{|AB|} = \frac{6}{10}.'
+  - 'Skróć ułamek: cosβ = \frac{3}{5} = 0,6.'
+  - Zauważ, że \frac{4}{5} to sinβ, czyli cosinus drugiego kąta ostrego.
+  answer:
+    kind: SYMBOLIC
+    latex: \frac{3}{5}
+  checks:
+  - kind: evaluate
+    expr: \frac{6}{10}
+  skills:
+  - podpisywanie boków względem wybranego kąta
+  - definicja cosinusa
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 0.6 vs 0.6 (tol 1e-09)'
+- id: g-cm-07
+  slot: COMMON_MISTAKE
+  ramp_index: 1
+  difficulty: 3
+  exercise_type: 'demonstracja błędu: trygonometria w trójkącie nieprostokątnym'
+  statement: W trójkącie równoramiennym ABC ramiona mają długości |AC| = |BC| = 13, a podstawa |AB| =
+    10. Kąt CAB (przy podstawie) oznaczmy przez \alpha. Uczeń zapisał \sin\alpha=\frac{|AB|}{|AC|}=\frac{10}{13}.
+    Wyjaśnij błąd i oblicz poprawną wartość \sin\alpha.
+  statement_latex: \sin\alpha=\frac{|CD|}{|AC|},\qquad |CD|=\sqrt{13^{2}-5^{2}}
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń potraktował trójkąt ABC tak, jakby był prostokątny, i napisał \sin\alpha=\frac{10}{13}\approx 0{,}77. Tymczasem trójkąt ABC nie ma kąta prostego, a definicje sin, cos, tg jako stosunków boków obowiązują WYŁĄCZNIE dla kąta ostrego w trójkącie PROSTOKĄTNYM.
+    POPRAWNIE: poprowadźmy wysokość CD z wierzchołka C na podstawę AB. W trójkącie równoramiennym spodek D jest środkiem AB, więc |AD|=\frac{10}{2}=5, a trójkąt ADC jest prostokątny (kąt przy D jest prosty).
+    Z twierdzenia Pitagorasa: |CD|=\sqrt{13^{2}-5^{2}}=\sqrt{169-25}=\sqrt{144}=12.
+    W trójkącie ADC względem kąta \alpha: naprzeciw leży CD = 12, przeciwprostokątną jest AC = 13, zatem
+    \sin\alpha=\frac{12}{13}\approx 0{,}92.
+    Kontrola: wartość należy do przedziału (0,1), a błędny wynik \frac{10}{13} jest w rzeczywistości sinusem innego kąta niż \alpha. ✓
+  solution_steps:
+  - Zauważ, że trójkąt ABC nie jest prostokątny — nie wolno stosować w nim wprost definicji sinusa.
+  - Poprowadź wysokość CD na podstawę AB; D jest środkiem AB, więc |AD| = 5.
+  - W trójkącie prostokątnym ADC oblicz |CD| = \sqrt{13^{2}-5^{2}} = 12.
+  - 'Zastosuj definicję w trójkącie ADC: sinα = \frac{12}{13}.'
+  - Sprawdź, że wynik leży w przedziale (0,1).
+  answer:
+    kind: SYMBOLIC
+    latex: \frac{12}{13}
+  checks:
+  - kind: evaluate
+    expr: \frac{\sqrt{13^{2}-5^{2}}}{13}
+  skills:
+  - wyodrębnianie trójkąta prostokątnego
+  - twierdzenie Pitagorasa
+  - definicja sinusa
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 0.9230769230769231 vs 0.9230769230769231 (tol 1e-09)'
+- id: g-cm-08
+  slot: COMMON_MISTAKE
+  ramp_index: 2
+  difficulty: 2
+  exercise_type: 'demonstracja błędu: sinus większy od 1'
+  statement: W trójkącie prostokątnym PQR kąt przy wierzchołku R jest prosty, przeciwprostokątna |PQ|
+    = 25, a przyprostokątna |QR| = 7 leży naprzeciw kąta QPR = \alpha. Uczeń zapisał \sin\alpha=\frac{25}{7}\approx
+    3{,}57 i zaczął szukać takiego kąta w tablicach. Wyjaśnij błąd oraz oblicz poprawne wartości \sin\alpha
+    i \cos\alpha.
+  statement_latex: \sin\alpha=\frac{7}{25},\qquad \cos\alpha=\frac{\sqrt{25^{2}-7^{2}}}{25}
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń odwrócił ułamek i podzielił przeciwprostokątną przez przyprostokątną, otrzymując \sin\alpha=\frac{25}{7}\approx 3{,}57. Takiej wartości nie ma w tablicach — i słusznie.
+    DLACZEGO ŹLE: przeciwprostokątna jest najdłuższym bokiem, więc w definicji sinusa i cosinusa stoi zawsze w MIANOWNIKU. Dlatego dla kąta ostrego zachodzi 0<\sin\alpha<1; wynik większy od 1 to sygnał odwróconego ułamka.
+    POPRAWNIE: \sin\alpha=\frac{|QR|}{|PQ|}=\frac{7}{25}=0{,}28.
+    Druga przyprostokątna (przy kącie \alpha): |PR|=\sqrt{25^{2}-7^{2}}=\sqrt{625-49}=\sqrt{576}=24, zatem \cos\alpha=\frac{24}{25}=0{,}96.
+    Kontrola jedynką trygonometryczną: 0{,}28^{2}+0{,}96^{2}=0{,}0784+0{,}9216=1. ✓
+  solution_steps:
+  - Zauważ, że sinus kąta ostrego nie może być większy od 1 — ułamek został odwrócony.
+  - 'Zapisz poprawnie: sinα = \frac{|QR|}{|PQ|} = \frac{7}{25} = 0,28.'
+  - 'Oblicz drugą przyprostokątną: |PR| = \sqrt{25^{2}-7^{2}} = 24.'
+  - Zapisz cosα = \frac{24}{25} = 0,96.
+  - 'Sprawdź jedynką trygonometryczną: 0,28² + 0,96² = 1.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: sin alfa
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{7}{25}
+    - name: cos alfa
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{24}{25}
+  checks:
+  - kind: evaluate
+    expr: \frac{7}{25}
+    part: sin alfa
+  - kind: evaluate
+    expr: \frac{\sqrt{25^{2}-7^{2}}}{25}
+    part: cos alfa
+  skills:
+  - kontrola zakresu wartości sinusa i cosinusa
+  - twierdzenie Pitagorasa
+  - definicje funkcji
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [sin alfa] SymPy solved it fresh: 0.28 vs 0.28 (tol 1e-09)
+      ; [cos alfa] SymPy solved it fresh: 0.96 vs 0.96 (tol 1e-09)'
+- id: g-cm-09
+  slot: COMMON_MISTAKE
+  ramp_index: 3
+  difficulty: 3
+  exercise_type: 'demonstracja błędu: „sin α + cos α = 1”'
+  statement: Kąt \alpha jest kątem ostrym oraz \sin\alpha=\frac{4}{5}. Uczeń obliczył \cos\alpha=1-\frac{4}{5}=\frac{1}{5}.
+    Wyjaśnij, dlaczego to rozumowanie jest błędne, a następnie oblicz poprawne wartości \cos\alpha oraz
+    \operatorname{tg}\alpha.
+  statement_latex: \cos\alpha=\sqrt{1-\left(\frac{4}{5}\right)^{2}},\qquad \operatorname{tg}\alpha=\frac{\frac{4}{5}}{\frac{3}{5}}
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń zapamiętał jedynkę trygonometryczną jako \sin\alpha+\cos\alpha=1 i wyliczył \cos\alpha=1-\frac{4}{5}=\frac{1}{5}=0{,}2.
+    DLACZEGO ŹLE: tożsamość dotyczy KWADRATÓW: \sin^{2}\alpha+\cos^{2}\alpha=1. Sprawdźmy wynik ucznia: \left(\frac{4}{5}\right)^{2}+\left(\frac{1}{5}\right)^{2}=0{,}64+0{,}04=0{,}68\neq 1 — nie może więc być poprawny.
+    POPRAWNIE: \cos^{2}\alpha=1-\left(\frac{4}{5}\right)^{2}=1-\frac{16}{25}=\frac{9}{25}, a ponieważ \alpha jest kątem ostrym, \cos\alpha=\frac{3}{5}=0{,}6.
+    Dalej \operatorname{tg}\alpha=\frac{\sin\alpha}{\cos\alpha}=\frac{\frac{4}{5}}{\frac{3}{5}}=\frac{4}{3}\approx 1{,}33.
+    Kontrola trójkątem pomocniczym 3–4–5: naprzeciw \alpha bok 4, przy \alpha bok 3, przeciwprostokątna 5 — zgadza się. ✓
+  solution_steps:
+  - 'Zauważ, że jedynka trygonometryczna dotyczy kwadratów: sin²α + cos²α = 1.'
+  - 'Sprawdź wynik ucznia: 0,64 + 0,04 = 0,68 ≠ 1 — wartość jest błędna.'
+  - Oblicz cos²α = 1 - \frac{16}{25} = \frac{9}{25}.
+  - 'Dla kąta ostrego weź pierwiastek dodatni: cosα = \frac{3}{5}.'
+  - Oblicz tgα = \frac{\frac{4}{5}}{\frac{3}{5}} = \frac{4}{3}.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: cos alfa
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{3}{5}
+    - name: tg alfa
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{4}{3}
+  checks:
+  - kind: evaluate
+    expr: \sqrt{1-\left(\frac{4}{5}\right)^{2}}
+    part: cos alfa
+  - kind: evaluate
+    expr: \frac{\frac{4}{5}}{\frac{3}{5}}
+    part: tg alfa
+  skills:
+  - jedynka trygonometryczna
+  - tangens przez sinus i cosinus
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [cos alfa] SymPy solved it fresh: 0.6 vs 0.6 (tol 1e-09) ;
+      [tg alfa] SymPy solved it fresh: 1.3333333333333333 vs 1.3333333333333333 (tol 1e-09)'
+- id: g-cm-10
+  slot: COMMON_MISTAKE
+  ramp_index: 4
+  difficulty: 3
+  exercise_type: 'demonstracja błędu: zły kierunek przekształcenia równania'
+  statement: W trójkącie prostokątnym ABC kąt przy wierzchołku C jest prosty, przyprostokątna |BC| = 12
+    leży naprzeciw kąta BAC o mierze 25^\circ. Uczeń zapisał \sin 25^\circ=\frac{12}{|AB|}, a następnie
+    |AB|=12\cdot\sin 25^\circ\approx 5{,}07. Wyjaśnij błąd i oblicz poprawną długość przeciwprostokątnej
+    AB, zaokrągloną do 0,1. Przyjmij \sin 25^\circ\approx 0{,}4226.
+  statement_latex: \sin 25^\circ=\frac{12}{|AB|}\ \Rightarrow\ |AB|=\frac{12}{0{,}4226}
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń „przy trygonometrii zawsze mnoży” i z równania \sin 25^\circ=\frac{12}{|AB|} otrzymał |AB|=12\cdot 0{,}4226\approx 5{,}07.
+    DLACZEGO ŹLE: wynik 5,07 jest KRÓTSZY od przyprostokątnej 12, a przeciwprostokątna musi być najdłuższym bokiem — to od razu wyklucza taką odpowiedź. Szukana wielkość stoi w MIANOWNIKU, więc trzeba pomnożyć obie strony przez |AB| i podzielić przez \sin 25^\circ.
+    POPRAWNIE: z \sin 25^\circ=\frac{12}{|AB|} mamy |AB|\cdot\sin 25^\circ=12, czyli
+    |AB|=\frac{12}{0{,}4226}\approx 28{,}40\approx 28{,}4.
+    Kontrola: 28,4 > 12 — przeciwprostokątna jest najdłuższa. ✓ Dzielenie przez liczbę mniejszą od 1 powiększa wynik, mnożenie by go zmniejszyło.
+  solution_steps:
+  - Zauważ, że wynik ucznia (5,07) jest mniejszy od przyprostokątnej 12 — przeciwprostokątna nie może
+    być krótsza.
+  - 'Zapisz równanie: sin25° = \frac{12}{|AB|}, niewiadoma stoi w mianowniku.'
+  - 'Pomnóż obie strony przez |AB|: |AB|·sin25° = 12.'
+  - 'Podziel przez sin25°: |AB| = \frac{12}{0,4226}.'
+  - 'Oblicz i zaokrąglij: |AB| ≈ 28,4; sprawdź, że 28,4 > 12.'
+  answer:
+    kind: NUMERIC
+    value: 28.4
+    tol: 0.06
+  checks:
+  - kind: evaluate
+    expr: \frac{12}{0.4226}
+  skills:
+  - przekształcanie równania z niewiadomą w mianowniku
+  - korzystanie z tablic
+  - kontrola sensowności wyniku
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 28.4 vs 28.3956460009465 (tol 0.06)'
+- id: g-ch-t02
+  slot: CHALLENGE
+  ramp_index: 0
+  difficulty: 4
+  exercise_type: zadanie praktyczne z kątem wzniesienia (dwa trójkąty prostokątne)
+  statement: Na poziomym placu stoi pionowy maszt. Punkty A i B leżą na tym placu, na jednej prostej z
+    podstawą masztu i po tej samej jego stronie, przy czym punkt B leży między punktem A a podstawą masztu
+    oraz |AB| = 30 m. Kąt wzniesienia wierzchołka masztu obserwowanego z punktu A ma miarę 45°, a obserwowanego
+    z punktu B — miarę 60°. Oblicz dokładną wysokość masztu (wynik podaj w metrach w postaci dokładnej).
+  statement_latex: \frac{h}{\operatorname{tg}45^\circ}-\frac{h}{\operatorname{tg}60^\circ}=30
+  solution: |-
+    Oznaczmy przez h (w metrach) wysokość masztu, a przez S — jego podstawę. Maszt jest pionowy, plac poziomy, więc trójkąty o wierzchołkach A, S, wierzchołek masztu oraz B, S, wierzchołek masztu są prostokątne z kątem prostym przy S.
+    1) W trójkącie z kątem 45° przy A: tg 45° = h/|AS|, czyli 1 = h/|AS|, więc |AS| = h.
+    2) W trójkącie z kątem 60° przy B: tg 60° = h/|BS|, czyli √3 = h/|BS|, więc |BS| = h/√3 = (h√3)/3.
+    3) Ponieważ B leży między A a S, mamy |AS| − |BS| = |AB| = 30, czyli
+     h − (h√3)/3 = 30.
+    4) Rozwiązujemy: h·(3 − √3)/3 = 30, więc h = 90/(3 − √3) = 90(3 + √3)/((3 − √3)(3 + √3)) = 90(3 + √3)/6 = 15(3 + √3) = 45 + 15√3.
+     Kontrola sensowności: 45 + 15√3 ≈ 71 m, a wtedy |AS| ≈ 71 m i |BS| ≈ 41 m, czyli różnica ≈ 30 m. ✓
+    Odpowiedź: maszt ma wysokość (45 + 15√3) m, czyli około 71 m.
+  solution_steps:
+  - 'Wprowadź niewiadomą: h — wysokość masztu, S — spodek masztu.'
+  - 'Z trójkąta przy punkcie A: tg 45° = h/|AS|, więc |AS| = h.'
+  - 'Z trójkąta przy punkcie B: tg 60° = h/|BS|, więc |BS| = (h√3)/3.'
+  - 'Ułóż równanie |AS| − |BS| = 30: h − (h√3)/3 = 30.'
+  - 'Rozwiąż: h = 90/(3 − √3) = 45 + 15√3.'
+  answer:
+    kind: SYMBOLIC
+    latex: 45+15\sqrt{3}
+  checks:
+  - kind: evaluate
+    expr: \frac{30}{1-\frac{\sqrt{3}}{3}}
+    var: h
+  stated_model:
+    variable: h
+    objective_latex: h-\frac{h\sqrt{3}}{3}=30
+    domain_lo: '0'
+    goal: value
+    constraint_used: '|AS|-|BS|=|AB|=30,\ \text{maszt pionowy, plac poziomy}'
+  skills:
+  - wprowadzenie niewiadomej
+  - model z dwoma trójkątami prostokątnymi
+  - tangens kąta ostrego
+  - usuwanie niewymierności z mianownika
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''h'': ''h-\\frac{h\\sqrt{3}}{3}=30'')
+      — human review'
+- id: g-ch-t03
+  slot: CHALLENGE
+  ramp_index: 1
+  difficulty: 4
+  exercise_type: prostokąt zadany obwodem i przekątną – tangens kąta
+  statement: Prostokąt ABCD ma obwód równy 28, a jego przekątna AC ma długość 10. Oblicz długość dłuższego
+    i długość krótszego boku tego prostokąta oraz tangens kąta ostrego, jaki przekątna AC tworzy z dłuższym
+    bokiem prostokąta.
+  statement_latex: a+b=\frac{28}{2}=14,\qquad a^{2}+b^{2}=10^{2}
+  solution: |-
+    Oznaczmy przez a i b długości boków prostokąta (a > b).
+    1) Z obwodu: 2a + 2b = 28, czyli a + b = 14.
+    2) Przekątna prostokąta dzieli go na dwa trójkąty prostokątne o przyprostokątnych a, b i przeciwprostokątnej 10, więc a² + b² = 100.
+    3) Z tożsamości (a + b)² = a² + 2ab + b² mamy 196 = 100 + 2ab, więc ab = 48.
+     Ponadto (a − b)² = a² + b² − 2ab = 100 − 96 = 4, a że a > b, to a − b = 2.
+    4) Z układu a + b = 14 i a − b = 2 dostajemy a = 8 oraz b = 6.
+     Kontrola: 6² + 8² = 36 + 64 = 100 = 10². ✓
+    5) Szukany kąt to kąt ostry przy dłuższym boku (np. kąt CAB, gdzie |AB| = 8). Względem niego bok o długości 6 leży NAPRZECIW, a bok o długości 8 leży PRZY nim — oba są przyprostokątnymi, więc używamy tangensa:
+     tg α = 6/8 = 3/4 = 0,75.
+     Uwaga na warunek „z dłuższym bokiem”: gdyby wziąć kąt przy krótszym boku, wyszłoby 8/6 = 4/3, a ten kąt jest większy od 45°.
+    Odpowiedź: boki mają długości 8 i 6, a szukany tangens jest równy 3/4.
+  solution_steps:
+  - Oznacz boki a > b; z obwodu a + b = 14.
+  - 'Przekątna daje trójkąt prostokątny: a² + b² = 100.'
+  - Z (a + b)² = 196 wylicz ab = 48, a z (a − b)² = 4 otrzymaj a − b = 2.
+  - 'Rozwiąż układ: a = 8, b = 6.'
+  - 'Kąt przy dłuższym boku: tg α = 6/8 = 3/4 (nie 4/3).'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: dluzszy_bok
+      answer:
+        kind: NUMERIC
+        value: 8.0
+    - name: krotszy_bok
+      answer:
+        kind: NUMERIC
+        value: 6.0
+    - name: tangens
+      answer:
+        kind: NUMERIC
+        value: 0.75
+  checks:
+  - kind: evaluate
+    expr: \frac{14+\sqrt{2\cdot 100-14^{2}}}{2}
+    var: a
+    part: dluzszy_bok
+  - kind: evaluate
+    expr: \frac{14-\sqrt{2\cdot 100-14^{2}}}{2}
+    var: a
+    part: krotszy_bok
+  - kind: evaluate
+    expr: \frac{6}{8}
+    part: tangens
+  stated_model:
+    variable: a
+    objective_latex: a^{2}+\left(14-a\right)^{2}=100
+    domain_lo: '7'
+    domain_hi: '14'
+    goal: value
+    constraint_used: \text{obwód}=28,\ \text{przekątna}=10,\ a>b>0
+  skills:
+  - wprowadzenie niewiadomych
+  - twierdzenie Pitagorasa
+  - wzory skróconego mnożenia
+  - wybór właściwego kąta ostrego
+  - tangens kąta ostrego
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''a'': ''a^{2}+\\left(14-a\\right)^{2}=100'')
+      — human review'
+- id: g-ch-t04
+  slot: CHALLENGE
+  ramp_index: 2
+  difficulty: 5
+  exercise_type: trójkąt prostokątny z wysokością na przeciwprostokątną + ocena wyniku
+  statement: |-
+    Dany jest trójkąt prostokątny ABC, w którym kąt przy wierzchołku C jest prosty. Punkt D leży na przeciwprostokątnej AB i jest spodkiem wysokości poprowadzonej z wierzchołka C, przy czym |AD| = 9 oraz |DB| = 16.
+    a) Oblicz długość wysokości CD oraz długości obu przyprostokątnych AC i BC.
+    b) Oblicz tangens kąta ABC i rozstrzygnij, czy miara kąta ABC jest mniejsza od 40° (przyjmij tg 40° ≈ 0,839).
+  statement_latex: \operatorname{tg}\left(\sphericalangle CAD\right)=\frac{|CD|}{9},\qquad \operatorname{tg}\left(\sphericalangle
+    CBD\right)=\frac{|CD|}{16},\qquad \sphericalangle CAD+\sphericalangle CBD=90^\circ
+  solution: |-
+    Oznaczmy α = |∠CAB|, β = |∠CBA| oraz h = |CD|. Odcinek CD jest prostopadły do AB, więc trójkąty ACD i BCD są prostokątne o kącie prostym przy D.
+    1) W trójkącie ACD: tg α = h/9. W trójkącie BCD: tg β = h/16.
+    2) W trójkącie ABC kąt przy C jest prosty, więc α + β = 90°, a stąd tg β = tg(90° − α) = 1/tg α, czyli
+     h/16 = 9/h, zatem h² = 144 i h = 12 (bierzemy wartość dodatnią).
+    3) Przyprostokątne z twierdzenia Pitagorasa (w trójkątach ACD i BCD):
+     |AC| = √(9² + 12²) = √225 = 15, |BC| = √(16² + 12²) = √400 = 20.
+     Kontrola w trójkącie ABC: 15² + 20² = 225 + 400 = 625 = 25² = (9 + 16)². ✓
+    4) Kąt ABC = β. Względem β w trójkącie ABC bok AC = 15 leży naprzeciw, bok BC = 20 leży przy nim — obie przyprostokątne, więc
+     tg β = 15/20 = 3/4 = 0,75. (Ten sam wynik daje trójkąt BCD: 12/16 = 0,75.)
+    5) Ponieważ 0,75 < 0,839 ≈ tg 40°, a tangens kąta ostrego rośnie wraz z miarą kąta, to β < 40°.
+    Odpowiedź: |CD| = 12, |AC| = 15, |BC| = 20, tg(∠ABC) = 3/4, a miara kąta ABC jest mniejsza od 40°.
+  solution_steps:
+  - Oznacz h = |CD| i zauważ, że trójkąty ACD i BCD są prostokątne.
+  - Zapisz tg α = h/9 oraz tg β = h/16.
+  - 'Skorzystaj z α + β = 90°, czyli tg β = 1/tg α: h/16 = 9/h, więc h² = 144 i h = 12.'
+  - 'Z twierdzenia Pitagorasa: |AC| = √(81 + 144) = 15, |BC| = √(256 + 144) = 20.'
+  - tg(∠ABC) = 12/16 = 15/20 = 0,75.
+  - 'Porównaj: 0,75 < 0,839 ≈ tg 40°, więc ∠ABC < 40°.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: CD
+      answer:
+        kind: NUMERIC
+        value: 12.0
+    - name: AC
+      answer:
+        kind: NUMERIC
+        value: 15.0
+    - name: BC
+      answer:
+        kind: NUMERIC
+        value: 20.0
+    - name: tg_ABC
+      answer:
+        kind: NUMERIC
+        value: 0.75
+    - name: czy_mniej_niz_40_stopni
+      answer:
+        kind: BOOLEAN
+        truth: true
+  checks:
+  - kind: evaluate
+    expr: \sqrt{9\cdot 16}
+    var: h
+    part: CD
+  - kind: evaluate
+    expr: \sqrt{9\cdot\left(9+16\right)}
+    part: AC
+  - kind: evaluate
+    expr: \sqrt{16\cdot\left(9+16\right)}
+    part: BC
+  - kind: evaluate
+    expr: \frac{12}{16}
+    part: tg_ABC
+  skills:
+  - kąty dopełniające się do 90°
+  - tangens kąta ostrego
+  - twierdzenie Pitagorasa
+  - porównanie wartości tangensa z tablicą
+  - łańcuch obliczeń
+  verification:
+    checkability: REFERENCE_CALL
+    note: 5 parts matched

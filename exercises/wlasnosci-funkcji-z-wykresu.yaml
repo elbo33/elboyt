@@ -1,0 +1,1004 @@
+section: wlasnosci-funkcji-z-wykresu
+name: Odczytywanie własności funkcji z wykresu
+scope: 'From a graph: domain, range, zeros, intervals of monotonicity, intervals of constant sign, greatest
+  and least value.'
+requirements:
+- V.4
+counts:
+  total: 16
+  REFERENCE_CALL: 9
+  DETERMINISTIC: 5
+  NOT_MACHINE_CHECKABLE: 2
+exercises:
+- id: g-th-00
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: odczyt dziedziny z wykresu
+  statement: Wykresem funkcji f jest łamana o kolejnych wierzchołkach A=(-4, 2), B=(-1, -3), C=(3, 1).
+    Punkty A i C są końcami wykresu i oba zaznaczono kropkami pełnymi, a wykres nie ma żadnych przerw.
+    Podaj dziedzinę funkcji f.
+  statement_latex: A=\left(-4,\,2\right),\quad B=\left(-1,\,-3\right),\quad C=\left(3,\,1\right)
+  solution: Dziedzinę odczytujemy jako rzut wykresu na oś OX, czyli patrzymy wyłącznie na pierwsze współrzędne
+    punktów wykresu. Skrajnie lewym punktem wykresu jest A=(-4, 2), więc najmniejszym argumentem jest
+    -4. Skrajnie prawym punktem jest C=(3, 1), więc największym argumentem jest 3. Oba końce zaznaczono
+    kropkami pełnymi, zatem oba argumenty należą do dziedziny, a wykres jest nieprzerwany, więc dziedzina
+    jest jednym przedziałem domkniętym. Stąd D_f = \left\langle -4,\,3 \right\rangle.
+  solution_steps:
+  - Zauważ, że dziedzina to zbiór argumentów, czyli rzut wykresu na oś OX.
+  - 'Odczytaj pierwszą współrzędną skrajnie lewego punktu wykresu: -4 (punkt A).'
+  - 'Odczytaj pierwszą współrzędną skrajnie prawego punktu wykresu: 3 (punkt C).'
+  - Kropki pełne na obu końcach oznaczają nawiasy domknięte; brak przerw w wykresie oznacza jeden przedział.
+  - 'Zapisz odpowiedź: D_f = ⟨-4, 3⟩.'
+  answer:
+    kind: INTERVAL
+    lo: '-4'
+    hi: '3'
+    lo_open: false
+    hi_open: false
+  skills:
+  - odczytywanie dziedziny z wykresu
+  - interpretacja kropek pełnych
+  verification:
+    checkability: REFERENCE_CALL
+    note: endpoints matched
+- id: g-th-01
+  slot: THEORY_SUPPORT
+  ramp_index: 1
+  difficulty: 2
+  exercise_type: odczyt miejsc zerowych
+  statement: 'Funkcja f jest określona następująco: f(x) = 2x + 3 dla x należących do przedziału ⟨-4,
+    1⟩ oraz f(x) = 5 dla x należących do przedziału (1, 4⟩. Wykres funkcji y = f(x) składa się z odcinka
+    o końcach (-4, -5) i (1, 5) oraz z poziomego odcinka o końcach (1, 5) (kropka pusta) i (4, 5) (kropka
+    pełna). Podaj wszystkie miejsca zerowe funkcji f.'
+  statement_latex: f\left(x\right)=2\cdot x+3 \ \text{dla}\ x\in\left\langle -4,\,1\right\rangle,\qquad
+    f\left(x\right)=5 \ \text{dla}\ x\in\left(1,\,4\right\rangle
+  solution: 'Miejsce zerowe to argument, dla którego wartość funkcji wynosi 0, czyli punkt wspólny wykresu
+    z osią OX. Drugi fragment wykresu leży na poziomie y = 5, więc w całości znajduje się nad osią OX
+    i nie daje miejsc zerowych. Pierwszy fragment to odcinek o równaniu y = 2x + 3, który wznosi się od
+    wartości -5 do wartości 5, więc przecina oś OX. Rozwiązujemy 2\cdot x+3=0, czyli 2x = -3, stąd x =
+    -\frac{3}{2}. Liczba -\frac{3}{2} należy do przedziału ⟨-4, 1⟩, więc jest miejscem zerowym. Odpowiedź:
+    x = -\frac{3}{2}.'
+  solution_steps:
+  - Przypomnij, że miejsce zerowe to liczba x z dziedziny, dla której f(x) = 0.
+  - 'Sprawdź drugi fragment: wartości stale równe 5, więc wykres leży nad osią OX — brak miejsc zerowych.'
+  - Dla pierwszego fragmentu rozwiąż równanie 2x + 3 = 0.
+  - Otrzymujesz x = -3/2 i sprawdzasz, że -3/2 ∈ ⟨-4, 1⟩.
+  - 'Zapisz miejsce zerowe jako liczbę: x = -3/2.'
+  answer:
+    kind: SET
+    members:
+    - -\frac{3}{2}
+  checks:
+  - kind: solve_equation
+    expr: 2\cdot x + 3 = 0
+  skills:
+  - odczytywanie miejsc zerowych
+  - rozwiązywanie równania f(x)=0
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 1 members matched'
+- id: g-th-02
+  slot: THEORY_SUPPORT
+  ramp_index: 2
+  difficulty: 2
+  exercise_type: przedziały monotoniczności
+  statement: 'Wykresem funkcji f jest łamana o kolejnych wierzchołkach A=(-5, 3), B=(-2, -1), C=(1, -1),
+    D=(4, 5). Punkty A i D są końcami wykresu i zaznaczono je kropkami pełnymi. Podaj: przedział, w którym
+    funkcja f jest malejąca; przedział, w którym funkcja f jest stała; przedział, w którym funkcja f jest
+    rosnąca.'
+  statement_latex: A=\left(-5,\,3\right),\ B=\left(-2,\,-1\right),\ C=\left(1,\,-1\right),\ D=\left(4,\,5\right)
+  solution: Prowadzimy wzrok wzdłuż wykresu od lewej do prawej. Od A=(-5, 3) do B=(-2, -1) wartości spadają
+    z 3 do -1, więc funkcja jest malejąca w przedziale ⟨-5, -2⟩. Od B=(-2, -1) do C=(1, -1) wartość jest
+    stale równa -1 (odcinek poziomy), więc funkcja jest stała w przedziale ⟨-2, 1⟩. Od C=(1, -1) do D=(4,
+    5) wartości rosną z -1 do 5, więc funkcja jest rosnąca w przedziale ⟨1, 4⟩. Każdy przedział zapisujemy
+    osobno.
+  solution_steps:
+  - 'Podziel dziedzinę argumentami wierzchołków łamanej: -5, -2, 1, 4.'
+  - Na odcinku AB wykres opada — f maleje w ⟨-5, -2⟩.
+  - Odcinek BC jest poziomy (wartość -1) — f jest stała w ⟨-2, 1⟩.
+  - Na odcinku CD wykres się wznosi — f rośnie w ⟨1, 4⟩.
+  - Zapisz trzy przedziały osobno, nie łącząc ich znakiem sumy.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: przedział, w którym f maleje
+      answer:
+        kind: INTERVAL
+        lo: '-5'
+        hi: '-2'
+        lo_open: false
+        hi_open: false
+    - name: przedział, w którym f jest stała
+      answer:
+        kind: INTERVAL
+        lo: '-2'
+        hi: '1'
+        lo_open: false
+        hi_open: false
+    - name: przedział, w którym f rośnie
+      answer:
+        kind: INTERVAL
+        lo: '1'
+        hi: '4'
+        lo_open: false
+        hi_open: false
+  skills:
+  - wyznaczanie przedziałów monotoniczności
+  - rozpoznawanie funkcji stałej
+  verification:
+    checkability: REFERENCE_CALL
+    note: 3 parts matched
+- id: g-ex-03
+  slot: EXERCISE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: pełny odczyt własności funkcji przedziałami określonej
+  statement: 'Funkcja f jest określona następująco: f(x) = x + 4 dla x ∈ ⟨-5, -1⟩, f(x) = 3 dla x ∈ (-1,
+    2⟩, f(x) = -2x + 7 dla x ∈ (2, 4). Wykres funkcji y = f(x) składa się zatem z odcinka o końcach (-5,
+    -1) i (-1, 3) (oba końce należą do wykresu), z poziomego odcinka o wartości 3 dla argumentów z przedziału
+    (-1, 2⟩ oraz z odcinka opadającego od punktu (2, 3) do punktu (4, -1), przy czym punkt (4, -1) do
+    wykresu nie należy. Uzupełnij zdania 1.-3., zapisując odpowiednie przedziały. 1. Dziedziną funkcji
+    f jest przedział ..... 2. Zbiorem wartości funkcji f jest przedział ..... 3. Zbiorem wszystkich argumentów,
+    dla których funkcja f przyjmuje wartości dodatnie, jest przedział .....'
+  statement_latex: f\left(x\right)=x+4\ \text{dla}\ x\in\left\langle -5,\,-1\right\rangle,\quad f\left(x\right)=3\
+    \text{dla}\ x\in\left(-1,\,2\right\rangle,\quad f\left(x\right)=-2\cdot x+7\ \text{dla}\ x\in\left(2,\,4\right)
+  solution: |-
+    Dziedzina: argumenty pochodzą z sumy przedziałów ⟨-5, -1⟩ ∪ (-1, 2⟩ ∪ (2, 4), które sklejają się w jeden przedział. Lewy koniec -5 należy do dziedziny (kropka pełna), prawy koniec 4 nie należy (kropka pusta). Zatem D_f = ⟨-5, 4).
+
+    Zbiór wartości: pierwszy fragment to odcinek rosnący od f(-5) = -1 do f(-1) = 3, daje wartości ⟨-1, 3⟩. Drugi fragment daje jedynie wartość 3. Trzeci fragment opada od poziomu 3 (dla x bliskich 2) do poziomu -1 (dla x bliskich 4, wartość -1 nie jest tu osiągana), daje wartości (-1, 3). Suma wszystkich wartości to ⟨-1, 3⟩.
+
+    Znak funkcji: miejsca zerowe znajdujemy w pierwszym i trzecim fragmencie. Z równania x + 4 = 0 mamy x = -4 (należy do ⟨-5, -1⟩), z równania -2x + 7 = 0 mamy x = \frac{7}{2} (należy do (2, 4)). Dla x ∈ ⟨-5, -4) wartości są ujemne, dla x ∈ (-4, -1⟩ dodatnie, na całym (-1, 2⟩ wartość 3 jest dodatnia, na (2, 7/2) wartości są dodatnie, a na (7/2, 4) ujemne. Zatem f(x) > 0 dla x ∈ (-4, \frac{7}{2}).
+  solution_steps:
+  - 'Zsumuj przedziały argumentów: ⟨-5, -1⟩ ∪ (-1, 2⟩ ∪ (2, 4) = ⟨-5, 4).'
+  - 'Wyznacz wartości na końcach fragmentów: f(-5) = -1, f(-1) = 3, wartość stała 3, wartości od 3 do
+    -1 (bez -1) na ostatnim fragmencie.'
+  - 'Połącz zbiory wartości: ⟨-1, 3⟩ ∪ {3} ∪ (-1, 3) = ⟨-1, 3⟩.'
+  - 'Znajdź miejsca zerowe: x + 4 = 0 daje x = -4; -2x + 7 = 0 daje x = 7/2.'
+  - Ustal, na których kawałkach wykres leży nad osią OX, i zapisz f(x) > 0 dla x ∈ (-4, 7/2).
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: dziedzina
+      answer:
+        kind: INTERVAL
+        lo: '-5'
+        hi: '4'
+        lo_open: false
+    - name: zbiór wartości
+      answer:
+        kind: INTERVAL
+        lo: '-1'
+        hi: '3'
+        lo_open: false
+        hi_open: false
+    - name: zbiór argumentów, dla których f(x) > 0
+      answer:
+        kind: INTERVAL
+        lo: '-4'
+        hi: \frac{7}{2}
+  skills:
+  - odczytywanie dziedziny
+  - odczytywanie zbioru wartości
+  - odczytywanie przedziałów stałego znaku
+  verification:
+    checkability: REFERENCE_CALL
+    note: 3 parts matched
+- id: g-ex-04
+  slot: EXERCISE
+  ramp_index: 1
+  difficulty: 3
+  exercise_type: odczyt własności funkcji kwadratowej z wykresu
+  statement: 'Dana jest funkcja f określona wzorem f(x) = x^2 - 6x + 5 dla x ∈ ⟨0, 7⟩ (oba końce należą
+    do dziedziny). Wykresem tej funkcji jest fragment paraboli o wierzchołku W = (3, -4), o ramionach
+    skierowanych do góry. Wyznacz: (a) wszystkie miejsca zerowe funkcji f; (b) zbiór wszystkich rozwiązań
+    nierówności f(x) ≤ 0; (c) wartość najmniejszą funkcji f w przedziale ⟨0, 7⟩ i argument, dla którego
+    jest przyjmowana; (d) wartość największą funkcji f w przedziale ⟨0, 7⟩ i argument, dla którego jest
+    przyjmowana.'
+  statement_latex: f\left(x\right)=x^{2}-6\cdot x+5,\qquad x\in\left\langle 0,\,7\right\rangle,\qquad
+    W=\left(3,\,-4\right)
+  solution: |-
+    (a) Miejsca zerowe to punkty wspólne wykresu z osią OX. Rozwiązujemy x^{2}-6\cdot x+5=0. Wyróżnik: \Delta = 36 - 4\cdot 5 = 16, \sqrt{\Delta}=4, więc x = \frac{6-4}{2}=1 lub x = \frac{6+4}{2}=5. Obie liczby należą do ⟨0, 7⟩, zatem miejscami zerowymi są 1 i 5.
+
+    (b) Ramiona paraboli skierowane są do góry, więc wykres leży pod osią OX lub na niej między miejscami zerowymi. Nierówność jest nieostra, więc końce dołączamy: x ∈ ⟨1, 5⟩ (cały ten przedział mieści się w dziedzinie).
+
+    (c) Najniższym punktem fragmentu wykresu jest wierzchołek W = (3, -4). Wartość najmniejsza wynosi -4 i jest przyjmowana dla x = 3.
+
+    (d) Kandydatami na wartość największą są końce przedziału: f(0) = 0 - 0 + 5 = 5 oraz f(7) = 49 - 42 + 5 = 12. Większa z nich to 12, zatem wartość największa wynosi 12 i jest przyjmowana dla x = 7.
+  solution_steps:
+  - 'Rozwiąż równanie x^2 - 6x + 5 = 0: Δ = 16, x = 1 lub x = 5 — to miejsca zerowe.'
+  - 'Ramiona paraboli skierowane do góry, więc f(x) ≤ 0 między miejscami zerowymi: x ∈ ⟨1, 5⟩.'
+  - 'Odczytaj wierzchołek W = (3, -4) — najniższy punkt wykresu: wartość najmniejsza to -4 dla x = 3.'
+  - 'Oblicz wartości na końcach przedziału: f(0) = 5, f(7) = 12.'
+  - 'Porównaj kandydatów: wartość największa wynosi 12 i jest przyjmowana dla x = 7.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: miejsca zerowe
+      answer:
+        kind: SET
+        members:
+        - '1'
+        - '5'
+    - name: rozwiązanie nierówności f(x) ≤ 0
+      answer:
+        kind: INTERVAL
+        lo: '1'
+        hi: '5'
+        lo_open: false
+        hi_open: false
+    - name: wartość najmniejsza
+      answer:
+        kind: NUMERIC
+        value: -4.0
+    - name: argument wartości najmniejszej
+      answer:
+        kind: NUMERIC
+        value: 3.0
+    - name: wartość największa
+      answer:
+        kind: NUMERIC
+        value: 12.0
+    - name: argument wartości największej
+      answer:
+        kind: NUMERIC
+        value: 7.0
+  checks:
+  - kind: solve_equation
+    expr: x^{2}-6\cdot x+5=0
+    part: miejsca zerowe
+  - kind: solve_inequality
+    expr: x^{2}-6\cdot x+5\le 0
+    part: rozwiązanie nierówności f(x) ≤ 0
+  - kind: evaluate
+    expr: \left(3\right)^{2}-6\cdot 3+5
+    part: wartość najmniejsza
+  - kind: solve_equation
+    expr: x^{2}-6\cdot x+5=-4
+    part: argument wartości najmniejszej
+  - kind: evaluate
+    expr: \left(7\right)^{2}-6\cdot 7+5
+    part: wartość największa
+  skills:
+  - odczytywanie miejsc zerowych
+  - graficzne rozwiązywanie nierówności
+  - wartość największa i najmniejsza w przedziale domkniętym
+  verification:
+    checkability: REFERENCE_CALL
+    note: 'could not compare: reference produced 4 outputs, answer has 6'
+- id: g-ex-05
+  slot: EXERCISE
+  ramp_index: 2
+  difficulty: 4
+  exercise_type: pełny opis własności wykresu z przerwą i kropką pustą
+  statement: 'Wykres funkcji h składa się z dwóch odcinków. Pierwszy odcinek ma końce (-4, 3) oraz (-1,
+    -3) i oba te punkty należą do wykresu (kropki pełne). Drugi odcinek ma końce (0, -1) oraz (3, 5),
+    przy czym punkt (0, -1) do wykresu nie należy (kropka pusta), a punkt (3, 5) należy (kropka pełna).
+    Poza tymi dwoma odcinkami wykresu nie ma. Wyznacz: (a) dziedzinę funkcji h; (b) zbiór wartości funkcji
+    h; (c) wszystkie miejsca zerowe funkcji h; (d) zbiór wszystkich argumentów, dla których h(x) < 0;
+    (e) uzasadnij, że w przedziale (0, 3⟩ funkcja h nie przyjmuje wartości najmniejszej.'
+  statement_latex: \text{odcinek I}:\ \left(-4,\,3\right)\to\left(-1,\,-3\right),\qquad \text{odcinek
+    II}:\ \left(0,\,-1\right)\to\left(3,\,5\right)
+  solution: |-
+    Wyznaczmy najpierw równania obu odcinków. Odcinek I: współczynnik kierunkowy to \frac{-3-3}{-1-\left(-4\right)} = \frac{-6}{3} = -2, więc y = 3 - 2\cdot\left(x+4\right) = -2\cdot x - 5 dla x ∈ ⟨-4, -1⟩. Odcinek II: współczynnik kierunkowy to \frac{5-\left(-1\right)}{3-0} = 2, więc y = -1 + 2\cdot x = 2\cdot x - 1 dla x ∈ (0, 3⟩.
+
+    (a) Dziedzina: rzut wykresu na oś OX to ⟨-4, -1⟩ ∪ (0, 3⟩ (między -1 a 0 wykresu nie ma, a 0 nie należy do dziedziny z powodu kropki pustej).
+
+    (b) Zbiór wartości: odcinek I opada od 3 do -3, daje ⟨-3, 3⟩; odcinek II wznosi się od poziomu -1 (nieosiąganego) do 5 (osiąganego), daje (-1, 5⟩. Suma: ⟨-3, 3⟩ ∪ (-1, 5⟩ = ⟨-3, 5⟩.
+
+    (c) Miejsca zerowe: -2\cdot x-5=0 daje x = -\frac{5}{2} ∈ ⟨-4, -1⟩; 2\cdot x-1=0 daje x = \frac{1}{2} ∈ (0, 3⟩. Miejsca zerowe to -\frac{5}{2} oraz \frac{1}{2}.
+
+    (d) Znak: na odcinku I wykres jest pod osią OX dla x > -\frac{5}{2}, czyli dla x ∈ \left(-\frac{5}{2},\,-1\right\rangle; na odcinku II wykres jest pod osią OX dla x < \frac{1}{2}, czyli dla x ∈ \left(0,\,\frac{1}{2}\right). Zatem h(x) < 0 dla x ∈ \left(-\frac{5}{2},\,-1\right\rangle \cup \left(0,\,\frac{1}{2}\right).
+
+    (e) W przedziale (0, 3⟩ funkcja jest rosnąca, a jej wartości to zbiór (-1, 5⟩. Poziom -1 nie jest osiągany (kropka pusta w punkcie (0, -1)), a dla dowolnego argumentu x_0 ∈ (0, 3⟩ można wskazać argument x_1 = \frac{x_0}{2} ∈ (0, 3⟩, dla którego h(x_1) < h(x_0). Zatem żadna przyjmowana wartość nie jest najmniejsza — wartość najmniejsza nie istnieje.
+  solution_steps:
+  - 'Wyznacz równania odcinków: y = -2x - 5 dla x ∈ ⟨-4, -1⟩ oraz y = 2x - 1 dla x ∈ (0, 3⟩.'
+  - 'Dziedzina jako rzut na OX z uwzględnieniem kropki pustej: ⟨-4, -1⟩ ∪ (0, 3⟩.'
+  - 'Zbiór wartości: ⟨-3, 3⟩ z pierwszego odcinka i (-1, 5⟩ z drugiego, w sumie ⟨-3, 5⟩.'
+  - 'Miejsca zerowe: -2x - 5 = 0 daje x = -5/2; 2x - 1 = 0 daje x = 1/2.'
+  - 'Znak ujemny: (-5/2, -1⟩ na pierwszym odcinku i (0, 1/2) na drugim.'
+  - 'Uzasadnij brak wartości najmniejszej w (0, 3⟩: funkcja rośnie, poziom -1 nie jest osiągany, dla każdego
+    argumentu istnieje mniejsza wartość.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: dziedzina
+      answer:
+        kind: SYMBOLIC
+        latex: \left\langle -4,\,-1\right\rangle \cup \left(0,\,3\right\rangle
+    - name: zbiór wartości
+      answer:
+        kind: INTERVAL
+        lo: '-3'
+        hi: '5'
+        lo_open: false
+        hi_open: false
+    - name: miejsca zerowe
+      answer:
+        kind: SET
+        members:
+        - -\frac{5}{2}
+        - \frac{1}{2}
+    - name: zbiór argumentów, dla których h(x) < 0
+      answer:
+        kind: SYMBOLIC
+        latex: \left(-\frac{5}{2},\,-1\right\rangle \cup \left(0,\,\frac{1}{2}\right)
+    - name: uzasadnienie braku wartości najmniejszej w (0, 3⟩
+      answer:
+        kind: NOT_MACHINE_CHECKABLE
+        reason: 'Uczeń musi uzasadnić, że w przedziale (0, 3⟩ funkcja h nie ma wartości najmniejszej:
+          h jest tam rosnąca, wartości tworzą zbiór (-1, 5⟩, poziom -1 nie jest osiągany (kropka pusta),
+          więc dla każdego argumentu x0 ∈ (0, 3⟩ istnieje argument mniejszy, dla którego wartość jest
+          mniejsza.'
+  skills:
+  - odczytywanie dziedziny z przerwą
+  - odczytywanie zbioru wartości
+  - znak funkcji
+  - ocena istnienia wartości skrajnych
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'part(s) need a human: uzasadnienie braku wartości najmniejszej w (0, 3⟩ · 0/4 other parts solved
+      fresh'
+- id: g-ex-t00
+  slot: EXERCISE
+  ramp_index: 6
+  difficulty: 4
+  exercise_type: odczyt własności funkcji danej wzorem przedziałami
+  statement: |-
+    Funkcja f jest określona następująco:
+    f(x) = -2x - 4 dla x ∈ ⟨-4, -1),  f(x) = -2 dla x ∈ ⟨-1, 2⟩,  f(x) = 2x - 6 dla x ∈ (2, 4⟩.
+    Wykresem funkcji f jest łamana o kolejnych wierzchołkach (-4, 4), (-1, -2), (2, -2), (4, 2); oba końce wykresu (dla x = -4 oraz x = 4) należą do wykresu.
+    a) Podaj zbiór wartości funkcji f.
+    b) Podaj wszystkie miejsca zerowe funkcji f.
+    c) Zapisz zbiór wszystkich rozwiązań nierówności f(x) ≥ 1.
+    d) Podaj wartość największą i wartość najmniejszą funkcji f w przedziale ⟨-3, 3⟩ oraz wszystkie argumenty, dla których te wartości są przyjmowane.
+  statement_latex: f(x)=\left\{\begin{matrix} -2 \cdot x - 4 & \text{dla } x \in \langle -4,\ -1) \\ -2
+    & \text{dla } x \in \langle -1,\ 2 \rangle \\ 2 \cdot x - 6 & \text{dla } x \in (2,\ 4 \rangle \end{matrix}\right.
+  solution: |-
+    Wykres jest łamaną ciągłą: opada z punktu (-4, 4) do (-1, -2), jest poziomy na poziomie -2 dla x ∈ ⟨-1, 2⟩, a następnie wznosi się do punktu (4, 2).
+
+    a) Najniższy poziom wykresu to y = -2 (cały odcinek poziomy), najwyższy to y = 4 (punkt (-4, 4), kropka pełna). Wykres jest ciągły, więc przyjmuje wszystkie wartości pomiędzy: ZW = ⟨-2, 4⟩.
+
+    b) Miejsca zerowe: na pierwszym kawałku -2x - 4 = 0, czyli x = -2 i -2 ∈ ⟨-4, -1). Na kawałku stałym wartość -2 ≠ 0. Na trzecim kawałku 2x - 6 = 0, czyli x = 3 i 3 ∈ (2, 4⟩. Miejsca zerowe to liczby -2 oraz 3.
+
+    c) Prowadzimy prostą y = 1. Na pierwszym kawałku: -2x - 4 ≥ 1 ⟺ -2x ≥ 5 ⟺ x ≤ -5/2; uwzględniając ⟨-4, -1) otrzymujemy ⟨-4, -5/2⟩. Na kawałku stałym -2 ≥ 1 nie zachodzi. Na trzecim kawałku: 2x - 6 ≥ 1 ⟺ x ≥ 7/2; uwzględniając (2, 4⟩ otrzymujemy ⟨7/2, 4⟩. Zatem rozwiązaniem jest zbiór argumentów ⟨-4, -5/2⟩ ∪ ⟨7/2, 4⟩.
+
+    d) Ograniczamy się do przedziału ⟨-3, 3⟩. Kandydaci: f(-3) = -2·(-3) - 4 = 2, wartość na odcinku poziomym równa -2 (dla x ∈ ⟨-1, 2⟩), f(3) = 2·3 - 6 = 0. Największa z tych liczb to 2, najmniejsza to -2.
+    Wartość największa wynosi 2 i jest przyjmowana dla x = -3 (na kawałku malejącym równanie -2x - 4 = 2 daje x = -3, innych argumentów nie ma). Wartość najmniejsza wynosi -2 i jest przyjmowana dla każdego x ∈ ⟨-1, 2⟩.
+  solution_steps:
+  - 'Zinterpretuj wzór: wykres to łamana o wierzchołkach (-4, 4), (-1, -2), (2, -2), (4, 2).'
+  - 'Zbiór wartości: najniższy poziom -2, najwyższy 4, wykres ciągły ⟹ ZW = ⟨-2, 4⟩.'
+  - 'Miejsca zerowe: -2x - 4 = 0 ⟹ x = -2; 2x - 6 = 0 ⟹ x = 3; kawałek stały wartości -2 nie daje zera.'
+  - 'Nierówność f(x) ≥ 1 rozwiąż na każdym kawałku osobno: x ≤ -5/2 oraz x ≥ 7/2, po przecięciu z dziedzinami
+    kawałków: ⟨-4, -5/2⟩ ∪ ⟨7/2, 4⟩.'
+  - 'W przedziale ⟨-3, 3⟩ porównaj kandydatów: f(-3) = 2, poziom -2 na ⟨-1, 2⟩, f(3) = 0.'
+  - 'Zapisz: wartość największa 2 dla x = -3; wartość najmniejsza -2 dla każdego x ∈ ⟨-1, 2⟩.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: zbior_wartosci
+      answer:
+        kind: INTERVAL
+        lo: '-2'
+        hi: '4'
+        lo_open: false
+        hi_open: false
+    - name: miejsca_zerowe
+      answer:
+        kind: SET
+        members:
+        - '-2'
+        - '3'
+    - name: rozwiazanie_nierownosci
+      answer:
+        kind: SYMBOLIC
+        latex: \langle -4,\ -\frac{5}{2} \rangle \cup \langle \frac{7}{2},\ 4 \rangle
+    - name: wartosc_najwieksza
+      answer:
+        kind: NUMERIC
+        value: 2.0
+    - name: argument_najwiekszej
+      answer:
+        kind: NUMERIC
+        value: -3.0
+    - name: wartosc_najmniejsza
+      answer:
+        kind: NUMERIC
+        value: -2.0
+    - name: argumenty_najmniejszej
+      answer:
+        kind: SYMBOLIC
+        latex: \langle -1,\ 2 \rangle
+  checks:
+  - kind: solve_equation
+    expr: \left(-2 \cdot x - 4\right) \cdot \left(2 \cdot x - 6\right) = 0
+    part: miejsca_zerowe
+  - kind: evaluate
+    expr: -2 \cdot \left(-3\right) - 4
+    part: wartosc_najwieksza
+  - kind: solve_equation
+    expr: -2 \cdot x - 4 = 2
+    part: argument_najwiekszej
+  - kind: evaluate
+    expr: 2 \cdot 2 - 6
+    part: wartosc_najmniejsza
+  skills:
+  - odczyt zbioru wartości
+  - wyznaczanie miejsc zerowych
+  - rozwiązywanie nierówności f(x) ≥ a
+  - wartość największa i najmniejsza w przedziale domkniętym
+  verification:
+    checkability: REFERENCE_CALL
+    note: 'could not compare: part disagrees: kind mismatch: answer=SYMBOLIC reference=INTERVAL'
+- id: g-ex-t01
+  slot: EXERCISE
+  ramp_index: 7
+  difficulty: 5
+  exercise_type: odczyt własności funkcji nieciągłej, badanie istnienia wartości skrajnych
+  statement: |-
+    Funkcja g jest określona następująco:
+    g(x) = x + 4 dla x ∈ ⟨-4, -1),  g(x) = -2 dla x ∈ ⟨-1, 2⟩,  g(x) = 2x - 6 dla x ∈ (2, 5⟩.
+    Wykres funkcji g składa się z odcinka o końcach (-4, 0) [kropka pełna] i (-1, 3) [kropka pusta], odcinka poziomego o końcach (-1, -2) i (2, -2) [obie kropki pełne] oraz odcinka o końcach (2, -2) i (5, 4) [oba końce należą do wykresu, przy czym punkt (2, -2) jest wspólny z odcinkiem poziomym].
+    a) Podaj zbiór wartości funkcji g.
+    b) Podaj wszystkie miejsca zerowe funkcji g.
+    c) Zapisz zbiór wszystkich argumentów, dla których g(x) > 0.
+    d) Rozstrzygnij, czy w przedziale ⟨-4, -1⟩ funkcja g ma wartość najmniejszą i czy ma wartość największą. Podaj te wartości, o ile istnieją, wraz z argumentami, dla których są przyjmowane, i uzasadnij odpowiedź.
+  statement_latex: g(x)=\left\{\begin{matrix} x + 4 & \text{dla } x \in \langle -4,\ -1) \\ -2 & \text{dla
+    } x \in \langle -1,\ 2 \rangle \\ 2 \cdot x - 6 & \text{dla } x \in (2,\ 5 \rangle \end{matrix}\right.
+  solution: |-
+    a) Pierwszy fragment (rosnący) przyjmuje wartości od g(-4) = 0 (włącznie) do poziomu 3 (bez, bo argument -1 należy już do drugiego wzoru), czyli ⟨0, 3). Drugi fragment daje jedną wartość -2. Trzeci fragment rośnie od poziomu -2 (bez, bo x = 2 nie należy do (2, 5⟩) do g(5) = 4 (włącznie), czyli (-2, 4⟩. Suma: {-2} ∪ (-2, 4⟩ ∪ ⟨0, 3) = ⟨-2, 4⟩. Zatem ZW = ⟨-2, 4⟩.
+
+    b) x + 4 = 0 daje x = -4 i -4 ∈ ⟨-4, -1), więc -4 jest miejscem zerowym. Wartość -2 nie jest zerem. 2x - 6 = 0 daje x = 3 i 3 ∈ (2, 5⟩. Miejsca zerowe: -4 oraz 3.
+
+    c) Na pierwszym fragmencie x + 4 > 0 ⟺ x > -4, czyli x ∈ (-4, -1). Na drugim fragmencie wartość -2 < 0. Na trzecim 2x - 6 > 0 ⟺ x > 3, czyli x ∈ (3, 5⟩. Zatem g(x) > 0 dla x ∈ (-4, -1) ∪ (3, 5⟩.
+
+    d) Rozważamy tylko fragment wykresu nad przedziałem ⟨-4, -1⟩. Dla x ∈ ⟨-4, -1) wartości to ⟨0, 3), a ponadto g(-1) = -2.
+    Wartość najmniejsza istnieje i wynosi -2; jest przyjmowana dla x = -1.
+    Wartości największej nie ma: wartości zbliżają się do 3, ale poziom 3 nie jest osiągany (punkt (-1, 3) nie należy do wykresu — kropka pusta), a dla dowolnego x₀ ∈ ⟨-4, -1) można wskazać argument bliższy -1, dla którego wartość jest większa niż g(x₀).
+  solution_steps:
+  - 'Ustal zbiory wartości poszczególnych fragmentów: ⟨0, 3), {-2}, (-2, 4⟩.'
+  - 'Zsumuj je: ZW = ⟨-2, 4⟩.'
+  - 'Rozwiąż g(x) = 0 na każdym fragmencie: x = -4 oraz x = 3.'
+  - 'Wyznacz znak na każdym fragmencie: g(x) > 0 dla x ∈ (-4, -1) ∪ (3, 5⟩.'
+  - 'W przedziale ⟨-4, -1⟩ zestaw wartości: ⟨0, 3) z fragmentu rosnącego oraz g(-1) = -2.'
+  - 'Wnioski: wartość najmniejsza -2 dla x = -1; wartość największa nie istnieje z powodu kropki pustej
+    w (-1, 3).'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: zbior_wartosci
+      answer:
+        kind: INTERVAL
+        lo: '-2'
+        hi: '4'
+        lo_open: false
+        hi_open: false
+    - name: miejsca_zerowe
+      answer:
+        kind: SET
+        members:
+        - '-4'
+        - '3'
+    - name: argumenty_dodatnie
+      answer:
+        kind: SYMBOLIC
+        latex: \left(-4,\ -1\right) \cup \left(3,\ 5 \right\rangle
+    - name: wartosc_najmniejsza
+      answer:
+        kind: NUMERIC
+        value: -2.0
+    - name: argument_najmniejszej
+      answer:
+        kind: NUMERIC
+        value: -1.0
+    - name: czy_istnieje_najwieksza
+      answer:
+        kind: SYMBOLIC
+        latex: nie istnieje
+    - name: uzasadnienie
+      answer:
+        kind: NOT_MACHINE_CHECKABLE
+        reason: Uczeń musi uzasadnić, że w ⟨-4, -1⟩ wartości fragmentu rosnącego zbliżają się do 3, ale
+          poziom 3 nie jest przyjmowany (punkt (-1, 3) nie należy do wykresu), więc dla każdego argumentu
+          istnieje inny argument o większej wartości — wartość największa nie istnieje.
+  checks:
+  - kind: solve_equation
+    expr: \left(x + 4\right) \cdot \left(2 \cdot x - 6\right) = 0
+    part: miejsca_zerowe
+  - kind: evaluate
+    expr: -1 + 4 - 3
+    part: wartosc_najmniejsza
+  skills:
+  - odczyt zbioru wartości z wykresu złożonego z kilku fragmentów
+  - miejsca zerowe
+  - przedziały stałego znaku
+  - ocena istnienia wartości największej
+  verification:
+    checkability: DETERMINISTIC
+    note: '[miejsca_zerowe] SymPy solved it fresh: 2 members matched ; [wartosc_najmniejsza] SymPy solved
+      it fresh and disagrees: -2.0 vs 0.0 (tol 1e-09)'
+- id: g-cm-06
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: 'korekta błędu: dziedzina a zbiór wartości'
+  statement: 'Funkcja f jest określona wzorem f(x) = -2x + 1 dla x ∈ ⟨-3, 2⟩. Jej wykresem jest odcinek
+    o końcach (-3, 7) oraz (2, -3), przy czym oba końce należą do wykresu (kropki pełne). Uczeń zapisał:
+    „Dziedziną funkcji f jest przedział ⟨-3, 7⟩, bo wykres sięga od -3 do 7”. Wyjaśnij, na czym polega
+    błąd ucznia, a następnie podaj poprawnie dziedzinę oraz zbiór wartości funkcji f.'
+  statement_latex: f\left(x\right)=-2\cdot x+1,\qquad x\in\left\langle -3,\,2\right\rangle,\qquad \left(-3,\,7\right),\
+    \left(2,\,-3\right)
+  solution: |-
+    Błędne rozumowanie ucznia: „patrzę, jak wysoko i jak nisko leży wykres — od -3 do 7 — i to jest dziedzina”, czyli D_f = ⟨-3, 7⟩. Uczeń odczytał liczby z osi OY (drugie współrzędne końców odcinka: 7 i -3) i nazwał je dziedziną. To pomylenie dziedziny ze zbiorem wartości.
+
+    Korekta: dziedzina to zbiór ARGUMENTÓW, czyli pierwszych współrzędnych punktów wykresu — odczytujemy ją z osi OX. Pierwsze współrzędne końców to -3 i 2, oba końce z kropkami pełnymi, więc D_f = ⟨-3, 2⟩ (co zresztą podano we wzorze funkcji).
+
+    Zbiór wartości to zbiór drugich współrzędnych, czyli rzut wykresu na oś OY. Funkcja maleje (współczynnik -2), f(-3) = 6 + 1 = 7 oraz f(2) = -4 + 1 = -3, a wykres jest odcinkiem, więc przyjmuje wszystkie wartości pomiędzy: ZW_f = ⟨-3, 7⟩.
+
+    Zapamiętaj: „x — dziedzina, y — wartości”.
+  solution_steps:
+  - 'Pokaż błąd: uczeń odczytał skrajne poziomy wykresu (7 i -3), czyli liczby z osi OY, i nazwał je dziedziną
+    — to zbiór wartości.'
+  - 'Przypomnij definicję: dziedzina to zbiór argumentów, odczytywany z osi OX.'
+  - 'Odczytaj pierwsze współrzędne końców odcinka: -3 i 2, kropki pełne, więc D_f = ⟨-3, 2⟩.'
+  - 'Oblicz wartości na końcach: f(-3) = 7, f(2) = -3; funkcja jest malejąca i ciągła, więc ZW_f = ⟨-3,
+    7⟩.'
+  - 'Podsumuj: dziedzina ⟨-3, 2⟩, zbiór wartości ⟨-3, 7⟩.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: dziedzina
+      answer:
+        kind: INTERVAL
+        lo: '-3'
+        hi: '2'
+        lo_open: false
+        hi_open: false
+    - name: zbiór wartości
+      answer:
+        kind: INTERVAL
+        lo: '-3'
+        hi: '7'
+        lo_open: false
+        hi_open: false
+  skills:
+  - odczytywanie dziedziny
+  - odczytywanie zbioru wartości
+  - rozróżnianie osi OX i OY
+  verification:
+    checkability: REFERENCE_CALL
+    note: 2 parts matched
+- id: g-cm-07
+  slot: COMMON_MISTAKE
+  ramp_index: 1
+  difficulty: 2
+  exercise_type: 'korekta błędu: miejsce zerowe jako liczba'
+  statement: 'Funkcja f jest określona wzorem f(x) = x^2 - x - 6 dla x ∈ ⟨-4, 4⟩. Jej wykres przecina
+    oś OX w punktach (-2, 0) oraz (3, 0). Uczeń na pytanie o miejsca zerowe odpowiedział: „Miejscami zerowymi
+    funkcji f są (-2, 0) oraz (3, 0)”. Wyjaśnij, na czym polega błąd ucznia, i podaj poprawną odpowiedź.'
+  statement_latex: f\left(x\right)=x^{2}-x-6,\qquad x\in\left\langle -4,\,4\right\rangle
+  solution: |-
+    Błędne rozumowanie ucznia: „wykres przecina oś OX w punktach (-2, 0) i (3, 0), więc to są miejsca zerowe”. Uczeń podał współrzędne punktów przecięcia zamiast samych argumentów.
+
+    Korekta: miejsce zerowe to LICZBA — argument x_0 z dziedziny, dla którego f(x_0) = 0, a nie punkt płaszczyzny. Punkty (-2, 0) i (3, 0) to punkty wspólne wykresu z osią OX; miejscami zerowymi są ich odcięte, czyli pierwsze współrzędne.
+
+    Sprawdzenie rachunkowe: x^{2}-x-6=0, \Delta = 1 + 24 = 25, \sqrt{\Delta}=5, więc x = \frac{1-5}{2} = -2 lub x = \frac{1+5}{2} = 3. Obie liczby należą do ⟨-4, 4⟩.
+
+    Poprawna odpowiedź: miejscami zerowymi funkcji f są liczby x = -2 oraz x = 3.
+  solution_steps:
+  - 'Pokaż błąd: uczeń zapisał punkty (-2, 0) i (3, 0) zamiast liczb.'
+  - 'Przypomnij definicję: x0 jest miejscem zerowym, gdy x0 ∈ D_f oraz f(x0) = 0 — to liczba na osi OX.'
+  - 'Rozwiąż x^2 - x - 6 = 0: Δ = 25, x = -2 lub x = 3.'
+  - Sprawdź, że obie liczby należą do ⟨-4, 4⟩.
+  - 'Zapisz poprawną odpowiedź: miejsca zerowe to -2 i 3.'
+  answer:
+    kind: SET
+    members:
+    - '-2'
+    - '3'
+  checks:
+  - kind: solve_equation
+    expr: x^{2}-x-6=0
+  skills:
+  - odczytywanie miejsc zerowych
+  - rozróżnianie punktu i liczby
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 2 members matched'
+- id: g-cm-08
+  slot: COMMON_MISTAKE
+  ramp_index: 2
+  difficulty: 2
+  exercise_type: 'korekta błędu: przecięcie z osią OY a miejsce zerowe'
+  statement: 'Funkcja f jest określona wzorem f(x) = 4x - 6 dla x ∈ ⟨-1, 5⟩. Jej wykresem jest odcinek
+    o końcach (-1, -10) oraz (5, 14) (oba końce należą do wykresu), a wykres przecina oś OY w punkcie
+    (0, -6). Uczeń zapisał: „Wykres przecina oś OY w punkcie (0, -6), więc miejscem zerowym funkcji f
+    jest liczba -6”. Wyjaśnij, na czym polega błąd ucznia, a następnie podaj wartość f(0) oraz miejsce
+    zerowe funkcji f.'
+  statement_latex: f\left(x\right)=4\cdot x-6,\qquad x\in\left\langle -1,\,5\right\rangle
+  solution: |-
+    Błędne rozumowanie ucznia: „na osi OY wykres jest w -6, więc miejsce zerowe to -6”. Uczeń pomylił punkt przecięcia z osią OY z punktem przecięcia z osią OX.
+
+    Korekta: punkt (0, -6) mówi, jaką wartość funkcja przyjmuje dla argumentu 0, czyli f(0) = 4\cdot 0 - 6 = -6. To WARTOŚĆ funkcji, a nie miejsce zerowe. Miejsce zerowe znajdujemy tam, gdzie wykres ma punkt wspólny z osią OX, czyli gdzie y = 0.
+
+    Rozwiązujemy 4\cdot x-6=0, czyli 4x = 6, stąd x = \frac{3}{2}. Liczba \frac{3}{2} należy do ⟨-1, 5⟩, więc jest miejscem zerowym (wykres przecina oś OX w punkcie \left(\frac{3}{2},\,0\right)).
+
+    Odpowiedź: f(0) = -6, miejsce zerowe x = \frac{3}{2}.
+  solution_steps:
+  - 'Pokaż błąd: uczeń wziął rzędną punktu przecięcia z osią OY jako miejsce zerowe.'
+  - 'Przypomnij: punkt (0, -6) daje wartość f(0) = -6.'
+  - Miejsce zerowe to rozwiązanie równania f(x) = 0, czyli punkt wspólny z osią OX.
+  - Rozwiąż 4x - 6 = 0, otrzymując x = 3/2, i sprawdź, że 3/2 ∈ ⟨-1, 5⟩.
+  - 'Zapisz odpowiedź: f(0) = -6 oraz miejsce zerowe x = 3/2.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: f(0)
+      answer:
+        kind: NUMERIC
+        value: -6.0
+    - name: miejsce zerowe
+      answer:
+        kind: SET
+        members:
+        - \frac{3}{2}
+  checks:
+  - kind: evaluate
+    expr: 4\cdot 0 - 6
+    part: f(0)
+  - kind: solve_equation
+    expr: 4\cdot x - 6 = 0
+    part: miejsce zerowe
+  skills:
+  - odczyt wartości f(0)
+  - odczytywanie miejsc zerowych
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [f(0)] SymPy solved it fresh: -6.0 vs -6.0 (tol 1e-09) ; [miejsce
+      zerowe] SymPy solved it fresh: 1 members matched'
+- id: g-cm-09
+  slot: COMMON_MISTAKE
+  ramp_index: 3
+  difficulty: 3
+  exercise_type: 'korekta błędu: suma przedziałów monotoniczności'
+  statement: 'Wykresem funkcji f jest łamana o kolejnych wierzchołkach A=(-5, 4), B=(-2, -2), C=(0, 3),
+    D=(3, -3); punkty A i D są końcami wykresu i zaznaczono je kropkami pełnymi. Uczeń zapisał: „Funkcja
+    f jest malejąca w zbiorze ⟨-5, -2⟩ ∪ ⟨0, 3⟩”. Wyjaśnij, dlaczego taki zapis jest błędny (wskaż odpowiedni
+    kontrprzykład), a następnie podaj poprawnie: oba przedziały, w których f jest malejąca, oraz przedział,
+    w którym f jest rosnąca.'
+  statement_latex: A=\left(-5,\,4\right),\ B=\left(-2,\,-2\right),\ C=\left(0,\,3\right),\ D=\left(3,\,-3\right)
+  solution: |-
+    Błędne rozumowanie ucznia: „na odcinku AB wykres opada i na odcinku CD też opada, więc funkcja maleje w zbiorze ⟨-5, -2⟩ ∪ ⟨0, 3⟩”.
+
+    Kontrprzykład obalający ten zapis: weźmy x_1 = -2 (z pierwszego kawałka) i x_2 = 0 (z drugiego kawałka). Wtedy x_1 < x_2, ale f\left(-2\right) = -2 oraz f\left(0\right) = 3, czyli f\left(x_1\right) < f\left(x_2\right). Warunek definicji funkcji malejącej (x_1 < x_2 \Rightarrow f\left(x_1\right) > f\left(x_2\right)) nie jest spełniony, więc na sumie tych przedziałów funkcja NIE jest malejąca.
+
+    Korekta: monotoniczność orzekamy o przedziale, a przedziały monotoniczności wypisujemy oddzielnie. Idąc od lewej: od A do B wykres opada (z 4 do -2), więc f maleje w ⟨-5, -2⟩; od B do C wykres się wznosi (z -2 do 3), więc f rośnie w ⟨-2, 0⟩; od C do D wykres opada (z 3 do -3), więc f maleje w ⟨0, 3⟩. Nigdy nie łączymy tych przedziałów znakiem sumy.
+  solution_steps:
+  - 'Pokaż błąd: uczeń połączył dwa przedziały malenia znakiem sumy zbiorów.'
+  - 'Podaj kontrprzykład: x1 = -2, x2 = 0, x1 < x2, ale f(-2) = -2 < 3 = f(0), więc definicja funkcji
+    malejącej nie jest spełniona.'
+  - 'Prześledź wykres od lewej: odcinek AB opada — f maleje w ⟨-5, -2⟩.'
+  - Odcinek BC wznosi się — f rośnie w ⟨-2, 0⟩.
+  - Odcinek CD opada — f maleje w ⟨0, 3⟩; przedziały zapisujemy osobno.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: pierwszy przedział, w którym f maleje
+      answer:
+        kind: INTERVAL
+        lo: '-5'
+        hi: '-2'
+        lo_open: false
+        hi_open: false
+    - name: drugi przedział, w którym f maleje
+      answer:
+        kind: INTERVAL
+        lo: '0'
+        hi: '3'
+        lo_open: false
+        hi_open: false
+    - name: przedział, w którym f rośnie
+      answer:
+        kind: INTERVAL
+        lo: '-2'
+        hi: '0'
+        lo_open: false
+        hi_open: false
+  skills:
+  - wyznaczanie przedziałów monotoniczności
+  - stosowanie definicji funkcji malejącej
+  verification:
+    checkability: REFERENCE_CALL
+    note: 3 parts matched
+- id: g-cm-10
+  slot: COMMON_MISTAKE
+  ramp_index: 4
+  difficulty: 3
+  exercise_type: 'korekta błędu: wartość największa a argument'
+  statement: 'Funkcja f jest określona wzorem f(x) = -x^2 + 6x - 5 dla x ∈ ⟨0, 5⟩. Wykresem funkcji jest
+    fragment paraboli o ramionach skierowanych w dół i wierzchołku W = (3, 4). Uczeń zapisał: „Największa
+    wartość funkcji f w przedziale ⟨0, 5⟩ jest równa 3, bo wykres najwyżej sięga nad liczbą 3”. Wyjaśnij,
+    na czym polega błąd ucznia, a następnie podaj największą wartość funkcji f w przedziale ⟨0, 5⟩ oraz
+    argument, dla którego jest ona przyjmowana.'
+  statement_latex: f\left(x\right)=-x^{2}+6\cdot x-5,\qquad x\in\left\langle 0,\,5\right\rangle,\qquad
+    W=\left(3,\,4\right)
+  solution: |-
+    Błędne rozumowanie ucznia: „najwyższy punkt wykresu leży nad liczbą 3 na osi OX, więc największa wartość wynosi 3”. Uczeń podał ARGUMENT zamiast WARTOŚCI.
+
+    Korekta: wartość funkcji to liczba odczytywana na osi OY (druga współrzędna punktu wykresu). Najwyższym punktem fragmentu wykresu jest wierzchołek W = (3, 4): jego pierwsza współrzędna 3 to argument, a druga współrzędna 4 to wartość.
+
+    Sprawdzenie rachunkowe: f\left(3\right) = -\left(3\right)^{2} + 6\cdot 3 - 5 = -9 + 18 - 5 = 4. Ponadto na końcach przedziału f\left(0\right) = -5 oraz f\left(5\right) = -25 + 30 - 5 = 0, a obie te wartości są mniejsze od 4. Ponieważ ramiona paraboli są skierowane w dół, dla każdego x ∈ ⟨0, 5⟩ zachodzi f(x) ≤ 4.
+
+    Odpowiedź: największa wartość funkcji f w przedziale ⟨0, 5⟩ wynosi 4 i jest przyjmowana dla argumentu x = 3.
+  solution_steps:
+  - 'Pokaż błąd: uczeń podał odciętą wierzchołka (3) jako wartość największą.'
+  - 'Przypomnij: wartość to liczba na osi OY, argument to liczba na osi OX.'
+  - Odczytaj wierzchołek W = (3, 4) — najwyższy punkt wykresu; oblicz f(3) = -9 + 18 - 5 = 4.
+  - 'Porównaj z wartościami na końcach: f(0) = -5, f(5) = 0 — obie mniejsze od 4.'
+  - 'Zapisz odpowiedź: wartość największa wynosi 4 i jest przyjmowana dla x = 3.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wartość największa
+      answer:
+        kind: NUMERIC
+        value: 4.0
+    - name: argument, dla którego jest przyjmowana
+      answer:
+        kind: NUMERIC
+        value: 3.0
+  checks:
+  - kind: evaluate
+    expr: -\left(3\right)^{2}+6\cdot 3-5
+    part: wartość największa
+  - kind: solve_equation
+    expr: -x^{2}+6\cdot x-5=4
+    part: argument, dla którego jest przyjmowana
+  skills:
+  - wartość największa w przedziale domkniętym
+  - rozróżnianie wartości i argumentu
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [wartość największa] SymPy solved it fresh: 4.0 vs 4.0 (tol
+      1e-09) ; [argument, dla którego jest przyjmowana] SymPy solved it fresh: 3.0 vs 3.0 (tol 1e-09)'
+- id: g-ch-t02
+  slot: CHALLENGE
+  ramp_index: 0
+  difficulty: 4
+  exercise_type: odtworzenie wykresu z warunków i odczyt własności
+  statement: |-
+    Funkcja f jest określona w przedziale ⟨-4, 6⟩, a jej wykresem jest łamana o kolejnych wierzchołkach A(-4, 6), B(-1, -3), C(3, -3), D(6, m); oba końce wykresu (punkty A i D) należą do wykresu. Wiadomo, że największa wartość funkcji f jest równa 6 i funkcja przyjmuje tę wartość dokładnie dla dwóch argumentów.
+    a) Oblicz m.
+    b) Podaj wszystkie miejsca zerowe funkcji f.
+    c) Zapisz zbiór wszystkich argumentów, dla których f(x) < 0.
+  statement_latex: A\left(-4,\ 6\right),\ B\left(-1,\ -3\right),\ C\left(3,\ -3\right),\ D\left(6,\ m\right),\qquad
+    \max_{x \in \langle -4,\ 6 \rangle} f(x) = 6
+  solution: |-
+    a) Na odcinku AB funkcja maleje od 6 do -3, na BC jest stała i równa -3, na CD zmienia się od -3 do m. Poziom 6 jest osiągany w punkcie A (dla x = -4). Gdyby m < 6, wartość największa 6 byłaby przyjmowana tylko dla jednego argumentu; gdyby m > 6, największa wartość byłaby równa m ≠ 6. Aby wartość największa wynosiła 6 i była przyjmowana dokładnie dla dwóch argumentów, musi być m = 6 (drugim argumentem jest x = 6).
+
+    b) Wyznaczamy równania odcinków.
+    AB: współczynnik kierunkowy równa się (-3 - 6)/(-1 - (-4)) = -3, więc y = 6 - 3(x + 4) = -3x - 6. Zero: -3x - 6 = 0, czyli x = -2 i -2 ∈ ⟨-4, -1⟩.
+    BC: y = -3, brak miejsc zerowych.
+    CD: współczynnik kierunkowy równa się (6 - (-3))/(6 - 3) = 3, więc y = -3 + 3(x - 3) = 3x - 12. Zero: 3x - 12 = 0, czyli x = 4 i 4 ∈ ⟨3, 6⟩.
+    Miejsca zerowe: -2 oraz 4.
+
+    c) Miejsca zerowe dzielą dziedzinę na kawałki. Dla x ∈ ⟨-4, -2) wykres leży nad osią OX (np. f(-4) = 6 > 0), dla x ∈ (-2, 4) pod osią (np. cały odcinek BC na poziomie -3), dla x ∈ (4, 6⟩ nad osią (np. f(6) = 6 > 0). Zatem f(x) < 0 dla x ∈ (-2, 4).
+  solution_steps:
+  - Zauważ, że poziom 6 jest osiągany w punkcie A; drugi argument o wartości 6 może pochodzić tylko z
+    ostatniego odcinka.
+  - Z warunku „wartość największa równa 6, przyjmowana dokładnie dwa razy” wynika m = 6.
+  - 'Wyznacz równanie odcinka AB: y = -3x - 6, i jego miejsce zerowe x = -2.'
+  - 'Wyznacz równanie odcinka CD: y = 3x - 12, i jego miejsce zerowe x = 4.'
+  - Odczytaj znak na kolejnych kawałkach dziedziny i zapisz f(x) < 0 dla x ∈ (-2, 4).
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: m
+      answer:
+        kind: NUMERIC
+        value: 6.0
+    - name: miejsca_zerowe
+      answer:
+        kind: SET
+        members:
+        - '-2'
+        - '4'
+    - name: argumenty_ujemne
+      answer:
+        kind: INTERVAL
+        lo: '-2'
+        hi: '4'
+  checks:
+  - kind: solve_equation
+    expr: \left(-3 \cdot x - 6\right) \cdot \left(3 \cdot x - 12\right) = 0
+    part: miejsca_zerowe
+  skills:
+  - interpretacja warunku o wartości największej
+  - wyznaczanie równania odcinka
+  - miejsca zerowe
+  - przedziały stałego znaku
+  verification:
+    checkability: REFERENCE_CALL
+    note: 3 parts matched
+- id: g-ch-t03
+  slot: CHALLENGE
+  ramp_index: 1
+  difficulty: 5
+  exercise_type: rekonstrukcja wykresu złożonego z paraboli i odcinka, odczyt własności
+  statement: |-
+    Wykres funkcji f składa się z dwóch części. Pierwsza część to fragment paraboli o wierzchołku W(1, -4) i ramionach skierowanych do góry, narysowany dla x ∈ ⟨-1, 3⟩ (oba końce należą do wykresu), przy czym punkt (3, 0) leży na tej paraboli. Druga część to odcinek o początku (3, 0) (kropka pełna) i końcu (6, c) (kropka pusta), a funkcja f jest rosnąca w przedziale ⟨3, 6). Zbiorem wartości funkcji f jest przedział ⟨-4, 5).
+    a) Oblicz c oraz f(0) i podaj dziedzinę funkcji f.
+    b) Podaj wszystkie miejsca zerowe funkcji f.
+    c) Zapisz zbiór wszystkich argumentów, dla których f(x) ≥ 0.
+    d) Rozstrzygnij, czy funkcja f ma wartość największą w przedziale ⟨0, 6). Odpowiedź uzasadnij.
+  statement_latex: f(x) = a \cdot \left(x - 1\right)^{2} - 4 \ \text{ dla } x \in \langle -1,\ 3 \rangle,
+    \qquad ZW_{f} = \langle -4,\ 5 \right)
+  solution: |-
+    Najpierw ustalamy wzór fragmentu parabolicznego. Z wierzchołka W(1, -4) mamy f(x) = a(x - 1)² - 4, a z warunku f(3) = 0 otrzymujemy a·(3 - 1)² - 4 = 0, czyli 4a = 4, a = 1 (ramiona do góry — zgodnie z treścią). Zatem na przedziale ⟨-1, 3⟩ mamy f(x) = (x - 1)² - 4.
+
+    a) Fragment paraboliczny przyjmuje wartości od -4 (w wierzchołku) do f(-1) = f(3) = 0, czyli ⟨-4, 0⟩. Odcinek rośnie od wartości 0 (dla x = 3) do poziomu c, którego nie osiąga (kropka pusta), więc daje wartości ⟨0, c). Razem ZW = ⟨-4, c). Skoro ZW = ⟨-4, 5), to c = 5.
+    f(0) = (0 - 1)² - 4 = 1 - 4 = -3.
+    Dziedzina: fragment paraboli daje ⟨-1, 3⟩, odcinek daje ⟨3, 6) (punkt (6, 5) nie należy do wykresu), więc D = ⟨-1, 6).
+
+    b) Miejsca zerowe fragmentu parabolicznego: (x - 1)² - 4 = 0 ⟺ (x - 1)² = 4 ⟺ x = -1 lub x = 3; obie liczby należą do ⟨-1, 3⟩. Odcinek jest rosnący i zaczyna się w punkcie (3, 0), więc dla x > 3 przyjmuje wartości dodatnie i nie daje nowych miejsc zerowych. Miejsca zerowe: -1 oraz 3.
+
+    c) Na przedziale ⟨-1, 3⟩ mamy (x - 1)² - 4 ≥ 0 ⟺ x ≤ -1 lub x ≥ 3, więc w tym przedziale warunek spełniają tylko argumenty x = -1 i x = 3. Na przedziale ⟨3, 6) wszystkie wartości są nieujemne. Zatem f(x) ≥ 0 dla x ∈ {-1} ∪ ⟨3, 6).
+
+    d) W przedziale ⟨0, 6) wartości funkcji to ⟨-4, 0⟩ (część paraboliczna dla x ∈ ⟨0, 3⟩) oraz ⟨0, 5) (odcinek). Wartości zbliżają się do 5, ale poziom 5 nie jest osiągany, bo punkt (6, 5) nie należy do wykresu. Dla każdego x₀ ∈ ⟨0, 6) można wskazać argument bliższy 6, dla którego wartość jest większa. Wartość największa nie istnieje.
+  solution_steps:
+  - 'Z wierzchołka i punktu (3, 0) wyznacz wzór paraboli: a·(3-1)² - 4 = 0 ⟹ a = 1, czyli f(x) = (x -
+    1)² - 4 na ⟨-1, 3⟩.'
+  - 'Ustal zbiory wartości obu części: ⟨-4, 0⟩ oraz ⟨0, c); z warunku ZW = ⟨-4, 5) wynika c = 5.'
+  - Oblicz f(0) = (0 - 1)² - 4 = -3 i podaj dziedzinę D = ⟨-1, 6).
+  - Rozwiąż (x - 1)² - 4 = 0 ⟹ x = -1, x = 3; na odcinku brak dalszych zer.
+  - 'Wyznacz zbiór f(x) ≥ 0: {-1} ∪ ⟨3, 6).'
+  - 'Zbadaj wartość największą w ⟨0, 6): poziom 5 nie jest osiągany (kropka pusta) — wartość największa
+    nie istnieje.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: c
+      answer:
+        kind: NUMERIC
+        value: 5.0
+    - name: f_0
+      answer:
+        kind: NUMERIC
+        value: -3.0
+    - name: dziedzina
+      answer:
+        kind: INTERVAL
+        lo: '-1'
+        hi: '6'
+        lo_open: false
+    - name: miejsca_zerowe
+      answer:
+        kind: SET
+        members:
+        - '-1'
+        - '3'
+    - name: argumenty_nieujemne
+      answer:
+        kind: SYMBOLIC
+        latex: \{-1\} \cup \left\langle 3,\ 6 \right)
+    - name: czy_istnieje_najwieksza
+      answer:
+        kind: SYMBOLIC
+        latex: nie istnieje
+    - name: uzasadnienie
+      answer:
+        kind: NOT_MACHINE_CHECKABLE
+        reason: Uczeń musi uzasadnić, że w przedziale ⟨0, 6) wartości funkcji zbliżają się do 5, ale poziom
+          5 nie jest przyjmowany (punkt (6, 5) nie należy do wykresu), więc wartość największa nie istnieje.
+  checks:
+  - kind: evaluate
+    expr: \left(0 - 1\right)^{2} - 4
+    part: f_0
+  - kind: solve_equation
+    expr: \left(x - 1\right)^{2} - 4 = 0
+    part: miejsca_zerowe
+  skills:
+  - postać kanoniczna funkcji kwadratowej z wierzchołka i punktu
+  - zbiór wartości sumy fragmentów
+  - zbiór argumentów f(x) ≥ 0
+  - ocena istnienia wartości największej
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'part(s) need a human: uzasadnienie · 2/6 other parts solved fresh'
+- id: g-ch-t04
+  slot: CHALLENGE
+  ramp_index: 2
+  difficulty: 5
+  exercise_type: odtworzenie łamanej z warunków i pełny odczyt własności
+  statement: |-
+    Funkcja f jest określona w przedziale ⟨-5, 7⟩, a jej wykresem jest łamana o kolejnych wierzchołkach A(-5, a), B(-2, 4), C(1, 4), D(p, -2), E(7, e), przy czym 1 < p < 7, a oba końce wykresu (punkty A i E) należą do wykresu. Wiadomo ponadto, że:
+    – liczba -4 jest miejscem zerowym funkcji f,
+    – liczba 3 jest miejscem zerowym funkcji f,
+    – największa wartość funkcji f w przedziale ⟨p, 7⟩ jest równa 4.
+    a) Wyznacz liczby a, p oraz e.
+    b) Zapisz zbiór wszystkich rozwiązań nierówności f(x) ≥ 2.
+    c) Podaj wartość największą i wartość najmniejszą funkcji f w przedziale ⟨-3, 5⟩ oraz wszystkie argumenty, dla których te wartości są przyjmowane.
+  statement_latex: A\left(-5,\ a\right),\ B\left(-2,\ 4\right),\ C\left(1,\ 4\right),\ D\left(p,\ -2\right),\
+    E\left(7,\ e\right),\qquad f(-4) = 0,\ f(3) = 0,\ \max_{x \in \langle p,\ 7 \rangle} f(x) = 4
+  solution: |-
+    a) Miejsce zerowe -4 leży między -5 a -2, więc pochodzi z odcinka AB. Współczynnik kierunkowy tego odcinka to (4 - a)/(-2 - (-5)) = (4 - a)/3, zatem na odcinku AB mamy y = a + ((4 - a)/3)·(x + 5). Warunek f(-4) = 0 daje a + (4 - a)/3 = 0, czyli 3a + 4 - a = 0, stąd a = -2. Wtedy odcinek AB ma równanie y = -2 + 2(x + 5) = 2x + 8 (rzeczywiście 2·(-4) + 8 = 0).
+    Odcinek BC jest poziomy: y = 4 dla x ∈ ⟨-2, 1⟩, więc miejsce zerowe 3 musi leżeć na odcinku CD. Odcinek CD łączy (1, 4) i (p, -2), więc y = 4 - (6/(p - 1))·(x - 1). Warunek f(3) = 0 daje 4 - (6·(3 - 1))/(p - 1) = 0, czyli 4(p - 1) = 12, stąd p = 4. Odcinek CD ma zatem równanie y = -2x + 6.
+    Na odcinku DE funkcja zmienia się monotonicznie od f(4) = -2 do f(7) = e, więc największa wartość w ⟨4, 7⟩ to większa z liczb -2 i e. Z warunku, że jest ona równa 4, otrzymujemy e = 4. Odcinek DE ma równanie y = -2 + 2(x - 4) = 2x - 10.
+
+    b) Rozwiązujemy f(x) ≥ 2 na każdym odcinku:
+    AB (x ∈ ⟨-5, -2⟩): 2x + 8 ≥ 2 ⟺ x ≥ -3, czyli ⟨-3, -2⟩;
+    BC (x ∈ ⟨-2, 1⟩): wartość 4 ≥ 2 — cały przedział ⟨-2, 1⟩;
+    CD (x ∈ ⟨1, 4⟩): -2x + 6 ≥ 2 ⟺ x ≤ 2, czyli ⟨1, 2⟩;
+    DE (x ∈ ⟨4, 7⟩): 2x - 10 ≥ 2 ⟺ x ≥ 6, czyli ⟨6, 7⟩.
+    Łącząc: x ∈ ⟨-3, 2⟩ ∪ ⟨6, 7⟩.
+
+    c) W przedziale ⟨-3, 5⟩ kandydaci to: f(-3) = 2·(-3) + 8 = 2, poziom 4 na odcinku BC (dla x ∈ ⟨-2, 1⟩), f(4) = -2 (wierzchołek D) oraz f(5) = 2·5 - 10 = 0.
+    Wartość największa wynosi 4 i jest przyjmowana dla każdego x ∈ ⟨-2, 1⟩.
+    Wartość najmniejsza wynosi -2 i jest przyjmowana tylko dla x = 4 (z równania -2x + 6 = -2 otrzymujemy x = 4).
+  solution_steps:
+  - Zauważ, że miejsce zerowe -4 pochodzi z odcinka AB i zapisz równanie tego odcinka z parametrem a.
+  - 'Z warunku f(-4) = 0 wyznacz a = -2; odcinek AB: y = 2x + 8.'
+  - 'Zauważ, że miejsce zerowe 3 pochodzi z odcinka CD (bo BC jest poziomy na poziomie 4) i z warunku
+    f(3) = 0 wyznacz p = 4; odcinek CD: y = -2x + 6.'
+  - 'Z warunku o największej wartości 4 w ⟨4, 7⟩ wyznacz e = 4; odcinek DE: y = 2x - 10.'
+  - 'Rozwiąż nierówność f(x) ≥ 2 osobno na każdym z czterech odcinków i zsumuj: ⟨-3, 2⟩ ∪ ⟨6, 7⟩.'
+  - 'W przedziale ⟨-3, 5⟩ porównaj kandydatów: f(-3) = 2, poziom 4 na ⟨-2, 1⟩, f(4) = -2, f(5) = 0.'
+  - 'Zapisz: wartość największa 4 dla każdego x ∈ ⟨-2, 1⟩; wartość najmniejsza -2 dla x = 4.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: a
+      answer:
+        kind: NUMERIC
+        value: -2.0
+    - name: p
+      answer:
+        kind: NUMERIC
+        value: 4.0
+    - name: e
+      answer:
+        kind: NUMERIC
+        value: 4.0
+    - name: rozwiazanie_nierownosci
+      answer:
+        kind: SYMBOLIC
+        latex: \langle -3,\ 2 \rangle \cup \langle 6,\ 7 \rangle
+    - name: wartosc_najwieksza
+      answer:
+        kind: NUMERIC
+        value: 4.0
+    - name: argumenty_najwiekszej
+      answer:
+        kind: SYMBOLIC
+        latex: \langle -2,\ 1 \rangle
+    - name: wartosc_najmniejsza
+      answer:
+        kind: NUMERIC
+        value: -2.0
+    - name: argument_najmniejszej
+      answer:
+        kind: NUMERIC
+        value: 4.0
+  checks:
+  - kind: solve_equation
+    expr: a + \frac{4 - a}{3} = 0
+    var: a
+    part: a
+  - kind: solve_equation
+    expr: 4 - \frac{6 \cdot \left(3 - 1\right)}{p - 1} = 0
+    var: p
+    part: p
+  - kind: evaluate
+    expr: -2 \cdot 4 + 6
+    part: wartosc_najmniejsza
+  - kind: solve_equation
+    expr: -2 \cdot x + 6 = -2
+    part: argument_najmniejszej
+  skills:
+  - wyznaczanie brakujących współrzędnych wierzchołków z warunków
+  - równanie odcinka
+  - rozwiązywanie nierówności f(x) ≥ a z wykresu
+  - wartości skrajne w przedziale domkniętym i argumenty
+  verification:
+    checkability: REFERENCE_CALL
+    note: 8 parts matched

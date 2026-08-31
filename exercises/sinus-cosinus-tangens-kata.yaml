@@ -1,0 +1,848 @@
+section: sinus-cosinus-tangens-kata
+name: Sinus, cosinus i tangens kąta od 0° do 180°
+scope: sin, cos and tan for angles from 0 to 180 degrees; exact values for 30, 45 and 60 degrees and the
+  reduction relationships for obtuse angles.
+requirements:
+- VII.1
+counts:
+  total: 16
+  DETERMINISTIC: 5
+  REFERENCE_CALL: 8
+  NOT_MACHINE_CHECKABLE: 3
+exercises:
+- id: g-th-00
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: obliczanie funkcji trygonometrycznych z punktu na ramieniu kąta
+  statement: Kąt \alpha o mierze z przedziału \langle 0^{\circ},180^{\circ}\rangle ma wierzchołek w punkcie
+    O=(0,0), jedno jego ramię pokrywa się z dodatnią półosią Ox, a drugie ramię przechodzi przez punkt
+    P=(4,3). Oblicz \sin\alpha, \cos\alpha oraz \operatorname{tg}\alpha.
+  statement_latex: P=\left(4,\ 3\right),\quad r=\sqrt{4^{2}+3^{2}},\quad \sin\alpha=\frac{y}{r},\ \cos\alpha=\frac{x}{r},\
+    \operatorname{tg}\alpha=\frac{y}{x}
+  solution: |-
+    Punkt P leży w I ćwiartce, więc \alpha jest kątem ostrym i wszystkie trzy wartości będą dodatnie.
+    Obliczamy r=|OP|=\sqrt{4^{2}+3^{2}}=\sqrt{16+9}=\sqrt{25}=5 (długość odcinka, zawsze dodatnia).
+    Z definicji współrzędnościowych:
+    \sin\alpha=\frac{y}{r}=\frac{3}{5},\qquad \cos\alpha=\frac{x}{r}=\frac{4}{5},\qquad \operatorname{tg}\alpha=\frac{y}{x}=\frac{3}{4}.
+    Kontrola jedynką trygonometryczną: \left(\frac{3}{5}\right)^{2}+\left(\frac{4}{5}\right)^{2}=\frac{9}{25}+\frac{16}{25}=1.
+  solution_steps:
+  - Zauważ, że P=(4,3) leży w I ćwiartce, więc kąt jest ostry (wszystkie wartości dodatnie).
+  - Oblicz r=\sqrt{4^{2}+3^{2}}=5.
+  - 'Podstaw do wzorów: \sin\alpha=\frac{3}{5}, \cos\alpha=\frac{4}{5}, \operatorname{tg}\alpha=\frac{3}{4}.'
+  - Sprawdź wynik jedynką trygonometryczną.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: sinus
+      answer:
+        kind: NUMERIC
+        value: 0.6
+        latex: \frac{3}{5}
+    - name: cosinus
+      answer:
+        kind: NUMERIC
+        value: 0.8
+        latex: \frac{4}{5}
+    - name: tangens
+      answer:
+        kind: NUMERIC
+        value: 0.75
+        latex: \frac{3}{4}
+  checks:
+  - kind: evaluate
+    expr: \frac{3}{\sqrt{4^{2}+3^{2}}}
+    part: sinus
+  - kind: evaluate
+    expr: \frac{4}{\sqrt{4^{2}+3^{2}}}
+    part: cosinus
+  - kind: evaluate
+    expr: \frac{3}{4}
+    part: tangens
+  skills:
+  - definicja współrzędnościowa sin, cos, tg
+  - obliczanie r = |OP|
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [sinus] SymPy solved it fresh: 0.6 vs 0.6 (tol 1e-09) ; [cosinus]
+      SymPy solved it fresh: 0.8 vs 0.8 (tol 1e-09) ; [tangens] SymPy solved it fresh: 0.75 vs 0.75 (tol
+      1e-09)'
+- id: g-th-01
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: wartość wyrażenia z kątami szczególnymi
+  statement: Oblicz dokładną wartość wyrażenia W = 2\cdot\sin 60^{\circ} - \operatorname{tg}45^{\circ}\cdot\cos
+    30^{\circ}.
+  statement_latex: W = 2\cdot\sin 60^{\circ} - \operatorname{tg}45^{\circ}\cdot\cos 30^{\circ}
+  solution: |-
+    Odczytujemy wartości szczególne: \sin 60^{\circ}=\frac{\sqrt{3}}{2}, \operatorname{tg}45^{\circ}=1, \cos 30^{\circ}=\frac{\sqrt{3}}{2}.
+    Zatem
+    W = 2\cdot\frac{\sqrt{3}}{2} - 1\cdot\frac{\sqrt{3}}{2} = \sqrt{3} - \frac{\sqrt{3}}{2} = \frac{2\sqrt{3}-\sqrt{3}}{2} = \frac{\sqrt{3}}{2}.
+  solution_steps:
+  - 'Wypisz wartości szczególne: \sin 60^{\circ}=\frac{\sqrt{3}}{2}, \operatorname{tg}45^{\circ}=1, \cos
+    30^{\circ}=\frac{\sqrt{3}}{2}.'
+  - 'Wstaw je do wyrażenia: W=2\cdot\frac{\sqrt{3}}{2}-1\cdot\frac{\sqrt{3}}{2}.'
+  - 'Wykonaj działania: W=\sqrt{3}-\frac{\sqrt{3}}{2}=\frac{\sqrt{3}}{2}.'
+  answer:
+    kind: SYMBOLIC
+    latex: \frac{\sqrt{3}}{2}
+  checks:
+  - kind: evaluate
+    expr: 2\cdot\sin\left(60^{\circ}\right)-\tan\left(45^{\circ}\right)\cdot\cos\left(30^{\circ}\right)
+  skills:
+  - tabela wartości dla 30°, 45°, 60°
+  - działania na pierwiastkach
+  verification:
+    checkability: REFERENCE_CALL
+    note: '''\\frac{\\sqrt{3}}{2}'' vs ''\\frac{\\sqrt{3}}{2}'''
+- id: g-th-02
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: wzory redukcyjne
+  statement: Korzystając ze wzorów redukcyjnych dla kąta rozwartego, oblicz \cos 120^{\circ} oraz \sin
+    135^{\circ}.
+  statement_latex: \cos 120^{\circ}=\cos\left(180^{\circ}-60^{\circ}\right),\qquad \sin 135^{\circ}=\sin\left(180^{\circ}-45^{\circ}\right)
+  solution: |-
+    Zapisujemy każdy kąt rozwarty w postaci 180^{\circ}-\alpha_{0}:
+    120^{\circ}=180^{\circ}-60^{\circ}, więc \cos 120^{\circ}=-\cos 60^{\circ}=-\frac{1}{2}.
+    135^{\circ}=180^{\circ}-45^{\circ}, więc \sin 135^{\circ}=\sin 45^{\circ}=\frac{\sqrt{2}}{2}.
+    Kontrola znaków: cosinus kąta rozwartego jest ujemny, sinus dodatni.
+  solution_steps:
+  - Zapisz 120^{\circ}=180^{\circ}-60^{\circ} i zastosuj \cos\left(180^{\circ}-\alpha\right)=-\cos\alpha.
+  - Odczytaj \cos 60^{\circ}=\frac{1}{2}, więc \cos 120^{\circ}=-\frac{1}{2}.
+  - Zapisz 135^{\circ}=180^{\circ}-45^{\circ} i zastosuj \sin\left(180^{\circ}-\alpha\right)=\sin\alpha.
+  - Odczytaj \sin 45^{\circ}=\frac{\sqrt{2}}{2}, więc \sin 135^{\circ}=\frac{\sqrt{2}}{2}.
+  - 'Sprawdź znaki: cos ujemny, sin dodatni.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: cos 120 stopni
+      answer:
+        kind: NUMERIC
+        value: -0.5
+        latex: -\frac{1}{2}
+    - name: sin 135 stopni
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{\sqrt{2}}{2}
+  checks:
+  - kind: evaluate
+    expr: -\cos\left(60^{\circ}\right)
+    part: cos 120 stopni
+  - kind: evaluate
+    expr: \sin\left(45^{\circ}\right)
+    part: sin 135 stopni
+  skills:
+  - redukcja kąta rozwartego do ostrego
+  - znaki funkcji w II ćwiartce
+  verification:
+    checkability: REFERENCE_CALL
+    note: 2 parts matched
+- id: g-ex-03
+  slot: EXERCISE
+  ramp_index: 1
+  difficulty: 2
+  exercise_type: wartość wyrażenia z kątami rozwartymi
+  statement: Oblicz dokładną wartość wyrażenia W = \sin 150^{\circ}\cdot\cos 180^{\circ} + \operatorname{tg}120^{\circ}\cdot\cos
+    30^{\circ}.
+  statement_latex: W = \sin 150^{\circ}\cdot\cos 180^{\circ} + \operatorname{tg}120^{\circ}\cdot\cos 30^{\circ}
+  solution: |-
+    Redukujemy kąty rozwarte:
+    \sin 150^{\circ}=\sin\left(180^{\circ}-30^{\circ}\right)=\sin 30^{\circ}=\frac{1}{2},
+    \operatorname{tg}120^{\circ}=\operatorname{tg}\left(180^{\circ}-60^{\circ}\right)=-\operatorname{tg}60^{\circ}=-\sqrt{3}.
+    Ponadto \cos 180^{\circ}=-1 oraz \cos 30^{\circ}=\frac{\sqrt{3}}{2}.
+    Zatem
+    W=\frac{1}{2}\cdot\left(-1\right)+\left(-\sqrt{3}\right)\cdot\frac{\sqrt{3}}{2}=-\frac{1}{2}-\frac{3}{2}=-2.
+  solution_steps:
+  - 'Zredukuj kąty rozwarte: \sin 150^{\circ}=\sin 30^{\circ}=\frac{1}{2}, \operatorname{tg}120^{\circ}=-\operatorname{tg}60^{\circ}=-\sqrt{3}.'
+  - Odczytaj \cos 180^{\circ}=-1 oraz \cos 30^{\circ}=\frac{\sqrt{3}}{2}.
+  - 'Podstaw: W=\frac{1}{2}\cdot\left(-1\right)+\left(-\sqrt{3}\right)\cdot\frac{\sqrt{3}}{2}.'
+  - 'Wykonaj działania: W=-\frac{1}{2}-\frac{3}{2}=-2.'
+  answer:
+    kind: NUMERIC
+    value: -2.0
+    latex: '-2'
+  checks:
+  - kind: evaluate
+    expr: \sin\left(150^{\circ}\right)\cdot\cos\left(180^{\circ}\right)+\tan\left(120^{\circ}\right)\cdot\cos\left(30^{\circ}\right)
+  skills:
+  - wzory redukcyjne
+  - działania na pierwiastkach
+  - wartości dla 0°, 90°, 180°
+  verification:
+    checkability: REFERENCE_CALL
+    note: -2.0 vs -2.0 (tol 1e-09)
+- id: g-ex-04
+  slot: EXERCISE
+  ramp_index: 2
+  difficulty: 3
+  exercise_type: jedynka trygonometryczna i związek tg = sin/cos
+  statement: Kąt \alpha jest kątem rozwartym i \cos\alpha = -\frac{12}{13}. Oblicz \sin\alpha oraz \operatorname{tg}\alpha,
+    a następnie wartość wyrażenia W = \frac{\sin\alpha}{1+\cos\alpha}.
+  statement_latex: \cos\alpha=-\frac{12}{13},\quad 90^{\circ}<\alpha<180^{\circ},\qquad W=\frac{\sin\alpha}{1+\cos\alpha}
+  solution: |-
+    Z jedynki trygonometrycznej \sin^{2}\alpha+\cos^{2}\alpha=1 mamy
+    \sin^{2}\alpha = 1-\left(-\frac{12}{13}\right)^{2}=1-\frac{144}{169}=\frac{25}{169}.
+    Dla każdego kąta z przedziału \langle 0^{\circ},180^{\circ}\rangle jest \sin\alpha\ge 0, więc \sin\alpha=\frac{5}{13}.
+    Dalej
+    \operatorname{tg}\alpha=\frac{\sin\alpha}{\cos\alpha}=\frac{\frac{5}{13}}{-\frac{12}{13}}=-\frac{5}{12} (ujemny, zgodnie z tym, że kąt jest rozwarty).
+    Wreszcie 1+\cos\alpha = 1-\frac{12}{13}=\frac{1}{13}, więc
+    W=\frac{\frac{5}{13}}{\frac{1}{13}}=5.
+  solution_steps:
+  - Podstaw \cos\alpha=-\frac{12}{13} do jedynki trygonometrycznej i wyznacz \sin^{2}\alpha=\frac{25}{169}.
+  - 'Wybierz znak dodatni (sinus kąta z \langle 0^{\circ},180^{\circ}\rangle jest nieujemny): \sin\alpha=\frac{5}{13}.'
+  - Oblicz \operatorname{tg}\alpha=\frac{\sin\alpha}{\cos\alpha}=-\frac{5}{12}.
+  - Oblicz 1+\cos\alpha=\frac{1}{13}.
+  - Wyznacz W=\frac{\frac{5}{13}}{\frac{1}{13}}=5.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: sin alfa
+      answer:
+        kind: NUMERIC
+        value: 0.38461538461538464
+        latex: \frac{5}{13}
+    - name: tg alfa
+      answer:
+        kind: NUMERIC
+        value: -0.4166666666666667
+        latex: -\frac{5}{12}
+    - name: wartosc W
+      answer:
+        kind: NUMERIC
+        value: 5.0
+        latex: '5'
+  checks:
+  - kind: evaluate
+    expr: \sqrt{1-\left(-\frac{12}{13}\right)^{2}}
+    part: sin alfa
+  - kind: evaluate
+    expr: \frac{\frac{5}{13}}{-\frac{12}{13}}
+    part: tg alfa
+  - kind: evaluate
+    expr: \frac{\frac{5}{13}}{1+\left(-\frac{12}{13}\right)}
+    part: wartosc W
+  skills:
+  - jedynka trygonometryczna
+  - dobór znaku dla kąta rozwartego
+  - działania na ułamkach
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [sin alfa] SymPy solved it fresh: 0.38461538461538464 vs 0.38461538461538464
+      (tol 1e-09) ; [tg alfa] SymPy solved it fresh: -0.4166666666666667 vs -0.4166666666666667 (tol 1e-09)
+      ; [wartosc W] SymPy solved it fresh: 5.0 vs 5.0 (tol 1e-09)'
+- id: g-ex-05
+  slot: EXERCISE
+  ramp_index: 3
+  difficulty: 4
+  exercise_type: równanie trygonometryczne w kontekście geometrycznym
+  statement: W trójkącie ABC kąt przy wierzchołku C ma miarę 105^{\circ}, a sinus kąta przy wierzchołku
+    A jest równy \frac{1}{2}. Wyznacz miary kątów A i B tego trójkąta oraz uzasadnij, dlaczego drugie
+    rozwiązanie równania \sin A=\frac{1}{2} należy odrzucić.
+  statement_latex: \sin A=\frac{1}{2},\qquad |\sphericalangle C| = 105^{\circ},\qquad |\sphericalangle
+    A|+|\sphericalangle B|+|\sphericalangle C| = 180^{\circ}
+  solution: |-
+    Kątem ostrym o sinusie \frac{1}{2} jest 30^{\circ}. Ponieważ 0<\frac{1}{2}<1, w przedziale \langle 0^{\circ},180^{\circ}\rangle równanie \sin A=\frac{1}{2} ma dwa rozwiązania:
+    A = 30^{\circ} lub A = 180^{\circ}-30^{\circ}=150^{\circ}.
+    W trójkącie suma miar kątów wynosi 180^{\circ}, a kąt C ma 105^{\circ}, więc |\sphericalangle A| < 180^{\circ}-105^{\circ}=75^{\circ}. Rozwiązanie A=150^{\circ} jest więc sprzeczne z warunkami zadania i je odrzucamy.
+    Zatem A = 30^{\circ}, a stąd
+    B = 180^{\circ}-105^{\circ}-30^{\circ}=45^{\circ}.
+  solution_steps:
+  - 'Rozwiąż \sin A=\frac{1}{2} w \langle 0^{\circ},180^{\circ}\rangle: A=30^{\circ} lub A=150^{\circ}.'
+  - Zauważ, że w trójkącie A+B = 180^{\circ}-105^{\circ} = 75^{\circ}, więc A<75^{\circ}.
+  - Odrzuć A=150^{\circ} jako sprzeczne z sumą kątów trójkąta.
+  - Przyjmij A=30^{\circ} i oblicz B=180-105-30=45^{\circ}.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: miara kata A
+      answer:
+        kind: NUMERIC
+        value: 30.0
+        latex: 30^{\circ}
+    - name: miara kata B
+      answer:
+        kind: NUMERIC
+        value: 45.0
+        latex: 45^{\circ}
+    - name: uzasadnienie odrzucenia
+      answer:
+        kind: NOT_MACHINE_CHECKABLE
+        reason: Należy wykazać, że równanie \sin A=\frac{1}{2} ma w \langle 0^{\circ},180^{\circ}\rangle
+          dwa rozwiązania 30^{\circ} i 150^{\circ}, oraz uzasadnić, że A=150^{\circ} jest niemożliwe,
+          bo A+C=255^{\circ}>180^{\circ} (suma kątów trójkąta wynosi 180^{\circ}, więc A<75^{\circ}).
+  checks:
+  - kind: evaluate
+    expr: 180-105-30
+    part: miara kata B
+  skills:
+  - rozwiązywanie sin α = s w ⟨0°,180°⟩
+  - suma kątów trójkąta
+  - odrzucanie rozwiązań sprzecznych z warunkami zadania
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'part(s) need a human: uzasadnienie odrzucenia · 1/2 other parts solved fresh'
+- id: g-ex-t00
+  slot: EXERCISE
+  ramp_index: 6
+  difficulty: 4
+  exercise_type: wyznaczanie pozostałych funkcji trygonometrycznych i wartość wyrażenia
+  statement: Kąt α jest kątem rozwartym i \operatorname{tg}\alpha = -\frac{3}{4}. Oblicz \sin\alpha oraz
+    \cos\alpha, a następnie oblicz dokładną wartość wyrażenia W = \frac{\sin\alpha - \cos\alpha}{\sin\alpha
+    \cdot \cos\alpha}.
+  statement_latex: \operatorname{tg}\alpha=-\frac{3}{4},\quad \alpha\in\left(90^\circ,180^\circ\right),\qquad
+    W=\frac{\sin\alpha-\cos\alpha}{\sin\alpha\cdot\cos\alpha}
+  solution: |-
+    Ponieważ α jest kątem rozwartym, jego drugie ramię leży w II ćwiartce, więc punkt P=(x,y) tego ramienia spełnia x<0 oraz y>0.
+    Z definicji \operatorname{tg}\alpha=\frac{y}{x}=-\frac{3}{4}, więc możemy przyjąć x=-4, y=3 (znaki zgodne z II ćwiartką).
+    Wtedy r=|OP|=\sqrt{\left(-4\right)^2+3^2}=\sqrt{16+9}=5 (r jest zawsze dodatnie).
+    Stąd \sin\alpha=\frac{y}{r}=\frac{3}{5} oraz \cos\alpha=\frac{x}{r}=-\frac{4}{5}.
+    Kontrola znaków: sinus dodatni, cosinus ujemny – zgodnie z tym, że kąt jest rozwarty. Kontrola jedynką: \left(\frac{3}{5}\right)^2+\left(-\frac{4}{5}\right)^2=\frac{9+16}{25}=1.
+    Licznik: \sin\alpha-\cos\alpha=\frac{3}{5}-\left(-\frac{4}{5}\right)=\frac{7}{5}.
+    Mianownik: \sin\alpha\cdot\cos\alpha=\frac{3}{5}\cdot\left(-\frac{4}{5}\right)=-\frac{12}{25}.
+    Zatem W=\frac{\frac{7}{5}}{-\frac{12}{25}}=\frac{7}{5}\cdot\left(-\frac{25}{12}\right)=-\frac{35}{12}.
+  solution_steps:
+  - 'Zauważ, że kąt rozwarty ma ramię w II ćwiartce: x<0, y>0.'
+  - Z \operatorname{tg}\alpha=\frac{y}{x}=-\frac{3}{4} przyjmij x=-4, y=3.
+  - Oblicz r=\sqrt{\left(-4\right)^2+3^2}=5.
+  - Zapisz \sin\alpha=\frac{3}{5}, \cos\alpha=-\frac{4}{5} i sprawdź znaki oraz jedynkę trygonometryczną.
+  - Oblicz licznik \frac{7}{5} i mianownik -\frac{12}{25}, a następnie W=-\frac{35}{12}.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: sin_alpha
+      answer:
+        kind: NUMERIC
+        value: 0.6
+        latex: \frac{3}{5}
+    - name: cos_alpha
+      answer:
+        kind: NUMERIC
+        value: -0.8
+        latex: -\frac{4}{5}
+    - name: W
+      answer:
+        kind: NUMERIC
+        value: -2.9166666666666665
+        latex: -\frac{35}{12}
+  checks:
+  - kind: evaluate
+    expr: \frac{3}{\sqrt{\left(-4\right)^2+3^2}}
+    part: sin_alpha
+  - kind: evaluate
+    expr: \frac{-4}{\sqrt{\left(-4\right)^2+3^2}}
+    part: cos_alpha
+  - kind: evaluate
+    expr: \frac{\frac{3}{5}-\left(-\frac{4}{5}\right)}{\frac{3}{5}\cdot\left(-\frac{4}{5}\right)}
+    part: W
+  skills:
+  - definicja współrzędnościowa funkcji trygonometrycznych
+  - jedynka trygonometryczna
+  - znaki funkcji w II ćwiartce
+  - działania na ułamkach
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [sin_alpha] SymPy solved it fresh: 0.6 vs 0.6 (tol 1e-09) ;
+      [cos_alpha] SymPy solved it fresh: -0.8 vs -0.8 (tol 1e-09) ; [W] SymPy solved it fresh: -2.9166666666666665
+      vs -2.9166666666666665 (tol 1e-09)'
+- id: g-ex-t01
+  slot: EXERCISE
+  ramp_index: 7
+  difficulty: 4
+  exercise_type: równania trygonometryczne w trójkącie + wartość wyrażenia
+  statement: W trójkącie ABC kąty wewnętrzne przy wierzchołkach A, B i C mają miary odpowiednio |\angle
+    A|, |\angle B| i |\angle C|. Wiadomo, że \cos\left|\angle A\right| = -\frac{1}{2} oraz \sin\left|\angle
+    B\right| = \frac{\sqrt{2}}{2}. Oblicz miary wszystkich trzech kątów tego trójkąta oraz dokładną wartość
+    wyrażenia W = \frac{\sin\left|\angle A\right|}{\cos\left|\angle B\right|}.
+  statement_latex: \cos\left|\angle A\right|=-\frac{1}{2},\qquad \sin\left|\angle B\right|=\frac{\sqrt{2}}{2},\qquad
+    W=\frac{\sin\left|\angle A\right|}{\cos\left|\angle B\right|}
+  solution: |-
+    Kąt wewnętrzny trójkąta należy do przedziału \left(0^\circ,180^\circ\right).
+    Równanie \cos\left|\angle A\right|=-\frac{1}{2}: kątem ostrym o cosinusie \frac{1}{2} jest 60^\circ, a wartość ujemna oznacza kąt rozwarty, więc |\angle A| = 180^\circ - 60^\circ = 120^\circ. Cosinus jest w tym przedziale malejący, więc to jedyne rozwiązanie.
+    Równanie \sin\left|\angle B\right|=\frac{\sqrt{2}}{2} ma dwa rozwiązania: 45^\circ oraz 180^\circ - 45^\circ = 135^\circ. Ponieważ |\angle A| = 120^\circ, a suma kątów trójkąta wynosi 180^\circ, musi być |\angle B| < 60^\circ. Rozwiązanie 135^\circ odrzucamy, zatem |\angle B| = 45^\circ.
+    Stąd |\angle C| = 180^\circ - 120^\circ - 45^\circ = 15^\circ.
+    Dalej \sin 120^\circ = \sin\left(180^\circ-60^\circ\right) = \sin 60^\circ = \frac{\sqrt{3}}{2} oraz \cos 45^\circ = \frac{\sqrt{2}}{2}.
+    Zatem W = \frac{\frac{\sqrt{3}}{2}}{\frac{\sqrt{2}}{2}} = \frac{\sqrt{3}}{\sqrt{2}} = \frac{\sqrt{6}}{2}.
+  solution_steps:
+  - Z \cos\left|\angle A\right|=-\frac{1}{2} wyznacz |\angle A| = 180^\circ - 60^\circ = 120^\circ (jedno
+    rozwiązanie).
+  - 'Z \sin\left|\angle B\right|=\frac{\sqrt{2}}{2} wypisz oba rozwiązania: 45^\circ i 135^\circ.'
+  - Odrzuć 135^\circ, bo suma kątów przekroczyłaby 180^\circ; stąd |\angle B| = 45^\circ.
+  - Oblicz |\angle C| = 180^\circ - 120^\circ - 45^\circ = 15^\circ.
+  - Podstaw \sin 120^\circ = \frac{\sqrt{3}}{2}, \cos 45^\circ = \frac{\sqrt{2}}{2} i uprość W = \frac{\sqrt{6}}{2}.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: kat_A
+      answer:
+        kind: NUMERIC
+        value: 120.0
+        latex: 120^\circ
+    - name: kat_B
+      answer:
+        kind: NUMERIC
+        value: 45.0
+        latex: 45^\circ
+    - name: kat_C
+      answer:
+        kind: NUMERIC
+        value: 15.0
+        latex: 15^\circ
+    - name: W
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{\sqrt{6}}{2}
+  checks:
+  - kind: evaluate
+    expr: 180 - 60
+    part: kat_A
+  - kind: evaluate
+    expr: 180 - 120 - 45
+    part: kat_C
+  - kind: evaluate
+    expr: \frac{\frac{\sqrt{3}}{2}}{\frac{\sqrt{2}}{2}}
+    part: W
+  skills:
+  - rozwiązywanie równań sin α = s, cos α = c w ⟨0°,180°⟩
+  - odrzucanie rozwiązań sprzecznych z warunkami zadania
+  - suma kątów trójkąta
+  - wartości szczególne i wzory redukcyjne
+  verification:
+    checkability: REFERENCE_CALL
+    note: 4 parts matched
+- id: g-cm-06
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: diagnoza błędu – znak sinusa kąta rozwartego
+  statement: 'Uczeń obliczał wartość wyrażenia W = 2\cdot\sin 120^{\circ} + 2\cdot\cos 120^{\circ} i rozumował
+    tak: „kąt 120^{\circ} leży w II ćwiartce, więc wszystkie funkcje trygonometryczne zmieniają znak,
+    czyli \sin 120^{\circ}=-\frac{\sqrt{3}}{2} oraz \cos 120^{\circ}=-\frac{1}{2}”, i otrzymał W=-\sqrt{3}-1.
+    Wskaż błąd w tym rozumowaniu i oblicz poprawną wartość wyrażenia W.'
+  statement_latex: W = 2\cdot\sin 120^{\circ} + 2\cdot\cos 120^{\circ}
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń przyjął, że dla kąta rozwartego zmieniają znak wszystkie funkcje, więc \sin 120^{\circ}=-\frac{\sqrt{3}}{2}; stąd W = 2\cdot\left(-\frac{\sqrt{3}}{2}\right)+2\cdot\left(-\frac{1}{2}\right)=-\sqrt{3}-1 — to jest odpowiedź błędna.
+    GDZIE JEST BŁĄD: punkt P=(x,y) leżący na ramieniu kąta \alpha\in\left(0^{\circ},180^{\circ}\right) ma zawsze y>0, a r=|OP|>0, więc \sin\alpha=\frac{y}{r}>0. Dla kąta rozwartego ujemna jest tylko pierwsza współrzędna x, więc znak zmieniają wyłącznie cosinus i tangens.
+    POPRAWNIE: \sin 120^{\circ}=\sin\left(180^{\circ}-60^{\circ}\right)=\sin 60^{\circ}=\frac{\sqrt{3}}{2}, natomiast \cos 120^{\circ}=-\cos 60^{\circ}=-\frac{1}{2}.
+    Zatem W = 2\cdot\frac{\sqrt{3}}{2}+2\cdot\left(-\frac{1}{2}\right)=\sqrt{3}-1.
+  solution_steps:
+  - 'Odtwórz błędne rozumowanie: uczeń przyjął \sin 120^{\circ}=-\frac{\sqrt{3}}{2} i otrzymał W=-\sqrt{3}-1.'
+  - 'Wskaż błąd: dla \alpha\in\left(0^{\circ},180^{\circ}\right) jest y>0 i r>0, więc \sin\alpha=\frac{y}{r}>0;
+    znak zmieniają tylko cos i tg.'
+  - 'Zastosuj poprawne wzory redukcyjne: \sin 120^{\circ}=\sin 60^{\circ}=\frac{\sqrt{3}}{2}, \cos 120^{\circ}=-\cos
+    60^{\circ}=-\frac{1}{2}.'
+  - Oblicz W=\sqrt{3}-1.
+  answer:
+    kind: SYMBOLIC
+    latex: \sqrt{3}-1
+  checks:
+  - kind: evaluate
+    expr: 2\cdot\sin\left(120^{\circ}\right)+2\cdot\cos\left(120^{\circ}\right)
+  skills:
+  - znaki funkcji trygonometrycznych w II ćwiartce
+  - wzory redukcyjne
+  verification:
+    checkability: REFERENCE_CALL
+    note: '''\\sqrt{3}-1'' vs ''\\sqrt{3}-1'''
+- id: g-cm-07
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: diagnoza błędu – wzór redukcyjny dla cosinusa
+  statement: Uczeń obliczał wartość wyrażenia W = 2\cdot\cos 150^{\circ} + \sqrt{3}\cdot\sin 150^{\circ},
+    stosując wzór \cos\left(180^{\circ}-\alpha\right)=\cos\alpha, i otrzymał W=\frac{3\sqrt{3}}{2}. Wyjaśnij,
+    na czym polega jego błąd, i podaj poprawną wartość wyrażenia W.
+  statement_latex: W = 2\cdot\cos 150^{\circ} + \sqrt{3}\cdot\sin 150^{\circ}
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń przyjął \cos 150^{\circ}=\cos 30^{\circ}=\frac{\sqrt{3}}{2} i otrzymał
+    W = 2\cdot\frac{\sqrt{3}}{2}+\sqrt{3}\cdot\frac{1}{2}=\sqrt{3}+\frac{\sqrt{3}}{2}=\frac{3\sqrt{3}}{2} — odpowiedź błędna.
+    GDZIE JEST BŁĄD: punkty okręgu jednostkowego odpowiadające kątom \alpha oraz 180^{\circ}-\alpha są symetryczne względem osi OY, a taka symetria zmienia znak pierwszej współrzędnej, czyli cosinusa. Prawidłowy wzór to \cos\left(180^{\circ}-\alpha\right)=-\cos\alpha. Szybka kontrola: cosinus kąta rozwartego musi być ujemny.
+    POPRAWNIE: \cos 150^{\circ}=-\cos 30^{\circ}=-\frac{\sqrt{3}}{2}, a \sin 150^{\circ}=\sin 30^{\circ}=\frac{1}{2}. Zatem
+    W = 2\cdot\left(-\frac{\sqrt{3}}{2}\right)+\sqrt{3}\cdot\frac{1}{2}=-\sqrt{3}+\frac{\sqrt{3}}{2}=-\frac{\sqrt{3}}{2}.
+  solution_steps:
+  - 'Odtwórz błędne rozumowanie: \cos 150^{\circ}=\cos 30^{\circ} daje W=\frac{3\sqrt{3}}{2}.'
+  - 'Wskaż błąd: symetria względem OY zmienia znak cosinusa, więc \cos\left(180^{\circ}-\alpha\right)=-\cos\alpha.'
+  - 'Popraw: \cos 150^{\circ}=-\frac{\sqrt{3}}{2}, \sin 150^{\circ}=\frac{1}{2}.'
+  - Oblicz W=-\sqrt{3}+\frac{\sqrt{3}}{2}=-\frac{\sqrt{3}}{2}.
+  answer:
+    kind: SYMBOLIC
+    latex: -\frac{\sqrt{3}}{2}
+  checks:
+  - kind: evaluate
+    expr: 2\cdot\cos\left(150^{\circ}\right)+\sqrt{3}\cdot\sin\left(150^{\circ}\right)
+  skills:
+  - wzór cos(180°−α) = −cos α
+  - kontrola znaku cosinusa kąta rozwartego
+  verification:
+    checkability: REFERENCE_CALL
+    note: '''-\\frac{\\sqrt{3}}{2}'' vs ''-\\frac{\\sqrt{3}}{2}'''
+- id: g-cm-08
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: diagnoza błędu – tangens kąta prostego
+  statement: 'Uczeń miał obliczyć wartość wyrażenia W = 2\cdot\sin 90^{\circ} + \operatorname{tg}90^{\circ}.
+    Napisał: „\cos 90^{\circ}=0, więc \operatorname{tg}90^{\circ}=0” i podał W=2. Rozstrzygnij, czy wyrażenie
+    W ma wartość liczbową (odpowiedz TAK lub NIE) i uzasadnij odpowiedź, a następnie oblicz wartość wyrażenia
+    U = 2\cdot\sin 90^{\circ} + \operatorname{tg}135^{\circ}.'
+  statement_latex: W = 2\cdot\sin 90^{\circ} + \operatorname{tg}90^{\circ},\qquad U = 2\cdot\sin 90^{\circ}
+    + \operatorname{tg}135^{\circ}
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń uznał, że skoro \cos 90^{\circ}=0, to \operatorname{tg}90^{\circ}=0, i otrzymał W = 2\cdot 1 + 0 = 2 — to jest błędne.
+    GDZIE JEST BŁĄD: \operatorname{tg}\alpha = \frac{\sin\alpha}{\cos\alpha}, a dla \alpha=90^{\circ} mianownik jest równy zero — dzielenie przez zero jest niewykonalne. W definicji współrzędnościowej \operatorname{tg}\alpha=\frac{y}{x}, a dla 90^{\circ} ramię kąta leży na osi OY, czyli x=0. Zatem \operatorname{tg}90^{\circ} nie istnieje i wyrażenie W nie ma wartości liczbowej (odpowiedź: NIE).
+    POPRAWNY RACHUNEK dla U: \sin 90^{\circ}=1 oraz \operatorname{tg}135^{\circ}=\operatorname{tg}\left(180^{\circ}-45^{\circ}\right)=-\operatorname{tg}45^{\circ}=-1, więc
+    U = 2\cdot 1 + \left(-1\right) = 1.
+  solution_steps:
+  - 'Odtwórz błąd: przyjęcie \operatorname{tg}90^{\circ}=0 prowadzi do W=2.'
+  - 'Wyjaśnij: \operatorname{tg}\alpha=\frac{\sin\alpha}{\cos\alpha}, a \cos 90^{\circ}=0, więc \operatorname{tg}90^{\circ}
+    nie istnieje – wyrażenie W nie ma wartości liczbowej.'
+  - Oblicz \operatorname{tg}135^{\circ}=-\operatorname{tg}45^{\circ}=-1 oraz \sin 90^{\circ}=1.
+  - Wyznacz U = 2\cdot 1 - 1 = 1.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: czy W ma wartosc liczbowa
+      answer:
+        kind: BOOLEAN
+        latex: \text{NIE, bo }\operatorname{tg}90^{\circ}\text{ nie istnieje}
+        truth: false
+    - name: wartosc U
+      answer:
+        kind: NUMERIC
+        value: 1.0
+        latex: '1'
+  checks:
+  - kind: evaluate
+    expr: 2\cdot\sin\left(90^{\circ}\right)+\tan\left(135^{\circ}\right)
+    part: wartosc U
+  skills:
+  - dziedzina tangensa
+  - tg α = sin α / cos α
+  - wzory redukcyjne
+  verification:
+    checkability: REFERENCE_CALL
+    note: 2 parts matched
+- id: g-cm-09
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: diagnoza błędu – komplet rozwiązań równania z sinusem
+  statement: 'Uczeń rozwiązywał w przedziale \langle 0^{\circ},180^{\circ}\rangle równania \sin\alpha=\frac{\sqrt{3}}{2}
+    oraz \cos\beta=-\frac{\sqrt{2}}{2} i podał tylko po jednej odpowiedzi: \alpha=60^{\circ} oraz \beta=135^{\circ}.
+    Sprawdź jego rozwiązania: wyznacz wszystkie kąty \alpha oraz wszystkie kąty \beta z przedziału \langle
+    0^{\circ},180^{\circ}\rangle spełniające te równania.'
+  statement_latex: \sin\alpha=\frac{\sqrt{3}}{2},\qquad \cos\beta=-\frac{\sqrt{2}}{2},\qquad \alpha,\beta\in\langle
+    0^{\circ},180^{\circ}\rangle
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń odczytał z tabeli kąt ostry 60^{\circ} i na tym poprzestał, podając \alpha=60^{\circ} jako jedyne rozwiązanie — to odpowiedź niepełna.
+    GDZIE JEST BŁĄD: w przedziale \langle 0^{\circ},180^{\circ}\rangle sinus rośnie od 0 do 1 na \langle 0^{\circ},90^{\circ}\rangle i maleje od 1 do 0 na \langle 90^{\circ},180^{\circ}\rangle, więc każdą wartość s\in\left(0,1\right) przyjmuje dwa razy: dla \alpha_{0} i dla 180^{\circ}-\alpha_{0}.
+    POPRAWNIE: \sin 60^{\circ}=\frac{\sqrt{3}}{2}, więc \alpha=60^{\circ} lub \alpha=180^{\circ}-60^{\circ}=120^{\circ}.
+    Dla cosinusa jest inaczej: cosinus maleje w całym przedziale od 1 do -1, więc rozwiązanie jest dokładnie jedno. Ponieważ \cos 45^{\circ}=\frac{\sqrt{2}}{2}, a wartość dana jest ujemna, to \beta=180^{\circ}-45^{\circ}=135^{\circ} — tutaj uczeń miał rację.
+    Odpowiedź: \alpha\in\left\{60^{\circ},120^{\circ}\right\}, \beta=135^{\circ}.
+  solution_steps:
+  - 'Odtwórz błąd: podanie tylko \alpha=60^{\circ} pomija drugie rozwiązanie równania z sinusem.'
+  - 'Przypomnij monotoniczność: sinus przyjmuje każdą wartość z (0,1) dwukrotnie, cosinus jest różnowartościowy
+    na \langle 0^{\circ},180^{\circ}\rangle.'
+  - Wyznacz \alpha=60^{\circ} oraz \alpha=180^{\circ}-60^{\circ}=120^{\circ}.
+  - 'Wyznacz \beta: \cos 45^{\circ}=\frac{\sqrt{2}}{2} i wartość ujemna, więc \beta=180^{\circ}-45^{\circ}=135^{\circ}
+    (jedyne rozwiązanie).'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: kąty alfa
+      answer:
+        kind: SET
+        members:
+        - 60^{\circ}
+        - 120^{\circ}
+    - name: kąty beta
+      answer:
+        kind: SET
+        members:
+        - 135^{\circ}
+  skills:
+  - rozwiązywanie sin α = s i cos α = c w ⟨0°,180°⟩
+  - monotoniczność sinusa i cosinusa
+  verification:
+    checkability: REFERENCE_CALL
+    note: 'could not compare: part disagrees: PARSE_ERROR: "UnexpectedCharacters: No terminal matches
+      ''\\'' in the current parser context, at line 1 col 5"'
+- id: g-cm-10
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: diagnoza błędu – definicje sin i cos w trójkącie prostokątnym
+  statement: W trójkącie prostokątnym ABC kąt prosty jest przy wierzchołku C, |BC| = 6, |AC| = 8, |AB|
+    = 10. Kąt przy wierzchołku A oznaczamy przez \alpha. Uczeń zapisał \sin\alpha = \frac{8}{10} oraz
+    \cos\alpha = \frac{6}{10}. Wskaż jego błąd i podaj poprawne wartości \sin\alpha, \cos\alpha oraz \operatorname{tg}\alpha.
+  statement_latex: '|BC| = 6,\ |AC| = 8,\ |AB| = 10,\qquad \sin\alpha = \frac{|BC|}{|AB|},\ \cos\alpha
+    = \frac{|AC|}{|AB|},\ \operatorname{tg}\alpha = \frac{|BC|}{|AC|}'
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń zamienił role przyprostokątnych i przyjął, że w liczniku sinusa stoi bok przyległy do kąta \alpha, czyli AC; otrzymał \sin\alpha=\frac{8}{10}=\frac{4}{5} i \cos\alpha=\frac{6}{10}=\frac{3}{5} — odwrotnie niż być powinno.
+    GDZIE JEST BŁĄD: sinus to stosunek boku leżącego naprzeciw kąta do przeciwprostokątnej, a cosinus – boku przyległego do przeciwprostokątnej. W tym trójkącie naprzeciw kąta \alpha (przy wierzchołku A) leży bok BC o długości 6, a bok AC o długości 8 jest bokiem przyległym; przeciwprostokątną jest AB o długości 10.
+    Kontrola: dla małego kąta bok naprzeciw jest krótki, więc sinus jest bliski 0, a cosinus bliski 1.
+    POPRAWNIE:
+    \sin\alpha=\frac{|BC|}{|AB|}=\frac{6}{10}=\frac{3}{5},\qquad \cos\alpha=\frac{|AC|}{|AB|}=\frac{8}{10}=\frac{4}{5},\qquad \operatorname{tg}\alpha=\frac{|BC|}{|AC|}=\frac{6}{8}=\frac{3}{4}.
+  solution_steps:
+  - 'Odtwórz błąd: uczeń wziął do sinusa bok przyległy, otrzymując \sin\alpha=\frac{4}{5}, \cos\alpha=\frac{3}{5}.'
+  - 'Ustal położenie boków względem kąta \alpha przy wierzchołku A: naprzeciw leży BC=6, przyległy jest
+    AC=8, przeciwprostokątna AB=10.'
+  - 'Zastosuj definicje: \sin\alpha=\frac{6}{10}=\frac{3}{5}, \cos\alpha=\frac{8}{10}=\frac{4}{5}.'
+  - Oblicz \operatorname{tg}\alpha=\frac{6}{8}=\frac{3}{4} i sprawdź, że \sin^{2}\alpha+\cos^{2}\alpha=1.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: sin alfa
+      answer:
+        kind: NUMERIC
+        value: 0.6
+        latex: \frac{3}{5}
+    - name: cos alfa
+      answer:
+        kind: NUMERIC
+        value: 0.8
+        latex: \frac{4}{5}
+    - name: tg alfa
+      answer:
+        kind: NUMERIC
+        value: 0.75
+        latex: \frac{3}{4}
+  checks:
+  - kind: evaluate
+    expr: \frac{6}{10}
+    part: sin alfa
+  - kind: evaluate
+    expr: \frac{8}{10}
+    part: cos alfa
+  - kind: evaluate
+    expr: \frac{6}{8}
+    part: tg alfa
+  skills:
+  - definicje sin, cos, tg kąta ostrego
+  - rozpoznawanie boku naprzeciw i przyległego
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [sin alfa] SymPy solved it fresh: 0.6 vs 0.6 (tol 1e-09) ;
+      [cos alfa] SymPy solved it fresh: 0.8 vs 0.8 (tol 1e-09) ; [tg alfa] SymPy solved it fresh: 0.75
+      vs 0.75 (tol 1e-09)'
+- id: g-ch-t02
+  slot: CHALLENGE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: 'zadanie odwrotne: z odległości punktu od początku układu do miary kąta'
+  statement: Kąt α o mierze z przedziału \left(0^\circ,180^\circ\right) ma wierzchołek w punkcie O = (0,\
+    0), jedno jego ramię pokrywa się z dodatnią półosią Ox, a na drugim ramieniu leży punkt P = (m,\ 4),
+    którego odległość od punktu O jest równa 8. Wiadomo ponadto, że α jest kątem rozwartym. Wyznacz liczbę
+    m oraz miarę kąta α.
+  statement_latex: P=\left(m,\ 4\right),\qquad \left|OP\right|=\sqrt{m^{2}+4^{2}}=8,\qquad \alpha\in\left(90^\circ,180^\circ\right)
+  solution: |-
+    Odległość punktu P od początku układu to r=\left|OP\right|=\sqrt{m^{2}+4^{2}}, więc z warunku zadania \sqrt{m^{2}+16}=8.
+    Stąd m^{2}+16=64, czyli m^{2}=48 i m=4\sqrt{3} lub m=-4\sqrt{3}.
+    Kąt α jest rozwarty, więc jego ramię leży w II ćwiartce, a zatem pierwsza współrzędna punktu P jest ujemna. Odrzucamy m=4\sqrt{3} i przyjmujemy m=-4\sqrt{3}.
+    Teraz \cos\alpha=\frac{m}{r}=\frac{-4\sqrt{3}}{8}=-\frac{\sqrt{3}}{2}.
+    Kątem ostrym o cosinusie \frac{\sqrt{3}}{2} jest 30^\circ, a wartość ujemna oznacza kąt rozwarty, więc \alpha=180^\circ-30^\circ=150^\circ.
+    Kontrola: \sin\alpha=\frac{4}{8}=\frac{1}{2}=\sin 150^\circ. ✔
+  solution_steps:
+  - 'Zapisz warunek na odległość: \sqrt{m^{2}+16}=8.'
+  - Podnieś obustronnie do kwadratu i wyznacz m^{2}=48, czyli m=\pm 4\sqrt{3}.
+  - Z warunku 'kąt rozwarty' wynika m<0, więc m=-4\sqrt{3}.
+  - Oblicz \cos\alpha=\frac{-4\sqrt{3}}{8}=-\frac{\sqrt{3}}{2}.
+  - Odczytaj \alpha=180^\circ-30^\circ=150^\circ i sprawdź wynik sinusem.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: m
+      answer:
+        kind: SYMBOLIC
+        latex: -4\sqrt{3}
+    - name: alpha
+      answer:
+        kind: NUMERIC
+        value: 150.0
+        latex: 150^\circ
+  checks:
+  - kind: evaluate
+    expr: -\sqrt{8^{2}-4^{2}}
+    var: m
+    part: m
+  - kind: evaluate
+    expr: 180 - 30
+    part: alpha
+  skills:
+  - definicja współrzędnościowa
+  - twierdzenie Pitagorasa dla r
+  - filtrowanie rozwiązania warunkiem 'kąt rozwarty'
+  - wartości szczególne
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [m] SymPy solved it fresh: -6.928203230275509 vs -6.928203230275509
+      (tol 1e-09) ; [alpha] SymPy solved it fresh: 150.0 vs 150.0 (tol 1e-09)'
+- id: g-ch-t03
+  slot: CHALLENGE
+  ramp_index: 1
+  difficulty: 4
+  exercise_type: geometria analityczna z kątem w położeniu standardowym
+  statement: W kartezjańskim układzie współrzędnych (x,\ y) dane są punkty O = (0,\ 0) oraz A = (6,\ 0).
+    Punkt B leży w drugiej ćwiartce układu współrzędnych, jego odległość od punktu O jest równa 4, a pole
+    trójkąta OAB jest równe 6\sqrt{3}. Kąt AOB ma miarę α. Wyznacz współrzędne punktu B oraz miarę kąta
+    α.
+  statement_latex: \left|OA\right|=6,\qquad \left|OB\right|=4,\qquad P_{OAB}=\frac{1}{2}\cdot 6\cdot y_{B}=6\sqrt{3}
+  solution: |-
+    Bok OA leży na osi Ox i ma długość 6, więc wysokość trójkąta OAB opuszczona na ten bok jest równa drugiej współrzędnej punktu B, czyli y_{B} (punkt B leży w II ćwiartce, więc y_{B}>0).
+    Zatem P_{OAB}=\frac{1}{2}\cdot 6\cdot y_{B}=3\cdot y_{B}. Z warunku 3\cdot y_{B}=6\sqrt{3} otrzymujemy y_{B}=2\sqrt{3}.
+    Punkt B leży na drugim ramieniu kąta α i \left|OB\right|=r=4, więc \sin\alpha=\frac{y_{B}}{r}=\frac{2\sqrt{3}}{4}=\frac{\sqrt{3}}{2}.
+    W przedziale \left(0^\circ,180^\circ\right) równanie to ma dwa rozwiązania: \alpha=60^\circ oraz \alpha=180^\circ-60^\circ=120^\circ.
+    Punkt B leży w II ćwiartce, więc x_{B}<0, czyli \cos\alpha<0 i kąt α jest rozwarty. Odrzucamy 60^\circ i przyjmujemy \alpha=120^\circ.
+    Pierwszą współrzędną wyznaczamy z Pitagorasa: x_{B}=-\sqrt{4^{2}-\left(2\sqrt{3}\right)^{2}}=-\sqrt{16-12}=-2 (znak minus, bo II ćwiartka).
+    Kontrola: \cos 120^\circ=-\frac{1}{2} oraz \frac{x_{B}}{r}=\frac{-2}{4}=-\frac{1}{2}. ✔
+    Odpowiedź: B=\left(-2,\ 2\sqrt{3}\right), \alpha=120^\circ.
+  solution_steps:
+  - Zauważ, że wysokość trójkąta OAB opuszczona na bok OA (leżący na osi Ox) jest równa y_{B}.
+  - 'Ułóż równanie pola: \frac{1}{2}\cdot 6\cdot y_{B}=6\sqrt{3}, stąd y_{B}=2\sqrt{3}.'
+  - 'Oblicz \sin\alpha=\frac{2\sqrt{3}}{4}=\frac{\sqrt{3}}{2} i wypisz oba rozwiązania: 60^\circ i 120^\circ.'
+  - Z warunku 'B w II ćwiartce' wynika x_{B}<0, więc \alpha=120^\circ.
+  - Wyznacz x_{B}=-\sqrt{16-12}=-2 i sprawdź zgodność z \cos 120^\circ=-\frac{1}{2}.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: B_x
+      answer:
+        kind: NUMERIC
+        value: -2.0
+        latex: '-2'
+    - name: B_y
+      answer:
+        kind: SYMBOLIC
+        latex: 2\sqrt{3}
+    - name: alpha
+      answer:
+        kind: NUMERIC
+        value: 120.0
+        latex: 120^\circ
+  checks:
+  - kind: evaluate
+    expr: -\sqrt{4^{2}-\left(2\sqrt{3}\right)^{2}}
+    part: B_x
+  - kind: evaluate
+    expr: \frac{2\cdot 6\sqrt{3}}{6}
+    var: y
+    part: B_y
+  - kind: evaluate
+    expr: 180 - 60
+    part: alpha
+  stated_model:
+    variable: y_{B}
+    objective_latex: P_{OAB}=\frac{1}{2}\cdot 6\cdot y_{B}
+    domain_lo: '0'
+    domain_hi: '4'
+    domain_hi_open: false
+    goal: value
+    constraint_used: \left|OB\right|=4 oraz B w II ćwiartce (x_{B}<0,\ y_{B}>0)
+  skills:
+  - 'złożenie modelu: pole trójkąta przez współrzędną y'
+  - definicja współrzędnościowa sin i cos
+  - równanie \sin\alpha=s i wybór właściwego rozwiązania
+  - kontrola znaków w II ćwiartce
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''y_{B}'': ''P_{OAB}=\\frac{1}{2}\\cdot
+      6\\cdot y_{B}'') — human review'
+- id: g-ch-t04
+  slot: CHALLENGE
+  ramp_index: 2
+  difficulty: 5
+  exercise_type: 'modelowanie: pole jako funkcja kąta, dziedzina, wartość i badanie osiągalności'
+  statement: W kartezjańskim układzie współrzędnych (x,\ y) dane są punkty O = (0,\ 0) oraz A = (5,\ 0).
+    Punkt B leży w drugiej ćwiartce układu współrzędnych, a jego odległość od punktu O jest równa 4. Przez
+    α oznaczamy miarę kąta AOB (jedno ramię tego kąta pokrywa się z dodatnią półosią Ox, a drugie przechodzi
+    przez punkt B). a) Wyznacz wzór na pole P trójkąta OAB w zależności od α oraz podaj przedział, do
+    którego należy miara α. b) Oblicz miarę kąta α oraz współrzędne punktu B, jeżeli pole trójkąta OAB
+    jest równe 5\sqrt{2}. c) Rozstrzygnij, czy pole trójkąta OAB może być równe 11. Odpowiedź uzasadnij.
+  statement_latex: P\left(\alpha\right)=\frac{1}{2}\cdot 5\cdot 4\sin\alpha=10\sin\alpha,\qquad \alpha\in\left(90^\circ,180^\circ\right)
+  solution: |-
+    a) Punkt B leży na drugim ramieniu kąta α, przy czym r=\left|OB\right|=4. Z definicji współrzędnościowej y_{B}=r\cdot\sin\alpha=4\sin\alpha oraz x_{B}=r\cdot\cos\alpha=4\cos\alpha.
+    Bok OA leży na osi Ox i ma długość 5, więc wysokość trójkąta opuszczona na ten bok jest równa y_{B}. Zatem
+    P=\frac{1}{2}\cdot 5\cdot 4\sin\alpha=10\sin\alpha.
+    Punkt B leży w II ćwiartce, więc x_{B}<0 i y_{B}>0, czyli \cos\alpha<0 i \sin\alpha>0. Stąd \alpha\in\left(90^\circ,180^\circ\right).
+    b) Z równania 10\sin\alpha=5\sqrt{2} otrzymujemy \sin\alpha=\frac{\sqrt{2}}{2}. W przedziale \left(0^\circ,180^\circ\right) rozwiązaniami są 45^\circ oraz 180^\circ-45^\circ=135^\circ, ale dziedziną jest \left(90^\circ,180^\circ\right), więc \alpha=135^\circ.
+    Wtedy \cos\alpha=\cos 135^\circ=-\frac{\sqrt{2}}{2}, a zatem
+    x_{B}=4\cdot\left(-\frac{\sqrt{2}}{2}\right)=-2\sqrt{2},\qquad y_{B}=4\cdot\frac{\sqrt{2}}{2}=2\sqrt{2}.
+    Kontrola: \left|OB\right|=\sqrt{8+8}=4 i punkt leży w II ćwiartce. ✔
+    c) Dla każdego kąta zachodzi \sin\alpha\le 1, więc P=10\sin\alpha\le 10<11. (Co więcej, dla \alpha\in\left(90^\circ,180^\circ\right) jest \sin\alpha<1, więc nawet P<10.) Pole trójkąta OAB nie może być równe 11.
+  solution_steps:
+  - 'Zapisz współrzędne punktu B przez kąt: x_{B}=4\cos\alpha, y_{B}=4\sin\alpha.'
+  - 'Zbuduj wzór na pole: P=\frac{1}{2}\cdot 5\cdot y_{B}=10\sin\alpha.'
+  - Z warunku 'B w II ćwiartce' wyznacz dziedzinę \alpha\in\left(90^\circ,180^\circ\right).
+  - Rozwiąż 10\sin\alpha=5\sqrt{2}, czyli \sin\alpha=\frac{\sqrt{2}}{2}; odrzuć 45^\circ (poza dziedziną)
+    i przyjmij \alpha=135^\circ.
+  - Oblicz x_{B}=4\cos 135^\circ=-2\sqrt{2} oraz y_{B}=4\sin 135^\circ=2\sqrt{2}.
+  - 'Porównaj 11 z zakresem wartości: P=10\sin\alpha\le 10, więc pole równe 11 jest niemożliwe.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wzor_pola
+      answer:
+        kind: SYMBOLIC
+        latex: 10\sin\alpha
+    - name: dziedzina
+      answer:
+        kind: INTERVAL
+        latex: \left(90^\circ,180^\circ\right)
+        lo: '90'
+        hi: '180'
+    - name: alpha
+      answer:
+        kind: NUMERIC
+        value: 135.0
+        latex: 135^\circ
+    - name: B_x
+      answer:
+        kind: SYMBOLIC
+        latex: -2\sqrt{2}
+    - name: B_y
+      answer:
+        kind: SYMBOLIC
+        latex: 2\sqrt{2}
+    - name: czy_pole_11
+      answer:
+        kind: BOOLEAN
+        latex: nie
+        truth: false
+    - name: uzasadnienie
+      answer:
+        kind: NOT_MACHINE_CHECKABLE
+        reason: Uczeń musi uzasadnić, że P=10\sin\alpha oraz \sin\alpha\le 1 (a dla \alpha\in\left(90^\circ,180^\circ\right)
+          nawet \sin\alpha<1), więc P\le 10<11 i pole równe 11 jest nieosiągalne.
+  checks:
+  - kind: simplify
+    expr: \frac{1}{2}\cdot 5\cdot 4\cdot\sin\left(\alpha\right)
+    var: \alpha
+    part: wzor_pola
+  - kind: evaluate
+    expr: 180 - 45
+    part: alpha
+  - kind: evaluate
+    expr: 4\cdot\left(-\frac{\sqrt{2}}{2}\right)
+    part: B_x
+  - kind: evaluate
+    expr: 4\cdot\frac{\sqrt{2}}{2}
+    part: B_y
+  stated_model:
+    variable: \alpha
+    objective_latex: P\left(\alpha\right)=10\sin\alpha
+    domain_lo: '90'
+    domain_hi: '180'
+    goal: value
+    constraint_used: \left|OA\right|=5,\ \left|OB\right|=4,\ B w II ćwiartce
+  skills:
+  - budowanie wzoru na pole w zależności od kąta
+  - dziedzina wymuszona położeniem punktu
+  - równanie \sin\alpha=s i wybór rozwiązania rozwartego
+  - wyznaczanie współrzędnych z \cos\alpha i \sin\alpha
+  - ocena osiągalności wartości z zakresu funkcji
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''\\alpha'': ''P\\left(\\alpha\\right)=10\\sin\\alpha'')
+      — human review'

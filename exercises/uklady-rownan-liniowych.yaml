@@ -1,0 +1,919 @@
+section: uklady-rownan-liniowych
+name: 'Układy równań liniowych: rozwiązywanie, interpretacja i zastosowania'
+scope: Solving 2x2 linear systems; consistent, dependent and inconsistent systems as pairs of lines; translating
+  a word problem into a system and interpreting the solution.
+requirements:
+- IV.1
+- IV.2
+counts:
+  total: 16
+  REFERENCE_CALL: 6
+  DETERMINISTIC: 5
+  NOT_MACHINE_CHECKABLE: 2
+  STATED_MODEL: 3
+exercises:
+- id: g-th-00
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: sprawdzenie pary liczb w układzie równań
+  statement: Dany jest układ równań \begin{cases} 3x + 2y = 4 \\ x - 5y = 7 \end{cases} Rozważamy parę
+    liczb x = 2, y = -1. Oblicz wartość lewej strony pierwszego równania oraz wartość lewej strony drugiego
+    równania dla tej pary liczb, a następnie rozstrzygnij, czy para (2, -1) jest rozwiązaniem tego układu
+    równań.
+  statement_latex: \begin{cases} 3\cdot x + 2\cdot y = 4 \\ x - 5\cdot y = 7 \end{cases},\qquad \left(x,\
+    y\right) = \left(2,\ -1\right)
+  solution: |-
+    Podstawiamy x = 2 oraz y = -1 do lewej strony pierwszego równania: 3\cdot 2 + 2\cdot(-1) = 6 - 2 = 4. Prawa strona pierwszego równania jest równa 4, więc pierwsze równanie jest spełnione.
+    Podstawiamy tę samą parę do lewej strony drugiego równania: 2 - 5\cdot(-1) = 2 + 5 = 7. Prawa strona drugiego równania jest równa 7, więc i to równanie jest spełnione.
+    Para liczb spełnia JEDNOCZEŚNIE oba równania, zatem jest rozwiązaniem układu. Geometrycznie: punkt (2, -1) leży na obu prostych, czyli jest ich punktem wspólnym.
+    Odpowiedź: lewa strona I równania ma wartość 4, lewa strona II równania ma wartość 7, para (2, -1) jest rozwiązaniem układu.
+  solution_steps:
+  - 'Podstaw x = 2 i y = -1 do lewej strony pierwszego równania: 3·2 + 2·(-1) = 4.'
+  - 'Porównaj z prawą stroną: 4 = 4, pierwsze równanie jest spełnione.'
+  - 'Podstaw tę samą parę do lewej strony drugiego równania: 2 - 5·(-1) = 7.'
+  - 'Porównaj z prawą stroną: 7 = 7, drugie równanie jest spełnione.'
+  - Ponieważ oba równania są spełnione jednocześnie, para (2, -1) jest rozwiązaniem układu.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wartość lewej strony I równania
+      answer:
+        kind: NUMERIC
+        value: 4.0
+    - name: wartość lewej strony II równania
+      answer:
+        kind: NUMERIC
+        value: 7.0
+    - name: czy para jest rozwiązaniem układu
+      answer:
+        kind: BOOLEAN
+        truth: true
+  checks:
+  - kind: evaluate
+    expr: 3\cdot 2 + 2\cdot\left(-1\right)
+    part: wartość lewej strony I równania
+  - kind: evaluate
+    expr: 2 - 5\cdot\left(-1\right)
+    part: wartość lewej strony II równania
+  skills:
+  - sprawdzanie, czy para liczb jest rozwiązaniem układu
+  - obliczanie wartości wyrażenia algebraicznego
+  verification:
+    checkability: REFERENCE_CALL
+    note: '3 parts matched · det: [wartość lewej strony I równania] SymPy solved it fresh: 4.0 vs 4.0
+      (tol 1e-09) ; [wartość lewej strony II równania] SymPy solved it fresh: 7.0 vs 7.0 (tol 1e-09)'
+- id: g-th-01
+  slot: THEORY_SUPPORT
+  ramp_index: 1
+  difficulty: 1
+  exercise_type: rozwiązywanie układu metodą podstawiania
+  statement: Rozwiąż metodą podstawiania układ równań \begin{cases} y = 2x - 3 \\ 3x + y = 12 \end{cases}
+    Podaj wartość x oraz wartość y.
+  statement_latex: \begin{cases} y = 2\cdot x - 3 \\ 3\cdot x + y = 12 \end{cases}
+  solution: |-
+    W pierwszym równaniu niewiadoma y jest już wyznaczona: y = 2x - 3.
+    Wyrażenie 2x - 3 podstawiamy w miejsce y do DRUGIEGO równania (nie do tego samego, z którego je wzięliśmy):
+    3x + (2x - 3) = 12.
+    Porządkujemy: 5x - 3 = 12, czyli 5x = 15, stąd x = 3.
+    Wracamy do wzoru z pierwszego równania: y = 2\cdot 3 - 3 = 3.
+    Sprawdzenie: y = 2·3 - 3 = 3 ✓ oraz 3·3 + 3 = 12 ✓.
+    Odpowiedź: (x, y) = (3, 3).
+  solution_steps:
+  - 'Zauważ, że z pierwszego równania y jest już wyznaczone: y = 2x - 3.'
+  - 'Podstaw 2x - 3 w miejsce y do drugiego równania: 3x + (2x - 3) = 12.'
+  - 'Rozwiąż równanie z jedną niewiadomą: 5x = 15, więc x = 3.'
+  - 'Oblicz y: y = 2·3 - 3 = 3.'
+  - Sprawdź parę (3, 3) w obu równaniach i zapisz odpowiedź jako parę liczb.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: x
+      answer:
+        kind: NUMERIC
+        value: 3.0
+    - name: y
+      answer:
+        kind: NUMERIC
+        value: 3.0
+  checks:
+  - kind: solve_equation
+    expr: 3\cdot x + \left(2\cdot x - 3\right) = 12
+    part: x
+  - kind: evaluate
+    expr: 2\cdot 3 - 3
+    var: y
+    part: y
+  skills:
+  - metoda podstawiania
+  - rozwiązywanie równania liniowego z jedną niewiadomą
+  - zapis rozwiązania jako pary liczb
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [x] SymPy solved it fresh: 3.0 vs 3.0 (tol 1e-09) ; [y] SymPy
+      solved it fresh: 3.0 vs 3.0 (tol 1e-09)'
+- id: g-th-02
+  slot: THEORY_SUPPORT
+  ramp_index: 2
+  difficulty: 2
+  exercise_type: klasyfikacja układu i interpretacja geometryczna
+  statement: Dany jest układ równań \begin{cases} y = -3x + 5 \\ y = -3x - 2 \end{cases} Rozstrzygnij,
+    czy ten układ jest oznaczony, nieoznaczony czy sprzeczny, podaj liczbę jego rozwiązań oraz opisz wzajemne
+    położenie prostych opisanych tymi równaniami.
+  statement_latex: \begin{cases} y = -3\cdot x + 5 \\ y = -3\cdot x - 2 \end{cases}
+  solution: |-
+    Oba równania są już zapisane w postaci kierunkowej y = ax + b.
+    Współczynniki kierunkowe: a_1 = -3 oraz a_2 = -3, są więc równe.
+    Wyrazy wolne: b_1 = 5 oraz b_2 = -2, są różne.
+    Równe współczynniki kierunkowe i różne wyrazy wolne oznaczają proste równoległe i rozłączne — nie mają one punktu wspólnego.
+    Można to też pokazać rachunkowo: odejmując równania stronami dostajemy 0 = 7, czyli zdanie fałszywe.
+    Odpowiedź: układ jest sprzeczny, ma 0 rozwiązań, a proste są równoległe i różne (nie mają punktów wspólnych).
+  solution_steps:
+  - 'Odczytaj współczynniki kierunkowe: a₁ = -3, a₂ = -3 — są równe.'
+  - 'Odczytaj wyrazy wolne: b₁ = 5, b₂ = -2 — są różne.'
+  - 'Wniosek algebraiczny: odejmując równania stronami otrzymujemy 0 = 7, zdanie fałszywe, więc układ
+    jest sprzeczny (0 rozwiązań).'
+  - 'Wniosek geometryczny: proste są równoległe i rozłączne, nie mają punktu wspólnego.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: typ układu
+      answer:
+        kind: SYMBOLIC
+        latex: \text{układ sprzeczny}
+    - name: liczba rozwiązań
+      answer:
+        kind: NUMERIC
+        value: 0.0
+    - name: położenie prostych
+      answer:
+        kind: NOT_MACHINE_CHECKABLE
+        reason: Uczeń ma opisać, że proste mają ten sam współczynnik kierunkowy (-3) i różne wyrazy wolne,
+          więc są równoległe i rozłączne — nie mają punktów wspólnych.
+  skills:
+  - klasyfikacja układu przez postać kierunkową
+  - interpretacja geometryczna układu
+  - liczba rozwiązań układu
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'part(s) need a human: położenie prostych · 0/2 other parts solved fresh'
+- id: g-ex-03
+  slot: EXERCISE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: rozwiązywanie układu metodą przeciwnych współczynników
+  statement: Rozwiąż układ równań \begin{cases} 4x - 3y = 18 \\ 2x + 5y = -4 \end{cases} Podaj wartość
+    x oraz wartość y.
+  statement_latex: \begin{cases} 4\cdot x - 3\cdot y = 18 \\ 2\cdot x + 5\cdot y = -4 \end{cases}
+  solution: |-
+    Stosujemy metodę przeciwnych współczynników. Mnożymy CAŁE drugie równanie przez (-2):
+    -4x - 10y = 8.
+    Dodajemy je stronami do pierwszego równania:
+    (4x - 4x) + (-3y - 10y) = 18 + 8, czyli -13y = 26, stąd y = -2.
+    Wstawiamy y = -2 do drugiego równania wyjściowego: 2x + 5\cdot(-2) = -4, czyli 2x - 10 = -4, więc 2x = 6 i x = 3.
+    Sprawdzenie: 4·3 - 3·(-2) = 12 + 6 = 18 ✓ oraz 2·3 + 5·(-2) = 6 - 10 = -4 ✓.
+    Odpowiedź: (x, y) = (3, -2). Układ jest oznaczony (W = 4·5 - 2·(-3) = 26 ≠ 0), proste przecinają się w punkcie (3, -2).
+  solution_steps:
+  - 'Pomnóż całe drugie równanie przez (-2): -4x - 10y = 8.'
+  - 'Dodaj równania stronami: -13y = 26.'
+  - 'Rozwiąż: y = -2.'
+  - 'Wstaw y = -2 do równania 2x + 5y = -4: 2x = 6, czyli x = 3.'
+  - Sprawdź parę (3, -2) w obu równaniach wyjściowych i zapisz odpowiedź.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: x
+      answer:
+        kind: NUMERIC
+        value: 3.0
+    - name: y
+      answer:
+        kind: NUMERIC
+        value: -2.0
+  checks:
+  - kind: solve_equation
+    expr: 4\cdot x - 3\cdot\frac{-4 - 2\cdot x}{5} = 18
+    part: x
+  - kind: solve_equation
+    expr: 4\cdot\frac{-4 - 5\cdot y}{2} - 3\cdot y = 18
+    var: y
+    part: y
+  skills:
+  - metoda eliminacji
+  - sprawdzanie rozwiązania
+  - zapis rozwiązania jako pary liczb
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [x] SymPy solved it fresh: 3.0 vs 3.0 (tol 1e-09) ; [y] SymPy
+      solved it fresh: -2.0 vs -2.0 (tol 1e-09)'
+- id: g-ex-04
+  slot: EXERCISE
+  ramp_index: 1
+  difficulty: 3
+  exercise_type: układ wymagający uporządkowania (ułamki i nawiasy)
+  statement: Rozwiąż układ równań \begin{cases} \frac{x+y}{2} - \frac{x-y}{3} = 3 \\ 2\left(x-1\right)
+    + 3\left(y+2\right) = 26 \end{cases} Podaj wartość x oraz wartość y.
+  statement_latex: \begin{cases} \frac{x+y}{2} - \frac{x-y}{3} = 3 \\ 2\cdot\left(x-1\right) + 3\cdot\left(y+2\right)
+    = 26 \end{cases}
+  solution: |-
+    Najpierw porządkujemy oba równania.
+    Pierwsze równanie mnożymy przez 6 (wspólny mianownik): 3(x + y) - 2(x - y) = 18, czyli 3x + 3y - 2x + 2y = 18, więc x + 5y = 18.
+    W drugim równaniu opuszczamy nawiasy: 2x - 2 + 3y + 6 = 26, czyli 2x + 3y = 22.
+    Otrzymaliśmy układ równoważny: { x + 5y = 18 ; 2x + 3y = 22 }.
+    Metoda podstawiania: z pierwszego równania x = 18 - 5y. Podstawiamy do drugiego:
+    2(18 - 5y) + 3y = 22, czyli 36 - 10y + 3y = 22, więc -7y = -14 i y = 2.
+    Stąd x = 18 - 5·2 = 8.
+    Sprawdzenie w równaniach wyjściowych: \frac{8+2}{2} - \frac{8-2}{3} = 5 - 2 = 3 ✓ oraz 2·(8-1) + 3·(2+2) = 14 + 12 = 26 ✓.
+    Odpowiedź: (x, y) = (8, 2).
+  solution_steps:
+  - 'Pomnóż pierwsze równanie przez 6 i uporządkuj: 3(x+y) - 2(x-y) = 18, czyli x + 5y = 18.'
+  - 'Opuść nawiasy w drugim równaniu: 2x - 2 + 3y + 6 = 26, czyli 2x + 3y = 22.'
+  - Z równania x + 5y = 18 wyznacz x = 18 - 5y.
+  - 'Podstaw do drugiego równania: 2(18 - 5y) + 3y = 22, skąd -7y = -14, czyli y = 2.'
+  - Oblicz x = 18 - 5·2 = 8.
+  - Sprawdź parę (8, 2) w obu równaniach wyjściowych i zapisz odpowiedź.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: x
+      answer:
+        kind: NUMERIC
+        value: 8.0
+    - name: y
+      answer:
+        kind: NUMERIC
+        value: 2.0
+  checks:
+  - kind: solve_equation
+    expr: 2\cdot x + 3\cdot\frac{18 - x}{5} = 22
+    part: x
+  - kind: solve_equation
+    expr: 2\cdot\left(18 - 5\cdot y\right) + 3\cdot y = 22
+    var: y
+    part: y
+  skills:
+  - 'porządkowanie równań: usuwanie ułamków i nawiasów'
+  - metoda podstawiania
+  - sprawdzanie rozwiązania
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [x] SymPy solved it fresh: 8.0 vs 8.0 (tol 1e-09) ; [y] SymPy
+      solved it fresh: 2.0 vs 2.0 (tol 1e-09)'
+- id: g-ex-05
+  slot: EXERCISE
+  ramp_index: 2
+  difficulty: 4
+  exercise_type: zadanie tekstowe rozwiązywane układem równań
+  statement: Na seans filmowy sprzedano bilety normalne w cenie 22 zł oraz bilety ulgowe w cenie 14 zł.
+    Łącznie sprzedano 150 biletów. Po opłaceniu kosztów organizacji seansu, które stanowiły 20% wpływów
+    ze sprzedaży biletów, organizatorowi pozostało 2128 zł. Oblicz, ile sprzedano biletów normalnych,
+    ile ulgowych oraz o ile więcej sprzedano biletów ulgowych niż normalnych. Zapisz obliczenia.
+  statement_latex: \begin{cases} x + y = 150 \\ \frac{80}{100}\cdot\left(22\cdot x + 14\cdot y\right)
+    = 2128 \end{cases}
+  solution: |-
+    Oznaczenia: x — liczba sprzedanych biletów normalnych, y — liczba sprzedanych biletów ulgowych. Z sensu zadania x i y są liczbami całkowitymi nieujemnymi oraz x + y = 150.
+    Koszty stanowiły 20% wpływów, więc organizatorowi pozostało 80% wpływów: 0{,}8\cdot(22x + 14y) = 2128, skąd 22x + 14y = \frac{2128}{0{,}8} = 2660.
+    Układ: { x + y = 150 ; 22x + 14y = 2660 }.
+    Z pierwszego równania y = 150 - x. Podstawiamy do drugiego:
+    22x + 14(150 - x) = 2660, czyli 22x + 2100 - 14x = 2660, więc 8x = 560 i x = 70.
+    Stąd y = 150 - 70 = 80.
+    Warunki dziedziny: 70 i 80 to liczby całkowite dodatnie — spełnione.
+    Sprawdzenie w treści: 70 + 80 = 150 ✓; wpływy 22·70 + 14·80 = 1540 + 1120 = 2660 zł, koszty 20% to 532 zł, pozostaje 2660 - 532 = 2128 zł ✓.
+    Różnica: 80 - 70 = 10.
+    Odpowiedź: sprzedano 70 biletów normalnych i 80 biletów ulgowych; biletów ulgowych sprzedano o 10 więcej niż normalnych.
+  solution_steps:
+  - 'Oznacz: x — liczba biletów normalnych, y — liczba biletów ulgowych; x, y całkowite nieujemne.'
+  - 'Zapisz pierwszy warunek: x + y = 150.'
+  - 'Zapisz drugi warunek: 0,8·(22x + 14y) = 2128, czyli 22x + 14y = 2660.'
+  - 'Podstaw y = 150 - x do drugiego równania: 22x + 14(150 - x) = 2660.'
+  - 'Rozwiąż: 8x = 560, czyli x = 70, a stąd y = 80.'
+  - Sprawdź warunki dziedziny i zgodność z treścią zadania.
+  - 'Odpowiedz na pytanie: oblicz różnicę 80 - 70 = 10 i sformułuj odpowiedź pełnym zdaniem.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: liczba biletów normalnych
+      answer:
+        kind: NUMERIC
+        value: 70.0
+    - name: liczba biletów ulgowych
+      answer:
+        kind: NUMERIC
+        value: 80.0
+    - name: o ile więcej biletów ulgowych
+      answer:
+        kind: NUMERIC
+        value: 10.0
+  checks:
+  - kind: solve_equation
+    expr: \frac{80}{100}\cdot\left(22\cdot x + 14\cdot\left(150 - x\right)\right) = 2128
+    part: liczba biletów normalnych
+  - kind: solve_equation
+    expr: \frac{80}{100}\cdot\left(22\cdot\left(150 - y\right) + 14\cdot y\right) = 2128
+    var: y
+    part: liczba biletów ulgowych
+  - kind: evaluate
+    expr: 80 - 70
+    part: o ile więcej biletów ulgowych
+  stated_model:
+    variable: x
+    objective_latex: \frac{80}{100}\cdot\left(22\cdot x + 14\cdot\left(150 - x\right)\right) = 2128
+    domain_lo: '0'
+    domain_hi: '150'
+    domain_lo_open: false
+    domain_hi_open: false
+    goal: value
+    constraint_used: x + y = 150,\ x,\ y \in \mathbb{Z},\ x \ge 0,\ y \ge 0
+  skills:
+  - układanie układu równań do treści zadania
+  - obliczenia procentowe
+  - interpretacja rozwiązania w kontekście zadania
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''x'': ''\\frac{80}{100}\\cdot\\left(22\\cdot
+      x + 14\\cdot\\left(150 - x\\right)\\right) = 2128'') — human review'
+- id: g-ex-t00
+  slot: EXERCISE
+  ramp_index: 6
+  difficulty: 3
+  exercise_type: Rozwiązywanie układu wymagającego uporządkowania + klasyfikacja
+  statement: |-
+    Rozwiąż układ równań
+    \[ \left\{ \begin{matrix} \frac{x+2}{3} - \frac{y-1}{2} = 1 \\ 5x - 2\left(y+3\right) = 8 \end{matrix} \right. \]
+    Podaj rozwiązanie w postaci pary liczb \left(x,\ y\right) oraz określ, czy ten układ jest oznaczony, nieoznaczony, czy sprzeczny. Zapisz obliczenia.
+  statement_latex: \left\{ \begin{matrix} \frac{x+2}{3} - \frac{y-1}{2} = 1 \\ 5\cdot x - 2\cdot\left(y+3\right)
+    = 8 \end{matrix} \right.
+  solution: |-
+    Porządkujemy pierwsze równanie: mnożymy obie strony (KAŻDY wyraz) przez 6:
+    \(2\cdot\left(x+2\right) - 3\cdot\left(y-1\right) = 6\), czyli \(2x + 4 - 3y + 3 = 6\), stąd \(2x - 3y = -1\).
+    Porządkujemy drugie równanie: \(5x - 2y - 6 = 8\), czyli \(5x - 2y = 14\).
+    Układ równoważny: \(\left\{ 2x - 3y = -1;\ 5x - 2y = 14 \right\}\).
+    Wyznacznik: \(W = 2\cdot\left(-2\right) - 5\cdot\left(-3\right) = -4 + 15 = 11 \neq 0\), więc układ jest oznaczony.
+    Metoda przeciwnych współczynników: pierwsze równanie mnożymy przez 2, drugie przez \(-3\):
+    \(4x - 6y = -2\) oraz \(-15x + 6y = -42\). Dodajemy stronami: \(-11x = -44\), stąd \(x = 4\).
+    Z równania \(5x - 2y = 14\): \(20 - 2y = 14\), czyli \(2y = 6\), \(y = 3\).
+    Sprawdzenie w równaniach wyjściowych: \(\frac{4+2}{3} - \frac{3-1}{2} = 2 - 1 = 1\) ✓ oraz \(5\cdot 4 - 2\cdot\left(3+3\right) = 20 - 12 = 8\) ✓.
+    Odpowiedź: \(\left(x,\ y\right) = \left(4,\ 3\right)\); układ jest oznaczony (proste przecinają się w jednym punkcie \(\left(4,\ 3\right)\)).
+  solution_steps:
+  - 'Mnożę pierwsze równanie przez 6 i porządkuję: 2x - 3y = -1.'
+  - 'Usuwam nawias w drugim równaniu i porządkuję: 5x - 2y = 14.'
+  - Obliczam wyznacznik W = 2·(-2) - 5·(-3) = 11 ≠ 0, więc układ jest oznaczony.
+  - 'Mnożę równania przez 2 i przez (-3) i dodaję stronami: -11x = -44, czyli x = 4.'
+  - Podstawiam x = 4 do 5x - 2y = 14 i otrzymuję y = 3.
+  - Sprawdzam parę (4, 3) w obu wyjściowych równaniach i zapisuję odpowiedź.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: x
+      answer:
+        kind: NUMERIC
+        value: 4.0
+    - name: y
+      answer:
+        kind: NUMERIC
+        value: 3.0
+    - name: typ_ukladu
+      answer:
+        kind: SYMBOLIC
+        latex: oznaczony
+  checks:
+  - kind: solve_equation
+    expr: 2 \cdot x - 3 \cdot \frac{5 \cdot x - 14}{2} = -1
+    part: x
+  - kind: solve_equation
+    expr: 5 \cdot \frac{3 \cdot y - 1}{2} - 2 \cdot y = 14
+    var: y
+    part: y
+  skills:
+  - porządkowanie równań (nawiasy, ułamki)
+  - metoda przeciwnych współczynników
+  - klasyfikacja układu
+  - sprawdzenie rozwiązania
+  verification:
+    checkability: REFERENCE_CALL
+    note: 'could not compare: reference produced 2 outputs, answer has 3'
+- id: g-ex-t01
+  slot: EXERCISE
+  ramp_index: 7
+  difficulty: 4
+  exercise_type: Układ z parametrem + rozwiązanie dla konkretnej wartości parametru
+  statement: |-
+    Dany jest układ równań z parametrem m:
+    \[ \left\{ \begin{matrix} m\cdot x + 2y = 4 \\ 2x + m\cdot y = m + 2 \end{matrix} \right. \]
+    a) Wyznacz tę wartość parametru m, dla której układ jest nieoznaczony, oraz tę, dla której układ jest sprzeczny.
+    b) Rozwiąż ten układ dla m = 0.
+    Zapisz obliczenia.
+  statement_latex: \left\{ \begin{matrix} m\cdot x + 2\cdot y = 4 \\ 2\cdot x + m\cdot y = m + 2 \end{matrix}
+    \right.
+  solution: |-
+    a) Wyznacznik układu: \(W = m\cdot m - 2\cdot 2 = m^{2} - 4\).
+    Dla \(W \neq 0\), czyli dla \(m \neq 2\) i \(m \neq -2\), układ jest oznaczony. Kandydatami na układ nieoznaczony lub sprzeczny są tylko \(m = 2\) oraz \(m = -2\) — każdy z nich trzeba zbadać osobno (samo \(W = 0\) niczego nie rozstrzyga).
+    Dla \(m = 2\): \(\left\{ 2x + 2y = 4;\ 2x + 2y = 4 \right\}\). Oba równania są identyczne, po odjęciu stronami otrzymujemy \(0 = 0\) — układ jest NIEOZNACZONY (proste pokrywają się, rozwiązaniem jest każda para postaci \(\left(x,\ 2 - x\right)\)).
+    Dla \(m = -2\): \(\left\{ -2x + 2y = 4;\ 2x - 2y = 0 \right\}\). Dodając równania stronami, otrzymujemy \(0 = 4\) — zdanie fałszywe, więc układ jest SPRZECZNY (proste \(y = x + 2\) i \(y = x\) są równoległe i rozłączne).
+    b) Dla \(m = 0\) układ ma postać \(\left\{ 2y = 4;\ 2x = 2 \right\}\), zatem \(y = 2\) oraz \(x = 1\).
+    Sprawdzenie: \(0\cdot 1 + 2\cdot 2 = 4\) ✓ oraz \(2\cdot 1 + 0\cdot 2 = 2 = 0 + 2\) ✓.
+    Odpowiedź: układ jest nieoznaczony dla \(m = 2\), sprzeczny dla \(m = -2\); dla \(m = 0\) rozwiązaniem jest para \(\left(1,\ 2\right)\).
+  solution_steps:
+  - Obliczam wyznacznik W = m² - 4.
+  - 'Rozwiązuję W = 0: m = 2 lub m = -2 — tylko te wartości mogą dawać układ nieoznaczony lub sprzeczny.'
+  - 'Podstawiam m = 2: oba równania to 2x + 2y = 4, otrzymuję 0 = 0 — układ nieoznaczony.'
+  - 'Podstawiam m = -2: po dodaniu równań stronami otrzymuję 0 = 4 — układ sprzeczny.'
+  - 'Podstawiam m = 0: z pierwszego równania y = 2, z drugiego x = 1.'
+  - Sprawdzam parę (1, 2) w obu równaniach dla m = 0 i zapisuję odpowiedź.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: m_nieoznaczony
+      answer:
+        kind: NUMERIC
+        value: 2.0
+    - name: m_sprzeczny
+      answer:
+        kind: NUMERIC
+        value: -2.0
+    - name: x_dla_m0
+      answer:
+        kind: NUMERIC
+        value: 1.0
+    - name: y_dla_m0
+      answer:
+        kind: NUMERIC
+        value: 2.0
+  checks:
+  - kind: solve_equation
+    expr: \frac{2}{m} = \frac{4}{m + 2}
+    var: m
+    part: m_nieoznaczony
+  - kind: solve_equation
+    expr: 2 \cdot x = 0 + 2
+    part: x_dla_m0
+  - kind: solve_equation
+    expr: 2 \cdot y = 4
+    var: y
+    part: y_dla_m0
+  skills:
+  - wyznacznik układu
+  - badanie układu z parametrem
+  - rozróżnianie układu nieoznaczonego i sprzecznego
+  - rozwiązywanie układu
+  verification:
+    checkability: REFERENCE_CALL
+    note: 'could not compare: reference produced 3 outputs, answer has 4'
+- id: g-cm-06
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: 'analiza błędu: układ nieoznaczony a sprzeczny'
+  statement: 'Rozwiąż układ równań \begin{cases} 2x - y = 3 \\ -6x + 3y = -9 \end{cases} Pewien uczeń
+    pomnożył pierwsze równanie przez 3, dodał równania stronami, otrzymał 0 = 0 i zapisał odpowiedź: "x
+    = 0 i y = 0". Wyjaśnij, na czym polega jego błąd, i podaj poprawną odpowiedź: typ układu oraz zbiór
+    jego rozwiązań.'
+  statement_latex: \begin{cases} 2\cdot x - y = 3 \\ -6\cdot x + 3\cdot y = -9 \end{cases}
+  solution: |-
+    BŁĘDNE ROZUMOWANIE UCZNIA: po pomnożeniu pierwszego równania przez 3 mamy 6x - 3y = 9; dodając stronami do drugiego równania dostajemy 0 = 0, a uczeń odczytuje z tego "x = 0 i y = 0". Błędna odpowiedź: (0, 0).
+    DLACZEGO TO ŹLE: równość 0 = 0 nie mówi nic o wartościach x i y — to zdanie zawsze prawdziwe. Sprawdźmy zresztą parę (0, 0) w pierwszym równaniu: 2·0 - 0 = 0, a miało być 3. Zatem (0, 0) NIE jest rozwiązaniem.
+    POPRAWNE ROZUMOWANIE: drugie równanie powstaje z pierwszego przez pomnożenie przez (-3): (-3)·(2x - y) = -6x + 3y oraz (-3)·3 = -9. Oba równania opisują tę samą prostą, więc każda para spełniająca pierwsze równanie spełnia i drugie. Tożsamość 0 = 0 oznacza właśnie, że układ jest NIEOZNACZONY — ma nieskończenie wiele rozwiązań.
+    Zbiór rozwiązań: z pierwszego równania y = 2x - 3, więc rozwiązaniami są wszystkie pary postaci (x, 2x - 3) dla x ∈ R. Geometrycznie proste się pokrywają.
+    ODPOWIEDŹ: układ jest nieoznaczony, jego rozwiązaniem jest każda para (x, y) spełniająca y = 2x - 3.
+  solution_steps:
+  - 'Pokaż błąd: uczeń z tożsamości 0 = 0 wyciąga wniosek x = 0 i y = 0.'
+  - 'Sprawdź parę (0, 0) w pierwszym równaniu: 2·0 - 0 = 0 ≠ 3 — nie jest rozwiązaniem.'
+  - Zauważ, że drugie równanie to pierwsze pomnożone przez (-3), łącznie z wyrazem wolnym.
+  - 'Wyciągnij poprawny wniosek: 0 = 0 oznacza układ nieoznaczony, nieskończenie wiele rozwiązań, proste
+    się pokrywają.'
+  - 'Opisz zbiór rozwiązań: y = 2x - 3, czyli pary (x, 2x - 3) dla x ∈ R.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: typ układu
+      answer:
+        kind: SYMBOLIC
+        latex: \text{układ nieoznaczony (nieskończenie wiele rozwiązań)}
+    - name: zbiór rozwiązań
+      answer:
+        kind: SYMBOLIC
+        latex: y = 2\cdot x - 3
+  skills:
+  - rozpoznawanie układu nieoznaczonego
+  - interpretacja tożsamości 0 = 0
+  - opis zbioru rozwiązań
+  verification:
+    checkability: REFERENCE_CALL
+    note: 'could not compare: part disagrees: NOT_MACHINE_CHECKABLE: ''prose inside the expression'''
+- id: g-cm-07
+  slot: COMMON_MISTAKE
+  ramp_index: 1
+  difficulty: 3
+  exercise_type: 'analiza błędu: interpretacja wyznacznika W = 0'
+  statement: 'Dany jest układ równań \begin{cases} 4x - 6y = 10 \\ -2x + 3y = -5 \end{cases} Uczeń obliczył
+    wyznacznik tego układu i napisał: "W = 0, więc układ jest sprzeczny i nie ma rozwiązań". Oblicz wyznacznik
+    W, wskaż błąd w rozumowaniu ucznia oraz podaj poprawny typ układu i zbiór jego rozwiązań.'
+  statement_latex: \begin{cases} 4\cdot x - 6\cdot y = 10 \\ -2\cdot x + 3\cdot y = -5 \end{cases},\qquad
+    W = 4\cdot 3 - \left(-2\right)\cdot\left(-6\right)
+  solution: |-
+    BŁĘDNE ROZUMOWANIE UCZNIA: W = 4·3 - (-2)·(-6) = 12 - 12 = 0, "zatem układ jest sprzeczny". Błędna odpowiedź: brak rozwiązań.
+    DLACZEGO TO ŹLE: warunek W ≠ 0 jest równoważny temu, że układ jest OZNACZONY. Gdy W = 0, wiemy jedynie, że układ nie ma dokładnie jednego rozwiązania — może być nieoznaczony ALBO sprzeczny. Trzeba to rozstrzygnąć, porównując wyrazy wolne.
+    POPRAWNE ROZUMOWANIE: mnożymy drugie równanie przez (-2), pamiętając o wyrazie wolnym: 4x - 6y = 10. Otrzymaliśmy dokładnie pierwsze równanie, więc oba równania opisują tę samą prostą. Eliminacja daje 0 = 0, a nie 0 = c ≠ 0.
+    Zatem układ jest NIEOZNACZONY: ma nieskończenie wiele rozwiązań, proste się pokrywają. Z równania 4x - 6y = 10 wyznaczamy y = \frac{2\cdot x - 5}{3}.
+    ODPOWIEDŹ: W = 0, układ jest nieoznaczony, rozwiązaniem jest każda para (x, y) spełniająca y = \frac{2x - 5}{3}.
+  solution_steps:
+  - 'Oblicz wyznacznik: W = 4·3 - (-2)·(-6) = 12 - 12 = 0.'
+  - 'Wskaż błąd: W = 0 oznacza tylko, że układ nie jest oznaczony; nie przesądza o sprzeczności.'
+  - 'Pomnóż całe drugie równanie przez (-2): 4x - 6y = 10 — to dokładnie pierwsze równanie.'
+  - 'Wniosek: równania są równoważne, eliminacja daje 0 = 0, układ jest nieoznaczony (proste się pokrywają).'
+  - 'Wyznacz zbiór rozwiązań: y = (2x - 5)/3.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wyznacznik W
+      answer:
+        kind: NUMERIC
+        value: 0.0
+    - name: typ układu
+      answer:
+        kind: SYMBOLIC
+        latex: \text{układ nieoznaczony (proste pokrywają się)}
+    - name: zbiór rozwiązań
+      answer:
+        kind: SYMBOLIC
+        latex: y = \frac{2\cdot x - 5}{3}
+  checks:
+  - kind: evaluate
+    expr: 4\cdot 3 - \left(-2\right)\cdot\left(-6\right)
+    part: wyznacznik W
+  skills:
+  - obliczanie wyznacznika układu
+  - rozróżnianie układu nieoznaczonego i sprzecznego
+  - opis zbioru rozwiązań
+  verification:
+    checkability: REFERENCE_CALL
+    note: 'could not compare: part disagrees: NOT_MACHINE_CHECKABLE: ''prose inside the expression'''
+- id: g-cm-08
+  slot: COMMON_MISTAKE
+  ramp_index: 2
+  difficulty: 3
+  exercise_type: 'analiza błędu: proporcje współczynników przy zerowym mianowniku'
+  statement: 'Dany jest układ równań \begin{cases} x - 4y = 7 \\ 3x = 9 \end{cases} Uczeń chciał zaklasyfikować
+    ten układ, porównując ilorazy współczynników \frac{a_1}{a_2} = \frac{b_1}{b_2} = \frac{c_1}{c_2},
+    i zapisał \frac{1}{3} = \frac{-4}{0}. Wyjaśnij, na czym polega jego błąd, zaklasyfikuj układ za pomocą
+    wyznacznika i rozwiąż go: podaj x oraz y.'
+  statement_latex: \begin{cases} 1\cdot x - 4\cdot y = 7 \\ 3\cdot x + 0\cdot y = 9 \end{cases},\qquad
+    W = 1\cdot 0 - 3\cdot\left(-4\right)
+  solution: |-
+    BŁĘDNE ROZUMOWANIE UCZNIA: drugie równanie 3x = 9 zapisane w postaci ogólnej to 3x + 0·y = 9, więc b₂ = 0. Uczeń tworzy iloraz \frac{-4}{0} — dzieli przez zero, co jest niewykonalne; z takiego "porównania" wyciąga potem dowolny wniosek (np. że układ jest sprzeczny).
+    DLACZEGO TO ŹLE: kryterium proporcji \frac{a_1}{a_2} = \frac{b_1}{b_2} = \frac{c_1}{c_2} wolno stosować tylko wtedy, gdy wszystkie mianowniki są różne od zera. Tutaj b₂ = 0, więc kryterium nie obowiązuje.
+    POPRAWNE ROZUMOWANIE: używamy wyznacznika: W = a₁b₂ - a₂b₁ = 1·0 - 3·(-4) = 0 + 12 = 12 ≠ 0, więc układ jest OZNACZONY — proste przecinają się w jednym punkcie.
+    Rozwiązanie: z drugiego równania 3x = 9, czyli x = 3. Podstawiamy do pierwszego: 3 - 4y = 7, czyli -4y = 4, więc y = -1.
+    Sprawdzenie: 3 - 4·(-1) = 3 + 4 = 7 ✓ oraz 3·3 = 9 ✓.
+    ODPOWIEDŹ: układ jest oznaczony, jego rozwiązaniem jest para (x, y) = (3, -1).
+  solution_steps:
+  - 'Wskaż błąd: w drugim równaniu b₂ = 0, więc ilorazu -4/0 nie można utworzyć — kryterium proporcji
+    nie stosuje się.'
+  - 'Zastosuj bezpieczne narzędzie — wyznacznik: W = 1·0 - 3·(-4) = 12 ≠ 0, układ jest oznaczony.'
+  - Z równania 3x = 9 oblicz x = 3.
+  - 'Podstaw x = 3 do pierwszego równania: 3 - 4y = 7, skąd y = -1.'
+  - Sprawdź parę (3, -1) w obu równaniach i zapisz odpowiedź.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: typ układu
+      answer:
+        kind: SYMBOLIC
+        latex: \text{układ oznaczony (proste przecinają się w jednym punkcie)}
+    - name: x
+      answer:
+        kind: NUMERIC
+        value: 3.0
+    - name: y
+      answer:
+        kind: NUMERIC
+        value: -1.0
+  checks:
+  - kind: solve_equation
+    expr: 3\cdot x = 9
+    part: x
+  - kind: solve_equation
+    expr: 3 - 4\cdot y = 7
+    var: y
+    part: y
+  skills:
+  - klasyfikacja układu za pomocą wyznacznika
+  - rozwiązywanie układu
+  - unikanie dzielenia przez zero
+  verification:
+    checkability: REFERENCE_CALL
+    note: 'could not compare: NOT_MACHINE_CHECKABLE: ''prose inside the expression'''
+- id: g-cm-09
+  slot: COMMON_MISTAKE
+  ramp_index: 3
+  difficulty: 2
+  exercise_type: 'analiza błędu: mnożenie tylko części równania'
+  statement: 'Rozwiąż układ równań \begin{cases} x + 3y = 5 \\ 2x - y = 3 \end{cases} Uczeń, chcąc wyeliminować
+    x, pomnożył pierwsze równanie przez (-2) i zapisał -2x - 6y = 5, a następnie dodał równania stronami,
+    otrzymując -7y = 8, czyli y = -\frac{8}{7}. Wskaż błąd w jego przekształceniu i podaj poprawne rozwiązanie
+    układu: wartość x oraz wartość y.'
+  statement_latex: \begin{cases} x + 3\cdot y = 5 \\ 2\cdot x - y = 3 \end{cases}
+  solution: |-
+    BŁĘDNE ROZUMOWANIE UCZNIA: mnożąc pierwsze równanie przez (-2), uczeń pomnożył tylko wyrazy z niewiadomymi i napisał -2x - 6y = 5, zapominając o wyrazie wolnym. Po dodaniu stronami do drugiego równania otrzymał -7y = 8, czyli błędny wynik y = -\frac{8}{7}.
+    DLACZEGO TO ŹLE: mnożymy OBIE STRONY równania, czyli każdy jego wyraz — także wyraz wolny. Tylko wtedy nowe równanie jest równoważne poprzedniemu. Sprawdzenie: dla x = 5 - 3y i y = -8/7 pierwsze równanie nie byłoby spełnione w drugim równaniu układu.
+    POPRAWNE ROZUMOWANIE: (-2)·(x + 3y) = (-2)·5, czyli -2x - 6y = -10.
+    Dodajemy stronami do drugiego równania: (-2x + 2x) + (-6y - y) = -10 + 3, czyli -7y = -7, stąd y = 1.
+    Z pierwszego równania: x + 3·1 = 5, więc x = 2.
+    Sprawdzenie: 2 + 3·1 = 5 ✓ oraz 2·2 - 1 = 3 ✓.
+    ODPOWIEDŹ: (x, y) = (2, 1).
+  solution_steps:
+  - 'Wskaż błąd: przy mnożeniu przez (-2) uczeń nie pomnożył wyrazu wolnego; poprawnie -2x - 6y = -10.'
+  - 'Dodaj poprawnie przekształcone równanie do drugiego: -7y = -7.'
+  - 'Rozwiąż: y = 1.'
+  - 'Wstaw y = 1 do pierwszego równania: x + 3 = 5, czyli x = 2.'
+  - Sprawdź parę (2, 1) w obu równaniach i zapisz odpowiedź.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: x
+      answer:
+        kind: NUMERIC
+        value: 2.0
+    - name: y
+      answer:
+        kind: NUMERIC
+        value: 1.0
+  checks:
+  - kind: solve_equation
+    expr: 2\cdot x - \frac{5 - x}{3} = 3
+    part: x
+  - kind: solve_equation
+    expr: 2\cdot\left(5 - 3\cdot y\right) - y = 3
+    var: y
+    part: y
+  skills:
+  - metoda przeciwnych współczynników
+  - poprawne mnożenie obu stron równania
+  - sprawdzanie rozwiązania
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [x] SymPy solved it fresh: 2.0 vs 2.0 (tol 1e-09) ; [y] SymPy
+      solved it fresh: 1.0 vs 1.0 (tol 1e-09)'
+- id: g-cm-10
+  slot: COMMON_MISTAKE
+  ramp_index: 4
+  difficulty: 2
+  exercise_type: 'analiza błędu: podstawienie do tego samego równania'
+  statement: 'Rozwiąż układ równań \begin{cases} x - 2y = 4 \\ 3x + y = 5 \end{cases} Uczeń wyznaczył
+    z pierwszego równania x = 4 + 2y, wstawił to wyrażenie z powrotem do pierwszego równania, otrzymał
+    \left(4 + 2y\right) - 2y = 4, czyli 0 = 0, i napisał: "układ jest nieoznaczony". Wyjaśnij, na czym
+    polega jego błąd, i podaj poprawne rozwiązanie: wartość x oraz wartość y.'
+  statement_latex: \begin{cases} x - 2\cdot y = 4 \\ 3\cdot x + y = 5 \end{cases}
+  solution: |-
+    BŁĘDNE ROZUMOWANIE UCZNIA: z pierwszego równania x = 4 + 2y, a następnie podstawienie do TEGO SAMEGO równania: (4 + 2y) - 2y = 4, czyli 4 = 4, a więc 0 = 0. Błędny wniosek: układ nieoznaczony.
+    DLACZEGO TO ŹLE: podstawiając wyrażenie do równania, z którego je wyznaczyliśmy, zawsze otrzymamy tożsamość — nie korzystamy wtedy z drugiego warunku, więc niczego nie rozstrzygamy. Wyznaczone wyrażenie trzeba wstawić do DRUGIEGO równania.
+    POPRAWNE ROZUMOWANIE: podstawiamy x = 4 + 2y do drugiego równania:
+    3(4 + 2y) + y = 5, czyli 12 + 6y + y = 5, więc 7y = -7 i y = -1.
+    Stąd x = 4 + 2·(-1) = 2.
+    Sprawdzenie: 2 - 2·(-1) = 2 + 2 = 4 ✓ oraz 3·2 + (-1) = 5 ✓.
+    Układ jest oznaczony (W = 1·1 - 3·(-2) = 7 ≠ 0), proste przecinają się w punkcie (2, -1).
+    ODPOWIEDŹ: (x, y) = (2, -1).
+  solution_steps:
+  - 'Wskaż błąd: uczeń podstawił wyrażenie do tego samego równania, z którego je wyznaczył — zawsze daje
+    to tożsamość 0 = 0.'
+  - 'Podstaw x = 4 + 2y do DRUGIEGO równania: 3(4 + 2y) + y = 5.'
+  - 'Rozwiąż: 12 + 7y = 5, czyli 7y = -7, więc y = -1.'
+  - Oblicz x = 4 + 2·(-1) = 2.
+  - Sprawdź parę (2, -1) w obu równaniach; układ jest oznaczony, a nie nieoznaczony.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: x
+      answer:
+        kind: NUMERIC
+        value: 2.0
+    - name: y
+      answer:
+        kind: NUMERIC
+        value: -1.0
+  checks:
+  - kind: solve_equation
+    expr: 3\cdot x + \frac{x - 4}{2} = 5
+    part: x
+  - kind: solve_equation
+    expr: 3\cdot\left(4 + 2\cdot y\right) + y = 5
+    var: y
+    part: y
+  skills:
+  - metoda podstawiania
+  - wykorzystanie obu warunków układu
+  - sprawdzanie rozwiązania
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [x] SymPy solved it fresh: 2.0 vs 2.0 (tol 1e-09) ; [y] SymPy
+      solved it fresh: -1.0 vs -1.0 (tol 1e-09)'
+- id: g-ch-t02
+  slot: CHALLENGE
+  ramp_index: 0
+  difficulty: 4
+  exercise_type: Zadanie tekstowe — liczba dwucyfrowa, model z układem równań
+  statement: Pewna liczba dwucyfrowa jest cztery razy większa od sumy swoich cyfr. Jeżeli do tej liczby
+    dodamy 18, to otrzymamy liczbę zapisaną tymi samymi cyframi, ale w odwrotnej kolejności. Wyznacz tę
+    liczbę dwucyfrową. Zapisz obliczenia.
+  statement_latex: \left\{ \begin{matrix} 10\cdot a + b = 4\cdot\left(a + b\right) \\ 10\cdot a + b +
+    18 = 10\cdot b + a \end{matrix} \right.
+  solution: |-
+    Oznaczenia: \(a\) — cyfra dziesiątek, \(b\) — cyfra jedności, przy czym \(a \in \{1,\ldots,9\}\), \(b \in \{0,\ldots,9\}\) i obie są liczbami całkowitymi. Szukana liczba to \(10a + b\), a liczba o przestawionych cyfrach to \(10b + a\).
+    Pierwszy warunek: \(10a + b = 4\cdot\left(a + b\right)\), czyli \(10a + b = 4a + 4b\), stąd \(6a = 3b\), czyli \(b = 2a\).
+    Drugi warunek: \(10a + b + 18 = 10b + a\), czyli \(9a + 18 = 9b\), stąd \(b - a = 2\).
+    Układ: \(\left\{ b = 2a;\ b - a = 2 \right\}\). Podstawiamy pierwsze do drugiego: \(2a - a = 2\), czyli \(a = 2\), a wtedy \(b = 4\).
+    Dziedzina: \(a = 2 \in \{1,\ldots,9\}\), \(b = 4 \in \{0,\ldots,9\}\) — cyfry poprawne.
+    Szukana liczba to \(10\cdot 2 + 4 = 24\).
+    Sprawdzenie w treści: suma cyfr \(2 + 4 = 6\) i \(4\cdot 6 = 24\) ✓; \(24 + 18 = 42\), a 42 to liczba 24 zapisana od tyłu ✓.
+    Odpowiedź: szukana liczba dwucyfrowa to 24.
+  solution_steps:
+  - 'Wprowadzam niewiadome: a — cyfra dziesiątek, b — cyfra jedności; liczba to 10a + b, po przestawieniu
+    cyfr 10b + a.'
+  - 'Zapisuję warunki dziedziny: a ∈ {1,...,9}, b ∈ {0,...,9}, cyfry całkowite.'
+  - Z warunku 'liczba jest 4 razy większa od sumy cyfr' otrzymuję 10a + b = 4(a + b), czyli b = 2a.
+  - Z warunku o dodaniu 18 otrzymuję 10a + b + 18 = 10b + a, czyli b - a = 2.
+  - 'Rozwiązuję układ metodą podstawiania: a = 2, b = 4.'
+  - 'Sprawdzam warunki dziedziny i treść zadania, składam liczbę: 10·2 + 4 = 24.'
+  answer:
+    kind: NUMERIC
+    value: 24.0
+  checks:
+  - kind: solve_equation
+    expr: n + 18 = 10 \cdot \frac{n}{6} + \frac{n}{12}
+    var: n
+  stated_model:
+    variable: a
+    objective_latex: 10 \cdot a + b
+    domain_lo: '1'
+    domain_hi: '9'
+    domain_lo_open: false
+    domain_hi_open: false
+    goal: value
+    constraint_used: b = 2 \cdot a \ \wedge\ b - a = 2
+  skills:
+  - zapis liczby dwucyfrowej 10a + b
+  - układanie układu równań
+  - warunki dziedziny (cyfry)
+  - odpowiedź na zadane pytanie
+  verification:
+    checkability: STATED_MODEL
+    note: 'stage 1 inconclusive: kind mismatch: answer=SYMBOLIC reference=NUMERIC'
+- id: g-ch-t03
+  slot: CHALLENGE
+  ramp_index: 1
+  difficulty: 4
+  exercise_type: Zadanie tekstowe — mieszaniny, układ równań i kontrola dziedziny
+  statement: |-
+    W laboratorium znajdują się dwa roztwory soli: 12-procentowy oraz 30-procentowy (procenty masowe). Z tych dwóch roztworów należy przygotować 900 g roztworu 20-procentowego.
+    a) Oblicz, ile gramów roztworu 12-procentowego i ile gramów roztworu 30-procentowego trzeba w tym celu zmieszać.
+    b) Rozstrzygnij, czy mieszając (w dowolnych proporcjach) te same dwa roztwory, można otrzymać 900 g roztworu 35-procentowego. Uzasadnij odpowiedź.
+    Zapisz obliczenia.
+  statement_latex: \left\{ \begin{matrix} x + y = 900 \\ \frac{12}{100}\cdot x + \frac{30}{100}\cdot y
+    = \frac{20}{100}\cdot 900 \end{matrix} \right.
+  solution: |-
+    Oznaczenia: \(x\) — masa roztworu 12-procentowego (w gramach), \(y\) — masa roztworu 30-procentowego (w gramach). Z sensu zadania \(x \geq 0\) i \(y \geq 0\).
+    a) Masa mieszaniny: \(x + y = 900\). Bilans soli: w mieszaninie ma być \(\frac{20}{100}\cdot 900 = 180\) g soli, więc \(\frac{12}{100}\cdot x + \frac{30}{100}\cdot y = 180\), czyli po pomnożeniu przez 100: \(12x + 30y = 18000\), a po podzieleniu przez 6: \(2x + 5y = 3000\).
+    Z pierwszego równania \(x = 900 - y\); podstawiamy do drugiego: \(2\cdot\left(900 - y\right) + 5y = 3000\), czyli \(1800 + 3y = 3000\), stąd \(3y = 1200\), \(y = 400\), a więc \(x = 500\).
+    Dziedzina: \(500 > 0\) i \(400 > 0\) — warunki spełnione. Sprawdzenie: \(0{,}12\cdot 500 + 0{,}30\cdot 400 = 60 + 120 = 180\) ✓.
+    b) Gdyby mieszanina miała mieć stężenie 35%, to soli byłoby \(\frac{35}{100}\cdot 900 = 315\) g, więc
+    \(\left\{ x + y = 900;\ \frac{12}{100}\cdot x + \frac{30}{100}\cdot y = 315 \right\}\).
+    Podstawiamy \(x = 900 - y\): \(12\cdot\left(900 - y\right) + 30y = 31500\), czyli \(10800 + 18y = 31500\), stąd \(18y = 20700\), \(y = 1150\), a wtedy \(x = 900 - 1150 = -250\).
+    Otrzymana para \(\left(-250,\ 1150\right)\) nie spełnia warunków dziedziny (masa nie może być ujemna, a masa jednego składnika nie może przekraczać masy mieszaniny), więc zadanie nie ma rozwiązania: takiej mieszaniny przygotować się NIE DA. Jest to zgodne z tym, że stężenie mieszaniny dwóch roztworów zawsze mieści się między 12% a 30%, a 35% leży poza tym przedziałem.
+    Odpowiedź: trzeba zmieszać 500 g roztworu 12-procentowego i 400 g roztworu 30-procentowego; roztworu 35-procentowego z tych składników otrzymać nie można.
+  solution_steps:
+  - 'Wprowadzam niewiadome: x — masa roztworu 12% (g), y — masa roztworu 30% (g); x ≥ 0, y ≥ 0.'
+  - 'Zapisuję równanie mas: x + y = 900 oraz bilans soli: 0,12x + 0,30y = 0,20·900 = 180.'
+  - 'Rozwiązuję układ metodą podstawiania: y = 400, x = 500; sprawdzam bilans soli.'
+  - 'Dla stężenia 35% zapisuję nowy układ: x + y = 900 oraz 0,12x + 0,30y = 0,35·900 = 315.'
+  - 'Rozwiązuję go: y = 1150, x = -250.'
+  - 'Konfrontuję wynik z dziedziną: masa ujemna jest niemożliwa, więc roztworu 35% nie da się otrzymać
+    (stężenie mieszaniny mieści się zawsze między 12% a 30%).'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: masa_roztworu_12
+      answer:
+        kind: NUMERIC
+        value: 500.0
+    - name: masa_roztworu_30
+      answer:
+        kind: NUMERIC
+        value: 400.0
+    - name: czy_mozna_35
+      answer:
+        kind: BOOLEAN
+        truth: false
+    - name: uzasadnienie
+      answer:
+        kind: NOT_MACHINE_CHECKABLE
+        reason: Należy zapisać układ dla stężenia 35% (x + y = 900, 0,12x + 0,30y = 315), otrzymać y =
+          1150 i x = -250 oraz uzasadnić, że wynik jest sprzeczny z warunkami dziedziny (masy muszą być
+          nieujemne), bo stężenie mieszaniny leży zawsze między 12% a 30%.
+  checks:
+  - kind: solve_equation
+    expr: \frac{12}{100} \cdot x + \frac{30}{100} \cdot \left(900 - x\right) = \frac{20}{100} \cdot 900
+    part: masa_roztworu_12
+  - kind: solve_equation
+    expr: \frac{12}{100} \cdot \left(900 - y\right) + \frac{30}{100} \cdot y = \frac{20}{100} \cdot 900
+    var: y
+    part: masa_roztworu_30
+  stated_model:
+    variable: x
+    objective_latex: \frac{12}{100} \cdot x + \frac{30}{100} \cdot \left(900 - x\right)
+    domain_lo: '0'
+    domain_hi: '900'
+    domain_lo_open: false
+    domain_hi_open: false
+    goal: value
+    constraint_used: x + y = 900
+  skills:
+  - bilans składnika w mieszaninie
+  - układanie i rozwiązywanie układu równań
+  - kontrola warunków dziedziny
+  - interpretacja wyniku sprzecznego z sensem zadania
+  verification:
+    checkability: STATED_MODEL
+    note: 'stage 1 inconclusive: kind mismatch: answer=SYMBOLIC reference=MULTIPART'
+- id: g-ch-t04
+  slot: CHALLENGE
+  ramp_index: 2
+  difficulty: 5
+  exercise_type: 'Zadanie tekstowo-geometryczne: układ równań, pole, kontrola wykonalności'
+  statement: |-
+    Prostokątna działka ABCD ma obwód równy 120 m, przy czym bok AB jest dłuższy od boku BC. Właściciel ogrodził tę działkę: wzdłuż boków AB i CD ustawił płot w cenie 60 zł za metr, a wzdłuż boków BC i AD — płot w cenie 40 zł za metr. Za całe ogrodzenie zapłacił 6400 zł.
+    a) Oblicz długości boków AB i BC tej działki oraz pole tej działki.
+    b) Rozstrzygnij, czy na tej działce można wytyczyć prostokątny plac o wymiarach 25 m na 22 m, którego boki są równoległe do boków działki. Uzasadnij odpowiedź.
+    Zapisz obliczenia.
+  statement_latex: \left\{ \begin{matrix} 2\cdot a + 2\cdot b = 120 \\ 2\cdot 60 \cdot a + 2\cdot 40 \cdot
+    b = 6400 \end{matrix} \right.
+  solution: |-
+    Oznaczenia: \(a\) — długość boku AB (w metrach), \(b\) — długość boku BC (w metrach); z sensu zadania \(a > 0\), \(b > 0\) oraz \(a > b\).
+    Obwód: \(2a + 2b = 120\), czyli \(a + b = 60\).
+    Koszt ogrodzenia: boki AB i CD mają łącznie długość \(2a\) i kosztują \(60\cdot 2a\) zł, boki BC i AD mają łącznie długość \(2b\) i kosztują \(40\cdot 2b\) zł, zatem \(120a + 80b = 6400\), czyli po podzieleniu przez 40: \(3a + 2b = 160\).
+    Układ: \(\left\{ a + b = 60;\ 3a + 2b = 160 \right\}\). Z pierwszego równania \(b = 60 - a\); podstawiamy: \(3a + 2\cdot\left(60 - a\right) = 160\), czyli \(a + 120 = 160\), stąd \(a = 40\), a wtedy \(b = 20\).
+    Warunek zadania: \(40 > 20\), czyli AB jest rzeczywiście dłuższy od BC — model jest zgodny z treścią.
+    Sprawdzenie: obwód \(2\cdot 40 + 2\cdot 20 = 120\) m ✓, koszt \(120\cdot 40 + 80\cdot 20 = 4800 + 1600 = 6400\) zł ✓.
+    Pole działki: \(P = 40\cdot 20 = 800\) (m²).
+    b) Plac o bokach równoległych do boków działki musi zmieścić się w prostokącie o wymiarach 40 m na 20 m. Choć pole placu \(25\cdot 22 = 550 < 800\), to przy każdym ustawieniu jeden z boków placu (22 m lub 25 m) musiałby być równoległy do boku BC o długości 20 m, a \(22 > 20\) i \(25 > 20\). Zatem placu o wymiarach 25 m na 22 m wytyczyć NIE MOŻNA.
+    Odpowiedź: AB = 40 m, BC = 20 m, pole działki wynosi 800 m²; takiego placu wytyczyć się nie da.
+  solution_steps:
+  - 'Wprowadzam niewiadome: a = |AB| (m), b = |BC| (m), a > b > 0.'
+  - Z obwodu zapisuję równanie 2a + 2b = 120, czyli a + b = 60.
+  - Z kosztu ogrodzenia zapisuję równanie 60·2a + 40·2b = 6400, czyli 3a + 2b = 160.
+  - 'Rozwiązuję układ metodą podstawiania: a = 40, b = 20; sprawdzam warunek a > b oraz dane liczbowe.'
+  - 'Obliczam pole działki: P = 40·20 = 800 m².'
+  - 'Porównuję wymiary placu z wymiarami działki: 22 > 20 i 25 > 20, więc żaden bok placu nie zmieści
+    się wzdłuż boku BC — placu wytyczyć nie można.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: AB
+      answer:
+        kind: NUMERIC
+        value: 40.0
+    - name: BC
+      answer:
+        kind: NUMERIC
+        value: 20.0
+    - name: pole
+      answer:
+        kind: NUMERIC
+        value: 800.0
+    - name: czy_miesci_sie_plac
+      answer:
+        kind: BOOLEAN
+        truth: false
+    - name: uzasadnienie
+      answer:
+        kind: NOT_MACHINE_CHECKABLE
+        reason: Należy uzasadnić, że przy bokach równoległych do boków działki jeden z boków placu (22
+          m albo 25 m) musiałby zmieścić się wzdłuż boku o długości 20 m, a 22 > 20 i 25 > 20, więc mimo
+          że 25·22 = 550 < 800, placu wytyczyć nie można.
+  checks:
+  - kind: solve_equation
+    expr: 2 \cdot 60 \cdot a + 2 \cdot 40 \cdot \left(60 - a\right) = 6400
+    var: a
+    part: AB
+  - kind: solve_equation
+    expr: 2 \cdot 60 \cdot \left(60 - b\right) + 2 \cdot 40 \cdot b = 6400
+    var: b
+    part: BC
+  - kind: evaluate
+    expr: 40 \cdot 20
+    part: pole
+  stated_model:
+    variable: a
+    objective_latex: 2 \cdot 60 \cdot a + 2 \cdot 40 \cdot \left(60 - a\right)
+    domain_lo: '30'
+    domain_hi: '60'
+    goal: value
+    constraint_used: a + b = 60 \ \wedge\ a > b
+  skills:
+  - układanie układu równań z opisu geometrycznego
+  - obwód i pole prostokąta
+  - rozwiązywanie układu
+  - sprawdzenie warunku zadania (bok dłuższy)
+  - ocena wykonalności przez porównanie z wymiarami
+  verification:
+    checkability: STATED_MODEL
+    note: 'stage 1 inconclusive: kind mismatch: answer=SYMBOLIC reference=MULTIPART'

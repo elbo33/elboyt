@@ -1,0 +1,836 @@
+section: cechy-podobienstwa-trojkatow
+name: Cechy podobieństwa trójkątów
+scope: The similarity criteria for triangles (AA, SSS, SAS); identifying similar triangles and using the
+  ratio of similarity to find lengths.
+requirements:
+- VIII.8
+counts:
+  total: 16
+  DETERMINISTIC: 10
+  REFERENCE_CALL: 2
+  NOT_MACHINE_CHECKABLE: 4
+exercises:
+- id: g-th-00
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: obliczanie skali i długości boku z zapisu podobieństwa
+  statement: 'Trójkąty ABC i KLM są podobne, przy czym △ABC ∼ △KLM (wierzchołki wypisano w kolejności
+    odpowiadania sobie). Dane są: |AB| = 6 cm, |BC| = 10 cm oraz |KL| = 9 cm. Oblicz skalę podobieństwa
+    k trójkąta KLM do trójkąta ABC oraz długość boku LM.'
+  statement_latex: k=\frac{\left|KL\right|}{\left|AB\right|}=\frac{9}{6},\qquad \left|LM\right|=k\cdot\left|BC\right|
+  solution: |-
+    Z zapisu △ABC ∼ △KLM odczytujemy odpowiadające sobie boki: AB ↔ KL, BC ↔ LM, AC ↔ KM.
+    Skala podobieństwa trójkąta KLM do trójkąta ABC:
+    k = |KL| / |AB| = 9/6 = 3/2.
+    Stąd |LM| = k · |BC| = (3/2) · 10 = 15 cm.
+    Sprawdzenie sensowności: k > 1, więc trójkąt KLM jest większy i rzeczywiście |LM| = 15 cm > |BC| = 10 cm.
+  solution_steps:
+  - 'Odczytaj z zapisu △ABC ∼ △KLM pary odpowiadających boków: AB ↔ KL, BC ↔ LM.'
+  - 'Oblicz skalę: k = |KL|/|AB| = 9/6 = 3/2.'
+  - 'Pomnóż |BC| przez k: |LM| = (3/2)·10 = 15 cm.'
+  - 'Sprawdź sensowność: k > 1, więc bok LM musi być dłuższy od BC.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: k
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{3}{2}
+    - name: LM
+      answer:
+        kind: NUMERIC
+        value: 15.0
+  checks:
+  - kind: evaluate
+    expr: \frac{9}{6}
+    part: k
+  - kind: evaluate
+    expr: \frac{9}{6}\cdot 10
+    part: LM
+  skills:
+  - odczytywanie odpowiadających sobie boków z zapisu podobieństwa
+  - wyznaczanie skali podobieństwa
+  - układanie i rozwiązywanie proporcji
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [k] SymPy solved it fresh: 1.5 vs 1.5 (tol 1e-09) ; [LM] SymPy
+      solved it fresh: 15.0 vs 15.0 (tol 1e-09)'
+- id: g-th-01
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: sprawdzanie podobieństwa cechą bbb
+  statement: Boki pierwszego trójkąta mają długości 5 cm, 8 cm i 11 cm, a boki drugiego trójkąta — kolejno
+    24 cm, 33 cm i 15 cm. Rozstrzygnij, czy te trójkąty są podobne, i jeśli tak, podaj skalę podobieństwa
+    drugiego trójkąta do pierwszego.
+  statement_latex: \frac{15}{5}=\frac{24}{8}=\frac{33}{11}
+  solution: |-
+    Porządkujemy boki obu trójkątów rosnąco.
+    Pierwszy trójkąt: 5, 8, 11. Drugi trójkąt: 15, 24, 33.
+    Sprawdzamy ilorazy odpowiadających sobie boków (najkrótszy do najkrótszego, średni do średniego, najdłuższy do najdłuższego):
+    15/5 = 3,  24/8 = 3,  33/11 = 3.
+    Wszystkie trzy ilorazy są równe, więc na mocy cechy bbb trójkąty są podobne, a skala podobieństwa drugiego trójkąta do pierwszego wynosi k = 3.
+  solution_steps:
+  - 'Uporządkuj boki obu trójkątów rosnąco: 5, 8, 11 oraz 15, 24, 33.'
+  - 'Oblicz trzy ilorazy odpowiadających sobie boków: 15/5 = 3, 24/8 = 3, 33/11 = 3.'
+  - Stwierdź, że wszystkie ilorazy są równe, więc z cechy bbb trójkąty są podobne.
+  - 'Zapisz skalę: k = 3.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: czy podobne
+      answer:
+        kind: BOOLEAN
+        truth: true
+    - name: k
+      answer:
+        kind: NUMERIC
+        value: 3.0
+  checks:
+  - kind: evaluate
+    expr: \frac{15}{5}
+    part: k
+  skills:
+  - porządkowanie boków rosnąco
+  - sprawdzanie proporcjonalności trzech par boków
+  - stosowanie cechy bbb
+  verification:
+    checkability: REFERENCE_CALL
+    note: '2 parts matched · det: [k] SymPy solved it fresh: 3.0 vs 3.0 (tol 1e-09)'
+- id: g-th-02
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: stosunek obwodów i pól trójkątów podobnych
+  statement: Trójkąt A′B′C′ jest podobny do trójkąta ABC w skali k = 5/2 (trójkąta A′B′C′ do trójkąta
+    ABC). Obwód trójkąta ABC jest równy 14 cm, a jego pole jest równe 8 cm². Oblicz obwód i pole trójkąta
+    A′B′C′.
+  statement_latex: Obw\left(\triangle A'B'C'\right)=\frac{5}{2}\cdot 14,\qquad P\left(\triangle A'B'C'\right)=\left(\frac{5}{2}\right)^{2}\cdot
+    8
+  solution: |-
+    Obwód jest sumą długości boków, a każda długość mnoży się przez k, więc obwód mnoży się przez k:
+    Obw(△A′B′C′) = (5/2) · 14 = 35 cm.
+    Pole zależy od iloczynu dwóch wymiarów, więc mnoży się przez k²:
+    P(△A′B′C′) = (5/2)² · 8 = (25/4) · 8 = 50 cm².
+  solution_steps:
+  - 'Zapisz, że obwody skalują się przez k: Obw′ = k · Obw.'
+  - Oblicz Obw′ = (5/2)·14 = 35 cm.
+  - 'Zapisz, że pola skalują się przez k²: P′ = k²·P.'
+  - Oblicz P′ = (25/4)·8 = 50 cm².
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: obwód A'B'C'
+      answer:
+        kind: NUMERIC
+        value: 35.0
+    - name: pole A'B'C'
+      answer:
+        kind: NUMERIC
+        value: 50.0
+  checks:
+  - kind: evaluate
+    expr: \frac{5}{2}\cdot 14
+    part: obwód A'B'C'
+  - kind: evaluate
+    expr: \left(\frac{5}{2}\right)^{2}\cdot 8
+    part: pole A'B'C'
+  skills:
+  - stosowanie zależności Obw'/Obw = k
+  - stosowanie zależności P'/P = k^2
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [obwód A''B''C''] SymPy solved it fresh: 35.0 vs 35.0 (tol
+      1e-09) ; [pole A''B''C''] SymPy solved it fresh: 50.0 vs 50.0 (tol 1e-09)'
+- id: g-ex-03
+  slot: EXERCISE
+  ramp_index: 1
+  difficulty: 2
+  exercise_type: konfiguracja z prostą równoległą do boku (daszek)
+  statement: 'W trójkącie ABC punkt D leży na boku AB, a punkt E leży na boku AC, przy czym odcinek DE
+    jest równoległy do boku BC. Dane są: |AD| = 5 cm, |DB| = 3 cm, |AE| = 4 cm oraz |DE| = 6 cm. Oblicz
+    długość boku BC oraz długość odcinka EC. Zapisz obliczenia.'
+  statement_latex: \frac{\left|AD\right|}{\left|AB\right|}=\frac{\left|AE\right|}{\left|AC\right|}=\frac{\left|DE\right|}{\left|BC\right|},\qquad
+    \left|AB\right|=5+3
+  solution: |-
+    Ponieważ DE ∥ BC, kąt ADE jest równy kątowi ABC (kąty odpowiadające), a kąt przy wierzchołku A jest wspólny. Z cechy kkk: △ADE ∼ △ABC.
+    Odpowiadające sobie boki: AD ↔ AB, AE ↔ AC, DE ↔ BC.
+    |AB| = |AD| + |DB| = 5 + 3 = 8 cm, więc skala trójkąta ABC do trójkąta ADE wynosi k = |AB|/|AD| = 8/5.
+    Stąd |BC| = k · |DE| = (8/5) · 6 = 9,6 cm.
+    Ponadto |AC| = k · |AE| = (8/5) · 4 = 6,4 cm, zatem |EC| = |AC| − |AE| = 6,4 − 4 = 2,4 cm.
+    Sprawdzenie sensowności: trójkąt ABC jest większy, więc BC > DE oraz AC > AE — zgadza się.
+  solution_steps:
+  - Z równoległości DE ∥ BC wskaż równe kąty odpowiadające i wspólny kąt A, stąd △ADE ∼ △ABC (cecha kkk).
+  - Oblicz |AB| = |AD| + |DB| = 8 cm i skalę k = |AB|/|AD| = 8/5.
+  - Oblicz |BC| = (8/5)·6 = 9,6 cm.
+  - Oblicz |AC| = (8/5)·4 = 6,4 cm, a następnie |EC| = 6,4 − 4 = 2,4 cm.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: BC
+      answer:
+        kind: NUMERIC
+        value: 9.6
+    - name: EC
+      answer:
+        kind: NUMERIC
+        value: 2.4
+  checks:
+  - kind: evaluate
+    expr: \frac{6\cdot\left(5+3\right)}{5}
+    part: BC
+  - kind: evaluate
+    expr: \frac{4\cdot\left(5+3\right)}{5}-4
+    part: EC
+  skills:
+  - rozpoznawanie podobieństwa w konfiguracji z prostą równoległą
+  - układanie proporcji z całymi bokami
+  - obliczanie długości odcinków
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [BC] SymPy solved it fresh: 9.6 vs 9.6 (tol 1e-09) ; [EC] SymPy
+      solved it fresh: 2.4 vs 2.4 (tol 1e-09)'
+- id: g-ex-04
+  slot: EXERCISE
+  ramp_index: 2
+  difficulty: 3
+  exercise_type: konfiguracja kokardki (kąty wierzchołkowe) z pytaniem o stosunek pól
+  statement: Odcinki KM i LN przecinają się w punkcie P. Wiadomo, że |∡PKL| = |∡PMN| oraz |KP| = 6, |LP|
+    = 4, |MP| = 15. Uzasadnij, że trójkąty KPL i MPN są podobne, oblicz długość odcinka PN oraz podaj
+    stosunek pola trójkąta MPN do pola trójkąta KPL. Zapisz obliczenia.
+  statement_latex: \frac{\left|MP\right|}{\left|KP\right|}=\frac{\left|PN\right|}{\left|LP\right|},\qquad
+    \frac{P\left(\triangle MPN\right)}{P\left(\triangle KPL\right)}=k^{2}
+  solution: |-
+    Z założenia |∡PKL| = |∡PMN|. Ponadto |∡KPL| = |∡MPN| jako kąty wierzchołkowe (odcinki KM i LN przecinają się w P). Dwie pary kątów są równe, więc na mocy cechy kkk trójkąty KPL i MPN są podobne, przy czym K ↔ M, P ↔ P, L ↔ N.
+    Odpowiadające sobie boki: KP ↔ MP oraz PL ↔ PN.
+    Skala trójkąta MPN do trójkąta KPL: k = |MP|/|KP| = 15/6 = 5/2.
+    Stąd |PN| = k · |LP| = (5/2) · 4 = 10.
+    Stosunek pól: P(△MPN)/P(△KPL) = k² = (5/2)² = 25/4.
+  solution_steps:
+  - Zauważ, że |∡KPL| = |∡MPN| jako kąty wierzchołkowe, a |∡PKL| = |∡PMN| z założenia.
+  - Z cechy kkk zapisz △KPL ∼ △MPN (K ↔ M, L ↔ N).
+  - Wyznacz skalę k = |MP|/|KP| = 15/6 = 5/2.
+  - Oblicz |PN| = (5/2)·4 = 10.
+  - 'Oblicz stosunek pól: k² = 25/4.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: uzasadnienie podobieństwa
+      answer:
+        kind: NOT_MACHINE_CHECKABLE
+        reason: 'Należy wskazać dwie pary równych kątów: |∡PKL| = |∡PMN| (założenie) oraz |∡KPL| = |∡MPN|
+          (kąty wierzchołkowe) i powołać się na cechę kkk, zapisując podobieństwo w kolejności odpowiadających
+          wierzchołków △KPL ∼ △MPN.'
+    - name: PN
+      answer:
+        kind: NUMERIC
+        value: 10.0
+    - name: stosunek pól
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{25}{4}
+  checks:
+  - kind: evaluate
+    expr: \frac{4\cdot 15}{6}
+    part: PN
+  - kind: evaluate
+    expr: \left(\frac{15}{6}\right)^{2}
+    part: stosunek pól
+  skills:
+  - uzasadnianie podobieństwa cechą kkk
+  - wykorzystanie kątów wierzchołkowych
+  - obliczanie długości z proporcji
+  - stosowanie zależności P'/P = k^2
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'part(s) need a human: uzasadnienie podobieństwa · 2/2 other parts solved fresh'
+- id: g-ex-05
+  slot: EXERCISE
+  ramp_index: 3
+  difficulty: 4
+  exercise_type: trójkąt prostokątny z wysokością z kąta prostego
+  statement: W trójkącie prostokątnym KLM kąt przy wierzchołku M jest prosty, |KM| = 9 cm oraz |LM| =
+    12 cm. Z wierzchołka M poprowadzono wysokość MS, gdzie punkt S leży na przeciwprostokątnej KL. Oblicz
+    długość przeciwprostokątnej KL, długość wysokości MS oraz długość odcinka KS. Zapisz obliczenia.
+  statement_latex: \left|KL\right|=\sqrt{9^{2}+12^{2}},\qquad \left|MS\right|=\frac{9\cdot 12}{\left|KL\right|},\qquad
+    \left|KM\right|^{2}=\left|KL\right|\cdot\left|KS\right|
+  solution: |-
+    Z twierdzenia Pitagorasa: |KL|² = 9² + 12² = 81 + 144 = 225, więc |KL| = 15 cm.
+    Trójkąty KSM i KML mają wspólny kąt ostry przy wierzchołku K oraz kąty proste (przy S i przy M), więc z cechy kkk: △KSM ∼ △KML (S ↔ M, M ↔ L).
+    Z odpowiadających sobie boków: |KS|/|KM| = |KM|/|KL|, czyli |KM|² = |KL| · |KS|.
+    Stąd |KS| = 81/15 = 5,4 cm.
+    Analogicznie △LSM ∼ △LMK, więc |LM|² = |KL| · |LS|, czyli |LS| = 144/15 = 9,6 cm (i rzeczywiście 5,4 + 9,6 = 15).
+    Wysokość: z podobieństwa △KSM ∼ △MSL mamy |MS|² = |KS| · |LS| = 5,4 · 9,6 = 51,84, więc |MS| = 7,2 cm.
+    Ten sam wynik daje porównanie pól: ½·9·12 = ½·15·|MS|, skąd |MS| = 108/15 = 7,2 cm.
+  solution_steps:
+  - 'Oblicz przeciwprostokątną z twierdzenia Pitagorasa: |KL| = √(81 + 144) = 15 cm.'
+  - Zauważ podobieństwo △KSM ∼ △KML (kąt prosty i wspólny kąt przy K), stąd |KM|² = |KL|·|KS|.
+  - Oblicz |KS| = 81/15 = 5,4 cm oraz |LS| = 144/15 = 9,6 cm.
+  - 'Z zależności |MS|² = |KS|·|LS| = 51,84 otrzymaj |MS| = 7,2 cm (lub z porównania pól: |MS| = (9·12)/15).'
+  - 'Sprawdź: |KS| + |LS| = 5,4 + 9,6 = 15 = |KL|.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: KL
+      answer:
+        kind: NUMERIC
+        value: 15.0
+    - name: MS
+      answer:
+        kind: NUMERIC
+        value: 7.2
+    - name: KS
+      answer:
+        kind: NUMERIC
+        value: 5.4
+  checks:
+  - kind: evaluate
+    expr: \sqrt{9^{2}+12^{2}}
+    part: KL
+  - kind: evaluate
+    expr: \frac{9\cdot 12}{15}
+    part: MS
+  - kind: evaluate
+    expr: \frac{9^{2}}{15}
+    part: KS
+  skills:
+  - twierdzenie Pitagorasa
+  - podobieństwo trójkątów w trójkącie prostokątnym z wysokością
+  - stosowanie zależności a^2 = c·p oraz h^2 = p·q
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [KL] SymPy solved it fresh: 15.0 vs 15.0 (tol 1e-09) ; [MS]
+      SymPy solved it fresh: 7.2 vs 7.2 (tol 1e-09) ; [KS] SymPy solved it fresh: 5.4 vs 5.4 (tol 1e-09)'
+- id: g-ex-t00
+  slot: EXERCISE
+  ramp_index: 6
+  difficulty: 3
+  exercise_type: obliczanie długości i stosunku pól w konfiguracji „kokardka”
+  statement: W trapezie ABCD boki AB i CD są równoległe, przy czym |AB| = 15 cm oraz |CD| = 9 cm. Przekątne
+    AC i BD tego trapezu przecinają się w punkcie S, a ponadto |AS| = 10 cm i |BS| = 7,5 cm. Oblicz długości
+    odcinków SC i SD oraz stosunek pola trójkąta ABS do pola trójkąta CDS. Zapisz obliczenia.
+  statement_latex: k=\frac{|CD|}{|AB|}=\frac{9}{15},\qquad |SC|=k\cdot|AS|,\qquad \frac{P_{ABS}}{P_{CDS}}=\left(\frac{15}{9}\right)^{2}
+  solution: |-
+    Ponieważ AB ∥ CD, to kąty SAB i SCD są naprzemianległe przy prostych równoległych przeciętych prostą AC, więc |∡SAB| = |∡SCD|. Podobnie |∡SBA| = |∡SDC| (proste równoległe przecięte prostą BD). Zatem na mocy cechy kkk trójkąty ABS i CDS są podobne: △ABS ∼ △CDS.
+    Odpowiadające sobie boki: AB ↔ CD, AS ↔ CS, BS ↔ DS.
+    Skala podobieństwa trójkąta CDS do trójkąta ABS wynosi k = \frac{|CD|}{|AB|} = \frac{9}{15} = \frac{3}{5}.
+    Stąd |SC| = \frac{3}{5}\cdot 10 = 6 (cm) oraz |SD| = \frac{3}{5}\cdot 7{,}5 = 4{,}5 (cm).
+    Trójkąt ABS jest większy, a skala podobieństwa trójkąta ABS do trójkąta CDS wynosi \frac{15}{9} = \frac{5}{3}, więc stosunek pól jest równy \left(\frac{5}{3}\right)^{2} = \frac{25}{9}.
+    Sprawdzenie sensowności: odcinki w mniejszym trójkącie CDS wyszły krótsze niż odpowiadające im odcinki w trójkącie ABS.
+  solution_steps:
+  - 'Z równoległości AB ∥ CD wskaż równe kąty naprzemianległe: |∡SAB| = |∡SCD| i |∡SBA| = |∡SDC|.'
+  - Z cechy kkk zapisz podobieństwo △ABS ∼ △CDS i wypisz odpowiadające sobie boki.
+  - 'Wyznacz skalę k = |CD| : |AB| = 9 : 15 = 3/5.'
+  - Oblicz |SC| = (3/5)·10 = 6 cm oraz |SD| = (3/5)·7,5 = 4,5 cm.
+  - Skala trójkąta ABS do CDS wynosi 15/9 = 5/3, więc stosunek pól to (5/3)² = 25/9.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: SC
+      answer:
+        kind: NUMERIC
+        value: 6.0
+    - name: SD
+      answer:
+        kind: NUMERIC
+        value: 4.5
+    - name: stosunek_pol
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{25}{9}
+  checks:
+  - kind: evaluate
+    expr: \frac{9}{15}\cdot 10
+    part: SC
+  - kind: evaluate
+    expr: \frac{9}{15}\cdot 7.5
+    part: SD
+  - kind: evaluate
+    expr: \left(\frac{15}{9}\right)^{2}
+    part: stosunek_pol
+  skills:
+  - rozpoznawanie podobieństwa z cechy kkk przy prostych równoległych
+  - ustalanie odpowiadających sobie boków
+  - układanie i rozwiązywanie proporcji
+  - stosunek pól trójkątów podobnych
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [SC] SymPy solved it fresh: 6.0 vs 6.0 (tol 1e-09) ; [SD] SymPy
+      solved it fresh: 4.5 vs 4.5 (tol 1e-09) ; [stosunek_pol] SymPy solved it fresh: 2.7777777777777777
+      vs 2.7777777777777777 (tol 1e-09)'
+- id: g-ex-t01
+  slot: EXERCISE
+  ramp_index: 7
+  difficulty: 4
+  exercise_type: od stosunku pól do skali, obwodu i długości odcinka
+  statement: W trójkącie ABC punkt D leży na boku AB, a punkt E leży na boku AC, przy czym DE ∥ BC. Pole
+    trójkąta ADE jest równe 12 cm², a pole trapezu DBCE jest równe 96 cm². Ponadto |AD| = 5 cm, a obwód
+    trójkąta ADE jest równy 18 cm. Oblicz skalę podobieństwa trójkąta ABC do trójkąta ADE, długość odcinka
+    DB oraz obwód trójkąta ABC. Zapisz obliczenia.
+  statement_latex: k=\sqrt{\frac{P_{ABC}}{P_{ADE}}}=\sqrt{\frac{12+96}{12}},\qquad |DB|=k\cdot|AD|-|AD|,\qquad
+    Obw_{ABC}=k\cdot Obw_{ADE}
+  solution: |-
+    Ponieważ DE ∥ BC, kąt ADE jest równy kątowi ABC (kąty odpowiadające), a kąt przy wierzchołku A jest wspólny, więc z cechy kkk: △ADE ∼ △ABC.
+    Pole trójkąta ABC to suma pola trójkąta ADE i pola trapezu DBCE:
+    P_{ABC} = 12 + 96 = 108 (cm²).
+    Stosunek pól trójkątów podobnych jest równy kwadratowi skali, więc
+    k^{2} = \frac{108}{12} = 9, skąd k = 3 (skala trójkąta ABC do trójkąta ADE).
+    Długości mnożymy przez k: |AB| = 3\cdot|AD| = 3\cdot 5 = 15 (cm), więc
+    |DB| = |AB| − |AD| = 15 − 5 = 10 (cm).
+    Uwaga: odpowiednikiem odcinka AD jest CAŁY bok AB, a nie jego część DB.
+    Obwód jest sumą długości, więc skaluje się przez k:
+    Obw(△ABC) = 3\cdot 18 = 54 (cm).
+  solution_steps:
+  - Uzasadnij podobieństwo △ADE ∼ △ABC (DE ∥ BC, kąty odpowiadające i wspólny kąt A, cecha kkk).
+  - 'Oblicz pole trójkąta ABC: 12 + 96 = 108 cm².'
+  - Z zależności P'/P = k² wyznacz k = √(108/12) = 3.
+  - Oblicz |AB| = 3·5 = 15 cm, a następnie |DB| = 15 − 5 = 10 cm.
+  - 'Oblicz obwód trójkąta ABC: Obw = k·18 = 3·18 = 54 cm.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: k
+      answer:
+        kind: NUMERIC
+        value: 3.0
+    - name: DB
+      answer:
+        kind: NUMERIC
+        value: 10.0
+    - name: obwod_ABC
+      answer:
+        kind: NUMERIC
+        value: 54.0
+  checks:
+  - kind: evaluate
+    expr: \sqrt{\frac{12+96}{12}}
+    part: k
+  - kind: evaluate
+    expr: 3\cdot 5-5
+    part: DB
+  - kind: evaluate
+    expr: 3\cdot 18
+    part: obwod_ABC
+  skills:
+  - wyznaczanie skali ze stosunku pól
+  - podobieństwo trójkąta odciętego prostą równoległą do boku
+  - stosunek obwodów trójkątów podobnych
+  - odróżnianie części boku od całego boku
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [k] SymPy solved it fresh: 3.0 vs 3.0 (tol 1e-09) ; [DB] SymPy
+      solved it fresh: 10.0 vs 10.0 (tol 1e-09) ; [obwod_ABC] SymPy solved it fresh: 54.0 vs 54.0 (tol
+      1e-09)'
+- id: g-cm-06
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: 'demonstracja błędu: podobieństwo mylone z przystawaniem'
+  statement: 'W trójkącie ABC dane są: |∡A| = 50°, |∡B| = 60°, |AB| = 6 cm i |BC| = 7 cm. W trójkącie
+    KLM dane są: |∡K| = 50°, |∡L| = 60° i |KL| = 9 cm. Ola rozumowała tak: „Oba trójkąty mają takie same
+    kąty, więc są takie same, czyli |LM| = |BC| = 7 cm”. Wskaż błąd w rozumowaniu Oli i oblicz poprawną
+    długość boku LM.'
+  statement_latex: k=\frac{\left|KL\right|}{\left|AB\right|}=\frac{9}{6},\qquad \left|LM\right|=k\cdot\left|BC\right|
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: „Kąty obu trójkątów są równe (50°, 60°, 70°), więc trójkąty są takie same — mają też równe boki, zatem |LM| = 7 cm”. Otrzymany wynik 7 cm jest błędny.
+    GDZIE JEST BŁĄD: równość kątów gwarantuje jedynie PODOBIEŃSTWO (ten sam kształt), a nie przystawanie (tę samą wielkość). Przystawanie to podobieństwo w szczególnej skali k = 1. Tutaj |KL| = 9 cm ≠ 6 cm = |AB|, więc trójkąty na pewno nie są przystające.
+    POPRAWNE ROZWIĄZANIE: z cechy kkk △ABC ∼ △KLM (A ↔ K, B ↔ L, C ↔ M), więc AB ↔ KL oraz BC ↔ LM.
+    Skala: k = |KL|/|AB| = 9/6 = 3/2.
+    |LM| = k · |BC| = (3/2) · 7 = 10,5 cm.
+    Sprawdzenie: k > 1, więc trójkąt KLM jest większy i |LM| > |BC| — zgadza się.
+  solution_steps:
+  - 'Zauważ błąd: z równości kątów wynika tylko podobieństwo, a nie przystawanie (przystawanie to k =
+    1).'
+  - Sprawdź, że k ≠ 1, bo |KL| = 9 ≠ 6 = |AB|.
+  - Z cechy kkk zapisz △ABC ∼ △KLM i wyznacz k = 9/6 = 3/2.
+  - Oblicz |LM| = (3/2)·7 = 10,5 cm.
+  answer:
+    kind: NUMERIC
+    value: 10.5
+  checks:
+  - kind: evaluate
+    expr: \frac{9}{6}\cdot 7
+  skills:
+  - odróżnianie podobieństwa od przystawania
+  - wyznaczanie skali podobieństwa
+  - obliczanie długości boku z proporcji
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 10.5 vs 10.5 (tol 1e-09)'
+- id: g-cm-07
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: 'demonstracja błędu: proporcja z boków, które sobie nie odpowiadają'
+  statement: 'Boki pierwszego trójkąta mają długości 3 cm, 5 cm i 7 cm. Drugi trójkąt jest do niego podobny,
+    a dwa jego boki mają długości 10 cm i 6 cm. Piotr zapisał: „Boki podaję w tej kolejności, w jakiej
+    występują w treści: 3 odpowiada 10, 5 odpowiada 6, a 7 odpowiada x, więc 3/10 = 7/x”. Wskaż błąd Piotra
+    i oblicz poprawną długość trzeciego boku drugiego trójkąta.'
+  statement_latex: \frac{6}{3}=\frac{10}{5}=\frac{x}{7}
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: Piotr paruje boki w kolejności podania: 3 ↔ 10, 5 ↔ 6, 7 ↔ x. Z proporcji 3/10 = 7/x otrzymuje x = 70/3 ≈ 23,3 cm.
+    GDZIE JEST BŁĄD: odpowiadają sobie boki leżące naprzeciw równych kątów, a nie boki wymienione na tym samym miejscu w treści zadania. Przy takim doborze ilorazy nie są zgodne: 10/3 ≈ 3,33, a 6/5 = 1,2 — to od razu pokazuje, że przyporządkowanie jest złe.
+    POPRAWNE ROZWIĄZANIE: porządkujemy boki rosnąco. Pierwszy trójkąt: 3, 5, 7. W drugim trójkącie mamy 6 i 10, a szukany bok x.
+    Sprawdzamy: 6/3 = 2 oraz 10/5 = 2 — ilorazy są zgodne, więc 6 odpowiada bokowi 3, a 10 odpowiada bokowi 5, i skala wynosi k = 2.
+    Zatem x odpowiada bokowi 7: x = 2 · 7 = 14 cm.
+    Sprawdzenie: 3, 5, 7 pomnożone przez 2 daje 6, 10, 14 — zgodnie z danymi.
+  solution_steps:
+  - Zauważ, że boki odpowiadają sobie według równych kątów, a nie według kolejności w treści.
+  - 'Uporządkuj boki pierwszego trójkąta rosnąco: 3, 5, 7.'
+  - 'Dopasuj znane boki drugiego trójkąta: 6/3 = 2 i 10/5 = 2, więc k = 2.'
+  - 'Oblicz brakujący bok: x = 2·7 = 14 cm.'
+  answer:
+    kind: NUMERIC
+    value: 14.0
+  checks:
+  - kind: evaluate
+    expr: 7\cdot\frac{6}{3}
+  skills:
+  - ustalanie odpowiadających sobie boków
+  - porządkowanie boków rosnąco
+  - wyznaczanie skali i brakującej długości
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 14.0 vs 14.0 (tol 1e-09)'
+- id: g-cm-08
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: 'demonstracja błędu: skalowanie pola przez k zamiast przez k^2'
+  statement: 'Trójkąt A′B′C′ jest podobny do trójkąta ABC w skali k = 3 (trójkąta A′B′C′ do trójkąta ABC).
+    Pole trójkąta ABC jest równe 12 cm², a jego obwód jest równy 18 cm. Kuba napisał: „Boki są 3 razy
+    większe, więc pole też jest 3 razy większe, czyli 36 cm²”. Wskaż błąd Kuby i oblicz poprawnie pole
+    oraz obwód trójkąta A′B′C′.'
+  statement_latex: P\left(\triangle A'B'C'\right)=3^{2}\cdot 12,\qquad Obw\left(\triangle A'B'C'\right)=3\cdot
+    18
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: „k = 3, więc pole mnożę przez 3: 3 · 12 = 36 cm²”. Wynik 36 cm² jest błędny.
+    GDZIE JEST BŁĄD: pole zależy od iloczynu DWÓCH wymiarów (P = ½·a·h), a każdy z nich mnoży się przez k, więc pole mnoży się przez k², a nie przez k. Przez k mnoży się obwód, bo jest sumą długości.
+    POPRAWNE ROZWIĄZANIE:
+    P(△A′B′C′) = k² · P(△ABC) = 3² · 12 = 9 · 12 = 108 cm².
+    Obw(△A′B′C′) = k · Obw(△ABC) = 3 · 18 = 54 cm.
+  solution_steps:
+  - Zauważ, że pola figur podobnych skalują się przez k², a nie przez k.
+  - 'Oblicz pole: P′ = 3²·12 = 108 cm².'
+  - 'Obwód, jako suma długości, skaluje się przez k: Obw′ = 3·18 = 54 cm.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: pole A'B'C'
+      answer:
+        kind: NUMERIC
+        value: 108.0
+    - name: obwód A'B'C'
+      answer:
+        kind: NUMERIC
+        value: 54.0
+  checks:
+  - kind: evaluate
+    expr: 3^{2}\cdot 12
+    part: pole A'B'C'
+  - kind: evaluate
+    expr: 3\cdot 18
+    part: obwód A'B'C'
+  skills:
+  - stosowanie zależności P'/P = k^2
+  - stosowanie zależności Obw'/Obw = k
+  - odróżnianie skalowania długości od skalowania pól
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [pole A''B''C''] SymPy solved it fresh: 108.0 vs 108.0 (tol
+      1e-09) ; [obwód A''B''C''] SymPy solved it fresh: 54.0 vs 54.0 (tol 1e-09)'
+- id: g-cm-09
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: 'demonstracja błędu: odwrotne użycie skali podobieństwa'
+  statement: 'Trójkąt KLM jest podobny do trójkąta ABC w skali k = 5/2 (trójkąta KLM do trójkąta ABC),
+    przy czym A ↔ K, B ↔ L, C ↔ M. Dane są: |KL| = 20 cm oraz obwód trójkąta KLM równy 45 cm. Zosia napisała:
+    „Skala wynosi 5/2, więc |AB| = 20 · 5/2 = 50 cm”. Wskaż błąd Zosi i oblicz poprawnie długość boku
+    AB oraz obwód trójkąta ABC.'
+  statement_latex: \left|AB\right|=20\cdot\frac{2}{5},\qquad Obw\left(\triangle ABC\right)=45\cdot\frac{2}{5}
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: „k = 5/2, więc każdą długość mnożę przez 5/2: |AB| = 20 · 5/2 = 50 cm”. Wynik 50 cm jest błędny — trójkąt ABC jest MNIEJSZY (bo k > 1 opisuje powiększenie ABC do KLM), a mimo to wyszedł bok dłuższy niż 20 cm.
+    GDZIE JEST BŁĄD: skala ma kierunek. Skoro k = 5/2 jest skalą trójkąta KLM do trójkąta ABC, to długości trójkąta ABC mnożymy przez k, żeby otrzymać długości trójkąta KLM; w drugą stronę mnożymy przez 1/k = 2/5.
+    POPRAWNE ROZWIĄZANIE:
+    |AB| = |KL| · (1/k) = 20 · 2/5 = 8 cm.
+    Obw(△ABC) = Obw(△KLM) · (1/k) = 45 · 2/5 = 18 cm.
+    Sprawdzenie: 8 · 5/2 = 20 = |KL| oraz 18 · 5/2 = 45 — zgadza się.
+  solution_steps:
+  - Zauważ, że k = 5/2 jest skalą KLM do ABC, więc z KLM do ABC mnożymy przez 1/k = 2/5.
+  - Oblicz |AB| = 20·(2/5) = 8 cm.
+  - Oblicz Obw(△ABC) = 45·(2/5) = 18 cm.
+  - 'Sprawdź: 8·(5/2) = 20 oraz 18·(5/2) = 45.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: AB
+      answer:
+        kind: NUMERIC
+        value: 8.0
+    - name: obwód ABC
+      answer:
+        kind: NUMERIC
+        value: 18.0
+  checks:
+  - kind: evaluate
+    expr: \frac{20\cdot 2}{5}
+    part: AB
+  - kind: evaluate
+    expr: \frac{45\cdot 2}{5}
+    part: obwód ABC
+  skills:
+  - kierunek skali podobieństwa
+  - obliczanie długości boku mniejszego trójkąta
+  - obliczanie obwodu z proporcji
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [AB] SymPy solved it fresh: 8.0 vs 8.0 (tol 1e-09) ; [obwód
+      ABC] SymPy solved it fresh: 18.0 vs 18.0 (tol 1e-09)'
+- id: g-cm-10
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 4
+  exercise_type: 'demonstracja błędu: fałszywa cecha „bbk” zamiast bkb'
+  statement: 'W trójkącie ABC dane są: |AB| = 9, |BC| = 6 oraz |∡BAC| = 30°. W trójkącie KLM dane są:
+    |KL| = 12, |LM| = 8 oraz |∡LKM| = 30°. Bartek stwierdził: „Zachodzi 12/9 = 8/6 = 4/3 i kąty przy wierzchołkach
+    A oraz K są równe, więc na mocy cechy bkb trójkąty ABC i KLM są podobne”. Rozstrzygnij, czy rozumowanie
+    Bartka jest poprawne, i wyjaśnij dlaczego. Następnie oblicz |KM| przy dodatkowym założeniu, że zamiast
+    kątów przy A i K równe są kąty |∡ABC| = |∡KLM| = 30°, a |AC| = 5,4.'
+  statement_latex: \frac{\left|KL\right|}{\left|AB\right|}=\frac{\left|LM\right|}{\left|BC\right|}=\frac{4}{3},\qquad
+    \left|KM\right|=\frac{4}{3}\cdot 5{,}4
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: „Dwa boki są proporcjonalne (12/9 = 8/6 = 4/3) i jest jeszcze para równych kątów, więc z cechy bkb trójkąty są podobne”.
+    GDZIE JEST BŁĄD: cecha bkb wymaga, aby równe kąty leżały MIĘDZY parami proporcjonalnych boków. Proporcjonalne są boki AB i BC oraz KL i LM, a kątem zawartym między nimi jest kąt przy wierzchołku B (odpowiednio przy L), natomiast dane są kąty przy A i K — leżące naprzeciw boku BC (odpowiednio LM). Taki układ danych („bbk”) nie wyznacza kształtu trójkąta jednoznacznie: mając |AB| = 9, |BC| = 6 i kąt 30° naprzeciw krótszego z tych boków, można zbudować dwa różne, niepodobne trójkąty (jeden z kątem przy C ostrym, drugi z rozwartym). Zatem rozumowanie Bartka jest niepoprawne — trójkąty nie muszą być podobne.
+    POPRAWNE ROZUMOWANIE PRZY ZMIENIONYM ZAŁOŻENIU: jeśli równe są kąty |∡ABC| = |∡KLM| = 30°, to leżą one między bokami AB i BC oraz KL i LM, a ponieważ |KL|/|AB| = |LM|/|BC| = 4/3, to z cechy bkb △ABC ∼ △KLM ze skalą k = 4/3.
+    Wtedy AC ↔ KM, więc |KM| = (4/3) · 5,4 = 7,2.
+  solution_steps:
+  - 'Sprawdź, między którymi bokami leży dany kąt: kąt przy A leży między AB i AC, a nie między AB i BC.'
+  - Stwierdź, że warunek cechy bkb nie jest spełniony — dane tworzą układ „bbk”, który nie gwarantuje
+    podobieństwa (możliwe dwa różne trójkąty).
+  - Przy założeniu |∡ABC| = |∡KLM| = 30° kąt leży między proporcjonalnymi bokami, więc z cechy bkb △ABC
+    ∼ △KLM, k = 12/9 = 4/3.
+  - Oblicz |KM| = (4/3)·5,4 = 7,2.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: czy rozumowanie Bartka jest poprawne
+      answer:
+        kind: BOOLEAN
+        truth: false
+    - name: KM
+      answer:
+        kind: NUMERIC
+        value: 7.2
+  checks:
+  - kind: evaluate
+    expr: \frac{12}{9}\cdot 5{,}4
+    part: KM
+  skills:
+  - rozumienie warunku o kącie zawartym między bokami
+  - ocena poprawności rozumowania
+  - stosowanie cechy bkb do obliczenia długości
+  verification:
+    checkability: REFERENCE_CALL
+    note: 2 parts matched
+- id: g-ch-t02
+  slot: CHALLENGE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: modelowanie sytuacji praktycznej trójkątami podobnymi
+  statement: Ola chce zmierzyć wysokość rosnącego na płaskim, poziomym terenie drzewa. Wbiła pionowo w
+    ziemię tyczkę o wysokości 2 m w odległości 3 m od pnia drzewa. Następnie położyła się na ziemi po
+    drugiej stronie tyczki tak, aby jej oko znajdowało się tuż przy powierzchni ziemi, i tak dobrała miejsce,
+    żeby wierzchołek tyczki i wierzchołek drzewa widzieć w jednej linii. Odległość oka Oli od podstawy
+    tyczki wynosiła wtedy 1,2 m. Oko Oli, podstawa tyczki i pień drzewa leżą na jednej prostej, a drzewo
+    i tyczka są prostopadłe do podłoża. Oblicz wysokość tego drzewa. Zapisz obliczenia.
+  statement_latex: \frac{h}{1{,}2+3}=\frac{2}{1{,}2}\quad\Longrightarrow\quad h=\frac{2\cdot\left(1{,}2+3\right)}{1{,}2}
+  solution: |-
+    Model: oznaczmy przez O punkt, w którym znajduje się oko Oli, przez T — podstawę tyczki, przez P — podstawę (pień) drzewa. Punkty O, T, P leżą na jednej prostej, przy czym |OT| = 1,2 m oraz |TP| = 3 m, więc |OP| = 1,2 + 3 = 4,2 m.
+    Tyczka i drzewo są prostopadłe do podłoża, a wierzchołek tyczki i wierzchołek drzewa leżą na jednej prostej wychodzącej z punktu O. Otrzymujemy dwa trójkąty prostokątne: mniejszy — o przyprostokątnych 1,2 m (podłoże) i 2 m (tyczka) — oraz większy — o przyprostokątnych 4,2 m i h (wysokość drzewa).
+    Oba trójkąty mają kąt prosty przy podłożu oraz wspólny kąt ostry przy wierzchołku O (linia wzroku jest tą samą prostą), więc na mocy cechy kkk są podobne.
+    Układamy proporcję odpowiadających sobie boków:
+    \frac{h}{4{,}2}=\frac{2}{1{,}2}
+    Stąd h = \frac{2\cdot 4{,}2}{1{,}2} = \frac{8{,}4}{1{,}2} = 7.
+    Wysokość drzewa jest równa 7 m.
+    Sprawdzenie sensowności: skala podobieństwa wynosi k = 4,2 : 1,2 = 3,5, a 3,5 · 2 m = 7 m — zgadza się.
+  solution_steps:
+  - 'Zbuduj model: dwa trójkąty prostokątne o wspólnym wierzchołku w punkcie, w którym znajduje się oko,
+    z pionową tyczką i pionowym drzewem jako przyprostokątnymi.'
+  - 'Oblicz odległość oka od pnia drzewa: 1,2 + 3 = 4,2 m.'
+  - Uzasadnij podobieństwo trójkątów cechą kkk (kąt prosty i wspólny kąt przy oku).
+  - Ułóż proporcję h/4,2 = 2/1,2.
+  - 'Rozwiąż proporcję: h = 2·4,2/1,2 = 7, czyli drzewo ma 7 m wysokości.'
+  answer:
+    kind: NUMERIC
+    value: 7.0
+  checks:
+  - kind: evaluate
+    expr: \frac{2\cdot\left(1.2+3\right)}{1.2}
+    var: h
+  stated_model:
+    variable: h
+    objective_latex: \frac{h}{1.2+3}=\frac{2}{1.2}
+    domain_lo: '0'
+    goal: value
+    constraint_used: trójkąty prostokątne o wspólnym kącie przy oku obserwatora są podobne (kkk)
+  skills:
+  - budowanie modelu geometrycznego z opisu słownego
+  - uzasadnianie podobieństwa cechą kkk
+  - układanie proporcji wysokość–odległość
+  - interpretacja wyniku w kontekście
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''h'': ''\\frac{h}{1.2+3}=\\frac{2}{1.2}'')
+      — human review'
+- id: g-ch-t03
+  slot: CHALLENGE
+  ramp_index: 1
+  difficulty: 4
+  exercise_type: wysokość z kąta prostego — równanie kwadratowe z odrzuceniem pierwiastka
+  statement: W trójkącie prostokątnym ABC kąt przy wierzchołku C jest prosty. Wysokość CD poprowadzona
+    z wierzchołka C na przeciwprostokątną AB ma długość 24 cm, a punkt D dzieli przeciwprostokątną na
+    odcinki AD i DB, przy czym odcinek AD jest o 14 cm dłuższy od odcinka DB. Oblicz obwód i pole trójkąta
+    ABC. Zapisz obliczenia.
+  statement_latex: '|CD|^{2}=|AD|\cdot|DB|\quad\Longrightarrow\quad 24^{2}=\left(x+14\right)\cdot x'
+  solution: |-
+    Oznaczmy |DB| = x (cm), x > 0. Wtedy |AD| = x + 14.
+    Trójkąty ACD i CBD są prostokątne (kąt przy D jest prosty) i mają równe kąty ostre: |∡ACD| = |∡CBD| (oba dopełniają kąt ∡DCB do 90°). Z cechy kkk △ACD ∼ △CBD, a stąd proporcja odpowiadających boków
+    \frac{|AD|}{|CD|}=\frac{|CD|}{|DB|}, czyli |CD|^{2}=|AD|\cdot|DB|.
+    Podstawiamy: 24^{2}=\left(x+14\right)\cdot x, czyli x^{2}+14x-576=0.
+    Δ = 14^{2}+4\cdot 576 = 196+2304 = 2500, \sqrt{\Delta}=50,
+    x_{1}=\frac{-14-50}{2}=-32, x_{2}=\frac{-14+50}{2}=18.
+    Długość odcinka musi być dodatnia, więc odrzucamy x = −32 i przyjmujemy |DB| = 18 cm, |AD| = 32 cm.
+    Przeciwprostokątna: |AB| = 18 + 32 = 50 (cm).
+    Z podobieństwa △ACD ∼ △ABC mamy |AC|^{2}=|AB|\cdot|AD| = 50\cdot 32 = 1600, więc |AC| = 40 cm.
+    Analogicznie |BC|^{2}=|AB|\cdot|DB| = 50\cdot 18 = 900, więc |BC| = 30 cm.
+    Obwód: 50 + 40 + 30 = 120 (cm).
+    Pole: P = \frac{1}{2}\cdot|AB|\cdot|CD| = \frac{1}{2}\cdot 50\cdot 24 = 600 (cm²).
+    Sprawdzenie: 30^{2}+40^{2}=900+1600=2500=50^{2} — twierdzenie Pitagorasa spełnione.
+  solution_steps:
+  - 'Wprowadź zmienną: |DB| = x > 0, wtedy |AD| = x + 14.'
+  - Uzasadnij podobieństwo △ACD ∼ △CBD (kkk) i zapisz zależność |CD|² = |AD|·|DB|.
+  - Ułóż równanie 576 = x(x + 14), czyli x² + 14x − 576 = 0.
+  - 'Rozwiąż równanie: Δ = 2500, x = −32 lub x = 18; odrzuć ujemny pierwiastek, więc |DB| = 18 cm, |AD|
+    = 32 cm.'
+  - 'Oblicz |AB| = 50 cm oraz z zależności a² = c·p przyprostokątne: |AC| = √(50·32) = 40 cm, |BC| = √(50·18)
+    = 30 cm.'
+  - 'Oblicz obwód: 50 + 40 + 30 = 120 cm i pole: ½·50·24 = 600 cm².'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: obwod
+      answer:
+        kind: NUMERIC
+        value: 120.0
+    - name: pole
+      answer:
+        kind: NUMERIC
+        value: 600.0
+  checks:
+  - kind: evaluate
+    expr: 50+\sqrt{50\cdot 32}+\sqrt{50\cdot 18}
+    part: obwod
+  - kind: evaluate
+    expr: \frac{1}{2}\cdot 50\cdot 24
+    part: pole
+  stated_model:
+    variable: x
+    objective_latex: 24^{2}=\left(x+14\right)\cdot x
+    domain_lo: '0'
+    goal: value
+    constraint_used: x = |DB| > 0; wysokość z kąta prostego daje h^2 = p \cdot q
+  skills:
+  - wprowadzenie zmiennej pomocniczej
+  - zależność h² = p·q z podobieństwa trójkątów
+  - odrzucenie ujemnego rozwiązania
+  - zależność a² = c·p i obliczanie obwodu oraz pola
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''x'': ''24^{2}=\\left(x+14\\right)\\cdot
+      x'') — human review'
+- id: g-ch-t04
+  slot: CHALLENGE
+  ramp_index: 2
+  difficulty: 5
+  exercise_type: prostokąt wpisany w trójkąt — wzór, dziedzina, wartość największa i sprawdzenie osiągalności
+  statement: |-
+    Dany jest trójkąt ABC, w którym |AB| = 12 cm, a wysokość CH poprowadzona z wierzchołka C na bok AB ma długość 8 cm (punkt H leży na boku AB). W trójkąt ten wpisano prostokąt DEFG w taki sposób, że bok DE zawiera się w boku AB, wierzchołek F leży na boku BC, a wierzchołek G leży na boku AC (bok GF jest równoległy do AB). Przyjmij, że |DG| = x, gdzie x oznacza wyrażoną w centymetrach wysokość tego prostokąta.
+    a) Wyznacz wzór na pole P prostokąta DEFG jako funkcję zmiennej x i podaj dziedzinę tej funkcji.
+    b) Oblicz, dla jakiej wartości x pole prostokąta DEFG jest największe, i oblicz to największe pole.
+    c) Rozstrzygnij, czy w trójkąt ABC można wpisać w opisany sposób prostokąt o polu 25 cm².
+  statement_latex: '|GF|=12\cdot\frac{8-x}{8},\qquad P\left(x\right)=x\cdot\left(12-\frac{3}{2}\cdot x\right)=12x-\frac{3}{2}x^{2}'
+  solution: |-
+    a) Ponieważ GF ∥ AB, trójkąt CGF jest podobny do trójkąta CAB: kąt przy wierzchołku C jest wspólny, a kąty CGF i CAB są odpowiadające (cecha kkk).
+    Wysokość trójkąta CGF poprowadzona z wierzchołka C jest równa 8 − x (od całej wysokości 8 odejmujemy wysokość prostokąta x). Odpowiadające sobie wysokości i boki są w tej samej skali, więc
+    \frac{|GF|}{12}=\frac{8-x}{8}, skąd |GF| = 12\cdot\frac{8-x}{8} = 12-\frac{3}{2}x.
+    Pole prostokąta:
+    P\left(x\right)=|DG|\cdot|GF| = x\cdot\left(12-\frac{3}{2}x\right) = 12x-\frac{3}{2}x^{2}.
+    Dziedzina: musi być x > 0 oraz |GF| > 0, czyli 12-\frac{3}{2}x>0, a więc x < 8. Zatem x ∈ (0, 8).
+    b) Funkcja P jest kwadratowa, a współczynnik przy x² jest ujemny \left(-\frac{3}{2}\right), więc największą wartość przyjmuje w wierzchołku:
+    x_{w}=\frac{-12}{2\cdot\left(-\frac{3}{2}\right)}=4.
+    Liczba 4 należy do dziedziny (0, 8), więc
+    P_{max}=P\left(4\right)=4\cdot\left(12-\frac{3}{2}\cdot 4\right)=4\cdot 6=24.
+    Największe pole prostokąta wynosi 24 cm² i jest osiągane dla x = 4 cm (wtedy |GF| = 6 cm).
+    c) Największe możliwe pole takiego prostokąta to 24 cm², a 25 > 24, więc prostokąta o polu 25 cm² wpisać w ten trójkąt w opisany sposób NIE można.
+  solution_steps:
+  - Zauważ, że GF ∥ AB, i uzasadnij podobieństwo △CGF ∼ △CAB (wspólny kąt C i kąty odpowiadające, cecha
+    kkk).
+  - Wysokość trójkąta CGF wynosi 8 − x, więc ze skali podobieństwa |GF| = 12·(8 − x)/8 = 12 − (3/2)x.
+  - 'Zapisz pole prostokąta: P(x) = x·(12 − (3/2)x) = 12x − (3/2)x².'
+  - Wyznacz dziedzinę z warunków x > 0 i 12 − (3/2)x > 0, czyli x ∈ (0, 8).
+  - 'Współczynnik przy x² jest ujemny, więc największa wartość jest w wierzchołku: x_w = −12 / (2·(−3/2))
+    = 4 ∈ (0, 8).'
+  - Oblicz P(4) = 4·6 = 24, czyli największe pole to 24 cm².
+  - 'Porównaj z 25 cm²: 25 > 24, więc takiego prostokąta wpisać nie można.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wzor_P
+      answer:
+        kind: SYMBOLIC
+        latex: 12x-\frac{3}{2}x^{2}
+    - name: dziedzina
+      answer:
+        kind: INTERVAL
+        lo: '0'
+        hi: '8'
+    - name: x_max
+      answer:
+        kind: NUMERIC
+        value: 4.0
+    - name: P_max
+      answer:
+        kind: NUMERIC
+        value: 24.0
+    - name: czy_pole_25
+      answer:
+        kind: BOOLEAN
+        truth: false
+  checks:
+  - kind: simplify
+    expr: x\cdot\left(12-\frac{3}{2}\cdot x\right)
+    part: wzor_P
+  - kind: evaluate
+    expr: \frac{-12}{2\cdot\left(-\frac{3}{2}\right)}
+    part: x_max
+  - kind: evaluate
+    expr: 4\cdot\left(12-\frac{3}{2}\cdot 4\right)
+    part: P_max
+  stated_model:
+    variable: x
+    objective_latex: P\left(x\right)=12x-\frac{3}{2}x^{2}
+    domain_lo: '0'
+    domain_hi: '8'
+    constraint_used: '|GF| = 12 \cdot \frac{8-x}{8} z podobieństwa \triangle CGF \sim \triangle CAB'
+  skills:
+  - podobieństwo trójkąta odciętego prostą równoległą do boku
+  - budowanie wzoru funkcji z warunku geometrycznego
+  - wyznaczanie dziedziny z warunków dodatniości
+  - wartość największa funkcji kwadratowej (wierzchołek)
+  - ocena osiągalności zadanej wartości
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''x'': ''P\\left(x\\right)=12x-\\frac{3}{2}x^{2}'')
+      — human review'

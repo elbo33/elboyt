@@ -1,0 +1,902 @@
+section: funkcja-kwadratowa-wartosci-w-przedziale
+name: Największa i najmniejsza wartość funkcji kwadratowej w przedziale
+scope: Locating the extremum relative to a closed interval and reading off the greatest and least value
+  on it.
+requirements:
+- V.10
+counts:
+  total: 16
+  REFERENCE_CALL: 6
+  NOT_MACHINE_CHECKABLE: 5
+  DETERMINISTIC: 4
+  STATED_MODEL: 1
+exercises:
+- id: g-th-00
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: obliczenie wierzchołka i sprawdzenie przynależności do przedziału
+  statement: Dana jest funkcja kwadratowa f określona wzorem f\left(x\right)=2x^2-8x+3. Oblicz pierwszą
+    współrzędną p wierzchołka paraboli będącej wykresem tej funkcji i rozstrzygnij, czy p należy do przedziału
+    \langle 0,3\rangle.
+  statement_latex: f\left(x\right)=2x^2-8x+3,\qquad p=-\frac{b}{2\cdot a},\qquad \langle 0,3\rangle
+  solution: |-
+    Ze wzoru funkcji odczytujemy a=2, b=-8, c=3.
+    Pierwsza współrzędna wierzchołka: p=-\frac{b}{2\cdot a}=-\frac{-8}{2\cdot 2}=\frac{8}{4}=2.
+    Sprawdzamy przynależność: 0\le 2\le 3, więc p=2 należy do przedziału \langle 0,3\rangle.
+    Odpowiedź: p=2 i p\in\langle 0,3\rangle.
+  solution_steps:
+  - 'Odczytaj współczynniki: a=2, b=-8.'
+  - Podstaw do wzoru p=-\frac{b}{2\cdot a}=-\frac{-8}{2\cdot 2}=2.
+  - Sprawdź nierówności 0\le 2\le 3 – są spełnione.
+  - 'Zapisz odpowiedź: p=2, wierzchołek należy do przedziału.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: p
+      answer:
+        kind: NUMERIC
+        value: 2.0
+    - name: czy p należy do przedziału
+      answer:
+        kind: BOOLEAN
+        truth: true
+  checks:
+  - kind: evaluate
+    expr: -\frac{-8}{2\cdot 2}
+    part: p
+  skills:
+  - wyznaczanie pierwszej współrzędnej wierzchołka
+  - sprawdzanie przynależności do przedziału domkniętego
+  verification:
+    checkability: REFERENCE_CALL
+    note: '2 parts matched · det: [p] SymPy solved it fresh: 2.0 vs 2.0 (tol 1e-09)'
+- id: g-th-01
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: odczyt wartości ekstremalnej z postaci kanonicznej
+  statement: Funkcja kwadratowa f jest określona wzorem f\left(x\right)=-\left(x-2\right)^2+7. Podaj wartość
+    największą tej funkcji w przedziale \langle 0,5\rangle oraz argument, dla którego jest ona przyjmowana.
+  statement_latex: f\left(x\right)=-\left(x-2\right)^2+7,\qquad x\in\langle 0,5\rangle
+  solution: |-
+    Z postaci kanonicznej odczytujemy a=-1<0 oraz wierzchołek W=\left(2,7\right), czyli p=2, q=7.
+    Ponieważ a<0, ramiona paraboli są skierowane w dół, więc w wierzchołku funkcja przyjmuje wartość największą.
+    Sprawdzamy, czy p należy do przedziału: 0\le 2\le 5, więc tak.
+    Zatem wartość największa w \langle 0,5\rangle wynosi f\left(2\right)=-\left(2-2\right)^2+7=7 i jest przyjmowana dla x=2.
+  solution_steps:
+  - Odczytaj z postaci kanonicznej a=-1 oraz W=\left(2,7\right).
+  - Stwierdź, że a<0, więc w wierzchołku jest wartość największa.
+  - Sprawdź, że p=2\in\langle 0,5\rangle.
+  - 'Zapisz: wartość największa równa 7, przyjmowana dla x=2.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wartość największa
+      answer:
+        kind: NUMERIC
+        value: 7.0
+    - name: argument
+      answer:
+        kind: NUMERIC
+        value: 2.0
+  checks:
+  - kind: evaluate
+    expr: -\left(2-2\right)^2+7
+    part: wartość największa
+  skills:
+  - odczytywanie wierzchołka z postaci kanonicznej
+  - wskazanie wartości największej przy a<0
+  verification:
+    checkability: REFERENCE_CALL
+    note: '2 parts matched · det: [wartość największa] SymPy solved it fresh: 7.0 vs 7.0 (tol 1e-09)'
+- id: g-th-02
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: wartości skrajne przy wierzchołku poza przedziałem
+  statement: Dana jest funkcja f\left(x\right)=x^2+2x-3. Wykaż, że pierwsza współrzędna wierzchołka nie
+    należy do przedziału \langle 2,5\rangle, a następnie oblicz wartość najmniejszą i wartość największą
+    funkcji f w tym przedziale.
+  statement_latex: f\left(x\right)=x^2+2x-3,\qquad x\in\langle 2,5\rangle
+  solution: |-
+    a=1>0, b=2, więc p=-\frac{2}{2\cdot 1}=-1.
+    Liczba -1 nie spełnia warunku 2\le x\le 5, zatem p\notin\langle 2,5\rangle i wierzchołek leży na lewo od przedziału.
+    Dla a>0 funkcja rośnie w przedziale \langle p,+\infty\rangle=\langle -1,+\infty\rangle, a cały przedział \langle 2,5\rangle w nim się zawiera, więc f jest tam rosnąca.
+    Stąd wartość najmniejszą przyjmuje w lewym końcu: f\left(2\right)=2^2+2\cdot 2-3=5,
+    a wartość największą w prawym końcu: f\left(5\right)=5^2+2\cdot 5-3=32.
+  solution_steps:
+  - Oblicz p=-\frac{2}{2\cdot 1}=-1.
+  - Uzasadnij, że -1\notin\langle 2,5\rangle.
+  - Z a>0 wywnioskuj, że f rośnie w \langle -1,+\infty\rangle, więc rośnie na \langle 2,5\rangle.
+  - Oblicz f\left(2\right)=5 i f\left(5\right)=32.
+  - 'Zapisz: wartość najmniejsza 5, największa 32.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: uzasadnienie
+      answer:
+        kind: NOT_MACHINE_CHECKABLE
+        reason: Należy obliczyć p=-1 i wykazać, że nie spełnia warunku 2\le x\le 5, a następnie powołać
+          się na monotoniczność funkcji na \langle 2,5\rangle.
+    - name: wartość najmniejsza
+      answer:
+        kind: NUMERIC
+        value: 5.0
+    - name: wartość największa
+      answer:
+        kind: NUMERIC
+        value: 32.0
+  checks:
+  - kind: evaluate
+    expr: 2^2+2\cdot 2-3
+    part: wartość najmniejsza
+  - kind: evaluate
+    expr: 5^2+2\cdot 5-3
+    part: wartość największa
+  skills:
+  - monotoniczność funkcji kwadratowej
+  - obliczanie wartości na końcach przedziału
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'part(s) need a human: uzasadnienie · 2/2 other parts solved fresh'
+- id: g-ex-03
+  slot: EXERCISE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: wartości ekstremalne w przedziale zawierającym wierzchołek
+  statement: Wyznacz wartość największą i wartość najmniejszą funkcji f\left(x\right)=x^2-2x-8 w przedziale
+    \langle -2,5\rangle. Podaj także argumenty, dla których te wartości są przyjmowane. Zapisz obliczenia.
+  statement_latex: f\left(x\right)=x^2-2x-8,\qquad x\in\langle -2,5\rangle
+  solution: |-
+    Krok 1: a=1>0, ramiona paraboli skierowane w górę.
+    Krok 2: p=-\frac{-2}{2\cdot 1}=1.
+    Krok 3: -2\le 1\le 5, więc wierzchołek należy do przedziału – liczymy trzy wartości.
+    Krok 4: f\left(1\right)=1^2-2\cdot 1-8=-9, f\left(-2\right)=\left(-2\right)^2-2\cdot\left(-2\right)-8=0, f\left(5\right)=5^2-2\cdot 5-8=7.
+    Krok 5: Ponieważ a>0 i p\in\langle -2,5\rangle, wartość najmniejsza to f\left(1\right)=-9. Wartość największa to większa z liczb f\left(-2\right)=0 i f\left(5\right)=7, czyli 7 (zgodnie z regułą odległości: \left|5-1\right|=4>\left|-2-1\right|=3).
+    Odpowiedź: wartość największa wynosi 7 (dla x=5), wartość najmniejsza wynosi -9 (dla x=1).
+  solution_steps:
+  - Stwierdź, że a=1>0.
+  - Oblicz p=-\frac{-2}{2\cdot 1}=1 i sprawdź, że p\in\langle -2,5\rangle.
+  - Oblicz f\left(1\right)=-9, f\left(-2\right)=0, f\left(5\right)=7.
+  - Wybierz minimum f\left(1\right)=-9 i maksimum f\left(5\right)=7.
+  - Zapisz wartości wraz z argumentami.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wartość największa
+      answer:
+        kind: NUMERIC
+        value: 7.0
+    - name: argument wartości największej
+      answer:
+        kind: NUMERIC
+        value: 5.0
+    - name: wartość najmniejsza
+      answer:
+        kind: NUMERIC
+        value: -9.0
+    - name: argument wartości najmniejszej
+      answer:
+        kind: NUMERIC
+        value: 1.0
+  checks:
+  - kind: evaluate
+    expr: 5^2-2\cdot 5-8
+    part: wartość największa
+  - kind: evaluate
+    expr: 1^2-2\cdot 1-8
+    part: wartość najmniejsza
+  - kind: evaluate
+    expr: -\frac{-2}{2\cdot 1}
+    part: argument wartości najmniejszej
+  skills:
+  - algorytm wartości największej i najmniejszej w przedziale
+  - obliczanie wartości funkcji
+  verification:
+    checkability: REFERENCE_CALL
+    note: '4 parts matched · det: [wartość największa] SymPy solved it fresh: 7.0 vs 7.0 (tol 1e-09) ;
+      [wartość najmniejsza] SymPy solved it fresh: -9.0 vs -9.0 (tol 1e-09) ; [argument wartości najmniejszej]
+      SymPy solved it fresh: 1.0 vs 1.0 (tol 1e-09)'
+- id: g-ex-04
+  slot: EXERCISE
+  ramp_index: 1
+  difficulty: 3
+  exercise_type: wartości ekstremalne i zbiór wartości w przedziale
+  statement: Dana jest funkcja kwadratowa f określona wzorem f\left(x\right)=-x^2+6x-4. Wyznacz wartość
+    największą i wartość najmniejszą funkcji f w przedziale \langle 4,7\rangle, uzasadnij położenie tych
+    wartości, korzystając z monotoniczności funkcji, oraz podaj zbiór wartości funkcji f zawężonej do
+    tego przedziału.
+  statement_latex: f\left(x\right)=-x^2+6x-4,\qquad x\in\langle 4,7\rangle
+  solution: |-
+    Krok 1: a=-1<0, ramiona paraboli skierowane w dół.
+    Krok 2: p=-\frac{6}{2\cdot\left(-1\right)}=3.
+    Krok 3: 3\notin\langle 4,7\rangle – wierzchołek leży na lewo od przedziału.
+    Krok 4: Dla a<0 funkcja maleje w \langle p,+\infty\rangle=\langle 3,+\infty\rangle, a \langle 4,7\rangle\subset\langle 3,+\infty\rangle, więc f jest malejąca na \langle 4,7\rangle. Zatem wartość największa jest w lewym końcu, a najmniejsza w prawym.
+    Krok 5: f\left(4\right)=-4^2+6\cdot 4-4=-16+24-4=4, f\left(7\right)=-7^2+6\cdot 7-4=-49+42-4=-11.
+    Wartość największa wynosi 4 (dla x=4), najmniejsza -11 (dla x=7).
+    Funkcja kwadratowa jest ciągła, więc w przedziale domkniętym przyjmuje wszystkie wartości pomiędzy minimum a maksimum: ZW=\langle -11,4\rangle.
+  solution_steps:
+  - Ustal a=-1<0 i oblicz p=-\frac{6}{2\cdot\left(-1\right)}=3.
+  - Stwierdź, że p\notin\langle 4,7\rangle i że f maleje na \langle 3,+\infty\rangle, więc maleje na \langle
+    4,7\rangle.
+  - Oblicz f\left(4\right)=4 oraz f\left(7\right)=-11.
+  - Wskaż wartość największą 4 (dla x=4) i najmniejszą -11 (dla x=7).
+  - Z ciągłości funkcji zapisz zbiór wartości \langle -11,4\rangle.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wartość największa
+      answer:
+        kind: NUMERIC
+        value: 4.0
+    - name: wartość najmniejsza
+      answer:
+        kind: NUMERIC
+        value: -11.0
+    - name: uzasadnienie
+      answer:
+        kind: NOT_MACHINE_CHECKABLE
+        reason: Trzeba wykazać, że p=3 leży poza przedziałem oraz że przy a<0 funkcja jest malejąca na
+          \langle 4,7\rangle, skąd maksimum w x=4, a minimum w x=7.
+    - name: zbiór wartości
+      answer:
+        kind: INTERVAL
+        lo: '-11'
+        hi: '4'
+        lo_open: false
+        hi_open: false
+  checks:
+  - kind: evaluate
+    expr: -4^2+6\cdot 4-4
+    part: wartość największa
+  - kind: evaluate
+    expr: -7^2+6\cdot 7-4
+    part: wartość najmniejsza
+  skills:
+  - monotoniczność funkcji kwadratowej
+  - zbiór wartości funkcji zawężonej do przedziału
+  - uzasadnianie położenia ekstremów
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'part(s) need a human: uzasadnienie · 2/3 other parts solved fresh'
+- id: g-ex-05
+  slot: EXERCISE
+  ramp_index: 2
+  difficulty: 4
+  exercise_type: optymalizacja kwadratowa z ograniczeniem przedziałowym
+  statement: Ogrodnik chce ogrodzić prostokątną rabatę, która jednym bokiem przylega do prostego, długiego
+    muru (przy murze siatki się nie stawia). Do ogrodzenia pozostałych trzech boków ma dokładnie 24 m
+    siatki i zużywa ją w całości. Długość boku prostopadłego do muru oznaczamy przez x (w metrach), przy
+    czym ze względów praktycznych 2\le x\le 5. Zapisz pole rabaty jako funkcję zmiennej x, a następnie
+    oblicz największe i najmniejsze możliwe pole rabaty. Zapisz obliczenia.
+  statement_latex: P\left(x\right)=x\cdot\left(24-2\cdot x\right)=-2x^2+24x,\qquad x\in\langle 2,5\rangle
+  solution: |-
+    Boki prostopadłe do muru mają długość x każdy (są dwa), więc na bok równoległy do muru zostaje 24-2\cdot x metrów siatki.
+    Pole rabaty: P\left(x\right)=x\cdot\left(24-2\cdot x\right)=-2x^2+24x, gdzie x\in\langle 2,5\rangle.
+    Współczynnik a=-2<0, więc ramiona paraboli skierowane są w dół, a p=-\frac{24}{2\cdot\left(-2\right)}=6.
+    Liczba 6 nie należy do \langle 2,5\rangle, więc wierzchołek leży na prawo od przedziału. Dla a<0 funkcja rośnie w \left(-\infty,6\rangle, a \langle 2,5\rangle\subset\left(-\infty,6\rangle, więc P jest rosnąca na \langle 2,5\rangle.
+    P\left(5\right)=-2\cdot 5^2+24\cdot 5=-50+120=70, P\left(2\right)=-2\cdot 2^2+24\cdot 2=-8+48=40.
+    Odpowiedź: największe pole to 70 m^2 (dla x=5 m), najmniejsze pole to 40 m^2 (dla x=2 m). Wartość P\left(6\right)=72 m^2 nie jest osiągalna, bo x=6 nie spełnia warunku zadania.
+  solution_steps:
+  - Zapisz drugi bok jako 24-2\cdot x i pole P\left(x\right)=x\cdot\left(24-2\cdot x\right)=-2x^2+24x.
+  - 'Ustal dziedzinę modelu: x\in\langle 2,5\rangle.'
+  - Oblicz p=-\frac{24}{2\cdot\left(-2\right)}=6 i stwierdź, że p\notin\langle 2,5\rangle.
+  - Z a<0 wywnioskuj, że P rośnie na \langle 2,5\rangle.
+  - Oblicz P\left(5\right)=70 oraz P\left(2\right)=40 i zinterpretuj wyniki w m^2.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wzór pola
+      answer:
+        kind: SYMBOLIC
+        latex: -2x^2+24x
+    - name: największe pole
+      answer:
+        kind: NUMERIC
+        value: 70.0
+    - name: najmniejsze pole
+      answer:
+        kind: NUMERIC
+        value: 40.0
+  checks:
+  - kind: simplify
+    expr: x\cdot\left(24-2\cdot x\right)
+    part: wzór pola
+  - kind: evaluate
+    expr: -2\cdot 5^2+24\cdot 5
+    part: największe pole
+  - kind: evaluate
+    expr: -2\cdot 2^2+24\cdot 2
+    part: najmniejsze pole
+  stated_model:
+    variable: x
+    objective_latex: P\left(x\right)=-2x^2+24x
+    domain_lo: '2'
+    domain_hi: '5'
+    domain_lo_open: false
+    domain_hi_open: false
+    constraint_used: 2\cdot x+y=24,\ 2\le x\le 5
+  skills:
+  - budowanie modelu kwadratowego
+  - wyznaczanie przedziału zmiennej
+  - optymalizacja gdy wierzchołek leży poza przedziałem
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''x'': ''P\\left(x\\right)=-2x^2+24x'')
+      — human review'
+- id: g-ex-t00
+  slot: EXERCISE
+  ramp_index: 6
+  difficulty: 3
+  exercise_type: wartość największa i najmniejsza w przedziale domkniętym (postać iloczynowa)
+  statement: Funkcja kwadratowa f jest określona wzorem f(x) = -(x-2)(x+4). Wyznacz wartość największą
+    i wartość najmniejszą funkcji f w przedziale ⟨-1, 3⟩ oraz podaj argumenty, dla których te wartości
+    są przyjmowane. Wyznacz też zbiór wartości funkcji f zawężonej do przedziału ⟨-1, 3⟩. Zapisz obliczenia.
+  statement_latex: f\left(x\right) = -\left(x-2\right)\cdot\left(x+4\right),\qquad x\in\langle -1,\,3\rangle
+  solution: |-
+    Z postaci iloczynowej odczytujemy miejsca zerowe: x_1 = 2, x_2 = -4. Po wymnożeniu f(x) = -(x^2+2x-8) = -x^2-2x+8, więc a = -1 < 0 — ramiona paraboli skierowane są w dół, a w wierzchołku funkcja przyjmuje wartość największą.
+    Pierwsza współrzędna wierzchołka to średnia arytmetyczna miejsc zerowych: p = \frac{2+(-4)}{2} = -1. Liczba p = -1 należy do przedziału ⟨-1, 3⟩ (jest jego lewym końcem).
+    Liczymy wartości w kandydatach: f(-1) = -(-1-2)(-1+4) = -(-3)\cdot 3 = 9 oraz f(3) = -(3-2)(3+4) = -1\cdot 7 = -7.
+    Ponieważ a < 0 i p ∈ ⟨-1,3⟩, wartość największa to f(p) = f(-1) = 9. Wartość najmniejsza jest przyjmowana na dalszym od p końcu przedziału, czyli f(3) = -7.
+    Funkcja kwadratowa jest ciągła, więc na przedziale domkniętym przyjmuje wszystkie wartości między wartością najmniejszą a największą: ZW = ⟨-7, 9⟩.
+    Odpowiedź: wartość największa wynosi 9 (dla x = -1), wartość najmniejsza wynosi -7 (dla x = 3), a zbiorem wartości jest ⟨-7, 9⟩.
+  solution_steps:
+  - 'Odczytaj miejsca zerowe z postaci iloczynowej: x_1 = 2, x_2 = -4.'
+  - 'Ustal znak a: po wymnożeniu f(x) = -x^2-2x+8, więc a = -1 < 0 (ramiona w dół).'
+  - Oblicz p = \frac{2+(-4)}{2} = -1 i sprawdź, że -1 ∈ ⟨-1,3⟩.
+  - Oblicz f(-1) = 9 oraz f(3) = -7.
+  - 'Dla a < 0 i p w przedziale: f_max = f(-1) = 9, f_min = f(3) = -7.'
+  - 'Z ciągłości funkcji zapisz zbiór wartości: ⟨-7, 9⟩.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wartosc_najwieksza
+      answer:
+        kind: NUMERIC
+        value: 9.0
+    - name: argument_dla_najwiekszej
+      answer:
+        kind: NUMERIC
+        value: -1.0
+    - name: wartosc_najmniejsza
+      answer:
+        kind: NUMERIC
+        value: -7.0
+    - name: argument_dla_najmniejszej
+      answer:
+        kind: NUMERIC
+        value: 3.0
+    - name: zbior_wartosci
+      answer:
+        kind: INTERVAL
+        lo: '-7'
+        hi: '9'
+        lo_open: false
+        hi_open: false
+  checks:
+  - kind: evaluate
+    expr: -\left(-1-2\right)\cdot\left(-1+4\right)
+    part: wartosc_najwieksza
+  - kind: evaluate
+    expr: \frac{2+\left(-4\right)}{2}
+    part: argument_dla_najwiekszej
+  - kind: evaluate
+    expr: -\left(3-2\right)\cdot\left(3+4\right)
+    part: wartosc_najmniejsza
+  skills:
+  - odczytywanie miejsc zerowych z postaci iloczynowej
+  - wyznaczanie pierwszej współrzędnej wierzchołka jako średniej miejsc zerowych
+  - sprawdzanie przynależności p do przedziału
+  - wyznaczanie zbioru wartości funkcji zawężonej do przedziału
+  verification:
+    checkability: REFERENCE_CALL
+    note: 5 parts matched
+- id: g-ex-t01
+  slot: EXERCISE
+  ramp_index: 7
+  difficulty: 4
+  exercise_type: wyznaczanie parametru z zadanej wartości największej w przedziale
+  statement: Funkcja kwadratowa f jest określona wzorem f(x) = x^2 - 2x + c, gdzie c jest pewną liczbą
+    rzeczywistą. W przedziale ⟨-2, 5⟩ funkcja f przyjmuje wartość największą równą 22. Oblicz c, a następnie
+    wyznacz wartość najmniejszą funkcji f w przedziale ⟨-2, 5⟩ (podaj też argument, dla którego jest ona
+    przyjmowana) oraz zbiór wartości funkcji f zawężonej do tego przedziału. Zapisz obliczenia.
+  statement_latex: f\left(x\right) = x^2 - 2\cdot x + c,\qquad x\in\langle -2,\,5\rangle,\qquad f_{\max}
+    = 22
+  solution: |-
+    Mamy a = 1 > 0, więc ramiona paraboli są skierowane w górę, a wartość największa w przedziale domkniętym jest przyjmowana na jednym z jego końców.
+    Pierwsza współrzędna wierzchołka: p = -\frac{-2}{2\cdot 1} = 1 i p = 1 ∈ ⟨-2, 5⟩.
+    Porównujemy odległości końców od osi symetrii x = 1: |-2-1| = 3, |5-1| = 4. Ponieważ a > 0, większą wartość daje koniec dalszy od p, czyli x = 5. Zatem f(5) = 22.
+    f(5) = 25 - 10 + c = 15 + c, więc 15 + c = 22, stąd c = 7.
+    Funkcja ma wzór f(x) = x^2 - 2x + 7. Ponieważ a > 0 i p = 1 należy do przedziału, wartość najmniejsza to f(1) = 1 - 2 + 7 = 6 (dla x = 1).
+    Sprawdzenie: f(-2) = 4 + 4 + 7 = 15 < 22 — istotnie maksimum jest w x = 5.
+    Z ciągłości funkcji kwadratowej zbiorem wartości w ⟨-2, 5⟩ jest ⟨6, 22⟩.
+    Odpowiedź: c = 7, wartość najmniejsza wynosi 6 (dla x = 1), a zbiór wartości to ⟨6, 22⟩.
+  solution_steps:
+  - Zauważ, że a = 1 > 0, więc maksimum w przedziale domkniętym jest na jednym z końców.
+  - Oblicz p = -\frac{-2}{2\cdot 1} = 1 i sprawdź, że p ∈ ⟨-2,5⟩.
+  - 'Porównaj odległości: |-2-1| = 3 < |5-1| = 4, więc przy a > 0 wartość największa jest w x = 5.'
+  - Rozwiąż równanie 25 - 10 + c = 22, otrzymując c = 7.
+  - Oblicz wartość najmniejszą f(1) = 1 - 2 + 7 = 6.
+  - 'Zapisz zbiór wartości: ⟨6, 22⟩.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: c
+      answer:
+        kind: NUMERIC
+        value: 7.0
+    - name: wartosc_najmniejsza
+      answer:
+        kind: NUMERIC
+        value: 6.0
+    - name: argument_dla_najmniejszej
+      answer:
+        kind: NUMERIC
+        value: 1.0
+    - name: zbior_wartosci
+      answer:
+        kind: INTERVAL
+        lo: '6'
+        hi: '22'
+        lo_open: false
+        hi_open: false
+  checks:
+  - kind: solve_equation
+    expr: 25 - 10 + c = 22
+    var: c
+    part: c
+  - kind: evaluate
+    expr: 1^2 - 2\cdot 1 + 7
+    part: wartosc_najmniejsza
+  - kind: evaluate
+    expr: -\frac{-2}{2\cdot 1}
+    part: argument_dla_najmniejszej
+  skills:
+  - porównywanie wartości na końcach przedziału przez odległość od osi symetrii
+  - wyznaczanie parametru z równania
+  - obliczanie wartości najmniejszej w wierzchołku
+  - wyznaczanie zbioru wartości w przedziale domkniętym
+  verification:
+    checkability: REFERENCE_CALL
+    note: 4 parts matched
+- id: g-cm-06
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: 'wykrycie błędu: automatyczne podawanie q'
+  statement: Oblicz wartość największą i wartość najmniejszą funkcji f\left(x\right)=-3x^2+12x-5 w przedziale
+    \langle 3,6\rangle. Uczeń odpowiedział, że wartość największa wynosi 7, bo tyle wynosi druga współrzędna
+    wierzchołka. Wyjaśnij, na czym polega jego błąd, i podaj poprawne wartości.
+  statement_latex: f\left(x\right)=-3x^2+12x-5,\qquad x\in\langle 3,6\rangle
+  solution: |-
+    BŁĘDNE ROZUMOWANIE UCZNIA: „a=-3<0, więc funkcja ma wartość największą w wierzchołku. p=-\frac{12}{2\cdot\left(-3\right)}=2, q=f\left(2\right)=-3\cdot 2^2+12\cdot 2-5=7, zatem w przedziale \langle 3,6\rangle wartość największa wynosi 7”. Błędny wynik: 7.
+    GDZIE JEST BŁĄD: wartość q jest przyjmowana tylko wtedy, gdy p należy do rozważanego przedziału. Tutaj p=2, a 2\notin\langle 3,6\rangle, więc funkcja nigdy nie osiąga wartości 7 dla x z tego przedziału.
+    POPRAWNE ROZWIĄZANIE: skoro a<0, to f maleje w \langle 2,+\infty\rangle, a cały przedział \langle 3,6\rangle w nim leży, więc f jest tam malejąca. Wartość największa jest w lewym końcu: f\left(3\right)=-3\cdot 3^2+12\cdot 3-5=-27+36-5=4, a najmniejsza w prawym: f\left(6\right)=-3\cdot 6^2+12\cdot 6-5=-108+72-5=-41.
+    Odpowiedź: wartość największa wynosi 4 (dla x=3), wartość najmniejsza wynosi -41 (dla x=6).
+  solution_steps:
+  - 'Pokaż błędne rozumowanie: podanie q=7 jako wartości największej.'
+  - Oblicz p=2 i stwierdź, że p\notin\langle 3,6\rangle – q nie jest przyjmowane.
+  - Z a<0 wywnioskuj, że f maleje na \langle 3,6\rangle.
+  - Oblicz f\left(3\right)=4 i f\left(6\right)=-41.
+  - Zapisz poprawną odpowiedź.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wartość największa
+      answer:
+        kind: NUMERIC
+        value: 4.0
+    - name: wartość najmniejsza
+      answer:
+        kind: NUMERIC
+        value: -41.0
+  checks:
+  - kind: evaluate
+    expr: -3\cdot 3^2+12\cdot 3-5
+    part: wartość największa
+  - kind: evaluate
+    expr: -3\cdot 6^2+12\cdot 6-5
+    part: wartość najmniejsza
+  skills:
+  - sprawdzanie przynależności wierzchołka do przedziału
+  - monotoniczność funkcji kwadratowej
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [wartość największa] SymPy solved it fresh: 4.0 vs 4.0 (tol
+      1e-09) ; [wartość najmniejsza] SymPy solved it fresh: -41.0 vs -41.0 (tol 1e-09)'
+- id: g-cm-07
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: 'wykrycie błędu: mylenie p z q'
+  statement: 'Oblicz wartość najmniejszą funkcji f\left(x\right)=x^2-8x+10 w przedziale \langle 1,6\rangle
+    oraz argument, dla którego jest ona przyjmowana. Uczeń napisał: „wartość najmniejsza wynosi 4”. Wyjaśnij,
+    dlaczego to odpowiedź błędna, i podaj poprawny wynik.'
+  statement_latex: f\left(x\right)=x^2-8x+10,\qquad x\in\langle 1,6\rangle
+  solution: |-
+    BŁĘDNE ROZUMOWANIE UCZNIA: „a=1>0, więc najmniejsza wartość jest w wierzchołku; p=-\frac{-8}{2\cdot 1}=4, zatem wartość najmniejsza wynosi 4”. Błędny wynik: 4.
+    GDZIE JEST BŁĄD: liczba p=4 to ARGUMENT (miejsce na osi x), w którym funkcja przyjmuje wartość najmniejszą, a nie sama wartość. Wartością jest dopiero q=f\left(p\right).
+    POPRAWNE ROZWIĄZANIE: p=4 oraz 1\le 4\le 6, więc wierzchołek należy do przedziału. Ponieważ a=1>0, wartość najmniejsza to f\left(4\right)=4^2-8\cdot 4+10=16-32+10=-6.
+    Odpowiedź: wartość najmniejsza wynosi -6 i jest przyjmowana dla x=4.
+  solution_steps:
+  - 'Przedstaw błąd: podanie p=4 zamiast wartości funkcji.'
+  - 'Wyjaśnij różnicę: p to argument, q=f\left(p\right) to wartość.'
+  - Sprawdź, że p=4\in\langle 1,6\rangle i a>0.
+  - Oblicz f\left(4\right)=-6.
+  - 'Zapisz poprawną odpowiedź: -6 dla x=4.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wartość najmniejsza
+      answer:
+        kind: NUMERIC
+        value: -6.0
+    - name: argument
+      answer:
+        kind: NUMERIC
+        value: 4.0
+  checks:
+  - kind: evaluate
+    expr: 4^2-8\cdot 4+10
+    part: wartość najmniejsza
+  - kind: evaluate
+    expr: -\frac{-8}{2\cdot 1}
+    part: argument
+  skills:
+  - rozróżnianie argumentu i wartości funkcji
+  - obliczanie f(p)
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [wartość najmniejsza] SymPy solved it fresh: -6.0 vs -6.0 (tol
+      1e-09) ; [argument] SymPy solved it fresh: 4.0 vs 4.0 (tol 1e-09)'
+- id: g-cm-08
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: 'wykrycie błędu: pominięcie znaku a'
+  statement: 'Wyznacz wartość największą i wartość najmniejszą funkcji f\left(x\right)=-2x^2+8x+1 w przedziale
+    \langle 0,3\rangle. Uczeń stwierdził: „w wierzchołku zawsze jest minimum, więc wartość najmniejsza
+    wynosi 9”. Wskaż błąd i podaj poprawne wartości.'
+  statement_latex: f\left(x\right)=-2x^2+8x+1,\qquad x\in\langle 0,3\rangle
+  solution: |-
+    BŁĘDNE ROZUMOWANIE UCZNIA: „p=-\frac{8}{2\cdot\left(-2\right)}=2, f\left(2\right)=-2\cdot 2^2+8\cdot 2+1=9, a w wierzchołku jest zawsze wartość najmniejsza, więc f_{\min}=9”. Błędny wynik: najmniejsza wartość 9.
+    GDZIE JEST BŁĄD: o tym, czy w wierzchołku jest minimum, czy maksimum, decyduje znak współczynnika a. Tutaj a=-2<0, ramiona są skierowane w dół, więc w wierzchołku jest wartość NAJWIĘKSZA.
+    POPRAWNE ROZWIĄZANIE: p=2 i 0\le 2\le 3, więc wierzchołek należy do przedziału; f\left(2\right)=9 to wartość największa.
+    Wartości na końcach: f\left(0\right)=-2\cdot 0^2+8\cdot 0+1=1, f\left(3\right)=-2\cdot 3^2+8\cdot 3+1=-18+24+1=7. Wartość najmniejsza to mniejsza z nich, czyli 1.
+    Odpowiedź: wartość największa wynosi 9 (dla x=2), wartość najmniejsza wynosi 1 (dla x=0).
+  solution_steps:
+  - 'Pokaż błędne rozumowanie: uznanie f\left(p\right) za minimum bez sprawdzenia znaku a.'
+  - Stwierdź a=-2<0, więc w wierzchołku jest maksimum.
+  - Oblicz p=2\in\langle 0,3\rangle oraz f\left(2\right)=9.
+  - Oblicz f\left(0\right)=1 i f\left(3\right)=7 i wybierz mniejszą wartość.
+  - 'Zapisz: f_{\max}=9 dla x=2, f_{\min}=1 dla x=0.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wartość największa
+      answer:
+        kind: NUMERIC
+        value: 9.0
+    - name: wartość najmniejsza
+      answer:
+        kind: NUMERIC
+        value: 1.0
+  checks:
+  - kind: evaluate
+    expr: -2\cdot 2^2+8\cdot 2+1
+    part: wartość największa
+  - kind: evaluate
+    expr: -2\cdot 0^2+8\cdot 0+1
+    part: wartość najmniejsza
+  skills:
+  - kierunek ramion paraboli
+  - wybór wartości skrajnych spośród f(p), f(m), f(n)
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [wartość największa] SymPy solved it fresh: 9.0 vs 9.0 (tol
+      1e-09) ; [wartość najmniejsza] SymPy solved it fresh: 1.0 vs 1.0 (tol 1e-09)'
+- id: g-cm-09
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: 'wykrycie błędu: liczenie wartości tylko na końcach'
+  statement: Wyznacz wartość największą i wartość najmniejszą funkcji f\left(x\right)=x^2-6x+4 w przedziale
+    \langle 1,5\rangle. Uczeń policzył tylko f\left(1\right) i f\left(5\right) i napisał, że obie wartości
+    skrajne są równe -1. Wyjaśnij, na czym polega błąd, i podaj poprawne wartości.
+  statement_latex: f\left(x\right)=x^2-6x+4,\qquad x\in\langle 1,5\rangle
+  solution: |-
+    BŁĘDNE ROZUMOWANIE UCZNIA: „f\left(1\right)=1^2-6\cdot 1+4=-1 oraz f\left(5\right)=5^2-6\cdot 5+4=-1, więc wartość największa i najmniejsza wynoszą -1”. Błędny wynik: f_{\min}=-1.
+    GDZIE JEST BŁĄD: liczenie wartości tylko na końcach jest poprawne wyłącznie wtedy, gdy p\notin\langle m,n\rangle. Tutaj p=-\frac{-6}{2\cdot 1}=3 i 1\le 3\le 5, więc wierzchołek NALEŻY do przedziału i trzeba policzyć również f\left(p\right). Równość f\left(1\right)=f\left(5\right) wynika właśnie z symetrii względem prostej x=3.
+    POPRAWNE ROZWIĄZANIE: a=1>0, p=3\in\langle 1,5\rangle, więc wartość najmniejsza to f\left(3\right)=3^2-6\cdot 3+4=9-18+4=-5. Wartość największa to większa z liczb f\left(1\right)=-1 i f\left(5\right)=-1, czyli -1 (przyjmowana dla x=1 i dla x=5).
+    Odpowiedź: wartość największa wynosi -1, wartość najmniejsza wynosi -5 (dla x=3).
+  solution_steps:
+  - Pokaż błędne rozumowanie oparte tylko na końcach przedziału.
+  - Oblicz p=3 i sprawdź, że p\in\langle 1,5\rangle.
+  - Oblicz f\left(3\right)=-5 – to wartość najmniejsza, bo a>0.
+  - Porównaj f\left(1\right)=f\left(5\right)=-1 – to wartość największa.
+  - Zapisz poprawną odpowiedź.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wartość największa
+      answer:
+        kind: NUMERIC
+        value: -1.0
+    - name: wartość najmniejsza
+      answer:
+        kind: NUMERIC
+        value: -5.0
+  checks:
+  - kind: evaluate
+    expr: 1^2-6\cdot 1+4
+    part: wartość największa
+  - kind: evaluate
+    expr: 3^2-6\cdot 3+4
+    part: wartość najmniejsza
+  skills:
+  - kandydaci na ekstrema w przedziale
+  - obliczanie f(p) gdy p należy do przedziału
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [wartość największa] SymPy solved it fresh: -1.0 vs -1.0 (tol
+      1e-09) ; [wartość najmniejsza] SymPy solved it fresh: -5.0 vs -5.0 (tol 1e-09)'
+- id: g-cm-10
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: 'wykrycie błędu: założenie, że prawy koniec daje większą wartość'
+  statement: Wyznacz wartość największą funkcji f\left(x\right)=x^2+4x+1 w przedziale \langle -6,1\rangle
+    oraz argument, dla którego jest ona przyjmowana. Uczeń stwierdził, że wartość największa jest zawsze
+    w prawym końcu przedziału, i podał 6. Wyjaśnij błąd i podaj poprawny wynik.
+  statement_latex: f\left(x\right)=x^2+4x+1,\qquad x\in\langle -6,1\rangle
+  solution: |-
+    BŁĘDNE ROZUMOWANIE UCZNIA: „największa wartość jest w prawym końcu, więc f_{\max}=f\left(1\right)=1^2+4\cdot 1+1=6”. Błędny wynik: 6 dla x=1.
+    GDZIE JEST BŁĄD: to, który koniec daje większą wartość, zależy od znaku a i od odległości końców od osi symetrii x=p, a nie od tego, który koniec jest „prawy”.
+    POPRAWNE ROZWIĄZANIE: a=1>0, p=-\frac{4}{2\cdot 1}=-2, przy czym -6\le -2\le 1, więc wierzchołek leży w przedziale.
+    Odległości od osi symetrii: \left|-6-\left(-2\right)\right|=4 oraz \left|1-\left(-2\right)\right|=3. Dla a>0 większą wartość daje koniec dalszy od p, czyli x=-6.
+    Sprawdzenie rachunkiem: f\left(-6\right)=\left(-6\right)^2+4\cdot\left(-6\right)+1=36-24+1=13 oraz f\left(1\right)=6, a 13>6.
+    Odpowiedź: wartość największa wynosi 13 i jest przyjmowana dla x=-6.
+  solution_steps:
+  - 'Pokaż błędne rozumowanie: wybór prawego końca bez analizy.'
+  - Oblicz p=-2 i stwierdź, że p\in\langle -6,1\rangle.
+  - Porównaj odległości \left|-6-\left(-2\right)\right|=4 i \left|1-\left(-2\right)\right|=3; przy a>0
+    dalszy koniec daje większą wartość.
+  - Oblicz f\left(-6\right)=13 (oraz kontrolnie f\left(1\right)=6).
+  - 'Zapisz poprawną odpowiedź: f_{\max}=13 dla x=-6.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wartość największa
+      answer:
+        kind: NUMERIC
+        value: 13.0
+    - name: argument
+      answer:
+        kind: NUMERIC
+        value: -6.0
+  checks:
+  - kind: evaluate
+    expr: \left(-6\right)^2+4\cdot\left(-6\right)+1
+    part: wartość największa
+  skills:
+  - reguła odległości od osi symetrii
+  - porównywanie wartości na końcach przedziału
+  verification:
+    checkability: REFERENCE_CALL
+    note: '2 parts matched · det: [wartość największa] SymPy solved it fresh: 13.0 vs 13.0 (tol 1e-09)'
+- id: g-ch-t02
+  slot: CHALLENGE
+  ramp_index: 0
+  difficulty: 4
+  exercise_type: optymalizacja kwadratowa z ograniczeniem (przychód)
+  statement: Kwiaciarnia sprzedaje dziennie 40 bukietów w cenie 30 zł za bukiet. Właściciel ustalił, że
+    każde obniżenie ceny bukietu o 1 zł zwiększa dzienną sprzedaż o 4 bukiety (obniżka nie musi być całkowitą
+    liczbą złotych, a wszystkie przygotowane bukiety zostają sprzedane). Właściciel rozważa jedynie obniżenie
+    ceny, nigdy jej podwyższenie. Ze względu na możliwości pracowni kwiaciarnia może przygotować dziennie
+    co najwyżej 60 bukietów. Jaka powinna być cena bukietu, aby dzienny przychód ze sprzedaży bukietów
+    był największy? Oblicz ten największy dzienny przychód. Zapisz obliczenia.
+  statement_latex: P\left(x\right) = \left(30 - x\right)\cdot\left(40 + 4\cdot x\right) = -4\cdot x^2
+    + 80\cdot x + 1200
+  solution: |-
+    Niech x oznacza obniżkę ceny bukietu w złotych, x ≥ 0. Wtedy cena wynosi (30 - x) zł, a dzienna sprzedaż (40 + 4x) bukietów.
+    Ograniczenie z treści: 40 + 4x ≤ 60, czyli 4x ≤ 20, stąd x ≤ 5. Zatem x ∈ ⟨0, 5⟩.
+    Przychód: P(x) = (30 - x)(40 + 4x) = 1200 + 120x - 40x - 4x^2 = -4x^2 + 80x + 1200.
+    Współczynnik a = -4 < 0, więc ramiona paraboli są skierowane w dół, a p = -\frac{80}{2\cdot(-4)} = 10.
+    p = 10 ∉ ⟨0, 5⟩ — wierzchołek leży na prawo od przedziału. Dla a < 0 funkcja rośnie w (-∞, 10⟩, a cały przedział ⟨0,5⟩ zawiera się w (-∞,10⟩, więc P jest na nim rosnąca i wartość największą przyjmuje dla x = 5.
+    P(5) = (30 - 5)(40 + 4·5) = 25·60 = 1500.
+    Odpowiedź: cena bukietu powinna wynosić 25 zł; największy dzienny przychód to 1500 zł (sprzedanych zostanie 60 bukietów). Wartość P(10) = 1600 zł jest nieosiągalna, bo wtedy trzeba by przygotować 80 bukietów.
+  solution_steps:
+  - 'Wprowadź zmienną: x — obniżka ceny w złotych; cena 30 - x, sprzedaż 40 + 4x.'
+  - Z warunku 40 + 4x ≤ 60 oraz x ≥ 0 wyznacz dziedzinę x ∈ ⟨0, 5⟩.
+  - Zapisz przychód P(x) = (30-x)(40+4x) = -4x^2 + 80x + 1200.
+  - Oblicz p = -\frac{80}{2\cdot(-4)} = 10 i stwierdź, że 10 ∉ ⟨0,5⟩.
+  - Z monotoniczności (a<0, przedział na lewo od p) wynika, że maksimum jest w x = 5.
+  - Oblicz cenę 30 - 5 = 25 zł i przychód P(5) = 25·60 = 1500 zł.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: cena
+      answer:
+        kind: NUMERIC
+        value: 25.0
+    - name: przychod
+      answer:
+        kind: NUMERIC
+        value: 1500.0
+  checks:
+  - kind: evaluate
+    expr: 30 - \frac{60 - 40}{4}
+    part: cena
+  - kind: evaluate
+    expr: \left(30 - 5\right)\cdot\left(40 + 4\cdot 5\right)
+    part: przychod
+  stated_model:
+    variable: x
+    objective_latex: P\left(x\right) = \left(30 - x\right)\cdot\left(40 + 4\cdot x\right)
+    domain_lo: '0'
+    domain_hi: '5'
+    domain_lo_open: false
+    domain_hi_open: false
+    constraint_used: 40 + 4\cdot x \leq 60
+  skills:
+  - wprowadzenie zmiennej i zbudowanie funkcji celu
+  - wyznaczenie przedziału dopuszczalnych wartości zmiennej
+  - wyznaczenie wierzchołka i sprawdzenie jego położenia względem przedziału
+  - wykorzystanie monotoniczności do wskazania maksimum na końcu przedziału
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''x'': ''P\\left(x\\right)
+      = \\left(30 - x\\right)\\cdot\\left(40 + 4\\cdot x\\right)'') — human review'
+- id: g-ch-t03
+  slot: CHALLENGE
+  ramp_index: 1
+  difficulty: 4
+  exercise_type: optymalizacja geometryczna z dodatkowym warunkiem zawężającym dziedzinę
+  statement: Prostokątny ogród warzywny ma jeden bok położony wzdłuż prostego muru — ten bok nie wymaga
+    ogrodzenia. Pozostałe trzy boki ogrodzono siatką o łącznej długości 60 m, zużywając całą siatkę. Ze
+    względu na sposób nawadniania bok ogrodu leżący wzdłuż muru nie może być krótszy niż 40 m. Oblicz
+    największe możliwe pole tego ogrodu oraz podaj wymiary ogrodu, dla którego to pole jest osiągane.
+    Zapisz obliczenia.
+  statement_latex: P\left(x\right) = x\cdot\left(60 - 2\cdot x\right) = -2\cdot x^2 + 60\cdot x
+  solution: |-
+    Niech x (w metrach) oznacza długość boku prostopadłego do muru. Ogrodzone są dwa takie boki oraz bok równoległy do muru, więc bok wzdłuż muru ma długość 60 - 2x.
+    Warunki: x > 0 oraz 60 - 2x ≥ 40, czyli -2x ≥ -20, stąd x ≤ 10. Dziedzina: x ∈ (0, 10⟩ (warunek 60-2x>0 jest spełniony automatycznie).
+    Pole: P(x) = x(60 - 2x) = -2x^2 + 60x.
+    a = -2 < 0, ramiona w dół, p = -\frac{60}{2\cdot(-2)} = 15.
+    p = 15 ∉ (0, 10⟩ — wierzchołek leży na prawo od dziedziny. Dla a < 0 funkcja rośnie w (-∞, 15⟩, więc na (0, 10⟩ jest rosnąca i największą wartość przyjmuje dla x = 10.
+    P(10) = 10·(60 - 20) = 10·40 = 400.
+    Odpowiedź: największe możliwe pole ogrodu wynosi 400 m² i jest osiągane dla ogrodu o wymiarach 10 m × 40 m (bok prostopadły do muru ma 10 m, bok wzdłuż muru 40 m). Wartość P(15) = 450 m² jest niedopuszczalna, bo wtedy bok wzdłuż muru miałby tylko 30 m.
+  solution_steps:
+  - Oznacz przez x długość boku prostopadłego do muru; bok wzdłuż muru ma wtedy 60 - 2x.
+  - Z warunków x > 0 i 60 - 2x ≥ 40 wyznacz dziedzinę x ∈ (0, 10⟩.
+  - Zapisz pole P(x) = x(60-2x) = -2x^2 + 60x.
+  - Oblicz p = 15 i stwierdź, że 15 nie należy do dziedziny.
+  - Z monotoniczności (a<0, dziedzina na lewo od p) wynika maksimum dla x = 10.
+  - Oblicz P(10) = 400 m² i podaj wymiary 10 m i 40 m.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: pole
+      answer:
+        kind: NUMERIC
+        value: 400.0
+    - name: bok_prostopadly_do_muru
+      answer:
+        kind: NUMERIC
+        value: 10.0
+    - name: bok_wzdluz_muru
+      answer:
+        kind: NUMERIC
+        value: 40.0
+  checks:
+  - kind: evaluate
+    expr: 10\cdot\left(60 - 2\cdot 10\right)
+    part: pole
+  - kind: evaluate
+    expr: \frac{60 - 40}{2}
+    part: bok_prostopadly_do_muru
+  - kind: evaluate
+    expr: 60 - 2\cdot 10
+    part: bok_wzdluz_muru
+  stated_model:
+    variable: x
+    objective_latex: P\left(x\right) = x\cdot\left(60 - 2\cdot x\right)
+    domain_lo: '0'
+    domain_hi: '10'
+    domain_hi_open: false
+    constraint_used: 60 - 2\cdot x \geq 40
+  skills:
+  - modelowanie sytuacji geometrycznej funkcją kwadratową
+  - wyznaczanie dziedziny z warunków zadania
+  - sprawdzanie położenia wierzchołka względem dziedziny
+  - interpretacja wyniku w języku zadania
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''x'': ''P\\left(x\\right)
+      = x\\cdot\\left(60 - 2\\cdot x\\right)'') — human review'
+- id: g-ch-t04
+  slot: CHALLENGE
+  ramp_index: 2
+  difficulty: 5
+  exercise_type: 'modelowanie bryły: wzór funkcji z dziedziną i wartość największa na przedziale'
+  statement: Prostopadłościan ma podstawę, która jest kwadratem o krawędzi długości a (w centymetrach).
+    Suma długości wszystkich krawędzi tego prostopadłościanu jest równa 48 cm, a jego wysokość jest co
+    najmniej dwukrotnie dłuższa od krawędzi podstawy. a) Wyznacz wzór funkcji S opisującej pole powierzchni
+    całkowitej tego prostopadłościanu w zależności od a oraz podaj dziedzinę tej funkcji. b) Oblicz największe
+    możliwe pole powierzchni całkowitej takiego prostopadłościanu i podaj długości jego krawędzi. Zapisz
+    obliczenia.
+  statement_latex: S\left(a\right) = 2\cdot a^2 + 4\cdot a\cdot\left(12 - 2\cdot a\right) = -6\cdot a^2
+    + 48\cdot a
+  solution: |-
+    a) Prostopadłościan o podstawie kwadratowej ma 8 krawędzi podstaw długości a i 4 krawędzie boczne długości h, więc 8a + 4h = 48, stąd h = 12 - 2a.
+    Warunki: a > 0 oraz h ≥ 2a, czyli 12 - 2a ≥ 2a, więc 4a ≤ 12, stąd a ≤ 3. (Warunek h > 0 jest wtedy spełniony.) Dziedziną jest przedział (0, 3⟩.
+    Pole powierzchni całkowitej: S(a) = 2a^2 + 4·a·h = 2a^2 + 4a(12 - 2a) = 2a^2 + 48a - 8a^2 = -6a^2 + 48a.
+    b) a = -6 < 0, ramiona paraboli skierowane w dół, p = -\frac{48}{2\cdot(-6)} = 4.
+    p = 4 ∉ (0, 3⟩ — wierzchołek leży poza dziedziną. Dla a < 0 funkcja rośnie w (-∞, 4⟩, a cała dziedzina (0,3⟩ leży w (-∞,4⟩, więc S jest rosnąca i wartość największą przyjmuje dla a = 3.
+    S(3) = -6·9 + 48·3 = -54 + 144 = 90. Wtedy h = 12 - 2·3 = 6 (istotnie 6 ≥ 2·3, warunek jest spełniony).
+    Odpowiedź: S(a) = -6a^2 + 48a dla a ∈ (0, 3⟩; największe pole powierzchni całkowitej wynosi 90 cm² i jest osiągane dla prostopadłościanu o krawędzi podstawy 3 cm i wysokości 6 cm. Wartość S(4) = 96 cm² jest nieosiągalna, bo dla a = 4 wysokość h = 4 nie spełnia warunku h ≥ 2a.
+  solution_steps:
+  - Z warunku 8a + 4h = 48 wyznacz h = 12 - 2a.
+  - Zapisz warunki a > 0 oraz h ≥ 2a, czyli 12 - 2a ≥ 2a, i wyznacz dziedzinę a ∈ (0, 3⟩.
+  - 'Zbuduj wzór: S(a) = 2a^2 + 4a(12-2a) = -6a^2 + 48a.'
+  - Oblicz p = -\frac{48}{2\cdot(-6)} = 4 i stwierdź, że 4 ∉ (0,3⟩.
+  - Z monotoniczności (a<0, dziedzina na lewo od p) maksimum jest dla a = 3.
+  - Oblicz S(3) = 90 cm² oraz h = 12 - 2·3 = 6 cm i sprawdź warunek h ≥ 2a.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wzor_S
+      answer:
+        kind: SYMBOLIC
+        latex: -6\cdot a^2 + 48\cdot a
+    - name: dziedzina
+      answer:
+        kind: INTERVAL
+        lo: '0'
+        hi: '3'
+        hi_open: false
+    - name: najwieksze_pole
+      answer:
+        kind: NUMERIC
+        value: 90.0
+    - name: krawedz_podstawy
+      answer:
+        kind: NUMERIC
+        value: 3.0
+    - name: wysokosc
+      answer:
+        kind: NUMERIC
+        value: 6.0
+  checks:
+  - kind: simplify
+    expr: 2\cdot a^2 + 4\cdot a\cdot\left(12 - 2\cdot a\right)
+    var: a
+    part: wzor_S
+  - kind: evaluate
+    expr: -6\cdot 3^2 + 48\cdot 3
+    var: a
+    part: najwieksze_pole
+  - kind: evaluate
+    expr: \frac{12}{4}
+    var: a
+    part: krawedz_podstawy
+  - kind: evaluate
+    expr: 12 - 2\cdot 3
+    var: a
+    part: wysokosc
+  stated_model:
+    variable: a
+    objective_latex: S\left(a\right) = 2\cdot a^2 + 4\cdot a\cdot\left(12 - 2\cdot a\right)
+    domain_lo: '0'
+    domain_hi: '3'
+    domain_hi_open: false
+    constraint_used: 12 - 2\cdot a \geq 2\cdot a
+  skills:
+  - zamiana warunku o sumie krawędzi na zależność między wymiarami
+  - budowanie wzoru na pole powierzchni całkowitej
+  - wyznaczanie dziedziny z warunków geometrycznych i dodatkowego ograniczenia
+  - sprawdzanie dopuszczalności wierzchołka i wyznaczanie maksimum na końcu przedziału
+  verification:
+    checkability: STATED_MODEL
+    note: 'stage 1 inconclusive: SympifyError: SympifyError: "cannot sympify object of type <class ''sympy.core.singleton.SingletonRegistry''>"'

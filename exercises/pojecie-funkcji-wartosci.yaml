@@ -1,0 +1,1011 @@
+section: pojecie-funkcji-wartosci
+name: Pojęcie funkcji; obliczanie i odczytywanie wartości
+scope: Function as a unique assignment given verbally, by table, graph, formula or piecewise; evaluating
+  from a formula; reading and interpreting values from tables, graphs and formulas.
+requirements:
+- V.1
+- V.2
+- V.3
+counts:
+  total: 16
+  DETERMINISTIC: 6
+  REFERENCE_CALL: 6
+  NOT_MACHINE_CHECKABLE: 3
+  STATED_MODEL: 1
+exercises:
+- id: g-th-00
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: obliczanie wartości funkcji ze wzoru
+  statement: Funkcja f jest określona wzorem f(x) = 3x - 5 dla wszystkich liczb rzeczywistych x. Oblicz
+    f(4) oraz f(-2).
+  statement_latex: f\left(x\right)=3\cdot x-5
+  solution: |-
+    W miejsce każdego x wstawiamy podany argument, ujmując go w nawias.
+    f(4) = 3·(4) − 5 = 12 − 5 = 7.
+    f(−2) = 3·(−2) − 5 = −6 − 5 = −11.
+    Odpowiedź: f(4) = 7 oraz f(−2) = −11.
+  solution_steps:
+  - Sprawdzamy, że oba argumenty należą do dziedziny (wszystkie liczby rzeczywiste).
+  - 'Podstawiamy x = 4: f(4) = 3\cdot\left(4\right)-5 = 12-5 = 7.'
+  - 'Podstawiamy x = -2 (argument w nawiasie): f(-2) = 3\cdot\left(-2\right)-5 = -6-5 = -11.'
+  - Zapisujemy odpowiedź w postaci f(a) = ... .
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: f(4)
+      answer:
+        kind: NUMERIC
+        value: 7.0
+    - name: f(-2)
+      answer:
+        kind: NUMERIC
+        value: -11.0
+  checks:
+  - kind: evaluate
+    expr: 3\cdot\left(4\right)-5
+    part: f(4)
+  - kind: evaluate
+    expr: 3\cdot\left(-2\right)-5
+    part: f(-2)
+  skills:
+  - podstawianie argumentu do wzoru
+  - nawiasy przy liczbie ujemnej
+  - kolejność działań
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [f(4)] SymPy solved it fresh: 7.0 vs 7.0 (tol 1e-09) ; [f(-2)]
+      SymPy solved it fresh: -11.0 vs -11.0 (tol 1e-09)'
+- id: g-th-01
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: odczyt z tabeli
+  statement: 'Funkcja g o dziedzinie D = {1, 2, 3, 4, 5} jest opisana tabelą: g(1) = 6, g(2) = -1, g(3)
+    = 6, g(4) = 0, g(5) = 3. Podaj zbiór wartości funkcji g oraz jej miejsce zerowe.'
+  statement_latex: D=\left\{1,2,3,4,5\right\},\quad g\left(1\right)=6,\ g\left(2\right)=-1,\ g\left(3\right)=6,\
+    g\left(4\right)=0,\ g\left(5\right)=3
+  solution: |-
+    Zbiór wartości to zbiór wszystkich liczb z wiersza wartości, zapisany bez powtórzeń:
+    ZW = {6, −1, 6, 0, 3} = {−1, 0, 3, 6}.
+    Miejsce zerowe to taki argument x₀ ∈ D, dla którego g(x₀) = 0. W tabeli wartość 0 stoi pod argumentem 4, więc x₀ = 4.
+    Odpowiedź: ZW = {−1, 0, 3, 6}, miejscem zerowym jest x = 4.
+  solution_steps:
+  - Ustalamy, że argumenty to liczby 1, 2, 3, 4, 5, a wartości to liczby 6, -1, 6, 0, 3.
+  - 'Zbiór wartości: wypisujemy wartości bez powtórzeń, ZW = \left\{-1,0,3,6\right\}.'
+  - Szukamy w wierszu wartości liczby 0 — stoi ona pod argumentem 4.
+  - 'Miejsce zerowe: x = 4 (to argument, a nie wartość).'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: zbiór wartości
+      answer:
+        kind: SET
+        members:
+        - '-1'
+        - '0'
+        - '3'
+        - '6'
+    - name: miejsce zerowe
+      answer:
+        kind: NUMERIC
+        value: 4.0
+  skills:
+  - odczyt wartości z tabeli
+  - zbiór wartości
+  - miejsce zerowe
+  verification:
+    checkability: REFERENCE_CALL
+    note: 2 parts matched
+- id: g-th-02
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: należenie punktu do wykresu
+  statement: Dana jest funkcja f określona wzorem f(x) = x^2 - 5 dla wszystkich liczb rzeczywistych x.
+    Oblicz f(3) oraz f(-2), a następnie rozstrzygnij, czy punkt A = (3, 4) należy do wykresu funkcji f
+    i czy punkt B = (-2, 1) należy do wykresu funkcji f.
+  statement_latex: f\left(x\right)=x^{2}-5,\quad A=\left(3,\,4\right),\quad B=\left(-2,\,1\right)
+  solution: |-
+    Punkt P(x₀, y₀) należy do wykresu funkcji f dokładnie wtedy, gdy y₀ = f(x₀).
+    f(3) = (3)² − 5 = 9 − 5 = 4. Ponieważ f(3) = 4 = y_A, punkt A(3, 4) należy do wykresu.
+    f(−2) = (−2)² − 5 = 4 − 5 = −1. Ponieważ f(−2) = −1, a y_B = 1, punkt B(−2, 1) NIE należy do wykresu.
+    Odpowiedź: f(3) = 4, f(−2) = −1; A leży na wykresie, B nie leży.
+  solution_steps:
+  - Obliczamy f(3) = \left(3\right)^{2}-5 = 4.
+  - 'Porównujemy z drugą współrzędną punktu A: 4 = 4, więc A należy do wykresu.'
+  - Obliczamy f(-2) = \left(-2\right)^{2}-5 = -1.
+  - 'Porównujemy z drugą współrzędną punktu B: -1 \ne 1, więc B nie należy do wykresu.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: f(3)
+      answer:
+        kind: NUMERIC
+        value: 4.0
+    - name: f(-2)
+      answer:
+        kind: NUMERIC
+        value: -1.0
+    - name: A należy do wykresu
+      answer:
+        kind: BOOLEAN
+        truth: true
+    - name: B należy do wykresu
+      answer:
+        kind: BOOLEAN
+        truth: false
+  checks:
+  - kind: evaluate
+    expr: \left(3\right)^{2}-5
+    part: f(3)
+  - kind: evaluate
+    expr: \left(-2\right)^{2}-5
+    part: f(-2)
+  skills:
+  - obliczanie wartości funkcji
+  - warunek należenia punktu do wykresu
+  verification:
+    checkability: REFERENCE_CALL
+    note: '4 parts matched · det: [f(3)] SymPy solved it fresh: 4.0 vs 4.0 (tol 1e-09) ; [f(-2)] SymPy
+      solved it fresh: -1.0 vs -1.0 (tol 1e-09)'
+- id: g-ex-03
+  slot: EXERCISE
+  ramp_index: 1
+  difficulty: 2
+  exercise_type: wartości funkcji i równanie f(x)=c
+  statement: Funkcja f jest określona wzorem f(x) = x^2 - 4x + 3 dla wszystkich liczb rzeczywistych x.
+    a) Oblicz f(-2) oraz f(1/2). b) Wyznacz wszystkie argumenty, dla których funkcja f przyjmuje wartość
+    3.
+  statement_latex: f\left(x\right)=x^{2}-4\cdot x+3
+  solution: |-
+    a) f(−2) = (−2)² − 4·(−2) + 3 = 4 + 8 + 3 = 15.
+    f(1/2) = (1/2)² − 4·(1/2) + 3 = 1/4 − 2 + 3 = 1/4 + 1 = 5/4.
+    b) Rozwiązujemy równanie f(x) = 3:
+    x² − 4x + 3 = 3
+    x² − 4x = 0
+    x(x − 4) = 0, czyli x = 0 lub x = 4.
+    Oba argumenty należą do dziedziny (zbioru liczb rzeczywistych).
+    Odpowiedź: f(−2) = 15, f(1/2) = 5/4; funkcja przyjmuje wartość 3 dla x = 0 oraz dla x = 4.
+  solution_steps:
+  - 'Podstawiamy argument -2 w nawiasie: f(-2)=\left(-2\right)^{2}-4\cdot\left(-2\right)+3=15.'
+  - 'Podstawiamy argument \frac{1}{2}: f\left(\frac{1}{2}\right)=\left(\frac{1}{2}\right)^{2}-4\cdot\frac{1}{2}+3=\frac{5}{4}.'
+  - Zapisujemy równanie x^{2}-4\cdot x+3=3.
+  - 'Przekształcamy: x^{2}-4\cdot x=0, czyli x\cdot\left(x-4\right)=0.'
+  - Odczytujemy rozwiązania x=0 oraz x=4 i sprawdzamy, że należą do dziedziny.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: f(-2)
+      answer:
+        kind: NUMERIC
+        value: 15.0
+    - name: f(1/2)
+      answer:
+        kind: NUMERIC
+        value: 1.25
+    - name: argumenty, dla których f(x)=3
+      answer:
+        kind: SET
+        members:
+        - '0'
+        - '4'
+  checks:
+  - kind: evaluate
+    expr: \left(-2\right)^{2}-4\cdot\left(-2\right)+3
+    part: f(-2)
+  - kind: evaluate
+    expr: \left(\frac{1}{2}\right)^{2}-4\cdot\frac{1}{2}+3
+    part: f(1/2)
+  - kind: solve_equation
+    expr: x^{2}-4\cdot x+3=3
+    part: argumenty, dla których f(x)=3
+  skills:
+  - podstawianie ujemnego i ułamkowego argumentu
+  - rozwiązywanie równania f(x)=c
+  - rozróżnianie argumentu i wartości
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [f(-2)] SymPy solved it fresh: 15.0 vs 15.0 (tol 1e-09) ; [f(1/2)]
+      SymPy solved it fresh: 1.25 vs 1.25 (tol 1e-09) ; [argumenty, dla których f(x)=3] SymPy solved it
+      fresh: 2 members matched'
+- id: g-ex-04
+  slot: EXERCISE
+  ramp_index: 2
+  difficulty: 3
+  exercise_type: funkcja określona różnymi wzorami
+  statement: 'Funkcja f jest określona dla wszystkich liczb rzeczywistych wzorem: f(x) = 2x + 7 dla x
+    < -2, f(x) = x^2 - 1 dla -2 \le x \le 3, f(x) = 11 - 2x dla x > 3. a) Oblicz f(-4), f(-2), f(3) oraz
+    f(5). b) Wyznacz wszystkie argumenty, dla których f(x) = 3.'
+  statement_latex: f\left(x\right)=\begin{cases} 2\cdot x+7 & \text{dla } x<-2\\ x^{2}-1 & \text{dla }
+    -2\le x\le 3\\ 11-2\cdot x & \text{dla } x>3\end{cases}
+  solution: |-
+    a) x = −4: ponieważ −4 < −2, obowiązuje wzór 2x + 7, więc f(−4) = 2·(−4) + 7 = −1.
+    x = −2: warunek −2 ≤ x ≤ 3 jest spełniony (nierówność nieostra), więc f(−2) = (−2)² − 1 = 3.
+    x = 3: 3 należy do ⟨−2, 3⟩, więc f(3) = 3² − 1 = 8 (nie wolno użyć wzoru 11 − 2x, bo tam jest x > 3).
+    x = 5: 5 > 3, więc f(5) = 11 − 2·5 = 1.
+    b) Równanie f(x) = 3 rozwiązujemy osobno na każdym przedziale:
+    • dla x < −2: 2x + 7 = 3 ⟹ 2x = −4 ⟹ x = −2; ale −2 nie spełnia warunku x < −2, więc ODRZUCAMY;
+    • dla −2 ≤ x ≤ 3: x² − 1 = 3 ⟹ x² = 4 ⟹ x = −2 lub x = 2; oba należą do ⟨−2, 3⟩, przyjmujemy oba;
+    • dla x > 3: 11 − 2x = 3 ⟹ 2x = 8 ⟹ x = 4; 4 > 3, przyjmujemy.
+    Odpowiedź: f(−4) = −1, f(−2) = 3, f(3) = 8, f(5) = 1; równanie f(x) = 3 ma trzy rozwiązania: x ∈ {−2, 2, 4}.
+  solution_steps:
+  - 'Dla x=-4 sprawdzamy warunek: -4<-2, więc f(-4)=2\cdot\left(-4\right)+7=-1.'
+  - Dla x=-2 zachodzi -2\le x\le 3, więc f(-2)=\left(-2\right)^{2}-1=3.
+  - Dla x=3 zachodzi -2\le x\le 3, więc f(3)=\left(3\right)^{2}-1=8.
+  - Dla x=5 zachodzi x>3, więc f(5)=11-2\cdot 5=1.
+  - Na przedziale x<-2 rozwiązujemy 2\cdot x+7=3 i otrzymujemy x=-2, które odrzucamy (nie spełnia x<-2).
+  - Na przedziale -2\le x\le 3 rozwiązujemy x^{2}-1=3 i otrzymujemy x=-2 oraz x=2 — oba przyjmujemy.
+  - Na przedziale x>3 rozwiązujemy 11-2\cdot x=3 i otrzymujemy x=4 — przyjmujemy.
+  - Zapisujemy zbiór rozwiązań \left\{-2,2,4\right\}.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: f(-4)
+      answer:
+        kind: NUMERIC
+        value: -1.0
+    - name: f(-2)
+      answer:
+        kind: NUMERIC
+        value: 3.0
+    - name: f(3)
+      answer:
+        kind: NUMERIC
+        value: 8.0
+    - name: f(5)
+      answer:
+        kind: NUMERIC
+        value: 1.0
+    - name: rozwiązania równania f(x)=3
+      answer:
+        kind: SET
+        members:
+        - '-2'
+        - '2'
+        - '4'
+  checks:
+  - kind: evaluate
+    expr: 2\cdot\left(-4\right)+7
+    part: f(-4)
+  - kind: evaluate
+    expr: \left(-2\right)^{2}-1
+    part: f(-2)
+  - kind: evaluate
+    expr: \left(3\right)^{2}-1
+    part: f(3)
+  - kind: evaluate
+    expr: 11-2\cdot\left(5\right)
+    part: f(5)
+  skills:
+  - wybór właściwego wzoru w funkcji klamrowej
+  - rozwiązywanie f(x)=c na każdym przedziale
+  - odrzucanie rozwiązań spoza przedziału
+  verification:
+    checkability: REFERENCE_CALL
+    note: '5 parts matched · det: [f(-4)] SymPy solved it fresh: -1.0 vs -1.0 (tol 1e-09) ; [f(-2)] SymPy
+      solved it fresh: 3.0 vs 3.0 (tol 1e-09) ; [f(3)] SymPy solved it fresh: 8.0 vs 8.0 (tol 1e-09) ;
+      [f(5)] SymPy solved it fresh: 1.0 vs 1.0 (tol 1e-09)'
+- id: g-ex-05
+  slot: EXERCISE
+  ramp_index: 3
+  difficulty: 4
+  exercise_type: modelowanie cennika, funkcja klamrowa, kilka źródeł informacji
+  statement: Na parkingu A za postój trwający nie dłużej niż 2 rozpoczęte godziny kierowca płaci 8 zł,
+    a za każdą kolejną rozpoczętą godzinę dopłaca 3 zł. Niech t oznacza liczbę rozpoczętych godzin postoju
+    (t jest liczbą naturalną, t \ge 1), a K(t) — koszt postoju w złotych. a) Zapisz wzór funkcji K. b)
+    Oblicz K(5). c) Kierowca zapłacił za postój 26 zł. Przez ile rozpoczętych godzin stał na tym parkingu?
+    d) Na parkingu B każda rozpoczęta godzina postoju kosztuje 4 zł i nie ma opłaty stałej. O ile złotych
+    mniej zapłaci kierowca za 5 rozpoczętych godzin postoju na parkingu A niż na parkingu B?
+  statement_latex: K\left(t\right)=\begin{cases} 8 & \text{dla } t\in\left\{1,2\right\}\\ 8+3\cdot\left(t-2\right)
+    & \text{dla } t>2\end{cases}
+  solution: |-
+    a) Za pierwsze dwie rozpoczęte godziny płacimy 8 zł, a za każdą godzinę ponad dwie — po 3 zł, czyli łącznie 3·(t − 2) zł dopłaty:
+    K(t) = 8 dla t = 1, 2 oraz K(t) = 8 + 3·(t − 2) dla t > 2 (t naturalne).
+    b) t = 5 > 2, więc K(5) = 8 + 3·(5 − 2) = 8 + 9 = 17 (zł).
+    c) Ponieważ 26 zł > 8 zł, argument leży w drugim przedziale:
+    8 + 3·(t − 2) = 26 ⟹ 3·(t − 2) = 18 ⟹ t − 2 = 6 ⟹ t = 8.
+    Sprawdzenie: 8 > 2 ✓. Kierowca stał 8 rozpoczętych godzin.
+    d) Parking B: L(5) = 4·5 = 20 (zł). Parking A: K(5) = 17 zł.
+    Różnica: 20 − 17 = 3 (zł).
+    Odpowiedź: za 5 rozpoczętych godzin postoju na parkingu A kierowca zapłaci o 3 zł mniej niż na parkingu B.
+  solution_steps:
+  - 'Ustalamy strukturę cennika: opłata stała 8 zł obejmuje 2 rozpoczęte godziny, każda kolejna kosztuje
+    3 zł.'
+  - 'Zapisujemy wzór: K\left(t\right)=8 dla t\in\left\{1,2\right\} oraz K\left(t\right)=8+3\cdot\left(t-2\right)
+    dla t>2.'
+  - 'Dla t=5 wybieramy drugi wzór: K\left(5\right)=8+3\cdot\left(5-2\right)=17 zł.'
+  - Rozwiązujemy równanie 8+3\cdot\left(t-2\right)=26, skąd t=8, i sprawdzamy warunek t>2.
+  - 'Obliczamy koszt na parkingu B: 4\cdot 5=20 zł.'
+  - Wyznaczamy różnicę 20-17=3 zł i zapisujemy odpowiedź z jednostką.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wzór funkcji K
+      answer:
+        kind: SYMBOLIC
+        latex: K\left(t\right)=\begin{cases} 8 & \text{dla } t\in\left\{1,2\right\}\\ 8+3\cdot\left(t-2\right)
+          & \text{dla } t>2\end{cases}
+    - name: K(5)
+      answer:
+        kind: NUMERIC
+        value: 17.0
+    - name: liczba godzin przy opłacie 26 zł
+      answer:
+        kind: NUMERIC
+        value: 8.0
+    - name: różnica kosztów za 5 godzin
+      answer:
+        kind: NUMERIC
+        value: 3.0
+  checks:
+  - kind: evaluate
+    expr: 8+3\cdot\left(5-2\right)
+    var: t
+    part: K(5)
+  - kind: solve_equation
+    expr: 8+3\cdot\left(t-2\right)=26
+    var: t
+    part: liczba godzin przy opłacie 26 zł
+  - kind: evaluate
+    expr: 4\cdot 5-\left(8+3\cdot\left(5-2\right)\right)
+    var: t
+    part: różnica kosztów za 5 godzin
+  stated_model:
+    variable: t
+    objective_latex: K\left(t\right)=\begin{cases} 8 & \text{dla } t\in\left\{1,2\right\}\\ 8+3\cdot\left(t-2\right)
+      & \text{dla } t>2\end{cases}
+    domain_lo: '1'
+    domain_lo_open: false
+    goal: value
+    constraint_used: t — liczba rozpoczętych godzin postoju, t liczba naturalna, t \ge 1
+  skills:
+  - budowanie wzoru funkcji klamrowej
+  - obliczanie wartości w kontekście praktycznym
+  - rozwiązywanie f(t)=c
+  - porównywanie dwóch ofert
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (NOT_MACHINE_CHECKABLE: ''set literal'') — human
+      review'
+- id: g-ex-t00
+  slot: EXERCISE
+  ramp_index: 6
+  difficulty: 3
+  exercise_type: 'funkcja klamrowa: obliczanie wartości i rozwiązywanie f(x)=c'
+  statement: |-
+    Funkcja f jest określona dla wszystkich liczb rzeczywistych wzorem
+    f(x) = 2x + 7 dla x < −2,  f(x) = x² − 1 dla −2 ≤ x ≤ 3,  f(x) = 11 − 2x dla x > 3.
+    a) Oblicz f(−4), f(−2), f(3) oraz f(5).
+    b) Wyznacz wszystkie argumenty, dla których funkcja f przyjmuje wartość 3.
+  statement_latex: f\left(x\right)=\begin{cases} 2\cdot x+7, & x<-2\\ x^{2}-1, & -2\le x\le 3\\ 11-2\cdot
+    x, & x>3\end{cases}
+  solution: |-
+    a) Dla każdego argumentu najpierw sprawdzamy, który warunek jest spełniony.
+    x = −4: ponieważ −4 < −2, korzystamy ze wzoru 2x + 7, więc f(−4) = 2·(−4) + 7 = −8 + 7 = −1.
+    x = −2: warunek −2 ≤ x ≤ 3 jest spełniony (nierówność nieostra!), więc f(−2) = (−2)² − 1 = 4 − 1 = 3.
+    x = 3: 3 należy do ⟨−2, 3⟩, więc f(3) = 3² − 1 = 9 − 1 = 8 (nie wolno użyć wzoru 11 − 2x, bo tam jest x > 3).
+    x = 5: 5 > 3, więc f(5) = 11 − 2·5 = 1.
+
+    b) Równanie f(x) = 3 rozwiązujemy osobno na każdym przedziale.
+    • dla x < −2: 2x + 7 = 3, czyli 2x = −4, x = −2. Ale −2 nie spełnia warunku x < −2, więc to rozwiązanie odrzucamy.
+    • dla −2 ≤ x ≤ 3: x² − 1 = 3, czyli x² = 4, x = −2 lub x = 2. Oba argumenty należą do ⟨−2, 3⟩, więc oba przyjmujemy.
+    • dla x > 3: 11 − 2x = 3, czyli 2x = 8, x = 4. Ponieważ 4 > 3, przyjmujemy.
+    Odpowiedź: f(x) = 3 dla x ∈ {−2, 2, 4}.
+  solution_steps:
+  - 'Dla x = −4 sprawdzam warunek: −4 < −2, więc f(−4) = 2·(−4) + 7 = −1.'
+  - Dla x = −2 zachodzi −2 ≤ x ≤ 3, więc f(−2) = (−2)² − 1 = 3.
+  - Dla x = 3 zachodzi −2 ≤ x ≤ 3, więc f(3) = 3² − 1 = 8.
+  - Dla x = 5 zachodzi x > 3, więc f(5) = 11 − 2·5 = 1.
+  - Na przedziale x < −2 rozwiązuję 2x + 7 = 3, otrzymuję x = −2 i odrzucam (nie spełnia x < −2).
+  - Na przedziale ⟨−2, 3⟩ rozwiązuję x² − 1 = 3, otrzymuję x = −2 i x = 2 — oba należą do przedziału.
+  - Na przedziale x > 3 rozwiązuję 11 − 2x = 3, otrzymuję x = 4, które spełnia x > 3.
+  - 'Zapisuję zbiór rozwiązań: {−2, 2, 4}.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: f(-4)
+      answer:
+        kind: NUMERIC
+        value: -1.0
+    - name: f(-2)
+      answer:
+        kind: NUMERIC
+        value: 3.0
+    - name: f(3)
+      answer:
+        kind: NUMERIC
+        value: 8.0
+    - name: f(5)
+      answer:
+        kind: NUMERIC
+        value: 1.0
+    - name: argumenty_f_rowne_3
+      answer:
+        kind: SET
+        members:
+        - '-2'
+        - '2'
+        - '4'
+  checks:
+  - kind: evaluate
+    expr: 2\cdot\left(-4\right)+7
+    part: f(-4)
+  - kind: evaluate
+    expr: \left(-2\right)^{2}-1
+    part: f(-2)
+  - kind: evaluate
+    expr: 3^{2}-1
+    part: f(3)
+  - kind: evaluate
+    expr: 11-2\cdot 5
+    part: f(5)
+  - kind: solve_equation
+    expr: \left(2\cdot x+4\right)\cdot\left(x^{2}-4\right)\cdot\left(8-2\cdot x\right) = 0
+    part: argumenty_f_rowne_3
+  skills:
+  - dobór wzoru do przedziału
+  - obliczanie wartości funkcji
+  - rozwiązywanie równania f(x)=c na każdym przedziale
+  - odrzucanie rozwiązań spoza przedziału
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 5 parts solved fresh · det: [f(-4)] SymPy solved it fresh: -1.0 vs -1.0 (tol 1e-09) ; [f(-2)]
+      SymPy solved it fresh: 3.0 vs 3.0 (tol 1e-09) ; [f(3)] SymPy solved it fresh: 8.0 vs 8.0 (tol 1e-09)
+      ; [f(5)] SymPy solved it fresh: 1.0 vs 1.0 (tol 1e-09) ; [argumenty_f_rowne_3] SymPy solved it fresh:
+      3 members matched'
+- id: g-ex-t01
+  slot: EXERCISE
+  ramp_index: 7
+  difficulty: 4
+  exercise_type: odczyt informacji z wykresu (łamana o danych wierzchołkach)
+  statement: |-
+    Wykresem funkcji f jest łamana złożona z trzech odcinków: AB, BC i CD, gdzie A = (−4, −2), B = (−1, 4), C = (3, −4), D = (5, 0). Dziedziną funkcji f jest przedział ⟨−4, 5⟩.
+    a) Podaj dziedzinę i zbiór wartości funkcji f.
+    b) Odczytaj f(−4) oraz f(3).
+    c) Wyznacz wszystkie miejsca zerowe funkcji f.
+    d) Wyznacz wszystkie rozwiązania równania f(x) = 2.
+    e) Podaj największą wartość funkcji f oraz argument, dla którego jest ona przyjmowana.
+  statement_latex: A=\left(-4,\,-2\right),\quad B=\left(-1,\,4\right),\quad C=\left(3,\,-4\right),\quad
+    D=\left(5,\,0\right)
+  solution: |-
+    Wyznaczam wzory poszczególnych odcinków.
+    AB, x ∈ ⟨−4, −1⟩: a = (4 − (−2))/(−1 − (−4)) = 6/3 = 2, więc y = 2x + 6 (sprawdzenie: dla x = −4 mamy −2 ✓).
+    BC, x ∈ ⟨−1, 3⟩: a = (−4 − 4)/(3 − (−1)) = −8/4 = −2, więc y = −2x + 2 (dla x = −1 mamy 4 ✓).
+    CD, x ∈ ⟨3, 5⟩: a = (0 − (−4))/(5 − 3) = 4/2 = 2, więc y = 2x − 10 (dla x = 3 mamy −4 ✓).
+
+    a) Rzut wykresu na oś OX to przedział ⟨−4, 5⟩ — to dziedzina. Najniżej leży punkt C o rzędnej −4, najwyżej punkt B o rzędnej 4, a wykres jest łamaną ciągłą, więc ZW = ⟨−4, 4⟩.
+    b) f(−4) = 2·(−4) + 6 = −2 (rzędna punktu A); f(3) = 2·3 − 10 = −4 (rzędna punktu C).
+    c) 2x + 6 = 0 ⟹ x = −3 ∈ ⟨−4, −1⟩ ✓; −2x + 2 = 0 ⟹ x = 1 ∈ ⟨−1, 3⟩ ✓; 2x − 10 = 0 ⟹ x = 5 ∈ ⟨3, 5⟩ ✓. Miejsca zerowe: −3, 1, 5.
+    d) Prowadzę prostą y = 2: 2x + 6 = 2 ⟹ x = −2 ∈ ⟨−4, −1⟩ ✓; −2x + 2 = 2 ⟹ x = 0 ∈ ⟨−1, 3⟩ ✓; 2x − 10 = 2 ⟹ x = 6 ∉ ⟨3, 5⟩ — odrzucam. Równanie f(x) = 2 ma dwa rozwiązania: x = −2 oraz x = 0.
+    e) Największa wartość funkcji jest równa 4 i jest przyjmowana dla argumentu x = −1.
+  solution_steps:
+  - 'Wyznaczam wzór odcinka AB: współczynnik kierunkowy 6/3 = 2, więc y = 2x + 6 dla x ∈ ⟨−4, −1⟩.'
+  - 'Wyznaczam wzór odcinka BC: współczynnik kierunkowy −8/4 = −2, więc y = −2x + 2 dla x ∈ ⟨−1, 3⟩.'
+  - 'Wyznaczam wzór odcinka CD: współczynnik kierunkowy 4/2 = 2, więc y = 2x − 10 dla x ∈ ⟨3, 5⟩.'
+  - 'Rzutuję wykres na oś OX: dziedzina D = ⟨−4, 5⟩; rzutuję na oś OY: ZW = ⟨−4, 4⟩.'
+  - Odczytuję f(−4) = −2 oraz f(3) = −4 (rzędne punktów A i C).
+  - 'Rozwiązuję równania odcinków równe 0: x = −3, x = 1, x = 5 — wszystkie należą do swoich przedziałów.'
+  - 'Rozwiązuję równania odcinków równe 2: x = −2 ✓, x = 0 ✓, x = 6 ✗ (spoza ⟨3, 5⟩).'
+  - Największa wartość to 4, przyjmowana dla x = −1 (punkt B).
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: dziedzina
+      answer:
+        kind: INTERVAL
+        lo: '-4'
+        hi: '5'
+        lo_open: false
+        hi_open: false
+    - name: zbior_wartosci
+      answer:
+        kind: INTERVAL
+        lo: '-4'
+        hi: '4'
+        lo_open: false
+        hi_open: false
+    - name: f(-4)
+      answer:
+        kind: NUMERIC
+        value: -2.0
+    - name: f(3)
+      answer:
+        kind: NUMERIC
+        value: -4.0
+    - name: miejsca_zerowe
+      answer:
+        kind: SET
+        members:
+        - '-3'
+        - '1'
+        - '5'
+    - name: rozwiazania_f_rowne_2
+      answer:
+        kind: SET
+        members:
+        - '-2'
+        - '0'
+    - name: wartosc_najwieksza
+      answer:
+        kind: NUMERIC
+        value: 4.0
+    - name: argument_wartosci_najwiekszej
+      answer:
+        kind: NUMERIC
+        value: -1.0
+  checks:
+  - kind: evaluate
+    expr: 2\cdot\left(-4\right)+6
+    part: f(-4)
+  - kind: evaluate
+    expr: 2\cdot 3-10
+    part: f(3)
+  - kind: solve_equation
+    expr: \left(2\cdot x+6\right)\cdot\left(-2\cdot x+2\right)\cdot\left(2\cdot x-10\right) = 0
+    part: miejsca_zerowe
+  - kind: solve_equation
+    expr: \left(2\cdot x+6-2\right)\cdot\left(-2\cdot x+2-2\right) = 0
+    part: rozwiazania_f_rowne_2
+  - kind: evaluate
+    expr: -2\cdot\left(-1\right)+2
+    part: wartosc_najwieksza
+  skills:
+  - wyznaczanie dziedziny i zbioru wartości
+  - odczyt wartości funkcji
+  - wyznaczanie wzorów odcinków łamanej
+  - miejsca zerowe
+  - rozwiązywanie równania f(x)=c
+  - wartość największa i argument, w którym jest przyjmowana
+  verification:
+    checkability: REFERENCE_CALL
+    note: 8 parts matched
+- id: g-cm-06
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: rozróżnianie argumentu i wartości
+  statement: 'Dana jest funkcja f określona wzorem f(x) = 2x^2 - 3 dla wszystkich liczb rzeczywistych
+    x. a) Oblicz f(2). b) Wyznacz wszystkie argumenty, dla których funkcja f przyjmuje wartość 5. Uczeń
+    w podpunkcie a) zapisał: "f(x) = 2, czyli 2x^2 - 3 = 2, zatem x^2 = \frac{5}{2}", a w podpunkcie b)
+    odpowiedział: "f(5) = 2\cdot 5^2 - 3 = 47". Wskaż błąd w tym rozumowaniu i podaj poprawne odpowiedzi.'
+  statement_latex: f\left(x\right)=2\cdot x^{2}-3
+  solution: |-
+    BŁĘDNE ROZUMOWANIE UCZNIA:
+    a) uczeń potraktował liczbę 2 jako wartość funkcji i ułożył równanie 2x² − 3 = 2, otrzymując x² = 5/2, czyli x = ±√(5/2) — to odpowiedź na zupełnie inne pytanie;
+    b) uczeń potraktował liczbę 5 jako argument i policzył f(5) = 2·5² − 3 = 47 — również odpowiedź na inne pytanie.
+    NA CZYM POLEGA BŁĄD: uczeń pomylił argument z wartością. Zapis f(2) oznacza WARTOŚĆ funkcji dla ARGUMENTU 2 (podstawiamy 2 w miejsce x). Natomiast zdanie "funkcja przyjmuje wartość 5" prowadzi do RÓWNANIA f(x) = 5, w którym szukamy argumentu. Argumenty odczytujemy z osi OX, wartości z osi OY.
+    POPRAWNE ROZWIĄZANIE:
+    a) f(2) = 2·(2)² − 3 = 2·4 − 3 = 8 − 3 = 5.
+    b) 2x² − 3 = 5 ⟹ 2x² = 8 ⟹ x² = 4 ⟹ x = −2 lub x = 2.
+    Odpowiedź: f(2) = 5, a wartość 5 funkcja przyjmuje dla dwóch argumentów: x = −2 oraz x = 2.
+  solution_steps:
+  - 'Rozpoznajemy błąd: zamiana ról argumentu i wartości (f(2) obliczamy przez podstawienie, a f(x)=5
+    przez rozwiązanie równania).'
+  - 'Poprawnie a): f(2)=2\cdot\left(2\right)^{2}-3=5.'
+  - 'Poprawnie b): układamy równanie 2\cdot x^{2}-3=5, skąd x^{2}=4.'
+  - Otrzymujemy x=-2 lub x=2 i sprawdzamy, że należą do dziedziny.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: f(2)
+      answer:
+        kind: NUMERIC
+        value: 5.0
+    - name: argumenty, dla których f(x)=5
+      answer:
+        kind: SET
+        members:
+        - '-2'
+        - '2'
+  checks:
+  - kind: evaluate
+    expr: 2\cdot\left(2\right)^{2}-3
+    part: f(2)
+  - kind: solve_equation
+    expr: 2\cdot x^{2}-3=5
+    part: argumenty, dla których f(x)=5
+  skills:
+  - obliczanie f(a)
+  - rozwiązywanie równania f(x)=c
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [f(2)] SymPy solved it fresh: 5.0 vs 5.0 (tol 1e-09) ; [argumenty,
+      dla których f(x)=5] SymPy solved it fresh: 2 members matched'
+- id: g-cm-07
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: rozstrzyganie, czy przyporządkowanie jest funkcją
+  statement: 'W tabeli zapisano przyporządkowanie o dziedzinie D = {1, 2, 3, 4, 5}: argumentowi 1 przypisano
+    liczbę 4, argumentowi 2 — liczbę 7, argumentowi 3 — liczbę 4, argumentowi 4 — liczbę 9, a argumentowi
+    5 — liczbę 7. Uczeń stwierdził: "To nie jest funkcja, bo liczba 4 pojawia się dwa razy i liczba 7
+    pojawia się dwa razy, więc przyporządkowanie nie jest jednoznaczne". Rozstrzygnij, czy tabela określa
+    funkcję, wskaż błąd ucznia i podaj zbiór wartości tego przyporządkowania.'
+  statement_latex: h\left(1\right)=4,\ h\left(2\right)=7,\ h\left(3\right)=4,\ h\left(4\right)=9,\ h\left(5\right)=7
+  solution: |-
+    BŁĘDNE ROZUMOWANIE UCZNIA: "wartość 4 przypisano dwóm argumentom (1 i 3), a wartość 7 dwóm argumentom (2 i 5), więc jednoznaczność jest złamana i to nie jest funkcja". Wniosek ucznia: to nie jest funkcja.
+    NA CZYM POLEGA BŁĄD: jednoznaczność dotyczy wyłącznie kierunku OD ARGUMENTU DO WARTOŚCI — każdy argument ma mieć dokładnie jedną wartość. Nie ma natomiast żadnego zakazu, by dwa różne argumenty miały tę samą wartość (np. funkcja stała f(x) = 7 jest poprawną funkcją).
+    POPRAWNE ROZUMOWANIE: sprawdzamy argumenty: 1, 2, 3, 4, 5 — każdy występuje w tabeli dokładnie raz i ma przypisaną dokładnie jedną liczbę. Oba warunki definicji są spełnione, więc tabela określa funkcję o dziedzinie D = {1, 2, 3, 4, 5}.
+    Zbiór wartości (liczby z wiersza wartości, bez powtórzeń): ZW = {4, 7, 9}.
+    Odpowiedź: tak, to jest funkcja; ZW = {4, 7, 9}.
+  solution_steps:
+  - 'Rozpoznajemy błąd: uczeń wymaga, by wartości się nie powtarzały — a definicja tego nie wymaga.'
+  - 'Sprawdzamy kompletność: każdy z argumentów 1, 2, 3, 4, 5 ma przypisaną wartość.'
+  - 'Sprawdzamy jednoznaczność: żaden argument nie występuje dwa razy z różnymi wartościami.'
+  - 'Wniosek: tabela określa funkcję.'
+  - 'Wypisujemy zbiór wartości bez powtórzeń: ZW=\left\{4,7,9\right\}.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: czy to funkcja
+      answer:
+        kind: BOOLEAN
+        truth: true
+    - name: zbiór wartości
+      answer:
+        kind: SET
+        members:
+        - '4'
+        - '7'
+        - '9'
+  skills:
+  - definicja funkcji
+  - jednoznaczność przyporządkowania
+  - zbiór wartości z tabeli
+  verification:
+    checkability: REFERENCE_CALL
+    note: 2 parts matched
+- id: g-cm-08
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: obliczanie wartości dla argumentu ujemnego
+  statement: 'Dana jest funkcja f określona wzorem f(x) = x^2 - 4x dla wszystkich liczb rzeczywistych
+    x. Oblicz f(-3) oraz f\left(-\frac{1}{2}\right). Uczeń zapisał: "f(-3) = -3^2 - 4\cdot -3 = -9 + 12
+    = 3". Wskaż błąd w tym zapisie i podaj poprawne wartości.'
+  statement_latex: f\left(x\right)=x^{2}-4\cdot x
+  solution: |-
+    BŁĘDNE ROZUMOWANIE UCZNIA: f(−3) = −3² − 4·−3 = −9 + 12 = 3.
+    NA CZYM POLEGA BŁĄD: uczeń nie ujął podstawianej liczby ujemnej w nawias. Zapis −3² oznacza −(3²) = −9, a to zupełnie co innego niż (−3)² = 9. Podstawiany argument ZAWSZE ujmujemy w nawias.
+    POPRAWNE ROZWIĄZANIE:
+    f(−3) = (−3)² − 4·(−3) = 9 + 12 = 21.
+    f(−1/2) = (−1/2)² − 4·(−1/2) = 1/4 + 2 = 9/4.
+    Odpowiedź: f(−3) = 21, f(−1/2) = 9/4 = 2,25. Błędny wynik ucznia (3) różni się od poprawnego (21) właśnie o skutek brakującego nawiasu.
+  solution_steps:
+  - 'Rozpoznajemy błąd: brak nawiasu przy podstawianiu liczby ujemnej, -3^{2}=-9 zamiast \left(-3\right)^{2}=9.'
+  - 'Podstawiamy poprawnie: f(-3)=\left(-3\right)^{2}-4\cdot\left(-3\right)=9+12=21.'
+  - 'Podstawiamy drugi argument: f\left(-\frac{1}{2}\right)=\left(-\frac{1}{2}\right)^{2}-4\cdot\left(-\frac{1}{2}\right)=\frac{1}{4}+2=\frac{9}{4}.'
+  - Zapisujemy odpowiedzi.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: f(-3)
+      answer:
+        kind: NUMERIC
+        value: 21.0
+    - name: f(-1/2)
+      answer:
+        kind: NUMERIC
+        value: 2.25
+  checks:
+  - kind: evaluate
+    expr: \left(-3\right)^{2}-4\cdot\left(-3\right)
+    part: f(-3)
+  - kind: evaluate
+    expr: \left(-\frac{1}{2}\right)^{2}-4\cdot\left(-\frac{1}{2}\right)
+    part: f(-1/2)
+  skills:
+  - nawiasy przy podstawianiu liczby ujemnej
+  - potęgowanie liczby ujemnej
+  - działania na ułamkach
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [f(-3)] SymPy solved it fresh: 21.0 vs 21.0 (tol 1e-09) ; [f(-1/2)]
+      SymPy solved it fresh: 2.25 vs 2.25 (tol 1e-09)'
+- id: g-cm-09
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: interpretacja symbolu f(x)
+  statement: 'Dana jest funkcja f określona wzorem f(x) = x^2 + 3x dla wszystkich liczb rzeczywistych
+    x. Oblicz f(5) oraz sumę f(2) + f(3), a następnie rozstrzygnij, czy prawdziwa jest równość f(2 + 3)
+    = f(2) + f(3). Uczeń napisał: "f(2 + 3) = f(2) + f(3), bo f(x) to f razy x, a mnożenie jest rozdzielne
+    względem dodawania". Wyjaśnij, dlaczego to rozumowanie jest błędne.'
+  statement_latex: f\left(x\right)=x^{2}+3\cdot x
+  solution: |-
+    BŁĘDNE ROZUMOWANIE UCZNIA: "f(x) = f·x, więc f(2 + 3) = f·2 + f·3 = f(2) + f(3)" — z tego uczeń wnioskuje, że równość zachodzi.
+    NA CZYM POLEGA BŁĄD: zapis f(x) czytamy "ef od iks" i oznacza on WARTOŚĆ funkcji dla argumentu x, a nie iloczyn litery f przez x. Nie wolno więc "wymnażać nawiasu". Aby obliczyć f(2 + 3), trzeba najpierw dodać: 2 + 3 = 5, a potem podstawić 5 do wzoru.
+    POPRAWNE OBLICZENIA:
+    f(5) = (5)² + 3·(5) = 25 + 15 = 40.
+    f(2) = (2)² + 3·(2) = 4 + 6 = 10, f(3) = (3)² + 3·(3) = 9 + 9 = 18, zatem f(2) + f(3) = 10 + 18 = 28.
+    Ponieważ f(2 + 3) = f(5) = 40, a f(2) + f(3) = 28, mamy 40 ≠ 28, więc równość jest FAŁSZYWA.
+    Odpowiedź: f(5) = 40, f(2) + f(3) = 28; równość f(2 + 3) = f(2) + f(3) nie zachodzi.
+  solution_steps:
+  - 'Rozpoznajemy błąd: f(x) nie jest iloczynem f\cdot x, lecz symbolem wartości funkcji.'
+  - Obliczamy f(5)=\left(5\right)^{2}+3\cdot\left(5\right)=40, bo f(2+3)=f(5).
+  - Obliczamy f(2)=10 oraz f(3)=18, więc f(2)+f(3)=28.
+  - 'Porównujemy: 40\ne 28, zatem równość jest fałszywa.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: f(5)
+      answer:
+        kind: NUMERIC
+        value: 40.0
+    - name: f(2)+f(3)
+      answer:
+        kind: NUMERIC
+        value: 28.0
+    - name: czy zachodzi f(2+3)=f(2)+f(3)
+      answer:
+        kind: BOOLEAN
+        truth: false
+  checks:
+  - kind: evaluate
+    expr: \left(5\right)^{2}+3\cdot\left(5\right)
+    part: f(5)
+  - kind: evaluate
+    expr: \left(\left(2\right)^{2}+3\cdot\left(2\right)\right)+\left(\left(3\right)^{2}+3\cdot\left(3\right)\right)
+    part: f(2)+f(3)
+  skills:
+  - obliczanie wartości funkcji
+  - rozumienie zapisu f(x)
+  - porównywanie wyrażeń
+  verification:
+    checkability: REFERENCE_CALL
+    note: '3 parts matched · det: [f(5)] SymPy solved it fresh: 40.0 vs 40.0 (tol 1e-09) ; [f(2)+f(3)]
+      SymPy solved it fresh: 28.0 vs 28.0 (tol 1e-09)'
+- id: g-cm-10
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: funkcja klamrowa — wybór wzoru
+  statement: 'Funkcja f jest określona dla wszystkich liczb rzeczywistych wzorem: f(x) = 3x + 5 dla x
+    \le 1 oraz f(x) = x^2 - 2 dla x > 1. Oblicz f(1) oraz f(3). Uczeń zapisał: "f(1) = 1^2 - 2 = -1".
+    Wskaż błąd w tym rozumowaniu i podaj poprawne wartości.'
+  statement_latex: f\left(x\right)=\begin{cases} 3\cdot x+5 & \text{dla } x\le 1\\ x^{2}-2 & \text{dla
+    } x>1\end{cases}
+  solution: |-
+    BŁĘDNE ROZUMOWANIE UCZNIA: dla x = 1 uczeń wybrał wzór x² − 2 (bo "1 jest na granicy, więc pasuje do drugiego wzoru") i otrzymał f(1) = 1² − 2 = −1.
+    NA CZYM POLEGA BŁĄD: przy pierwszym wzorze stoi warunek x ≤ 1 (nierówność NIEOSTRA), a przy drugim x > 1 (nierówność OSTRA). Liczba 1 spełnia warunek x ≤ 1, a nie spełnia warunku x > 1, więc dla x = 1 obowiązuje TYLKO pierwszy wzór.
+    POPRAWNE ROZWIĄZANIE:
+    x = 1: ponieważ 1 ≤ 1, korzystamy ze wzoru 3x + 5, czyli f(1) = 3·(1) + 5 = 8.
+    x = 3: ponieważ 3 > 1, korzystamy ze wzoru x² − 2, czyli f(3) = (3)² − 2 = 9 − 2 = 7.
+    Odpowiedź: f(1) = 8 (a nie −1) oraz f(3) = 7.
+  solution_steps:
+  - 'Rozpoznajemy błąd: zignorowanie różnicy między nierównością nieostrą x\le 1 a ostrą x>1.'
+  - 'Dla x=1 sprawdzamy warunki: 1\le 1 jest prawdą, więc obowiązuje wzór 3\cdot x+5.'
+  - Obliczamy f(1)=3\cdot\left(1\right)+5=8.
+  - Dla x=3 zachodzi 3>1, więc f(3)=\left(3\right)^{2}-2=7.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: f(1)
+      answer:
+        kind: NUMERIC
+        value: 8.0
+    - name: f(3)
+      answer:
+        kind: NUMERIC
+        value: 7.0
+  checks:
+  - kind: evaluate
+    expr: 3\cdot\left(1\right)+5
+    part: f(1)
+  - kind: evaluate
+    expr: \left(3\right)^{2}-2
+    part: f(3)
+  skills:
+  - sprawdzanie warunku przy klamrze
+  - nierówności ostre i nieostre
+  - obliczanie wartości funkcji
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [f(1)] SymPy solved it fresh: 8.0 vs 8.0 (tol 1e-09) ; [f(3)]
+      SymPy solved it fresh: 7.0 vs 7.0 (tol 1e-09)'
+- id: g-ch-t02
+  slot: CHALLENGE
+  ramp_index: 0
+  difficulty: 4
+  exercise_type: budowa modelu liniowego z dwóch danych wartości i obliczenie wartości funkcji
+  statement: Wypożyczalnia kajaków pobiera jednorazową opłatę startową za wypożyczenie kajaka oraz dodatkowo
+    stałą kwotę za każdą godzinę pływania. Klient, który pływał 4 godziny, zapłacił 26 zł, a klient, który
+    pływał 7 godzin, zapłacił 41 zł. Ile zapłaci klient, który wypożyczy kajak na 10 godzin?
+  statement_latex: K\left(t\right)=a+c\cdot t,\qquad K\left(4\right)=26,\qquad K\left(7\right)=41
+  solution: |-
+    Koszt zależy od liczby godzin t, więc opisuję go funkcją. Opłata startowa (stała) to a zł, a cena jednej godziny to c zł, zatem
+    K(t) = a + c·t, gdzie t ≥ 0 jest liczbą godzin.
+    Z danych: K(4) = 26 oraz K(7) = 41, czyli
+    a + 4c = 26,
+    a + 7c = 41.
+    Odejmując pierwsze równanie od drugiego: 3c = 15, więc c = 5 (jedna godzina kosztuje 5 zł).
+    Stąd a = 26 − 4·5 = 6 (opłata startowa wynosi 6 zł).
+    Wzór funkcji: K(t) = 6 + 5·t.
+    Za 10 godzin: K(10) = 6 + 5·10 = 56.
+    Odpowiedź: klient, który wypożyczy kajak na 10 godzin, zapłaci 56 zł.
+  solution_steps:
+  - Wprowadzam zmienną t — liczbę godzin pływania, oraz oznaczam opłatę startową przez a, a cenę jednej
+    godziny przez c.
+  - 'Zapisuję model kosztu: K(t) = a + c·t.'
+  - 'Z danych zapisuję warunki: a + 4c = 26 oraz a + 7c = 41.'
+  - 'Odejmuję równania stronami: 3c = 15, więc c = 5.'
+  - Wyznaczam a = 26 − 4·5 = 6, czyli K(t) = 6 + 5·t.
+  - Obliczam K(10) = 6 + 5·10 = 56.
+  - 'Odpowiedź: 56 zł.'
+  answer:
+    kind: NUMERIC
+    value: 56.0
+  checks:
+  - kind: evaluate
+    expr: \left(26-4\cdot\frac{41-26}{3}\right)+10\cdot\frac{41-26}{3}
+    var: t
+  stated_model:
+    variable: t
+    objective_latex: K\left(t\right)=6+5\cdot t
+    domain_lo: '0'
+    domain_lo_open: false
+    goal: value
+    constraint_used: K\left(4\right)=26 \ \wedge\ K\left(7\right)=41
+  skills:
+  - wprowadzanie zmiennych do opisu słownego
+  - budowa wzoru funkcji liniowej opisującej cennik
+  - wyznaczanie parametrów z układu warunków
+  - obliczanie wartości funkcji i interpretacja w kontekście
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''t'': ''K\\left(t\\right)=6+5\\cdot
+      t'') — human review'
+- id: g-ch-t03
+  slot: CHALLENGE
+  ramp_index: 1
+  difficulty: 4
+  exercise_type: 'modelowanie geometryczne: pole jako funkcja szerokości ścieżki, filtracja pierwiastka'
+  statement: |-
+    Prostokątna działka ma wymiary 30 m × 20 m. Wzdłuż całego wewnętrznego brzegu działki wysypano żwirem ścieżkę o jednakowej szerokości, a pozostała część działki — również prostokąt — została obsiana trawą. Pole trawnika jest równe 336 m².
+    a) Oblicz szerokość ścieżki.
+    b) Oblicz, jaki procent powierzchni całej działki zajmuje ścieżka.
+  statement_latex: P\left(x\right)=\left(30-2\cdot x\right)\cdot\left(20-2\cdot x\right)=336
+  solution: |-
+    a) Oznaczam przez x (w metrach) szerokość ścieżki. Ścieżka biegnie wzdłuż wszystkich czterech boków, więc trawnik jest prostokątem o bokach krótszych z obu stron o x:
+    P(x) = (30 − 2x)·(20 − 2x).
+    Z warunków geometrycznych 30 − 2x > 0 i 20 − 2x > 0 oraz x > 0, więc dziedziną jest przedział (0; 10).
+    Rozwiązuję równanie P(x) = 336:
+    (30 − 2x)(20 − 2x) = 336
+    600 − 60x − 40x + 4x² = 336
+    4x² − 100x + 264 = 0  | : 4
+    x² − 25x + 66 = 0,  Δ = 625 − 264 = 361, √Δ = 19,
+    x = (25 − 19)/2 = 3 albo x = (25 + 19)/2 = 22.
+    Liczba 22 nie należy do dziedziny (22 > 10 — ścieżka szersza niż połowa działki jest niemożliwa), więc odrzucamy ją.
+    Szerokość ścieżki wynosi 3 m. (Sprawdzenie: (30 − 6)(20 − 6) = 24·14 = 336 ✓.)
+    b) Pole całej działki: 30·20 = 600 m². Pole ścieżki: 600 − 336 = 264 m².
+    264/600 · 100% = 44%.
+    Odpowiedź: ścieżka zajmuje 44% powierzchni działki.
+  solution_steps:
+  - Wprowadzam zmienną x — szerokość ścieżki w metrach.
+  - Zauważam, że trawnik jest prostokątem o wymiarach (30 − 2x) m × (20 − 2x) m, więc P(x) = (30 − 2x)(20
+    − 2x).
+  - 'Ustalam dziedzinę: x > 0, 20 − 2x > 0, czyli x ∈ (0; 10).'
+  - Zapisuję równanie (30 − 2x)(20 − 2x) = 336 i doprowadzam je do postaci x² − 25x + 66 = 0.
+  - Obliczam Δ = 361 i pierwiastki x = 3 oraz x = 22.
+  - Odrzucam x = 22 jako liczbę spoza dziedziny; szerokość ścieżki to 3 m.
+  - Obliczam pole działki 600 m² i pole ścieżki 600 − 336 = 264 m².
+  - Obliczam 264/600 · 100% = 44%.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: szerokosc_sciezki_m
+      answer:
+        kind: NUMERIC
+        value: 3.0
+    - name: procent_powierzchni_sciezki
+      answer:
+        kind: NUMERIC
+        value: 44.0
+  checks:
+  - kind: evaluate
+    expr: \frac{25-\sqrt{625-264}}{2}
+    part: szerokosc_sciezki_m
+  - kind: evaluate
+    expr: \frac{600-336}{600}\cdot 100
+    part: procent_powierzchni_sciezki
+  stated_model:
+    variable: x
+    objective_latex: P\left(x\right)=\left(30-2\cdot x\right)\cdot\left(20-2\cdot x\right)
+    domain_lo: '0'
+    domain_hi: '10'
+    goal: value
+    constraint_used: P\left(x\right)=336
+  skills:
+  - wprowadzenie zmiennej do opisu geometrycznego
+  - zbudowanie wzoru funkcji pola
+  - ustalenie dziedziny wynikającej z warunków geometrycznych
+  - rozwiązanie równania kwadratowego i odrzucenie pierwiastka spoza dziedziny
+  - obliczenia procentowe
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''x'': ''P\\left(x\\right)=\\left(30-2\\cdot
+      x\\right)\\cdot\\left(20-2\\cdot x\\right)'') — human review'
+- id: g-ch-t04
+  slot: CHALLENGE
+  ramp_index: 2
+  difficulty: 5
+  exercise_type: wzór funkcji z dziedziną, wyznaczenie argumentu z danej wartości i dalsze obliczenie
+  statement: |-
+    Z prostokątnego arkusza blachy o wymiarach 24 cm × 18 cm wycięto w każdym z czterech narożników jednakowy kwadrat o boku x cm, a powstałe cztery prostokątne paski zagięto ku górze pod kątem prostym, otrzymując otwarte od góry pudełko w kształcie prostopadłościanu o wysokości x cm.
+    a) Wyznacz wzór funkcji S opisującej pole powierzchni pudełka (dno oraz cztery ściany boczne, bez górnej pokrywy) w zależności od x i podaj dziedzinę tej funkcji.
+    b) Pole powierzchni tego pudełka jest równe 396 cm². Oblicz x i sprawdź, czy otrzymana liczba należy do dziedziny.
+    c) Oblicz objętość otrzymanego pudełka.
+  statement_latex: S\left(x\right)=\left(24-2\cdot x\right)\cdot\left(18-2\cdot x\right)+2\cdot x\cdot\left(24-2\cdot
+    x\right)+2\cdot x\cdot\left(18-2\cdot x\right)
+  solution: |-
+    a) Po wycięciu narożników dno pudełka jest prostokątem o wymiarach (24 − 2x) cm × (18 − 2x) cm, a wysokość pudełka wynosi x cm. Pole powierzchni to pole dna powiększone o pola czterech ścian bocznych (dwie o wymiarach x × (24 − 2x) i dwie o wymiarach x × (18 − 2x)):
+    S(x) = (24 − 2x)(18 − 2x) + 2·x·(24 − 2x) + 2·x·(18 − 2x)
+    = 432 − 84x + 4x² + 48x − 4x² + 36x − 4x²
+    = 432 − 4x².
+    (Ten sam wynik otrzymamy szybciej: z arkusza o polu 24·18 = 432 cm² usunięto cztery kwadraty o polu x² każdy.)
+    Warunki geometryczne: x > 0, 24 − 2x > 0 i 18 − 2x > 0, czyli x < 9. Dziedzina: x ∈ (0; 9).
+    b) Rozwiązuję równanie S(x) = 396:
+    432 − 4x² = 396 ⟹ 4x² = 36 ⟹ x² = 9 ⟹ x = 3 lub x = −3.
+    Liczba −3 nie należy do dziedziny (odrzucam), a x = 3 spełnia warunek 0 < 3 < 9 ✓.
+    Zatem bok wyciętego kwadratu wynosi 3 cm.
+    c) Dla x = 3 dno ma wymiary (24 − 6) cm × (18 − 6) cm = 18 cm × 12 cm, a wysokość 3 cm, więc
+    V = 18·12·3 = 648 cm³.
+    Odpowiedź: S(x) = 432 − 4x² dla x ∈ (0; 9), x = 3 cm, V = 648 cm³.
+  solution_steps:
+  - Zauważam, że dno pudełka to prostokąt o wymiarach (24 − 2x) × (18 − 2x), a wysokość pudełka to x.
+  - 'Składam pole powierzchni: dno + dwie ściany x·(24 − 2x) + dwie ściany x·(18 − 2x).'
+  - 'Redukuję wyrażenie: S(x) = 432 − 84x + 4x² + 48x − 4x² + 36x − 4x² = 432 − 4x².'
+  - Ustalam dziedzinę z warunków x > 0, 24 − 2x > 0, 18 − 2x > 0, czyli x ∈ (0; 9).
+  - Rozwiązuję 432 − 4x² = 396, otrzymuję x² = 9, więc x = 3 lub x = −3.
+  - Odrzucam x = −3 (poza dziedziną) i sprawdzam, że 3 ∈ (0; 9).
+  - Dla x = 3 wyznaczam wymiary dna 18 cm × 12 cm i wysokość 3 cm.
+  - Obliczam objętość V = 18·12·3 = 648 cm³.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wzor_S
+      answer:
+        kind: SYMBOLIC
+        latex: S\left(x\right)=432-4\cdot x^{2}
+    - name: dziedzina_S
+      answer:
+        kind: INTERVAL
+        lo: '0'
+        hi: '9'
+    - name: x_cm
+      answer:
+        kind: NUMERIC
+        value: 3.0
+    - name: objetosc_cm3
+      answer:
+        kind: NUMERIC
+        value: 648.0
+  checks:
+  - kind: simplify
+    expr: \left(24-2\cdot x\right)\cdot\left(18-2\cdot x\right)+2\cdot x\cdot\left(24-2\cdot x\right)+2\cdot
+      x\cdot\left(18-2\cdot x\right)
+    part: wzor_S
+  - kind: evaluate
+    expr: \sqrt{\frac{432-396}{4}}
+    part: x_cm
+  - kind: evaluate
+    expr: \left(24-2\cdot 3\right)\cdot\left(18-2\cdot 3\right)\cdot 3
+    part: objetosc_cm3
+  stated_model:
+    variable: x
+    objective_latex: S\left(x\right)=432-4\cdot x^{2}
+    domain_lo: '0'
+    domain_hi: '9'
+    goal: value
+    constraint_used: S\left(x\right)=396
+  skills:
+  - składanie wzoru funkcji z opisu konstrukcji
+  - wyznaczanie dziedziny wynikającej z warunków geometrycznych
+  - upraszczanie wyrażenia algebraicznego
+  - rozwiązywanie równania f(x)=c z weryfikacją dziedziny
+  - obliczanie objętości prostopadłościanu
+  verification:
+    checkability: STATED_MODEL
+    note: 'stage 1 inconclusive: SympifyError: SympifyError: "cannot sympify object of type <class ''sympy.core.singleton.SingletonRegistry''>"'

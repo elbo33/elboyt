@@ -1,0 +1,771 @@
+section: rownania-nierownosci-liniowe
+name: Równania liniowe sprzeczne i tożsamościowe; nierówności liniowe
+scope: Recognising a contradictory and an identity linear equation; solving linear inequalities in one
+  unknown and writing the solution set.
+requirements:
+- III.2
+- III.3
+counts:
+  total: 16
+  DETERMINISTIC: 5
+  REFERENCE_CALL: 8
+  STATED_MODEL: 2
+  NOT_MACHINE_CHECKABLE: 1
+exercises:
+- id: g-th-00
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: rozwiązywanie nierówności liniowej
+  statement: Rozwiąż nierówność \(5x - 3 > 12\). Zbiór wszystkich rozwiązań zapisz w postaci przedziału.
+  statement_latex: 5\cdot x - 3 > 12
+  solution: |-
+    Przenosimy liczbę −3 na prawą stronę (zmieniając jej znak): 5x > 12 + 3, czyli 5x > 15.
+    Dzielimy obie strony przez 5 — liczbę dodatnią — więc znak nierówności pozostaje bez zmian: x > 3.
+    Zbiór rozwiązań: (3, +∞). Przy symbolu +∞ zawsze stoi nawias okrągły.
+    Sprawdzenie: dla x = 4 mamy 5·4 − 3 = 17 > 12 ✓, a dla x = 0 mamy −3 > 12 — fałsz, więc 0 słusznie nie należy do zbioru rozwiązań.
+  solution_steps:
+  - 'Przenieś wyraz wolny na prawą stronę: 5x > 15.'
+  - 'Podziel obie strony przez 5 (liczba dodatnia, znak bez zmian): x > 3.'
+  - 'Zapisz zbiór rozwiązań jako przedział: (3, +∞).'
+  - Sprawdź liczbą próbną x = 4.
+  answer:
+    kind: INTERVAL
+    lo: '3'
+    hi: +\infty
+  checks:
+  - kind: solve_inequality
+    expr: 5\cdot x - 3 > 12
+  skills:
+  - przekształcanie nierówności liniowej
+  - zapis przedziałowy zbioru rozwiązań
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: endpoints matched'
+- id: g-th-01
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: klasyfikacja równania liniowego
+  statement: Dane jest równanie \(5\left(x - 2\right) + 3 = 5x - 7\). Rozstrzygnij, czy to równanie jest
+    oznaczone, sprzeczne, czy tożsamościowe, i podaj zbiór wszystkich jego rozwiązań.
+  statement_latex: 5\cdot\left(x - 2\right) + 3 = 5\cdot x - 7
+  solution: |-
+    Usuwamy nawias po lewej stronie: 5x − 10 + 3 = 5x − 7, czyli 5x − 7 = 5x − 7.
+    Przenosimy wyrazy z niewiadomą na lewą stronę, a liczby na prawą: 5x − 5x = −7 + 7, czyli 0·x = 0.
+    Współczynnik przy x jest równy 0 i wyraz wolny również jest równy 0 — została prawdziwa równość liczbowa 0 = 0, która nie zależy od x.
+    Odpowiedź: równanie jest tożsamościowe, spełnia je każda liczba rzeczywista, zbiór rozwiązań to R.
+    Sprawdzenie: dla x = 1 mamy L = 5·(−1) + 3 = −2, P = 5 − 7 = −2 ✓.
+  solution_steps:
+  - 'Usuń nawias: 5x − 10 + 3 = 5x − 7.'
+  - 'Zredukuj wyrazy podobne po lewej stronie: 5x − 7 = 5x − 7.'
+  - 'Przenieś wyrazy z x na jedną stronę, liczby na drugą: 0·x = 0.'
+  - Stwierdź, że równość 0 = 0 jest prawdziwa dla każdego x — równanie tożsamościowe.
+  - 'Zapisz zbiór rozwiązań: R.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: typ równania
+      answer:
+        kind: SYMBOLIC
+        latex: \text{równanie tożsamościowe}
+    - name: zbiór rozwiązań
+      answer:
+        kind: SYMBOLIC
+        latex: \mathbb{R}
+  skills:
+  - redukcja wyrazów podobnych
+  - rozpoznawanie równania tożsamościowego
+  - zapis zbioru rozwiązań
+  verification:
+    checkability: REFERENCE_CALL
+    note: 'could not compare: part disagrees: NOT_MACHINE_CHECKABLE: ''prose inside the expression'''
+- id: g-th-02
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: rozwiązywanie nierówności liniowej
+  statement: Rozwiąż nierówność \(-x + 1 < 4\). Zbiór wszystkich rozwiązań zapisz w postaci przedziału.
+  statement_latex: -x + 1 < 4
+  solution: |-
+    Przenosimy 1 na prawą stronę: −x < 4 − 1, czyli −x < 3.
+    Dzielimy obie strony przez −1 — liczbę ujemną — więc ODWRACAMY znak nierówności: x > −3.
+    Zbiór rozwiązań: (−3, +∞). Kraniec −3 nie należy do zbioru, bo nierówność jest ostra.
+    Sprawdzenie: dla x = 0 mamy 0 + 1 = 1 < 4 ✓; dla x = −5 mamy 5 + 1 = 6 < 4 — fałsz ✓.
+  solution_steps:
+  - 'Przenieś 1 na prawą stronę: −x < 3.'
+  - 'Podziel obie strony przez −1 i odwróć znak nierówności: x > −3.'
+  - 'Zapisz zbiór rozwiązań: (−3, +∞).'
+  - Sprawdź liczbą próbną x = 0.
+  answer:
+    kind: INTERVAL
+    lo: '-3'
+    hi: +\infty
+  checks:
+  - kind: solve_inequality
+    expr: -x + 1 < 4
+  skills:
+  - mnożenie/dzielenie nierówności przez liczbę ujemną
+  - zapis przedziałowy
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: endpoints matched'
+- id: g-ex-03
+  slot: EXERCISE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: nierówność liniowa z nawiasami
+  statement: Rozwiąż nierówność \(4\left(x - 2\right) - 3 \geq 2\left(x + 1\right) + 5\). Zbiór wszystkich
+    rozwiązań zapisz w postaci przedziału oraz podaj najmniejszą liczbę całkowitą, która tę nierówność
+    spełnia.
+  statement_latex: 4\cdot\left(x - 2\right) - 3 \geq 2\cdot\left(x + 1\right) + 5
+  solution: |-
+    Usuwamy nawiasy po obu stronach: 4x − 8 − 3 ≥ 2x + 2 + 5, czyli 4x − 11 ≥ 2x + 7.
+    Grupujemy wyrazy z niewiadomą po lewej stronie, a liczby po prawej: 4x − 2x ≥ 7 + 11, czyli 2x ≥ 18.
+    Dzielimy obie strony przez 2 (liczba dodatnia, znak bez zmian): x ≥ 9.
+    Zbiór rozwiązań: ⟨9, +∞). Kraniec 9 należy do zbioru, bo nierówność jest nieostra, więc najmniejsza liczba całkowita spełniająca nierówność to 9.
+    Sprawdzenie: dla x = 9 mamy L = 4·7 − 3 = 25, P = 2·10 + 5 = 25, więc 25 ≥ 25 ✓.
+  solution_steps:
+  - 'Usuń nawiasy: 4x − 8 − 3 ≥ 2x + 2 + 5.'
+  - 'Zredukuj wyrazy podobne: 4x − 11 ≥ 2x + 7.'
+  - 'Zgrupuj wyrazy: 2x ≥ 18.'
+  - 'Podziel przez 2: x ≥ 9.'
+  - 'Zapisz przedział ⟨9, +∞) i odczytaj najmniejszą liczbę całkowitą: 9.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: zbiór rozwiązań
+      answer:
+        kind: INTERVAL
+        lo: '9'
+        hi: +\infty
+        lo_open: false
+    - name: najmniejsza liczba całkowita
+      answer:
+        kind: NUMERIC
+        value: 9.0
+  checks:
+  - kind: solve_inequality
+    expr: 4\cdot\left(x - 2\right) - 3 \geq 2\cdot\left(x + 1\right) + 5
+    part: zbiór rozwiązań
+  skills:
+  - usuwanie nawiasów
+  - grupowanie wyrazów
+  - zapis przedziałowy
+  verification:
+    checkability: REFERENCE_CALL
+    note: 2 parts matched
+- id: g-ex-04
+  slot: EXERCISE
+  ramp_index: 1
+  difficulty: 3
+  exercise_type: nierówność liniowa z ułamkami
+  statement: Rozwiąż nierówność \(\frac{2x - 1}{3} - \frac{x + 2}{4} \leq 1\). Zbiór wszystkich rozwiązań
+    zapisz w postaci przedziału oraz podaj największą liczbę całkowitą należącą do tego zbioru.
+  statement_latex: \frac{2\cdot x - 1}{3} - \frac{x + 2}{4} \leq 1
+  solution: |-
+    Wspólnym mianownikiem liczb 3 i 4 jest 12. Mnożymy obie strony przez 12 (liczba dodatnia, więc znak nierówności zostaje), pamiętając o nawiasach wokół liczników:
+    4(2x − 1) − 3(x + 2) ≤ 12
+    8x − 4 − 3x − 6 ≤ 12
+    5x − 10 ≤ 12
+    5x ≤ 22
+    Dzielimy przez 5 (liczba dodatnia): x ≤ 22/5, czyli x ≤ 4,4.
+    Zbiór rozwiązań: (−∞, 22/5⟩.
+    Największa liczba całkowita należąca do tego przedziału to 4 (bo 5 > 4,4).
+    Sprawdzenie: dla x = 4 mamy (8 − 1)/3 − (4 + 2)/4 = 7/3 − 3/2 = 5/6 ≤ 1 ✓; dla x = 5: 9/3 − 7/4 = 1,25 > 1 ✗.
+  solution_steps:
+  - 'Pomnóż obie strony przez 12: 4(2x − 1) − 3(x + 2) ≤ 12.'
+  - 'Usuń nawiasy: 8x − 4 − 3x − 6 ≤ 12.'
+  - 'Zredukuj: 5x − 10 ≤ 12, czyli 5x ≤ 22.'
+  - 'Podziel przez 5: x ≤ 22/5.'
+  - 'Zapisz przedział (−∞, 22/5⟩ i wskaż największą liczbę całkowitą: 4.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: zbiór rozwiązań
+      answer:
+        kind: INTERVAL
+        lo: -\infty
+        hi: \frac{22}{5}
+        hi_open: false
+    - name: największa liczba całkowita
+      answer:
+        kind: NUMERIC
+        value: 4.0
+  checks:
+  - kind: solve_inequality
+    expr: \frac{2\cdot x - 1}{3} - \frac{x + 2}{4} \leq 1
+    part: zbiór rozwiązań
+  skills:
+  - mnożenie przez wspólny mianownik
+  - nawiasy przy licznikach wielowyrazowych
+  - rozwiązania całkowite
+  verification:
+    checkability: REFERENCE_CALL
+    note: 2 parts matched
+- id: g-ex-05
+  slot: EXERCISE
+  ramp_index: 2
+  difficulty: 4
+  exercise_type: nierówność liniowa i równanie z parametrem
+  statement: |-
+    a) Rozwiąż nierówność \(3\left(2 - x\right) - 2\left(4 - x\right) \geq x - 2\) i zapisz zbiór wszystkich jej rozwiązań w postaci przedziału.
+    b) Wyznacz tę wartość parametru \(m\), dla której równanie \(\left(2m - 6\right)x = m - 3\) z niewiadomą \(x\) jest tożsamościowe (spełnia je każda liczba rzeczywista).
+  statement_latex: 3\cdot\left(2 - x\right) - 2\cdot\left(4 - x\right) \geq x - 2,\qquad \left(2\cdot
+    m - 6\right)\cdot x = m - 3
+  solution: |-
+    a) Usuwamy nawiasy: 6 − 3x − 8 + 2x ≥ x − 2, czyli −x − 2 ≥ x − 2.
+    Przenosimy wyrazy z x na lewo, liczby na prawo: −x − x ≥ −2 + 2, czyli −2x ≥ 0.
+    Dzielimy obie strony przez −2 — liczbę ujemną — więc odwracamy znak: x ≤ 0.
+    Zbiór rozwiązań: (−∞, 0⟩.
+    Sprawdzenie: dla x = −1 mamy L = 3·3 − 2·5 = −1, P = −3, więc −1 ≥ −3 ✓; dla x = 1: L = 3 − 6 = −3, P = −1, więc −3 ≥ −1 — fałsz ✓.
+
+    b) Równanie ma postać A·x = B, gdzie A = 2m − 6, B = m − 3. Równanie jest tożsamościowe dokładnie wtedy, gdy A = 0 i B = 0.
+    A = 0 daje 2m − 6 = 0, czyli m = 3.
+    Sprawdzamy wyraz wolny: dla m = 3 mamy B = 3 − 3 = 0, więc równanie przyjmuje postać 0·x = 0 — jest tożsamościowe.
+    Odpowiedź: m = 3. (Dla m ≠ 3 równanie jest oznaczone i ma jedno rozwiązanie x = (m − 3)/(2m − 6) = 1/2; nie ma takiego m, dla którego równanie byłoby sprzeczne.)
+  solution_steps:
+  - 'a) Usuń nawiasy: 6 − 3x − 8 + 2x ≥ x − 2.'
+  - 'a) Zredukuj: −x − 2 ≥ x − 2, następnie −2x ≥ 0.'
+  - 'a) Podziel przez −2 z odwróceniem znaku: x ≤ 0; zbiór rozwiązań (−∞, 0⟩.'
+  - 'b) Zapisz równanie w postaci A·x = B: A = 2m − 6, B = m − 3.'
+  - 'b) Rozwiąż A = 0: 2m − 6 = 0, stąd m = 3.'
+  - 'b) Sprawdź wyraz wolny dla m = 3: B = 0, więc 0·x = 0 — równanie tożsamościowe; odpowiedź m = 3.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: a) zbiór rozwiązań nierówności
+      answer:
+        kind: INTERVAL
+        lo: -\infty
+        hi: '0'
+        hi_open: false
+    - name: b) wartość parametru m
+      answer:
+        kind: NUMERIC
+        value: 3.0
+  checks:
+  - kind: solve_inequality
+    expr: 3\cdot\left(2 - x\right) - 2\cdot\left(4 - x\right) \geq x - 2
+    part: a) zbiór rozwiązań nierówności
+  - kind: solve_equation
+    expr: 2\cdot m - 6 = 0
+    var: m
+    part: b) wartość parametru m
+  skills:
+  - rozwiązywanie nierówności liniowej
+  - dyskusja równania z parametrem
+  - rozpoznawanie równania tożsamościowego
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [a) zbiór rozwiązań nierówności] SymPy solved it fresh: endpoints
+      matched ; [b) wartość parametru m] SymPy solved it fresh: 3.0 vs 3.0 (tol 1e-09)'
+- id: g-ex-t00
+  slot: EXERCISE
+  ramp_index: 6
+  difficulty: 3
+  exercise_type: nierówność liniowa z ułamkami + rozwiązania całkowite
+  statement: Rozwiąż nierówność \frac{3 - 2\cdot x}{4} - \frac{x - 1}{6} > \frac{1}{3}. Zbiór wszystkich
+    rozwiązań zapisz w postaci przedziału, a następnie podaj największą liczbę całkowitą, która tę nierówność
+    spełnia.
+  statement_latex: \frac{3 - 2\cdot x}{4} - \frac{x - 1}{6} > \frac{1}{3}
+  solution: |-
+    Wspólnym mianownikiem liczb 4, 6 i 3 jest 12. Mnożymy obie strony nierówności przez 12 — to liczba dodatnia, więc zwrot nierówności się nie zmienia (licznik wielowyrazowy bierzemy w nawias):
+    \frac{12\cdot\left(3 - 2\cdot x\right)}{4} - \frac{12\cdot\left(x - 1\right)}{6} > \frac{12}{3}, czyli 3\cdot\left(3 - 2\cdot x\right) - 2\cdot\left(x - 1\right) > 4.
+    Usuwamy nawiasy: 9 - 6\cdot x - 2\cdot x + 2 > 4, po redukcji: -8\cdot x + 11 > 4.
+    Przenosimy 11 na prawą stronę: -8\cdot x > -7.
+    Dzielimy obie strony przez -8, czyli przez liczbę ujemną, więc ODWRACAMY znak nierówności: x < \frac{7}{8}.
+    Zbiór wszystkich rozwiązań: \left(-\infty, \frac{7}{8}\right).
+    Największa liczba całkowita w tym przedziale: skoro \frac{7}{8} = 0{,}875, to szukaną liczbą jest \lfloor \frac{7}{8} \rfloor = 0 (liczba 1 już nie należy do przedziału).
+    Sprawdzenie: dla x = 0 lewa strona wynosi \frac{3}{4} + \frac{1}{6} = \frac{11}{12} > \frac{1}{3} ✓, a dla x = 1 mamy \frac{1}{4} - 0 = \frac{1}{4} < \frac{1}{3} ✗.
+  solution_steps:
+  - Wspólny mianownik 4, 6, 3 to 12; mnożymy obie strony przez 12 (liczba dodatnia — znak bez zmian),
+    pamiętając o nawiasach.
+  - Otrzymujemy 3\cdot\left(3 - 2\cdot x\right) - 2\cdot\left(x - 1\right) > 4.
+  - 'Usuwamy nawiasy i redukujemy wyrazy podobne: -8\cdot x + 11 > 4.'
+  - 'Porządkujemy: -8\cdot x > -7.'
+  - 'Dzielimy przez -8 i odwracamy znak nierówności: x < \frac{7}{8}.'
+  - Zapisujemy zbiór rozwiązań jako przedział \left(-\infty, \frac{7}{8}\right).
+  - Największa liczba całkowita spełniająca nierówność to \lfloor \frac{7}{8} \rfloor = 0.
+  - Sprawdzamy podstawieniem liczby z przedziału (x = 0) i liczby spoza niego (x = 1).
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: zbior_rozwiazan
+      answer:
+        kind: INTERVAL
+        lo: -\infty
+        hi: \frac{7}{8}
+    - name: najwieksza_calkowita
+      answer:
+        kind: NUMERIC
+        value: 0.0
+  checks:
+  - kind: solve_inequality
+    expr: \frac{3 - 2\cdot x}{4} - \frac{x - 1}{6} > \frac{1}{3}
+    part: zbior_rozwiazan
+  - kind: evaluate
+    expr: \left\lfloor \frac{7}{8} \right\rfloor
+    part: najwieksza_calkowita
+  skills:
+  - mnożenie nierówności przez wspólny mianownik
+  - dzielenie przez liczbę ujemną z odwróceniem znaku
+  - zapis przedziałowy zbioru rozwiązań
+  - wyznaczanie największej liczby całkowitej spełniającej nierówność
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [zbior_rozwiazan] SymPy solved it fresh: endpoints matched
+      ; [najwieksza_calkowita] SymPy solved it fresh: 0.0 vs 0.0 (tol 1e-09)'
+- id: g-ex-t01
+  slot: EXERCISE
+  ramp_index: 7
+  difficulty: 4
+  exercise_type: dyskusja równania liniowego z parametrem
+  statement: Dane jest równanie \left(m^{2} - 1\right)\cdot x = m + 1 z niewiadomą x i parametrem m. Wyznacz
+    wszystkie wartości parametru m, dla których to równanie jest sprzeczne, wszystkie wartości m, dla
+    których jest ono tożsamościowe, oraz zapisz rozwiązanie x tego równania dla pozostałych wartości m.
+  statement_latex: \left(m^{2} - 1\right)\cdot x = m + 1
+  solution: |-
+    Równanie ma już postać A\cdot x = B, gdzie A = m^{2} - 1 = \left(m - 1\right)\cdot\left(m + 1\right) oraz B = m + 1.
+    Szukamy najpierw tych m, dla których współczynnik przy x jest zerem: m^{2} - 1 = 0, czyli m = 1 lub m = -1. Tylko te wartości wymagają osobnego rozpatrzenia.
+    Dla m = 1: A = 0 oraz B = 1 + 1 = 2 \neq 0, więc równanie ma postać 0\cdot x = 2 — otrzymujemy fałszywą równość liczbową, równanie jest sprzeczne, zbiór rozwiązań to \varnothing.
+    Dla m = -1: A = 0 oraz B = -1 + 1 = 0, więc równanie ma postać 0\cdot x = 0 — równość prawdziwa dla każdej liczby x. Równanie jest tożsamościowe, zbiór rozwiązań to \mathbb{R} (uwaga: to NIE jest x = 0).
+    Dla pozostałych m, czyli dla m \neq 1 i m \neq -1, mamy A \neq 0, więc równanie jest oznaczone i
+    x = \frac{m + 1}{m^{2} - 1} = \frac{m + 1}{\left(m - 1\right)\cdot\left(m + 1\right)} = \frac{1}{m - 1}.
+    Odpowiedź: równanie jest sprzeczne dla m = 1, tożsamościowe dla m = -1, a dla m \neq \pm 1 ma dokładnie jedno rozwiązanie x = \frac{1}{m - 1}.
+  solution_steps:
+  - Zapisz równanie w postaci A\cdot x = B z A = m^{2} - 1 i B = m + 1.
+  - 'Rozwiąż A = 0: m^{2} - 1 = 0, stąd m = 1 lub m = -1 — te wartości rozpatrz osobno.'
+  - Dla m = 1 otrzymujesz 0\cdot x = 2 — równość fałszywa, równanie sprzeczne, zbiór rozwiązań \varnothing.
+  - Dla m = -1 otrzymujesz 0\cdot x = 0 — równość prawdziwa, równanie tożsamościowe, zbiór rozwiązań \mathbb{R}.
+  - 'Dla m \neq \pm 1 podziel obie strony przez m^{2} - 1 i skróć: x = \frac{m + 1}{\left(m - 1\right)\cdot\left(m
+    + 1\right)} = \frac{1}{m - 1}.'
+  - Zbierz pełną dyskusję przypadków w odpowiedzi.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: m_sprzeczne
+      answer:
+        kind: SET
+        members:
+        - '1'
+    - name: m_tozsamosciowe
+      answer:
+        kind: SET
+        members:
+        - '-1'
+    - name: rozwiazanie_dla_pozostalych_m
+      answer:
+        kind: SYMBOLIC
+        latex: \frac{1}{m - 1}
+  checks:
+  - kind: simplify
+    expr: \frac{m + 1}{m^{2} - 1}
+    var: m
+    part: rozwiazanie_dla_pozostalych_m
+  skills:
+  - doprowadzanie równania do postaci A(m)\cdot x = B(m)
+  - rozpoznawanie równania sprzecznego i tożsamościowego
+  - skracanie wyrażenia wymiernego
+  - dyskusja przypadków
+  verification:
+    checkability: REFERENCE_CALL
+    note: 'answer and reference disagree: part disagrees: ''\\frac{1}{m - 1}'' vs ''x=\\frac{1}{m-1}'''
+- id: g-cm-06
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: nierówność liniowa — analiza błędu
+  statement: Rozwiąż nierówność \(-4x + 5 > 21\) i zapisz zbiór wszystkich jej rozwiązań w postaci przedziału.
+    Pewien uczeń otrzymał odpowiedź \(\left(-4, +\infty\right)\). Wyjaśnij, na czym polega jego błąd,
+    i podaj poprawny zbiór rozwiązań.
+  statement_latex: -4\cdot x + 5 > 21
+  solution: |-
+    BŁĘDNE ROZUMOWANIE UCZNIA:
+    Uczeń poprawnie przeniósł 5 na prawą stronę: −4x > 16, a następnie podzielił obie strony przez −4, nie zmieniając znaku nierówności: x > −4. Stąd jego odpowiedź (−4, +∞).
+
+    DLACZEGO TO JEST BŁĄD:
+    Mnożenie lub dzielenie obu stron nierówności przez liczbę UJEMNĄ odwraca zwrot nierówności (a < b oraz c < 0 ⟺ ac > bc). Test liczbą próbną natychmiast wykrywa błąd: dla x = 0 (liczba z przedziału ucznia) mamy −4·0 + 5 = 5, a 5 > 21 jest fałszem.
+
+    POPRAWNE ROZWIĄZANIE:
+    −4x + 5 > 21
+    −4x > 16   | : (−4), znak nierówności się odwraca
+    x < −4
+    Zbiór rozwiązań: (−∞, −4).
+    Sprawdzenie: dla x = −5 mamy −4·(−5) + 5 = 25 > 21 ✓.
+  solution_steps:
+  - 'Przenieś 5 na prawą stronę: −4x > 16.'
+  - Zauważ, że dzielisz przez liczbę ujemną −4, więc znak nierówności trzeba odwrócić.
+  - Otrzymaj x < −4 (a nie x > −4).
+  - 'Zapisz zbiór rozwiązań: (−∞, −4).'
+  - Zweryfikuj podstawieniem x = −5 (spełnia) i x = 0 (nie spełnia).
+  answer:
+    kind: INTERVAL
+    lo: -\infty
+    hi: '-4'
+  checks:
+  - kind: solve_inequality
+    expr: -4\cdot x + 5 > 21
+  skills:
+  - dzielenie nierówności przez liczbę ujemną
+  - test liczbą próbną
+  - zapis przedziałowy
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: endpoints matched'
+- id: g-cm-07
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: klasyfikacja równania — analiza błędu
+  statement: 'Rozwiąż równanie \(3\left(2x - 5\right) = 6x - 15\). Uczeń doprowadził je do postaci \(0\cdot
+    x = 0\) i napisał: „zatem \(x = 0\), równanie ma jedno rozwiązanie”. Wyjaśnij, na czym polega błąd,
+    i podaj poprawny zbiór rozwiązań tego równania.'
+  statement_latex: 3\cdot\left(2\cdot x - 5\right) = 6\cdot x - 15
+  solution: |-
+    BŁĘDNE ROZUMOWANIE UCZNIA:
+    Po usunięciu nawiasu: 6x − 15 = 6x − 15, więc 6x − 6x = −15 + 15, czyli 0·x = 0. Uczeń potraktował ten zapis jak zwykłe równanie i „odczytał” z niego x = 0, podając zbiór rozwiązań {0}.
+
+    DLACZEGO TO JEST BŁĄD:
+    Równość 0·x = 0 jest prawdziwa dla KAŻDEJ liczby rzeczywistej x, bo zero pomnożone przez cokolwiek daje zero. Nie jest to warunek wyróżniający liczbę 0 — jest to informacja, że równanie nie nakłada na x żadnego warunku.
+
+    POPRAWNE ROZWIĄZANIE:
+    3(2x − 5) = 6x − 15
+    6x − 15 = 6x − 15  — obie strony to to samo wyrażenie
+    0·x = 0 — równość prawdziwa, niezależna od x.
+    Równanie jest tożsamościowe, zbiór rozwiązań to R.
+    Sprawdzenie: dla x = 1 mamy L = 3·(−3) = −9, P = 6 − 15 = −9 ✓; dla x = 4: L = 3·3 = 9, P = 24 − 15 = 9 ✓ — nie tylko zero spełnia równanie.
+  solution_steps:
+  - 'Usuń nawias: 6x − 15 = 6x − 15.'
+  - 'Przenieś wyrazy: 0·x = 0.'
+  - Zauważ, że 0·x = 0 jest prawdziwe dla każdego x, a nie tylko dla x = 0.
+  - 'Sformułuj wniosek: równanie tożsamościowe, zbiór rozwiązań R.'
+  - 'Potwierdź przykładami: x = 1 i x = 4 spełniają równanie.'
+  answer:
+    kind: SYMBOLIC
+    latex: \mathbb{R}
+  skills:
+  - interpretacja zapisu 0·x = 0
+  - rozpoznawanie równania tożsamościowego
+  verification:
+    checkability: REFERENCE_CALL
+    note: '''\\mathbb{R}'' vs ''\\mathbb{R}'''
+- id: g-cm-08
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: klasyfikacja równania — analiza błędu
+  statement: 'Rozwiąż równanie \(4\left(x + 3\right) - 2x = 2\left(x + 7\right)\). Uczeń doszedł do zapisu
+    \(0\cdot x = 2\) i napisał: „stąd \(x = \frac{2}{0} = 0\)”. Wyjaśnij, na czym polega błąd, i podaj
+    poprawny zbiór rozwiązań tego równania.'
+  statement_latex: 4\cdot\left(x + 3\right) - 2\cdot x = 2\cdot\left(x + 7\right)
+  solution: |-
+    BŁĘDNE ROZUMOWANIE UCZNIA:
+    Po uporządkowaniu: 4x + 12 − 2x = 2x + 14, czyli 2x + 12 = 2x + 14, a stąd 0·x = 2. Uczeń „podzielił” 2 przez 0 i uznał, że x = 0, podając rozwiązanie {0}.
+
+    DLACZEGO TO JEST BŁĄD:
+    Przez zero nie wolno dzielić — zapis 2 : 0 nie ma sensu. Ponadto 0·x = 0 dla każdej liczby x, więc równość 0·x = 2 jest FAŁSZYWA dla każdego x. Podstawienie x = 0 do wyjściowego równania daje L = 4·3 − 0 = 12, P = 2·7 = 14, a 12 ≠ 14 — liczba 0 nie jest rozwiązaniem.
+
+    POPRAWNE ROZWIĄZANIE:
+    4x + 12 − 2x = 2x + 14
+    2x + 12 = 2x + 14
+    2x − 2x = 14 − 12
+    0·x = 2 — równość fałszywa dla każdego x.
+    Równanie jest sprzeczne, nie ma rozwiązań; zbiór rozwiązań to ∅.
+    Interpretacja: wyrażenia 2x + 12 i 2x + 14 różnią się o stałą 2, więc nigdy nie są równe.
+  solution_steps:
+  - 'Usuń nawiasy i zredukuj: 2x + 12 = 2x + 14.'
+  - 'Przenieś wyrazy: 0·x = 2.'
+  - Zauważ, że dzielenie przez zero jest niedozwolone, a 0·x = 0 dla każdego x.
+  - 'Wniosek: równość 0·x = 2 jest fałszywa dla każdego x — równanie sprzeczne.'
+  - 'Zapisz zbiór rozwiązań: ∅ (sprawdzenie: x = 0 nie spełnia równania).'
+  answer:
+    kind: SYMBOLIC
+    latex: \varnothing
+  skills:
+  - interpretacja zapisu 0·x = c
+  - rozpoznawanie równania sprzecznego
+  - zakaz dzielenia przez zero
+  verification:
+    checkability: REFERENCE_CALL
+    note: 'could not compare: kind mismatch: answer=SYMBOLIC reference=SET'
+- id: g-cm-09
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: klasyfikacja równań — analiza błędu
+  statement: |-
+    Dane są dwa równania:
+    I. \(2\left(3x + 1\right) - 6x = 2\)
+    II. \(2\left(3x + 1\right) - 6x = 5\)
+    Uczeń stwierdził: „w obu równaniach niewiadoma się skraca, więc oba są tożsamościowe i każde z nich spełnia każda liczba rzeczywista”. Wyjaśnij, na czym polega błąd, i podaj zbiór rozwiązań każdego z tych równań.
+  statement_latex: 2\cdot\left(3\cdot x + 1\right) - 6\cdot x = 2,\qquad 2\cdot\left(3\cdot x + 1\right)
+    - 6\cdot x = 5
+  solution: |-
+    BŁĘDNE ROZUMOWANIE UCZNIA:
+    W obu równaniach lewa strona to 6x + 2 − 6x, więc x znika. Uczeń uznał, że samo zniknięcie niewiadomej oznacza tożsamość i w obu przypadkach zapisał zbiór rozwiązań R.
+
+    DLACZEGO TO JEST BŁĄD:
+    Zniknięcie x to dopiero połowa informacji. Trzeba jeszcze spojrzeć na pozostałą równość liczbową: jeśli jest prawdziwa — równanie jest tożsamościowe (R); jeśli fałszywa — równanie jest sprzeczne (∅).
+
+    POPRAWNE ROZWIĄZANIE:
+    I. 6x + 2 − 6x = 2, czyli 2 = 2, a więc 0·x = 0 — równość prawdziwa. Równanie I jest tożsamościowe, zbiór rozwiązań: R.
+    II. 6x + 2 − 6x = 5, czyli 2 = 5, a więc 0·x = 3 — równość fałszywa. Równanie II jest sprzeczne, zbiór rozwiązań: ∅.
+    Sprawdzenie dla II: dla x = 10 lewa strona wynosi 62 − 60 = 2 ≠ 5 — istotnie żadna liczba nie spełnia tego równania.
+  solution_steps:
+  - 'Uprość lewą stronę obu równań: 6x + 2 − 6x = 2 (nie zależy od x).'
+  - 'Równanie I: zostaje 2 = 2, czyli 0·x = 0 — równość prawdziwa.'
+  - 'Wniosek dla I: równanie tożsamościowe, zbiór rozwiązań R.'
+  - 'Równanie II: zostaje 2 = 5, czyli 0·x = 3 — równość fałszywa.'
+  - 'Wniosek dla II: równanie sprzeczne, zbiór rozwiązań ∅.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: zbiór rozwiązań równania I
+      answer:
+        kind: SYMBOLIC
+        latex: \mathbb{R}
+    - name: zbiór rozwiązań równania II
+      answer:
+        kind: SYMBOLIC
+        latex: \varnothing
+  skills:
+  - odróżnianie równania sprzecznego od tożsamościowego
+  - analiza pozostałej równości liczbowej
+  verification:
+    checkability: REFERENCE_CALL
+    note: 'could not compare: part disagrees: kind mismatch: answer=SYMBOLIC reference=SET'
+- id: g-cm-10
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: zapis zbioru rozwiązań — analiza błędu
+  statement: Rozwiąż równanie \(6x + 5 = 3\left(2x + 1\right) + 4\). Uczeń zapisał odpowiedź w postaci
+    „\(x = \varnothing\), czyli \(x = 0\)”. Wyjaśnij, dlaczego taki zapis jest niepoprawny, i podaj poprawnie
+    sformułowaną odpowiedź (zbiór rozwiązań).
+  statement_latex: 6\cdot x + 5 = 3\cdot\left(2\cdot x + 1\right) + 4
+  solution: |-
+    BŁĘDNE ROZUMOWANIE UCZNIA:
+    Uczeń poprawnie uporządkował równanie: 6x + 5 = 6x + 3 + 4, czyli 6x + 5 = 6x + 7, a stąd 0·x = 2. Zauważył, że rozwiązań nie ma, ale odpowiedź zapisał jako „x = ∅”, a następnie dopisał „czyli x = 0”.
+
+    DLACZEGO TO JEST BŁĄD:
+    Symbol ∅ oznacza ZBIÓR (zbiór pusty), a nie wartość niewiadomej — zapis „x = ∅” nie ma sensu, podobnie jak nie ma sensu utożsamianie braku rozwiązań z rozwiązaniem x = 0. Liczba 0 nie spełnia równania: L = 5, P = 3 + 4 = 7, a 5 ≠ 7.
+
+    POPRAWNE ROZWIĄZANIE I ZAPIS:
+    6x + 5 = 6x + 7
+    6x − 6x = 7 − 5
+    0·x = 2 — równość fałszywa dla każdego x.
+    Odpowiedź: równanie jest sprzeczne, nie ma rozwiązań; zbiór rozwiązań tego równania to ∅.
+  solution_steps:
+  - 'Usuń nawias po prawej stronie: 6x + 5 = 6x + 7.'
+  - 'Przenieś wyrazy: 0·x = 2 — równość fałszywa.'
+  - 'Stwierdź: równanie jest sprzeczne.'
+  - 'Zapisz odpowiedź poprawnie: zbiór rozwiązań = ∅ (nie „x = ∅” ani „x = 0”).'
+  - 'Uzasadnij, że x = 0 nie spełnia równania: L = 5, P = 7.'
+  answer:
+    kind: SYMBOLIC
+    latex: \varnothing
+  skills:
+  - poprawny zapis zbioru pustego
+  - rozpoznawanie równania sprzecznego
+  verification:
+    checkability: REFERENCE_CALL
+    note: 'could not compare: kind mismatch: answer=SYMBOLIC reference=SET'
+- id: g-ch-t02
+  slot: CHALLENGE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: modelowanie nierównością liniową (liczby kolejne)
+  statement: 'Suma trzech kolejnych liczb nieparzystych dodatnich jest większa od 100. Wyznacz najmniejszą
+    taką trójkę liczb: podaj jej najmniejszy wyraz oraz sumę wszystkich trzech liczb tej trójki.'
+  statement_latex: x + \left(x + 2\right) + \left(x + 4\right) > 100
+  solution: |-
+    Oznaczmy przez x najmniejszą z trzech kolejnych liczb nieparzystych. Kolejne liczby nieparzyste różnią się o 2, więc te trzy liczby to x, x + 2 oraz x + 4, przy czym x jest liczbą nieparzystą.
+    Suma tych liczb: x + \left(x + 2\right) + \left(x + 4\right) = 3\cdot x + 6.
+    Warunek zadania daje nierówność 3\cdot x + 6 > 100, czyli 3\cdot x > 94, a po podzieleniu przez 3 (liczba dodatnia, znak bez zmian): x > \frac{94}{3} = 31\tfrac{1}{3}.
+    Zbiorem rozwiązań tej nierówności jest przedział \left(\frac{94}{3}, +\infty\right), ale x ma być liczbą nieparzystą. Najmniejsza liczba całkowita większa od \frac{94}{3} to 32, a ta jest parzysta, więc najmniejsza dopuszczalna wartość to x = 33.
+    Wtedy trójka to 33, 35, 37, a jej suma wynosi 3\cdot 33 + 6 = 105 > 100 ✓.
+    Sprawdzenie, że wcześniejsza trójka nie spełnia warunku: dla x = 31 suma to 3\cdot 31 + 6 = 99, a 99 < 100 ✗.
+    Odpowiedź: najmniejszy wyraz szukanej trójki to 33, a suma jej wyrazów wynosi 105.
+  solution_steps:
+  - 'Wprowadź niewiadomą: niech x będzie najmniejszą z trzech kolejnych liczb nieparzystych; pozostałe
+    to x + 2 i x + 4.'
+  - 'Zbuduj wyrażenie na sumę: x + \left(x + 2\right) + \left(x + 4\right) = 3\cdot x + 6.'
+  - Zapisz warunek zadania jako nierówność 3\cdot x + 6 > 100.
+  - 'Rozwiąż nierówność: 3\cdot x > 94, x > \frac{94}{3}.'
+  - 'Wybierz najmniejszą liczbę NIEPARZYSTĄ większą od \frac{94}{3}: liczba 32 jest parzysta, więc x =
+    33.'
+  - 'Oblicz sumę: 3\cdot 33 + 6 = 105 i sprawdź, że dla x = 31 suma 99 nie spełnia warunku.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: najmniejszy_wyraz
+      answer:
+        kind: NUMERIC
+        value: 33.0
+    - name: suma_trojki
+      answer:
+        kind: NUMERIC
+        value: 105.0
+  checks:
+  - kind: evaluate
+    expr: \left\lceil \frac{94}{3} \right\rceil + 1
+    part: najmniejszy_wyraz
+  - kind: evaluate
+    expr: 3\cdot 33 + 6
+    part: suma_trojki
+  stated_model:
+    variable: x
+    objective_latex: 3\cdot x + 6
+    domain_lo: \frac{94}{3}
+    goal: min
+    constraint_used: 3\cdot x + 6 > 100,\ x \text{ nieparzysta dodatnia}
+  skills:
+  - wprowadzenie niewiadomej
+  - zapisanie sumy trzech kolejnych liczb nieparzystych
+  - rozwiązanie nierówności liniowej
+  - wybór rozwiązania spełniającego warunek nieparzystości
+  verification:
+    checkability: STATED_MODEL
+    note: 'stage 1 inconclusive: no interior critical point in (\frac{94}{3}, None)'
+- id: g-ch-t03
+  slot: CHALLENGE
+  ramp_index: 1
+  difficulty: 4
+  exercise_type: modelowanie geometryczne nierównością liniową z warunkiem istnienia trójkąta
+  statement: Trójkąt równoramienny ma podstawę o długości 10 cm, a jego obwód jest nie większy niż 34
+    cm. a) Wyznacz zbiór wszystkich możliwych długości ramienia tego trójkąta (w centymetrach) i zapisz
+    go w postaci przedziału. b) Podaj najmniejszą całkowitą długość ramienia (w centymetrach), przy której
+    taki trójkąt istnieje.
+  statement_latex: 2\cdot x + 10 \le 34 \quad \wedge \quad 2\cdot x > 10
+  solution: |-
+    Oznaczmy przez x długość ramienia trójkąta (w centymetrach); trójkąt jest równoramienny, więc oba ramiona mają długość x, a podstawa 10 cm.
+    Warunek na obwód: 2\cdot x + 10 \le 34, czyli 2\cdot x \le 24, stąd x \le 12.
+    Sam ten warunek nie wystarcza — trójkąt musi istnieć. Warunek trójkąta dla boków x, x, 10 sprowadza się do nierówności x + x > 10, czyli 2\cdot x > 10, stąd x > 5 (pozostałe dwie nierówności, x + 10 > x, są spełnione zawsze).
+    Bierzemy część wspólną: x > 5 oraz x \le 12, czyli x \in \left(5, 12\right\rangle.
+    b) Kraniec 5 NIE należy do zbioru rozwiązań (nierówność ostra: dla x = 5 odcinki 5, 5, 10 nie tworzą trójkąta, bo 5 + 5 = 10). Najmniejsza liczba całkowita większa od 5 to \lfloor 5 \rfloor + 1 = 6.
+    Sprawdzenie: dla x = 6 obwód wynosi 2\cdot 6 + 10 = 22 \le 34 ✓ i 6 + 6 = 12 > 10 ✓; dla x = 12 obwód wynosi 34 \le 34 ✓.
+    Odpowiedź: a) \left(5, 12\right\rangle; b) 6 cm.
+  solution_steps:
+  - Oznacz przez x długość ramienia; boki trójkąta to x, x oraz 10.
+  - 'Zapisz warunek na obwód: 2\cdot x + 10 \le 34, stąd x \le 12.'
+  - 'Zapisz warunek istnienia trójkąta: 2\cdot x > 10, stąd x > 5.'
+  - 'Wyznacz część wspólną obu warunków: x \in \left(5, 12\right\rangle.'
+  - Zauważ, że kraniec 5 jest wykluczony (nierówność ostra), więc najmniejsza całkowita długość ramienia
+    to \lfloor 5 \rfloor + 1 = 6 cm.
+  - Sprawdź odpowiedź, podstawiając x = 6 oraz x = 12.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: zbior_dlugosci_ramienia
+      answer:
+        kind: INTERVAL
+        lo: '5'
+        hi: '12'
+        hi_open: false
+    - name: najmniejsza_calkowita_dlugosc_ramienia
+      answer:
+        kind: NUMERIC
+        value: 6.0
+  checks:
+  - kind: evaluate
+    expr: \left\lfloor 5 \right\rfloor + 1
+    part: najmniejsza_calkowita_dlugosc_ramienia
+  stated_model:
+    variable: x
+    objective_latex: 2\cdot x + 10
+    domain_lo: '5'
+    domain_hi: '12'
+    domain_hi_open: false
+    goal: value
+    constraint_used: 2\cdot x + 10 \le 34 \ \wedge\ 2\cdot x > 10
+  skills:
+  - wprowadzenie niewiadomej w kontekście geometrycznym
+  - zastosowanie warunku istnienia trójkąta
+  - rozwiązanie nierówności liniowej
+  - część wspólna przedziałów
+  - najmniejsze rozwiązanie całkowite przy krańcu wykluczonym
+  verification:
+    checkability: STATED_MODEL
+    note: 'stage 1 inconclusive: kind mismatch: answer=SYMBOLIC reference=MULTIPART'
+- id: g-ch-t04
+  slot: CHALLENGE
+  ramp_index: 2
+  difficulty: 5
+  exercise_type: 'modelowanie bryłą: wzór z dziedziną + nierówność liniowa'
+  statement: Ze sztywnego drutu o długości 84 cm wykonano model prostopadłościanu (drut tworzy wszystkie
+    krawędzie i został zużyty w całości). Podstawą tego prostopadłościanu jest prostokąt, w którym jeden
+    bok jest dwa razy dłuższy od drugiego. a) Wyznacz wzór opisujący wysokość tego prostopadłościanu w
+    zależności od długości krótszego boku podstawy oraz podaj dziedzinę tej zależności (zbiór tych długości,
+    dla których prostopadłościan istnieje). b) Wyznacz zbiór wszystkich długości krótszego boku podstawy,
+    dla których wysokość prostopadłościanu jest nie mniejsza od dłuższego boku podstawy, i podaj największą
+    możliwą długość krótszego boku podstawy.
+  statement_latex: 4\cdot\left(x + 2\cdot x + h\right) = 84
+  solution: |-
+    Oznaczmy przez x (w centymetrach) długość krótszego boku podstawy. Wtedy dłuższy bok podstawy ma długość 2\cdot x, a wysokość oznaczmy przez h.
+    Prostopadłościan ma 12 krawędzi: po 4 krawędzie każdej z trzech długości, więc suma ich długości wynosi 4\cdot\left(x + 2\cdot x + h\right). Cały drut został zużyty, zatem
+    4\cdot\left(x + 2\cdot x + h\right) = 84, czyli 3\cdot x + h = \frac{84}{4} = 21.
+    Stąd h = 21 - 3\cdot x.
+    Dziedzina: wszystkie wymiary muszą być dodatnie, więc x > 0 oraz h > 0, czyli 21 - 3\cdot x > 0, stąd x < 7. Zatem x \in \left(0, 7\right).
+    b) Warunek „wysokość nie mniejsza od dłuższego boku podstawy”: h \ge 2\cdot x, czyli
+    21 - 3\cdot x \ge 2\cdot x, stąd 21 \ge 5\cdot x, czyli x \le \frac{21}{5} = 4{,}2.
+    Uwzględniamy dziedzinę: \frac{21}{5} < 7, więc cały otrzymany zbiór mieści się w dziedzinie i szukany zbiór to x \in \left(0, \frac{21}{5}\right\rangle.
+    Największa możliwa długość krótszego boku podstawy to x = \frac{21}{5} = 4{,}2 cm.
+    Sprawdzenie: dla x = 4{,}2 mamy 2\cdot x = 8{,}4 oraz h = 21 - 3\cdot 4{,}2 = 8{,}4, więc h = 2\cdot x ✓, a suma krawędzi wynosi 4\cdot\left(4{,}2 + 8{,}4 + 8{,}4\right) = 4\cdot 21 = 84 ✓.
+    Odpowiedź: a) h = 21 - 3\cdot x dla x \in \left(0, 7\right); b) x \in \left(0, \frac{21}{5}\right\rangle, największa długość krótszego boku podstawy to 4{,}2 cm.
+  solution_steps:
+  - Oznacz przez x długość krótszego boku podstawy; dłuższy bok to 2\cdot x, wysokość to h.
+  - 'Zapisz sumę długości 12 krawędzi: 4\cdot\left(x + 2\cdot x + h\right) = 84, czyli 3\cdot x + h =
+    21.'
+  - 'Wyznacz wzór na wysokość: h = 21 - 3\cdot x.'
+  - 'Wyznacz dziedzinę z warunków x > 0 i h > 0: 21 - 3\cdot x > 0, czyli x < 7, więc x \in \left(0, 7\right).'
+  - Zapisz warunek h \ge 2\cdot x jako nierówność 21 - 3\cdot x \ge 2\cdot x.
+  - 'Rozwiąż ją: 21 \ge 5\cdot x, czyli x \le \frac{21}{5}.'
+  - 'Sprawdź zgodność z dziedziną: \frac{21}{5} < 7, więc zbiór rozwiązań to \left(0, \frac{21}{5}\right\rangle.'
+  - 'Odczytaj największą wartość: x = \frac{21}{5} = 4{,}2 cm; sprawdź wynik, obliczając wymiary i sumę
+    krawędzi.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wzor_wysokosci
+      answer:
+        kind: SYMBOLIC
+        latex: 21 - 3\cdot x
+    - name: dziedzina
+      answer:
+        kind: INTERVAL
+        lo: '0'
+        hi: '7'
+    - name: zbior_x_z_warunkiem
+      answer:
+        kind: INTERVAL
+        lo: '0'
+        hi: \frac{21}{5}
+        hi_open: false
+    - name: najwieksza_dlugosc_krotszego_boku
+      answer:
+        kind: NUMERIC
+        value: 4.2
+  checks:
+  - kind: simplify
+    expr: \frac{84}{4} - 3\cdot x
+    part: wzor_wysokosci
+  - kind: evaluate
+    expr: \frac{21}{5}
+    part: najwieksza_dlugosc_krotszego_boku
+  stated_model:
+    variable: x
+    objective_latex: h = 21 - 3\cdot x
+    domain_lo: '0'
+    domain_hi: '7'
+    constraint_used: 4\cdot\left(x + 2\cdot x + h\right) = 84,\ x > 0,\ h > 0,\ h \ge 2\cdot x
+  skills:
+  - obliczanie sumy długości krawędzi prostopadłościanu
+  - wyznaczanie wzoru zależności liniowej
+  - dziedzina wymuszona dodatniością wymiarów
+  - rozwiązanie nierówności liniowej
+  - sprawdzenie zgodności wyniku z dziedziną
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''x'': ''h = 21
+      - 3\\cdot x'') — human review'

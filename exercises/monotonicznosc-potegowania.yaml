@@ -1,0 +1,857 @@
+section: monotonicznosc-potegowania
+name: Monotoniczność potęgowania
+scope: 'How a^x orders values of x: the direction is kept for base > 1 and reversed for base in (0, 1);
+  comparing and estimating powers.'
+requirements:
+- I.5
+counts:
+  total: 16
+  REFERENCE_CALL: 9
+  DETERMINISTIC: 3
+  NOT_MACHINE_CHECKABLE: 4
+exercises:
+- id: g-th-00
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: porownywanie_poteg_o_tej_samej_podstawie
+  statement: Porównaj liczby w każdej z par. W każdym podpunkcie wpisz między liczbami znak < albo >.
+    (a) 7^{-3} i 7^{-2}. (b) \left(\frac{2}{5}\right)^{4} i \left(\frac{2}{5}\right)^{7}.
+  statement_latex: \text{(a) } 7^{-3} \;\square\; 7^{-2}, \qquad \text{(b) } \left(\frac{2}{5}\right)^{4}
+    \;\square\; \left(\frac{2}{5}\right)^{7}
+  solution: |-
+    (a) Podstawą jest liczba 7, a 7 > 1, więc potęgowanie zachowuje porządek wykładników. Na osi liczbowej -3 < -2, zatem 7^{-3} < 7^{-2}.
+    (b) Podstawą jest liczba \frac{2}{5}, a 0 < \frac{2}{5} < 1, więc potęgowanie odwraca porządek wykładników. Ponieważ 4 < 7, otrzymujemy \left(\frac{2}{5}\right)^{4} > \left(\frac{2}{5}\right)^{7}.
+    Sprawdzenie w (b): \left(\frac{2}{5}\right)^{4} = \frac{16}{625}, a \left(\frac{2}{5}\right)^{7} = \frac{128}{78125} = \frac{16}{9765{,}625}\text{-tej części} — druga liczba jest wyraźnie mniejsza.
+  solution_steps:
+  - 'W podpunkcie (a) sprawdź podstawę: 7 > 1, więc potęgowanie jest rosnące.'
+  - 'Porównaj wykładniki: -3 < -2, więc 7^{-3} < 7^{-2}.'
+  - 'W podpunkcie (b) sprawdź podstawę: 0 < \frac{2}{5} < 1, więc potęgowanie jest malejące.'
+  - 'Porównaj wykładniki: 4 < 7, więc znak trzeba odwrócić: \left(\frac{2}{5}\right)^{4} > \left(\frac{2}{5}\right)^{7}.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: (a)
+      answer:
+        kind: SYMBOLIC
+        latex: 7^{-3} < 7^{-2}
+    - name: (b)
+      answer:
+        kind: SYMBOLIC
+        latex: \left(\frac{2}{5}\right)^{4} > \left(\frac{2}{5}\right)^{7}
+  skills:
+  - monotoniczność potęgowania względem wykładnika
+  - rozpoznanie położenia podstawy względem 1
+  verification:
+    checkability: REFERENCE_CALL
+    note: 2 parts matched
+- id: g-th-01
+  slot: THEORY_SUPPORT
+  ramp_index: 1
+  difficulty: 1
+  exercise_type: porownanie_potegi_z_jedynka
+  statement: 'Dla każdej z podanych liczb rozstrzygnij (odpowiedź TAK albo NIE), czy jest ona większa
+    od 1: (a) \left(\frac{3}{4}\right)^{-6}, (b) \left(0{,}9\right)^{5}, (c) 2^{-0{,}3}.'
+  statement_latex: \left(\frac{3}{4}\right)^{-6} > 1?\qquad \left(0{,}9\right)^{5} > 1?\qquad 2^{-0{,}3}
+    > 1?
+  solution: |-
+    Punktem odniesienia jest a^{0} = 1.
+    (a) Podstawa \frac{3}{4} należy do przedziału (0,1), a wykładnik -6 jest ujemny. Dla podstawy z (0,1) potęga jest większa od 1 dokładnie wtedy, gdy wykładnik jest ujemny, więc \left(\frac{3}{4}\right)^{-6} > 1 — odpowiedź TAK. (Rachunkiem: \left(\frac{3}{4}\right)^{-6} = \left(\frac{4}{3}\right)^{6} > 1.)
+    (b) Podstawa 0{,}9 należy do (0,1), a wykładnik 5 jest dodatni, więc potęga jest mniejsza od 1 — odpowiedź NIE.
+    (c) Podstawa 2 > 1, a wykładnik -0{,}3 jest ujemny, więc 2^{-0{,}3} < 2^{0} = 1 — odpowiedź NIE.
+  solution_steps:
+  - Zauważ, że w każdym podpunkcie porównujesz potęgę z a^{0} = 1.
+  - '(a) podstawa z (0,1) i wykładnik ujemny → potęga większa od 1: TAK.'
+  - '(b) podstawa z (0,1) i wykładnik dodatni → potęga mniejsza od 1: NIE.'
+  - '(c) podstawa większa od 1 i wykładnik ujemny → potęga mniejsza od 1: NIE.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: (a)
+      answer:
+        kind: BOOLEAN
+        truth: true
+    - name: (b)
+      answer:
+        kind: BOOLEAN
+        truth: false
+    - name: (c)
+      answer:
+        kind: BOOLEAN
+        truth: false
+  skills:
+  - porównywanie potęgi z liczbą 1
+  - znak wykładnika a położenie podstawy
+  verification:
+    checkability: REFERENCE_CALL
+    note: 3 parts matched
+- id: g-th-02
+  slot: THEORY_SUPPORT
+  ramp_index: 2
+  difficulty: 2
+  exercise_type: prosta_nierownosc_wykladnicza
+  statement: Rozwiąż nierówność 5^{x-2} < 5^{6}. Zbiór rozwiązań zapisz w postaci przedziału.
+  statement_latex: 5^{x-2} < 5^{6}
+  solution: |-
+    Podstawą obu potęg jest liczba 5, a 5 > 1, więc potęgowanie o tej podstawie jest rosnące i przy opuszczaniu potęgowania zachowujemy znak nierówności:
+    x - 2 < 6
+    x < 8.
+    Zbiór rozwiązań: x \in \left(-\infty, 8\right).
+    Sprawdzenie: dla x = 0 mamy 5^{-2} = \frac{1}{25} < 5^{6} — nierówność jest spełniona.
+  solution_steps:
+  - Zauważ, że obie strony mają tę samą podstawę 5 i że 5 > 1.
+  - 'Opuść potęgowanie bez zmiany znaku nierówności: x - 2 < 6.'
+  - 'Rozwiąż nierówność liniową: x < 8.'
+  - 'Zapisz zbiór rozwiązań: x \in \left(-\infty, 8\right).'
+  answer:
+    kind: INTERVAL
+    hi: '8'
+  checks:
+  - kind: solve_inequality
+    expr: x - 2 < 6
+  skills:
+  - rozwiązywanie prostej nierówności wykładniczej
+  - zapis zbioru rozwiązań jako przedziału
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: endpoints matched'
+- id: g-ex-03
+  slot: EXERCISE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: sprowadzanie_do_wspolnej_podstawy
+  statement: Dane są liczby 27^{10} oraz 9^{16}. Zapisz każdą z nich w postaci potęgi o podstawie 3 (podaj
+    otrzymane wykładniki), a następnie rozstrzygnij, która z tych liczb jest większa.
+  statement_latex: 27^{10} = 3^{\square}, \qquad 9^{16} = 3^{\square}
+  solution: |-
+    Obie podstawy są potęgami trójki: 27 = 3^{3} oraz 9 = 3^{2}. Stąd
+    27^{10} = \left(3^{3}\right)^{10} = 3^{3 \cdot 10} = 3^{30},
+    9^{16} = \left(3^{2}\right)^{16} = 3^{2 \cdot 16} = 3^{32}.
+    Wspólna podstawa 3 jest większa od 1, więc potęgowanie zachowuje porządek wykładników. Ponieważ 30 < 32, mamy 3^{30} < 3^{32}, czyli 27^{10} < 9^{16}.
+    Odpowiedź: większa jest liczba 9^{16}.
+  solution_steps:
+  - 'Zapisz podstawy jako potęgi trójki: 27 = 3^{3}, 9 = 3^{2}.'
+  - 'Zastosuj wzór \left(a^{m}\right)^{n} = a^{m \cdot n}: 27^{10} = 3^{30}, 9^{16} = 3^{32}.'
+  - Zauważ, że podstawa 3 > 1, więc potęgowanie jest rosnące.
+  - 'Porównaj wykładniki: 30 < 32, zatem 27^{10} < 9^{16} — większa jest liczba 9^{16}.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wykladnik liczby 27^{10} przy podstawie 3
+      answer:
+        kind: NUMERIC
+        value: 30.0
+    - name: wykladnik liczby 9^{16} przy podstawie 3
+      answer:
+        kind: NUMERIC
+        value: 32.0
+    - name: wieksza liczba
+      answer:
+        kind: SYMBOLIC
+        latex: 9^{16}
+  checks:
+  - kind: evaluate
+    expr: 3 \cdot 10
+    part: wykladnik liczby 27^{10} przy podstawie 3
+  - kind: evaluate
+    expr: 2 \cdot 16
+    part: wykladnik liczby 9^{16} przy podstawie 3
+  skills:
+  - sprowadzanie do wspólnej podstawy
+  - monotoniczność potęgowania dla podstawy większej od 1
+  verification:
+    checkability: REFERENCE_CALL
+    note: '3 parts matched · det: [wykladnik liczby 27^{10} przy podstawie 3] SymPy solved it fresh: 30.0
+      vs 30.0 (tol 1e-09) ; [wykladnik liczby 9^{16} przy podstawie 3] SymPy solved it fresh: 32.0 vs
+      32.0 (tol 1e-09)'
+- id: g-ex-04
+  slot: EXERCISE
+  ramp_index: 1
+  difficulty: 3
+  exercise_type: porzadkowanie_liczb_zapisanych_jako_potegi
+  statement: 'Dane są liczby: a = \left(\frac{1}{2}\right)^{-\frac{3}{2}}, \; b = 4^{\frac{3}{5}}, \;
+    c = \left(\frac{1}{8}\right)^{\frac{1}{5}}, \; d = 8^{\frac{3}{10}}. Uporządkuj te liczby rosnąco,
+    podając kolejność ich oznaczeń.'
+  statement_latex: a = \left(\frac{1}{2}\right)^{-\frac{3}{2}}, \quad b = 4^{\frac{3}{5}}, \quad c = \left(\frac{1}{8}\right)^{\frac{1}{5}},
+    \quad d = 8^{\frac{3}{10}}
+  solution: |-
+    Sprowadzamy wszystkie liczby do podstawy 2, korzystając z \left(\frac{1}{a}\right)^{x} = a^{-x} oraz \left(a^{m}\right)^{n} = a^{m \cdot n}:
+    a = \left(2^{-1}\right)^{-\frac{3}{2}} = 2^{\frac{3}{2}} = 2^{1,5},
+    b = \left(2^{2}\right)^{\frac{3}{5}} = 2^{\frac{6}{5}} = 2^{1,2},
+    c = \left(2^{-3}\right)^{\frac{1}{5}} = 2^{-\frac{3}{5}} = 2^{-0,6},
+    d = \left(2^{3}\right)^{\frac{3}{10}} = 2^{\frac{9}{10}} = 2^{0,9}.
+    Wspólna podstawa 2 jest większa od 1, więc porządek wykładników przenosi się bez zmian na porządek potęg. Wykładniki uporządkowane rosnąco: -0,6 < 0,9 < 1,2 < 1,5, czyli c < d < b < a.
+    Odpowiedź (rosnąco): c, d, b, a.
+  solution_steps:
+  - 'Zamień podstawy ułamkowe na potęgi dwójki: \frac{1}{2} = 2^{-1}, \frac{1}{8} = 2^{-3}.'
+  - 'Zapisz wszystkie liczby w postaci potęg o podstawie 2: a = 2^{\frac{3}{2}}, b = 2^{\frac{6}{5}},
+    c = 2^{-\frac{3}{5}}, d = 2^{\frac{9}{10}}.'
+  - 'Zamień wykładniki na ułamki dziesiętne: 1,5; 1,2; -0,6; 0,9.'
+  - 'Uporządkuj wykładniki rosnąco: -0,6 < 0,9 < 1,2 < 1,5.'
+  - 'Ponieważ podstawa 2 > 1, kolejność potęg jest taka sama: c < d < b < a.'
+  answer:
+    kind: TUPLE
+    latex: c < d < b < a
+    items:
+    - c
+    - d
+    - b
+    - a
+  skills:
+  - sprowadzanie do wspólnej podstawy
+  - zamiana podstawy na odwrotną
+  - porządkowanie liczb
+  verification:
+    checkability: REFERENCE_CALL
+    note: 4 components matched
+- id: g-ex-05
+  slot: EXERCISE
+  ramp_index: 2
+  difficulty: 4
+  exercise_type: porownanie_poteg_i_nierownosc_wykladnicza
+  statement: (a) Która z liczb 5^{30} oraz 3^{45} jest większa? Odpowiedź uzasadnij, sprowadzając obie
+    liczby do wspólnego wykładnika. (b) Rozwiąż nierówność \left(\frac{3}{5}\right)^{2x-1} \geq \left(\frac{3}{5}\right)^{x+4}
+    i zapisz zbiór rozwiązań w postaci przedziału.
+  statement_latex: \text{(a) } 5^{30} \;\square\; 3^{45}, \qquad \text{(b) } \left(\frac{3}{5}\right)^{2x-1}
+    \geq \left(\frac{3}{5}\right)^{x+4}
+  solution: |-
+    (a) Podstaw 5 i 3 nie da się sprowadzić do wspólnej podstawy, więc uwspólniamy wykładniki. NWD(30, 45) = 15, zatem
+    5^{30} = \left(5^{2}\right)^{15} = 25^{15},
+    3^{45} = \left(3^{3}\right)^{15} = 27^{15}.
+    Teraz wykładnik jest wspólny i dodatni, więc decyduje porównanie podstaw: skoro 0 < 25 < 27, to 25^{15} < 27^{15}. Zatem 5^{30} < 3^{45} — większa jest liczba 3^{45}.
+    (b) Podstawa \frac{3}{5} należy do przedziału (0,1), więc przy opuszczaniu potęgowania ODWRACAMY znak nierówności:
+    2x - 1 \leq x + 4
+    2x - x \leq 4 + 1
+    x \leq 5.
+    Zbiór rozwiązań: x \in \left(-\infty, 5\right\rangle.
+    Sprawdzenie: dla x = 0 lewa strona to \left(\frac{3}{5}\right)^{-1} = \frac{5}{3} > 1, a prawa \left(\frac{3}{5}\right)^{4} < 1 — nierówność jest spełniona.
+  solution_steps:
+  - '(a) Wyznacz NWD wykładników: NWD(30, 45) = 15.'
+  - '(a) Zapisz liczby w postaci potęg o wykładniku 15: 5^{30} = 25^{15}, 3^{45} = 27^{15}.'
+  - '(a) Wykładnik 15 jest dodatni, więc większa podstawa daje większą potęgę: 25^{15} < 27^{15}, czyli
+    większa jest liczba 3^{45}.'
+  - (b) Ustal, że podstawa \frac{3}{5} leży w przedziale (0,1), więc potęgowanie jest malejące.
+  - '(b) Opuść potęgowanie, odwracając znak: 2x - 1 \leq x + 4.'
+  - '(b) Rozwiąż nierówność: x \leq 5, czyli x \in \left(-\infty, 5\right\rangle.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: (a) wieksza liczba
+      answer:
+        kind: SYMBOLIC
+        latex: 3^{45}
+    - name: (a) uzasadnienie
+      answer:
+        kind: NOT_MACHINE_CHECKABLE
+        reason: 'Uczeń musi uzasadnić porównanie: sprowadzić obie liczby do wspólnego wykładnika 15 (5^{30}
+          = 25^{15}, 3^{45} = 27^{15}) i powołać się na monotoniczność względem podstawy przy dodatnim
+          wykładniku.'
+    - name: (b) zbior rozwiazan
+      answer:
+        kind: INTERVAL
+        hi: '5'
+        hi_open: false
+  checks:
+  - kind: solve_inequality
+    expr: 2 \cdot x - 1 \le x + 4
+    part: (b) zbior rozwiazan
+  skills:
+  - sprowadzanie do wspólnego wykładnika
+  - monotoniczność względem podstawy
+  - prosta nierówność wykładnicza
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'part(s) need a human: (a) uzasadnienie · 1/2 other parts solved fresh'
+- id: g-ex-t00
+  slot: EXERCISE
+  ramp_index: 6
+  difficulty: 3
+  exercise_type: porządkowanie potęg (wspólna podstawa)
+  statement: |-
+    Dane są liczby:
+    a = \left( \frac{1}{8} \right)^{-0,4}, \quad b = 4^{0,6}, \quad c = 2^{1,1}, \quad d = \left( \frac{1}{32} \right)^{-0,25}.
+    Zapisz każdą z tych liczb w postaci potęgi o podstawie 2 (podaj wykładniki), a następnie uporządkuj liczby a, b, c, d rosnąco.
+  statement_latex: a = \left( \frac{1}{8} \right)^{-0,4},\quad b = 4^{0,6},\quad c = 2^{1,1},\quad d =
+    \left( \frac{1}{32} \right)^{-0,25}
+  solution: |-
+    Każdą podstawę zapisujemy jako potęgę liczby 2 i korzystamy ze wzoru \left( a^{m} \right)^{n} = a^{m \cdot n}.
+
+    a = \left( 2^{-3} \right)^{-\frac{2}{5}} = 2^{\left(-3\right) \cdot \left(-\frac{2}{5}\right)} = 2^{\frac{6}{5}} = 2^{1,2}.
+
+    b = \left( 2^{2} \right)^{\frac{3}{5}} = 2^{2 \cdot \frac{3}{5}} = 2^{\frac{6}{5}} = 2^{1,2}.
+
+    c = 2^{1,1} = 2^{\frac{11}{10}}.
+
+    d = \left( 2^{-5} \right)^{-\frac{1}{4}} = 2^{\left(-5\right) \cdot \left(-\frac{1}{4}\right)} = 2^{\frac{5}{4}} = 2^{1,25}.
+
+    Wszystkie liczby mają teraz wspólną podstawę 2 > 1, więc potęgowanie zachowuje porządek: kolejność wykładników przenosi się bez zmian na kolejność potęg.
+
+    Wykładniki na osi liczbowej: 1,1 < 1,2 = 1,2 < 1,25, czyli c ma najmniejszy wykładnik, a d największy; liczby a i b mają ten sam wykładnik, więc są równe.
+
+    Zatem rosnąco: c < a = b < d, czyli 2^{1,1} < \left( \frac{1}{8} \right)^{-0,4} = 4^{0,6} < \left( \frac{1}{32} \right)^{-0,25}.
+  solution_steps:
+  - 'Zapisz podstawy jako potęgi dwójki: \frac{1}{8} = 2^{-3}, \; 4 = 2^{2}, \; \frac{1}{32} = 2^{-5}.'
+  - 'Zastosuj wzór \left( a^{m} \right)^{n} = a^{m \cdot n}: a = 2^{1,2}, \; b = 2^{1,2}, \; c = 2^{1,1},
+    \; d = 2^{1,25}.'
+  - Zauważ, że wspólna podstawa 2 jest większa od 1, więc potęgowanie jest rosnące.
+  - 'Uporządkuj wykładniki: 1,1 < 1,2 = 1,2 < 1,25.'
+  - 'Przenieś porządek na potęgi: c < a = b < d.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wykladnik_a
+      answer:
+        kind: NUMERIC
+        value: 1.2
+    - name: wykladnik_b
+      answer:
+        kind: NUMERIC
+        value: 1.2
+    - name: wykladnik_c
+      answer:
+        kind: NUMERIC
+        value: 1.1
+    - name: wykladnik_d
+      answer:
+        kind: NUMERIC
+        value: 1.25
+    - name: porzadek_rosnacy
+      answer:
+        kind: SYMBOLIC
+        latex: c < a = b < d
+  checks:
+  - kind: evaluate
+    expr: \left(-3\right) \cdot \left(-\frac{2}{5}\right)
+    part: wykladnik_a
+  - kind: evaluate
+    expr: 2 \cdot \frac{3}{5}
+    part: wykladnik_b
+  - kind: evaluate
+    expr: \frac{11}{10}
+    part: wykladnik_c
+  - kind: evaluate
+    expr: \left(-5\right) \cdot \left(-\frac{1}{4}\right)
+    part: wykladnik_d
+  skills:
+  - sprowadzanie potęg do wspólnej podstawy
+  - stosowanie wzoru (a^m)^n = a^{mn}
+  - porównywanie wykładników ujemnych i ułamkowych
+  - monotoniczność potęgowania dla podstawy większej od 1
+  verification:
+    checkability: REFERENCE_CALL
+    note: 'answer and reference disagree: part disagrees: 1.2 vs 2.29739670999407 (tol 1e-09)'
+- id: g-ex-t01
+  slot: EXERCISE
+  ramp_index: 7
+  difficulty: 4
+  exercise_type: nierówność wykładnicza
+  statement: Rozwiąż nierówność \left( \frac{1}{9} \right)^{x-1} \ge 27^{2x-5} i zapisz zbiór jej rozwiązań
+    w postaci przedziału. Podaj największą liczbę całkowitą spełniającą tę nierówność.
+  statement_latex: \left( \frac{1}{9} \right)^{x-1} \ge 27^{2 \cdot x - 5}
+  solution: |-
+    Sprowadzamy obie strony do podstawy 3: \frac{1}{9} = 3^{-2} oraz 27 = 3^{3}.
+
+    Lewa strona: \left( 3^{-2} \right)^{x-1} = 3^{-2 \cdot \left( x - 1 \right)} = 3^{-2x+2}.
+    Prawa strona: \left( 3^{3} \right)^{2x-5} = 3^{3 \cdot \left( 2x - 5 \right)} = 3^{6x-15}.
+
+    Nierówność ma postać 3^{-2x+2} \ge 3^{6x-15}. Podstawa 3 > 1, więc potęgowanie jest rosnące i znak nierówności zostaje zachowany:
+    -2x + 2 \ge 6x - 15
+    2 + 15 \ge 6x + 2x
+    17 \ge 8x
+    x \le \frac{17}{8}.
+
+    Zbiór rozwiązań: x \in \left( -\infty, \frac{17}{8} \right\rangle.
+
+    Ponieważ \frac{17}{8} = 2,125, największą liczbą całkowitą spełniającą nierówność jest 2.
+
+    Sprawdzenie dla x = 2: lewa strona \left( \frac{1}{9} \right)^{1} = 3^{-2}, prawa strona 27^{-1} = 3^{-3}; istotnie 3^{-2} \ge 3^{-3}.
+  solution_steps:
+  - 'Zapisz podstawy jako potęgi trójki: \frac{1}{9} = 3^{-2}, \; 27 = 3^{3}.'
+  - 'Przekształć obie strony: 3^{-2x+2} \ge 3^{6x-15}.'
+  - Zauważ, że podstawa 3 > 1, więc znaku nierówności nie odwracamy.
+  - Rozwiąż nierówność liniową -2x + 2 \ge 6x - 15, otrzymując x \le \frac{17}{8}.
+  - 'Zapisz zbiór rozwiązań \left( -\infty, \frac{17}{8} \right\rangle i odczytaj największą liczbę całkowitą:
+    2.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: zbior_rozwiazan
+      answer:
+        kind: INTERVAL
+        lo: -\infty
+        hi: \frac{17}{8}
+        hi_open: false
+    - name: najwieksza_calkowita
+      answer:
+        kind: NUMERIC
+        value: 2.0
+  checks:
+  - kind: solve_inequality
+    expr: \left( \frac{1}{9} \right)^{x-1} \ge 27^{2 \cdot x - 5}
+    part: zbior_rozwiazan
+  - kind: evaluate
+    expr: \left\lfloor \frac{17}{8} \right\rfloor
+    part: najwieksza_calkowita
+  skills:
+  - sprowadzanie obu stron nierówności do wspólnej podstawy
+  - opuszczanie potęgowania przy podstawie większej od 1
+  - rozwiązywanie nierówności liniowej
+  - zapis zbioru rozwiązań jako przedziału
+  - wyznaczanie największej liczby całkowitej spełniającej nierówność
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [zbior_rozwiazan] SymPy solved it fresh: endpoints matched
+      ; [najwieksza_calkowita] SymPy solved it fresh: 2.0 vs 2.0 (tol 1e-09)'
+- id: g-cm-06
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: nierownosc_wykladnicza_podstawa_z_przedzialu_0_1
+  statement: 'Rozwiąż nierówność \left(\frac{1}{4}\right)^{3x} < \left(\frac{1}{4}\right)^{x+8} i zapisz
+    zbiór rozwiązań w postaci przedziału. Uczeń rozwiązał tę nierówność tak: „skoro po obu stronach jest
+    ta sama podstawa, to 3x < x + 8, czyli x < 4”. Wskaż błąd w tym rozumowaniu i podaj poprawny wynik.'
+  statement_latex: \left(\frac{1}{4}\right)^{3x} < \left(\frac{1}{4}\right)^{x+8}
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń opuścił potęgowanie, przepisując znak nierówności bez zmiany:
+    3x < x + 8
+    2x < 8
+    x < 4,
+    czyli otrzymał x \in \left(-\infty, 4\right).
+    GDZIE JEST BŁĄD: podstawą jest liczba \frac{1}{4}, a 0 < \frac{1}{4} < 1, więc potęgowanie o tej podstawie jest MALEJĄCE — większy wykładnik daje mniejszą potęgę. Przy przechodzeniu od nierówności potęg do nierówności wykładników trzeba więc ODWRÓCIĆ znak. Reguła „bez zmiany znaku” obowiązuje tylko dla podstawy większej od 1.
+    POPRAWNE ROZWIĄZANIE:
+    3x > x + 8
+    2x > 8
+    x > 4,
+    czyli x \in \left(4, +\infty\right).
+    Sprawdzenie: dla x = 5 lewa strona to \left(\frac{1}{4}\right)^{15}, a prawa \left(\frac{1}{4}\right)^{13}; ponieważ 15 > 13 i podstawa jest z (0,1), lewa strona jest mniejsza — nierówność jest spełniona. Dla x = 0 mamy \left(\frac{1}{4}\right)^{0} = 1 oraz \left(\frac{1}{4}\right)^{8} < 1, więc nierówność NIE jest spełniona — liczba 0 nie należy do zbioru rozwiązań, co potwierdza, że wynik ucznia był zły.
+  solution_steps:
+  - 'Błędnie: opuszczenie potęgowania bez zmiany znaku daje 3x < x + 8, czyli x < 4.'
+  - Zauważ, że podstawa \frac{1}{4} należy do przedziału (0,1), więc potęgowanie jest malejące.
+  - 'Popraw krok: opuszczając potęgowanie, odwróć znak nierówności: 3x > x + 8.'
+  - 'Rozwiąż: 2x > 8, czyli x > 4.'
+  - Zapisz zbiór rozwiązań x \in \left(4, +\infty\right) i sprawdź go dla x = 5 oraz x = 0.
+  answer:
+    kind: INTERVAL
+    lo: '4'
+  checks:
+  - kind: solve_inequality
+    expr: 3 \cdot x > x + 8
+  skills:
+  - prosta nierówność wykładnicza
+  - odwracanie znaku nierówności dla podstawy z (0,1)
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: endpoints matched'
+- id: g-cm-07
+  slot: COMMON_MISTAKE
+  ramp_index: 1
+  difficulty: 2
+  exercise_type: dodatniosc_potegi
+  statement: Uczeń twierdzi, że liczba 5^{-2} jest ujemna, „bo w wykładniku jest minus”. Oblicz wartość
+    liczby 5^{-2}, rozstrzygnij (TAK/NIE), czy jest ona ujemna, oraz porównaj ją z liczbą 1. Wyjaśnij,
+    na czym polega błąd ucznia.
+  statement_latex: 5^{-2} = \frac{1}{5^{2}} = \frac{1}{25}
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń czyta „minus w wykładniku” jako „minus przed liczbą” i pisze 5^{-2} < 0, a nawet 5^{-2} = -25.
+    GDZIE JEST BŁĄD: dla każdej podstawy a > 0 i każdego wykładnika rzeczywistego x zachodzi a^{x} > 0 — potęga liczby dodatniej nigdy nie jest ujemna ani równa zeru. Ujemny wykładnik oznacza jedynie odwrotność: a^{-n} = \frac{1}{a^{n}}.
+    POPRAWNE ROZWIĄZANIE: 5^{-2} = \frac{1}{5^{2}} = \frac{1}{25} = 0{,}04. Jest to liczba dodatnia, więc odpowiedź na pytanie „czy jest ujemna” brzmi NIE.
+    Porównanie z 1: podstawa 5 > 1, a wykładnik -2 < 0, więc 5^{-2} < 5^{0} = 1. Rzeczywiście \frac{1}{25} < 1.
+    Wniosek: znak wykładnika nie decyduje o znaku potęgi, lecz jedynie o tym, czy potęga jest mniejsza, czy większa od 1 (przy podstawie większej od 1 ujemny wykładnik daje liczbę z przedziału (0,1)).
+  solution_steps:
+  - 'Błędnie: „minus w wykładniku” odczytane jako znak liczby, stąd wniosek 5^{-2} < 0.'
+  - 'Przypomnij własność: dla a > 0 zawsze a^{x} > 0.'
+  - 'Zastosuj definicję ujemnego wykładnika: 5^{-2} = \frac{1}{5^{2}} = \frac{1}{25} = 0{,}04.'
+  - Stwierdź, że liczba jest dodatnia — odpowiedź NIE.
+  - 'Porównaj z 1: podstawa 5 > 1 i wykładnik ujemny, więc 5^{-2} < 1.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wartosc liczby
+      answer:
+        kind: NUMERIC
+        value: 0.04
+    - name: czy liczba jest ujemna
+      answer:
+        kind: BOOLEAN
+        truth: false
+    - name: porownanie z 1
+      answer:
+        kind: SYMBOLIC
+        latex: 5^{-2} < 1
+  checks:
+  - kind: evaluate
+    expr: 5^{-2}
+    part: wartosc liczby
+  skills:
+  - dodatniość potęgi o podstawie dodatniej
+  - interpretacja ujemnego wykładnika
+  - porównanie potęgi z 1
+  verification:
+    checkability: REFERENCE_CALL
+    note: '3 parts matched · det: [wartosc liczby] SymPy solved it fresh: 0.04 vs 0.04 (tol 1e-09)'
+- id: g-cm-08
+  slot: COMMON_MISTAKE
+  ramp_index: 2
+  difficulty: 3
+  exercise_type: porownanie_poteg_o_roznych_podstawach
+  statement: Uczeń twierdzi, że 32^{11} > 16^{15}, ponieważ podstawa 32 jest większa od podstawy 16. Sprowadź
+    obie liczby do wspólnej podstawy 2 (podaj otrzymane wykładniki) i rozstrzygnij, która z liczb 16^{15}
+    i 32^{11} jest większa. Wskaż błąd w rozumowaniu ucznia.
+  statement_latex: 16^{15} = 2^{\square}, \qquad 32^{11} = 2^{\square}
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń porównuje same podstawy: „32 > 16, więc 32^{11} > 16^{15}”.
+    GDZIE JEST BŁĄD: reguła „większa podstawa daje większą potęgę” dotyczy wyłącznie potęg o TYM SAMYM wykładniku, a tu wykładniki są różne (11 i 15). Podobnie porównywanie wykładników wymaga tej samej podstawy. Trzeba więc najpierw coś uwspólnić.
+    POPRAWNE ROZWIĄZANIE: obie podstawy są potęgami dwójki: 16 = 2^{4}, 32 = 2^{5}, zatem
+    16^{15} = \left(2^{4}\right)^{15} = 2^{4 \cdot 15} = 2^{60},
+    32^{11} = \left(2^{5}\right)^{11} = 2^{5 \cdot 11} = 2^{55}.
+    Podstawa 2 > 1, więc potęgowanie zachowuje porządek wykładników. Ponieważ 55 < 60, mamy 2^{55} < 2^{60}, czyli 32^{11} < 16^{15}.
+    Odpowiedź: większa jest liczba 16^{15}, a twierdzenie ucznia jest fałszywe.
+  solution_steps:
+  - 'Błędnie: porównanie samych podstaw (32 > 16) przy różnych wykładnikach.'
+  - Przypomnij, że monotoniczność względem podstawy wymaga tego samego wykładnika, a względem wykładnika
+    — tej samej podstawy.
+  - Zapisz 16 = 2^{4} oraz 32 = 2^{5}.
+  - 'Oblicz wykładniki: 16^{15} = 2^{60}, 32^{11} = 2^{55}.'
+  - Ponieważ 2 > 1 i 55 < 60, otrzymujesz 32^{11} < 16^{15} — większa jest liczba 16^{15}.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wykladnik liczby 16^{15} przy podstawie 2
+      answer:
+        kind: NUMERIC
+        value: 60.0
+    - name: wykladnik liczby 32^{11} przy podstawie 2
+      answer:
+        kind: NUMERIC
+        value: 55.0
+    - name: wieksza liczba
+      answer:
+        kind: SYMBOLIC
+        latex: 16^{15}
+  checks:
+  - kind: evaluate
+    expr: 4 \cdot 15
+    part: wykladnik liczby 16^{15} przy podstawie 2
+  - kind: evaluate
+    expr: 5 \cdot 11
+    part: wykladnik liczby 32^{11} przy podstawie 2
+  skills:
+  - sprowadzanie do wspólnej podstawy
+  - monotoniczność potęgowania względem wykładnika
+  verification:
+    checkability: REFERENCE_CALL
+    note: '3 parts matched · det: [wykladnik liczby 16^{15} przy podstawie 2] SymPy solved it fresh: 60.0
+      vs 60.0 (tol 1e-09) ; [wykladnik liczby 32^{11} przy podstawie 2] SymPy solved it fresh: 55.0 vs
+      55.0 (tol 1e-09)'
+- id: g-cm-09
+  slot: COMMON_MISTAKE
+  ramp_index: 3
+  difficulty: 3
+  exercise_type: monotonicznosc_wzgledem_podstawy
+  statement: 'Uczeń zapisał, że 3^{-4} < 5^{-4}, ponieważ 3 < 5. Oblicz wartości liczb 3^{-4} i 5^{-4},
+    porównaj je (wpisz właściwy znak: < albo >) i wyjaśnij, dlaczego rozumowanie ucznia jest błędne.'
+  statement_latex: 3^{-4} \;\square\; 5^{-4}
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń stosuje regułę „większa podstawa → większa potęga” i pisze 3^{-4} < 5^{-4}.
+    GDZIE JEST BŁĄD: ta reguła obowiązuje tylko dla WYKŁADNIKA DODATNIEGO. Tutaj wykładnik jest ujemny, a a^{-n} = \frac{1}{a^{n}}; branie odwrotności odwraca porządek liczb dodatnich, więc dla wykładnika ujemnego większa podstawa daje MNIEJSZĄ potęgę.
+    POPRAWNE ROZWIĄZANIE:
+    3^{-4} = \frac{1}{3^{4}} = \frac{1}{81},
+    5^{-4} = \frac{1}{5^{4}} = \frac{1}{625}.
+    Ponieważ 81 < 625, to \frac{1}{81} > \frac{1}{625}, czyli 3^{-4} > 5^{-4}.
+    Ogólnie: jeśli 0 < a < b oraz x < 0, to a^{x} > b^{x}. Dla porównania: 3^{4} = 81 < 625 = 5^{4} — przy dodatnim wykładniku porządek jest zgodny z porządkiem podstaw.
+  solution_steps:
+  - 'Błędnie: zastosowanie reguły dla dodatniego wykładnika do wykładnika ujemnego, stąd 3^{-4} < 5^{-4}.'
+  - 'Skorzystaj z definicji: 3^{-4} = \frac{1}{3^{4}} = \frac{1}{81}, 5^{-4} = \frac{1}{5^{4}} = \frac{1}{625}.'
+  - 'Porównaj odwrotności: 81 < 625, więc \frac{1}{81} > \frac{1}{625}.'
+  - 'Zapisz wniosek: 3^{-4} > 5^{-4}, bo dla wykładnika ujemnego porządek podstaw się odwraca.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wartosc 3^{-4}
+      answer:
+        kind: NUMERIC
+        value: 0.012345679012345678
+    - name: wartosc 5^{-4}
+      answer:
+        kind: NUMERIC
+        value: 0.0016
+    - name: porownanie
+      answer:
+        kind: SYMBOLIC
+        latex: 3^{-4} > 5^{-4}
+  checks:
+  - kind: evaluate
+    expr: 3^{-4}
+    part: wartosc 3^{-4}
+  - kind: evaluate
+    expr: 5^{-4}
+    part: wartosc 5^{-4}
+  skills:
+  - monotoniczność względem podstawy przy ujemnym wykładniku
+  - obliczanie potęg o ujemnym wykładniku
+  verification:
+    checkability: REFERENCE_CALL
+    note: 'could not compare: part disagrees: PARSE_ERROR: "UnexpectedCharacters: No terminal matches
+      ''>'' in the current parser context, at line 1 col 1"'
+- id: g-cm-10
+  slot: COMMON_MISTAKE
+  ramp_index: 4
+  difficulty: 3
+  exercise_type: zalozenia_twierdzenia_o_monotonicznosci
+  statement: 'Kasia twierdzi, że: (1) z równości 1^{x} = 1^{5} wynika, że x = 5, oraz (2) skoro 3 < 4,
+    to na mocy monotoniczności potęgowania \left(-2\right)^{3} < \left(-2\right)^{4}. Rozstrzygnij (TAK/NIE),
+    czy z równości 1^{x} = 1^{5} wynika x = 5, oblicz wartości liczb \left(-2\right)^{3} i \left(-2\right)^{4}
+    oraz wyjaśnij, dlaczego w żadnym z tych przypadków nie wolno powoływać się na monotoniczność potęgowania.'
+  statement_latex: 1^{x} = 1^{5}, \qquad \left(-2\right)^{3} \;\square\; \left(-2\right)^{4}
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: Kasia stosuje twierdzenia „a^{x_{1}} = a^{x_{2}} \iff x_{1} = x_{2}” oraz „x_{1} < x_{2} \Rightarrow a^{x_{1}} < a^{x_{2}}” do podstaw a = 1 i a = -2.
+    GDZIE JEST BŁĄD: oba twierdzenia mają założenia a > 0 oraz a \neq 1.
+    (1) Dla a = 1 mamy 1^{x} = 1 dla każdego x, więc równość 1^{x} = 1^{5} jest prawdziwa dla KAŻDEJ liczby rzeczywistej x (np. x = 0 albo x = -7). Nie wynika z niej x = 5 — odpowiedź NIE.
+    (2) Dla podstawy ujemnej potęgowanie w ogóle nie jest funkcją monotoniczną: \left(-2\right)^{3} = -8, \left(-2\right)^{4} = 16, ale \left(-2\right)^{5} = -32, więc wartości „skaczą” raz na plus, raz na minus. Sama nierówność -8 < 16 jest prawdziwa (wynika po prostu z obliczenia obu liczb), ale NIE wolno jej uzasadniać monotonicznością potęgowania — dla podstawy ujemnej ta reguła nie obowiązuje.
+    WNIOSEK: monotoniczność i różnowartościowość potęgowania stosujemy wyłącznie dla a > 0 i a \neq 1.
+  solution_steps:
+  - 'Błędnie: zastosowanie twierdzeń o monotoniczności do podstaw a = 1 i a = -2.'
+  - 'Przypomnij założenia twierdzeń: a > 0 oraz a \neq 1.'
+  - '(1) Zauważ, że 1^{x} = 1 dla każdego x, więc równość 1^{x} = 1^{5} spełnia każda liczba rzeczywista
+    — wniosek x = 5 jest nieuprawniony: NIE.'
+  - (2) Oblicz \left(-2\right)^{3} = -8 oraz \left(-2\right)^{4} = 16.
+  - (2) Zauważ, że kolejne potęgi liczby -2 zmieniają znak (np. \left(-2\right)^{5} = -32), więc ciąg
+    potęg nie jest monotoniczny i reguły nie stosujemy.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: czy z rownosci 1^{x} = 1^{5} wynika x = 5
+      answer:
+        kind: BOOLEAN
+        truth: false
+    - name: wartosc \left(-2\right)^{3}
+      answer:
+        kind: NUMERIC
+        value: -8.0
+    - name: wartosc \left(-2\right)^{4}
+      answer:
+        kind: NUMERIC
+        value: 16.0
+  checks:
+  - kind: evaluate
+    expr: \left(-2\right)^{3}
+    part: wartosc \left(-2\right)^{3}
+  - kind: evaluate
+    expr: \left(-2\right)^{4}
+    part: wartosc \left(-2\right)^{4}
+  skills:
+  - założenia a > 0 i a \neq 1
+  - różnowartościowość potęgowania
+  - obliczanie potęg o podstawie ujemnej
+  verification:
+    checkability: REFERENCE_CALL
+    note: '3 parts matched · det: [wartosc \left(-2\right)^{3}] SymPy solved it fresh: -8.0 vs -8.0 (tol
+      1e-09) ; [wartosc \left(-2\right)^{4}] SymPy solved it fresh: 16.0 vs 16.0 (tol 1e-09)'
+- id: g-ch-t02
+  slot: CHALLENGE
+  ramp_index: 0
+  difficulty: 4
+  exercise_type: potęgi w zadaniu o bryle
+  statement: Objętość pewnego sześcianu jest równa 2^{4,5}. Oblicz pole powierzchni całkowitej tego sześcianu.
+    Rozstrzygnij też, czy krawędź tego sześcianu jest większa od liczby 2^{1,4}.
+  statement_latex: a^{3} = 2^{\frac{9}{2}}, \qquad P_{c} = 6 \cdot a^{2}
+  solution: |-
+    Oznaczmy przez a długość krawędzi sześcianu (a > 0). Wtedy jego objętość to a^{3}, więc
+    a^{3} = 2^{4,5} = 2^{\frac{9}{2}}.
+
+    Szukamy a w postaci potęgi dwójki: jeśli a = 2^{t}, to a^{3} = 2^{3 \cdot t}, a z różnowartościowości potęgowania (podstawa 2 > 0, 2 \ne 1) otrzymujemy 3 \cdot t = \frac{9}{2}, czyli t = \frac{3}{2}. Zatem
+    a = 2^{\frac{3}{2}}.
+
+    Pole powierzchni całkowitej sześcianu wynosi P_{c} = 6 \cdot a^{2}, więc
+    P_{c} = 6 \cdot \left( 2^{\frac{3}{2}} \right)^{2} = 6 \cdot 2^{3} = 6 \cdot 8 = 48.
+
+    Porównanie krawędzi z liczbą 2^{1,4}: obie liczby mają wspólną podstawę 2 > 1, więc potęgowanie zachowuje porządek wykładników. Ponieważ \frac{3}{2} = 1,5 > 1,4, mamy 2^{1,5} > 2^{1,4}, czyli krawędź jest większa od 2^{1,4} — odpowiedź: tak.
+  solution_steps:
+  - 'Wprowadź zmienną: niech a > 0 będzie krawędzią sześcianu; wtedy a^{3} = 2^{\frac{9}{2}}.'
+  - Zapisz a = 2^{t} i z różnowartościowości potęgowania rozwiąż 3 \cdot t = \frac{9}{2}, skąd t = \frac{3}{2},
+    czyli a = 2^{\frac{3}{2}}.
+  - 'Ułóż wzór na pole powierzchni całkowitej: P_{c} = 6 \cdot a^{2}.'
+  - Oblicz P_{c} = 6 \cdot \left( 2^{\frac{3}{2}} \right)^{2} = 6 \cdot 2^{3} = 48.
+  - 'Porównaj wykładniki 1,5 i 1,4 przy podstawie 2 > 1: 2^{1,5} > 2^{1,4}, więc krawędź jest większa
+    od 2^{1,4}.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: pole_powierzchni
+      answer:
+        kind: NUMERIC
+        value: 48.0
+    - name: krawedz_wieksza_od_2^1,4
+      answer:
+        kind: BOOLEAN
+        truth: true
+  checks:
+  - kind: evaluate
+    expr: 6 \cdot \left( 2^{\frac{3}{2}} \right)^{2}
+    part: pole_powierzchni
+  stated_model:
+    variable: a
+    objective_latex: P_{c}\left( a \right) = 6 \cdot a^{2}, \quad a^{3} = 2^{\frac{9}{2}}
+    domain_lo: '0'
+    goal: value
+    constraint_used: a jest krawędzią sześcianu o objętości 2^{4,5}
+  skills:
+  - wprowadzenie zmiennej opisującej krawędź bryły
+  - zapis pierwiastka jako potęgi o wykładniku wymiernym
+  - układanie wzoru na pole powierzchni sześcianu
+  - monotoniczność potęgowania dla podstawy większej od 1
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (PARSE_ERROR: "UnexpectedCharacters: No terminal
+      matches '','' in the current parser context, at line 1 col 38") — human review'
+- id: g-ch-t03
+  slot: CHALLENGE
+  ramp_index: 1
+  difficulty: 4
+  exercise_type: nierówność wykładnicza z nieznaną podstawą
+  statement: |-
+    Liczba a jest dodatnia i różna od 1. Wiadomo, że a^{\frac{1}{2}} < a^{\frac{1}{3}}.
+    a) Rozstrzygnij, do którego z przedziałów: \left( 0, 1 \right) czy \left( 1, +\infty \right), należy liczba a. Odpowiedź uzasadnij.
+    b) Rozwiąż nierówność a^{2x-3} \le a^{5-x} i zapisz zbiór rozwiązań w postaci przedziału. Podaj najmniejszą liczbę całkowitą spełniającą tę nierówność.
+  statement_latex: a^{\frac{1}{2}} < a^{\frac{1}{3}}, \qquad a^{2 \cdot x - 3} \le a^{5 - x}
+  solution: |-
+    a) Wykładniki spełniają \frac{1}{3} < \frac{1}{2}, a mimo to potęga o większym wykładniku jest MNIEJSZA: a^{\frac{1}{2}} < a^{\frac{1}{3}}. Oznacza to, że potęgowanie o podstawie a odwraca porządek wykładników, a to zachodzi dokładnie wtedy, gdy 0 < a < 1. Zatem a \in \left( 0, 1 \right).
+    (Gdyby było a > 1, to z \frac{1}{3} < \frac{1}{2} wynikałoby a^{\frac{1}{3}} < a^{\frac{1}{2}}, co przeczy założeniu.)
+
+    b) Skoro 0 < a < 1, to opuszczając potęgowanie ODWRACAMY znak nierówności:
+    a^{2x-3} \le a^{5-x} \iff 2x - 3 \ge 5 - x
+    2x + x \ge 5 + 3
+    3x \ge 8
+    x \ge \frac{8}{3}.
+
+    Zbiór rozwiązań: x \in \left\langle \frac{8}{3}, +\infty \right).
+    Ponieważ \frac{8}{3} = 2\frac{2}{3}, najmniejszą liczbą całkowitą spełniającą nierówność jest 3.
+
+    Sprawdzenie dla a = \frac{1}{2} i x = 3: lewa strona \left( \frac{1}{2} \right)^{3} = \frac{1}{8}, prawa strona \left( \frac{1}{2} \right)^{2} = \frac{1}{4}; istotnie \frac{1}{8} \le \frac{1}{4}.
+  solution_steps:
+  - 'Porównaj wykładniki w warunku: \frac{1}{3} < \frac{1}{2}, natomiast a^{\frac{1}{2}} < a^{\frac{1}{3}}.'
+  - Wywnioskuj, że potęgowanie o podstawie a odwraca porządek, więc a \in \left( 0, 1 \right).
+  - 'W nierówności a^{2x-3} \le a^{5-x} opuść potęgowanie, odwracając znak: 2x - 3 \ge 5 - x.'
+  - 'Rozwiąż nierówność liniową: 3x \ge 8, czyli x \ge \frac{8}{3}.'
+  - 'Zapisz zbiór rozwiązań \left\langle \frac{8}{3}, +\infty \right) i wskaż najmniejszą liczbę całkowitą:
+    3.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: przedzial_dla_a
+      answer:
+        kind: INTERVAL
+        lo: '0'
+        hi: '1'
+    - name: uzasadnienie_polozenia_a
+      answer:
+        kind: NOT_MACHINE_CHECKABLE
+        reason: Uczeń musi uzasadnić, że skoro \frac{1}{3} < \frac{1}{2}, a mimo to a^{\frac{1}{2}} <
+          a^{\frac{1}{3}}, to potęgowanie o podstawie a odwraca porządek wykładników, co zachodzi wyłącznie
+          dla 0 < a < 1 (dla a > 1 byłoby a^{\frac{1}{3}} < a^{\frac{1}{2}}).
+    - name: zbior_rozwiazan
+      answer:
+        kind: INTERVAL
+        lo: \frac{8}{3}
+        hi: +\infty
+        lo_open: false
+    - name: najmniejsza_calkowita
+      answer:
+        kind: NUMERIC
+        value: 3.0
+  checks:
+  - kind: solve_inequality
+    expr: 2 \cdot x - 3 \ge 5 - x
+    part: zbior_rozwiazan
+  - kind: evaluate
+    expr: \left\lceil \frac{8}{3} \right\rceil
+    part: najmniejsza_calkowita
+  skills:
+  - wnioskowanie o położeniu podstawy na podstawie porównania potęg
+  - monotoniczność potęgowania dla podstawy z przedziału (0,1)
+  - odwracanie znaku nierówności przy opuszczaniu potęgowania
+  - zapis zbioru rozwiązań i wybór najmniejszej liczby całkowitej
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'part(s) need a human: uzasadnienie_polozenia_a · 2/3 other parts solved fresh'
+- id: g-ch-t04
+  slot: CHALLENGE
+  ramp_index: 2
+  difficulty: 5
+  exercise_type: potęgi i nierówności wykładnicze w zadaniu o bryle (wzór + dziedzina)
+  statement: |-
+    Prostopadłościan ma podstawę kwadratową o krawędzi długości 2^{x} cm i pole powierzchni bocznej równe 2^{9} cm^{2} (x jest liczbą rzeczywistą).
+    a) Wyznacz wzór na wysokość H tego prostopadłościanu w zależności od x, zapisując go w postaci potęgi liczby 2.
+    b) Wyznacz zbiór wszystkich wartości x, dla których jednocześnie wysokość prostopadłościanu jest mniejsza od krawędzi jego podstawy oraz objętość prostopadłościanu nie przekracza 2^{12} cm^{3}.
+    c) Oblicz objętość prostopadłościanu dla największej wartości x spełniającej warunki z podpunktu b).
+  statement_latex: 4 \cdot 2^{x} \cdot H = 2^{9}, \qquad V\left( x \right) = \left( 2^{x} \right)^{2}
+    \cdot H
+  solution: |-
+    a) Pole powierzchni bocznej prostopadłościanu o podstawie kwadratowej to obwód podstawy razy wysokość:
+    4 \cdot 2^{x} \cdot H = 2^{9},
+    zatem
+    H = \frac{2^{9}}{4 \cdot 2^{x}} = \frac{2^{9}}{2^{2} \cdot 2^{x}} = 2^{9-2-x} = 2^{7-x} \;\left[ \text{cm} \right].
+
+    b) Objętość: V\left( x \right) = \left( 2^{x} \right)^{2} \cdot H = 2^{2x} \cdot 2^{7-x} = 2^{x+7}.
+
+    Warunek 1 (wysokość mniejsza od krawędzi podstawy): 2^{7-x} < 2^{x}. Podstawa 2 > 1, więc porównujemy wykładniki bez zmiany znaku:
+    7 - x < x \iff 7 < 2x \iff x > \frac{7}{2}.
+
+    Warunek 2 (objętość nie przekracza 2^{12}): 2^{x+7} \le 2^{12}, znowu podstawa 2 > 1, więc
+    x + 7 \le 12 \iff x \le 5.
+
+    Część wspólna obu warunków: x \in \left( \frac{7}{2}, 5 \right\rangle. Zbiór jest niepusty, więc taki prostopadłościan istnieje.
+
+    c) Największa dopuszczalna wartość to x = 5 (spełnia 5 > \frac{7}{2}). Wtedy
+    V = 2^{5+7} = 2^{12} = 4096 \;\left[ \text{cm}^{3} \right]
+    (krawędź podstawy 2^{5} = 32 cm, wysokość 2^{2} = 4 cm — istotnie wysokość jest mniejsza od krawędzi podstawy, a pole boczne wynosi 4 \cdot 32 \cdot 4 = 512 = 2^{9} cm^{2}).
+  solution_steps:
+  - 'Zapisz pole powierzchni bocznej: 4 \cdot 2^{x} \cdot H = 2^{9}.'
+  - 'Wyznacz wysokość: H = \frac{2^{9}}{2^{2} \cdot 2^{x}} = 2^{7-x}.'
+  - 'Ułóż wzór na objętość: V\left( x \right) = 2^{2x} \cdot 2^{7-x} = 2^{x+7}.'
+  - Z warunku 2^{7-x} < 2^{x} przy podstawie 2 > 1 otrzymaj 7 - x < x, czyli x > \frac{7}{2}.
+  - Z warunku 2^{x+7} \le 2^{12} otrzymaj x + 7 \le 12, czyli x \le 5.
+  - 'Wyznacz część wspólną: x \in \left( \frac{7}{2}, 5 \right\rangle.'
+  - Dla największego x = 5 oblicz V = 2^{12} = 4096 cm^{3}.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wzor_wysokosci
+      answer:
+        kind: SYMBOLIC
+        latex: H\left( x \right) = 2^{7-x}
+    - name: zbior_x
+      answer:
+        kind: INTERVAL
+        lo: \frac{7}{2}
+        hi: '5'
+        hi_open: false
+    - name: objetosc_dla_najwiekszego_x
+      answer:
+        kind: NUMERIC
+        value: 4096.0
+  checks:
+  - kind: simplify
+    expr: \frac{2^{9}}{4 \cdot 2^{x}}
+    part: wzor_wysokosci
+  - kind: evaluate
+    expr: 2^{5+7}
+    part: objetosc_dla_najwiekszego_x
+  stated_model:
+    variable: x
+    objective_latex: V\left( x \right) = 2^{x+7}
+    domain_lo: \frac{7}{2}
+    domain_hi: '5'
+    domain_hi_open: false
+    goal: value
+    constraint_used: 4 \cdot 2^{x} \cdot H = 2^{9}, \; H < 2^{x}, \; V\left( x \right) \le 2^{12}
+  skills:
+  - układanie zależności z pola powierzchni bocznej prostopadłościanu
+  - działania na potęgach o wspólnej podstawie
+  - zapis objętości jako potęgi liczby 2
+  - rozwiązywanie nierówności wykładniczych przez porównanie wykładników
+  - wyznaczanie części wspólnej warunków i sprawdzanie ograniczenia
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''x'': ''V\\left(
+      x \\right) = 2^{x+7}'') — human review'

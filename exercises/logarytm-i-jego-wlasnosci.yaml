@@ -1,0 +1,702 @@
+section: logarytm-i-jego-wlasnosci
+name: Logarytm i jego własności
+scope: Logarithm as the inverse of exponentiation; evaluating logarithms; the formulas for the logarithm
+  of a product, a quotient and a power.
+requirements:
+- I.9
+counts:
+  total: 16
+  DETERMINISTIC: 7
+  REFERENCE_CALL: 7
+  NOT_MACHINE_CHECKABLE: 2
+exercises:
+- id: g-th-00
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: obliczanie logarytmu z definicji
+  statement: Niech \log_{2}64 = c. Zapisz tę równość w postaci potęgowej i oblicz c.
+  statement_latex: \log_{2}64 = c
+  solution: 'Z definicji logarytmu równość \log_{2}64=c oznacza dokładnie to samo, co 2^{c}=64. Liczbę
+    64 zapisujemy jako potęgę dwójki: 64 = 2^{6}. Zatem 2^{c}=2^{6}, a stąd (porównując wykładniki przy
+    tej samej podstawie) c = 6. Kontrola znaku: podstawa 2>1 i liczba logarytmowana 64>1, więc wynik musi
+    być dodatni — zgadza się.'
+  solution_steps:
+  - 'Zapisz równoważne równanie potęgowe: 2^{c}=64.'
+  - 'Przedstaw 64 jako potęgę dwójki: 64=2^{6}.'
+  - 'Porównaj wykładniki: c=6.'
+  answer:
+    kind: NUMERIC
+    value: 6.0
+  checks:
+  - kind: evaluate
+    expr: \log_{2}64
+  skills:
+  - definicja logarytmu
+  - zamiana równości logarytmicznej na potęgową
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 6.0 vs 6.0 (tol 1e-09)'
+- id: g-th-01
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: logarytm dziesiętny
+  statement: 'Oblicz logarytmy dziesiętne: a) \log 10000, b) \log 0{,}01.'
+  statement_latex: \log 10000,\quad \log 0{,}01
+  solution: |-
+    Brak podstawy oznacza podstawę 10.
+    a) \log 10000 = c \iff 10^{c}=10000=10^{4}, więc c=4.
+    b) \log 0{,}01 = c \iff 10^{c}=0{,}01=10^{-2}, więc c=-2.
+    Kontrola: w podpunkcie b) liczba logarytmowana jest mniejsza od 1, a podstawa większa od 1, więc wynik musi być ujemny.
+  solution_steps:
+  - Zauważ, że brak zapisanej podstawy oznacza podstawę 10.
+  - a) 10^{c}=10^{4}, więc \log 10000 = 4.
+  - b) 0{,}01 = 10^{-2}, więc \log 0{,}01 = -2.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: a
+      answer:
+        kind: NUMERIC
+        value: 4.0
+    - name: b
+      answer:
+        kind: NUMERIC
+        value: -2.0
+  checks:
+  - kind: evaluate
+    expr: \log_{10}10000
+    part: a
+  - kind: evaluate
+    expr: \log_{10}\left(\frac{1}{100}\right)
+    part: b
+  skills:
+  - logarytm dziesiętny
+  - potęgi liczby 10
+  - znak logarytmu
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [a] SymPy solved it fresh: 4.0 vs 4.0 (tol 1e-09) ; [b] SymPy
+      solved it fresh: -2.0 vs -2.0 (tol 1e-09)'
+- id: g-th-02
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: podstawowe tożsamości logarytmiczne
+  statement: 'Oblicz: a) \log_{7}1, b) \log_{7}7^{5}, c) 7^{\log_{7}12}.'
+  statement_latex: \log_{7}1,\quad \log_{7}7^{5},\quad 7^{\log_{7}12}
+  solution: |-
+    a) Szukamy c takiego, że 7^{c}=1. Ponieważ 7^{0}=1, mamy \log_{7}1=0.
+    b) Ze wzoru \log_{a}a^{k}=k otrzymujemy \log_{7}7^{5}=5 (istotnie 7^{5}=7^{5}).
+    c) Logarytmowanie jest działaniem odwrotnym do potęgowania: a^{\log_{a}b}=b, więc 7^{\log_{7}12}=12.
+  solution_steps:
+  - a) 7^{0}=1, zatem \log_{7}1=0.
+  - 'b) Zastosuj wzór \log_{a}a^{k}=k: wynik 5.'
+  - 'c) Zastosuj tożsamość a^{\log_{a}b}=b: wynik 12.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: a
+      answer:
+        kind: NUMERIC
+        value: 0.0
+    - name: b
+      answer:
+        kind: NUMERIC
+        value: 5.0
+    - name: c
+      answer:
+        kind: NUMERIC
+        value: 12.0
+  checks:
+  - kind: evaluate
+    expr: \log_{7}1
+    part: a
+  - kind: evaluate
+    expr: \log_{7}\left(7^{5}\right)
+    part: b
+  - kind: evaluate
+    expr: 7^{\log_{7}12}
+    part: c
+  skills:
+  - log_a 1 = 0
+  - log_a a^k = k
+  - tożsamość a^{log_a b}=b
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [a] SymPy solved it fresh: 0.0 vs 0.0 (tol 1e-09) ; [b] SymPy
+      solved it fresh: 5.0 vs 5.0 (tol 1e-09) ; [c] SymPy solved it fresh: 12.0 vs 12.0 (tol 1e-09)'
+- id: g-ex-03
+  slot: EXERCISE
+  ramp_index: 1
+  difficulty: 2
+  exercise_type: zwijanie wyrażenia logarytmicznego
+  statement: Oblicz wartość wyrażenia W = \log_{12}8 + \log_{12}18 - \log_{3}\frac{1}{9}.
+  statement_latex: W = \log_{12}8 + \log_{12}18 - \log_{3}\frac{1}{9}
+  solution: |-
+    Dwa pierwsze logarytmy mają tę samą podstawę 12, więc możemy je zwinąć wzorem na logarytm iloczynu:
+    \log_{12}8 + \log_{12}18 = \log_{12}\left(8\cdot 18\right) = \log_{12}144 = 2, bo 12^{2}=144.
+    Trzeci składnik: \log_{3}\frac{1}{9} = c \iff 3^{c}=3^{-2}, czyli \log_{3}\frac{1}{9} = -2.
+    Zatem W = 2 - \left(-2\right) = 4.
+    Uwaga: nie wolno obliczać osobno \log_{12}8 ani \log_{12}18 — to liczby niewymierne; cała sztuka polega na zwinięciu wyrażenia w jeden logarytm.
+  solution_steps:
+  - 'Zwiń pierwsze dwa składniki: \log_{12}8+\log_{12}18=\log_{12}\left(8\cdot 18\right)=\log_{12}144.'
+  - Oblicz \log_{12}144=2, bo 12^{2}=144.
+  - Oblicz \log_{3}\frac{1}{9}=-2, bo 3^{-2}=\frac{1}{9}.
+  - 'Wykonaj odejmowanie: W = 2-\left(-2\right)=4.'
+  answer:
+    kind: NUMERIC
+    value: 4.0
+  checks:
+  - kind: evaluate
+    expr: \log_{12}8+\log_{12}18-\log_{3}\left(\frac{1}{9}\right)
+  skills:
+  - logarytm iloczynu
+  - obliczanie logarytmu z definicji
+  - logarytm odwrotności
+  verification:
+    checkability: REFERENCE_CALL
+    note: 4.0 vs 4.0 (tol 1e-09)
+- id: g-ex-04
+  slot: EXERCISE
+  ramp_index: 2
+  difficulty: 3
+  exercise_type: proste równania logarytmiczne
+  statement: 'Rozwiąż równania, wypisując wcześniej założenia: a) \log_{5}\left(2x+3\right)=2, b) \log_{2}\left(x-2\right)+\log_{2}\left(x+2\right)=5.'
+  statement_latex: \log_{5}\left(2x+3\right)=2,\qquad \log_{2}\left(x-2\right)+\log_{2}\left(x+2\right)=5
+  solution: |-
+    a) Założenie: 2x+3>0, czyli x>-\frac{3}{2}.
+    Z definicji logarytmu: 2x+3=5^{2}=25, stąd 2x=22 i x=11. Liczba 11 spełnia założenie, więc x=11.
+
+    b) Założenia: x-2>0 oraz x+2>0, czyli łącznie x>2.
+    Lewa strona (ta sama podstawa): \log_{2}\left(x-2\right)+\log_{2}\left(x+2\right)=\log_{2}\left[\left(x-2\right)\cdot\left(x+2\right)\right]=\log_{2}\left(x^{2}-4\right).
+    Z definicji: x^{2}-4=2^{5}=32, czyli x^{2}=36, więc x=6 lub x=-6.
+    Założenie x>2 odrzuca x=-6. Odpowiedź: x=6.
+  solution_steps:
+  - a) Zapisz założenie 2x+3>0, czyli x>-\frac{3}{2}.
+  - 'a) Zamień na postać potęgową: 2x+3=5^{2}=25.'
+  - 'a) Rozwiąż: x=11 i sprawdź założenie — jest spełnione.'
+  - 'b) Zapisz założenia: x-2>0 i x+2>0, czyli x>2.'
+  - 'b) Zwiń lewą stronę: \log_{2}\left(x^{2}-4\right)=5.'
+  - 'b) Zamień na postać potęgową: x^{2}-4=32, czyli x^{2}=36, x=6 lub x=-6.'
+  - b) Odrzuć x=-6 (nie spełnia założeń); odpowiedź x=6.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: a
+      answer:
+        kind: SET
+        members:
+        - '11'
+    - name: b
+      answer:
+        kind: SET
+        members:
+        - '6'
+  checks:
+  - kind: solve_equation
+    expr: \log_{5}\left(2\cdot x+3\right)=2
+    part: a
+  - kind: solve_equation
+    expr: \log_{2}\left(x-2\right)+\log_{2}\left(x+2\right)=5
+    part: b
+  skills:
+  - definicja logarytmu
+  - założenia w równaniu logarytmicznym
+  - logarytm iloczynu
+  - weryfikacja rozwiązań
+  verification:
+    checkability: REFERENCE_CALL
+    note: '2 parts matched · det: [a] SymPy solved it fresh: 1 members matched'
+- id: g-ex-05
+  slot: EXERCISE
+  ramp_index: 3
+  difficulty: 4
+  exercise_type: wartość wyrażenia logarytmicznego i rozwijanie logarytmu
+  statement: a) Oblicz wartość wyrażenia W = 9^{\log_{3}4} + \log_{\frac{1}{2}}8 + \log_{27}9. b) Wiedząc,
+    że \log 2 = a oraz \log 3 = b, wyraź liczbę \log 0{,}6 za pomocą a i b (logarytmy dziesiętne).
+  statement_latex: W = 9^{\log_{3}4} + \log_{\frac{1}{2}}8 + \log_{27}9,\qquad \log 0{,}6 = ?
+  solution: |-
+    a) Pierwszy składnik: 9^{\log_{3}4}=\left(3^{2}\right)^{\log_{3}4}=\left(3^{\log_{3}4}\right)^{2}=4^{2}=16, bo 3^{\log_{3}4}=4.
+    Drugi składnik: \log_{\frac{1}{2}}8=c \iff \left(2^{-1}\right)^{c}=2^{3}, czyli 2^{-c}=2^{3}, stąd c=-3.
+    Trzeci składnik: 27=3^{3}, 9=3^{2}, więc z zamiany podstawy \log_{27}9=\frac{\log_{3}9}{\log_{3}27}=\frac{2}{3}.
+    Razem: W = 16 - 3 + \frac{2}{3} = \frac{41}{3} = 13\frac{2}{3}.
+
+    b) 0{,}6=\frac{6}{10}, więc \log 0{,}6 = \log 6 - \log 10 = \left(\log 2 + \log 3\right) - 1 = a + b - 1.
+    Sprawdzenie rzędu wielkości: 0{,}6<1, więc wynik powinien być ujemny; dla a\approx 0{,}301 i b\approx 0{,}477 mamy a+b-1\approx -0{,}222 — zgadza się.
+  solution_steps:
+  - 'a) Zapisz 9=3^{2} i skorzystaj z 3^{\log_{3}4}=4: 9^{\log_{3}4}=4^{2}=16.'
+  - 'a) Oblicz \log_{\frac{1}{2}}8: \left(\frac{1}{2}\right)^{c}=8 \Rightarrow 2^{-c}=2^{3} \Rightarrow
+    c=-3.'
+  - a) Oblicz \log_{27}9=\frac{\log_{3}9}{\log_{3}27}=\frac{2}{3}.
+  - 'a) Zsumuj: W = 16-3+\frac{2}{3}=\frac{41}{3}.'
+  - b) Zapisz 0{,}6=\frac{6}{10} i zastosuj wzór na logarytm ilorazu.
+  - b) Rozłóż \log 6 = \log 2 + \log 3 oraz \log 10 = 1.
+  - 'b) Podstaw dane: \log 0{,}6 = a+b-1.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: W
+      answer:
+        kind: NUMERIC
+        value: 13.666666666666666
+    - name: log06
+      answer:
+        kind: SYMBOLIC
+        latex: a+b-1
+  checks:
+  - kind: evaluate
+    expr: 9^{\log_{3}4}+\log_{\frac{1}{2}}8+\log_{27}9
+    part: W
+  skills:
+  - tożsamość a^{log_a b}=b
+  - zamiana podstawy logarytmu
+  - podstawa mniejsza od 1
+  - rozwijanie logarytmu przez dane
+  verification:
+    checkability: REFERENCE_CALL
+    note: 2 parts matched
+- id: g-ex-t00
+  slot: EXERCISE
+  ramp_index: 6
+  difficulty: 4
+  exercise_type: obliczanie wartości wyrażenia logarytmicznego
+  statement: Oblicz wartość wyrażenia \( W = 9^{\log_{3}2} + \log_{2}40 - \log_{2}5 - \log_{27}9 \).
+  statement_latex: W = 9^{\log_{3}2} + \log_{2}40 - \log_{2}5 - \log_{27}9
+  solution: |-
+    Pierwszy składnik: podstawę potęgi zapisujemy jako potęgę trójki, \(9 = 3^{2}\), więc \(9^{\log_{3}2} = \left(3^{2}\right)^{\log_{3}2} = \left(3^{\log_{3}2}\right)^{2} = 2^{2} = 4\), bo \(3^{\log_{3}2} = 2\).
+    Drugi i trzeci składnik mają tę samą podstawę, więc zwijamy je w logarytm ilorazu: \(\log_{2}40 - \log_{2}5 = \log_{2}\frac{40}{5} = \log_{2}8 = 3\), bo \(2^{3} = 8\).
+    Czwarty składnik: \(27 = 3^{3}\) i \(9 = 3^{2}\), więc ze wzoru na zamianę podstawy \(\log_{27}9 = \frac{\log_{3}9}{\log_{3}27} = \frac{2}{3}\).
+    Razem: \(W = 4 + 3 - \frac{2}{3} = 7 - \frac{2}{3} = \frac{19}{3}\).
+    Uwaga: nie wolno liczyć osobno \(\log_{2}40\) ani \(\log_{2}5\) — to liczby niewymierne; cała sztuka polega na zwinięciu wyrażenia.
+  solution_steps:
+  - Zapisz 9 = 3^2 i skorzystaj z (3^2)^{log_3 2} = (3^{log_3 2})^2 = 2^2 = 4.
+  - 'Zwiń różnicę: log_2 40 − log_2 5 = log_2 8 = 3.'
+  - 'Zamień podstawę: log_27 9 = log_3 9 / log_3 27 = 2/3.'
+  - 'Wykonaj działania: 4 + 3 − 2/3 = 19/3.'
+  answer:
+    kind: NUMERIC
+    value: 6.333333333333333
+    latex: \frac{19}{3}
+  checks:
+  - kind: evaluate
+    expr: 9^{\log_{3}2} + \log_{2}40 - \log_{2}5 - \log_{27}9
+  skills:
+  - tożsamość a^{log_a b}=b
+  - zwijanie różnicy logarytmów
+  - zamiana podstawy logarytmu
+  - działania na liczbach wymiernych
+  verification:
+    checkability: REFERENCE_CALL
+    note: 6.333333333333333 vs 6.333333333333333 (tol 1e-09)
+- id: g-ex-t01
+  slot: EXERCISE
+  ramp_index: 7
+  difficulty: 4
+  exercise_type: proste równania logarytmiczne z założeniami
+  statement: Rozwiąż równania. W każdym podpunkcie wypisz najpierw założenia. a) \( \log_{2}\left(x-1\right)
+    + \log_{2}\left(x+5\right) = 4 \), b) \( \log_{x}27 = \frac{3}{2} \).
+  statement_latex: \text{a) } \log_{2}\left(x-1\right) + \log_{2}\left(x+5\right) = 4, \qquad \text{b)
+    } \log_{x}27 = \frac{3}{2}
+  solution: |-
+    a) Założenia: \(x - 1 > 0\) oraz \(x + 5 > 0\), czyli łącznie \(x > 1\).
+    Zwijamy lewą stronę: \(\log_{2}\left[\left(x-1\right)\cdot\left(x+5\right)\right] = 4\), zatem z definicji logarytmu \(\left(x-1\right)\cdot\left(x+5\right) = 2^{4} = 16\).
+    Stąd \(x^{2} + 4x - 5 = 16\), czyli \(x^{2} + 4x - 21 = 0\). Wyróżnik \(\Delta = 16 + 84 = 100\), \(\sqrt{\Delta} = 10\), więc \(x = \frac{-4-10}{2} = -7\) lub \(x = \frac{-4+10}{2} = 3\).
+    Warunek \(x > 1\) odrzuca \(x = -7\). Rozwiązaniem jest \(x = 3\).
+    b) Założenia: \(x > 0\) i \(x \neq 1\).
+    Z definicji logarytmu: \(x^{\frac{3}{2}} = 27\), czyli \(x = 27^{\frac{2}{3}} = \left(3^{3}\right)^{\frac{2}{3}} = 3^{2} = 9\).
+    Liczba 9 spełnia założenia, więc \(x = 9\).
+  solution_steps:
+  - 'a) Zapisz założenia: x − 1 > 0 i x + 5 > 0, czyli x > 1.'
+  - 'a) Zwiń sumę logarytmów: log_2[(x−1)(x+5)] = 4, więc (x−1)(x+5) = 16.'
+  - 'a) Rozwiąż x² + 4x − 21 = 0: x = 3 lub x = −7.'
+  - a) Odrzuć x = −7 (sprzeczne z x > 1); odpowiedź x = 3.
+  - 'b) Zapisz założenia: x > 0, x ≠ 1.'
+  - 'b) Z definicji: x^{3/2} = 27, więc x = 27^{2/3} = 9; liczba 9 spełnia założenia.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: a
+      answer:
+        kind: SET
+        members:
+        - '3'
+    - name: b
+      answer:
+        kind: SET
+        members:
+        - '9'
+  checks:
+  - kind: solve_equation
+    expr: \log_{2}\left(x-1\right) + \log_{2}\left(x+5\right) - 4
+    part: a
+  - kind: solve_equation
+    expr: x^{\frac{3}{2}} - 27
+    part: b
+  skills:
+  - wypisywanie założeń
+  - zwijanie sumy logarytmów
+  - rozwiązywanie równania kwadratowego
+  - równanie z niewiadomą w podstawie logarytmu
+  - odrzucanie rozwiązań sprzecznych z założeniami
+  verification:
+    checkability: REFERENCE_CALL
+    note: 2 parts matched
+- id: g-cm-06
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: 'diagnoza błędu: logarytm sumy'
+  statement: 'Oblicz wartość liczby \log_{2}\left(16+16\right). Uczeń zapisał: \log_{2}\left(16+16\right)=\log_{2}16+\log_{2}16=4+4=8.
+    Wyjaśnij, na czym polega błąd, i podaj poprawny wynik.'
+  statement_latex: \log_{2}\left(16+16\right)
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń zastosował 'wzór' \log_{a}\left(b+c\right)=\log_{a}b+\log_{a}c i otrzymał \log_{2}16+\log_{2}16=4+4=8.
+    DLACZEGO TO ŹLE: wzór na logarytm sumy nie istnieje. Suma logarytmów odpowiada logarytmowi ILOCZYNU: \log_{a}b+\log_{a}c=\log_{a}\left(b\cdot c\right). Zapis ucznia oznaczałby w istocie \log_{2}\left(16\cdot 16\right)=\log_{2}256=8, a to zupełnie inna liczba niż \log_{2}32.
+    POPRAWNIE: najpierw wykonujemy działanie pod logarytmem: 16+16=32. Następnie \log_{2}32=c \iff 2^{c}=2^{5}, czyli c=5.
+    ODPOWIEDŹ: \log_{2}\left(16+16\right)=5.
+  solution_steps:
+  - Zauważ, że nie ma wzoru na logarytm sumy — rozbicie \log_{2}(16+16) na sumę logarytmów jest błędne.
+  - 'Wykonaj najpierw dodawanie pod logarytmem: 16+16=32.'
+  - Oblicz \log_{2}32=5, bo 2^{5}=32.
+  - Porównaj z błędnym wynikiem 8, który odpowiada \log_{2}\left(16\cdot 16\right).
+  answer:
+    kind: NUMERIC
+    value: 5.0
+  checks:
+  - kind: evaluate
+    expr: \log_{2}\left(16+16\right)
+  skills:
+  - logarytm iloczynu (a nie sumy)
+  - obliczanie logarytmu z definicji
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 5.0 vs 5.0 (tol 1e-09)'
+- id: g-cm-07
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: 'diagnoza błędu: iloczyn logarytmów'
+  statement: 'Oblicz wartość wyrażenia \log_{3}9\cdot\log_{3}27. Uczeń zapisał: \log_{3}9\cdot\log_{3}27=\log_{3}\left(9\cdot
+    27\right)=\log_{3}243=5. Wskaż błąd i podaj poprawną wartość.'
+  statement_latex: \log_{3}9\cdot\log_{3}27
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń zamienił iloczyn logarytmów na logarytm iloczynu i otrzymał \log_{3}243=5.
+    DLACZEGO TO ŹLE: logarytm iloczynu jest równy SUMIE logarytmów: \log_{3}9+\log_{3}27=\log_{3}\left(9\cdot 27\right)=5. Dla iloczynu logarytmów żaden taki wzór nie zachodzi — trzeba po prostu obliczyć oba logarytmy i je pomnożyć.
+    POPRAWNIE: \log_{3}9=2, bo 3^{2}=9; \log_{3}27=3, bo 3^{3}=27. Zatem \log_{3}9\cdot\log_{3}27=2\cdot 3=6.
+    ODPOWIEDŹ: 6 (a nie 5 — liczba 5 jest wartością SUMY tych logarytmów).
+  solution_steps:
+  - Zauważ, że wzór \log_{a}b+\log_{a}c=\log_{a}\left(b\cdot c\right) dotyczy sumy, a nie iloczynu logarytmów.
+  - 'Oblicz osobno: \log_{3}9=2 oraz \log_{3}27=3.'
+  - 'Pomnóż: 2\cdot 3=6.'
+  - 'Porównaj: błędny wynik 5 to wartość \log_{3}9+\log_{3}27.'
+  answer:
+    kind: NUMERIC
+    value: 6.0
+  checks:
+  - kind: evaluate
+    expr: \log_{3}9\cdot\log_{3}27
+  skills:
+  - odróżnianie iloczynu logarytmów od logarytmu iloczynu
+  - obliczanie logarytmu z definicji
+  verification:
+    checkability: REFERENCE_CALL
+    note: 6.0 vs 6.0 (tol 1e-09)
+- id: g-cm-08
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: 'diagnoza błędu: iloraz logarytmów'
+  statement: 'Oblicz wartość wyrażenia \frac{\log_{5}125}{\log_{5}25}. Uczeń zapisał: \frac{\log_{5}125}{\log_{5}25}=\log_{5}\frac{125}{25}=\log_{5}5=1.
+    Wyjaśnij błąd i podaj poprawną wartość.'
+  statement_latex: \frac{\log_{5}125}{\log_{5}25}
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń potraktował iloraz logarytmów jak logarytm ilorazu i otrzymał \log_{5}5=1.
+    DLACZEGO TO ŹLE: logarytm ilorazu jest równy RÓŻNICY logarytmów: \log_{5}125-\log_{5}25=\log_{5}\frac{125}{25}=\log_{5}5=1. Iloraz logarytmów to zupełnie inna konstrukcja — to wzór na zamianę podstawy: \frac{\log_{5}125}{\log_{5}25}=\log_{25}125.
+    POPRAWNIE: \log_{5}125=3, bo 5^{3}=125, oraz \log_{5}25=2, bo 5^{2}=25. Zatem \frac{\log_{5}125}{\log_{5}25}=\frac{3}{2}=1{,}5.
+    (Sprawdzenie: \log_{25}125=c \iff 5^{2c}=5^{3} \iff c=\frac{3}{2}.)
+    ODPOWIEDŹ: \frac{3}{2}.
+  solution_steps:
+  - Zauważ, że \log_{a}b-\log_{a}c=\log_{a}\frac{b}{c}; iloraz logarytmów to co innego.
+  - Oblicz osobno \log_{5}125=3 oraz \log_{5}25=2.
+  - 'Podziel: \frac{3}{2}=1{,}5.'
+  - Zauważ dodatkowo, że \frac{\log_{5}125}{\log_{5}25}=\log_{25}125=\frac{3}{2} (wzór na zamianę podstawy).
+  answer:
+    kind: NUMERIC
+    value: 1.5
+  checks:
+  - kind: evaluate
+    expr: \frac{\log_{5}125}{\log_{5}25}
+  skills:
+  - odróżnianie ilorazu logarytmów od logarytmu ilorazu
+  - zamiana podstawy logarytmu
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 1.5 vs 1.5 (tol 1e-09)'
+- id: g-cm-09
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: 'diagnoza błędu: kwadrat logarytmu a logarytm potęgi'
+  statement: 'Oblicz wartość wyrażenia W = \left(\log_{2}16\right)^{2}-\log_{2}16^{2}. Uczeń zapisał:
+    \left(\log_{2}16\right)^{2}=2\cdot\log_{2}16=8 oraz \log_{2}16^{2}=\left(\log_{2}16\right)^{2}=16,
+    więc W=8-16=-8. Wskaż błąd i podaj poprawną wartość.'
+  statement_latex: W = \left(\log_{2}16\right)^{2}-\log_{2}\left(16^{2}\right)
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń zamienił miejscami oba zapisy — 'zsunął' wykładnik z kwadratu całego logarytmu i jednocześnie potraktował \log_{2}16^{2} jak kwadrat logarytmu. Otrzymał W = 8-16 = -8.
+    DLACZEGO TO ŹLE: wykładnik schodzi przed logarytm tylko wtedy, gdy dotyczy LICZBY LOGARYTMOWANEJ: \log_{a}b^{r}=r\cdot\log_{a}b. Kwadrat całego logarytmu, czyli \left(\log_{a}b\right)^{2}, to zwykłe podniesienie liczby do kwadratu i nie da się go uprościć tym wzorem.
+    POPRAWNIE: \log_{2}16=4, więc
+    \left(\log_{2}16\right)^{2}=4^{2}=16,
+    \log_{2}16^{2}=2\cdot\log_{2}16=2\cdot 4=8 (istotnie 16^{2}=256=2^{8}).
+    Zatem W = 16-8 = 8.
+    ODPOWIEDŹ: W = 8.
+  solution_steps:
+  - Oblicz \log_{2}16=4.
+  - 'Podnieś do kwadratu wartość logarytmu: \left(\log_{2}16\right)^{2}=4^{2}=16.'
+  - 'Zastosuj wzór na logarytm potęgi: \log_{2}\left(16^{2}\right)=2\cdot 4=8.'
+  - 'Odejmij: W = 16-8 = 8 (błędny wynik ucznia to -8).'
+  answer:
+    kind: NUMERIC
+    value: 8.0
+  checks:
+  - kind: evaluate
+    expr: \left(\log_{2}16\right)^{2}-\log_{2}\left(16^{2}\right)
+  skills:
+  - logarytm potęgi
+  - odróżnianie (\log_a b)^r od \log_a b^r
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 8.0 vs 8.0 (tol 1e-09)'
+- id: g-cm-10
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: 'diagnoza błędu: ujemna liczba logarytmowana'
+  statement: 'Dane jest wyrażenie \log_{3}\left(2-x\right). Uczeń podstawił x=11 i zapisał: \log_{3}\left(2-11\right)=\log_{3}\left(-9\right)=-2,
+    bo ''minus przechodzi przed logarytm''. Wyjaśnij, dlaczego to rozumowanie jest błędne. Następnie a)
+    wyznacz zbiór wszystkich x, dla których wyrażenie \log_{3}\left(2-x\right) ma sens, oraz b) oblicz
+    jego wartość dla x=-7.'
+  statement_latex: \log_{3}\left(2-x\right)
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń przyjął, że \log_{3}\left(-9\right)=-2, 'wyciągając minus' przed logarytm.
+    DLACZEGO TO ŹLE: z definicji \log_{3}\left(-9\right)=c oznaczałoby 3^{c}=-9. Ale potęga liczby dodatniej jest zawsze dodatnia, więc żadne c nie spełnia tej równości — liczba \log_{3}\left(-9\right) po prostu NIE ISTNIEJE. Ujemna może być WARTOŚĆ logarytmu (np. \log_{3}\frac{1}{9}=-2), ale nigdy liczba logarytmowana. Dla x=11 wyrażenie nie ma sensu.
+    a) Warunek: 2-x>0, czyli x<2. Zbiorem tych x jest przedział \left(-\infty,\ 2\right).
+    b) Dla x=-7 mamy 2-\left(-7\right)=9>0, więc wyrażenie ma sens i \log_{3}9=2, bo 3^{2}=9.
+  solution_steps:
+  - 'Zapisz warunek istnienia logarytmu: liczba logarytmowana musi być dodatnia.'
+  - 'Pokaż, że \log_{3}\left(-9\right) nie istnieje: równanie 3^{c}=-9 nie ma rozwiązań, bo 3^{c}>0.'
+  - a) Rozwiąż nierówność 2-x>0, otrzymując x<2, czyli x\in\left(-\infty,\ 2\right).
+  - 'b) Podstaw x=-7: 2-\left(-7\right)=9, więc \log_{3}9=2.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: dziedzina
+      answer:
+        kind: INTERVAL
+        lo: -\infty
+        hi: '2'
+    - name: wartosc
+      answer:
+        kind: NUMERIC
+        value: 2.0
+  checks:
+  - kind: solve_inequality
+    expr: 2-x>0
+    part: dziedzina
+  - kind: evaluate
+    expr: \log_{3}\left(2-\left(-7\right)\right)
+    part: wartosc
+  skills:
+  - warunek b>0 dla liczby logarytmowanej
+  - wyznaczanie dziedziny wyrażenia logarytmicznego
+  - obliczanie wartości logarytmu
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [dziedzina] SymPy solved it fresh: endpoints matched ; [wartosc]
+      SymPy solved it fresh: 2.0 vs 2.0 (tol 1e-09)'
+- id: g-ch-t02
+  slot: CHALLENGE
+  ramp_index: 0
+  difficulty: 4
+  exercise_type: wyznaczanie wartości wyrażenia logarytmicznego z warunków na liczby
+  statement: Liczby dodatnie \(x\) oraz \(y\) spełniają jednocześnie warunki \( x\cdot y = 10^{5} \) oraz
+    \( \frac{x}{y} = 10 \). Oblicz wartość wyrażenia \( \log x + 2\cdot\log y \) (logarytmy dziesiętne).
+  statement_latex: x\cdot y = 10^{5}, \quad \frac{x}{y} = 10, \quad \log x + 2\cdot\log y = ?
+  solution: |-
+    Oba warunki logarytmujemy (logarytm dziesiętny), oznaczając \(p = \log x\) oraz \(q = \log y\).
+    Z pierwszego warunku: \(\log\left(x\cdot y\right) = \log 10^{5}\), czyli \(\log x + \log y = 5\), zatem \(p + q = 5\).
+    Z drugiego warunku: \(\log\frac{x}{y} = \log 10\), czyli \(\log x - \log y = 1\), zatem \(p - q = 1\).
+    Dodając równania stronami: \(2p = 6\), więc \(p = 3\), a stąd \(q = 2\).
+    Szukane wyrażenie: \(\log x + 2\cdot\log y = p + 2q = 3 + 2\cdot 2 = 7\).
+    Sprawdzenie: \(p = 3\) i \(q = 2\) oznacza \(x = 1000\), \(y = 100\); istotnie \(x\cdot y = 10^{5}\) i \(\frac{x}{y} = 10\).
+  solution_steps:
+  - Oznacz p = log x, q = log y.
+  - 'Zlogarytmuj warunek x·y = 10^5: p + q = 5 (logarytm iloczynu).'
+  - 'Zlogarytmuj warunek x/y = 10: p − q = 1 (logarytm ilorazu).'
+  - 'Rozwiąż układ: p = 3, q = 2.'
+  - Oblicz p + 2q = 3 + 4 = 7.
+  answer:
+    kind: NUMERIC
+    value: 7.0
+    latex: '7'
+  checks:
+  - kind: evaluate
+    expr: \log_{10}1000 + 2\cdot\log_{10}100
+  skills:
+  - logarytmowanie warunków
+  - logarytm iloczynu i ilorazu
+  - układ równań liniowych
+  - składanie szukanego wyrażenia
+  verification:
+    checkability: REFERENCE_CALL
+    note: 7.0 vs 7.0 (tol 1e-09)
+- id: g-ch-t03
+  slot: CHALLENGE
+  ramp_index: 1
+  difficulty: 5
+  exercise_type: modelowanie równaniem logarytmicznym z warunkiem dodatniości
+  statement: Dwie liczby dodatnie różnią się o 24. Logarytm o podstawie 3 z iloczynu tych liczb jest równy
+    4. Wyznacz obie te liczby oraz oblicz różnicę logarytmu o podstawie 3 z liczby większej i logarytmu
+    o podstawie 3 z liczby mniejszej.
+  statement_latex: \log_{3}\left(x\cdot\left(x+24\right)\right) = 4, \quad x > 0
+  solution: |-
+    Oznaczmy przez \(x\) mniejszą z liczb; wtedy większa jest równa \(x + 24\), przy czym z warunków zadania \(x > 0\).
+    Warunek zapisujemy równaniem: \(\log_{3}\left(x\cdot\left(x+24\right)\right) = 4\), więc z definicji logarytmu \(x\cdot\left(x+24\right) = 3^{4} = 81\).
+    Stąd \(x^{2} + 24x - 81 = 0\). Wyróżnik: \(\Delta = 24^{2} + 4\cdot 81 = 576 + 324 = 900\), \(\sqrt{\Delta} = 30\).
+    Pierwiastki: \(x = \frac{-24 - 30}{2} = -27\) lub \(x = \frac{-24 + 30}{2} = 3\).
+    Warunek \(x > 0\) odrzuca \(x = -27\), więc mniejsza liczba to \(3\), a większa \(3 + 24 = 27\).
+    Różnica logarytmów: \(\log_{3}27 - \log_{3}3 = \log_{3}\frac{27}{3} = \log_{3}9 = 2\).
+    Sprawdzenie: \(3\cdot 27 = 81\) i \(\log_{3}81 = 4\) — zgadza się.
+  solution_steps:
+  - 'Wprowadź zmienną: mniejsza liczba x > 0, większa x + 24.'
+  - 'Zapisz warunek: log_3(x(x+24)) = 4, czyli x(x+24) = 3^4 = 81.'
+  - 'Rozwiąż x² + 24x − 81 = 0: Δ = 900, x = 3 lub x = −27.'
+  - Odrzuć x = −27 (liczby mają być dodatnie); liczby to 3 i 27.
+  - Oblicz log_3 27 − log_3 3 = log_3 9 = 2.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: liczba_mniejsza
+      answer:
+        kind: NUMERIC
+        value: 3.0
+        latex: '3'
+    - name: liczba_wieksza
+      answer:
+        kind: NUMERIC
+        value: 27.0
+        latex: '27'
+    - name: roznica_logarytmow
+      answer:
+        kind: NUMERIC
+        value: 2.0
+        latex: '2'
+  checks:
+  - kind: evaluate
+    expr: \frac{-24 + \sqrt{24^{2} + 4\cdot 81}}{2}
+    part: liczba_mniejsza
+  - kind: evaluate
+    expr: \frac{-24 + \sqrt{24^{2} + 4\cdot 81}}{2} + 24
+    part: liczba_wieksza
+  - kind: evaluate
+    expr: \log_{3}27 - \log_{3}3
+    part: roznica_logarytmow
+  stated_model:
+    variable: x
+    objective_latex: x\cdot\left(x+24\right) = 81
+    domain_lo: '0'
+    goal: value
+    constraint_used: x>0,\ \text{druga liczba} = x+24
+  skills:
+  - wprowadzenie zmiennej
+  - definicja logarytmu
+  - równanie kwadratowe
+  - odrzucanie rozwiązania sprzecznego z warunkiem zadania
+  - logarytm ilorazu
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''x'': ''x\\cdot\\left(x+24\\right)
+      = 81'') — human review'
+- id: g-ch-t04
+  slot: CHALLENGE
+  ramp_index: 2
+  difficulty: 5
+  exercise_type: 'modelowanie: logarytm jako działanie odwrotne do potęgowania (wzór + dziedzina + obliczenie)'
+  statement: W hodowli laboratoryjnej liczba bakterii podwaja się co 20 minut. W chwili rozpoczęcia obserwacji
+    w hodowli było 400 bakterii. Hodowlę prowadzi się w naczyniu, w którym może się znaleźć co najwyżej
+    60000 bakterii. a) Wyznacz wzór, z którego można obliczyć czas \(t\) (w minutach, liczony od chwili
+    rozpoczęcia obserwacji) potrzebny do tego, by liczba bakterii w hodowli wzrosła do \(n\), oraz podaj
+    zbiór tych wartości \(n\), dla których wzór ten opisuje hodowlę prowadzoną w tym naczyniu. b) Oblicz,
+    po ilu minutach od rozpoczęcia obserwacji w hodowli będzie 51000 bakterii — a jeśli taka liczba w
+    tym naczyniu wystąpić nie może, wyjaśnij dlaczego; następnie oblicz, po ilu minutach w hodowli będzie
+    51200 bakterii, i rozstrzygnij, czy naczynie pomieści tę liczbę bakterii.
+  statement_latex: n\left(t\right) = 400\cdot 2^{\frac{t}{20}}, \qquad t = 20\cdot\log_{2}\frac{n}{400}
+  solution: |-
+    a) Po każdych 20 minutach liczba bakterii mnoży się przez 2, więc po czasie \(t\) minut liczba bakterii wynosi \(n = 400\cdot 2^{\frac{t}{20}}\).
+    Odwracamy tę zależność: \(2^{\frac{t}{20}} = \frac{n}{400}\), a z definicji logarytmu \(\frac{t}{20} = \log_{2}\frac{n}{400}\), czyli
+    \(t = 20\cdot\log_{2}\frac{n}{400}\).
+    Wzór ma sens dla \(n > 0\), ale opisuje hodowlę od chwili rozpoczęcia obserwacji (czyli \(t \ge 0\), stąd \(n \ge 400\)) i tylko dopóki bakterie mieszczą się w naczyniu (\(n \le 60000\)). Zatem \(n \in \left[400;\ 60000\right]\).
+    b) Dla \(n = 51200\) mamy \(\frac{n}{400} = 128 = 2^{7}\), więc \(t = 20\cdot\log_{2}2^{7} = 20\cdot 7 = 140\) minut.
+    Sprawdzenie pojemności: \(51200 \le 60000\), więc naczynie pomieści tę liczbę bakterii (a więc wynik 140 minut jest zgodny z modelem).
+    Uwaga do liczby 51000: \(\frac{51000}{400} = 127{,}5\) nie jest potęgą dwójki, więc czas \(t = 20\cdot\log_{2}127{,}5\) nie jest liczbą wymierną możliwą do wyznaczenia bez tablic — sam stan 51000 bakterii jest jednak w tym naczyniu dopuszczalny, bo \(51000 \le 60000\); liczba, dla której rachunek jest dokładny, to 51200.
+  solution_steps:
+  - 'Zbuduj model wzrostu: po t minutach liczba bakterii to n = 400·2^{t/20}.'
+  - 'Odwróć zależność logarytmem: t/20 = log_2 (n/400), czyli t = 20·log_2 (n/400).'
+  - 'Ustal zbiór wartości n: t ≥ 0 daje n ≥ 400, pojemność naczynia daje n ≤ 60000, więc n ∈ [400; 60000].'
+  - 'Podstaw n = 51200: 51200/400 = 128 = 2^7, więc t = 20·7 = 140 minut.'
+  - 'Sprawdź warunek brzegowy: 51200 ≤ 60000, więc naczynie pomieści tę liczbę bakterii.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wzor
+      answer:
+        kind: SYMBOLIC
+        latex: t = 20\cdot\log_{2}\frac{n}{400}
+    - name: dziedzina
+      answer:
+        kind: INTERVAL
+        latex: \left[400;\ 60000\right]
+        lo: '400'
+        hi: '60000'
+        lo_open: false
+        hi_open: false
+    - name: czas_dla_51200
+      answer:
+        kind: NUMERIC
+        value: 140.0
+        latex: '140'
+    - name: czy_naczynie_pomiesci
+      answer:
+        kind: BOOLEAN
+        truth: true
+    - name: komentarz_do_51000
+      answer:
+        kind: NOT_MACHINE_CHECKABLE
+        reason: 'Uczeń ma wyjaśnić, że 51000 : 400 = 127,5 nie jest potęgą dwójki, więc czasu t = 20·log_2
+          127,5 nie da się podać dokładnie bez tablic, choć sama liczba 51000 mieści się w naczyniu (51000
+          ≤ 60000).'
+  checks:
+  - kind: evaluate
+    expr: 20\cdot\log_{2}\left(\frac{51200}{400}\right)
+    var: n
+    part: czas_dla_51200
+  stated_model:
+    variable: n
+    objective_latex: t\left(n\right) = 20\cdot\log_{2}\frac{n}{400}
+    domain_lo: '400'
+    domain_hi: '60000'
+    domain_lo_open: false
+    domain_hi_open: false
+    goal: value
+    constraint_used: n = 400\cdot 2^{\frac{t}{20}},\ n\le 60000
+  skills:
+  - budowanie modelu wykładniczego
+  - odwracanie zależności logarytmem
+  - wyznaczanie dziedziny wzoru
+  - obliczanie logarytmu z definicji
+  - sprawdzanie warunku brzegowego
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (objective is not a function of ''n'': ''t\\left(n\\right)
+      = 20\\cdot\\log_{2}\\frac{n}{400}'') — human review'

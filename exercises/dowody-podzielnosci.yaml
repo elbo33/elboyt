@@ -1,0 +1,858 @@
+section: dowody-podzielnosci
+name: Dowody dotyczące podzielności liczb całkowitych
+scope: Divisibility and remainders; representing integers by form (2k, 3k+1, ...); short direct proofs
+  about divisibility and parity.
+requirements:
+- I.2
+counts:
+  total: 16
+  DETERMINISTIC: 2
+  REFERENCE_CALL: 5
+  NOT_MACHINE_CHECKABLE: 7
+  STATED_MODEL: 2
+exercises:
+- id: g-th-00
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: dzielenie z resztą
+  statement: Zapisz liczbę \(-47\) w postaci \(-47 = 6\cdot q + r\), gdzie \(q\) i \(r\) są liczbami całkowitymi
+    oraz \(0 \le r < 6\). Podaj wyznaczoną resztę \(r\) oraz iloraz całkowity \(q\).
+  statement_latex: -47 = 6\cdot q + r,\qquad 0 \le r < 6
+  solution: |-
+    Szukamy takiej liczby całkowitej q, aby po odjęciu 6\cdot q od liczby -47 otrzymać liczbę z przedziału [0,6). Dla q = -8 mamy 6\cdot(-8) = -48, a więc r = -47 - (-48) = 1 oraz 0 \le 1 < 6. Zatem -47 = 6\cdot(-8) + 1, czyli reszta wynosi 1, a iloraz całkowity wynosi -8.
+
+    Uwaga: zapis -47 = 6\cdot(-7) + (-5) nie jest poprawny, bo reszta nie może być ujemna.
+  solution_steps:
+  - Z twierdzenia o dzieleniu z resztą szukamy q, r całkowitych, dla których -47 = 6\cdot q + r oraz 0
+    \le r < 6.
+  - Największa wielokrotność liczby 6 nie większa od -47 to 6\cdot(-8) = -48.
+  - Obliczamy r = -47 - \left(-48\right) = 1 i sprawdzamy warunek 0 \le 1 < 6.
+  - 'Zapisujemy wynik: -47 = 6\cdot\left(-8\right) + 1, więc r = 1, q = -8.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: reszta r
+      answer:
+        kind: NUMERIC
+        value: 1.0
+    - name: iloraz q
+      answer:
+        kind: NUMERIC
+        value: -8.0
+  checks:
+  - kind: evaluate
+    expr: -47 - 6\cdot\left(-8\right)
+    part: reszta r
+  - kind: evaluate
+    expr: \frac{-47 - 1}{6}
+    part: iloraz q
+  skills:
+  - twierdzenie o dzieleniu z resztą
+  - wyznaczanie reszty liczby ujemnej
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [reszta r] SymPy solved it fresh: 1.0 vs 1.0 (tol 1e-09) ;
+      [iloraz q] SymPy solved it fresh: -8.0 vs -8.0 (tol 1e-09)'
+- id: g-th-01
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: ogólna postać liczby o zadanej reszcie
+  statement: Liczba całkowita \(n\) daje resztę \(3\) przy dzieleniu przez \(7\). Zapisz ogólną postać
+    liczby \(n\) za pomocą parametru całkowitego \(k\) oraz wyznacz resztę z dzielenia liczby \(n+11\)
+    przez \(7\).
+  statement_latex: n = 7\cdot k + 3,\qquad k \in \mathbb{Z}
+  solution: |-
+    Liczby dające resztę 3 przy dzieleniu przez 7 to dokładnie liczby postaci n = 7\cdot k + 3, gdzie k jest liczbą całkowitą.
+
+    Wtedy n + 11 = 7\cdot k + 3 + 11 = 7\cdot k + 14 = 7\cdot\left(k+2\right).
+
+    Liczba k+2 jest całkowita, więc n+11 jest iloczynem liczby 7 i liczby całkowitej, czyli jest podzielna przez 7. Reszta z dzielenia liczby n+11 przez 7 wynosi 0.
+  solution_steps:
+  - 'Zapisujemy n wzorem: n = 7\cdot k + 3, gdzie k \in \mathbb{Z}.'
+  - Obliczamy n + 11 = 7\cdot k + 3 + 11 = 7\cdot k + 14.
+  - 'Wyłączamy czynnik: 7\cdot k + 14 = 7\cdot\left(k+2\right), a k+2 jest liczbą całkowitą.'
+  - Zatem 7 \mid \left(n+11\right), czyli reszta wynosi 0.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: postać liczby n
+      answer:
+        kind: SYMBOLIC
+        latex: 7k+3,\ k\in\mathbb{Z}
+    - name: reszta z dzielenia n+11 przez 7
+      answer:
+        kind: NUMERIC
+        value: 0.0
+  checks:
+  - kind: evaluate
+    expr: 7\cdot k + 3 + 11 - 7\cdot\left(k+2\right)
+    var: k
+    part: reszta z dzielenia n+11 przez 7
+  skills:
+  - zapisywanie liczby wzorem nk+r
+  - wyznaczanie reszty wyrażenia
+  verification:
+    checkability: REFERENCE_CALL
+    note: 'could not compare: part disagrees: PARSE_ERROR: "UnexpectedCharacters: No terminal matches
+      '','' in the current parser context, at line 1 col 5"'
+- id: g-th-02
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: dowód wprost przez wyłączenie czynnika
+  statement: Dane jest wyrażenie \(5n^{2}+15n\), gdzie \(n\) jest liczbą całkowitą. Zapisz to wyrażenie
+    w postaci \(5\cdot W\left(n\right)\), podając wyrażenie \(W\left(n\right)\), a następnie wykaż, że
+    dla każdej liczby całkowitej \(n\) liczba \(5n^{2}+15n\) jest podzielna przez \(5\).
+  statement_latex: 5n^{2}+15n = 5\cdot W\left(n\right)
+  solution: |-
+    Niech n będzie dowolną liczbą całkowitą. Wyłączamy czynnik 5 przed nawias:
+    5n^{2}+15n = 5\cdot\left(n^{2}+3n\right),
+    zatem W\left(n\right) = n^{2}+3n.
+
+    Liczba n jest całkowita, więc n^{2}+3n jako suma iloczynów liczb całkowitych też jest liczbą całkowitą. Wyrażenie 5n^{2}+15n jest więc iloczynem liczby 5 i liczby całkowitej, a to zgodnie z definicją podzielności oznacza, że 5 \mid \left(5n^{2}+15n\right). To należało wykazać.
+  solution_steps:
+  - Niech n będzie dowolną liczbą całkowitą.
+  - 'Wyłączamy wspólny czynnik: 5n^{2}+15n = 5\cdot\left(n^{2}+3n\right), czyli W\left(n\right)=n^{2}+3n.'
+  - Zauważamy, że n^{2}+3n jest liczbą całkowitą (suma i iloczyn liczb całkowitych).
+  - 'Wniosek: 5n^{2}+15n jest iloczynem liczby 5 i liczby całkowitej, więc jest podzielne przez 5.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wyrażenie W(n)
+      answer:
+        kind: SYMBOLIC
+        latex: n^{2}+3n
+    - name: dowód podzielności przez 5
+      answer:
+        kind: NOT_MACHINE_CHECKABLE
+        reason: Należy zapisać 5n^{2}+15n = 5\cdot\left(n^{2}+3n\right), stwierdzić, że n^{2}+3n jest
+          liczbą całkowitą, i powołać się na definicję podzielności.
+  checks:
+  - kind: simplify
+    expr: \frac{5n^{2}+15n}{5}
+    var: n
+    part: wyrażenie W(n)
+  skills:
+  - wyłączanie czynnika przed nawias
+  - definicja podzielności
+  - zapisanie wniosku
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'part(s) need a human: dowód podzielności przez 5 · 1/1 other parts solved fresh'
+- id: g-ex-03
+  slot: EXERCISE
+  ramp_index: 1
+  difficulty: 2
+  exercise_type: wyznaczanie reszty z uzasadnieniem
+  statement: Wyznacz resztę z dzielenia liczby \(4n^{2}+8n+11\) przez \(4\) dla dowolnej liczby całkowitej
+    \(n\) oraz uzasadnij, że reszta ta nie zależy od \(n\).
+  statement_latex: 4n^{2}+8n+11 = 4\cdot\left(n^{2}+2n+2\right)+3
+  solution: |-
+    Niech n będzie dowolną liczbą całkowitą. Przekształcamy wyrażenie tak, aby wyodrębnić wielokrotność liczby 4:
+    4n^{2}+8n+11 = 4n^{2}+8n+8+3 = 4\cdot\left(n^{2}+2n+2\right)+3.
+
+    Liczba n^{2}+2n+2 jest całkowita, więc 4\cdot\left(n^{2}+2n+2\right) jest wielokrotnością liczby 4. Ponadto 0 \le 3 < 4, więc z twierdzenia o dzieleniu z resztą reszta z dzielenia liczby 4n^{2}+8n+11 przez 4 jest równa 3 — niezależnie od wyboru liczby całkowitej n. To należało wykazać.
+  solution_steps:
+  - Niech n będzie dowolną liczbą całkowitą.
+  - 'Rozbijamy wyraz wolny: 11 = 8 + 3, więc 4n^{2}+8n+11 = 4n^{2}+8n+8+3.'
+  - 'Wyłączamy czynnik 4: 4n^{2}+8n+8+3 = 4\cdot\left(n^{2}+2n+2\right)+3.'
+  - Stwierdzamy, że n^{2}+2n+2 jest liczbą całkowitą oraz 0 \le 3 < 4.
+  - 'Wniosek: reszta z dzielenia przez 4 jest równa 3 dla każdej liczby całkowitej n.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: reszta
+      answer:
+        kind: NUMERIC
+        value: 3.0
+    - name: uzasadnienie
+      answer:
+        kind: NOT_MACHINE_CHECKABLE
+        reason: Należy przekształcić wyrażenie do postaci 4\cdot\left(n^{2}+2n+2\right)+3, uzasadnić całkowitość
+          czynnika w nawiasie i sprawdzić warunek 0 \le 3 < 4.
+  checks:
+  - kind: evaluate
+    expr: 4n^{2}+8n+11 - 4\cdot\left(n^{2}+2n+2\right)
+    var: n
+    part: reszta
+  skills:
+  - przekształcanie wyrażenia do postaci d\cdot(\ldots)+r
+  - warunek 0 \le r < d
+  - zapisanie wniosku
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'part(s) need a human: uzasadnienie · 1/1 other parts solved fresh'
+- id: g-ex-04
+  slot: EXERCISE
+  ramp_index: 2
+  difficulty: 3
+  exercise_type: dowód podzielności dla liczby nieparzystej
+  statement: Wykaż, że dla każdej nieparzystej liczby całkowitej \(n\) liczba \(5n^{2}+6n+9\) jest podzielna
+    przez \(4\). Zapisz ponadto iloraz \(\frac{5n^{2}+6n+9}{4}\) jako wyrażenie zmiennej \(l\), przyjmując
+    \(n=2l+1\).
+  statement_latex: 5n^{2}+6n+9,\qquad n = 2l+1,\ l\in\mathbb{Z}
+  solution: |-
+    Niech n będzie dowolną nieparzystą liczbą całkowitą. Wtedy istnieje liczba całkowita l taka, że n = 2l+1.
+
+    Podstawiamy i wykonujemy działania:
+    5\left(2l+1\right)^{2}+6\left(2l+1\right)+9 = 5\cdot\left(4l^{2}+4l+1\right)+12l+6+9 = 20l^{2}+20l+5+12l+15 = 20l^{2}+32l+20.
+
+    Wyłączamy czynnik 4:
+    20l^{2}+32l+20 = 4\cdot\left(5l^{2}+8l+5\right).
+
+    Liczba l jest całkowita, więc 5l^{2}+8l+5 jest liczbą całkowitą. Zatem 5n^{2}+6n+9 jest iloczynem liczby 4 i liczby całkowitej, czyli jest podzielne przez 4. To należało wykazać.
+
+    Iloraz wynosi \frac{5n^{2}+6n+9}{4} = 5l^{2}+8l+5.
+
+    Sprawdzenie (kontrolne, nie zastępuje dowodu): dla n=3, czyli l=1, mamy 45+18+9 = 72 = 4\cdot 18 oraz 5+8+5 = 18.
+  solution_steps:
+  - 'Zapisujemy założenie wzorem: n = 2l+1, gdzie l \in \mathbb{Z}.'
+  - 'Podstawiamy: 5\left(2l+1\right)^{2}+6\left(2l+1\right)+9 = 20l^{2}+20l+5+12l+15.'
+  - 'Redukujemy wyrazy podobne: 20l^{2}+32l+20.'
+  - 'Wyłączamy czynnik 4: 20l^{2}+32l+20 = 4\cdot\left(5l^{2}+8l+5\right), czyli iloraz to 5l^{2}+8l+5.'
+  - 'Stwierdzamy całkowitość wyrażenia 5l^{2}+8l+5 i zapisujemy wniosek: 4 \mid \left(5n^{2}+6n+9\right).'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: iloraz
+      answer:
+        kind: SYMBOLIC
+        latex: 5l^{2}+8l+5
+    - name: dowód
+      answer:
+        kind: NOT_MACHINE_CHECKABLE
+        reason: Należy przyjąć n=2l+1 (l całkowite), przekształcić wyrażenie do postaci 4\cdot\left(5l^{2}+8l+5\right)
+          i uzasadnić, że czynnik w nawiasie jest liczbą całkowitą.
+  checks:
+  - kind: simplify
+    expr: \frac{5\cdot\left(2l+1\right)^{2}+6\cdot\left(2l+1\right)+9}{4}
+    var: l
+    part: iloraz
+  skills:
+  - zapis liczby nieparzystej 2l+1
+  - przekształcenia algebraiczne
+  - definicja podzielności
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'part(s) need a human: dowód · 1/1 other parts solved fresh'
+- id: g-ex-05
+  slot: EXERCISE
+  ramp_index: 3
+  difficulty: 4
+  exercise_type: dowód podzielności przez liczbę złożoną
+  statement: Wykaż, że dla każdej liczby całkowitej \(n\) liczba \(n^{3}+11n\) jest podzielna przez \(6\).
+    Oblicz ponadto iloraz \(\frac{n^{3}+11n}{6}\) dla \(n=7\).
+  statement_latex: n^{3}+11n = \left(n-1\right)\cdot n\cdot\left(n+1\right)+12n
+  solution: |-
+    Niech n będzie dowolną liczbą całkowitą. Zapisujemy
+    n^{3}+11n = \left(n^{3}-n\right)+12n = n\cdot\left(n^{2}-1\right)+12n = \left(n-1\right)\cdot n\cdot\left(n+1\right)+12n.
+
+    Składnik 12n jest podzielny przez 6, bo 12n = 6\cdot 2n, a 2n jest liczbą całkowitą.
+
+    Składnik \left(n-1\right)\cdot n\cdot\left(n+1\right) jest iloczynem trzech kolejnych liczb całkowitych. Ponieważ 6 = 2\cdot 3 oraz NWD(2,3)=1, wystarczy pokazać jego podzielność przez 2 i przez 3.
+    • Podzielność przez 2: wśród dwóch kolejnych liczb n i n+1 dokładnie jedna jest parzysta, więc iloczyn jest podzielny przez 2.
+    • Podzielność przez 3: z twierdzenia o dzieleniu z resztą n = 3k lub n = 3k+1, lub n = 3k+2. Gdy n = 3k, czynnik n dzieli się przez 3; gdy n = 3k+1, to n-1 = 3k; gdy n = 3k+2, to n+1 = 3\left(k+1\right). Innych przypadków nie ma, więc iloczyn zawsze dzieli się przez 3.
+    Zatem \left(n-1\right)n\left(n+1\right) dzieli się przez 6.
+
+    Suma dwóch liczb podzielnych przez 6 jest podzielna przez 6, więc 6 \mid \left(n^{3}+11n\right). To należało wykazać.
+
+    Dla n = 7: 7^{3}+11\cdot 7 = 343+77 = 420 oraz \frac{420}{6} = 70.
+  solution_steps:
+  - Niech n będzie dowolną liczbą całkowitą; zapisujemy n^{3}+11n = \left(n^{3}-n\right)+12n.
+  - Rozkładamy n^{3}-n = \left(n-1\right)\cdot n\cdot\left(n+1\right) — iloczyn trzech kolejnych liczb
+    całkowitych.
+  - Uzasadniamy podzielność tego iloczynu przez 2 (jedna z liczb n, n+1 jest parzysta) i przez 3 (rozpatrujemy
+    n=3k, 3k+1, 3k+2); z NWD(2,3)=1 wynika podzielność przez 6.
+  - Zauważamy, że 12n = 6\cdot 2n jest podzielne przez 6.
+  - Suma liczb podzielnych przez 6 jest podzielna przez 6, więc 6 \mid \left(n^{3}+11n\right).
+  - Obliczamy \frac{7^{3}+11\cdot 7}{6} = \frac{420}{6} = 70.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: dowód podzielności przez 6
+      answer:
+        kind: NOT_MACHINE_CHECKABLE
+        reason: Należy rozłożyć n^{3}+11n = \left(n-1\right)n\left(n+1\right)+12n, uzasadnić podzielność
+          iloczynu trzech kolejnych liczb przez 2 i przez 3 (wszystkie trzy przypadki reszt) oraz powołać
+          się na NWD(2,3)=1 i na własność sumy liczb podzielnych przez 6.
+    - name: iloraz dla n=7
+      answer:
+        kind: NUMERIC
+        value: 70.0
+  checks:
+  - kind: evaluate
+    expr: \frac{7^{3}+11\cdot 7}{6}
+    var: n
+    part: iloraz dla n=7
+  skills:
+  - rozkład n^{3}-n=(n-1)n(n+1)
+  - iloczyn kolejnych liczb całkowitych
+  - podzielność przez 6 przez rozbicie 6=2\cdot 3
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'part(s) need a human: dowód podzielności przez 6 · 1/1 other parts solved fresh'
+- id: g-ex-t00
+  slot: EXERCISE
+  ramp_index: 6
+  difficulty: 3
+  exercise_type: dowód podzielności z wnioskiem liczbowym
+  statement: |-
+    Dana jest liczba \left(2\cdot n+5\right)^{2}-\left(2\cdot n-1\right)^{2}, gdzie n jest liczbą całkowitą.
+    a) Wykaż, że dla każdej liczby całkowitej n liczba ta jest podzielna przez 24.
+    b) Oblicz wartość tej liczby dla n=10.
+    c) Wyznacz wszystkie liczby całkowite n, dla których liczba ta jest podzielna przez 48.
+  statement_latex: \left(2\cdot n+5\right)^{2}-\left(2\cdot n-1\right)^{2}
+  solution: |-
+    a) Niech n będzie dowolną liczbą całkowitą. Korzystamy ze wzoru na różnicę kwadratów a^{2}-b^{2}=\left(a-b\right)\left(a+b\right), przyjmując a=2\cdot n+5 oraz b=2\cdot n-1:
+    \left(2\cdot n+5\right)^{2}-\left(2\cdot n-1\right)^{2}=\left[\left(2\cdot n+5\right)-\left(2\cdot n-1\right)\right]\cdot\left[\left(2\cdot n+5\right)+\left(2\cdot n-1\right)\right]=6\cdot\left(4\cdot n+4\right)=24\cdot\left(n+1\right).
+    Liczba n+1 jest liczbą całkowitą (suma liczb całkowitych), więc badana liczba jest iloczynem liczby 24 i liczby całkowitej. Zgodnie z definicją podzielności jest ona podzielna przez 24. To należało wykazać.
+
+    b) Dla n=10 otrzymujemy \left(2\cdot 10+5\right)^{2}-\left(2\cdot 10-1\right)^{2}=25^{2}-19^{2}=625-361=264 (zgodnie ze wzorem 24\cdot\left(10+1\right)=264).
+
+    c) Badana liczba równa się 24\cdot\left(n+1\right). Jest ona podzielna przez 48=24\cdot 2 dokładnie wtedy, gdy 24\cdot\left(n+1\right)=48\cdot m dla pewnej całkowitej m, czyli gdy n+1=2\cdot m, a więc gdy n+1 jest liczbą parzystą. To zachodzi dokładnie wtedy, gdy n jest liczbą nieparzystą, tzn. n=2\cdot m+1, gdzie m jest liczbą całkowitą.
+  solution_steps:
+  - 'Zapisz założenie: n jest dowolną liczbą całkowitą.'
+  - Zastosuj wzór na różnicę kwadratów do wyrażenia \left(2\cdot n+5\right)^{2}-\left(2\cdot n-1\right)^{2}.
+  - 'Uprość czynniki: 6\cdot\left(4\cdot n+4\right)=24\cdot\left(n+1\right).'
+  - Zauważ, że n+1 jest liczbą całkowitą, i sformułuj wniosek o podzielności przez 24.
+  - 'Podstaw n=10: 24\cdot 11=264.'
+  - 'Rozwiąż warunek 48\mid 24\cdot\left(n+1\right): n+1 musi być parzyste, czyli n jest nieparzyste,
+    n=2\cdot m+1.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: dowod_24
+      answer:
+        kind: NOT_MACHINE_CHECKABLE
+        reason: Należy przekształcić \left(2n+5\right)^{2}-\left(2n-1\right)^{2} do postaci 24\cdot\left(n+1\right),
+          stwierdzić, że n+1 jest liczbą całkowitą, i powołać się na definicję podzielności.
+    - name: wartosc_dla_n_10
+      answer:
+        kind: NUMERIC
+        value: 264.0
+    - name: n_podzielne_przez_48
+      answer:
+        kind: SYMBOLIC
+        latex: n=2\cdot m+1,\ m\in\mathbb{Z}
+  checks:
+  - kind: evaluate
+    expr: \left(2\cdot 10+5\right)^{2}-\left(2\cdot 10-1\right)^{2}
+    var: n
+    part: wartosc_dla_n_10
+  skills:
+  - wzory skróconego mnożenia w dowodzie
+  - wyłączanie czynnika przed nawias
+  - definicja podzielności
+  - analiza podzielności przez liczbę złożoną
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'part(s) need a human: dowod_24 · 1/2 other parts solved fresh'
+- id: g-ex-t01
+  slot: EXERCISE
+  ramp_index: 7
+  difficulty: 4
+  exercise_type: zapis dziesiętny — dowód i analiza podzielności
+  statement: |-
+    Liczba trzycyfrowa N ma cyfrę setek a, cyfrę dziesiątek b oraz cyfrę jedności c, przy czym c\ge 1 oraz a>c. Przez M oznaczamy liczbę trzycyfrową zapisaną tymi samymi cyframi w odwrotnej kolejności, tzn. o cyfrze setek c, cyfrze dziesiątek b i cyfrze jedności a.
+    a) Wykaż, że różnica N-M jest podzielna przez 99.
+    b) Oblicz różnicę N-M dla N=742.
+    c) Wyznacz wszystkie możliwe wartości różnicy a-c, dla których liczba N-M jest podzielna przez 198.
+  statement_latex: N-M=\left(100\cdot a+10\cdot b+c\right)-\left(100\cdot c+10\cdot b+a\right)
+  solution: |-
+    a) Zapisujemy obie liczby wzorami: N=100\cdot a+10\cdot b+c oraz M=100\cdot c+10\cdot b+a, gdzie a,c\in\{1,2,\ldots,9\}, b\in\{0,1,\ldots,9\}. Wtedy
+    N-M=\left(100\cdot a+10\cdot b+c\right)-\left(100\cdot c+10\cdot b+a\right)=99\cdot a-99\cdot c=99\cdot\left(a-c\right).
+    Liczba a-c jest liczbą całkowitą (różnica cyfr), więc N-M jest iloczynem liczby 99 i liczby całkowitej, zatem jest podzielna przez 99. To należało wykazać.
+
+    b) Dla N=742 mamy a=7, b=4, c=2, więc M=247 oraz N-M=742-247=495 \left(=99\cdot 5\right).
+
+    c) Ponieważ N-M=99\cdot\left(a-c\right) oraz 198=2\cdot 99, a przy tym NWD\left(2,99\right)=1, liczba 99\cdot\left(a-c\right) jest podzielna przez 198 dokładnie wtedy, gdy jest parzysta, czyli gdy a-c jest liczbą parzystą (bo 99 jest nieparzyste). Z warunków zadania a>c oraz a\le 9 i c\ge 1 wynika, że 1\le a-c\le 8. Parzyste wartości w tym zakresie to 2, 4, 6, 8 i każda z nich jest osiągalna, np. a-c=8 dla a=9, c=1. Zatem a-c\in\{2,4,6,8\}.
+  solution_steps:
+  - 'Zapisz liczby wzorami: N=100\cdot a+10\cdot b+c, M=100\cdot c+10\cdot b+a, z warunkami na cyfry.'
+  - 'Wykonaj odejmowanie i wyłącz czynnik: N-M=99\cdot\left(a-c\right).'
+  - Stwierdź, że a-c jest liczbą całkowitą, i zapisz wniosek o podzielności przez 99.
+  - Dla N=742 wyznacz M=247 i oblicz 742-247=495.
+  - Rozłóż 198=2\cdot 99, NWD(2,99)=1, więc 198\mid 99\cdot\left(a-c\right) wtedy i tylko wtedy, gdy a-c
+    jest parzyste.
+  - 'Uwzględnij ograniczenia cyfr: 1\le a-c\le 8, stąd a-c\in\{2,4,6,8\}.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: dowod_99
+      answer:
+        kind: NOT_MACHINE_CHECKABLE
+        reason: Należy zapisać N i M w postaci dziesiętnej, otrzymać N-M=99\cdot\left(a-c\right) i stwierdzić,
+          że a-c jest liczbą całkowitą.
+    - name: roznica_dla_742
+      answer:
+        kind: NUMERIC
+        value: 495.0
+    - name: wartosci_a_minus_c
+      answer:
+        kind: SET
+        members:
+        - '2'
+        - '4'
+        - '6'
+        - '8'
+  checks:
+  - kind: evaluate
+    expr: 742-247
+    var: a
+    part: roznica_dla_742
+  skills:
+  - zapis dziesiętny liczby trzycyfrowej
+  - dowód wprost przez wyłączenie czynnika
+  - podzielność przez iloczyn liczb względnie pierwszych
+  - analiza warunków na cyfry
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'part(s) need a human: dowod_99 · 1/2 other parts solved fresh'
+- id: g-cm-06
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: ocena poprawności rozumowania
+  statement: 'Kasia miała wykazać, że dla każdej liczby całkowitej \(n\) liczba \(n^{2}+3n\) jest parzysta.
+    Napisała: „dla \(n=1\) otrzymuję \(4\), dla \(n=2\) otrzymuję \(10\), dla \(n=3\) otrzymuję \(18\),
+    dla \(n=4\) otrzymuję \(28\) — wszystkie te liczby są parzyste, zatem teza jest udowodniona”. Rozstrzygnij,
+    czy przedstawione rozumowanie jest dowodem, oblicz wartość wyrażenia \(n^{2}+3n\) dla \(n=-5\) i przeprowadź
+    poprawny dowód.'
+  statement_latex: n^{2}+3n = n\cdot\left(n+3\right)
+  solution: |-
+    Błędne rozumowanie: Kasia sprawdziła tezę dla n = 1, 2, 3, 4 i uznała, że skoro w każdym z tych czterech przypadków wynik jest parzysty, to zdanie jest udowodnione. Otrzymała „odpowiedź”: teza udowodniona.
+
+    Dlaczego to błąd: zdanie dotyczy WSZYSTKICH liczb całkowitych, a jest ich nieskończenie wiele (także 0 i liczby ujemne, np. n = -5, dla którego n^{2}+3n = 25-15 = 10). Sprawdzenie skończenie wielu przykładów pozwala co najwyżej postawić hipotezę; dowodem jest dopiero rozumowanie ogólne z literą n. (Kontrprzykładem można natomiast zdanie ogólne obalić — jeden wystarczy.)
+
+    Poprawny dowód: niech n będzie dowolną liczbą całkowitą. Wtedy n^{2}+3n = n\cdot\left(n+3\right).
+    • Jeżeli n = 2k, gdzie k \in \mathbb{Z}, to n\left(n+3\right) = 2\cdot k\left(n+3\right), a k\left(n+3\right) jest liczbą całkowitą.
+    • Jeżeli n = 2k+1, gdzie k \in \mathbb{Z}, to n+3 = 2k+4 = 2\left(k+2\right), więc n\left(n+3\right) = 2\cdot n\left(k+2\right), a n\left(k+2\right) jest liczbą całkowitą.
+    Przypadki wyczerpują wszystkie liczby całkowite, więc n^{2}+3n jest zawsze liczbą parzystą. To należało wykazać.
+
+    Odpowiedź: rozumowanie Kasi NIE jest dowodem; dla n = -5 wartość wyrażenia wynosi 10.
+  solution_steps:
+  - 'Odtwarzamy błędne rozumowanie: sprawdzenie czterech przykładów i uznanie tezy za udowodnioną.'
+  - 'Wskazujemy błąd: zdanie dotyczy nieskończenie wielu liczb całkowitych (także ujemnych), więc przykłady
+    dają tylko hipotezę.'
+  - 'Obliczamy wartość dla n = -5: \left(-5\right)^{2}+3\cdot\left(-5\right) = 25-15 = 10.'
+  - 'Przeprowadzamy poprawny dowód: n^{2}+3n = n\left(n+3\right) i rozpatrujemy przypadki n = 2k oraz
+    n = 2k+1.'
+  - 'Formułujemy wniosek: dla każdej liczby całkowitej n liczba n^{2}+3n jest parzysta.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: czy rozumowanie Kasi jest dowodem
+      answer:
+        kind: BOOLEAN
+        truth: false
+    - name: wartość wyrażenia dla n=-5
+      answer:
+        kind: NUMERIC
+        value: 10.0
+  checks:
+  - kind: evaluate
+    expr: \left(-5\right)^{2}+3\cdot\left(-5\right)
+    var: n
+    part: wartość wyrażenia dla n=-5
+  skills:
+  - odróżnianie sprawdzenia przykładów od dowodu
+  - dowód wprost dla dowolnej liczby całkowitej
+  verification:
+    checkability: REFERENCE_CALL
+    note: '2 parts matched · det: [wartość wyrażenia dla n=-5] SymPy solved it fresh: 10.0 vs 10.0 (tol
+      1e-09)'
+- id: g-cm-07
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: wykrycie błędu w oznaczeniach
+  statement: 'Uczeń miał rozstrzygnąć, czy prawdziwe jest zdanie: „suma dwóch liczb parzystych jest podzielna
+    przez \(4\)”. Napisał: „niech \(m\) i \(n\) będą liczbami parzystymi, czyli \(m=2k\) i \(n=2k\); wtedy
+    \(m+n=4k\), więc suma jest podzielna przez \(4\)”. Wskaż błąd w tym rozumowaniu, rozstrzygnij, czy
+    zdanie jest prawdziwe, i podaj resztę z dzielenia liczby \(2+4\) przez \(4\).'
+  statement_latex: m = 2\cdot k,\quad n = 2\cdot l,\quad m+n = 2\cdot\left(k+l\right)
+  solution: |-
+    Błędne rozumowanie: uczeń przyjął m = 2k oraz n = 2k, otrzymał m+n = 4k i wyciągnął wniosek, że 4 \mid \left(m+n\right). Wniosek: „zdanie prawdziwe”.
+
+    Dlaczego to błąd: zapis m = 2k i n = 2k wymusza m = n, a więc uczeń udowodnił tezę tylko dla dwóch RÓWNYCH liczb parzystych. Każda nowa liczba wymaga nowej litery.
+
+    Poprawnie: niech m = 2k oraz n = 2l, gdzie k, l \in \mathbb{Z}. Wtedy m+n = 2k+2l = 2\cdot\left(k+l\right), a k+l jest liczbą całkowitą — suma jest zatem parzysta, ale nic więcej z tego nie wynika.
+
+    Kontrprzykład: m = 2, n = 4 są parzyste, a m+n = 6 oraz 6 = 4\cdot 1 + 2, więc reszta z dzielenia liczby 6 przez 4 wynosi 2, czyli 6 nie jest podzielne przez 4.
+
+    Odpowiedź: zdanie jest FAŁSZYWE, a reszta z dzielenia liczby 2+4 przez 4 jest równa 2.
+  solution_steps:
+  - 'Odtwarzamy błędne rozumowanie: m = 2k i n = 2k, stąd m+n = 4k.'
+  - 'Wskazujemy błąd: ta sama litera k opisuje dwie różne liczby, co wymusza m = n.'
+  - 'Zapisujemy poprawnie: m = 2k, n = 2l, m+n = 2\left(k+l\right) — suma jest tylko parzysta.'
+  - 'Podajemy kontrprzykład: 2+4 = 6 = 4\cdot 1 + 2, reszta 2.'
+  - 'Wniosek: zdanie jest fałszywe.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: czy zdanie jest prawdziwe
+      answer:
+        kind: BOOLEAN
+        truth: false
+    - name: reszta z dzielenia liczby 2+4 przez 4
+      answer:
+        kind: NUMERIC
+        value: 2.0
+  checks:
+  - kind: evaluate
+    expr: 2+4-4\cdot 1
+    part: reszta z dzielenia liczby 2+4 przez 4
+  skills:
+  - wprowadzanie różnych parametrów dla różnych liczb
+  - obalanie zdania kontrprzykładem
+  verification:
+    checkability: REFERENCE_CALL
+    note: '2 parts matched · det: [reszta z dzielenia liczby 2+4 przez 4] SymPy solved it fresh: 2.0 vs
+      2.0 (tol 1e-09)'
+- id: g-cm-08
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: poprawianie reszty z dzielenia
+  statement: 'Uczeń zapisał dwa stwierdzenia: (1) „liczba \(-23\) daje resztę \(-3\) przy dzieleniu przez
+    \(5\)”, (2) „liczba \(4k+4\), gdzie \(k\) jest liczbą całkowitą, daje resztę \(4\) przy dzieleniu
+    przez \(4\)”. Wskaż błędy w obu stwierdzeniach i podaj poprawne reszty.'
+  statement_latex: -23 = 5\cdot\left(-5\right)+2,\qquad 4k+4 = 4\cdot\left(k+1\right)+0
+  solution: |-
+    Błędne rozumowanie: uczeń napisał -23 = 5\cdot\left(-4\right)-3 i odczytał „resztę” -3; w drugim przypadku z zapisu 4k+4 odczytał „resztę” 4.
+
+    Dlaczego to błąd: w twierdzeniu o dzieleniu z resztą reszta r musi spełniać 0 \le r < b. Liczba -3 jest ujemna, a liczba 4 nie jest mniejsza od dzielnika 4 — żadna z nich nie może być resztą z dzielenia przez 5 (odpowiednio przez 4).
+
+    Poprawnie:
+    (1) -23 = 5\cdot\left(-5\right)+2, bo 5\cdot\left(-5\right) = -25 oraz -23-\left(-25\right) = 2 i 0 \le 2 < 5. Reszta wynosi 2.
+    (2) 4k+4 = 4\cdot\left(k+1\right), a k+1 jest liczbą całkowitą, więc liczba 4k+4 jest podzielna przez 4 i jej reszta z dzielenia przez 4 wynosi 0.
+
+    Odpowiedź: reszty wynoszą odpowiednio 2 oraz 0.
+  solution_steps:
+  - 'Przypominamy warunek z twierdzenia o dzieleniu z resztą: 0 \le r < b.'
+  - Odrzucamy „resztę” -3 (ujemna) i „resztę” 4 (nie jest mniejsza od dzielnika 4).
+  - Zapisujemy -23 = 5\cdot\left(-5\right)+2, więc reszta z dzielenia -23 przez 5 wynosi 2.
+  - Zapisujemy 4k+4 = 4\cdot\left(k+1\right), więc reszta z dzielenia 4k+4 przez 4 wynosi 0.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: reszta z dzielenia -23 przez 5
+      answer:
+        kind: NUMERIC
+        value: 2.0
+    - name: reszta z dzielenia 4k+4 przez 4
+      answer:
+        kind: NUMERIC
+        value: 0.0
+  checks:
+  - kind: evaluate
+    expr: -23 - 5\cdot\left(-5\right)
+    part: reszta z dzielenia -23 przez 5
+  - kind: evaluate
+    expr: 4\cdot k + 4 - 4\cdot\left(k+1\right)
+    var: k
+    part: reszta z dzielenia 4k+4 przez 4
+  skills:
+  - warunek 0 \le r < b
+  - reszta liczby ujemnej
+  - odczytanie reszty z postaci nk+r
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [reszta z dzielenia -23 przez 5] SymPy solved it fresh: 2.0
+      vs 2.0 (tol 1e-09) ; [reszta z dzielenia 4k+4 przez 4] SymPy solved it fresh: 0.0 vs 0.0 (tol 1e-09)'
+- id: g-cm-09
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: uzupełnienie podziału na przypadki
+  statement: 'Uczeń chciał wykazać zdanie: „dla każdej liczby całkowitej \(n\) liczba \(n^{2}+2\) nie
+    jest podzielna przez \(3\)”. Rozpatrzył tylko dwa przypadki: \(n=3k\) oraz \(n=3k+1\) i uznał dowód
+    za zakończony. Wskaż brakujący przypadek, wyznacz resztę z dzielenia liczby \(n^{2}+2\) przez \(3\)
+    w tym przypadku, oblicz wartość wyrażenia \(n^{2}+2\) dla \(n=2\) i rozstrzygnij, czy zdanie ucznia
+    jest prawdziwe.'
+  statement_latex: n = 3k+2 \;\Rightarrow\; n^{2}+2 = 3\cdot\left(3k^{2}+4k+2\right)
+  solution: |-
+    Błędne rozumowanie: uczeń sprawdził, że dla n = 3k mamy n^{2}+2 = 3\cdot 3k^{2}+2 (reszta 2), a dla n = 3k+1 mamy n^{2}+2 = 9k^{2}+6k+3 = 3\cdot\left(3k^{2}+2k+1\right)... — tu zresztą reszta wynosi 0! — i mimo to uznał, że pominięcie przypadku n = 3k+2 nie ma znaczenia. Jego „odpowiedź”: zdanie udowodnione.
+
+    Dlaczego to błąd: przy dzielniku 3 przypadki muszą być trzy: n = 3k, n = 3k+1, n = 3k+2. Pominięcie choćby jednego unieważnia dowód. Tutaj brakujący przypadek wręcz obala tezę.
+
+    Brakujący przypadek n = 3k+2:
+    n^{2}+2 = \left(3k+2\right)^{2}+2 = 9k^{2}+12k+4+2 = 9k^{2}+12k+6 = 3\cdot\left(3k^{2}+4k+2\right).
+    Liczba 3k^{2}+4k+2 jest całkowita, więc n^{2}+2 jest podzielne przez 3 — reszta wynosi 0.
+
+    Kontrprzykład: dla n = 2 mamy n^{2}+2 = 4+2 = 6 = 3\cdot 2, a więc liczba podzielna przez 3.
+
+    Odpowiedź: zdanie ucznia jest FAŁSZYWE; w przypadku n = 3k+2 reszta z dzielenia n^{2}+2 przez 3 wynosi 0, a dla n = 2 otrzymujemy 6.
+  solution_steps:
+  - Zauważamy, że przy dzielniku 3 przypadki to n = 3k, n = 3k+1 oraz n = 3k+2 — uczeń pominął ostatni.
+  - 'Podstawiamy n = 3k+2: n^{2}+2 = 9k^{2}+12k+6 = 3\cdot\left(3k^{2}+4k+2\right).'
+  - 'Odczytujemy resztę: 0, bo 3k^{2}+4k+2 jest liczbą całkowitą.'
+  - 'Podajemy kontrprzykład n = 2: n^{2}+2 = 6, liczba podzielna przez 3.'
+  - 'Wniosek: zdanie jest fałszywe, a dowód ucznia był niepełny.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: reszta w przypadku n=3k+2
+      answer:
+        kind: NUMERIC
+        value: 0.0
+    - name: wartość n^2+2 dla n=2
+      answer:
+        kind: NUMERIC
+        value: 6.0
+    - name: czy zdanie ucznia jest prawdziwe
+      answer:
+        kind: BOOLEAN
+        truth: false
+  checks:
+  - kind: evaluate
+    expr: \left(3\cdot k+2\right)^{2}+2-3\cdot\left(3k^{2}+4k+2\right)
+    var: k
+    part: reszta w przypadku n=3k+2
+  - kind: evaluate
+    expr: 2^{2}+2
+    var: n
+    part: wartość n^2+2 dla n=2
+  skills:
+  - pełny podział na przypadki reszt z dzielenia przez 3
+  - obalanie zdania kontrprzykładem
+  verification:
+    checkability: REFERENCE_CALL
+    note: 'could not compare: part disagrees: kind mismatch: answer=NUMERIC reference=SYMBOLIC'
+- id: g-cm-10
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 3
+  exercise_type: podzielność przez iloczyn dzielników
+  statement: 'Uczeń zauważył, że dla każdej liczby całkowitej \(n\) liczba \(12n\) jest podzielna przez
+    \(4\) i przez \(6\), i wywnioskował: „zatem dla każdej liczby całkowitej \(n\) liczba \(12n\) jest
+    podzielna przez \(24\)”. Wskaż błąd w tym wniosku, oblicz wartość wyrażenia \(12n\) dla \(n=3\) jako
+    kontrprzykład oraz zapisz, dla jakich liczb całkowitych \(n\) liczba \(12n\) rzeczywiście jest podzielna
+    przez \(24\).'
+  statement_latex: 12\cdot n,\qquad 24 = 4\cdot 6,\qquad \mathrm{NWD}\left(4,6\right)=2
+  solution: |-
+    Błędne rozumowanie: „skoro 4 \mid 12n i 6 \mid 12n, to 4\cdot 6 = 24 dzieli 12n”. Wniosek ucznia: 24 \mid 12n dla każdej liczby całkowitej n.
+
+    Dlaczego to błąd: własność „a \mid n i b \mid n \Rightarrow ab \mid n” wymaga, aby liczby a i b były względnie pierwsze. Tutaj \mathrm{NWD}\left(4,6\right)=2 \ne 1, więc z podzielności przez 4 i przez 6 wynika jedynie podzielność przez najmniejszą wspólną wielokrotność, czyli przez 12.
+
+    Kontrprzykład: dla n = 3 otrzymujemy 12\cdot 3 = 36, a 36 = 24\cdot 1 + 12, więc 36 nie jest podzielne przez 24.
+
+    Kiedy 24 \mid 12n? Mamy 12n = 24m dokładnie wtedy, gdy n = 2m, czyli dokładnie wtedy, gdy n jest liczbą parzystą (n = 2k, k \in \mathbb{Z}).
+
+    Odpowiedź: wniosek ucznia jest FAŁSZYWY; kontrprzykład: dla n = 3 mamy 12n = 36; podzielność przez 24 zachodzi dokładnie dla n parzystych.
+  solution_steps:
+  - 'Przypominamy warunek: z a \mid n i b \mid n wynika ab \mid n tylko wtedy, gdy \mathrm{NWD}\left(a,b\right)=1.'
+  - 'Sprawdzamy: \mathrm{NWD}\left(4,6\right)=2 \ne 1, więc wniosek ucznia jest nieuprawniony.'
+  - 'Podajemy kontrprzykład: 12\cdot 3 = 36 oraz 36 = 24\cdot 1+12, czyli 24 \nmid 36.'
+  - 'Rozstrzygamy warunek: 12n = 24m \iff n = 2m, czyli n musi być parzyste.'
+  - 'Zapisujemy wniosek: 24 \mid 12n dokładnie dla n = 2k, k \in \mathbb{Z}.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: czy wniosek ucznia jest poprawny
+      answer:
+        kind: BOOLEAN
+        truth: false
+    - name: wartość 12n dla n=3
+      answer:
+        kind: NUMERIC
+        value: 36.0
+    - name: warunek na n
+      answer:
+        kind: SYMBOLIC
+        latex: n=2k,\ k\in\mathbb{Z}
+  checks:
+  - kind: evaluate
+    expr: 12\cdot 3
+    var: n
+    part: wartość 12n dla n=3
+  skills:
+  - warunek NWD(a,b)=1 przy łączeniu dzielników
+  - kontrprzykład
+  - opis zbioru liczb spełniających warunek
+  verification:
+    checkability: REFERENCE_CALL
+    note: 'could not compare: reference produced 2 outputs, answer has 3'
+- id: g-ch-t02
+  slot: CHALLENGE
+  ramp_index: 0
+  difficulty: 4
+  exercise_type: dowód o reszcie — samodzielne wprowadzenie oznaczeń
+  statement: Ola wybrała trzy kolejne liczby całkowite nieparzyste i obliczyła sumę ich kwadratów. Wykaż,
+    że reszta z dzielenia otrzymanej sumy przez 12 nie zależy od tego, jakie liczby Ola wybrała, oraz
+    wyznacz tę resztę.
+  statement_latex: S=\left(2\cdot k+1\right)^{2}+\left(2\cdot k+3\right)^{2}+\left(2\cdot k+5\right)^{2}
+  solution: |-
+    Trzeba samodzielnie wprowadzić oznaczenie. Kolejne liczby nieparzyste różnią się o 2, więc najmniejszą z nich zapiszemy jako 2\cdot k+1, gdzie k jest liczbą całkowitą; pozostałe to 2\cdot k+3 oraz 2\cdot k+5.
+    Suma ich kwadratów wynosi
+    S=\left(2\cdot k+1\right)^{2}+\left(2\cdot k+3\right)^{2}+\left(2\cdot k+5\right)^{2}=\left(4\cdot k^{2}+4\cdot k+1\right)+\left(4\cdot k^{2}+12\cdot k+9\right)+\left(4\cdot k^{2}+20\cdot k+25\right)=12\cdot k^{2}+36\cdot k+35.
+    Rozdzielamy wyraz wolny tak, aby otrzymać resztę z przedziału \left[0,12\right):
+    S=12\cdot k^{2}+36\cdot k+24+11=12\cdot\left(k^{2}+3\cdot k+2\right)+11.
+    Liczba k^{2}+3\cdot k+2 jest całkowita (suma i iloczyn liczb całkowitych), więc 12\cdot\left(k^{2}+3\cdot k+2\right) jest wielokrotnością liczby 12, a ponieważ 0\le 11<12, reszta z dzielenia S przez 12 jest równa 11 — niezależnie od wyboru liczby k, czyli niezależnie od wyboru trzech kolejnych liczb nieparzystych. To należało wykazać.
+    Sprawdzenie (tylko kontrolne, nie jest dowodem): dla liczb 1, 3, 5 mamy 1+9+25=35=12\cdot 2+11.
+  solution_steps:
+  - 'Wprowadź oznaczenie: trzy kolejne liczby nieparzyste to 2\cdot k+1, 2\cdot k+3, 2\cdot k+5, k\in\mathbb{Z}.'
+  - Zapisz sumę kwadratów i wykonaj potęgowania.
+  - 'Zredukuj wyrazy podobne: S=12\cdot k^{2}+36\cdot k+35.'
+  - 'Rozbij wyraz wolny: S=12\cdot\left(k^{2}+3\cdot k+2\right)+11.'
+  - Uzasadnij całkowitość nawiasu i warunek 0\le 11<12; odczytaj resztę 11 i sformułuj wniosek.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: reszta
+      answer:
+        kind: NUMERIC
+        value: 11.0
+    - name: dowod_niezaleznosci
+      answer:
+        kind: NOT_MACHINE_CHECKABLE
+        reason: Należy zapisać liczby jako 2k+1, 2k+3, 2k+5, przekształcić sumę kwadratów do postaci 12\cdot\left(k^{2}+3k+2\right)+11,
+          uzasadnić całkowitość nawiasu i warunek 0\le 11<12.
+  checks:
+  - kind: evaluate
+    expr: 1^{2}+3^{2}+5^{2}-12\cdot 2
+    var: k
+    part: reszta
+  stated_model:
+    variable: k
+    objective_latex: S=\left(2\cdot k+1\right)^{2}+\left(2\cdot k+3\right)^{2}+\left(2\cdot k+5\right)^{2}
+    goal: value
+    constraint_used: k\in\mathbb{Z}; trzy kolejne liczby nieparzyste różnią się o 2
+  skills:
+  - zapis kolejnych liczb nieparzystych
+  - budowa wyrażenia z opisu słownego
+  - przekształcenie do postaci 12\cdot(\ldots)+r
+  - odczytanie reszty z dzielenia
+  verification:
+    checkability: STATED_MODEL
+    note: 'stage 1 inconclusive: SympifyError: SympifyError: "cannot sympify object of type <class ''sympy.core.singleton.SingletonRegistry''>"'
+- id: g-ch-t03
+  slot: CHALLENGE
+  ramp_index: 1
+  difficulty: 4
+  exercise_type: zapis dziesiętny — dowód i wyznaczenie liczb z warunku
+  statement: |-
+    Pewna liczba dwucyfrowa ma cyfrę dziesiątek a i cyfrę jedności b, przy czym b\ge 1. Po zamianie cyfr miejscami otrzymujemy drugą liczbę dwucyfrową.
+    a) Wykaż, że różnica kwadratu pierwszej liczby i kwadratu drugiej liczby jest podzielna przez 99.
+    b) Wyznacz wszystkie liczby dwucyfrowe, dla których różnica ta jest równa 4455.
+  statement_latex: \left(10\cdot a+b\right)^{2}-\left(10\cdot b+a\right)^{2}=99\cdot\left(a-b\right)\cdot\left(a+b\right)
+  solution: |-
+    a) Oznaczamy N=10\cdot a+b oraz M=10\cdot b+a, gdzie a\in\{1,\ldots,9\}, b\in\{1,\ldots,9\}. Ze wzoru na różnicę kwadratów
+    N^{2}-M^{2}=\left(N-M\right)\cdot\left(N+M\right)=\left(9\cdot a-9\cdot b\right)\cdot\left(11\cdot a+11\cdot b\right)=9\cdot 11\cdot\left(a-b\right)\cdot\left(a+b\right)=99\cdot\left(a-b\right)\cdot\left(a+b\right).
+    Liczba \left(a-b\right)\cdot\left(a+b\right) jest całkowita, więc N^{2}-M^{2} jest iloczynem liczby 99 i liczby całkowitej, zatem jest podzielna przez 99. To należało wykazać.
+
+    b) Z warunku 99\cdot\left(a-b\right)\cdot\left(a+b\right)=4455 otrzymujemy \left(a-b\right)\cdot\left(a+b\right)=\frac{4455}{99}=45.
+    Ponieważ 45>0 oraz a+b>0, mamy a-b>0. Liczba 45 jest nieparzysta, więc oba czynniki a-b i a+b są nieparzyste, a przy tym a-b<a+b. Możliwe rozkłady liczby 45 na iloczyn dwóch dodatnich czynników, w którym pierwszy jest mniejszy, to 1\cdot 45, 3\cdot 15 oraz 5\cdot 9.
+    • a-b=1 i a+b=45 — niemożliwe, bo a+b\le 9+9=18.
+    • a-b=3 i a+b=15 — stąd a=9, b=6, czyli liczba 96.
+    • a-b=5 i a+b=9 — stąd a=7, b=2, czyli liczba 72.
+    Oba wyniki spełniają warunki zadania (cyfry, b\ge 1). Sprawdzenie: 96^{2}-69^{2}=9216-4761=4455 oraz 72^{2}-27^{2}=5184-729=4455.
+    Szukane liczby dwucyfrowe to 72 i 96.
+  solution_steps:
+  - 'Wprowadź oznaczenia cyfr: N=10\cdot a+b, M=10\cdot b+a.'
+  - 'Zastosuj wzór na różnicę kwadratów: N^{2}-M^{2}=99\cdot\left(a-b\right)\cdot\left(a+b\right) i sformułuj
+    wniosek o podzielności przez 99.'
+  - Z równania 99\cdot\left(a-b\right)\cdot\left(a+b\right)=4455 otrzymaj \left(a-b\right)\cdot\left(a+b\right)=45.
+  - Zauważ, że 45 jest nieparzyste, więc oba czynniki są nieparzyste i dodatnie; wypisz rozkłady 1\cdot
+    45, 3\cdot 15, 5\cdot 9.
+  - Odrzuć przypadek a+b=45 (bo a+b\le 18) i rozwiąż pozostałe układy.
+  - Podaj liczby 96 i 72 oraz sprawdź je rachunkiem.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: dowod_99
+      answer:
+        kind: NOT_MACHINE_CHECKABLE
+        reason: Należy zapisać obie liczby w postaci 10a+b i 10b+a, zastosować wzór na różnicę kwadratów
+          i otrzymać 99\cdot\left(a-b\right)\left(a+b\right) z całkowitym drugim czynnikiem.
+    - name: liczby_dwucyfrowe
+      answer:
+        kind: SET
+        members:
+        - '72'
+        - '96'
+  stated_model:
+    variable: a
+    objective_latex: R=\left(10\cdot a+b\right)^{2}-\left(10\cdot b+a\right)^{2}=99\cdot\left(a-b\right)\cdot\left(a+b\right)
+    goal: value
+    constraint_used: a\in\{1,\ldots,9\},\ b\in\{1,\ldots,9\},\ R=4455
+  skills:
+  - zapis dziesiętny liczby dwucyfrowej
+  - różnica kwadratów jako narzędzie dowodowe
+  - rozkład liczby na czynniki i analiza parzystości
+  - filtrowanie rozwiązań przez ograniczenia na cyfry
+  verification:
+    checkability: NOT_MACHINE_CHECKABLE
+    note: 'no optimisable objective in the stated model (PARSE_ERROR: "UnexpectedCharacters: No terminal
+      matches ''='' in the current parser context, at line 1 col 60") — human review'
+- id: g-ch-t04
+  slot: CHALLENGE
+  ramp_index: 2
+  difficulty: 5
+  exercise_type: zapis dziesiętny — dowód, warunek podzielności i wybór największej liczby
+  statement: |-
+    Liczbę trzycyfrową nazwiemy zgodną, jeżeli jej cyfra dziesiątek jest średnią arytmetyczną cyfry setek i cyfry jedności.
+    a) Wykaż, że każda liczba zgodna jest podzielna przez 3.
+    b) Wyznacz największą liczbę zgodną, która ma trzy różne cyfry i jest podzielna przez 9.
+  statement_latex: N=100\cdot a+10\cdot b+c,\qquad b=\frac{a+c}{2}
+  solution: |-
+    Oznaczenia. Niech N będzie liczbą zgodną o cyfrze setek a, cyfrze dziesiątek b i cyfrze jedności c, gdzie a\in\{1,\ldots,9\}, b,c\in\{0,\ldots,9\}. Wtedy N=100\cdot a+10\cdot b+c, a warunek z treści zapisujemy jako b=\frac{a+c}{2}, czyli 2\cdot b=a+c.
+
+    a) Przekształcamy N, korzystając z warunku a+c=2\cdot b:
+    N=100\cdot a+10\cdot b+c=99\cdot a+9\cdot b+\left(a+b+c\right)=99\cdot a+9\cdot b+\left(2\cdot b+b\right)=99\cdot a+12\cdot b=3\cdot\left(33\cdot a+4\cdot b\right).
+    Liczba 33\cdot a+4\cdot b jest całkowita, więc N jest iloczynem liczby 3 i liczby całkowitej, czyli jest podzielna przez 3. To należało wykazać.
+
+    b) Z części a) mamy N=99\cdot a+12\cdot b=9\cdot\left(11\cdot a+b\right)+3\cdot b. Liczba 9\cdot\left(11\cdot a+b\right) jest podzielna przez 9, więc
+    9\mid N \iff 9\mid 3\cdot b \iff 3\mid b,
+    czyli b\in\{0,3,6,9\}.
+    Szukamy liczby największej, więc próbujemy kolejno największą możliwą cyfrę setek: a=9. Z warunku 2\cdot b=a+c otrzymujemy c=2\cdot b-9, a c musi być cyfrą, czyli 0\le 2\cdot b-9\le 9, skąd b\ge 4{,}5. Wraz z warunkiem 3\mid b zostają b=6 oraz b=9.
+    • b=9: c=2\cdot 9-9=9, czyli liczba 999 — ma powtarzające się cyfry, więc nie spełnia warunku „trzy różne cyfry”; odrzucamy.
+    • b=6: c=2\cdot 6-9=3, czyli liczba 963; cyfry 9, 6, 3 są różne.
+    Sprawdzenie: \frac{9+3}{2}=6 (liczba jest zgodna) oraz 963=9\cdot 107, więc 9\mid 963.
+    Każda liczba zgodna o cyfrze setek mniejszej od 9 jest mniejsza od 963, a dla a=9 jedyną dopuszczalną możliwością jest 963. Zatem szukaną liczbą jest 963.
+  solution_steps:
+  - 'Wprowadź zapis dziesiętny: N=100\cdot a+10\cdot b+c, a\in\{1,\ldots,9\}, b,c\in\{0,\ldots,9\}.'
+  - 'Przetłumacz warunek słowny na równanie: 2\cdot b=a+c.'
+  - Przekształć N=99\cdot a+9\cdot b+\left(a+b+c\right) i wykorzystaj a+c=2\cdot b, otrzymując N=99\cdot
+    a+12\cdot b=3\cdot\left(33\cdot a+4\cdot b\right); wywnioskuj podzielność przez 3.
+  - 'Zapisz N=9\cdot\left(11\cdot a+b\right)+3\cdot b i wywnioskuj: 9\mid N \iff 3\mid b, czyli b\in\{0,3,6,9\}.'
+  - 'Przyjmij największe a=9; z 2\cdot b=9+c wyznacz c=2\cdot b-9 i sprawdź dopuszczalność cyfry c: b\ge
+    4{,}5.'
+  - Rozpatrz b=9 (liczba 999 — cyfry nierózne, odrzucona) i b=6 (liczba 963).
+  - Sprawdź warunki dla 963 i sformułuj odpowiedź.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: dowod_podzielnosci_przez_3
+      answer:
+        kind: NOT_MACHINE_CHECKABLE
+        reason: Należy zapisać N=100a+10b+c, wykorzystać warunek 2b=a+c i doprowadzić do postaci N=3\cdot\left(33a+4b\right)
+          z całkowitym czynnikiem w nawiasie.
+    - name: najwieksza_liczba
+      answer:
+        kind: NUMERIC
+        value: 963.0
+  checks:
+  - kind: evaluate
+    expr: 100\cdot 9+10\cdot 6+3
+    var: a
+    part: najwieksza_liczba
+  stated_model:
+    variable: N
+    objective_latex: N=100\cdot a+10\cdot b+c
+    domain_lo: '100'
+    domain_hi: '999'
+    domain_lo_open: false
+    domain_hi_open: false
+    constraint_used: 2\cdot b=a+c,\ a\in\{1,\ldots,9\},\ b,c\in\{0,\ldots,9\},\ cyfry\ parami\ różne,\
+      9\mid N
+  skills:
+  - zapis dziesiętny liczby trzycyfrowej
+  - przełożenie warunku słownego na równanie 2b=a+c
+  - dowód podzielności przez wyłączenie czynnika
+  - warunek podzielności przez 9
+  - sprawdzenie dopuszczalności cyfr
+  verification:
+    checkability: STATED_MODEL
+    note: 'stage 1 inconclusive: SympifyError: SympifyError: "cannot sympify object of type <class ''function''>"'

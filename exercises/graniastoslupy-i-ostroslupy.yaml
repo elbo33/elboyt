@@ -1,0 +1,782 @@
+section: graniastoslupy-i-ostroslupy
+name: 'Graniastosłupy i ostrosłupy: objętości i pola powierzchni'
+scope: Volume and surface area of prisms and pyramids, including regular ones; recovering a missing edge,
+  height or slant height with the Pythagorean theorem or trigonometry; the net.
+requirements:
+- X.5
+counts:
+  total: 16
+  DETERMINISTIC: 13
+  REFERENCE_CALL: 1
+  STATED_MODEL: 2
+exercises:
+- id: g-th-00
+  slot: THEORY_SUPPORT
+  ramp_index: 0
+  difficulty: 1
+  exercise_type: obliczenie objętości graniastosłupa z danych bezpośrednich
+  statement: Podstawą graniastosłupa prostego jest prostokąt o bokach długości 4 i 7, a wysokość tego
+    graniastosłupa jest równa 5. Oblicz objętość tego graniastosłupa. Zapisz obliczenia.
+  statement_latex: V = P_p \cdot H = \left(4 \cdot 7\right)\cdot 5
+  solution: |-
+    Podstawą jest prostokąt, więc pole podstawy wynosi P_p = 4 \cdot 7 = 28.
+    Graniastosłup jest prosty, więc jego wysokość H = 5 jest długością krawędzi bocznej.
+    Objętość: V = P_p \cdot H = 28 \cdot 5 = 140.
+    Jednostki są sześcienne (objętość), wynik jest większy od pola podstawy — to zgodne z sensem geometrycznym.
+  solution_steps:
+  - 'Oblicz pole podstawy: P_p = 4 \cdot 7 = 28.'
+  - 'Zapisz wzór na objętość graniastosłupa: V = P_p \cdot H.'
+  - 'Podstaw dane: V = 28 \cdot 5 = 140.'
+  answer:
+    kind: NUMERIC
+    value: 140.0
+    latex: '140'
+  checks:
+  - kind: evaluate
+    expr: 4 \cdot 7 \cdot 5
+  skills:
+  - objętość graniastosłupa
+  - pole prostokąta
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 140.0 vs 140.0 (tol 1e-09)'
+- id: g-th-01
+  slot: THEORY_SUPPORT
+  ramp_index: 1
+  difficulty: 1
+  exercise_type: obliczenie objętości ostrosłupa z danych bezpośrednich
+  statement: Podstawą ostrosłupa prawidłowego czworokątnego jest kwadrat o boku długości 6, a wysokość
+    tego ostrosłupa jest równa 10. Oblicz objętość tego ostrosłupa. Zapisz obliczenia.
+  statement_latex: V = \frac{1}{3}\cdot P_p \cdot H = \frac{1}{3}\cdot 6^2 \cdot 10
+  solution: |-
+    Pole podstawy (kwadrat o boku 6): P_p = 6^2 = 36.
+    W ostrosłupie objętość liczymy ze wzoru V = \frac{1}{3}\cdot P_p \cdot H.
+    Stąd V = \frac{1}{3}\cdot 36 \cdot 10 = 12 \cdot 10 = 120.
+    Gdyby to był graniastosłup o tej samej podstawie i wysokości, objętość byłaby trzy razy większa (360).
+  solution_steps:
+  - 'Oblicz pole podstawy: P_p = 6^2 = 36.'
+  - 'Zapisz wzór na objętość ostrosłupa: V = \frac{1}{3}\cdot P_p \cdot H.'
+  - 'Podstaw dane: V = \frac{1}{3}\cdot 36 \cdot 10 = 120.'
+  answer:
+    kind: NUMERIC
+    value: 120.0
+    latex: '120'
+  checks:
+  - kind: evaluate
+    expr: \frac{1}{3}\cdot 6^2 \cdot 10
+  skills:
+  - objętość ostrosłupa
+  - czynnik 1/3
+  - pole kwadratu
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 120.0 vs 120.0 (tol 1e-09)'
+- id: g-th-02
+  slot: THEORY_SUPPORT
+  ramp_index: 2
+  difficulty: 2
+  exercise_type: pole powierzchni ostrosłupa z siatki
+  statement: W ostrosłupie prawidłowym czworokątnym krawędź podstawy ma długość 10, a wysokość ściany
+    bocznej (odcinek poprowadzony z wierzchołka ostrosłupa do środka krawędzi podstawy) jest równa 12.
+    Oblicz pole powierzchni bocznej oraz pole powierzchni całkowitej tego ostrosłupa. Zapisz obliczenia.
+  statement_latex: P_b = 4\cdot \frac{1}{2}\cdot 10 \cdot 12,\qquad P_c = 10^2 + P_b
+  solution: |-
+    Siatka ostrosłupa prawidłowego czworokątnego składa się z kwadratu o boku 10 oraz z czterech przystających trójkątów równoramiennych o podstawie a = 10 i wysokości h = 12.
+    Pole jednej ściany bocznej: \frac{1}{2}\cdot 10 \cdot 12 = 60.
+    Pole boczne: P_b = 4 \cdot 60 = 240.
+    Pole podstawy: P_p = 10^2 = 100.
+    Ostrosłup ma tylko JEDNĄ podstawę, więc P_c = P_p + P_b = 100 + 240 = 340.
+  solution_steps:
+  - 'Rozpoznaj siatkę: kwadrat o boku 10 i cztery trójkąty o podstawie 10 i wysokości 12.'
+  - 'Oblicz pole jednej ściany bocznej: \frac{1}{2}\cdot 10 \cdot 12 = 60.'
+  - 'Oblicz pole boczne: P_b = 4 \cdot 60 = 240.'
+  - 'Oblicz pole podstawy: P_p = 10^2 = 100.'
+  - 'Złóż pole całkowite: P_c = 100 + 240 = 340.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: P_b
+      answer:
+        kind: NUMERIC
+        value: 240.0
+        latex: '240'
+    - name: P_c
+      answer:
+        kind: NUMERIC
+        value: 340.0
+        latex: '340'
+  checks:
+  - kind: evaluate
+    expr: 4\cdot \frac{1}{2}\cdot 10 \cdot 12
+    part: P_b
+  - kind: evaluate
+    expr: 10^2 + 4\cdot \frac{1}{2}\cdot 10 \cdot 12
+    part: P_c
+  skills:
+  - pole boczne ostrosłupa prawidłowego
+  - pole całkowite ostrosłupa
+  - siatka bryły
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [P_b] SymPy solved it fresh: 240.0 vs 240.0 (tol 1e-09) ; [P_c]
+      SymPy solved it fresh: 340.0 vs 340.0 (tol 1e-09)'
+- id: g-ex-03
+  slot: EXERCISE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: objętość i pole całkowite graniastosłupa prawidłowego sześciokątnego
+  statement: W graniastosłupie prawidłowym sześciokątnym krawędź podstawy ma długość 3, a wysokość bryły
+    jest równa 8. Oblicz objętość oraz pole powierzchni całkowitej tego graniastosłupa. Zapisz obliczenia.
+  statement_latex: P_p = \frac{3\cdot 3^2\sqrt{3}}{2},\qquad V = P_p\cdot 8,\qquad P_c = 2P_p + 6\cdot
+    3\cdot 8
+  solution: |-
+    Podstawą jest sześciokąt foremny o boku a = 3, więc P_p = \frac{3a^2\sqrt{3}}{2} = \frac{3\cdot 9\sqrt{3}}{2} = \frac{27\sqrt{3}}{2}.
+    Objętość: V = P_p \cdot H = \frac{27\sqrt{3}}{2}\cdot 8 = 108\sqrt{3} \approx 187,1.
+    Graniastosłup jest prosty i prawidłowy, więc ścian bocznych jest 6 i każda jest prostokątem o wymiarach 3 \times 8:
+    P_b = 6\cdot 3\cdot 8 = 144.
+    Pole całkowite: P_c = 2P_p + P_b = 2\cdot \frac{27\sqrt{3}}{2} + 144 = 27\sqrt{3} + 144 \approx 190,8.
+  solution_steps:
+  - 'Oblicz pole podstawy: P_p = \frac{3\cdot 3^2\sqrt{3}}{2} = \frac{27\sqrt{3}}{2}.'
+  - 'Oblicz objętość: V = \frac{27\sqrt{3}}{2}\cdot 8 = 108\sqrt{3}.'
+  - 'Oblicz pole boczne: P_b = 6\cdot 3\cdot 8 = 144.'
+  - 'Oblicz pole całkowite: P_c = 2\cdot\frac{27\sqrt{3}}{2} + 144 = 27\sqrt{3} + 144.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: V
+      answer:
+        kind: SYMBOLIC
+        latex: 108\sqrt{3}
+    - name: P_c
+      answer:
+        kind: SYMBOLIC
+        latex: 27\sqrt{3}+144
+  checks:
+  - kind: evaluate
+    expr: \frac{3\cdot 3^2\cdot\sqrt{3}}{2}\cdot 8
+    part: V
+  - kind: evaluate
+    expr: 2\cdot\frac{3\cdot 3^2\cdot\sqrt{3}}{2} + 6\cdot 3\cdot 8
+    part: P_c
+  skills:
+  - pole sześciokąta foremnego
+  - objętość graniastosłupa
+  - pole boczne graniastosłupa prostego
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 2 parts solved fresh · det: [V] SymPy solved it fresh: 187.06148721743875 vs 187.06148721743875
+      (tol 1e-09) ; [P_c] SymPy solved it fresh: 190.7653718043597 vs 190.7653718043597 (tol 1e-09)'
+- id: g-ex-04
+  slot: EXERCISE
+  ramp_index: 1
+  difficulty: 3
+  exercise_type: odzyskiwanie odcinków w ostrosłupie za pomocą twierdzenia Pitagorasa
+  statement: Dany jest ostrosłup prawidłowy czworokątny ABCDS o podstawie ABCD. Krawędź podstawy ma długość
+    12, a każda krawędź boczna ma długość 10. Oblicz wysokość ściany bocznej, wysokość tego ostrosłupa,
+    jego objętość oraz pole powierzchni całkowitej. Zapisz obliczenia.
+  statement_latex: h = \sqrt{10^2 - \left(\frac{12}{2}\right)^2},\qquad H = \sqrt{10^2 - \left(\frac{12\sqrt{2}}{2}\right)^2}
+  solution: |-
+    Ściana boczna jest trójkątem równoramiennym o ramieniu b = 10 i podstawie a = 12. Jej wysokość h dzieli podstawę na połowy, więc
+    h = \sqrt{b^2 - \left(\frac{a}{2}\right)^2} = \sqrt{100 - 36} = \sqrt{64} = 8.
+    Promień okręgu opisanego na podstawie (połowa przekątnej kwadratu): R = \frac{a\sqrt{2}}{2} = 6\sqrt{2}.
+    W trójkącie prostokątnym o przyprostokątnych H i R oraz przeciwprostokątnej b:
+    H = \sqrt{b^2 - R^2} = \sqrt{100 - 72} = \sqrt{28} = 2\sqrt{7} \approx 5,29.
+    Pole podstawy: P_p = 12^2 = 144.
+    Objętość: V = \frac{1}{3}\cdot 144 \cdot 2\sqrt{7} = 96\sqrt{7} \approx 254,0.
+    Pole boczne: P_b = 4\cdot \frac{1}{2}\cdot 12\cdot 8 = 192.
+    Pole całkowite: P_c = 144 + 192 = 336.
+    Kontrola sensu: H = 2\sqrt{7} \approx 5,29 < h = 8 < b = 10 — kolejność zgodna z geometrią.
+  solution_steps:
+  - 'W ścianie bocznej zastosuj Pitagorasa: h = \sqrt{10^2 - 6^2} = 8.'
+  - Wyznacz R = \frac{12\sqrt{2}}{2} = 6\sqrt{2}.
+  - 'Oblicz wysokość bryły: H = \sqrt{10^2 - \left(6\sqrt{2}\right)^2} = \sqrt{28} = 2\sqrt{7}.'
+  - 'Oblicz objętość: V = \frac{1}{3}\cdot 144\cdot 2\sqrt{7} = 96\sqrt{7}.'
+  - 'Oblicz pole boczne: P_b = 4\cdot\frac{1}{2}\cdot 12\cdot 8 = 192 i pole całkowite: P_c = 144 + 192
+    = 336.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: h
+      answer:
+        kind: NUMERIC
+        value: 8.0
+        latex: '8'
+    - name: H
+      answer:
+        kind: SYMBOLIC
+        latex: 2\sqrt{7}
+    - name: V
+      answer:
+        kind: SYMBOLIC
+        latex: 96\sqrt{7}
+    - name: P_c
+      answer:
+        kind: NUMERIC
+        value: 336.0
+        latex: '336'
+  checks:
+  - kind: evaluate
+    expr: \sqrt{10^2 - \left(\frac{12}{2}\right)^2}
+    part: h
+  - kind: evaluate
+    expr: \sqrt{10^2 - \left(\frac{12\cdot\sqrt{2}}{2}\right)^2}
+    part: H
+  - kind: evaluate
+    expr: \frac{1}{3}\cdot 12^2 \cdot \sqrt{10^2 - \left(\frac{12\cdot\sqrt{2}}{2}\right)^2}
+    part: V
+  - kind: evaluate
+    expr: 12^2 + 4\cdot\frac{1}{2}\cdot 12\cdot \sqrt{10^2 - \left(\frac{12}{2}\right)^2}
+    part: P_c
+  skills:
+  - twierdzenie Pitagorasa w bryle
+  - wysokość ściany bocznej
+  - wysokość ostrosłupa
+  - pole całkowite ostrosłupa
+  - objętość ostrosłupa
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 4 parts solved fresh · det: [h] SymPy solved it fresh: 8.0 vs 8.0 (tol 1e-09) ; [H] SymPy
+      solved it fresh: 5.291502622129181 vs 5.291502622129181 (tol 1e-09) ; [V] SymPy solved it fresh:
+      253.9921258622007 vs 253.9921258622007 (tol 1e-09) ; [P_c] SymPy solved it fresh: 336.0 vs 336.0
+      (tol 1e-09)'
+- id: g-ex-05
+  slot: EXERCISE
+  ramp_index: 2
+  difficulty: 4
+  exercise_type: trygonometria w ostrosłupie prawidłowym trójkątnym
+  statement: Dany jest ostrosłup prawidłowy trójkątny ABCS o podstawie ABC. Krawędź podstawy ma długość
+    6, a każda ściana boczna jest nachylona do płaszczyzny podstawy pod kątem \alpha = 60^\circ. Oblicz
+    wysokość tego ostrosłupa, jego objętość oraz pole powierzchni całkowitej. Zapisz obliczenia.
+  statement_latex: r = \frac{6\sqrt{3}}{6},\qquad H = r\cdot\operatorname{tg}60^\circ,\qquad h = \frac{r}{\cos
+    60^\circ}
+  solution: |-
+    Podstawą jest trójkąt równoboczny o boku a = 6. Odległość środka podstawy od krawędzi podstawy (promień okręgu wpisanego) wynosi
+    r = \frac{a\sqrt{3}}{6} = \frac{6\sqrt{3}}{6} = \sqrt{3}.
+    Kąt nachylenia ściany bocznej leży w trójkącie prostokątnym o przyprostokątnych r i H, którego przeciwprostokątną jest wysokość ściany bocznej h.
+    Wysokość bryły: \operatorname{tg}60^\circ = \frac{H}{r}, więc H = \sqrt{3}\cdot\sqrt{3} = 3.
+    Wysokość ściany bocznej: \cos 60^\circ = \frac{r}{h}, więc h = \frac{\sqrt{3}}{\frac{1}{2}} = 2\sqrt{3}.
+    Pole podstawy: P_p = \frac{6^2\sqrt{3}}{4} = 9\sqrt{3}.
+    Objętość: V = \frac{1}{3}\cdot 9\sqrt{3}\cdot 3 = 9\sqrt{3} \approx 15,6.
+    Pole boczne: P_b = 3\cdot\frac{1}{2}\cdot 6\cdot 2\sqrt{3} = 18\sqrt{3}.
+    Pole całkowite: P_c = 9\sqrt{3} + 18\sqrt{3} = 27\sqrt{3} \approx 46,8.
+    Kontrola: h = 2\sqrt{3} \approx 3,46 > H = 3 > r = \sqrt{3} — zgodnie z oczekiwaniem.
+  solution_steps:
+  - 'Wyznacz r dla trójkąta równobocznego o boku 6: r = \frac{6\sqrt{3}}{6} = \sqrt{3}.'
+  - 'Z tangensa kąta nachylenia ściany: H = r\cdot\operatorname{tg}60^\circ = \sqrt{3}\cdot\sqrt{3} =
+    3.'
+  - 'Z cosinusa: h = \frac{r}{\cos 60^\circ} = 2\sqrt{3}.'
+  - 'Oblicz pole podstawy: P_p = \frac{6^2\sqrt{3}}{4} = 9\sqrt{3}.'
+  - 'Oblicz objętość: V = \frac{1}{3}\cdot 9\sqrt{3}\cdot 3 = 9\sqrt{3}.'
+  - Oblicz P_b = 3\cdot\frac{1}{2}\cdot 6\cdot 2\sqrt{3} = 18\sqrt{3} oraz P_c = 9\sqrt{3} + 18\sqrt{3}
+    = 27\sqrt{3}.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: H
+      answer:
+        kind: NUMERIC
+        value: 3.0
+        latex: '3'
+    - name: V
+      answer:
+        kind: SYMBOLIC
+        latex: 9\sqrt{3}
+    - name: P_c
+      answer:
+        kind: SYMBOLIC
+        latex: 27\sqrt{3}
+  checks:
+  - kind: evaluate
+    expr: \frac{6\cdot\sqrt{3}}{6}\cdot\sqrt{3}
+    part: H
+  - kind: evaluate
+    expr: \frac{1}{3}\cdot\frac{6^2\cdot\sqrt{3}}{4}\cdot 3
+    part: V
+  - kind: evaluate
+    expr: \frac{6^2\cdot\sqrt{3}}{4} + 3\cdot\frac{1}{2}\cdot 6\cdot 2\cdot\sqrt{3}
+    part: P_c
+  skills:
+  - promienie r i R w trójkącie równobocznym
+  - kąt nachylenia ściany bocznej
+  - objętość ostrosłupa
+  - pole całkowite ostrosłupa
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [H] SymPy solved it fresh: 3.0 vs 3.0 (tol 1e-09) ; [V] SymPy
+      solved it fresh: 15.588457268119896 vs 15.588457268119896 (tol 1e-09) ; [P_c] SymPy solved it fresh:
+      46.76537180435969 vs 46.76537180435969 (tol 1e-09)'
+- id: g-ex-t00
+  slot: EXERCISE
+  ramp_index: 6
+  difficulty: 4
+  exercise_type: graniastosłup prawidłowy — przekątna bryły, objętość i pole boczne
+  statement: Dany jest graniastosłup prawidłowy sześciokątny ABCDEF A'B'C'D'E'F', w którym wierzchołek
+    A' leży nad A, B' nad B itd. Krawędź podstawy tego graniastosłupa ma długość 6, a najdłuższa przekątna
+    bryły, czyli odcinek AD', ma długość 15 (punkty A i D są przeciwległymi wierzchołkami sześciokąta
+    foremnego ABCDEF). Oblicz wysokość tego graniastosłupa, jego objętość oraz pole powierzchni bocznej.
+    Zapisz obliczenia.
+  statement_latex: \left|AD\right| = 2\cdot 6 = 12,\qquad H = \sqrt{15^{2} - 12^{2}}
+  solution: |-
+    Rzutem prostokątnym przekątnej AD' na płaszczyznę podstawy jest najdłuższa przekątna sześciokąta foremnego, czyli odcinek AD o długości |AD| = 2a = 2\cdot 6 = 12.
+    Trójkąt ADD' jest prostokątny (krawędź boczna DD' jest prostopadła do podstawy), więc z twierdzenia Pitagorasa:
+    H^2 = |AD'|^2 - |AD|^2 = 15^2 - 12^2 = 225 - 144 = 81, zatem H = 9.
+    Pole podstawy (sześciokąt foremny o boku 6): P_p = \frac{3\cdot 6^2\sqrt{3}}{2} = 54\sqrt{3}.
+    Objętość: V = P_p\cdot H = 54\sqrt{3}\cdot 9 = 486\sqrt{3} \approx 841,8.
+    Pole powierzchni bocznej: sześć przystających prostokątów 6\times 9, więc P_b = 6\cdot 6\cdot 9 = 324.
+    Kontrola sensu: przekątna bryły (15) jest dłuższa od przekątnej podstawy (12) i od wysokości (9) — zgadza się.
+  solution_steps:
+  - Zauważ, że rzutem przekątnej AD' na podstawę jest przekątna AD = 2a = 12.
+  - 'Z twierdzenia Pitagorasa w trójkącie prostokątnym ADD'': H^2 = 15^2 - 12^2 = 81, więc H = 9.'
+  - 'Oblicz pole podstawy: P_p = \frac{3\cdot 6^2\sqrt{3}}{2} = 54\sqrt{3}.'
+  - 'Objętość: V = 54\sqrt{3}\cdot 9 = 486\sqrt{3}.'
+  - 'Pole boczne: P_b = Ob_p\cdot H = 36\cdot 9 = 324.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: H
+      answer:
+        kind: NUMERIC
+        value: 9.0
+    - name: V
+      answer:
+        kind: SYMBOLIC
+        latex: 486\sqrt{3}
+    - name: P_b
+      answer:
+        kind: NUMERIC
+        value: 324.0
+  checks:
+  - kind: evaluate
+    expr: \sqrt{15^{2} - \left(2\cdot 6\right)^{2}}
+    part: H
+  - kind: evaluate
+    expr: \frac{3\cdot 6^{2}\cdot\sqrt{3}}{2}\cdot 9
+    part: V
+  - kind: evaluate
+    expr: 6\cdot 6\cdot 9
+    part: P_b
+  skills:
+  - rozpoznanie przekątnej podstawy jako rzutu przekątnej bryły
+  - twierdzenie Pitagorasa w trójkącie wewnątrz bryły
+  - pole sześciokąta foremnego
+  - objętość i pole boczne graniastosłupa prostego
+  verification:
+    checkability: DETERMINISTIC
+    note: 'all 3 parts solved fresh · det: [H] SymPy solved it fresh: 9.0 vs 9.0 (tol 1e-09) ; [V] SymPy
+      solved it fresh: 841.7766924784744 vs 841.7766924784744 (tol 1e-09) ; [P_b] SymPy solved it fresh:
+      324.0 vs 324.0 (tol 1e-09)'
+- id: g-ex-t01
+  slot: EXERCISE
+  ramp_index: 7
+  difficulty: 5
+  exercise_type: ostrosłup prawidłowy trójkątny — trygonometria kąta nachylenia ściany bocznej
+  statement: W ostrosłupie prawidłowym trójkątnym ABCS o podstawie ABC krawędź podstawy ma długość 6,
+    a każda ściana boczna jest nachylona do płaszczyzny podstawy pod kątem 60°. Oblicz objętość tego ostrosłupa,
+    pole jego powierzchni całkowitej oraz długość krawędzi bocznej. Zapisz obliczenia.
+  statement_latex: r = \frac{6\sqrt{3}}{6} = \sqrt{3},\qquad \operatorname{tg}60^{\circ} = \frac{H}{r}
+  solution: |-
+    Podstawą jest trójkąt równoboczny o boku a = 6, więc promień okręgu wpisanego r = \frac{a\sqrt{3}}{6} = \frac{6\sqrt{3}}{6} = \sqrt{3}, a promień okręgu opisanego R = \frac{a\sqrt{3}}{3} = 2\sqrt{3}.
+    Kąt nachylenia ściany bocznej leży w trójkącie prostokątnym o przyprostokątnych r i H, z przeciwprostokątną h (wysokością ściany bocznej):
+    \operatorname{tg}60^{\circ} = \frac{H}{r} \Rightarrow H = \sqrt{3}\cdot\sqrt{3} = 3,
+    \cos 60^{\circ} = \frac{r}{h} \Rightarrow h = \frac{\sqrt{3}}{\frac{1}{2}} = 2\sqrt{3}.
+    Pole podstawy: P_p = \frac{6^2\sqrt{3}}{4} = 9\sqrt{3}.
+    Objętość: V = \frac{1}{3}\cdot 9\sqrt{3}\cdot 3 = 9\sqrt{3} \approx 15,6.
+    Pole boczne: P_b = 3\cdot\frac{1}{2}\cdot 6\cdot 2\sqrt{3} = 18\sqrt{3}; pole całkowite: P_c = 9\sqrt{3} + 18\sqrt{3} = 27\sqrt{3} \approx 46,8.
+    Krawędź boczna: b^2 = H^2 + R^2 = 3^2 + \left(2\sqrt{3}\right)^2 = 9 + 12 = 21, więc b = \sqrt{21}.
+    Kontrola: w ścianie bocznej b^2 = h^2 + \left(\frac{a}{2}\right)^2 = 12 + 9 = 21 — zgadza się; ponadto h > H, jak być powinno.
+  solution_steps:
+  - 'Wyznacz promienie w podstawie: r = \frac{6\sqrt{3}}{6} = \sqrt{3}, R = \frac{6\sqrt{3}}{3} = 2\sqrt{3}.'
+  - 'Z trójkąta (r, H, h): \operatorname{tg}60^{\circ} = \frac{H}{r}, więc H = 3, oraz \cos 60^{\circ}
+    = \frac{r}{h}, więc h = 2\sqrt{3}.'
+  - 'Pole podstawy: P_p = \frac{6^2\sqrt{3}}{4} = 9\sqrt{3}.'
+  - 'Objętość: V = \frac{1}{3}\cdot 9\sqrt{3}\cdot 3 = 9\sqrt{3}.'
+  - Pole boczne P_b = 3\cdot\frac{1}{2}\cdot 6\cdot 2\sqrt{3} = 18\sqrt{3}, więc P_c = 27\sqrt{3}.
+  - 'Krawędź boczna: b = \sqrt{H^2 + R^2} = \sqrt{9 + 12} = \sqrt{21}.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: V
+      answer:
+        kind: SYMBOLIC
+        latex: 9\sqrt{3}
+    - name: P_c
+      answer:
+        kind: SYMBOLIC
+        latex: 27\sqrt{3}
+    - name: b
+      answer:
+        kind: SYMBOLIC
+        latex: \sqrt{21}
+  checks:
+  - kind: evaluate
+    expr: \frac{1}{3}\cdot\frac{6^{2}\cdot\sqrt{3}}{4}\cdot\left(\frac{6\sqrt{3}}{6}\cdot\sqrt{3}\right)
+    part: V
+  - kind: evaluate
+    expr: \frac{6^{2}\cdot\sqrt{3}}{4} + 3\cdot\frac{1}{2}\cdot 6\cdot 2\sqrt{3}
+    part: P_c
+  - kind: evaluate
+    expr: \sqrt{3^{2} + \left(\frac{6\sqrt{3}}{3}\right)^{2}}
+    part: b
+  skills:
+  - promienie r i R w trójkącie równobocznym
+  - wysokość bryły z tangensa kąta nachylenia ściany bocznej
+  - pole całkowite ostrosłupa
+  - krawędź boczna z twierdzenia Pitagorasa
+  verification:
+    checkability: REFERENCE_CALL
+    note: 3 parts matched
+- id: g-cm-06
+  slot: COMMON_MISTAKE
+  ramp_index: 0
+  difficulty: 2
+  exercise_type: 'demonstracja błędu: pominięcie czynnika 1/3'
+  statement: 'W ostrosłupie prawidłowym czworokątnym krawędź podstawy ma długość 9, a wysokość ostrosłupa
+    jest równa 8. Pewien uczeń obliczył objętość tak: „pole podstawy razy wysokość, czyli V = 81 \cdot
+    8 = 648”. Wyjaśnij, na czym polega błąd, i oblicz poprawną objętość tego ostrosłupa.'
+  statement_latex: V = \frac{1}{3}\cdot 9^2 \cdot 8
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń użył wzoru V = P_p\cdot H, właściwego dla graniastosłupa: P_p = 9^2 = 81, więc V = 81\cdot 8 = 648.
+    DLACZEGO TO ŹLE: wzór V = P_p\cdot H opisuje graniastosłup. Ostrosłup o tej samej podstawie i tej samej wysokości ma objętość trzykrotnie mniejszą — stąd w jego wzorze czynnik \frac{1}{3}. Wynik 648 to objętość graniastosłupa o podstawie 9\times 9 i wysokości 8, a nie ostrosłupa.
+    POPRAWNIE: V = \frac{1}{3}\cdot P_p\cdot H = \frac{1}{3}\cdot 81 \cdot 8 = 27\cdot 8 = 216.
+    Odpowiedź: V = 216 (uczniowski wynik jest dokładnie trzy razy za duży).
+  solution_steps:
+  - Zauważ, że bryła jest ostrosłupem, a nie graniastosłupem.
+  - 'Wskaż błąd: użyto wzoru V = P_p\cdot H zamiast V = \frac{1}{3}\cdot P_p\cdot H.'
+  - 'Oblicz pole podstawy: P_p = 9^2 = 81.'
+  - 'Oblicz poprawną objętość: V = \frac{1}{3}\cdot 81\cdot 8 = 216.'
+  answer:
+    kind: NUMERIC
+    value: 216.0
+    latex: '216'
+  checks:
+  - kind: evaluate
+    expr: \frac{1}{3}\cdot 9^2 \cdot 8
+  skills:
+  - objętość ostrosłupa
+  - rozróżnianie wzorów dla graniastosłupa i ostrosłupa
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 216.0 vs 216.0 (tol 1e-09)'
+- id: g-cm-07
+  slot: COMMON_MISTAKE
+  ramp_index: 1
+  difficulty: 3
+  exercise_type: 'demonstracja błędu: krawędź boczna zamiast wysokości ściany'
+  statement: 'W ostrosłupie prawidłowym czworokątnym krawędź podstawy ma długość 16, a każda krawędź boczna
+    ma długość 17. Uczeń obliczył pole powierzchni bocznej tak: P_b = 4\cdot\frac{1}{2}\cdot 16 \cdot
+    17 = 544. Wyjaśnij, na czym polega błąd, i oblicz poprawne pole powierzchni bocznej tego ostrosłupa.'
+  statement_latex: P_b = 4\cdot\frac{1}{2}\cdot 16 \cdot \sqrt{17^2 - 8^2}
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: do wzoru P_b = n\cdot\frac{1}{2}\cdot a\cdot h uczeń wstawił krawędź boczną b = 17 w miejsce wysokości ściany bocznej h i otrzymał P_b = 4\cdot\frac{1}{2}\cdot 16\cdot 17 = 544.
+    DLACZEGO TO ŹLE: ściana boczna to trójkąt równoramienny o ramionach b = 17 i podstawie a = 16. We wzorze na pole trójkąta potrzebna jest wysokość opuszczona na podstawę, czyli h, a nie ramię b. Zawsze h < b.
+    POPRAWNIE: h = \sqrt{b^2 - \left(\frac{a}{2}\right)^2} = \sqrt{17^2 - 8^2} = \sqrt{289 - 64} = \sqrt{225} = 15.
+    P_b = 4\cdot\frac{1}{2}\cdot 16\cdot 15 = 4\cdot 120 = 480.
+    Odpowiedź: P_b = 480 (a nie 544).
+  solution_steps:
+  - 'Wskaż błąd: w miejsce wysokości ściany h wstawiono ramię b = 17.'
+  - 'Oblicz wysokość ściany bocznej: h = \sqrt{17^2 - 8^2} = 15.'
+  - 'Oblicz pole jednej ściany: \frac{1}{2}\cdot 16\cdot 15 = 120.'
+  - 'Oblicz pole boczne: P_b = 4\cdot 120 = 480.'
+  answer:
+    kind: NUMERIC
+    value: 480.0
+    latex: '480'
+  checks:
+  - kind: evaluate
+    expr: 4\cdot\frac{1}{2}\cdot 16 \cdot \sqrt{17^2 - 8^2}
+  skills:
+  - pole boczne ostrosłupa prawidłowego
+  - twierdzenie Pitagorasa w ścianie bocznej
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 480.0 vs 480.0 (tol 1e-09)'
+- id: g-cm-08
+  slot: COMMON_MISTAKE
+  ramp_index: 2
+  difficulty: 3
+  exercise_type: 'demonstracja błędu: wysokość bryły zamiast wysokości ściany'
+  statement: 'W ostrosłupie prawidłowym czworokątnym krawędź podstawy ma długość 10, a wysokość ostrosłupa
+    jest równa 12. Uczeń obliczył pole powierzchni całkowitej tak: P_c = 10^2 + 4\cdot\frac{1}{2}\cdot
+    10\cdot 12 = 340. Wyjaśnij, na czym polega błąd, i oblicz poprawne pole powierzchni całkowitej.'
+  statement_latex: h = \sqrt{12^2 + 5^2},\qquad P_c = 10^2 + 4\cdot\frac{1}{2}\cdot 10\cdot h
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń przyjął, że wysokość bryły H = 12 jest jednocześnie wysokością każdej ściany bocznej i policzył P_b = 4\cdot\frac{1}{2}\cdot 10\cdot 12 = 240, a stąd P_c = 100 + 240 = 340.
+    DLACZEGO TO ŹLE: H jest prostopadła do podstawy i wychodzi ze środka podstawy — nie leży w płaszczyźnie ściany bocznej. Wysokość ściany bocznej h jest przeciwprostokątną trójkąta prostokątnego o przyprostokątnych H i r, więc zawsze h > H.
+    POPRAWNIE: r = \frac{a}{2} = 5, zatem h = \sqrt{H^2 + r^2} = \sqrt{144 + 25} = \sqrt{169} = 13.
+    P_b = 4\cdot\frac{1}{2}\cdot 10\cdot 13 = 260, P_p = 10^2 = 100.
+    P_c = 100 + 260 = 360.
+    Odpowiedź: P_c = 360 (a nie 340).
+  solution_steps:
+  - 'Wskaż błąd: użyto H = 12 jako wysokości ściany bocznej.'
+  - Wyznacz r = \frac{10}{2} = 5.
+  - Oblicz h = \sqrt{12^2 + 5^2} = 13.
+  - Oblicz P_b = 4\cdot\frac{1}{2}\cdot 10\cdot 13 = 260.
+  - Oblicz P_c = 100 + 260 = 360.
+  answer:
+    kind: NUMERIC
+    value: 360.0
+    latex: '360'
+  checks:
+  - kind: evaluate
+    expr: 10^2 + 4\cdot\frac{1}{2}\cdot 10 \cdot \sqrt{12^2 + \left(\frac{10}{2}\right)^2}
+  skills:
+  - związek h^2 = H^2 + r^2
+  - pole całkowite ostrosłupa
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 360.0 vs 360.0 (tol 1e-09)'
+- id: g-cm-09
+  slot: COMMON_MISTAKE
+  ramp_index: 3
+  difficulty: 2
+  exercise_type: 'demonstracja błędu: podwojona podstawa ostrosłupa'
+  statement: 'W ostrosłupie prawidłowym czworokątnym krawędź podstawy ma długość 6, a wysokość ściany
+    bocznej jest równa 5. Uczeń obliczył pole powierzchni całkowitej tak: P_c = 2\cdot 6^2 + 4\cdot\frac{1}{2}\cdot
+    6\cdot 5 = 132. Wyjaśnij, na czym polega błąd, i podaj poprawne pole powierzchni całkowitej.'
+  statement_latex: P_c = 6^2 + 4\cdot\frac{1}{2}\cdot 6 \cdot 5
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń zastosował wzór P_c = 2P_p + P_b, czyli policzył pole podstawy dwa razy: 2\cdot 36 + 60 = 72 + 60 = 132.
+    DLACZEGO TO ŹLE: dwie podstawy ma graniastosłup. Ostrosłup ma tylko jedną podstawę i n trójkątnych ścian bocznych, więc P_c = P_p + P_b.
+    POPRAWNIE: P_p = 6^2 = 36, P_b = 4\cdot\frac{1}{2}\cdot 6\cdot 5 = 60.
+    P_c = 36 + 60 = 96.
+    Odpowiedź: P_c = 96 (błąd zawyżył wynik o jedno pole podstawy, czyli o 36).
+  solution_steps:
+  - 'Wskaż błąd: ostrosłup ma jedną podstawę, więc nie mnożymy P_p przez 2.'
+  - Oblicz P_p = 6^2 = 36.
+  - Oblicz P_b = 4\cdot\frac{1}{2}\cdot 6\cdot 5 = 60.
+  - Oblicz P_c = 36 + 60 = 96.
+  answer:
+    kind: NUMERIC
+    value: 96.0
+    latex: '96'
+  checks:
+  - kind: evaluate
+    expr: 6^2 + 4\cdot\frac{1}{2}\cdot 6 \cdot 5
+  skills:
+  - pole całkowite ostrosłupa
+  - rozróżnianie P_c ostrosłupa i graniastosłupa
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 96.0 vs 96.0 (tol 1e-09)'
+- id: g-cm-10
+  slot: COMMON_MISTAKE
+  ramp_index: 4
+  difficulty: 4
+  exercise_type: 'demonstracja błędu: kąt krawędzi bocznej mylony z kątem ściany bocznej'
+  statement: 'W ostrosłupie prawidłowym czworokątnym krawędź podstawy ma długość 8, a krawędź boczna jest
+    nachylona do płaszczyzny podstawy pod kątem 60^\circ. Uczeń obliczył wysokość ostrosłupa tak: „rzutem
+    jest odcinek o długości \frac{8}{2} = 4, więc H = 4\cdot\operatorname{tg}60^\circ = 4\sqrt{3}”. Wyjaśnij,
+    na czym polega błąd, i oblicz poprawną wysokość tego ostrosłupa.'
+  statement_latex: H = \frac{8\sqrt{2}}{2}\cdot\operatorname{tg}60^\circ
+  solution: |-
+    BŁĘDNE ROZUMOWANIE: uczeń użył r = \frac{a}{2} = 4, czyli odległości środka podstawy od boku, i otrzymał H = 4\cdot\sqrt{3} = 4\sqrt{3}\approx 6,93.
+    DLACZEGO TO ŹLE: odcinek r jest rzutem WYSOKOŚCI ŚCIANY BOCZNEJ, a nie krawędzi bocznej. Rzutem krawędzi bocznej na podstawę jest odcinek łączący środek podstawy z jej wierzchołkiem, czyli R = \frac{a\sqrt{2}}{2} (połowa przekątnej kwadratu). Kąt ściany bocznej i kąt krawędzi bocznej to dwa różne kąty.
+    POPRAWNIE: R = \frac{8\sqrt{2}}{2} = 4\sqrt{2}.
+    W trójkącie prostokątnym o przyprostokątnych R i H: \operatorname{tg}60^\circ = \frac{H}{R}, więc
+    H = 4\sqrt{2}\cdot\sqrt{3} = 4\sqrt{6} \approx 9,80.
+    Odpowiedź: H = 4\sqrt{6}, a nie 4\sqrt{3}.
+  solution_steps:
+  - 'Wskaż błąd: rzutem krawędzi bocznej jest R, a nie r.'
+  - Oblicz R = \frac{8\sqrt{2}}{2} = 4\sqrt{2}.
+  - 'Zapisz zależność: \operatorname{tg}60^\circ = \frac{H}{R}.'
+  - Oblicz H = 4\sqrt{2}\cdot\sqrt{3} = 4\sqrt{6}.
+  answer:
+    kind: SYMBOLIC
+    latex: 4\sqrt{6}
+  checks:
+  - kind: evaluate
+    expr: \frac{8\cdot\sqrt{2}}{2}\cdot\sqrt{3}
+  skills:
+  - kąt nachylenia krawędzi bocznej
+  - promienie R i r w kwadracie
+  - trygonometria w bryle
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 9.797958971132712 vs 9.797958971132712 (tol 1e-09)'
+- id: g-ch-t02
+  slot: CHALLENGE
+  ramp_index: 0
+  difficulty: 4
+  exercise_type: zadanie odwrotne — z objętości do pola powierzchni
+  statement: Pewien ostrosłup prawidłowy czworokątny ma tę własność, że jego wysokość jest równa długości
+    krawędzi podstawy. Objętość tego ostrosłupa jest równa 72. Oblicz pole powierzchni całkowitej tego
+    ostrosłupa. Zapisz obliczenia.
+  statement_latex: \frac{1}{3}\cdot x^{2}\cdot x = 72
+  solution: |-
+    Oznaczmy przez x długość krawędzi podstawy; z warunku zadania wysokość bryły też jest równa x, przy czym x > 0.
+    Podstawą jest kwadrat, więc P_p = x^2 i
+    V = \frac{1}{3}\cdot x^{2}\cdot x = \frac{x^{3}}{3}.
+    Z równania \frac{x^{3}}{3} = 72 otrzymujemy x^{3} = 216, czyli x = 6 (rozwiązanie dodatnie).
+    Zatem a = 6 oraz H = 6, a promień okręgu wpisanego w podstawę r = \frac{a}{2} = 3.
+    Wysokość ściany bocznej: h^{2} = H^{2} + r^{2} = 6^{2} + 3^{2} = 45, więc h = 3\sqrt{5} (h > H — zgadza się).
+    Pole boczne: P_b = 4\cdot\frac{1}{2}\cdot 6\cdot 3\sqrt{5} = 36\sqrt{5}.
+    Pole całkowite (jedna podstawa!): P_c = P_p + P_b = 36 + 36\sqrt{5} \approx 116,5.
+  solution_steps:
+  - Oznacz przez x krawędź podstawy; z treści H = x, x > 0.
+  - 'Zapisz objętość: V = \frac{1}{3}\cdot x^{2}\cdot x = \frac{x^{3}}{3}.'
+  - 'Rozwiąż równanie \frac{x^{3}}{3} = 72: x^{3} = 216, x = 6.'
+  - Oblicz r = \frac{6}{2} = 3 i h = \sqrt{6^{2}+3^{2}} = 3\sqrt{5}.
+  - Oblicz P_b = 4\cdot\frac{1}{2}\cdot 6\cdot 3\sqrt{5} = 36\sqrt{5} i P_c = 36 + 36\sqrt{5}.
+  answer:
+    kind: SYMBOLIC
+    latex: 36 + 36\sqrt{5}
+  checks:
+  - kind: evaluate
+    expr: 6^{2} + 4\cdot\frac{1}{2}\cdot 6\cdot\sqrt{6^{2}+3^{2}}
+  skills:
+  - wprowadzenie niewiadomej opisującej bryłę
+  - ułożenie i rozwiązanie równania z objętości
+  - twierdzenie Pitagorasa w trójkącie (H, r, h)
+  - pole całkowite ostrosłupa
+  verification:
+    checkability: DETERMINISTIC
+    note: '[whole] SymPy solved it fresh: 116.49844718999243 vs 116.49844718999243 (tol 1e-09)'
+- id: g-ch-t03
+  slot: CHALLENGE
+  ramp_index: 1
+  difficulty: 5
+  exercise_type: optymalizacja kwadratowa w stereometrii z ograniczeniem zewnętrznym
+  statement: Pudełko ma kształt graniastosłupa prawidłowego czworokątnego. Łączna długość wszystkich dwunastu
+    krawędzi tego pudełka jest równa 48 cm. Pudełko ma stać na półce o prześwicie 4 cm, więc jego wysokość
+    nie może być większa niż 4 cm. Powierzchnia boczna pudełka (cztery ściany boczne) ma zostać oklejona
+    ozdobnym papierem. Wyznacz długość krawędzi podstawy i wysokość pudełka, dla których pole powierzchni
+    bocznej jest największe, oraz oblicz to pole. Zapisz obliczenia.
+  statement_latex: P_b\left(a\right) = 4\cdot a\cdot\left(12 - 2a\right) = 48a - 8a^{2}
+  solution: |-
+    Niech a oznacza długość krawędzi podstawy (kwadratu), a H wysokość pudełka; a > 0, H > 0.
+    Graniastosłup prawidłowy czworokątny ma 8 krawędzi podstaw i 4 krawędzie boczne, więc
+    8a + 4H = 48, skąd H = 12 - 2a.
+    Warunek H > 0 daje a < 6, a warunek z półki H \le 4 daje 12 - 2a \le 4, czyli a \ge 4. Ostatecznie a \in \left[4;6\right).
+    Pole powierzchni bocznej:
+    P_b\left(a\right) = Ob_p\cdot H = 4a\cdot\left(12 - 2a\right) = 48a - 8a^{2}.
+    Jest to parabola o ramionach skierowanych w dół, o wierzchołku dla a = \frac{-48}{2\cdot\left(-8\right)} = 3. Punkt a = 3 NIE należy do dziedziny (wtedy H = 6 > 4), a na przedziale \left[4;6\right) funkcja jest malejąca, więc największą wartość przyjmuje na lewym krańcu, dla a = 4.
+    Wtedy H = 12 - 2\cdot 4 = 4 oraz P_b = 4\cdot 4\cdot 4 = 64.
+    Odpowiedź: krawędź podstawy 4 cm, wysokość 4 cm (pudełko jest sześcianem), największe pole powierzchni bocznej wynosi 64 cm^{2}.
+  solution_steps:
+  - Oznacz krawędź podstawy przez a i wysokość przez H; z sumy krawędzi 8a + 4H = 48, więc H = 12 - 2a.
+  - 'Ustal dziedzinę: H > 0 daje a < 6, warunek H \le 4 daje a \ge 4, zatem a \in \left[4;6\right).'
+  - 'Zbuduj funkcję celu: P_b\left(a\right) = 4a\left(12-2a\right) = 48a - 8a^{2}.'
+  - 'Wierzchołek paraboli: a = 3 — nie należy do dziedziny, więc na \left[4;6\right) funkcja maleje.'
+  - 'Największa wartość dla a = 4: H = 4 oraz P_b = 64 cm^{2}.'
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: a
+      answer:
+        kind: NUMERIC
+        value: 4.0
+    - name: H
+      answer:
+        kind: NUMERIC
+        value: 4.0
+    - name: P_b
+      answer:
+        kind: NUMERIC
+        value: 64.0
+  checks:
+  - kind: evaluate
+    expr: \frac{48 - 4\cdot 4}{8}
+    var: a
+    part: a
+  - kind: evaluate
+    expr: 12 - 2\cdot 4
+    var: a
+    part: H
+  - kind: evaluate
+    expr: 4\cdot 4\cdot\left(12 - 2\cdot 4\right)
+    var: a
+    part: P_b
+  stated_model:
+    variable: a
+    objective_latex: 4\cdot a\cdot\left(12 - 2a\right)
+    domain_lo: '0'
+    domain_hi: '4'
+    domain_hi_open: false
+    constraint_used: 8a + 4H = 48,\ H \le 4
+  skills:
+  - wprowadzenie zmiennej i wyrażenie wysokości przez sumę krawędzi
+  - zbudowanie funkcji celu P_b = Ob_p \cdot H
+  - dziedzina wynikająca z dodatniości wymiarów i z warunku zadania
+  - wierzchołek paraboli i sprawdzenie dopuszczalności
+  verification:
+    checkability: STATED_MODEL
+    note: 'stage 1 inconclusive: cannot match a MULTIPART answer to the optimum'
+- id: g-ch-t04
+  slot: CHALLENGE
+  ramp_index: 2
+  difficulty: 5
+  exercise_type: 'modelowanie: wzór i dziedzina, optymalizacja z warunkiem konstrukcyjnym'
+  statement: |-
+    Hełm wieży ma kształt ostrosłupa prawidłowego czworokątnego. Suma długości krawędzi podstawy tego ostrosłupa i długości wysokości jego ściany bocznej jest równa 21 m. Ze względów konstrukcyjnych krawędź podstawy hełmu musi mieć długość co najmniej 12 m. Cztery ściany boczne mają zostać pokryte blachą.
+    a) Wyznacz wzór na pole powierzchni bocznej hełmu w zależności od długości x krawędzi podstawy oraz podaj dziedzinę tak otrzymanej funkcji, uwzględniając wszystkie warunki zadania.
+    b) Wyznacz długość krawędzi podstawy, dla której pole powierzchni bocznej jest największe, oblicz to pole oraz oblicz wysokość takiego ostrosłupa. Zapisz obliczenia.
+  statement_latex: P_b\left(x\right) = 4\cdot\frac{1}{2}\cdot x\cdot\left(21 - x\right) = 42x - 2x^{2}
+  solution: |-
+    a) Niech x oznacza długość krawędzi podstawy, a h — wysokość ściany bocznej. Z warunku x + h = 21 mamy h = 21 - x.
+    Pole powierzchni bocznej to cztery przystające trójkąty równoramienne o podstawie x i wysokości h:
+    P_b\left(x\right) = 4\cdot\frac{1}{2}\cdot x\cdot\left(21-x\right) = 42x - 2x^{2}.
+    Warunki: x > 0 oraz h > 0. Ponadto ostrosłup istnieje tylko wtedy, gdy h > \frac{x}{2} (bo h^{2} = H^{2} + \left(\frac{x}{2}\right)^{2} i H > 0), czyli 21 - x > \frac{x}{2}, skąd x < 14. Warunek konstrukcyjny daje x \ge 12.
+    Dziedzina: x \in \left[12;14\right).
+    b) Wykresem funkcji P_b jest parabola o ramionach skierowanych w dół, a jej wierzchołek ma odciętą x = \frac{-42}{2\cdot\left(-2\right)} = 10{,}5. Ta wartość nie należy do dziedziny, a dla x > 10{,}5 funkcja maleje, więc największą wartość na przedziale \left[12;14\right) przyjmuje dla x = 12.
+    Wtedy h = 21 - 12 = 9 oraz P_b = 42\cdot 12 - 2\cdot 12^{2} = 504 - 288 = 216 (m^{2}).
+    Wysokość bryły: r = \frac{x}{2} = 6, więc H = \sqrt{h^{2} - r^{2}} = \sqrt{81 - 36} = \sqrt{45} = 3\sqrt{5} \approx 6{,}7 (m).
+    Kontrola: h = 9 > H = 3\sqrt{5} — zgodnie z geometrią bryły.
+  solution_steps:
+  - Oznacz krawędź podstawy przez x; z warunku x + h = 21 wysokość ściany bocznej h = 21 - x.
+  - 'Zapisz pole boczne jako sumę pól czterech trójkątów: P_b\left(x\right) = 2x\left(21-x\right) = 42x
+    - 2x^{2}.'
+  - 'Ustal dziedzinę: x > 0, h > 0 oraz h > \frac{x}{2} (istnienie ostrosłupa) daje x < 14; warunek konstrukcyjny
+    daje x \ge 12, więc x \in \left[12;14\right).'
+  - 'Wierzchołek paraboli: x = 10{,}5 — poza dziedziną; na \left[12;14\right) funkcja maleje, więc maksimum
+    dla x = 12.'
+  - Oblicz P_b\left(12\right) = 216 m^{2} oraz H = \sqrt{\left(21-12\right)^{2} - 6^{2}} = 3\sqrt{5} m.
+  answer:
+    kind: MULTIPART
+    parts:
+    - name: wzor_P_b
+      answer:
+        kind: SYMBOLIC
+        latex: 42x - 2x^{2}
+    - name: dziedzina
+      answer:
+        kind: INTERVAL
+        lo: '12'
+        hi: '14'
+        lo_open: false
+    - name: x_max
+      answer:
+        kind: NUMERIC
+        value: 12.0
+    - name: P_b_max
+      answer:
+        kind: NUMERIC
+        value: 216.0
+    - name: H
+      answer:
+        kind: SYMBOLIC
+        latex: 3\sqrt{5}
+  checks:
+  - kind: simplify
+    expr: 4\cdot\frac{1}{2}\cdot x\cdot\left(21 - x\right)
+    part: wzor_P_b
+  - kind: evaluate
+    expr: 2\cdot 12\cdot\left(21 - 12\right)
+    part: P_b_max
+  - kind: evaluate
+    expr: \sqrt{\left(21 - 12\right)^{2} - \left(\frac{12}{2}\right)^{2}}
+    part: H
+  stated_model:
+    variable: x
+    objective_latex: 2\cdot x\cdot\left(21 - x\right)
+    domain_lo: '12'
+    domain_hi: '14'
+    domain_lo_open: false
+    constraint_used: x + h = 21,\ h > \frac{x}{2},\ x \ge 12
+  skills:
+  - ułożenie wzoru na pole boczne ostrosłupa jako funkcji krawędzi podstawy
+  - dziedzina z warunku istnienia bryły (h > \frac{a}{2}) i z warunku zadania
+  - własności funkcji kwadratowej o ramionach w dół
+  - twierdzenie Pitagorasa h^2 = H^2 + r^2
+  verification:
+    checkability: STATED_MODEL
+    note: 'stage 1 inconclusive: no interior critical point in (12, 14)'
