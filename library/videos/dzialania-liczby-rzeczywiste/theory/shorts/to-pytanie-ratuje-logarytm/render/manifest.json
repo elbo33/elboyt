@@ -1,0 +1,41 @@
+{
+  "generatedAt": "2026-09-02T11:32:49.451Z",
+  "topic": "Działania w R: logarytm z definicji",
+  "outputVideo": "/Users/elieboulanger/Desktop/elboyt/generated/video.mp4",
+  "storyboard": "/Users/elieboulanger/Desktop/elboyt/generated/storyboard.json",
+  "durationSeconds": 44.766666666666666,
+  "scenes": [
+    {
+      "id": "logarytm-pytanie-01-definition-3",
+      "title": "To pytanie ratuje logarytm",
+      "className": "Short_logarytm_pytanie_01_definition_3",
+      "durationSeconds": 44.766666666666666,
+      "sceneType": "hook",
+      "sceneLabel": "To pytanie ratuje logarytm",
+      "sceneIndex": 1,
+      "standalone": true,
+      "narration": "Logarytm brzmi jak nowe działanie, ale najwygodniej czytać go jako pytanie. Zapis logarytm z b przy podstawie a równa się c oznacza: a do potęgi c daje b. Czyli logarytm szuka brakującego wykładnika. Na przykład, gdy zobaczysz logarytm przy podstawie dwa z liczby jeden przez szesnaście, nie zaczynasz od pamięciowego wzoru. Pytasz: do której potęgi trzeba podnieść dwa, żeby otrzymać jeden przez szesnaście. Ta zmiana języka jest kluczowa. Logarytm zamienia się w zwykłe myślenie o potęgach, a ułamek zwykle prowadzi do wykładnika ujemnego tutaj.",
+      "derivedFromScene": "definition-3",
+      "purpose": "To pytanie ratuje logarytm",
+      "mathematicalConcept": "Logarytm brzmi jak nowe działanie, ale najwygodniej czytać go jako pytanie. Zapis logarytm z b przy podstawie a równa się c oznacza: a do potęgi c daje b. Czyli logarytm szuka brakującego wykładnika. Na przykład, gdy zobaczysz logarytm przy podstawie dwa z liczby jeden przez szesnaście, nie zaczynasz od pamięciowego wzoru. Pytasz: do której potęgi trzeba podnieść dwa, żeby otrzymać jeden przez szesnaście. Ta zmiana języka jest kluczowa. Logarytm zamienia się w zwykłe myślenie o potęgach, a ułamek zwykle prowadzi do wykładnika ujemnego tutaj.",
+      "objects": [],
+      "animation": "Short: vertical, pace=fast, hard cuts.",
+      "camera": "Static 9:16 frame; bottom 25% kept clear.",
+      "text": "To pytanie ratuje logarytm",
+      "transition": "Hard cut.",
+      "sourcePath": "/Users/elieboulanger/Desktop/elboyt/generated/scenes/manim/logarytm-pytanie-01-definition-3.py",
+      "renderPath": "/Users/elieboulanger/Desktop/elboyt/generated/scenes/renders/logarytm-pytanie-01-definition-3.mp4",
+      "publicPath": "generated/scenes/logarytm-pytanie-01-definition-3.mp4"
+    }
+  ],
+  "previewFrames": [
+    "/Users/elieboulanger/Desktop/elboyt/generated/frames/frame-01.jpg",
+    "/Users/elieboulanger/Desktop/elboyt/generated/frames/frame-final.jpg"
+  ],
+  "scenePreviewFrames": [
+    "/Users/elieboulanger/Desktop/elboyt/generated/scene-previews/01-early-logarytm-pytanie-01-definition-3.png",
+    "/Users/elieboulanger/Desktop/elboyt/generated/scene-previews/01-mid-logarytm-pytanie-01-definition-3.png",
+    "/Users/elieboulanger/Desktop/elboyt/generated/scene-previews/01-late-logarytm-pytanie-01-definition-3.png"
+  ],
+  "sceneContactSheet": "/Users/elieboulanger/Desktop/elboyt/generated/scene-previews/contact-sheet.jpg"
+}

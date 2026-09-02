@@ -604,5 +604,21 @@ export const dzialaniaLiczbyRzeczywiste: SectionAuthoring = {
   slug: "dzialania-liczby-rzeczywiste",
   topic: "Działania w zbiorze liczb rzeczywistych i przedziały liczbowe",
   authored: withNarration([...hook, ...intuition, ...definition, ...why, ...summary]),
-  examples: [exValue, exLog, exInterval].map(withExampleNarration)
+  examples: [exValue, exLog, exInterval].map(withExampleNarration),
+  thumbnail: {
+    py: `from manim import *
+from support.style import LessonScene
+from support.thumbnail import stage_thumbnail
+
+
+class ThumbnailScene(LessonScene):
+    def construct(self):
+        stage_thumbnail(
+            self,
+            kicker="MATURA",
+            headline="DZIAŁANIA W R\\nI PRZEDZIAŁY LICZBOWE",
+            formula=r"(-2)^4 \\neq -2^4",
+        )
+`
+  }
 };

@@ -1,0 +1,41 @@
+{
+  "generatedAt": "2026-09-02T11:32:15.251Z",
+  "topic": "Działania w R: kolejność działań",
+  "outputVideo": "/Users/elieboulanger/Desktop/elboyt/generated/video.mp4",
+  "storyboard": "/Users/elieboulanger/Desktop/elboyt/generated/storyboard.json",
+  "durationSeconds": 29.033333333333335,
+  "scenes": [
+    {
+      "id": "kolejnosc-dzialan-01-intuition-3",
+      "title": "Kolejność działań zabiera punkty",
+      "className": "Short_kolejnosc_dzialan_01_intuition_3",
+      "durationSeconds": 29.033333333333335,
+      "sceneType": "hook",
+      "sceneLabel": "Kolejność działań zabiera punkty",
+      "sceneIndex": 1,
+      "standalone": true,
+      "narration": "Kolejność działań traktujemy jak maszynę z bramkami. Najpierw wchodzą nawiasy, również te ukryte pod kreską ułamkową i pod znakiem pierwiastka. Potem liczymy potęgi, pierwiastki i logarytmy. Następna bramka to mnożenie i dzielenie, wykonywane od lewej do prawej. Na końcu zostaje dodawanie i odejmowanie, także od lewej do prawej. Dzięki temu wyrażenie nie jest chaosem. Każdy fragment czeka na swoją kolej. W przykładach będziemy dokładnie pilnować, przez którą bramkę przechodzi zapis.",
+      "derivedFromScene": "intuition-3",
+      "purpose": "Kolejność działań zabiera punkty",
+      "mathematicalConcept": "Kolejność działań traktujemy jak maszynę z bramkami. Najpierw wchodzą nawiasy, również te ukryte pod kreską ułamkową i pod znakiem pierwiastka. Potem liczymy potęgi, pierwiastki i logarytmy. Następna bramka to mnożenie i dzielenie, wykonywane od lewej do prawej. Na końcu zostaje dodawanie i odejmowanie, także od lewej do prawej. Dzięki temu wyrażenie nie jest chaosem. Każdy fragment czeka na swoją kolej. W przykładach będziemy dokładnie pilnować, przez którą bramkę przechodzi zapis.",
+      "objects": [],
+      "animation": "Short: vertical, pace=fast, hard cuts.",
+      "camera": "Static 9:16 frame; bottom 25% kept clear.",
+      "text": "Kolejność działań zabiera punkty",
+      "transition": "Hard cut.",
+      "sourcePath": "/Users/elieboulanger/Desktop/elboyt/generated/scenes/manim/kolejnosc-dzialan-01-intuition-3.py",
+      "renderPath": "/Users/elieboulanger/Desktop/elboyt/generated/scenes/renders/kolejnosc-dzialan-01-intuition-3.mp4",
+      "publicPath": "generated/scenes/kolejnosc-dzialan-01-intuition-3.mp4"
+    }
+  ],
+  "previewFrames": [
+    "/Users/elieboulanger/Desktop/elboyt/generated/frames/frame-01.jpg",
+    "/Users/elieboulanger/Desktop/elboyt/generated/frames/frame-final.jpg"
+  ],
+  "scenePreviewFrames": [
+    "/Users/elieboulanger/Desktop/elboyt/generated/scene-previews/01-early-kolejnosc-dzialan-01-intuition-3.png",
+    "/Users/elieboulanger/Desktop/elboyt/generated/scene-previews/01-mid-kolejnosc-dzialan-01-intuition-3.png",
+    "/Users/elieboulanger/Desktop/elboyt/generated/scene-previews/01-late-kolejnosc-dzialan-01-intuition-3.png"
+  ],
+  "sceneContactSheet": "/Users/elieboulanger/Desktop/elboyt/generated/scene-previews/contact-sheet.jpg"
+}

@@ -8,7 +8,7 @@ never as part of the video.
 """
 from manim import *
 
-from .colors import ACCENT, FOREGROUND, MUTED, SOFT
+from .colors import ACCENT, FOREGROUND, MUTED
 from .config import FRAME_H, FRAME_W
 from .style import FONT
 
@@ -19,43 +19,13 @@ def _fit_width(mob, max_w):
     return mob
 
 
-def _add_bright_thumbnail_grid(scene):
-    lines = VGroup()
-    step = 0.8
-    half_w = FRAME_W / 2 + step
-    half_h = FRAME_H / 2 + step
-    y = -half_h
-    while y <= half_h:
-        lines.add(
-            Line(
-                [-half_w, y, 0],
-                [half_w, y, 0],
-                color=SOFT,
-                stroke_width=1.0,
-            ).set_opacity(0.62)
-        )
-        y += step
-    x = -half_w
-    while x <= half_w:
-        lines.add(
-            Line(
-                [x, -half_h, 0],
-                [x, half_h, 0],
-                color=SOFT,
-                stroke_width=1.0,
-            ).set_opacity(0.52)
-        )
-        x += step
-    scene.add(lines)
-
-
 def stage_thumbnail(scene, kicker, headline, formula, figure=None):
     """kicker  - short section label, top-left, letter-spaced caps + accent rule
     headline  - 1-3 lines (``\\n`` separated), bold caps, centred, upper band
     formula   - a LaTeX string, rendered large in ACCENT along the lower band
     figure    - optional mobject (chip strip, number line, ...) for the middle
     """
-    _add_bright_thumbnail_grid(scene)
+    scene.add_texture()
 
     # --- kicker + accent rule (top-left) ---------------------------------
     tag = Text(kicker.upper(), font=FONT, weight=BOLD, color=MUTED).scale(0.52)
@@ -75,7 +45,7 @@ def stage_thumbnail(scene, kicker, headline, formula, figure=None):
     ])
     lines.arrange(DOWN, center=True, buff=0.26)
     _fit_width(lines, FRAME_W - 2.0)
-    lines.move_to([0, 1.28, 0])
+    lines.move_to([0, FRAME_H / 2 - 1.05 - lines.height / 2, 0])
     scene.add(lines)
 
     # --- figure (optional, middle band) --------------------------------
@@ -92,8 +62,7 @@ def stage_thumbnail(scene, kicker, headline, formula, figure=None):
     fx.scale(2.1 if figure is not None else 2.5)
     _fit_width(fx, FRAME_W - 2.4)
     top = min(fig_bottom - 0.5 - fx.height / 2, -1.4)
-    target_y = -1.55 if figure is None else max(top, -FRAME_H / 2 + 0.6 + fx.height / 2)
-    fx.move_to([0, target_y, 0])
+    fx.move_to([0, max(top, -FRAME_H / 2 + 0.6 + fx.height / 2), 0])
     scene.add(fx)
 
     scene.wait(0.1)

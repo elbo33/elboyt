@@ -1,0 +1,41 @@
+{
+  "generatedAt": "2026-09-02T11:32:02.030Z",
+  "topic": "Działania w R: oś liczbowa",
+  "outputVideo": "/Users/elieboulanger/Desktop/elboyt/generated/video.mp4",
+  "storyboard": "/Users/elieboulanger/Desktop/elboyt/generated/storyboard.json",
+  "durationSeconds": 36.766666666666666,
+  "scenes": [
+    {
+      "id": "os-liczbowa-01-hook-1",
+      "title": "Bez osi nie zdasz matury",
+      "className": "Short_os_liczbowa_01_hook_1",
+      "durationSeconds": 36.766666666666666,
+      "sceneType": "hook",
+      "sceneLabel": "Bez osi nie zdasz matury",
+      "sceneIndex": 1,
+      "standalone": true,
+      "narration": "Cześć. W tym odcinku przejdziemy spokojnie przez działania w zbiorze liczb rzeczywistych i przez przedziały liczbowe. Zaczynamy od osi, bo ona będzie naszym głównym obrazem. Na jednej prostej widzimy liczby ujemne, zero, liczby dodatnie, pierwiastki i później całe kawałki osi. Najpierw zobaczysz, jak rozpoznawać rodzaje liczb. Potem przejdziemy przez kolejność działań, znaki przy potęgach, pierwiastki i logarytmy. Na końcu użyjemy tego samego obrazu do przedziałów. Nie będziemy uczyć się haseł na pamięć. Będziemy patrzeć, co oznacza zapis, jaki ruch wolno wykonać, i gdzie wynik powinien leżeć na osi.",
+      "derivedFromScene": "hook-1",
+      "purpose": "Bez osi nie zdasz matury",
+      "mathematicalConcept": "Cześć. W tym odcinku przejdziemy spokojnie przez działania w zbiorze liczb rzeczywistych i przez przedziały liczbowe. Zaczynamy od osi, bo ona będzie naszym głównym obrazem. Na jednej prostej widzimy liczby ujemne, zero, liczby dodatnie, pierwiastki i później całe kawałki osi. Najpierw zobaczysz, jak rozpoznawać rodzaje liczb. Potem przejdziemy przez kolejność działań, znaki przy potęgach, pierwiastki i logarytmy. Na końcu użyjemy tego samego obrazu do przedziałów. Nie będziemy uczyć się haseł na pamięć. Będziemy patrzeć, co oznacza zapis, jaki ruch wolno wykonać, i gdzie wynik powinien leżeć na osi.",
+      "objects": [],
+      "animation": "Short: vertical, pace=fast, hard cuts.",
+      "camera": "Static 9:16 frame; bottom 25% kept clear.",
+      "text": "Bez osi nie zdasz matury",
+      "transition": "Hard cut.",
+      "sourcePath": "/Users/elieboulanger/Desktop/elboyt/generated/scenes/manim/os-liczbowa-01-hook-1.py",
+      "renderPath": "/Users/elieboulanger/Desktop/elboyt/generated/scenes/renders/os-liczbowa-01-hook-1.mp4",
+      "publicPath": "generated/scenes/os-liczbowa-01-hook-1.mp4"
+    }
+  ],
+  "previewFrames": [
+    "/Users/elieboulanger/Desktop/elboyt/generated/frames/frame-01.jpg",
+    "/Users/elieboulanger/Desktop/elboyt/generated/frames/frame-final.jpg"
+  ],
+  "scenePreviewFrames": [
+    "/Users/elieboulanger/Desktop/elboyt/generated/scene-previews/01-early-os-liczbowa-01-hook-1.png",
+    "/Users/elieboulanger/Desktop/elboyt/generated/scene-previews/01-mid-os-liczbowa-01-hook-1.png",
+    "/Users/elieboulanger/Desktop/elboyt/generated/scene-previews/01-late-os-liczbowa-01-hook-1.png"
+  ],
+  "sceneContactSheet": "/Users/elieboulanger/Desktop/elboyt/generated/scene-previews/contact-sheet.jpg"
+}
