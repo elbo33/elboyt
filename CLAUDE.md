@@ -43,11 +43,17 @@ storyboard, COMMAND.md). The `.mp4` / `.png` renders live on disk only
 
 ## Commands
 
+Codex chat is the production operator for this repo. The user asks Codex to plan,
+render, revise, voice, publish, and continue. The browser dashboard is the
+review and approval surface where the user can inspect artifacts and see state;
+it is not the primary creative chat interface.
+
 ```
 npm run next
 npm run generate:next
 npm run voiceover:ready
 npm run publish:ready
+npm run dashboard
 
 npm run generate -- <section> <type> [stage]     stage = longform (default) | shorts | stills
 npm run publish  -- <section> <type> [stage]
@@ -63,6 +69,10 @@ npm run voiceover:test
   generated long-form videos or shorts, and stops for a second review.
 - `publish:ready` reads `generated/.ready.json` and publishes exactly that
   staged target.
+- `dashboard` starts the local browser dashboard at `http://localhost:4317`.
+  It shows queue status, review artifacts, stage progress, job logs, and buttons
+  that call the same gated commands. Treat dashboard approvals as user approval;
+  do not bypass them.
 - `voiceover:test` makes a short Polish calibration MP3 and root Markdown report
   with duration, word count, and WPM for the configured ElevenLabs voice.
 - Polish narration budget is 128.2 WPM for the configured Koras voice, measured
@@ -79,22 +89,28 @@ npm run voiceover:test
   statement + A/B/C/D + comment CTA + `.md` caption). Distractors come from the
   ZasPro COMMON_MISTAKE bank.
 
-No one-off section authoring is registered. The next production task is the
-generic planner layer that turns the local ZasPro YAML into renderable theory,
-exercise, mistake, challenge, short, and still plans.
+No one-off section authoring is registered. The generic planner layer turns the
+local ZasPro YAML into baseline theory, exercise, mistake, challenge, short, and
+still plans. Treat it as the first systematic render grammar to improve after
+reviewing actual output, not as the final authored creative layer.
 
 ## Approval gates
 
-Each stage is gated on the operator's approval, in order. Nothing advances or
-publishes without it. A failed approval means iterating on **that** stage, not
-moving on.
+Each stage is gated on the user's approval, in order. Nothing advances,
+voices, or publishes without it. A failed approval means iterating on **that**
+stage, not moving on.
 
-1. `generate` long form → it sits in `generated/`. Report it is ready. Stop.
-2. Operator approves → `publish` longform → stop. Do not continue to shorts.
-3. Operator says go → `generate` shorts → stop.
-4. Operator approves → `publish` shorts → stop.
-5. Same for stills.
-6. Only now is the episode done. Operator picks the next one.
+1. User asks Codex chat for the next long-form video.
+2. Codex prepares or revises the director plan and runs the local render command.
+3. The silent render sits in `generated/`; user reviews it in the dashboard.
+4. If rejected, Codex changes the plan/render and repeats the silent render.
+5. If accepted, Codex runs `voiceover:ready`; ElevenLabs is called only here.
+6. User reviews the voiced render in the dashboard.
+7. If accepted, Codex publishes it into `library/`.
+8. Codex then moves to shorts and stills for the same topic, each with its own
+   review gate.
+9. Only after longform, shorts, and stills are accepted/published is the topic
+   done. Codex then asks for or selects the next queue target.
 
 ## Golden rules
 
@@ -114,25 +130,53 @@ moving on.
    state anything not shown on screen. It is **generated** from the storyboard's
    per-scene `narration` after the ffprobe pass (`src/script/fromStoryboard.ts`),
    not hand-written.
-5. **Language: Polish (pl-PL) by default.** Every new piece — all on-screen text
+5. **Narration fills the measured scene time.** Long-form narration starts with
+   a natural greeting and episode intro, then complements the visuals for every
+   scene. Use the measured Koras voice speed, 128.2 WPM, so there are no silent
+   gaps after the voiceover is added. If the render duration changes, rewrite
+   the scene narration before calling ElevenLabs.
+6. **Visuals stay active but not frantic.** Use sparse on-screen text and
+   purposeful visual motion: reveals, highlights, traces, transforms and
+   circumscribes. Avoid long stretches where nothing changes unless narration
+   is actively explaining a dense visual. Before voiceover, review
+   `generated/scene-previews/contact-sheet.jpg` for overlap, crowded formulas,
+   title/tag collisions and off-frame content. The review frames must cover
+   early, middle and late moments in every scene. Any title, problem statement
+   or formula strip that touches or visually competes with the top-left chapter
+   tag is a hard rejection.
+7. **Language: Polish (pl-PL) by default.** Every new piece — all on-screen text
    *and* its `script.md` — is authored in Polish unless the operator asks
    otherwise. File/folder slugs stay ASCII (`slugify` folds diacritics).
-6. Read `prompts/director.md` (the creative brief) before authoring scenes.
-7. **No em dashes.** The em dash (`—`) and en dash (`–`) are strictly banned in
+8. Read `prompts/director.md` (the creative brief) before authoring scenes.
+9. **No em dashes.** The em dash (`—`) and en dash (`–`) are strictly banned in
    every piece of user-facing text: on-screen Manim strings, `script.md`
    narration, titles, captions, notes, thumbnails. Use a comma, a colon, the
    word "to", parentheses, or rewrite. Mathematical minus (`−` or `-`) is fine;
    it is not a dash.
-8. **Numbers as words in `script.md`.** In every narration script, short and
+10. **Numbers as words in `script.md`.** In every narration script, short and
    long, write numbers as Polish words, never digits: "dziesiąty wyraz",
    "równa się siedem", "minus dwadzieścia dziewięć"; never "10", "= 7", "-29".
    Narration only; on-screen math stays in digits. `fromStoryboard.ts` warns
    loudly on a rule 7 or 8 violation.
-9. **Shorts staging.** The retention-hook title is centred (horizontally and as
-   a block, every line under the last) via `hook_title()` in
-   `src/manim/shorts.py`, not free-placed `Text`. Background is the same
-   `add_texture()` grid as the long form, nothing else. Content sits in the
-   vertical middle; the bottom 25% stays clear (`ai_math_shorts_bottom_safe_zone`).
+11. **Shorts staging.** Derivative shorts must inherit the approved longform
+   visual language: same dark grid, colors, math objects, scene archetypes, and
+   worked-example template in vertical format. Do not create a separate
+   reel-only style. The rejected six-reel formula-stack/axis renderer has been
+   removed and should not be recreated. Each short reuses the exact extracted
+   longform narration for its source scene(s), so the approved longform audio
+   can be reused later. The only intentional visual difference from longform is
+   the opening label text itself. Replace the existing first label, for example
+   the `stage_figure(... question="...")` line; for `stage_derivation`, pass the
+   same label through its `question` option. Every short must have this opening
+   label. Do not add a second overlay label. The replacement should be
+   controversial and matura-focused, for
+   example: "Bez tego NIE ZDASZ matury. Kropka.", "Ten temat oblewa połowę
+   maturzystów", "90% zdających maturę o tym nie wie", "To pytanie jest na
+   KAŻDEJ maturze", "Egzaminator na maturze liczy, że tego nie znasz",
+   "Robisz to źle na maturze i nawet nie wiesz". Do not change the rest of the
+   longform-derived visual scene for the sake of the hook. Keep animation active
+   but never chaotic: no irrelevant frozen frames, no constant pulsing, and no
+   overlapping objects or labels.
 
 ## Thumbnail
 

@@ -121,4 +121,6 @@ export type RenderManifest = {
   durationSeconds: number;
   scenes: VideoScene[];
   previewFrames: string[];
+  scenePreviewFrames?: string[];
+  sceneContactSheet?: string;
 };

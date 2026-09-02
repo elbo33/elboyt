@@ -50,8 +50,8 @@ def stage_figure(scene, figure, *, question=None, caption=None, reveal=None, pac
     whole figure fades in. `question` sits above, `caption` below."""
     q = None
     if question:
-        q = body(question, 0.5 if not IS_VERTICAL else 0.52, FOREGROUND)
-        q.to_edge(UP, buff=1.0 if not IS_VERTICAL else 2.6)
+        q = body(question, 0.44 if not IS_VERTICAL else 0.52, FOREGROUND)
+        q.to_edge(UP, buff=1.32 if not IS_VERTICAL else 2.75)
         _fit(q, FRAME_W - (1.4 if not IS_VERTICAL else 0.7), 1.8)
 
     if IS_VERTICAL:
@@ -64,22 +64,22 @@ def stage_figure(scene, figure, *, question=None, caption=None, reveal=None, pac
         figure.move_to([0, 0.0, 0])
         cap_y = figure.get_bottom()[1] - 0.7
     else:
-        top = (q.get_bottom()[1] - 0.5) if q is not None else (FRAME_H / 2 - 0.8)
+        top = (q.get_bottom()[1] - 0.6) if q is not None else (FRAME_H / 2 - 1.0)
         bottom = SAFE_BOTTOM_Y + 1.0
         _fit(figure, FRAME_W - 1.4, top - bottom, min_fill=0.5)
         figure.move_to([0, 0.58 * top + 0.42 * bottom, 0])
         cap_y = None
 
     if q is not None:
-        scene.play(FadeIn(q, shift=0.15 * UP), run_time=_t(pace, 0.9))
-        hold(scene, 1.0, pace)
+        scene.play(FadeIn(q, shift=0.08 * UP), run_time=_t(pace, 0.95))
+        hold(scene, 0.85, pace)
 
     if reveal:
         for step in reveal:
-            scene.play(*step, run_time=_t(pace, 0.9))
-            hold(scene, 0.9, pace)
+            scene.play(*step, run_time=_t(pace, 0.95))
+            hold(scene, 0.75, pace)
     else:
-        scene.play(FadeIn(figure, shift=0.15 * UP), run_time=_t(pace, 1.2))
+        scene.play(FadeIn(figure, shift=0.08 * UP), run_time=_t(pace, 1.25))
         hold(scene, 1.6, pace)
 
     if caption:
@@ -97,7 +97,7 @@ def stage_figure(scene, figure, *, question=None, caption=None, reveal=None, pac
 # ---------------------------------------------------------------------------
 # 2 · stage_derivation
 # ---------------------------------------------------------------------------
-def stage_derivation(scene, *, symbolic=None, columns=None, caption=None, pace="slow"):
+def stage_derivation(scene, *, symbolic=None, columns=None, caption=None, pace="slow", question=None):
     """One derivation.
 
     symbolic = ["tex", "tex", ...]  -> each line writes on below the previous,
@@ -107,6 +107,14 @@ def stage_derivation(scene, *, symbolic=None, columns=None, caption=None, pace="
         rows are column-aligned (same number of entries); revealed row by row;
         then a rule and `combine` land beneath. This is the forwards/backwards
         pairing (16:9 stacked rows, 9:16 the same but tighter)."""
+    q = None
+    if question:
+        q = body(question, 0.44 if not IS_VERTICAL else 0.52, FOREGROUND)
+        q.to_edge(UP, buff=1.32 if not IS_VERTICAL else 2.75)
+        _fit(q, FRAME_W - (1.4 if not IS_VERTICAL else 0.7), 1.8)
+        scene.play(FadeIn(q, shift=0.08 * UP), run_time=_t(pace, 0.95))
+        hold(scene, 0.85, pace)
+
     if symbolic:
         lines = VGroup(*[MathTex(s, color=FOREGROUND).scale(0.72 if not IS_VERTICAL else 0.8)
                          for s in symbolic])

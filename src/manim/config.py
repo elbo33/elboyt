@@ -38,7 +38,7 @@ SAFE_BOTTOM_FRAC = _F["safe"]
 # The long form is a slow lecture: every step stays on screen long enough for
 # someone who does not know the topic to read it. Shorts compress hard. One
 # knob, imported by archetypes / templates / compute — env MANIM_DWELL overrides.
-LONGFORM_DWELL = float(os.environ.get("MANIM_DWELL", "4.4"))
+LONGFORM_DWELL = float(os.environ.get("MANIM_DWELL", "3.4"))
 _RT_SLOW = 1.4  # run_times stretch less than holds — sluggish motion reads worse than a long hold
 # The short is a trailer, not a compressed lecture: still readable, but every
 # hold short and every reveal quick. Not the lecture pace halved.

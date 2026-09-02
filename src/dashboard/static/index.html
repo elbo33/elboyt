@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>elboyt production</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <h1>elboyt production</h1>
+        <p id="subtitle">Loading queue...</p>
+      </div>
+      <button id="refresh" class="icon-button" title="Refresh status">R</button>
+    </header>
+
+    <main>
+      <section class="band status-band">
+        <div class="status-block">
+          <span class="label">Current gate</span>
+          <strong id="current-gate">Loading</strong>
+          <span id="current-detail"></span>
+        </div>
+        <div class="actions">
+          <button id="generate-next">Generate next</button>
+          <button id="voiceover-ready">Accept visual, add voiceover</button>
+          <button id="publish-ready">Accept final, publish</button>
+        </div>
+      </section>
+
+      <section class="band">
+        <h2>Pipeline</h2>
+        <div id="pipeline" class="pipeline"></div>
+      </section>
+
+      <section class="split">
+        <div class="panel">
+          <h2>Generated Review</h2>
+          <div id="artifacts" class="artifacts"></div>
+        </div>
+        <div class="panel">
+          <h2>Job Log</h2>
+          <pre id="job-log">No job running.</pre>
+        </div>
+      </section>
+
+      <section class="band">
+        <h2>Course Progress</h2>
+        <div id="progress" class="progress"></div>
+      </section>
+    </main>
+
+    <script src="/app.js"></script>
+  </body>
+</html>

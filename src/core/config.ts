@@ -12,6 +12,7 @@ export const GENERATED_DIR = path.join(PROJECT_ROOT, "generated");
 export const PUBLIC_GENERATED_DIR = path.join(PROJECT_ROOT, "public", "generated");
 export const SCENE_SOURCE_DIR = path.join(GENERATED_DIR, "scenes", "manim");
 export const SCENE_RENDER_DIR = path.join(GENERATED_DIR, "scenes", "renders");
+export const SCENE_PREVIEW_DIR = path.join(GENERATED_DIR, "scene-previews");
 export const REMOTION_EXPORT_DIR = path.join(GENERATED_DIR, "remotion");
 export const FRAME_DIR = path.join(GENERATED_DIR, "frames");
 export const STORYBOARD_PATH = path.join(GENERATED_DIR, "storyboard.json");
@@ -20,6 +21,7 @@ export const FINAL_VIDEO_PATH = path.join(GENERATED_DIR, "video.mp4");
 export const THUMBNAIL_PATH = path.join(GENERATED_DIR, "thumbnail.png");
 export const SHORTS_OUT_DIR = path.join(GENERATED_DIR, "shorts");
 export const STILLS_OUT_DIR = path.join(GENERATED_DIR, "stills");
+export const STILLS_SPEC_PATH = path.join(GENERATED_DIR, "stills-specs.json");
 // Written by `generate` at the end of a stage, checked by `publish` so a stale
 // generated/ can never be published as if it were fresh.
 export const READY_MARKER = path.join(GENERATED_DIR, ".ready.json");

@@ -10,6 +10,7 @@ import {
   READY_MARKER,
   SCENE_SOURCE_DIR,
   SHORTS_OUT_DIR,
+  STILLS_SPEC_PATH,
   STILLS_OUT_DIR,
   STORYBOARD_PATH,
   THUMBNAIL_PATH
@@ -187,6 +188,8 @@ async function publishStills(section: string, type: EpisodeType): Promise<void> 
   const specs = path.join(PROJECT_ROOT, "src", "planning", "stills", section, `${type}.json`);
   if (await exists(specs)) {
     await copyFileEnsured(specs, path.join(renderDir, `${type}.json`));
+  } else if (await exists(STILLS_SPEC_PATH)) {
+    await copyFileEnsured(STILLS_SPEC_PATH, path.join(renderDir, `${type}.json`));
   }
   await fs.writeFile(
     path.join(renderDir, "COMMAND.md"),

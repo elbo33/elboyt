@@ -1,6 +1,7 @@
 # === Dependencies & build output ===
 node_modules/
 dist/
+.tmp/
 .venv/
 venv/
 __pycache__/

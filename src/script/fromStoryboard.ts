@@ -77,6 +77,17 @@ export function assertScriptStyle(storyboard: Storyboard): void {
     if (digits) {
       problems.push(`  ${scene.id}: digits in narration (${digits.join(", ")}) — spell them as Polish words`);
     }
+    if (n.trim()) {
+      const words = countVoiceoverWords(n);
+      const target = targetWordsForSeconds(scene.durationSeconds);
+      const low = Math.floor(target * 0.88);
+      const high = Math.ceil(target * 1.12);
+      if (words < low || words > high) {
+        problems.push(
+          `  ${scene.id}: narration ${words} words, target ${target} (${low}-${high}) for ${scene.durationSeconds.toFixed(1)}s`
+        );
+      }
+    }
   }
   if (problems.length) {
     // eslint-disable-next-line no-console

@@ -3,6 +3,7 @@
   "include": [
     "src/cli",
     "src/core",
+    "src/dashboard",
     "src/production",
     "src/zaspro",
     "src/planning",

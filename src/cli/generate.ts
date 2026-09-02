@@ -11,8 +11,10 @@ import {
   READY_MARKER,
   REMOTION_EXPORT_DIR,
   SCENE_RENDER_DIR,
+  SCENE_PREVIEW_DIR,
   SCENE_SOURCE_DIR,
   SHORTS_OUT_DIR,
+  STILLS_SPEC_PATH,
   STILLS_OUT_DIR,
   STORYBOARD_PATH,
   THUMBNAIL_PATH,
@@ -23,14 +25,16 @@ import {copyFileEnsured, ensureDir, resetDir, writeJson} from "../core/fs";
 import {EPISODE_TYPES, isEpisodeType} from "../core/library";
 import {logStep} from "../core/logger";
 import type {EpisodeType} from "../core/library";
-import type {RenderManifest, Storyboard} from "../core/types";
+import type {RenderManifest, Storyboard, VideoScene} from "../core/types";
 import * as theoryPlanner from "../planning/longform/theoryPlanner";
+import {genericLongformPlannerFor} from "../planning/generic/episode";
+import {buildGenericStillSpecs} from "../planning/generic/stills";
 import * as shortsPlanner from "../planning/shorts/shortsPlanner";
 import {shortSlug, shortsForEpisode} from "../planning/shorts/shortsPlanner";
 import {stripAudioTrack} from "../rendering/finalize";
 import {copyManimSupport, renderManimScene, renderThumbnailFrame} from "../rendering/manim";
 import {probeDurationSeconds} from "../rendering/measure";
-import {extractPreviewFrames} from "../rendering/preview";
+import {extractPreviewFrames, extractScenePreviewFrames} from "../rendering/preview";
 import {renderRemotion} from "../rendering/remotion";
 import {writeScriptFromStoryboard} from "../script/fromStoryboard";
 
@@ -105,6 +109,46 @@ async function writeSceneSources(planner: Planner, storyboard: Storyboard): Prom
   }
 }
 
+function preservesLongformVoiceTiming(storyboard: Storyboard, scene: VideoScene): boolean {
+  return storyboard.format === "short-9x16" && Boolean(scene.derivedFromScene);
+}
+
+async function padSceneRenderToDuration(scene: VideoScene, targetSeconds: number): Promise<number> {
+  const measured = await probeDurationSeconds(scene.renderPath);
+  const padSeconds = targetSeconds - measured;
+  if (padSeconds <= 0.05) {
+    return Math.round(measured * FPS) / FPS;
+  }
+
+  const tempPath = scene.renderPath.replace(/\.mp4$/, ".padded.tmp.mp4");
+  await run(
+    "ffmpeg",
+    [
+      "-y",
+      "-i",
+      scene.renderPath,
+      "-vf",
+      `tpad=stop_mode=clone:stop_duration=${padSeconds.toFixed(3)}`,
+      "-c:v",
+      "libx264",
+      "-preset",
+      "veryfast",
+      "-crf",
+      "18",
+      "-pix_fmt",
+      "yuv420p",
+      "-an",
+      tempPath
+    ],
+    PROJECT_ROOT
+  );
+  await fs.rename(tempPath, scene.renderPath);
+  await copyFileEnsured(scene.renderPath, path.join(PUBLIC_GENERATED_DIR, "scenes", path.basename(scene.renderPath)));
+
+  const padded = await probeDurationSeconds(scene.renderPath);
+  return Math.round(padded * FPS) / FPS;
+}
+
 /**
  * Render one piece (a long-form episode or one short) end to end, leaving the
  * result in generated/: video.mp4, script.md, storyboard.json, scene sources
@@ -149,8 +193,13 @@ async function renderPiece(planner: Planner, topic: string, resetRoot: boolean):
 
   logStep("Re-syncing durations to the rendered Manim timelines");
   for (const scene of storyboard.scenes) {
-    const measured = await probeDurationSeconds(scene.renderPath);
-    const snapped = Math.round(measured * FPS) / FPS;
+    const target = scene.durationSeconds;
+    let snapped = preservesLongformVoiceTiming(storyboard, scene)
+      ? await padSceneRenderToDuration(scene, target)
+      : Math.round((await probeDurationSeconds(scene.renderPath)) * FPS) / FPS;
+    if (preservesLongformVoiceTiming(storyboard, scene) && snapped + 0.05 < target) {
+      logStep(`  ${scene.id}: vertical render ${snapped.toFixed(2)}s, target ${target.toFixed(2)}s for voice reuse`);
+    }
     if (Math.abs(snapped - scene.durationSeconds) > 0.05) {
       logStep(`  ${scene.id}: planned ${scene.durationSeconds}s -> actual ${snapped.toFixed(2)}s`);
     }
@@ -163,7 +212,10 @@ async function renderPiece(planner: Planner, topic: string, resetRoot: boolean):
   logStep("Generating script.md from scene narration + measured timings");
   await writeScriptFromStoryboard(storyboard, path.join(GENERATED_DIR, "script.md"));
 
-  logStep(`Composing final ${storyboard.format} video with Remotion`);
+  logStep("Extracting early/mid/late visual-review PNGs per scene");
+  const scenePreviews = await extractScenePreviewFrames(storyboard);
+
+  logStep(`Composing final ${storyboard.format} video from rendered scene clips`);
   await renderRemotion();
 
   logStep("Removing audio track");
@@ -179,7 +231,9 @@ async function renderPiece(planner: Planner, topic: string, resetRoot: boolean):
     storyboard: STORYBOARD_PATH,
     durationSeconds: storyboard.durationSeconds,
     scenes: storyboard.scenes,
-    previewFrames
+    previewFrames,
+    scenePreviewFrames: scenePreviews.frames,
+    sceneContactSheet: scenePreviews.contactSheet ?? undefined
   };
   await writeJson(MANIFEST_PATH, manifest);
   return storyboard;
@@ -198,18 +252,93 @@ async function renderThumbnail(): Promise<boolean> {
   return true;
 }
 
-const LONGFORM_PLANNERS: Partial<Record<EpisodeType, Planner>> = {
-  theory: theoryPlanner
-  // exercises / mistakes / challenge: planners not built yet
+const STORYBOARD_EPISODE_TYPE: Record<EpisodeType, Storyboard["episodeType"]> = {
+  theory: "THEORY",
+  exercises: "EXERCISES",
+  mistakes: "COMMON_MISTAKES",
+  challenge: "CHALLENGE"
+};
+
+async function readStoryboardForReference(filePath: string): Promise<Storyboard | null> {
+  try {
+    return JSON.parse(await fs.readFile(filePath, "utf8")) as Storyboard;
+  } catch {
+    return null;
+  }
+}
+
+function isMatchingLongformReference(storyboard: Storyboard | null, section: string, type: EpisodeType): boolean {
+  return Boolean(
+    storyboard &&
+      storyboard.sectionSlug === section &&
+      storyboard.episodeType === STORYBOARD_EPISODE_TYPE[type] &&
+      storyboard.format === "longform-16x9" &&
+      Array.isArray(storyboard.scenes) &&
+      storyboard.scenes.length > 0
+  );
+}
+
+async function preserveLongformReference(section: string, type: EpisodeType): Promise<void> {
+  const temp = path.join(PROJECT_ROOT, ".tmp", "longform-reference");
+  const currentReference = path.join(GENERATED_DIR, "longform-reference");
+  const currentReferenceStoryboard = await readStoryboardForReference(path.join(currentReference, "storyboard.json"));
+  if (isMatchingLongformReference(currentReferenceStoryboard, section, type)) {
+    await resetDir(temp);
+    await fs.cp(currentReference, temp, {recursive: true});
+    return;
+  }
+
+  const rootStoryboard = await readStoryboardForReference(STORYBOARD_PATH);
+  if (!isMatchingLongformReference(rootStoryboard, section, type)) {
+    return;
+  }
+
+  try {
+    await fs.access(FINAL_VIDEO_PATH);
+  } catch {
+    return;
+  }
+
+  await resetDir(temp);
+  await copyFileEnsured(FINAL_VIDEO_PATH, path.join(temp, "video.mp4"));
+  for (const file of ["script.md", "storyboard.json", "manifest.json"]) {
+    const source = path.join(GENERATED_DIR, file);
+    try {
+      await copyFileEnsured(source, path.join(temp, file));
+    } catch {
+      // Missing optional reference artifact; keep the rest.
+    }
+  }
+  try {
+    await fs.cp(SCENE_PREVIEW_DIR, path.join(temp, "scene-previews"), {recursive: true});
+  } catch {
+    // Scene previews are useful but not required to render shorts.
+  }
+}
+
+async function restoreLongformReference(): Promise<void> {
+  const temp = path.join(PROJECT_ROOT, ".tmp", "longform-reference");
+  try {
+    await fs.access(path.join(temp, "video.mp4"));
+  } catch {
+    return;
+  }
+
+  const ref = path.join(GENERATED_DIR, "longform-reference");
+  await resetDir(ref);
+  await fs.cp(temp, ref, {recursive: true});
+  await fs.rm(temp, {recursive: true, force: true});
+}
+
+const LONGFORM_PLANNERS: Record<EpisodeType, Planner> = {
+  theory: theoryPlanner,
+  exercises: genericLongformPlannerFor("exercises"),
+  mistakes: genericLongformPlannerFor("mistakes"),
+  challenge: genericLongformPlannerFor("challenge")
 };
 
 async function runLongform(args: Args): Promise<void> {
   const planner = LONGFORM_PLANNERS[args.type];
-  if (!planner) {
-    throw new Error(
-      `No long-form planner for type "${args.type}" yet. Only "theory" is built.`
-    );
-  }
   process.env.SECTION = args.section;
   logStep(`LONG FORM — ${args.section} / ${args.type}`);
   const sb = await renderPiece(planner, args.topic ?? "", true);
@@ -238,7 +367,9 @@ async function runShorts(args: Args): Promise<void> {
     );
   }
 
+  await preserveLongformReference(args.section, args.type);
   await resetDir(GENERATED_DIR);
+  await restoreLongformReference();
   await ensureDir(SHORTS_OUT_DIR);
   const done: string[] = [];
 
@@ -254,7 +385,9 @@ async function runShorts(args: Args): Promise<void> {
     await copyFileEnsured(FINAL_VIDEO_PATH, path.join(outDir, `${slug}.mp4`));
     await copyFileEnsured(path.join(GENERATED_DIR, "script.md"), path.join(outDir, "script.md"));
     await copyFileEnsured(STORYBOARD_PATH, path.join(outDir, "render", "storyboard.json"));
+    await copyFileEnsured(MANIFEST_PATH, path.join(outDir, "render", "manifest.json"));
     await fs.cp(SCENE_SOURCE_DIR, path.join(outDir, "render", "scenes"), {recursive: true});
+    await fs.cp(SCENE_PREVIEW_DIR, path.join(outDir, "render", "scene-previews"), {recursive: true});
     done.push(slug);
   }
 
@@ -273,17 +406,21 @@ async function runStills(args: Args): Promise<void> {
     args.section,
     `${args.type}.json`
   );
+  let specsToRender = specs;
   try {
     await fs.access(specs);
   } catch {
-    throw new Error(`No stills specs at ${path.relative(PROJECT_ROOT, specs)} — author it first.`);
+    logStep(`No authored stills specs at ${path.relative(PROJECT_ROOT, specs)} — using generic ZasPro specs`);
+    await ensureDir(GENERATED_DIR);
+    await writeJson(STILLS_SPEC_PATH, buildGenericStillSpecs(args.section, args.type));
+    specsToRender = STILLS_SPEC_PATH;
   }
 
   await resetDir(STILLS_OUT_DIR);
   logStep(`STILLS — ${args.section} / ${args.type}`);
   await run(
     resolveManimPython(),
-    [path.join(PROJECT_ROOT, "scripts", "make_stills.py"), specs, "--out-dir", STILLS_OUT_DIR],
+    [path.join(PROJECT_ROOT, "scripts", "make_stills.py"), specsToRender, "--out-dir", STILLS_OUT_DIR],
     PROJECT_ROOT
   );
 

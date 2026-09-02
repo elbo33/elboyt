@@ -27,13 +27,29 @@ class LessonScene(Scene):
         step = 0.8
         half_w = FRAME_W / 2 + step
         half_h = FRAME_H / 2 + step
+        horizontal_opacity = 0.22 if IS_VERTICAL else 0.20
+        vertical_opacity = 0.16 if IS_VERTICAL else 0.14
         y = -half_h
         while y <= half_h:
-            lines.add(Line([-half_w, y, 0], [half_w, y, 0], color=SOFT, stroke_width=1).set_opacity(0.16))
+            lines.add(
+                Line(
+                    [-half_w, y, 0],
+                    [half_w, y, 0],
+                    color=SOFT,
+                    stroke_width=1.0,
+                ).set_opacity(horizontal_opacity)
+            )
             y += step
         x = -half_w
         while x <= half_w:
-            lines.add(Line([x, -half_h, 0], [x, half_h, 0], color=SOFT, stroke_width=1).set_opacity(0.10))
+            lines.add(
+                Line(
+                    [x, -half_h, 0],
+                    [x, half_h, 0],
+                    color=SOFT,
+                    stroke_width=1.0,
+                ).set_opacity(vertical_opacity)
+            )
             x += step
         self.add(lines)
 
@@ -238,7 +254,7 @@ def two_col(left, right, gap=1.2, at=ORIGIN):
 # a strip at the top across every beat of a worked example; the running
 # expression builds down the middle; the answer sits on a fixed baseline just
 # above the caption line, never floating with the step count.
-STMT_STRIP_Y = FRAME_H / 2 - (1.7 if not IS_VERTICAL else 2.6)
+STMT_STRIP_Y = FRAME_H / 2 - (2.05 if not IS_VERTICAL else 2.75)
 WORK_TOP_Y = STMT_STRIP_Y - (1.4 if not IS_VERTICAL else 1.8)
 ANSWER_Y = SAFE_BOTTOM_Y + (1.5 if not IS_VERTICAL else 2.4)
 CAPTION_Y = SAFE_BOTTOM_Y + (0.55 if not IS_VERTICAL else 1.1)

@@ -9,12 +9,19 @@ import {
 } from "../../core/config";
 import {slugify} from "../../core/slug";
 import type {SceneType, Storyboard, VideoScene} from "../../core/types";
+import {
+  createGenericLongformStoryboard,
+  getGenericLongformSceneCode
+} from "../generic/episode";
 import {loadSection} from "../zaspro";
 import {THEORY_SKELETON} from "./skeletons";
+import {dzialaniaLiczbyRzeczywiste} from "./sections/dzialaniaLiczbyRzeczywiste";
 import type {AuthoredScene, ExampleAuthoring, SectionAuthoring} from "./sections/types";
 
 // Per-section THEORY authoring. One entry per section as they are written.
-const SECTIONS: Record<string, SectionAuthoring> = {};
+const SECTIONS: Record<string, SectionAuthoring> = {
+  "dzialania-liczby-rzeczywiste": dzialaniaLiczbyRzeczywiste
+};
 
 function currentSlug(): string {
   if (!process.env.SECTION) {
@@ -58,12 +65,13 @@ function authoredPlan(a: AuthoredScene): ScenePlan {
     id,
     title: a.title,
     className,
-    durationSeconds: 24,
+    durationSeconds: a.durationSeconds ?? 24,
     sceneType: a.band as SceneType,
     sceneLabel: a.sceneLabel,
     standalone: a.standalone,
     stillMoment: a.stillMoment,
     shortHook: a.shortHook,
+    narration: a.narration,
     purpose: a.title,
     mathematicalConcept: a.title,
     objects: [],
@@ -79,6 +87,8 @@ function exampleBeatPlan(ex: ExampleAuthoring, beatIndex: number): ScenePlan {
   const nn = String(beatIndex).padStart(2, "0");
   const className = `${ex.className}_${nn}_${beat.replace(/-/g, "_")}`;
   const id = `example-${ex.sourceId}-${nn}-${beat}`;
+  const narrations = ex.ex.narrations as Record<string, string> | undefined;
+  const narration = narrations?.[beat];
   // Double-stringify: inner builds the JSON text, outer wraps it in a string
   // literal valid in both JSON and Python (handles backslashes, quotes,
   // unicode). json.loads then parses it back to a dict with True/False/None.
@@ -94,12 +104,13 @@ function exampleBeatPlan(ex: ExampleAuthoring, beatIndex: number): ScenePlan {
     id,
     title: `${ex.sceneLabel} — ${beatTag(beat)}`,
     className,
-    durationSeconds: 8,
+    durationSeconds: ex.durationSeconds ?? 18,
     sceneType: "example" as SceneType,
     sceneLabel: `${ex.sceneLabel}   ·   ${beatTag(beat)}`,
     sourceExerciseId: ex.sourceId,
     standalone: beat === "present",
     stillMoment: beat === "result" ? "the boxed answer with the full worked chain" : "",
+    narration,
     purpose: `Worked example ${ex.sourceId}, beat ${beat}.`,
     mathematicalConcept: String(ex.ex.statement ?? ""),
     objects: [],
@@ -140,9 +151,7 @@ export function createStoryboard(topic: string): Storyboard {
   const slug = currentSlug();
   const section = SECTIONS[slug];
   if (!section) {
-    throw new Error(
-      `No THEORY authoring for section "${slug}". Add it to src/planning/longform/sections/.`
-    );
+    return createGenericLongformStoryboard("theory", topic);
   }
   loadSection(slug); // fail loudly if the ZasPro checkout is missing
 
@@ -185,9 +194,7 @@ function plansForCurrent(): ScenePlan[] {
   const slug = currentSlug();
   const section = SECTIONS[slug];
   if (!section) {
-    throw new Error(
-      `No THEORY authoring for section "${slug}" yet. Build a generic planner or add section authoring.`
-    );
+    return [];
   }
   if (!_cache.has(slug)) _cache.set(slug, buildScenePlans(section));
   return _cache.get(slug)!;
@@ -195,7 +202,7 @@ function plansForCurrent(): ScenePlan[] {
 
 export function getSceneCode(sceneId: string): string {
   const plan = plansForCurrent().find((p) => p.id === sceneId);
-  if (!plan) throw new Error(`Unknown scene ${sceneId}`);
+  if (!plan) return getGenericLongformSceneCode("theory", sceneId);
   return `${plan.code}\n`;
 }
 

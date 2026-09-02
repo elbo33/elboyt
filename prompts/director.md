@@ -12,13 +12,15 @@ Do not generate a custom mathematical DSL. Write normal Manim code for each chap
 - 1920x1080, 16:9
 - 30 FPS
 - 8 minutes or longer
-- no voiceover
+- silent render first, voiceover only after visual approval
 - **language: Polish (pl-PL) by default** — every headline, caption, label, and
   the `script.md` narration is Polish unless the user asks for another language
   for a specific video. Mathematical notation stays as notation; slugs stay ASCII.
 - dark background (`#081018`), high-contrast objects
 - one strong accent (`#22D3EE`), one restrained secondary (`#F59E0B`)
 - visual explanation first, text second
+- on-screen text is sparse: short labels, formulas, captions and questions only;
+  the narration carries the full explanation
 - a small chapter tag pinned to the top-left of **every** scene, same place every time
 - no other persistent chrome: no channel watermark, no timer, no progress bar overlay
 
@@ -47,16 +49,54 @@ layout, and timing are identical case to case. Only the numbers change.
 - Plan durations loosely; the pipeline re-measures every rendered chapter with
   `ffprobe` and rewrites `storyboard.json` before the Remotion cut, so a chapter
   can run long or short without desyncing the final video.
-- Silent video needs reading time. 6–12 second holds on a captioned diagram are
-  correct, not dead air.
+- Long-form lecture pacing should be calm but not frozen. Prefer small
+  purposeful reveals, highlights, traces, circumscribes and object movement over
+  long static holds.
+- Avoid stretches where nothing changes on screen unless the narration is
+  deliberately covering a dense visual. A still frame must be buying
+  understanding, not padding runtime.
 
 ## Quality bars
 
 - no text outside the frame, no unreadably small equations, no clutter
 - the chapter tag is the only fixed element
 - all motion must teach something
+- every scene gets saved visual-review PNGs from early, middle and late moments;
+  use those frames to check spacing, overlaps, title/tag collisions and crowded
+  math before voiceover
+- the top-left chapter tag is a protected safe zone: no title, problem
+  statement, formula strip or other fixed text may touch it or visually compete
+  with it
 - every `example` chapter is visually interchangeable with the others
 - mathematical simplifications must be intentional
+
+## Derivative Shorts
+
+Derivative shorts must inherit the approved longform visual language. Use the
+same dark grid, colors, math objects, scene archetypes, and worked-example
+template in vertical format. Do not create a separate reel-only style. The
+rejected six-reel formula-stack/axis renderer has been removed and should not
+be recreated.
+
+- Reuse the exact extracted longform script for the source scene(s), so the
+  approved longform audio can be reused later.
+- The only intentional visual difference from longform is the opening label
+  text itself. Replace the existing first label, for example the
+  `stage_figure(... question="...")` line; for `stage_derivation`, pass the
+  same label through its `question` option. Every short must have this opening
+  label. Do not add a second overlay label. The replacement should be
+  controversial and matura-focused, for example:
+  "Bez tego NIE ZDASZ matury. Kropka.", "Ten temat oblewa połowę
+  maturzystów", "90% zdających maturę o tym nie wie", "To pytanie jest na
+  KAŻDEJ maturze", "Egzaminator na maturze liczy, że tego nie znasz",
+  "Robisz to źle na maturze i nawet nie wiesz". Do not change the rest of the
+  longform-derived visual scene for the sake of the hook.
+- Visuals must track what the narration is saying at that moment. Use less
+  text and more mathematical graphics: objects moving, highlighting,
+  transforming, splitting, joining, or being measured.
+- Keep animation dynamic throughout, but never chaotic. Avoid irrelevant frozen
+  frames, constant pulsing, and any overlapping objects or labels.
+- Reuse approved longform narration/audio when that workflow is redesigned.
 
 ## Run
 
@@ -124,14 +164,19 @@ Constraints:
 
 - One `##` section per chapter, in order, with the chapter's approximate start
   time (`m:ss`) taken from the final storyboard.
-- Say **only what is on screen**. The script explains the visuals; it never adds
-  facts, numbers, or steps the viewer can't see.
-- Length per section ≈ chapter duration at ~150 words/minute. A ~8:15 video is
-  roughly 1,100–1,300 spoken words total.
+- Start the episode with a natural greeting and a clear introduction: what the
+  viewer will learn today, what examples will be worked, and how the visual
+  approach will help.
+- Say **only what is supported by the screen**. The script complements the
+  visuals; it can explain the meaning of what is shown, but it never invents
+  facts, numbers, or steps the viewer cannot see.
+- Length per section must match the measured scene duration using the saved
+  Polish Koras voice speed, `128.2 WPM`. Undershooting creates silence; overshooting
+  creates rushed delivery. Rewrite the narration after the ffprobe pass if needed.
 - Plain spoken prose. Spell numbers and symbols the way they'd be read aloud
   ("two n plus one", "n squared"), not as glyphs.
-- Calm and declarative, matching the house style. No "welcome back", no
-  "don't forget to subscribe", no narrator persona.
+- Calm and declarative, matching the house style. No "don't forget to subscribe"
+  and no narrator persona.
 
 Use the recorded example at
 `library/videos/why-is-the-sum-of-the-first-n-odd-numbers-a-perfect-square/script.md`

@@ -11,6 +11,8 @@ export type AuthoredScene = {
   standalone: boolean;
   stillMoment: string;
   shortHook?: string;
+  narration?: string;
+  durationSeconds?: number;
   py: string; // full Manim scene file body (imports + one LessonScene subclass)
 };
 
@@ -22,6 +24,7 @@ export type ExampleAuthoring = {
   className: string; // base class name; beats append a suffix
   sceneLabel: string; // "PRZYKŁAD 1 / 3"
   ex: Record<string, unknown> & {beats: string[]};
+  durationSeconds?: number;
 };
 
 // The episode thumbnail (1920x1080, ThumbA-flat style). `py` is a full Manim

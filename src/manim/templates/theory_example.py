@@ -92,14 +92,22 @@ def _stmt_strip(ex):
     t2c = {h: ACCENT for h in ex.get("highlights", [])}
     s = Text(_wrap(ex["statement"], w), font=FONT, weight=MEDIUM, color=FOREGROUND,
              line_spacing=1.0, t2c=t2c).scale(0.36 if IS_VERTICAL else 0.34)
-    s.to_edge(UP, buff=0.9).to_edge(LEFT, buff=1.0)
+    # Keep the recurring problem statement in its own row below the fixed
+    # top-left chapter tag. This prevents "statement vs tag" collisions in
+    # worked examples, especially during compute beats.
+    if IS_VERTICAL:
+        s.to_edge(UP, buff=1.55)
+    else:
+        if s.width > 10.4:
+            s.scale(10.4 / s.width)
+        s.move_to([0, STMT_STRIP_Y - 0.28, 0])
     return s
 
 
 def _chip(ex):
     labels = ex.get("sought") or [ex.get("sought_fallback", "?")]
     c = sought_chip([f"${x}$" if any(ch in x for ch in "_^\\{") else x for x in labels])
-    c.scale(0.85).to_edge(RIGHT, buff=0.8).set_y(STMT_STRIP_Y - 0.3)
+    c.scale(0.78).to_edge(RIGHT, buff=0.85).set_y(STMT_STRIP_Y - 0.85)
     return c
 
 

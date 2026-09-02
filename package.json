@@ -11,6 +11,8 @@
     "publish": "tsc -p tsconfig.cli.json && node dist/cli/publish.js",
     "voiceover:test": "tsc -p tsconfig.cli.json && node dist/cli/voiceoverTest.js",
     "voiceover:ready": "tsc -p tsconfig.cli.json && node dist/cli/voiceoverReady.js",
+    "visual:review": "tsc -p tsconfig.cli.json && node dist/cli/visualReview.js",
+    "dashboard": "tsc -p tsconfig.cli.json && node dist/dashboard/server.js",
     "render:remotion": "remotion render src/remotion/index.ts MathLong generated/video.mp4",
     "studio": "remotion studio src/remotion/index.ts",
     "typecheck": "tsc --noEmit -p tsconfig.cli.json"

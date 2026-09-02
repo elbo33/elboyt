@@ -27,12 +27,29 @@ export type ReadyMarker = {
   type: EpisodeType;
   stage: Stage;
   at?: string;
+  voiceoverAt?: string;
 };
 
 export type ProductionStatus =
   | {kind: "ready"; ready: ReadyMarker}
   | {kind: "next"; target: ProductionTarget}
   | {kind: "complete"};
+
+export type StageOverview = {
+  stage: Stage;
+  complete: boolean;
+};
+
+export type EpisodeOverview = {
+  type: EpisodeType;
+  stages: StageOverview[];
+};
+
+export type SectionOverview = {
+  section: string;
+  sectionName: string;
+  episodes: EpisodeOverview[];
+};
 
 function exists(p: string): boolean {
   return fs.existsSync(p);
@@ -117,4 +134,18 @@ export function publishCommand(target: ProductionTarget | ReadyMarker): string {
 export function generatedDirHasWork(): boolean {
   if (!exists(GENERATED_DIR)) return false;
   return fs.readdirSync(GENERATED_DIR).some((name) => name !== ".DS_Store");
+}
+
+export function productionOverview(): SectionOverview[] {
+  return loadTeachingSections().map((section) => ({
+    section: section.slug,
+    sectionName: section.name,
+    episodes: EPISODE_TYPES.map((type) => ({
+      type,
+      stages: STAGES.map((stage) => ({
+        stage,
+        complete: isStageComplete(section.slug, type, stage)
+      }))
+    }))
+  }));
 }
