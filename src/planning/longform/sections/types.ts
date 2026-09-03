@@ -32,6 +32,7 @@ export type ExampleAuthoring = {
 // single frame at the end of the long-form stage, never as part of the video.
 export type ThumbnailAuthoring = {
   py: string;
+  filename?: string;
 };
 
 export type SectionAuthoring = {
@@ -41,4 +42,8 @@ export type SectionAuthoring = {
   examples: ExampleAuthoring[]; // THEORY_SUPPORT problems, easy -> hard
   maturaExample?: ExampleAuthoring; // the MATURA_CONNECTION band, staged as a worked block
   thumbnail?: ThumbnailAuthoring;
+  // Long-form theory always ships three thumbnails: the clean topic thumbnail
+  // plus two matura-focused hooks. `thumbnail` is kept as the canonical first
+  // variant for older section files.
+  thumbnailVariants?: ThumbnailAuthoring[];
 };

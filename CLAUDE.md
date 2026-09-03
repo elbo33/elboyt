@@ -156,8 +156,8 @@ stage, not moving on.
 10. **Numbers as words in `script.md`.** In every narration script, short and
    long, write numbers as Polish words, never digits: "dziesiąty wyraz",
    "równa się siedem", "minus dwadzieścia dziewięć"; never "10", "= 7", "-29".
-   Narration only; on-screen math stays in digits. `fromStoryboard.ts` warns
-   loudly on a rule 7 or 8 violation.
+   Narration only; on-screen math stays in digits. `fromStoryboard.ts` fails
+   the render on a rule 7 or 8 violation, including underfilled narration.
 11. **Shorts staging.** Derivative shorts must inherit the approved longform
    visual language: same dark grid, colors, math objects, scene archetypes, and
    worked-example template in vertical format. Do not create a separate
@@ -181,12 +181,15 @@ stage, not moving on.
 ## Thumbnail
 
 Rendered as the last step of the long-form stage (`generate ... longform`) into
-`generated/thumbnail.png`, published alongside the `.mp4`. Same ground,
+`generated/thumbnail.png` and `generated/thumbnail-1.png` through
+`generated/thumbnail-3.png`, published alongside the `.mp4`. Same ground,
 typography and layout as `.thumbs-preview/ThumbA-flat.png` (grid background,
 letter-spaced kicker + accent rule, bold caps headline, big ACCENT `MathTex`
 formula, optional middle figure); the kicker, headline, figure and formula are
-authored per episode as `SectionAuthoring.thumbnail` — one `stage_thumbnail(...)`
-call in `src/manim/thumbnail.py`. No em dashes (rule 7).
+authored per episode as `SectionAuthoring.thumbnail` and
+`SectionAuthoring.thumbnailVariants`. The first thumbnail is the clean topic
+thumbnail. The other two use centered, catchy or controversial matura text. No
+em dashes (rule 7).
 
 ## Requirements
 

@@ -15,6 +15,9 @@ import {loadTeachingSections} from "../planning/zaspro";
 export const STAGES = ["longform", "shorts", "stills"] as const;
 export type Stage = (typeof STAGES)[number];
 
+const ACTIVE_EPISODE_TYPES: readonly EpisodeType[] = ["theory"];
+const ACTIVE_STAGES: readonly Stage[] = ["longform"];
+
 export type ProductionTarget = {
   section: string;
   sectionName: string;
@@ -102,8 +105,8 @@ export function nextProductionStatus(): ProductionStatus {
   if (ready) return {kind: "ready", ready};
 
   for (const section of loadTeachingSections()) {
-    for (const type of EPISODE_TYPES) {
-      for (const stage of STAGES) {
+    for (const type of ACTIVE_EPISODE_TYPES) {
+      for (const stage of ACTIVE_STAGES) {
         if (!isStageComplete(section.slug, type, stage)) {
           return {
             kind: "next",
@@ -140,9 +143,9 @@ export function productionOverview(): SectionOverview[] {
   return loadTeachingSections().map((section) => ({
     section: section.slug,
     sectionName: section.name,
-    episodes: EPISODE_TYPES.map((type) => ({
+    episodes: ACTIVE_EPISODE_TYPES.map((type) => ({
       type,
-      stages: STAGES.map((stage) => ({
+      stages: ACTIVE_STAGES.map((stage) => ({
         stage,
         complete: isStageComplete(section.slug, type, stage)
       }))

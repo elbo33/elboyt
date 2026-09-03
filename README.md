@@ -76,6 +76,11 @@ title/tag spacing and off-frame content. A render is not acceptable if the
 top-left chapter tag touches or visually competes with the scene title,
 problem statement, formula strip, or any other fixed text.
 
+Long-form theory generation also renders three thumbnails: one clean topic
+thumbnail and two centered matura-hook variants. `thumbnail.png` is the
+canonical first thumbnail; `thumbnail-1.png`, `thumbnail-2.png`, and
+`thumbnail-3.png` are published into the library for review.
+
 `npm run dashboard` starts a local browser dashboard at
 `http://localhost:4317`. It shows the next queue target, the generated review
 artifacts, a visual pipeline state, job logs, and the full section/type/stage
@@ -94,6 +99,13 @@ The intended production order is:
 8. Codex then moves to shorts and stills for the same topic, each with its own
    review gate.
 
+Current operating mode:
+
+- For now the production queue advances only through theory long-form videos:
+  `type=theory`, `stage=longform`. Shorts, stills, exercises, mistakes and
+  challenges can still be generated manually, but they are not selected by
+  `npm run next` or `npm run generate:next`.
+
 Long-form direction rules:
 
 - Start narration with a natural greeting and a clear introduction to the
@@ -101,7 +113,8 @@ Long-form direction rules:
 - Keep on-screen text sparse. The narration complements the video and carries
   the explanation; the screen should show formulas, labels and graphics.
 - Rewrite narration after the ffprobe timing pass so each section covers its
-  measured scene duration at the saved Koras speed, 128.2 WPM. No silent gaps
+  measured scene duration at the saved Koras speed, 128.2 WPM. Underfilled
+  narration is a hard render failure, because there must be no silent gaps
   before voiceover.
 - Keep visuals active but not frantic: use purposeful reveals, highlights,
   traces and transforms, and avoid long stretches where nothing changes.

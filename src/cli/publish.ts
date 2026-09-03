@@ -119,6 +119,12 @@ async function publishLongform(section: string, type: EpisodeType): Promise<void
   } else {
     logStep("  WARNING: no generated/thumbnail.png — publishing without a thumbnail");
   }
+  for (const name of ["thumbnail-1.png", "thumbnail-2.png", "thumbnail-3.png"]) {
+    const source = path.join(GENERATED_DIR, name);
+    if (await exists(source)) {
+      await copyFileEnsured(source, path.join(dest, name));
+    }
+  }
 
   // render/: the reproducers only — storyboard, scene sources (+ support),
   // section authoring, COMMAND.md. Never the Manim cache or per-scene clips.
@@ -129,13 +135,14 @@ async function publishLongform(section: string, type: EpisodeType): Promise<void
   await fs.writeFile(
     path.join(renderDir, "COMMAND.md"),
     `# Reproduce\n\n\`\`\`\nnpm run generate -- ${section} ${type}\nnpm run publish  -- ${section} ${type}\n\`\`\`\n\n` +
-      `Built at commit ${await currentCommit()}. The thumbnail is rendered as the\n` +
-      `last step of the long-form stage (ThumbA-flat style).\n`,
+      `Built at commit ${await currentCommit()}. The three thumbnails are rendered\n` +
+      `as the last step of the long-form stage (ThumbA-flat style): one clean\n` +
+      `topic thumbnail plus two matura-hook variants.\n`,
     "utf8"
   );
 
   await wipeScratch();
-  logStep(`Done. library/videos/${section}/${type}/ now holds ${base}.mp4 + script.md + thumbnail.png + render/`);
+  logStep(`Done. library/videos/${section}/${type}/ now holds ${base}.mp4 + script.md + thumbnails + render/`);
 }
 
 async function publishShorts(section: string, type: EpisodeType): Promise<void> {

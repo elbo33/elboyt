@@ -36,7 +36,7 @@ import {copyManimSupport, renderManimScene, renderThumbnailFrame} from "../rende
 import {probeDurationSeconds} from "../rendering/measure";
 import {extractPreviewFrames, extractScenePreviewFrames} from "../rendering/preview";
 import {renderRemotion} from "../rendering/remotion";
-import {writeScriptFromStoryboard} from "../script/fromStoryboard";
+import {fillNarrationBudget, writeScriptFromStoryboard} from "../script/fromStoryboard";
 
 type Planner = {
   createStoryboard: (topic: string) => Storyboard;
@@ -206,6 +206,7 @@ async function renderPiece(planner: Planner, topic: string, resetRoot: boolean):
     scene.durationSeconds = snapped;
   }
   storyboard.durationSeconds = storyboard.scenes.reduce((t, s) => t + s.durationSeconds, 0);
+  fillNarrationBudget(storyboard);
   await writeJson(STORYBOARD_PATH, storyboard);
   await writeJson(path.join(PUBLIC_GENERATED_DIR, "storyboard.json"), storyboard);
 
@@ -240,15 +241,22 @@ async function renderPiece(planner: Planner, topic: string, resetRoot: boolean):
 }
 
 async function renderThumbnail(): Promise<boolean> {
-  const code = theoryPlanner.getThumbnailCode();
-  if (!code) {
+  const plans = theoryPlanner.getThumbnailPlans();
+  if (plans.length === 0) {
     logStep("No thumbnail authored for this section — skipping (add one before publish)");
     return false;
   }
-  logStep("Rendering episode thumbnail (1920x1080, ThumbA-flat style)");
-  const src = path.join(SCENE_SOURCE_DIR, "_thumbnail.py");
-  await fs.writeFile(src, code, "utf8");
-  await renderThumbnailFrame(src, theoryPlanner.getThumbnailClassName(), THUMBNAIL_PATH);
+  logStep(`Rendering ${plans.length} episode thumbnail(s) (1920x1080, ThumbA-flat style)`);
+  for (let i = 0; i < plans.length; i++) {
+    const plan = plans[i];
+    const src = path.join(SCENE_SOURCE_DIR, `_thumbnail_${i + 1}.py`);
+    const out = path.join(GENERATED_DIR, plan.filename);
+    await fs.writeFile(src, plan.code, "utf8");
+    await renderThumbnailFrame(src, plan.className, out);
+    if (i === 0) {
+      await copyFileEnsured(out, THUMBNAIL_PATH);
+    }
+  }
   return true;
 }
 
@@ -350,7 +358,7 @@ async function runLongform(args: Args): Promise<void> {
   console.log(`  generated/video.mp4        ${mins} min, ${sb.scenes.length} scenes`);
   console.log(`  generated/script.md`);
   console.log(`  generated/storyboard.json`);
-  console.log(hasThumb ? `  generated/thumbnail.png` : `  (no thumbnail — author section.thumbnail)`);
+  console.log(hasThumb ? `  generated/thumbnail.png + thumbnail variants` : `  (no thumbnail — author section.thumbnail)`);
   console.log(`  generated/frames/          preview stills`);
   console.log(`\nReview, then approve with:  npm run publish -- ${args.section} ${args.type}`);
 }

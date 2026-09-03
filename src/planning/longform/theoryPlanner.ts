@@ -16,11 +16,13 @@ import {
 import {loadSection} from "../zaspro";
 import {THEORY_SKELETON} from "./skeletons";
 import {dzialaniaLiczbyRzeczywiste} from "./sections/dzialaniaLiczbyRzeczywiste";
+import {wartoscBezwzgledna} from "./sections/wartoscBezwzgledna";
 import type {AuthoredScene, ExampleAuthoring, SectionAuthoring} from "./sections/types";
 
 // Per-section THEORY authoring. One entry per section as they are written.
 const SECTIONS: Record<string, SectionAuthoring> = {
-  "dzialania-liczby-rzeczywiste": dzialaniaLiczbyRzeczywiste
+  "dzialania-liczby-rzeczywiste": dzialaniaLiczbyRzeczywiste,
+  "wartosc-bezwzgledna": wartoscBezwzgledna
 };
 
 function currentSlug(): string {
@@ -206,15 +208,37 @@ export function getSceneCode(sceneId: string): string {
   return `${plan.code}\n`;
 }
 
-// The episode thumbnail: a single authored `stage_thumbnail(...)` scene,
-// rendered as one still at the end of the long-form stage. `null` if the
-// section has not authored a thumbnail yet (the stage warns and skips).
+export type ThumbnailPlan = {
+  filename: string;
+  code: string;
+  className: string;
+};
+
+function thumbnailClassName(py: string): string {
+  return py.match(/class\s+(\w+)\s*\(/)?.[1] ?? "ThumbnailScene";
+}
+
+// Long-form theory ships three thumbnails. Variant 1 is the clean topic card;
+// variants 2 and 3 are catchy matura hooks authored by the section.
+export function getThumbnailPlans(): ThumbnailPlan[] {
+  const section = SECTIONS[currentSlug()];
+  if (!section?.thumbnail) return [];
+  const variants = [section.thumbnail, ...(section.thumbnailVariants ?? [])].slice(0, 3);
+  return variants.map((t, i) => {
+    const filename = t.filename ?? `thumbnail-${i + 1}.png`;
+    return {
+      filename,
+      code: `${t.py}\n`,
+      className: thumbnailClassName(t.py)
+    };
+  });
+}
+
+// Back-compat for any caller that expects the canonical thumbnail.
 export function getThumbnailCode(): string | null {
-  const t = SECTIONS[currentSlug()]?.thumbnail;
-  return t ? `${t.py}\n` : null;
+  return getThumbnailPlans()[0]?.code ?? null;
 }
 
 export function getThumbnailClassName(): string {
-  const py = SECTIONS[currentSlug()]?.thumbnail?.py ?? "";
-  return py.match(/class\s+(\w+)\s*\(/)?.[1] ?? "ThumbnailScene";
+  return getThumbnailPlans()[0]?.className ?? "ThumbnailScene";
 }

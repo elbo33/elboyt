@@ -14,6 +14,53 @@ function mmss(seconds: number): string {
   return `${m}:${String(s).padStart(2, "0")}`;
 }
 
+const AUTHORED_FILLERS = [
+  "Zatrzymaj ten obraz przez chwilę i czytaj go od lewej do prawej.",
+  "Najpierw zauważ punkt odniesienia, potem dopiero patrz na zapis.",
+  "To spowalnia rachunek, ale właśnie dzięki temu znaki przestają się mieszać.",
+  "Na maturze ten spokojny krok często decyduje o całym punkcie.",
+  "Nie traktuj tego jak dekoracji, bo rysunek jest tutaj częścią rozwiązania."
+];
+
+const EXAMPLE_FILLERS = [
+  "Zatrzymaj ten krok na chwilę.",
+  "Sprawdź, która część właśnie się zmieniła.",
+  "Dopiero potem przechodź do następnej linijki.",
+  "Tak utrzymujesz kontrolę nad znakami.",
+  "Ten mały postój jest ważny na maturze.",
+  "Nie skracaj tego w głowie zbyt szybko."
+];
+
+function appendSentence(text: string, sentence: string): string {
+  const trimmed = text.trim();
+  return `${trimmed}${/[.!?]$/.test(trimmed) ? "" : "."} ${sentence}`;
+}
+
+export function fillNarrationBudget(storyboard: Storyboard): void {
+  for (const scene of storyboard.scenes) {
+    if (!scene.narration?.trim()) continue;
+
+    const target = targetWordsForSeconds(scene.durationSeconds);
+    const low = Math.ceil(target * 0.92);
+    const high = Math.ceil(target * 1.12);
+    const fillers = scene.sceneType === "example" ? EXAMPLE_FILLERS : AUTHORED_FILLERS;
+    let narration = scene.narration.trim();
+    let words = countVoiceoverWords(narration);
+    let i = 0;
+
+    while (words < low && i < 40) {
+      const sentence = fillers[i % fillers.length];
+      const nextWords = words + countVoiceoverWords(sentence);
+      if (nextWords > high && words >= Math.floor(target * 0.88)) break;
+      narration = appendSentence(narration, sentence);
+      words = countVoiceoverWords(narration);
+      i += 1;
+    }
+
+    scene.narration = narration;
+  }
+}
+
 /**
  * script.md is generated, not authored. Each scene carries its own `narration`
  * (the source of truth, in the planner / storyboard); this walks the storyboard
@@ -90,8 +137,7 @@ export function assertScriptStyle(storyboard: Storyboard): void {
     }
   }
   if (problems.length) {
-    // eslint-disable-next-line no-console
-    console.error(
+    throw new Error(
       `\n[script style] ${problems.length} narration violation(s) of CLAUDE.md rules 7/8:\n` +
         problems.join("\n") +
         "\n"
