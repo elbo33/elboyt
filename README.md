@@ -55,7 +55,7 @@ Generation writes silent scratch output to `generated/` and stops for visual
 review. After the render is accepted, `npm run voiceover:ready` sends the
 generated narration to ElevenLabs, muxes it onto the approved longform/shorts
 MP4, and stops for one more review. Publish copies the approved output into
-`library/videos/<section>/<type>/`, writes the reproducer files, then wipes
+`library/videos/<NN>-<section>/<type>/`, writes the reproducer files, then wipes
 scratch output.
 
 `npm run next` reads the local teaching-section order and reports the next
@@ -110,6 +110,17 @@ Long-form direction rules:
 
 - Start narration with a natural greeting and a clear introduction to the
   episode.
+- Write new scripts as a genuine, conversational Polish educational YouTube
+  lesson. Explain the reasoning behind visible steps, connect scenes naturally,
+  and read the complete generated script aloud. Rewrite generic or repeated
+  timing filler in the storyboard narration before approval; see
+  `prompts/director.md`. Existing library scripts and videos are left as they are.
+- Close each new long-form episode with a brief, natural request to subscribe
+  and comment on the topic viewers would like to see next, noting that their
+  support helps the channel.
+- Ban em dashes (`—`) and en dashes (`–`) from every future video's narration,
+  script headings, titles, captions, on-screen text, thumbnails, and notes. Use
+  ordinary punctuation or rewrite the sentence; mathematical minus is allowed.
 - Active long-form theory sections are now: hook, definition, worked examples,
   optional matura connection, and summary. `intuition` and `why_it_works` are
   historical bands only, kept in previously published storyboards/render

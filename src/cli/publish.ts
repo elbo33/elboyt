@@ -189,7 +189,7 @@ async function publishLongform(section: string, type: EpisodeType): Promise<void
   );
 
   await wipeScratch();
-  logStep(`Done. library/videos/${section}/${type}/ now holds ${base}.mp4 + script.md + thumbnails + render/`);
+  logStep(`Done. ${path.relative(PROJECT_ROOT, dest)} now holds ${base}.mp4 + script.md + thumbnails + render/`);
 }
 
 async function publishShorts(section: string, type: EpisodeType): Promise<void> {
@@ -221,7 +221,7 @@ async function publishShorts(section: string, type: EpisodeType): Promise<void> 
   }
 
   await wipeScratch();
-  logStep(`Done. ${slugs.length} short(s) under library/videos/${section}/${type}/shorts/`);
+  logStep(`Done. ${slugs.length} short(s) under ${path.relative(PROJECT_ROOT, dest)}`);
 }
 
 async function publishStills(section: string, type: EpisodeType): Promise<void> {
@@ -254,7 +254,7 @@ async function publishStills(section: string, type: EpisodeType): Promise<void> 
   );
 
   await wipeScratch();
-  logStep(`Done. Stills under library/videos/${section}/${type}/stills/`);
+  logStep(`Done. Stills under ${path.relative(PROJECT_ROOT, dest)}`);
 }
 
 async function main(): Promise<void> {

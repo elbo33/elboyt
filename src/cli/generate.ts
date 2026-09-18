@@ -237,7 +237,12 @@ async function renderPiece(
     scene.durationSeconds = snapped;
   }
   storyboard.durationSeconds = storyboard.scenes.reduce((t, s) => t + s.durationSeconds, 0);
-  fillNarrationBudget(storyboard);
+  // This episode's spoken script is authored to the measured scenes. Automatic
+  // repeated filler would break the approved human narration standard.
+  if (storyboard.sectionSlug !== "prawa-dzialan-potegi-pierwiastki" &&
+      storyboard.sectionSlug !== "monotonicznosc-potegowania") {
+    fillNarrationBudget(storyboard);
+  }
   await writeJson(STORYBOARD_PATH, storyboard);
   await writeJson(path.join(PUBLIC_GENERATED_DIR, "storyboard.json"), storyboard);
 

@@ -16,6 +16,10 @@ Do not generate a custom mathematical DSL. Write normal Manim code for each chap
 - **language: Polish (pl-PL) by default** — every headline, caption, label, and
   the `script.md` narration is Polish unless the user asks for another language
   for a specific video. Mathematical notation stays as notation; slugs stay ASCII.
+- **No em dash or en dash in future videos.** Never use `—` or `–` in narration,
+  script headings, on-screen text, titles, captions, thumbnail copy, or notes.
+  Rewrite the sentence with a comma, colon, parentheses, or separate sentence.
+  Mathematical minus (`−` or `-`) remains valid in equations.
 - dark background (`#081018`), high-contrast objects
 - one strong accent (`#22D3EE`), one restrained secondary (`#F59E0B`)
 - visual explanation first, text second
@@ -113,8 +117,8 @@ Outputs land in `generated/` (`video.mp4`, `storyboard.json`, `manifest.json`,
 Once `generated/video.mp4` is final, publish it to the repo-root `library/`:
 
 ```
-library/videos/<title-slug>/
-  <title-slug>.mp4          <- the final render, and nothing else
+library/videos/<NN>-<section>/<type>/
+  <section>-<polish-type>.mp4  <- the final render
   script.md                 <- word-for-word narration (see below)
   render/
     <planner>.ts            <- the planner that produced it
@@ -127,8 +131,11 @@ Rules:
 
 - Copy **only** `video.mp4` into the library. Never copy per-chapter clips,
   the Manim `media/` cache, preview frames, or Remotion temp.
-- The library folder is named by the video's title (slugified). The title is
-  listed first; the code that renders it lives under `render/`.
+- The library section folder starts with its two-digit, one-based position in
+  `topics/teaching_sections.yaml`, followed by the unnumbered section slug.
+  This applies to existing and future folders, so they sort in course order.
+  Episode type stays a child folder; CLI arguments and media basenames keep the
+  unnumbered slug. The source that renders it lives under `render/`.
 - After publishing, delete `generated/` and `public/` entirely.
 - To revise a piece: edit its planner, re-run, copy the new `video.mp4` over the
   old one in the library, wipe `generated/` again, and update `script.md`.
@@ -139,6 +146,43 @@ Every published video ships a `script.md`: the exact words a narrator would say
 to explain the whole thing, start to finish. The video itself stays silent — this
 is its spoken counterpart, useful for a voiced cut, captions, show notes, and as
 a check that the visuals actually carry the argument.
+
+### Voice for new videos
+
+Write future narration like a genuine Polish educational YouTube video: a
+knowledgeable teacher speaking directly to one viewer, with warmth, curiosity,
+and clear reasoning. Use natural spoken Polish, varied sentence lengths, and
+transitions that respond to what just happened on screen. Explain why each step
+matters and anticipate a viewer's likely question or mistake. A brief, honest
+question or observation can make the explanation feel conversational; avoid
+forced excitement, clickbait in the spoken lesson, and a performed persona.
+
+Read the complete script aloud before accepting a new render. It should sound
+like one coherent explanation across scene boundaries, not separate captions
+stitched together. Remove repetitive openings, formulaic summaries, generic
+encouragement, and sentences that merely restate a label or describe an obvious
+animation. Do not repeat a stock sentence to fill time. When a measured scene
+needs more words, rewrite its source narration with a useful explanation of the
+visible mathematics, then check the whole script again at the saved voice pace.
+If a scene has nothing more meaningful to say, revise its visual duration or
+storyboard instead of padding the narration.
+
+End each new long-form video with one brief, natural call to action after the
+mathematical recap. Invite viewers who enjoyed the lesson to subscribe and to
+comment which topic or video they would like to see next. Say in the creator's
+own voice that their support would help the channel. Keep it warm and specific,
+not a repeated slogan or a sudden change in tone. In Polish, a suitable shape
+is: "Jeśli ten film Ci pomógł i lubisz takie wyjaśnienia, zasubskrybuj kanał.
+Napisz też w komentarzu, jaki temat chcesz zobaczyć następny. To naprawdę
+pomoże mi rozwijać ten kanał." Adapt the wording to the episode rather than
+copying it verbatim every time. Give the closing scene enough measured time for
+the invitation; do not cram it into the last seconds of the math explanation.
+
+The source of `script.md` is each scene's `narration` in the planner/storyboard.
+Apply these edits there so the generated script, any later voiceover, and derived
+shorts use the same approved words. This standard applies to new production
+only; do not regenerate or revise scripts or videos already in `library/` merely
+to conform to it.
 
 Write it **last**, against the final `storyboard.json` (chapter durations are
 re-synced from the renders).
@@ -167,15 +211,16 @@ Constraints:
   approach will help.
 - Say **only what is supported by the screen**. The script complements the
   visuals; it can explain the meaning of what is shown, but it never invents
-  facts, numbers, or steps the viewer cannot see.
+  facts, numbers, or steps the viewer cannot see. The closing call to action is
+  the sole exception: it may address the viewer directly after the lesson ends.
 - Length per section must match the measured scene duration using the saved
   Polish Koras voice speed, `128.2 WPM`. Undershooting creates silence; overshooting
   creates rushed delivery. Rewrite the narration after the ffprobe pass if needed.
 - Plain spoken prose. Spell numbers and symbols the way they'd be read aloud
   ("two n plus one", "n squared"), not as glyphs.
-- Calm and declarative, matching the house style. No "don't forget to subscribe"
-  and no narrator persona.
+- Calm and conversational, matching the house style. Include the single closing
+  subscribe-and-comment invitation described above; avoid mid-video pitches and
+  a performed narrator persona.
 
-Use the recorded example at
-`library/videos/why-is-the-sum-of-the-first-n-odd-numbers-a-perfect-square/script.md`
-as the template.
+Use the voice standard above when reviewing each new script; previously
+published scripts are not a required wording template.

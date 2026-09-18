@@ -1,0 +1,105 @@
+# Narracja: Prawa działań na potęgach i pierwiastkach: teoria
+
+Wygenerowana z `storyboard.json` po pomiarze ffprobe (16 scen, THEORY poziomy, 8.1 min).
+Budżet narracji: 128.2 WPM, zgodnie z `voiceover-speed-test.md`.
+Każda scena niesie własny tekst narracji; ten plik składa je w kolejności,
+z czasami startu z gotowego montażu. Opisuje wyłącznie to, co widać na ekranie.
+
+---
+
+## 1 · Prawa działań na potęgach i pierwiastkach  ·  0:00
+
+Czas sceny: 35.0 s. Budżet: około 75 słów. Tekst: 67 słów.
+
+Cześć! Dziś połączymy dwa zapisy, które na pierwszy rzut oka wyglądają jak osobne tematy: potęgi i pierwiastki. Zobaczysz, jak czytać wykładnik ułamkowy, kiedy dodawać wykładniki, a kiedy je mnożyć. Potem sprawdzimy to na trzech zadaniach, od prostego zapisu aż po rachunek podobny do maturalnego. Najważniejsze jest jedno: zanim ruszysz z obliczeniami, rozpoznaj podstawę i działanie. Wtedy wzór przestaje być czymś do zapamiętania na ślepo i bez stresu.
+
+## 2 · Potęga o wykładniku naturalnym  ·  0:35
+
+Czas sceny: 18.0 s. Budżet: około 38 słów. Tekst: 37 słów.
+
+Zacznijmy od najprostszej sytuacji. Potęga o wykładniku naturalnym oznacza, że tę samą podstawę mnożymy przez siebie kilka razy. Podstawa pozostaje ta sama, zmienia się tylko liczba czynników. Właśnie z tego zapisu wyrosną za chwilę pozostałe prawa działań.
+
+## 3 · Potęga o wykładniku 0 i o wykładniku całkowitym ujemnym  ·  0:53
+
+Czas sceny: 26.9 s. Budżet: około 57 słów. Tekst: 64 słów.
+
+Co się stanie, gdy wykładnik spadnie do zera? Jeśli podstawa nie jest zerem, wynik wynosi jeden. Można to zobaczyć, dzieląc tę samą potęgę przez siebie: z jednej strony dostajemy jeden, a z drugiej potęgę o wykładniku zerowym. Kiedy wykładnik jest ujemny, przechodzimy do odwrotności. To nadal liczba dodatnia, jeśli podstawa była dodatnia. Ujemny wykładnik nie oznacza ujemnego wyniku. Sprawdź, czy nie dzielisz przez zero.
+
+## 4 · Pierwiastek arytmetyczny stopnia n  ·  1:20
+
+Czas sceny: 18.0 s. Budżet: około 38 słów. Tekst: 37 słów.
+
+Teraz pierwiastek. Pytamy, jaką nieujemną liczbę trzeba podnieść do wskazanej potęgi, żeby otrzymać liczbę pod pierwiastkiem. To słowo, nieujemną, ma znaczenie. Pierwiastek kwadratowy daje jeden wynik, nawet jeśli równanie z kwadratem ma dwa rozwiązania. Zapamiętaj tę różnicę.
+
+## 5 · Prawa działań na potęgach  ·  1:38
+
+Czas sceny: 20.0 s. Budżet: około 43 słów. Tekst: 46 słów.
+
+Spójrz na prawa działań na potęgach jak na instrukcję czytania zapisu. Ta sama podstawa i mnożenie? Dodaj wykładniki. Ta sama podstawa i dzielenie? Odejmij je. Potęga podniesiona do kolejnej potęgi? Pomnóż wykładniki. Nie wybieraj wzoru po samym wyglądzie liczb, tylko po tym, jakie działanie rzeczywiście wykonujesz.
+
+## 6 · Obliczanie wartości potęgi o wykładniku wymiernym  ·  1:58
+
+Czas sceny: 23.0 s. Budżet: około 49 słów. Tekst: 55 słów.
+
+Przy wykładniku ułamkowym dobrze jest zacząć od pytania: czy podstawę da się zapisać jako prostą potęgę? Jeśli tak, przepisz ją w tej postaci, a potem pomnóż wykładniki. Ujemny wykładnik każe przejść do odwrotności. Dzięki tej kolejności rachunek staje się krótszy, a znak wyniku łatwiej kontrolować. Na końcu sprawdź, czy wartość ma sens dla dodatniej podstawy.
+
+## 7 · Upraszczanie wyrażenia potęgowego przez sprowadzenie do wspólnej podstawy  ·  2:21
+
+Czas sceny: 29.0 s. Budżet: około 62 słów. Tekst: 63 słów.
+
+W bardziej złożonym wyrażeniu szukaj wspólnej podstawy. Liczby mogą wyglądać inaczej, ale często są kolejnymi potęgami tej samej liczby. Kiedy wszystkie zapiszesz jedną podstawą, w liczniku dodajesz wykładniki, a przy dzieleniu odejmujesz wykładnik mianownika. Jeśli wcześniej widzisz potęgę potęgi, najpierw pomnóż jej wykładniki. To porządkuje rachunek i pozwala sprawdzić każdy krok osobno. Na maturze ten nawyk jest cenniejszy niż pamiętanie wielu osobnych sztuczek.
+
+## 8 · Definicja potęgi o wykładniku naturalnym  ·  2:50
+
+Czas sceny: 18.0 s. Budżet: około 38 słów. Tekst: 40 słów.
+
+Wróćmy na moment do definicji. Wykładnik naturalny mówi, ile razy podstawa występuje w iloczynie. To bardzo prosty obraz, ale daje dobrą kontrolę nad wzorami. Jeśli nie pamiętasz, czy przy mnożeniu potęg dodawać wykładniki, rozpisz kilka czynników i policz je ponownie.
+
+## 9 · Potęga o wykładniku zerowym  ·  3:08
+
+Czas sceny: 18.0 s. Budżet: około 38 słów. Tekst: 39 słów.
+
+Potęga o wykładniku zerowym jest równa jeden, pod warunkiem że podstawa nie jest zerem. Ten warunek łatwo przeoczyć, zwłaszcza gdy w podstawie jest wyrażenie z niewiadomą. Zanim użyjesz wzoru, sprawdź więc, czy podstawa może się wyzerować. Dopiero wtedy upraszczaj.
+
+## 10 · zamiana zapisu pierwiastkowego na potęgowy  ·  3:26
+
+Czas sceny: 28.0 s. Budżet: około 60 słów. Tekst: 64 słów.
+
+W pierwszym zadaniu zmieniamy pierwiastek czwartego stopnia z piątki do potęgi trzeciej na potęgę o wykładniku ułamkowym. Spójrz na dwa miejsca w zapisie: stopień pierwiastka trafia do mianownika wykładnika, a potęga spod pierwiastka do licznika. Dostajemy więc pięć do trzech czwartych. Nie obliczamy przybliżenia dziesiętnego, bo polecenie prosi właśnie o nową postać tej samej liczby. To mały krok, który później upraszcza znacznie dłuższe rachunki.
+
+## 11 · obliczanie potęgi o wykładniku wymiernym  ·  3:54
+
+Czas sceny: 28.0 s. Budżet: około 60 słów. Tekst: 63 słów.
+
+Teraz trzeba już policzyć wartość. Szesnaście do trzech czwartych może wyglądać niewygodnie, dopóki nie zauważysz, że szesnaście jest czwartą potęgą dwójki. Wstawiamy tę postać i mnożymy wykładniki. Czwórka skraca się z mianownikiem ułamka, więc zostaje dwa do trzeciej, czyli osiem. Można też najpierw wyciągnąć pierwiastek czwartego stopnia z szesnastu, a potem podnieść wynik do trzeciej potęgi. Obie drogi prowadzą do tego samego wyniku.
+
+## 12 · prawa działań na potęgach  ·  4:22
+
+Czas sceny: 28.0 s. Budżet: około 60 słów. Tekst: 64 słów.
+
+W ostatnim przykładzie wszystkie potęgi mają tę samą podstawę, dwójkę. W liczniku mnożymy, więc dodajemy wykładniki: siedem i minus trzy dają cztery. Następnie dzielimy przez dwa do drugiej, więc od czterech odejmujemy dwa. Zostaje dwa do drugiej, czyli cztery. Zauważ, że ujemny wykładnik nie był tu osobnym problemem. Wszedł do zwykłego rachunku na wykładnikach. To właśnie po to ćwiczyliśmy rozpoznawanie podstawy na początku filmu.
+
+## 13 · Zadanie w stylu maturalnym  ·  4:50
+
+Czas sceny: 52.0 s. Budżet: około 111 słów. Tekst: 99 słów.
+
+Na koniec połączmy te pomysły w jednym zadaniu w stylu maturalnym. Widzisz sumę trzech składników. Pierwszy ma ujemny wykładnik ułamkowy, drugi dodatni wykładnik ułamkowy, a trzeci wykładnik zerowy. Gdy spróbujesz uprościć wszystko jednocześnie, łatwo zgubić znak albo pomylić kolejność. Dlatego najpierw rozdziel rachunek na trzy krótkie części. Przy pierwszym składniku pomyśl o odwrotności, przy drugim poszukaj wygodnej podstawy, a przy trzecim przypomnij sobie warunek dla wykładnika zerowego. Dopiero gdy każda część jest jasna, wróć do dodawania i odejmowania. To prosty sposób na zachowanie kontroli, nawet gdy całe wyrażenie wygląda groźnie. Warto zaznaczyć te części osobno również na swojej kartce.
+
+## 14 · Policz składniki osobno  ·  5:42
+
+Czas sceny: 51.0 s. Budżet: około 109 słów. Tekst: 97 słów.
+
+Zacznijmy od ułamka. Ujemny wykładnik odwraca podstawę, więc z jednej dziewiątej przechodzimy do dziewięciu podniesionych do jednej drugiej. To po prostu pierwiastek kwadratowy z dziewięciu, czyli trzy. Teraz drugi składnik. Trzydzieści dwa to piąta potęga dwójki. Kiedy podniesiemy tę potęgę do dwóch piątych, wykładniki się pomnożą, piątki skrócą i zostanie dwa do drugiej, czyli cztery. Zwróć uwagę, że nie przybliżaliśmy pierwiastka na kalkulatorze. Odpowiedni zapis podstawy sprawił, że oba składniki dały dokładne, małe liczby. Na egzaminie taka zmiana zapisu często oszczędza więcej czasu niż szybkie liczenie w głowie. Oba wyniki możesz teraz wpisać pod odpowiednimi składnikami wyrażenia.
+
+## 15 · Złóż wynik i sprawdź  ·  6:33
+
+Czas sceny: 52.0 s. Budżet: około 111 słów. Tekst: 100 słów.
+
+Pozostał trzeci składnik. Siedem jest różne od zera, więc siedem do potęgi zerowej to jeden. Teraz składamy wyniki dokładnie w tej kolejności, którą pokazuje wyrażenie: trzy plus cztery minus jeden. Dostajemy sześć. Zróbmy jeszcze krótką kontrolę. Ujemny wykładnik przy dodatniej podstawie nie dał liczby ujemnej, a drugi składnik też wyszedł dodatni. Odejmujemy tylko jeden, więc wynik sześć ma sens. Właśnie tak warto kończyć zadanie maturalne: wrócić do pierwotnego zapisu, sprawdzić znaki i dopiero wtedy zaznaczyć odpowiedź. Jeśli po drodze pomylisz odwrotność z minusem, ta kontrola szybko pokaże, gdzie rachunek się rozjechał. W ten sposób chronisz punkty za cały tok rozwiązania.
+
+## 16 · Podsumowanie  ·  7:25
+
+Czas sceny: 43.9 s. Budżet: około 94 słów. Tekst: 82 słów.
+
+Zbierzmy najważniejszą myśl. Najpierw rozpoznaj podstawę i sprawdź warunki. Przy mnożeniu potęg o tej samej podstawie dodaj wykładniki, przy dzieleniu je odejmij, a w potędze potęgi pomnóż. Pierwiastek możesz przepisać jako potęgę z ułamkiem w wykładniku. W zadaniach ten jeden ruch często odsłania prosty plan, bez zbędnego stresu. Jeśli ten film Ci pomógł i lubisz takie wyjaśnienia, zasubskrybuj kanał. Napisz też w komentarzu, jaki temat chcesz zobaczyć następny. To naprawdę pomoże mi rozwijać ten kanał. Dzięki za wspólną naukę i do zobaczenia!
+

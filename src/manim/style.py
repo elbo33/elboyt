@@ -5,7 +5,9 @@ from manim import *
 from .config import FRAME_W, FRAME_H, IS_VERTICAL, SAFE_BOTTOM_Y, FORMAT_ID
 from .colors import BACKGROUND, FOREGROUND, MUTED, ACCENT, SECONDARY, SOFT, GREEN, RED
 
-FONT = "Avenir Next"
+from manimpango import list_fonts
+
+FONT = "Avenir Next" if "Avenir Next" in list_fonts() else "Arial"
 
 
 class LessonScene(Scene):

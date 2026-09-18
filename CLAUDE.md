@@ -28,7 +28,7 @@ Grouped by section, then type. The four episodes of a section live together.
 Shorts and stills nest under the episode they derive from.
 
 ```
-library/videos/<section>/<type>/          type = theory | exercises | mistakes | challenge
+library/videos/<NN>-<section>/<type>/     type = theory | exercises | mistakes | challenge
   <section>-<polish>.mp4                   teoria / zadania / bledy / wyzwanie
   script.md                               word-for-word narration, generated from the storyboard
   thumbnail.png                           1920x1080, ThumbA-flat style (see .thumbs-preview/)
@@ -40,6 +40,11 @@ library/videos/<section>/<type>/          type = theory | exercises | mistakes |
 `git` carries the reproducers under `render/` (planner, Manim sources,
 storyboard, COMMAND.md). The `.mp4` / `.png` renders live on disk only
 (`.gitignore` blocks them everywhere, `library/` included).
+
+`NN` is the section's one-based position in `topics/teaching_sections.yaml`,
+zero-padded to two digits (`01` through `62`). This applies to all current and
+future library section folders so file-browser sorting follows the curriculum.
+Keep CLI section arguments, storyboard slugs, and MP4 basenames unnumbered.
 
 ## Commands
 
@@ -127,7 +132,7 @@ stage, not moving on.
 2. **`generated/` and `public/` are scratch.** `publish` wipes them. Nothing in
    them is source of truth.
 3. **Only the final render is kept**, and only under
-   `library/videos/<section>/<type>/` (and its `shorts/` `stills/`). No
+   `library/videos/<NN>-<section>/<type>/` (and its `shorts/` `stills/`). No
    per-scene clips, Manim `media/` caches, or preview frames — ever. `publish`
    copies `generated/scenes/manim/` (sources) into `render/scenes/`, nothing
    from `generated/scenes/renders/` or `generated/media/`.
@@ -142,6 +147,19 @@ stage, not moving on.
    scene. Use the measured Koras voice speed, 128.2 WPM, so there are no silent
    gaps after the voiceover is added. If the render duration changes, rewrite
    the scene narration before calling ElevenLabs.
+   For new videos, write the per-scene narration as one natural, conversational
+   Polish lesson. Speak to the viewer like a thoughtful educational YouTube
+   teacher: explain the reason for each visible step, anticipate confusion, vary
+   phrasing, and carry ideas smoothly across scene cuts. Read the full generated
+   `script.md` aloud before approving it. Repeated stock phrases or filler added
+   only to reach the word budget are a rejection; rewrite the source narration
+   with useful visual-grounded explanation or adjust scene timing. See
+   `prompts/director.md` for the full voice standard. Apply this to future
+   production only; leave existing library scripts and videos untouched.
+   After the final math recap, close each new long-form video with one warm,
+   concise invitation to subscribe and comment which topic viewers want next,
+   mentioning that their support helps the channel. Budget time for it in the
+   closing scene and vary the wording naturally between episodes.
 6. **Visuals stay active but not frantic.** Use sparse on-screen text and
    purposeful visual motion: reveals, highlights, traces, transforms and
    circumscribes. Avoid long stretches where nothing changes unless narration
@@ -155,11 +173,12 @@ stage, not moving on.
    *and* its `script.md` — is authored in Polish unless the operator asks
    otherwise. File/folder slugs stay ASCII (`slugify` folds diacritics).
 8. Read `prompts/director.md` (the creative brief) before authoring scenes.
-9. **No em dashes.** The em dash (`—`) and en dash (`–`) are strictly banned in
-   every piece of user-facing text: on-screen Manim strings, `script.md`
-   narration, titles, captions, notes, thumbnails. Use a comma, a colon, the
-   word "to", parentheses, or rewrite. Mathematical minus (`−` or `-`) is fine;
-   it is not a dash.
+9. **No em dashes in future videos.** The em dash (`—`) and en dash (`–`) are
+   strictly banned in every piece of user-facing text, including on-screen
+   Manim strings, `script.md` narration and headings, titles, captions, notes,
+   and thumbnails. Use a comma, a colon, the word "to", parentheses, or rewrite.
+   Mathematical minus (`−` or `-`) is fine; it is not a dash. Apply this to
+   future video production without regenerating already approved videos.
 10. **Numbers as words in `script.md`.** In every narration script, short and
    long, write numbers as Polish words, never digits: "dziesiąty wyraz",
    "równa się siedem", "minus dwadzieścia dziewięć"; never "10", "= 7", "-29".

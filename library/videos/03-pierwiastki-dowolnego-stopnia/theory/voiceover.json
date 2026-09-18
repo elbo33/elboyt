@@ -1,0 +1,206 @@
+{
+  "generatedAt": "2026-09-05T11:11:49.577Z",
+  "recoveredFromPublishedVideo": true,
+  "source": {
+    "storyboard": "render/storyboard.json",
+    "script": "script.md",
+    "silentVideo": "pierwiastki-dowolnego-stopnia-teoria.silent.mp4",
+    "voiceover": "voiceover.mp3",
+    "finalVideo": "pierwiastki-dowolnego-stopnia-teoria.mp4"
+  },
+  "elevenLabs": {
+    "voiceId": "Y1quDTS4ZfJp2mhu0Zw5",
+    "modelId": "eleven_multilingual_v2",
+    "outputFormat": "mp3_44100_128",
+    "voiceSettings": {
+      "stability": 0.23,
+      "similarity_boost": 0.46,
+      "style": 0.3,
+      "use_speaker_boost": true,
+      "speed": 1.1
+    },
+    "calibration": "voiceover-speed-test.md"
+  },
+  "text": {
+    "wordCount": 2161,
+    "characterCount": 14967,
+    "sceneCount": 42
+  },
+  "media": {
+    "audioSeconds": 1014.061859,
+    "videoSeconds": 1014.066667,
+    "measuredWpm": 127.86202227136519,
+    "syncStrategy": "scene-by-scene ElevenLabs generation with per-scene atempo retime"
+  },
+  "sceneSync": [
+    {
+      "scene": "hook-1",
+      "targetSeconds": 32.9
+    },
+    {
+      "scene": "hook-2",
+      "targetSeconds": 35.233333333333334
+    },
+    {
+      "scene": "intuition-1",
+      "targetSeconds": 32.9
+    },
+    {
+      "scene": "intuition-2",
+      "targetSeconds": 36.766666666666666
+    },
+    {
+      "scene": "intuition-3",
+      "targetSeconds": 29.233333333333334
+    },
+    {
+      "scene": "intuition-4",
+      "targetSeconds": 36.766666666666666
+    },
+    {
+      "scene": "definition-1",
+      "targetSeconds": 40.63333333333333
+    },
+    {
+      "scene": "definition-2",
+      "targetSeconds": 35.233333333333334
+    },
+    {
+      "scene": "definition-3",
+      "targetSeconds": 36.766666666666666
+    },
+    {
+      "scene": "definition-4",
+      "targetSeconds": 29.233333333333334
+    },
+    {
+      "scene": "definition-5",
+      "targetSeconds": 30.3
+    },
+    {
+      "scene": "why_it_works-1",
+      "targetSeconds": 36.766666666666666
+    },
+    {
+      "scene": "why_it_works-2",
+      "targetSeconds": 36.766666666666666
+    },
+    {
+      "scene": "why_it_works-3",
+      "targetSeconds": 36.766666666666666
+    },
+    {
+      "scene": "why_it_works-4",
+      "targetSeconds": 35.233333333333334
+    },
+    {
+      "scene": "example-g-th-00-00-present",
+      "targetSeconds": 18.566666666666666
+    },
+    {
+      "scene": "example-g-th-00-01-restate",
+      "targetSeconds": 21.833333333333332
+    },
+    {
+      "scene": "example-g-th-00-02-plan",
+      "targetSeconds": 14.866666666666667
+    },
+    {
+      "scene": "example-g-th-00-03-compute-1",
+      "targetSeconds": 11.1
+    },
+    {
+      "scene": "example-g-th-00-04-compute-2",
+      "targetSeconds": 11.1
+    },
+    {
+      "scene": "example-g-th-00-05-compute-3",
+      "targetSeconds": 11.1
+    },
+    {
+      "scene": "example-g-th-00-06-compute-4",
+      "targetSeconds": 11.1
+    },
+    {
+      "scene": "example-g-th-00-07-result",
+      "targetSeconds": 19.4
+    },
+    {
+      "scene": "example-g-th-00-08-insight",
+      "targetSeconds": 22.633333333333333
+    },
+    {
+      "scene": "example-g-th-01-00-present",
+      "targetSeconds": 18.566666666666666
+    },
+    {
+      "scene": "example-g-th-01-01-restate",
+      "targetSeconds": 21.833333333333332
+    },
+    {
+      "scene": "example-g-th-01-02-plan",
+      "targetSeconds": 14.866666666666667
+    },
+    {
+      "scene": "example-g-th-01-03-compute-1",
+      "targetSeconds": 11.1
+    },
+    {
+      "scene": "example-g-th-01-04-compute-2",
+      "targetSeconds": 11.1
+    },
+    {
+      "scene": "example-g-th-01-05-result",
+      "targetSeconds": 19.4
+    },
+    {
+      "scene": "example-g-th-01-06-insight",
+      "targetSeconds": 22.633333333333333
+    },
+    {
+      "scene": "example-g-th-02-00-present",
+      "targetSeconds": 18.566666666666666
+    },
+    {
+      "scene": "example-g-th-02-01-restate",
+      "targetSeconds": 21.833333333333332
+    },
+    {
+      "scene": "example-g-th-02-02-plan",
+      "targetSeconds": 14.866666666666667
+    },
+    {
+      "scene": "example-g-th-02-03-compute-1",
+      "targetSeconds": 11.1
+    },
+    {
+      "scene": "example-g-th-02-04-compute-2",
+      "targetSeconds": 11.1
+    },
+    {
+      "scene": "example-g-th-02-05-compute-3",
+      "targetSeconds": 11.1
+    },
+    {
+      "scene": "example-g-th-02-06-result",
+      "targetSeconds": 19.4
+    },
+    {
+      "scene": "example-g-th-02-07-insight",
+      "targetSeconds": 22.633333333333333
+    },
+    {
+      "scene": "summary-1",
+      "targetSeconds": 35.233333333333334
+    },
+    {
+      "scene": "summary-2",
+      "targetSeconds": 35.233333333333334
+    },
+    {
+      "scene": "summary-3",
+      "targetSeconds": 30.3
+    }
+  ],
+  "archiveNote": "Raw per-scene ElevenLabs parts were generated in scratch and wiped by the older publish command before this metadata file was reconstructed. Future longform publishes preserve voiceover artifacts automatically."
+}

@@ -104,7 +104,7 @@ const DERIVED_SHORTS: Record<string, DerivedShortPlan[]> = {
 
 // Which shorts belong to which episode. The shorts stage of an episode renders
 // every key listed here, in order; publish nests them under
-// library/videos/<section>/<type>/shorts/<slug>/.
+// library/videos/<NN>-<section>/<type>/shorts/<slug>/.
 const EPISODE_SHORTS: Record<string, string[]> = Object.fromEntries(
   Object.entries(DERIVED_SHORTS).map(([episode, plans]) => [
     episode,

@@ -91,18 +91,27 @@ export async function extractScenePreviewFrames(storyboard: Storyboard): Promise
     return {frames, contactSheet: null};
   }
 
-  const pattern = path.join(SCENE_PREVIEW_DIR, "*.png");
+  // The Windows FFmpeg builds commonly omit glob support. A concat list works
+  // on both Windows and Unix and preserves storyboard order.
+  const fileList = path.join(SCENE_PREVIEW_DIR, "contact-sheet-files.txt");
+  await fs.writeFile(
+    fileList,
+    frames.map((frame) => `file '${frame.replace(/\\/g, "/").replace(/'/g, "'\\''")}'`).join("\n") + "\n",
+    "utf8"
+  );
   const contactSheet = path.join(SCENE_PREVIEW_DIR, "contact-sheet.jpg");
   await run(
     "ffmpeg",
     [
       "-y",
-      "-pattern_type",
-      "glob",
+      "-f",
+      "concat",
+      "-safe",
+      "0",
       "-i",
-      pattern,
+      fileList,
       "-vf",
-      "scale=320:180,tile=6x19:padding=10:margin=10:color=0x081018",
+      `scale=320:180,tile=6x${Math.ceil(frames.length / 6)}:padding=10:margin=10:color=0x081018`,
       "-frames:v",
       "1",
       "-update",

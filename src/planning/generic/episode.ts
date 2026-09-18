@@ -24,6 +24,10 @@ import {
   type ExerciseSlot,
   type Section
 } from "../zaspro";
+import {powerRootsNarration} from "../longform/sections/powerRootsNarration";
+import {powerRootsVisuals, type PowerRootsVisualStep} from "../longform/sections/powerRootsVisuals";
+import {monotonicityNarration} from "../longform/sections/monotonicityNarration";
+import {monotonicityVisuals} from "../longform/sections/monotonicityVisuals";
 
 type GenericScenePlan = Omit<
   VideoScene,
@@ -137,7 +141,8 @@ function sceneCode(
   title: string,
   lines: string[],
   duration: number,
-  visualKind: VisualKind
+  visualKind: VisualKind,
+  steps?: PowerRootsVisualStep[]
 ): string {
   const compactLines = lines
     .map((line) => cleanText(line))
@@ -149,7 +154,8 @@ function sceneCode(
     title,
     lines: compactLines.length ? compactLines : visualLines([lines.find(Boolean) ?? ""], 1, 42),
     duration: Math.max(2, duration - 1.3),
-    visualKind
+    visualKind,
+    steps: steps ?? []
   });
 
   return `import json
@@ -325,6 +331,31 @@ class ${className}(LessonScene):
         if title.width > 12.8:
             title.scale_to_fit_width(12.8)
 
+        if DATA["steps"]:
+            self.play(FadeIn(title, shift=0.15 * DOWN), run_time=0.6)
+            scene_seconds = DATA["duration"] + 1.3
+            step_budget = (scene_seconds - 1.0) / len(DATA["steps"])
+            current = None
+            for step in DATA["steps"]:
+                formula = MathTex(step["formula"], color=ACCENT).scale(1.15)
+                if formula.width > 11.5:
+                    formula.scale_to_fit_width(11.5)
+                formula.move_to([0, 0.35, 0])
+                caption = Text(step["label"], font=FONT, color=FOREGROUND).scale(0.34)
+                if caption.width > 11.5:
+                    caption.scale_to_fit_width(11.5)
+                caption.next_to(formula, DOWN, buff=0.65)
+                group = VGroup(formula, caption)
+                if current is None:
+                    self.play(FadeIn(group, shift=0.12 * UP), run_time=1.0)
+                else:
+                    self.play(FadeOut(current), FadeIn(group, shift=0.12 * UP), run_time=1.0)
+                self.wait(max(0.2, step_budget - 1.7))
+                self.play(Indicate(formula, color=SECONDARY), run_time=0.7)
+                current = group
+            self.play(FadeOut(title), FadeOut(current), run_time=0.4)
+            return
+
         visual = self.make_visual(DATA.get("visualKind", "board"))
         visual.move_to([0, -0.2, 0])
         if visual.width > 8.2:
@@ -373,7 +404,12 @@ function makeScene(input: {
       input.title,
       input.lines,
       durationSeconds,
-      input.visualKind ?? "board"
+      input.visualKind ?? "board",
+      process.env.SECTION === "prawa-dzialan-potegi-pierwiastki"
+        ? powerRootsVisuals[input.id]
+        : process.env.SECTION === "monotonicznosc-potegowania"
+          ? monotonicityVisuals[input.id]
+          : undefined
     ),
     id: input.id,
     title: input.title,
@@ -1293,6 +1329,8 @@ function theoryPlans(section: Section): GenericScenePlan[] {
   const methods = section.knowledge.methods;
   const formulas = section.knowledge.formulas;
   const examples = exercisesForSlot(section, "THEORY_SUPPORT").slice(0, 3);
+  const isPowerRoots = section.slug === "prawa-dzialan-potegi-pierwiastki";
+  const isMonotonicity = section.slug === "monotonicznosc-potegowania";
 
   const plans: GenericScenePlan[] = [];
   plans.push(
@@ -1302,8 +1340,10 @@ function theoryPlans(section: Section): GenericScenePlan[] {
       sceneType: "hook",
       sceneLabel: "HAK",
       narration:
-        `Dzisiaj porządkujemy temat ${section.name}. ` +
-        "Celem jest zobaczyć, co trzeba rozpoznać na maturze, jakiego narzędzia użyć i gdzie zwykle pojawia się pułapka.",
+        isPowerRoots
+          ? "Cześć! Dziś połączymy dwa zapisy, które na pierwszy rzut oka wyglądają jak osobne tematy: potęgi i pierwiastki. Zobaczysz, jak czytać wykładnik ułamkowy, kiedy dodawać wykładniki, a kiedy je mnożyć. Potem sprawdzimy to na trzech zadaniach, od prostego zapisu aż po rachunek podobny do maturalnego. Najważniejsze jest jedno: zanim ruszysz z obliczeniami, rozpoznaj podstawę i działanie. Wtedy wzór przestaje być czymś do zapamiętania na ślepo."
+          : `Dzisiaj porządkujemy temat ${section.name}. ` +
+            "Celem jest zobaczyć, co trzeba rozpoznać na maturze, jakiego narzędzia użyć i gdzie zwykle pojawia się pułapka.",
       lines: visualLines([
         `Temat: ${section.name}`,
         `Zakres: ${takeWords(section.scope, 28)}`,
@@ -1362,6 +1402,43 @@ function theoryPlans(section: Section): GenericScenePlan[] {
 
   examples.forEach((exercise, index) => plans.push(problemScene(exercise, "example", `PRZYKŁAD ${index + 1}`)));
 
+  if (isPowerRoots) {
+    for (const [id, title] of [
+      ["matura-setup", "Zadanie w stylu maturalnym"],
+      ["matura-calculate", "Policz składniki osobno"],
+      ["matura-check", "Złóż wynik i sprawdź"]
+    ]) {
+      plans.push(makeScene({
+        id,
+        title,
+        sceneType: "matura_connection",
+        sceneLabel: "MATURA",
+        narration: powerRootsNarration[id],
+        lines: ["Potęgi o wykładnikach ułamkowych, ujemnych i zerowych"],
+        minSeconds: 50,
+        maxSeconds: 53
+      }));
+    }
+  }
+  if (isMonotonicity) {
+    for (const [id, title] of [
+      ["matura-setup", "Porównaj dwie potęgi"],
+      ["matura-calculate", "Sprowadź do podstawy trzy"],
+      ["matura-check", "Sprawdź kierunek nierówności"]
+    ]) {
+      plans.push(makeScene({
+        id,
+        title,
+        sceneType: "matura_connection",
+        sceneLabel: "MATURA",
+        narration: monotonicityNarration[id],
+        lines: ["Porównanie potęg o wspólnej podstawie"],
+        minSeconds: 35,
+        maxSeconds: 53
+      }));
+    }
+  }
+
   plans.push(
     makeScene({
       id: "theory-summary",
@@ -1369,8 +1446,10 @@ function theoryPlans(section: Section): GenericScenePlan[] {
       sceneType: "summary",
       sceneLabel: "PODSUMOWANIE",
       narration:
-        "Po tej lekcji najpierw nazywamy typ obiektu, potem wybieramy własność albo metodę, a dopiero na końcu liczymy. " +
-        "Taka kolejność zmniejsza liczbę przypadkowych błędów.",
+        isPowerRoots
+          ? "Zbierzmy to w jedną prostą kolejność. Najpierw sprawdź podstawę i warunki. Przy mnożeniu potęg o tej samej podstawie dodaj wykładniki, przy dzieleniu je odejmij, a gdy potęga jest podniesiona do potęgi, pomnóż wykładniki. Pierwiastek możesz zapisać jako potęgę z ułamkiem w wykładniku. W zadaniach z tej lekcji właśnie ten ruch pozwalał zobaczyć wspólny plan, zamiast zgadywać kolejne kroki. Jeśli ten film Ci pomógł i lubisz takie wyjaśnienia, zasubskrybuj kanał. Napisz też w komentarzu, jaki temat chcesz zobaczyć następny. To naprawdę pomoże mi rozwijać ten kanał."
+          : "Po tej lekcji najpierw nazywamy typ obiektu, potem wybieramy własność albo metodę, a dopiero na końcu liczymy. " +
+            "Taka kolejność zmniejsza liczbę przypadkowych błędów.",
       lines: visualLines([
         "Najpierw: rozpoznaj typ zadania.",
         "Potem: wybierz wzór, własność albo metodę.",
@@ -1379,14 +1458,39 @@ function theoryPlans(section: Section): GenericScenePlan[] {
     })
   );
 
-  return plans;
+  if (isMonotonicity) return plans.map((plan) => {
+    const narration = monotonicityNarration[plan.id];
+    const steps = monotonicityVisuals[plan.id];
+    if (!narration || !steps) throw new Error(`Missing monotonicity narration or visual for ${plan.id}`);
+    const durationSeconds = Math.round(countVoiceoverWords(narration) / POLISH_VOICEOVER_WPM * 60);
+    return {
+      ...plan,
+      durationSeconds,
+      narration,
+      shortHook: narration,
+      code: sceneCode(plan.className, plan.sceneLabel, plan.title, plan.objects, durationSeconds, "formula", steps)
+    };
+  });
+  if (!isPowerRoots) return plans;
+  return plans.map((plan) => {
+    const narration = powerRootsNarration[plan.id];
+    if (!narration) throw new Error(`Missing powers-and-roots narration for ${plan.id}`);
+    return {...plan, narration, shortHook: narration};
+  });
 }
 
 function problemScene(exercise: Exercise, sceneType: SceneType, label: string): GenericScenePlan {
   const sought = soughtLabels(exercise);
   const answer = answerText(exercise);
   const steps = exercise.solution_steps.slice(0, 5);
-  const title = exercise.exercise_type || exercise.id;
+  const monotonicityTitles: Record<string, string> = {
+    "g-th-00": "Porównaj potęgi o tej samej podstawie",
+    "g-th-01": "Porównaj potęgi z jedynką",
+    "g-th-02": "Rozwiąż nierówność wykładniczą"
+  };
+  const title = process.env.SECTION === "monotonicznosc-potegowania"
+    ? monotonicityTitles[exercise.id] ?? exercise.exercise_type ?? exercise.id
+    : exercise.exercise_type || exercise.id;
   return makeScene({
     id: `${sceneType}-${exercise.id}`,
     title,
@@ -1522,9 +1626,55 @@ export function getGenericLongformThumbnailPlans(): {
   className: string;
 }[] {
   const section = loadSection(currentSectionSlug());
-  if (section.slug !== "pierwiastki-dowolnego-stopnia") return [];
+  if (section.slug !== "pierwiastki-dowolnego-stopnia" &&
+      section.slug !== "prawa-dzialan-potegi-pierwiastki" &&
+      section.slug !== "monotonicznosc-potegowania") return [];
 
-  const variants = [
+  const variants = section.slug === "monotonicznosc-potegowania" ? [
+    {
+      filename: "thumbnail-1.png",
+      className: "GenericMonotonicityThumbnailOne",
+      kicker: "MATURA PODSTAWOWA",
+      headline: "POTĘGI: KIEDY\nODWRÓCIĆ ZNAK?",
+      formula: String.raw`\left(\frac12\right)^2>\left(\frac12\right)^3`
+    },
+    {
+      filename: "thumbnail-2.png",
+      className: "GenericMonotonicityThumbnailTwo",
+      kicker: "MONOTONICZNOŚĆ POTĘGOWANIA",
+      headline: "JEDYNKA ZMIENIA\nWSZYSTKO",
+      formula: String.raw`2^2<2^3`
+    },
+    {
+      filename: "thumbnail-3.png",
+      className: "GenericMonotonicityThumbnailThree",
+      kicker: "MATURA: PORÓWNYWANIE POTĘG",
+      headline: "TEN ZNAK\nMYLI WSZYSTKICH",
+      formula: String.raw`\left(\frac25\right)^4>\left(\frac25\right)^7`
+    }
+  ] : section.slug === "prawa-dzialan-potegi-pierwiastki" ? [
+    {
+      filename: "thumbnail-1.png",
+      className: "GenericPowerRootsThumbnailOne",
+      kicker: "MATURA PODSTAWOWA",
+      headline: "POTĘGI I\nPIERWIASTKI",
+      formula: String.raw`a^{\frac{m}{n}}=\sqrt[n]{a^m}`
+    },
+    {
+      filename: "thumbnail-2.png",
+      className: "GenericPowerRootsThumbnailTwo",
+      kicker: "POTĘGI I PIERWIASTKI",
+      headline: "MATURA: JEDEN WYKŁADNIK\nZERO ZGADYWANIA",
+      formula: String.raw`a^m\cdot a^n=a^{m+n}`
+    },
+    {
+      filename: "thumbnail-3.png",
+      className: "GenericPowerRootsThumbnailThree",
+      kicker: "POTĘGI I PIERWIASTKI",
+      headline: "MATURA: PIERWIASTKI\nWRESZCIE MAJĄ SENS",
+      formula: String.raw`\sqrt[4]{5^3}=5^{\frac{3}{4}}`
+    }
+  ] : [
     {
       filename: "thumbnail-1.png",
       className: "GenericRootThumbnailOne",

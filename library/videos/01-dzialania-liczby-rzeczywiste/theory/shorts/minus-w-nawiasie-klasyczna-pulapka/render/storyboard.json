@@ -1,0 +1,49 @@
+{
+  "topic": "Działania w R: minus przy potędze",
+  "slug": "minus-w-nawiasie-klasyczna-pulapka",
+  "sectionSlug": "dzialania-liczby-rzeczywiste",
+  "episodeType": "THEORY",
+  "format": "short-9x16",
+  "fps": 30,
+  "width": 1080,
+  "height": 1920,
+  "durationSeconds": 30.766666666666666,
+  "crossfadeFrames": 0,
+  "derivedFrom": {
+    "episode": "dzialania-liczby-rzeczywiste/theory",
+    "scenes": [
+      "definition-1"
+    ]
+  },
+  "visualIdentity": {
+    "background": "#081018",
+    "foreground": "#F7FAFF",
+    "accent": "#22D3EE",
+    "secondaryAccent": "#F59E0B",
+    "font": "Avenir Next"
+  },
+  "scenes": [
+    {
+      "id": "minus-w-nawiasie-01-definition-1",
+      "title": "Minus w nawiasie: klasyczna pułapka",
+      "className": "Short_minus_w_nawiasie_01_definition_1",
+      "durationSeconds": 30.766666666666666,
+      "sceneType": "hook",
+      "sceneLabel": "Minus w nawiasie: klasyczna pułapka",
+      "sceneIndex": 1,
+      "standalone": true,
+      "narration": "Pierwsza pułapka to minus przy potędze. W górnym zapisie minus znajduje się w nawiasie, więc jest częścią podstawy. Potęgujemy całą liczbę ujemną. W dolnym zapisie minus stoi przed potęgą. Najpierw powstaje potęga liczby dodatniej, a dopiero potem dokładamy znak minus z przodu. Dlatego te dwa zapisy nie znaczą tego samego. Gdy widzisz potęgę, zadaj jedno pytanie: co dokładnie jest podstawą. Odpowiedź prawie zawsze znajduje się w nawiasie albo w jego braku.",
+      "derivedFromScene": "definition-1",
+      "purpose": "Minus w nawiasie: klasyczna pułapka",
+      "mathematicalConcept": "Pierwsza pułapka to minus przy potędze. W górnym zapisie minus znajduje się w nawiasie, więc jest częścią podstawy. Potęgujemy całą liczbę ujemną. W dolnym zapisie minus stoi przed potęgą. Najpierw powstaje potęga liczby dodatniej, a dopiero potem dokładamy znak minus z przodu. Dlatego te dwa zapisy nie znaczą tego samego. Gdy widzisz potęgę, zadaj jedno pytanie: co dokładnie jest podstawą. Odpowiedź prawie zawsze znajduje się w nawiasie albo w jego braku.",
+      "objects": [],
+      "animation": "Short: vertical, pace=fast, hard cuts.",
+      "camera": "Static 9:16 frame; bottom 25% kept clear.",
+      "text": "Minus w nawiasie: klasyczna pułapka",
+      "transition": "Hard cut.",
+      "sourcePath": "/Users/elieboulanger/Desktop/elboyt/generated/scenes/manim/minus-w-nawiasie-01-definition-1.py",
+      "renderPath": "/Users/elieboulanger/Desktop/elboyt/generated/scenes/renders/minus-w-nawiasie-01-definition-1.mp4",
+      "publicPath": "generated/scenes/minus-w-nawiasie-01-definition-1.mp4"
+    }
+  ]
+}

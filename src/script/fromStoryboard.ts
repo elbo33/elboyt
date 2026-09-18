@@ -115,10 +115,27 @@ export function buildScriptMarkdown(storyboard: Storyboard): string {
 // source) — it fails loudly so a violation cannot ship silently.
 export function assertScriptStyle(storyboard: Storyboard): void {
   const problems: string[] = [];
+  if (/[—–]/.test(storyboard.topic)) {
+    problems.push("  topic: contains an em/en dash — rewrite the title");
+  }
   for (const scene of storyboard.scenes) {
     const n = scene.narration ?? "";
-    if (/[—–]/.test(n)) {
-      problems.push(`  ${scene.id}: contains an em/en dash — use a comma or rewrite`);
+    for (const [field, value] of Object.entries({
+      narration: n,
+      title: scene.title,
+      sceneLabel: scene.sceneLabel,
+      text: scene.text,
+      stillMoment: scene.stillMoment,
+      shortHook: scene.shortHook
+    })) {
+      if (typeof value === "string" && /[—–]/.test(value)) {
+        problems.push(`  ${scene.id}.${field}: contains an em/en dash — use a comma or rewrite`);
+      }
+    }
+    for (const [index, object] of (scene.objects ?? []).entries()) {
+      if (/[—–]/.test(object)) {
+        problems.push(`  ${scene.id}.objects[${index}]: contains an em/en dash — rewrite`);
+      }
     }
     const digits = n.match(/(?<![A-Za-z_])\d+/g);
     if (digits) {
@@ -138,7 +155,7 @@ export function assertScriptStyle(storyboard: Storyboard): void {
   }
   if (problems.length) {
     throw new Error(
-      `\n[script style] ${problems.length} narration violation(s) of CLAUDE.md rules 7/8:\n` +
+      `\n[script style] ${problems.length} style violation(s) of CLAUDE.md rules 7/9/10:\n` +
         problems.join("\n") +
         "\n"
     );
@@ -151,9 +168,8 @@ export async function writeScriptFromStoryboard(
 ): Promise<void> {
   assertScriptStyle(storyboard);
   const md = buildScriptMarkdown(storyboard);
-  if (/[—–]/.test(md.replace(/^## .+$/gm, ""))) {
-    // eslint-disable-next-line no-console
-    console.error("[script style] generated script.md still contains an em/en dash outside headers");
+  if (/[—–]/.test(md)) {
+    throw new Error("[script style] generated script.md contains an em/en dash");
   }
   await fs.mkdir(path.dirname(outPath), {recursive: true});
   await fs.writeFile(outPath, md + "\n", "utf8");
