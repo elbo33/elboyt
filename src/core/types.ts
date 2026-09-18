@@ -9,8 +9,11 @@ export type EpisodeType =
   | "CHALLENGE"
   | "EXPLAINER";
 
-// THEORY: hook -> intuition -> definition -> why_it_works -> example x3
-//         -> matura_connection -> summary
+// THEORY, active from 2026-09-14 onward:
+//   hook -> definition -> example x3 -> matura_connection -> summary
+// `intuition` and `why_it_works` are historical scene types kept for old
+// published library storyboards/render sources only; new theory authoring must
+// not create them.
 export type TheoryScene =
   | "hook"
   | "intuition"

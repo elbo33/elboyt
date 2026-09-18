@@ -26,20 +26,18 @@ Do not generate a custom mathematical DSL. Write normal Manim code for each chap
 
 ## Repetitive skeleton (required order)
 
-1. **intro** — hook + the raw pattern
-2. **roadmap** — literally list the chapters that follow
-3. **concept** — define every term the video leans on
-4. **master build** — the whole idea once, slow, uninterrupted
-5. **example** — a worked case from a *single shared template*
-6. **example** — the same template, new numbers
-7. **example** — the same template again (aim for 5–7 of these)
-8. **pattern check** — read the pattern back off the results
-9. **example (stress test)** — one deliberately large case
-10. **principle** — why the key step can never fail
-11. **principle (three ways)** — the same fact from independent angles
-12. **algebra** — the symbolic confirmation
-13. **recap** — restate every example + the one-line reason
-14. **outro** — final formula, end card
+Active from 2026-09-14 onward: `intuition` and `why_it_works` are no longer
+project sections. They may remain in already-published library storyboards and
+render sources only for reproducibility. Do not create either band for new
+videos.
+
+1. **hook** — greeting, promise, and the raw pattern
+2. **definition** — define every term and formal rule the video leans on
+3. **example** — a worked case from a *single shared template*
+4. **example** — the same template, new numbers
+5. **example** — the same template again
+6. **matura connection** — one exam-shaped application if the section has one
+7. **summary** — restate every example + the final checklist
 
 Every `example` chapter must call the **same** template function so the beats,
 layout, and timing are identical case to case. Only the numbers change.

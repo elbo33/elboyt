@@ -38,7 +38,11 @@ export type ThumbnailAuthoring = {
 export type SectionAuthoring = {
   slug: string;
   topic: string; // human episode title
-  authored: AuthoredScene[]; // hook / intuition / definition / why_it_works / summary
+  // Active new theory authoring uses hook / definition / summary only.
+  // Existing section files may still carry historical intuition / why_it_works
+  // scenes for reproducibility context, but THEORY_SKELETON no longer selects
+  // those bands for future long-form renders.
+  authored: AuthoredScene[];
   examples: ExampleAuthoring[]; // THEORY_SUPPORT problems, easy -> hard
   maturaExample?: ExampleAuthoring; // the MATURA_CONNECTION band, staged as a worked block
   thumbnail?: ThumbnailAuthoring;

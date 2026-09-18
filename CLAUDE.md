@@ -94,6 +94,13 @@ local ZasPro YAML into baseline theory, exercise, mistake, challenge, short, and
 still plans. Treat it as the first systematic render grammar to improve after
 reviewing actual output, not as the final authored creative layer.
 
+Active long-form theory structure from 2026-09-14 onward:
+`hook -> definition -> example -> matura_connection -> summary`.
+The old `intuition` and `why_it_works` bands are no longer part of new project
+authoring or generation. They may still appear inside already-published
+`library/videos/.../render/storyboard.json` files and historical render sources;
+leave those artifacts untouched so previous videos remain reproducible.
+
 ## Approval gates
 
 Each stage is gated on the user's approval, in order. Nothing advances,
@@ -188,8 +195,11 @@ letter-spaced kicker + accent rule, bold caps headline, big ACCENT `MathTex`
 formula, optional middle figure); the kicker, headline, figure and formula are
 authored per episode as `SectionAuthoring.thumbnail` and
 `SectionAuthoring.thumbnailVariants`. The first thumbnail is the clean topic
-thumbnail. The other two use centered, catchy or controversial matura text. No
-em dashes (rule 7).
+thumbnail. The other two use centered, catchy or controversial matura hook
+sentences; the headline itself must include the exact word `MATURA`, must read
+like a real hook sentence rather than a label, and must stay short enough for a
+thumbnail, usually 4-7 words split across two or three punchy lines. No em
+dashes (rule 7).
 
 ## Requirements
 

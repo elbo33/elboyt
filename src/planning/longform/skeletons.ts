@@ -4,6 +4,8 @@
 
 export type BandType =
   | "hook"
+  // Historical only: already-published longforms may contain these bands in
+  // their library storyboards/render sources, but new theory episodes do not.
   | "intuition"
   | "definition"
   | "why_it_works"
@@ -21,12 +23,13 @@ export type BandType =
 
 export type Band = {type: BandType; count: number};
 
-// THEORY — target 22-28 min, ~46 scenes.
+// THEORY — active skeleton from 2026-09-14 onward.
+// `intuition` and `why_it_works` are no longer production bands. Their old
+// source/storyboard metadata is kept only so previously published videos remain
+// understandable and reproducible from their library render folders.
 export const THEORY_SKELETON: Band[] = [
   {type: "hook", count: 2},
-  {type: "intuition", count: 4},
   {type: "definition", count: 5},
-  {type: "why_it_works", count: 6},
   {type: "example", count: 3}, // each expands to its beat block
   {type: "matura_connection", count: 4},
   {type: "summary", count: 3}

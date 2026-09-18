@@ -37,6 +37,11 @@ type VisualKind =
   | "operation_order"
   | "formula"
   | "interval"
+  | "root_parity"
+  | "root_balance"
+  | "factor_tree"
+  | "common_degree"
+  | "rationalize"
   | "exercise"
   | "summary";
 
@@ -134,10 +139,15 @@ function sceneCode(
   duration: number,
   visualKind: VisualKind
 ): string {
+  const compactLines = lines
+    .map((line) => cleanText(line))
+    .filter(Boolean)
+    .filter((line) => line.length <= 68)
+    .slice(0, 3);
   const data = JSON.stringify({
     tag,
     title,
-    lines,
+    lines: compactLines.length ? compactLines : visualLines([lines.find(Boolean) ?? ""], 1, 42),
     duration: Math.max(2, duration - 1.3),
     visualKind
   });
@@ -210,6 +220,67 @@ class ${className}(LessonScene):
             bottom.next_to(mid, DOWN, buff=0.36)
             return VGroup(frame, top, mid, bottom)
 
+        if kind == "root_parity":
+            even_box = RoundedRectangle(width=2.25, height=2.25, corner_radius=0.1, color=ACCENT, stroke_width=4)
+            odd_box = RoundedRectangle(width=2.25, height=2.25, corner_radius=0.1, color=SECONDARY, stroke_width=4)
+            even = VGroup(even_box, MathTex(r"x^4", color=FOREGROUND).scale(0.72), Text("parzysty", font=FONT, color=ACCENT).scale(0.24))
+            odd = VGroup(odd_box, MathTex(r"x^3", color=FOREGROUND).scale(0.72), Text("nieparzysty", font=FONT, color=SECONDARY).scale(0.24))
+            even[1].move_to(even_box.get_center() + 0.25 * UP)
+            even[2].move_to(even_box.get_center() + 0.55 * DOWN)
+            odd[1].move_to(odd_box.get_center() + 0.25 * UP)
+            odd[2].move_to(odd_box.get_center() + 0.55 * DOWN)
+            pair = VGroup(even, odd).arrange(RIGHT, buff=0.45)
+            arrows = VGroup(
+                Arrow(even_box.get_bottom(), even_box.get_bottom() + 0.65 * DOWN, color=MUTED, buff=0.05, tip_length=0.16),
+                Arrow(odd_box.get_bottom(), odd_box.get_bottom() + 0.65 * DOWN, color=MUTED, buff=0.05, tip_length=0.16),
+            )
+            labels = VGroup(
+                Text("wynik ≥ 0", font=FONT, color=FOREGROUND).scale(0.22).next_to(arrows[0], DOWN, buff=0.1),
+                Text("znak zostaje", font=FONT, color=FOREGROUND).scale(0.22).next_to(arrows[1], DOWN, buff=0.1),
+            )
+            return VGroup(pair, arrows, labels)
+
+        if kind == "root_balance":
+            radical = MathTex(r"\\sqrt[n]{a}=b", color=ACCENT).scale(0.9)
+            power = MathTex(r"b^n=a", color=SECONDARY).scale(0.85)
+            arrow1 = Arrow(radical.get_right(), power.get_left(), color=MUTED, buff=0.25, tip_length=0.18)
+            row = VGroup(radical, arrow1, power).arrange(RIGHT, buff=0.35)
+            question = Text("pierwiastek pyta o podstawę potęgi", font=FONT, weight=MEDIUM, color=FOREGROUND).scale(0.24)
+            question.next_to(row, DOWN, buff=0.42)
+            return VGroup(row, question)
+
+        if kind == "factor_tree":
+            expr = MathTex(r"40=2^3\\cdot 5", color=FOREGROUND).scale(0.72)
+            root = MathTex(r"\\sqrt[3]{40}=2\\sqrt[3]{5}", color=ACCENT).scale(0.72)
+            cube = RoundedRectangle(width=1.15, height=0.78, corner_radius=0.08, color=SECONDARY, stroke_width=4)
+            cube_label = MathTex(r"2^3", color=SECONDARY).scale(0.52).move_to(cube)
+            rem = RoundedRectangle(width=1.15, height=0.78, corner_radius=0.08, color=MUTED, stroke_width=3)
+            rem_label = MathTex(r"5", color=FOREGROUND).scale(0.52).move_to(rem)
+            chips = VGroup(VGroup(cube, cube_label), VGroup(rem, rem_label)).arrange(RIGHT, buff=0.35)
+            chips.next_to(expr, DOWN, buff=0.5)
+            root.next_to(chips, DOWN, buff=0.52)
+            return VGroup(expr, chips, root)
+
+        if kind == "common_degree":
+            left = MathTex(r"\\sqrt[3]{3}", color=ACCENT).scale(0.62)
+            mid = MathTex(r"\\sqrt[4]{5}", color=SECONDARY).scale(0.62)
+            right = MathTex(r"\\sqrt{2}", color=FOREGROUND).scale(0.62)
+            top = VGroup(left, mid, right).arrange(RIGHT, buff=0.52)
+            target = MathTex(r"\\sqrt[12]{\\phantom{000}}", color=MUTED).scale(0.9)
+            target.next_to(top, DOWN, buff=0.65)
+            arrows = VGroup(*[Arrow(m.get_bottom(), target.get_top(), color=MUTED, buff=0.12, tip_length=0.14) for m in top])
+            label = Text("wspólny stopień", font=FONT, weight=BOLD, color=FOREGROUND).scale(0.26).next_to(target, DOWN, buff=0.3)
+            return VGroup(top, arrows, target, label)
+
+        if kind == "rationalize":
+            frac1 = MathTex(r"\\frac{6}{\\sqrt[3]{3}}", color=FOREGROUND).scale(0.82)
+            times = MathTex(r"\\cdot\\frac{\\sqrt[3]{9}}{\\sqrt[3]{9}}", color=SECONDARY).scale(0.72)
+            frac2 = MathTex(r"=2\\sqrt[3]{9}", color=ACCENT).scale(0.8)
+            row = VGroup(frac1, times, frac2).arrange(RIGHT, buff=0.28)
+            note = Text("dopełnij wykładnik do stopnia pierwiastka", font=FONT, color=MUTED).scale(0.22)
+            note.next_to(row, DOWN, buff=0.42)
+            return VGroup(row, note)
+
         if kind == "interval":
             axis = Line(3.7 * LEFT, 3.7 * RIGHT, color=FOREGROUND, stroke_width=4)
             seg = Line(axis.point_from_proportion(0.22), axis.point_from_proportion(0.78), color=ACCENT, stroke_width=12)
@@ -255,30 +326,20 @@ class ${className}(LessonScene):
             title.scale_to_fit_width(12.8)
 
         visual = self.make_visual(DATA.get("visualKind", "board"))
-        visual.to_edge(LEFT, buff=1.0)
-        visual.set_y(-0.35)
-        if visual.width > 5.1:
-            visual.scale_to_fit_width(5.1)
-        if visual.height > 4.9:
-            visual.scale_to_fit_height(4.9)
+        visual.move_to([0, -0.2, 0])
+        if visual.width > 8.2:
+            visual.scale_to_fit_width(8.2)
+        if visual.height > 4.45:
+            visual.scale_to_fit_height(4.45)
 
         rows = VGroup()
-        for line in DATA["lines"]:
-            row = Text(line, font=FONT, weight=MEDIUM, color=FOREGROUND, line_spacing=0.95)
-            row.scale(0.31)
-            rows.add(row)
-        rows.arrange(DOWN, aligned_edge=LEFT, buff=0.2)
-        rows.next_to(visual, RIGHT, buff=0.7)
-        rows.align_to(visual, UP)
-        if rows.width > 7.8:
-            rows.scale_to_fit_width(7.8)
-        if rows.height > 5.9:
-            rows.scale_to_fit_height(5.9)
 
-        accent = Line(LEFT, RIGHT, color=SECONDARY, stroke_width=5).scale(1.4)
-        accent.next_to(VGroup(visual, rows), DOWN, buff=0.45)
+        accent = Line(LEFT, RIGHT, color=SECONDARY, stroke_width=5).scale(1.2)
+        accent.next_to(visual, DOWN, buff=0.45)
+        if accent.get_bottom()[1] < -2.55:
+            accent.move_to([0, -2.45, 0])
 
-        self.play(FadeIn(title, shift=0.15 * DOWN), FadeIn(visual, shift=0.15 * RIGHT), FadeIn(rows, shift=0.15 * UP), run_time=0.6)
+        self.play(FadeIn(title, shift=0.15 * DOWN), FadeIn(visual, shift=0.18 * UP), run_time=0.6)
         self.play(Create(accent), run_time=0.35)
         self.wait(DATA["duration"])
         self.play(FadeOut(title), FadeOut(visual), FadeOut(rows), FadeOut(accent), run_time=0.35)
@@ -389,8 +450,8 @@ function directedRealNumbersTheoryPlans(section: Section): GenericScenePlan[] {
   add({
     id: "director-01-sets",
     title: "Najpierw ustawiamy mapę liczb",
-    sceneType: "intuition",
-    sceneLabel: "INTUICJA / ZBIORY",
+    sceneType: "definition",
+    sceneLabel: "DEFINICJA / ZBIORY",
     visualKind: "sets",
     narration:
       "Zbiór liczb rzeczywistych traktujemy jak całą oś liczbową. W środku mamy coraz większe rodziny liczb: naturalne, całkowite, wymierne, a obok nich liczby niewymierne. Ten obraz jest ważny, bo zadanie często sprawdza, w jakim świecie wolno nam wykonać dany ruch.",
@@ -404,8 +465,8 @@ function directedRealNumbersTheoryPlans(section: Section): GenericScenePlan[] {
   add({
     id: "director-02-axis",
     title: "Oś liczbowa to model zbioru R",
-    sceneType: "intuition",
-    sceneLabel: "INTUICJA / OŚ",
+    sceneType: "definition",
+    sceneLabel: "DEFINICJA / OŚ",
     visualKind: "number_line",
     narration:
       "Na osi nie widzimy tylko liczb całkowitych. Widzimy wszystkie punkty pomiędzy nimi. Dlatego porównywanie liczb, znaki nierówności i przedziały będą później jedną historią: liczba po lewej jest mniejsza, liczba po prawej jest większa.",
@@ -434,8 +495,8 @@ function directedRealNumbersTheoryPlans(section: Section): GenericScenePlan[] {
   add({
     id: "director-04-laws",
     title: "Prawa działań pomagają, ale mają granice",
-    sceneType: "why_it_works",
-    sceneLabel: "METODA / PRAWA",
+    sceneType: "definition",
+    sceneLabel: "DEFINICJA / PRAWA",
     visualKind: "formula",
     narration:
       "Przemienność, łączność i rozdzielność są narzędziami do porządkowania rachunku. Ale nie wszystkie działania mają te własności. Odejmowania i dzielenia nie można przestawiać bez konsekwencji, więc najpierw rozpoznajemy działanie, a dopiero potem używamy prawa.",
@@ -449,8 +510,8 @@ function directedRealNumbersTheoryPlans(section: Section): GenericScenePlan[] {
   add({
     id: "director-05-order",
     title: "Kolejność działań jako drabina decyzji",
-    sceneType: "why_it_works",
-    sceneLabel: "METODA / KOLEJNOŚĆ",
+    sceneType: "definition",
+    sceneLabel: "DEFINICJA / KOLEJNOŚĆ",
     visualKind: "operation_order",
     narration:
       "Zamiast pamiętać kolejność jako hasło, używamy jej jak drabiny. Najpierw szukamy nawiasów, także tych ukrytych pod kreską ułamkową i pod pierwiastkiem. Potem potęgi, pierwiastki i logarytmy. Dopiero potem mnożenie z dzieleniem, a na końcu dodawanie z odejmowaniem.",
@@ -524,8 +585,8 @@ function directedRealNumbersTheoryPlans(section: Section): GenericScenePlan[] {
   add({
     id: "director-10-estimate",
     title: "Szacowanie chroni przed wynikiem bez sensu",
-    sceneType: "why_it_works",
-    sceneLabel: "METODA / SZACOWANIE",
+    sceneType: "definition",
+    sceneLabel: "DEFINICJA / SZACOWANIE",
     visualKind: "number_line",
     narration:
       "Szacowanie nie jest dodatkiem dla ambitnych. To hamulec bezpieczeństwa. Jeśli wiemy, między jakimi pełnymi kwadratami leży liczba pod pierwiastkiem, to od razu wiemy, w jakim rejonie osi powinien znaleźć się wynik.",
@@ -569,8 +630,8 @@ function directedRealNumbersTheoryPlans(section: Section): GenericScenePlan[] {
   add({
     id: "director-13-interval-operations",
     title: "Suma, część wspólna i różnica przedziałów",
-    sceneType: "why_it_works",
-    sceneLabel: "METODA / PRZEDZIAŁY",
+    sceneType: "definition",
+    sceneLabel: "DEFINICJA / PRZEDZIAŁY",
     visualKind: "interval",
     narration:
       "Działania na przedziałach najlepiej robić oczami. Rysujemy oba zbiory pod sobą w tej samej skali. Część wspólna to miejsce zamalowane dwa razy. Suma to wszystko, co zamalowane chociaż raz. Różnica to to, co zostaje z pierwszego zbioru po wycięciu drugiego.",
@@ -764,9 +825,468 @@ function directedRealNumbersTheoryPlans(section: Section): GenericScenePlan[] {
   return plans;
 }
 
+function directedRootsTheoryPlans(section: Section): GenericScenePlan[] {
+  const exBasic = exerciseById(section, "g-th-00");
+  const exExtract = exerciseById(section, "g-th-01");
+  const exProperties = exerciseById(section, "g-th-02");
+  const c = (needle: string) => section.knowledge.concepts.find((item) => item.name.includes(needle));
+  const f = (needle: string) => section.knowledge.formulas.find((item) => item.name.includes(needle));
+  const plans: GenericScenePlan[] = [];
+  const add = (scene: Parameters<typeof directorScene>[0]) => plans.push(directorScene(scene));
+
+  add({
+    id: "roots-00-hook",
+    title: "Pierwiastki dowolnego stopnia",
+    sceneType: "hook",
+    sceneLabel: "LECTURE / MAPA",
+    visualKind: "root_balance",
+    narration:
+      "Dzisiaj robimy pierwiastki dowolnego stopnia powoli, od obrazu do rachunku. Najważniejsze pytanie brzmi: jaka liczba po podniesieniu do danego stopnia daje liczbę pod pierwiastkiem. Od tej jednej myśli zbudujemy parzystość, znaki, upraszczanie i przykłady maturalne.",
+    lines: visualLines([
+      "Pytanie główne: jaka liczba po potędze daje liczbę pod pierwiastkiem?",
+      "Mapa lekcji: stopień, znak, dziedzina, własności, upraszczanie.",
+      `Źródło: ${section.scope}`
+    ], 5)
+  });
+
+  add({
+    id: "roots-01-anatomy",
+    title: "Najpierw czytamy zapis pierwiastka",
+    sceneType: "definition",
+    sceneLabel: "DEFINICJA / ZAPIS",
+    visualKind: "root_balance",
+    narration:
+      "W zapisie pierwiastka mamy dwie informacje. Mała liczba przy znaku pierwiastka mówi o stopniu, czyli o tym, którą potęgę będziemy odwracać. Liczba pod znakiem pierwiastka mówi, jaki wynik tej potęgi chcemy otrzymać.",
+    lines: visualLines([
+      c("Stopień")?.description ?? "",
+      "n: stopień pierwiastka",
+      "a: liczba podpierwiastkowa",
+      "√a to skrót dla pierwiastka stopnia drugiego"
+    ], 5)
+  });
+
+  add({
+    id: "roots-02-even-model",
+    title: "Parzysty stopień daje wynik nieujemny",
+    sceneType: "definition",
+    sceneLabel: "DEFINICJA / PARZYSTY",
+    visualKind: "root_parity",
+    narration:
+      "Gdy stopień jest parzysty, wynik pierwiastka arytmetycznego jest z definicji nieujemny. To znaczy, że czwarty pierwiastek z szesnastu to dwa, a nie plus minus dwa. Symbol pierwiastka wybiera jedną konkretną liczbę.",
+    lines: visualLines([
+      c("parzystego")?.description ?? "",
+      "⁴√16 = 2",
+      "wynik parzystego pierwiastka: zawsze ≥ 0"
+    ], 5)
+  });
+
+  add({
+    id: "roots-03-even-negative",
+    title: "Parzysty pierwiastek z liczby ujemnej nie istnieje w R",
+    sceneType: "definition",
+    sceneLabel: "DEFINICJA / DZIEDZINA",
+    visualKind: "root_parity",
+    narration:
+      "Ta sama zasada od razu blokuje liczby ujemne pod pierwiastkiem parzystego stopnia. Czwarta potęga liczby dodatniej jest dodatnia i czwarta potęga liczby ujemnej też jest dodatnia. Nie da się więc dostać liczby ujemnej.",
+    lines: visualLines([
+      "⁴√(-16) nie istnieje w R",
+      "dla parzystego n wymagamy a ≥ 0",
+      f("Definicja pierwiastka")?.conditions ?? ""
+    ], 5)
+  });
+
+  add({
+    id: "roots-04-odd-model",
+    title: "Nieparzysty stopień zachowuje znak",
+    sceneType: "definition",
+    sceneLabel: "DEFINICJA / NIEPARZYSTY",
+    visualKind: "root_parity",
+    narration:
+      "Przy stopniu nieparzystym sytuacja jest inna. Liczba ujemna podniesiona do nieparzystej potęgi zostaje ujemna. Dlatego pierwiastek nieparzystego stopnia z liczby ujemnej istnieje i ma znak minus.",
+    lines: visualLines([
+      c("nieparzystego")?.description ?? "",
+      "³√(-8) = -2, bo (-2)³ = -8",
+      f("Znak pierwiastka")?.latex_raw ?? ""
+    ], 5)
+  });
+
+  add({
+    id: "roots-05-domain-switch",
+    title: "Pierwsza decyzja: parzysty czy nieparzysty",
+    sceneType: "definition",
+    sceneLabel: "DEFINICJA / DECYZJA",
+    visualKind: "summary",
+    narration:
+      "Każde zadanie zaczynamy od przełącznika: stopień parzysty czy nieparzysty. Jeżeli jest nieparzysty, liczba pod pierwiastkiem może być dowolna. Jeżeli jest parzysty, najpierw musimy sprawdzić, czy liczba pod pierwiastkiem jest nieujemna.",
+    lines: visualLines([
+      c("Dziedzina")?.description ?? "",
+      "n parzyste: W ≥ 0",
+      "n nieparzyste: W dowolne",
+      "Najpierw dziedzina, potem rachunek"
+    ], 5)
+  });
+
+  add({
+    id: "roots-06-root-vs-equation",
+    title: "Pierwiastek to nie to samo co równanie",
+    sceneType: "definition",
+    sceneLabel: "DEFINICJA / PUŁAPKA",
+    visualKind: "formula",
+    narration:
+      "Bardzo ważna pułapka: pierwiastek arytmetyczny nie jest listą wszystkich rozwiązań równania. Równanie iks do kwadratu równa się dziewięć ma dwa rozwiązania. Ale pierwiastek z dziewięciu jako liczba ma wartość trzy.",
+    lines: visualLines([
+      "x² = 9  →  x = -3 lub x = 3",
+      "√9 = 3",
+      "pierwiastek wskazuje jedną wartość"
+    ], 5)
+  });
+
+  add({
+    id: "roots-07-nth-power",
+    title: "Pierwiastek z n-tej potęgi pilnuje parzystości",
+    sceneType: "definition",
+    sceneLabel: "DEFINICJA / POTĘGA",
+    visualKind: "formula",
+    narration:
+      "Gdy pierwiastek spotyka potęgę tego samego stopnia, nie zawsze po prostu znika. Przy stopniu nieparzystym znak zostaje, więc wynik to pierwotna liczba. Przy stopniu parzystym znak może zniknąć, dlatego pojawia się wartość bezwzględna.",
+    lines: visualLines([
+      c("n-tego stopnia")?.description ?? "",
+      f("Pierwiastek n-tego")?.latex_raw ?? "",
+      "⁶√((-4)⁶) = |-4| = 4"
+    ], 5)
+  });
+
+  add({
+    id: "roots-08-exact-form",
+    title: "Nie każdy pierwiastek trzeba zamieniać na przecinek",
+    sceneType: "definition",
+    sceneLabel: "DEFINICJA / DOKŁADNOŚĆ",
+    visualKind: "number_line",
+    narration:
+      "W matematyce maturalnej pierwiastek często jest odpowiedzią dokładną. Jeśli liczba pod pierwiastkiem nie jest odpowiednią potęgą, nie próbujemy zgadywać długiego rozwinięcia dziesiętnego. Zostawiamy zapis pierwiastkowy i upraszczamy go tyle, ile się da.",
+    lines: visualLines([
+      c("niewymierna")?.explanation ?? "",
+      "³√8 = 2",
+      "³√7 zostaje w postaci dokładnej",
+      "celem jest prosty zapis, nie przybliżenie"
+    ], 5)
+  });
+
+  add({
+    id: "roots-09-simplest-form",
+    title: "Co znaczy postać najprostsza",
+    sceneType: "definition",
+    sceneLabel: "DEFINICJA / POSTAĆ",
+    visualKind: "summary",
+    narration:
+      "Postać najprostsza ma trzy kontrole. Pod pierwiastkiem nie powinno zostać nic, co da się wyciągnąć przed znak. Stopień pierwiastka ma być możliwie najmniejszy. W mianowniku nie chcemy zostawiać pierwiastka.",
+    lines: visualLines([
+      c("Postać najprostsza")?.description ?? "",
+      "bez ukrytych n-tych potęg pod pierwiastkiem",
+      "bez niepotrzebnego stopnia",
+      "bez pierwiastka w mianowniku"
+    ], 5)
+  });
+
+  add({
+    id: "roots-10-factor-grouping",
+    title: "Wyłączanie czynnika to grupowanie potęg",
+    sceneType: "definition",
+    sceneLabel: "DEFINICJA / CZYNNIKI",
+    visualKind: "factor_tree",
+    narration:
+      "Najpewniejszy sposób upraszczania to rozkład na czynniki pierwsze. Przy pierwiastku stopnia trzeciego szukamy grup po trzy takie same czynniki. Pełna grupa wychodzi przed pierwiastek, a reszta zostaje pod znakiem.",
+    lines: visualLines([
+      c("Wyłączanie czynnika")?.explanation ?? "",
+      "40 = 2³ · 5",
+      "³√40 = 2³√5",
+      "grupa trzech dwójek wychodzi jako jedna dwójka"
+    ], 5)
+  });
+
+  add({
+    id: "roots-11-product-property",
+    title: "Kiedy można połączyć pierwiastki w jeden",
+    sceneType: "definition",
+    sceneLabel: "WZÓR / ILOCZYN",
+    visualKind: "formula",
+    narration:
+      "Pierwiastki tego samego stopnia możemy mnożyć pod jednym znakiem, ale warunki nadal mają znaczenie. Przy stopniu parzystym liczby pod pierwiastkami muszą być nieujemne. Przy stopniu nieparzystym znak ujemny jest dopuszczalny.",
+    lines: visualLines([
+      f("Pierwiastek z iloczynu")?.latex_raw ?? "",
+      f("Pierwiastek z iloczynu")?.conditions ?? "",
+      "⁴√2 · ⁴√8 = ⁴√16 = 2"
+    ], 5)
+  });
+
+  add({
+    id: "roots-12-quotient-property",
+    title: "Iloraz działa podobnie, ale mianownik nie może być zerem",
+    sceneType: "definition",
+    sceneLabel: "WZÓR / ILORAZ",
+    visualKind: "formula",
+    narration:
+      "Przy ilorazie dochodzi jeszcze jeden warunek: mianownik nie może być zerem. To jest zwykła zasada dzielenia, ale w pierwiastkach łatwo ją przeoczyć, bo uwaga ucieka na stopień i znak liczby podpierwiastkowej.",
+    lines: visualLines([
+      f("Pierwiastek z ilorazu")?.latex_raw ?? "",
+      f("Pierwiastek z ilorazu")?.conditions ?? "",
+      "najpierw warunki, potem połączenie"
+    ], 5)
+  });
+
+  add({
+    id: "roots-13-root-of-root",
+    title: "Pierwiastek z pierwiastka mnoży stopnie",
+    sceneType: "definition",
+    sceneLabel: "WZÓR / ZAGNIEŻDŻENIE",
+    visualKind: "root_balance",
+    narration:
+      "Gdy pierwiastek siedzi w pierwiastku, patrzymy na stopnie jak na kolejne odwracane potęgi. Pierwiastek kwadratowy z pierwiastka trzeciego zamienia się w pierwiastek szóstego stopnia. Stopnie się mnożą.",
+    lines: visualLines([
+      f("Pierwiastek z pierwiastka")?.latex_raw ?? "",
+      "√(³√64) = ⁶√64",
+      "64 = 2⁶, więc wynik to 2"
+    ], 5)
+  });
+
+  add({
+    id: "roots-14-common-degree",
+    title: "Wspólny stopień działa jak wspólny mianownik",
+    sceneType: "definition",
+    sceneLabel: "DEFINICJA / WSPÓLNY STOPIEŃ",
+    visualKind: "common_degree",
+    narration:
+      "Kiedy porównujemy pierwiastki różnych stopni, sprowadzamy je do wspólnego stopnia. To przypomina sprowadzanie ułamków do wspólnego mianownika. Mnożymy stopień i wykładnik liczby pod pierwiastkiem przez ten sam współczynnik.",
+    lines: visualLines([
+      c("Sprowadzanie")?.explanation ?? "",
+      f("Zmiana stopnia")?.latex_raw ?? "",
+      "³√3, ⁴√5, √2  →  stopień dwunasty"
+    ], 5)
+  });
+
+  add({
+    id: "roots-15-rational-exponent",
+    title: "Wykładnik ułamkowy jest innym zapisem pierwiastka",
+    sceneType: "definition",
+    sceneLabel: "DEFINICJA / POTĘGA WYMIERNA",
+    visualKind: "formula",
+    narration:
+      "Wykładnik ułamkowy mówi to samo co pierwiastek. Mianownik wykładnika jest stopniem pierwiastka, a licznik zostaje potęgą. W tej lekcji trzymamy jednak w głowie ważne ograniczenie: ta definicja wprost dotyczy dodatniej podstawy.",
+    lines: visualLines([
+      c("wykładniku wymiernym")?.description ?? "",
+      f("Potęga o wykładniku")?.latex_raw ?? "",
+      "mianownik → stopień, licznik → potęga"
+    ], 5)
+  });
+
+  add({
+    id: "roots-16-similar-roots",
+    title: "Dodajemy tylko pierwiastki podobne",
+    sceneType: "definition",
+    sceneLabel: "DEFINICJA / PODOBNE",
+    visualKind: "formula",
+    narration:
+      "Dodawanie pierwiastków działa jak redukcja wyrazów podobnych w algebrze. Jeżeli stopień i liczba pod pierwiastkiem są takie same, dodajemy tylko współczynniki. Jeżeli są różne, najpierw próbujemy uprościć składniki.",
+    lines: visualLines([
+      c("Wyrażenia podobne")?.explanation ?? "",
+      f("Dodawanie pierwiastków")?.latex_raw ?? "",
+      "3³√2 - 4³√2 + 5³√2 = 4³√2"
+    ], 5)
+  });
+
+  add({
+    id: "roots-17-rationalize",
+    title: "Usuwanie pierwiastka z mianownika",
+    sceneType: "definition",
+    sceneLabel: "DEFINICJA / MIANOWNIK",
+    visualKind: "rationalize",
+    narration:
+      "Jeżeli pierwiastek został w mianowniku, dopełniamy wykładnik pod pierwiastkiem do pełnego stopnia. Przy pierwiastku trzeciego stopnia z trójki brakuje jeszcze dwóch trójek. Dlatego mnożymy przez pierwiastek trzeciego stopnia z dziewięciu.",
+    lines: visualLines([
+      c("Usuwanie niewymierności")?.explanation ?? "",
+      f("Usuwanie niewymierności")?.latex_raw ?? "",
+      "³√3 · ³√9 = ³√27 = 3"
+    ], 5)
+  });
+
+  add({
+    id: "roots-18-example-basic-present",
+    title: "Przykład pierwszy: dwa proste pierwiastki",
+    sceneType: "example",
+    sceneLabel: "PRZYKŁAD / TREŚĆ",
+    visualKind: "exercise",
+    sourceExerciseId: exBasic.id,
+    narration:
+      "Pierwszy przykład sprawdza dokładnie przełącznik parzystości. Mamy pierwiastek trzeciego stopnia z liczby ujemnej oraz pierwiastek czwartego stopnia z liczby dodatniej. Zanim policzymy, ustalamy, jaki znak wyniku jest w ogóle możliwy.",
+    lines: visualLines([
+      exBasic.statement,
+      "a) stopień nieparzysty, liczba ujemna",
+      "b) stopień parzysty, liczba dodatnia",
+      "szukamy wartości pierwiastków"
+    ], 5)
+  });
+
+  add({
+    id: "roots-19-example-basic-odd",
+    title: "Część a: pierwiastek nieparzysty z liczby ujemnej",
+    sceneType: "example",
+    sceneLabel: "PRZYKŁAD / A",
+    visualKind: "root_parity",
+    sourceExerciseId: exBasic.id,
+    narration:
+      "W części a stopień wynosi trzy, czyli jest nieparzysty. Minus może zostać pod pierwiastkiem i wyjdzie jako minus w wyniku. Szukamy liczby, której trzecia potęga daje minus sześćdziesiąt cztery. To jest minus cztery.",
+    lines: visualLines([
+      "³√(-64) = -³√64",
+      "64 = 4³",
+      "³√(-64) = -4",
+      "sprawdzenie: (-4)³ = -64"
+    ], 5)
+  });
+
+  add({
+    id: "roots-20-example-basic-even",
+    title: "Część b: pierwiastek parzysty wybiera wynik dodatni",
+    sceneType: "example",
+    sceneLabel: "PRZYKŁAD / B",
+    visualKind: "root_parity",
+    sourceExerciseId: exBasic.id,
+    narration:
+      "W części b stopień wynosi cztery. Liczba pod pierwiastkiem jest dodatnia, więc pierwiastek istnieje. Wynik musi być nieujemny. Ponieważ pięć do czwartej potęgi daje sześćset dwadzieścia pięć, odpowiedź to pięć.",
+    lines: visualLines([
+      "⁴√625",
+      "625 = 5⁴",
+      "⁴√625 = 5",
+      "nie piszemy ±5"
+    ], 5)
+  });
+
+  add({
+    id: "roots-21-example-extract-present",
+    title: "Przykład drugi: wyłączamy czynnik",
+    sceneType: "example",
+    sceneLabel: "PRZYKŁAD / TREŚĆ",
+    visualKind: "exercise",
+    sourceExerciseId: exExtract.id,
+    narration:
+      "Drugi przykład pokazuje typowy rachunek maturalny: uprościć pierwiastek trzeciego stopnia z czterdziestu. Nie szukamy przybliżenia. Szukamy sześcianu ukrytego pod pierwiastkiem, bo pełny sześcian może wyjść przed znak.",
+    lines: visualLines([
+      exExtract.statement,
+      "stopień: 3",
+      "szukamy sześcianów pod pierwiastkiem",
+      "postać najprostsza, nie przybliżenie"
+    ], 5)
+  });
+
+  add({
+    id: "roots-22-example-extract-factor",
+    title: "Rozkład czterdziestu ujawnia sześcian",
+    sceneType: "example",
+    sceneLabel: "PRZYKŁAD / ROZKŁAD",
+    visualKind: "factor_tree",
+    sourceExerciseId: exExtract.id,
+    narration:
+      "Rozkładamy czterdzieści na czynniki. Dostajemy dwa do trzeciej potęgi razy pięć. Trzy dwójki tworzą pełną grupę dla pierwiastka trzeciego stopnia, więc ta grupa wychodzi jako jedna dwójka.",
+    lines: visualLines([
+      "40 = 2 · 2 · 2 · 5",
+      "40 = 2³ · 5",
+      "pełna grupa: 2³",
+      "reszta: 5"
+    ], 5)
+  });
+
+  add({
+    id: "roots-23-example-extract-result",
+    title: "Zapisujemy postać najprostszą",
+    sceneType: "example",
+    sceneLabel: "PRZYKŁAD / WYNIK",
+    visualKind: "factor_tree",
+    sourceExerciseId: exExtract.id,
+    narration:
+      "Teraz zamieniamy rozkład na wynik. Pierwiastek trzeciego stopnia z dwa do trzeciej potęgi daje dwa. Piątka zostaje pod pierwiastkiem, bo nie ma już pełnej grupy trzech takich samych czynników.",
+    lines: visualLines([
+      "³√40 = ³√(2³ · 5)",
+      "³√(2³ · 5) = 2³√5",
+      "pod pierwiastkiem nie został żaden sześcian",
+      "odpowiedź: 2³√5"
+    ], 5)
+  });
+
+  add({
+    id: "roots-24-example-properties-present",
+    title: "Przykład trzeci: własności pierwiastków",
+    sceneType: "example",
+    sceneLabel: "PRZYKŁAD / TREŚĆ",
+    visualKind: "exercise",
+    sourceExerciseId: exProperties.id,
+    narration:
+      "Trzeci przykład łączy dwie własności. W części a mnożymy pierwiastki tego samego stopnia. W części b pierwiastek znajduje się w pierwiastku. W obu przypadkach najpierw rozpoznajemy strukturę, a dopiero potem liczymy.",
+    lines: visualLines([
+      exProperties.statement,
+      "a) iloczyn pierwiastków czwartego stopnia",
+      "b) pierwiastek z pierwiastka",
+      "rozpoznaj strukturę przed rachunkiem"
+    ], 5)
+  });
+
+  add({
+    id: "roots-25-example-product-result",
+    title: "Część a: łączymy iloczyn pod jednym pierwiastkiem",
+    sceneType: "example",
+    sceneLabel: "PRZYKŁAD / ILOCZYN",
+    visualKind: "formula",
+    sourceExerciseId: exProperties.id,
+    narration:
+      "W części a oba pierwiastki mają stopień czwarty i obie liczby podpierwiastkowe są dodatnie. Możemy więc połączyć je w jeden pierwiastek. Pod spodem powstaje dwieście pięćdziesiąt sześć, czyli cztery do czwartej potęgi.",
+    lines: visualLines([
+      "⁴√2 · ⁴√128 = ⁴√(2 · 128)",
+      "2 · 128 = 256",
+      "256 = 4⁴",
+      "wynik: 4"
+    ], 5)
+  });
+
+  add({
+    id: "roots-26-example-nested-result",
+    title: "Część b: pierwiastek z pierwiastka",
+    sceneType: "example",
+    sceneLabel: "PRZYKŁAD / ZAGNIEŻDŻENIE",
+    visualKind: "root_balance",
+    sourceExerciseId: exProperties.id,
+    narration:
+      "W części b mamy pierwiastek kwadratowy z pierwiastka trzeciego stopnia. Stopnie mnożą się, więc dostajemy pierwiastek szóstego stopnia z sześćdziesięciu czterech. A sześćdziesiąt cztery to dwa do szóstej potęgi.",
+    lines: visualLines([
+      "√(³√64) = ⁶√64",
+      "64 = 2⁶",
+      "⁶√64 = 2",
+      "wynik: 2"
+    ], 5)
+  });
+
+  add({
+    id: "roots-27-summary",
+    title: "Co ma zostać po tej lekcji",
+    sceneType: "summary",
+    sceneLabel: "PODSUMOWANIE / CHECKLISTA",
+    visualKind: "summary",
+    narration:
+      "Zostawiamy sobie prostą checklistę. Najpierw sprawdź stopień pierwiastka. Potem zdecyduj, czy znak liczby podpierwiastkowej jest dozwolony. Następnie użyj odpowiedniej własności i na końcu uprość wynik, szukając pełnych grup pod pierwiastkiem.",
+    lines: visualLines([
+      "1. Stopień: parzysty czy nieparzysty?",
+      "2. Dziedzina i znak.",
+      "3. Własność: iloczyn, iloraz, zagnieżdżenie.",
+      "4. Postać najprostsza i sprawdzenie."
+    ], 5)
+  });
+
+  return plans;
+}
+
 function theoryPlans(section: Section): GenericScenePlan[] {
   if (section.slug === "dzialania-liczby-rzeczywiste") {
     return directedRealNumbersTheoryPlans(section);
+  }
+  if (section.slug === "pierwiastki-dowolnego-stopnia") {
+    return directedRootsTheoryPlans(section);
   }
 
   const concepts = [...section.knowledge.concepts].sort((a, b) => a.difficulty - b.difficulty);
@@ -797,8 +1317,8 @@ function theoryPlans(section: Section): GenericScenePlan[] {
       makeScene({
         id: `theory-concept-${index + 1}`,
         title: concept.name,
-        sceneType: index === 0 ? "intuition" : "definition",
-        sceneLabel: index === 0 ? "INTUICJA" : "DEFINICJA",
+        sceneType: "definition",
+        sceneLabel: "DEFINICJA",
         narration:
           `${concept.name}. ${firstSentence(concept.explanation, concept.description)} ` +
           "Zatrzymaj ten obraz, bo do niego wrócimy przy zadaniach.",
@@ -813,8 +1333,8 @@ function theoryPlans(section: Section): GenericScenePlan[] {
       makeScene({
         id: `theory-method-${index + 1}`,
         title: method.name,
-        sceneType: "why_it_works",
-        sceneLabel: "METODA",
+        sceneType: "definition",
+        sceneLabel: "DEFINICJA",
         narration:
           `${method.name}. Używamy tej metody wtedy, gdy ${cleanText(method.when_to_use).toLowerCase()} ` +
           `Najważniejszy pierwszy krok to: ${cleanText(method.steps[0] ?? "nazwać dane i szukane").toLowerCase()}.`,
@@ -994,6 +1514,58 @@ export function getGenericLongformSceneCode(type: EpisodeType, sceneId: string):
   const plan = plansFor(type).find((scene) => scene.id === sceneId);
   if (!plan) throw new Error(`Unknown generic ${type} scene "${sceneId}".`);
   return `${plan.code}\n`;
+}
+
+export function getGenericLongformThumbnailPlans(): {
+  filename: string;
+  code: string;
+  className: string;
+}[] {
+  const section = loadSection(currentSectionSlug());
+  if (section.slug !== "pierwiastki-dowolnego-stopnia") return [];
+
+  const variants = [
+    {
+      filename: "thumbnail-1.png",
+      className: "GenericRootThumbnailOne",
+      kicker: "MATURA PODSTAWOWA",
+      headline: "PIERWIASTKI\nDOWOLNEGO STOPNIA",
+      formula: String.raw`\sqrt[n]{a}=b`
+    },
+    {
+      filename: "thumbnail-2.png",
+      className: "GenericRootThumbnailTwo",
+      kicker: "TEN TEMAT OBLEWA MATURZYSTÓW",
+      headline: "TEN ZNAK\nDECYDUJE O WYNIKU",
+      formula: String.raw`\sqrt[4]{(-3)^4}=3`
+    },
+    {
+      filename: "thumbnail-3.png",
+      className: "GenericRootThumbnailThree",
+      kicker: "BEZ TEGO NIE ZDASZ MATURY",
+      headline: "NIE ZGADUJ\nPIERWIASTKA",
+      formula: String.raw`\sqrt[3]{-64}=-4`
+    }
+  ];
+
+  return variants.map((variant) => ({
+    filename: variant.filename,
+    className: variant.className,
+    code: `from manim import *
+from support.style import LessonScene
+from support.thumbnail import stage_thumbnail
+
+
+class ${variant.className}(LessonScene):
+    def construct(self):
+        stage_thumbnail(
+            self,
+            kicker=${JSON.stringify(variant.kicker)},
+            headline=${JSON.stringify(variant.headline)},
+            formula=${JSON.stringify(variant.formula)},
+        )
+`
+  }));
 }
 
 export function genericLongformPlannerFor(type: EpisodeType): GenericPlanner {

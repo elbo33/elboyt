@@ -110,6 +110,10 @@ Long-form direction rules:
 
 - Start narration with a natural greeting and a clear introduction to the
   episode.
+- Active long-form theory sections are now: hook, definition, worked examples,
+  optional matura connection, and summary. `intuition` and `why_it_works` are
+  historical bands only, kept in previously published storyboards/render
+  sources for reproducibility. Do not create them for new videos.
 - Keep on-screen text sparse. The narration complements the video and carries
   the explanation; the screen should show formulas, labels and graphics.
 - Rewrite narration after the ffprobe timing pass so each section covers its

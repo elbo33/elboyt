@@ -669,7 +669,7 @@ class ThumbnailScene(LessonScene):
         stage_thumbnail(
             self,
             kicker="MATURA",
-            headline="BEZ TEGO\\nNIE ZDASZ",
+            headline="BEZ TEGO\\nMATURA TO\\nLOTERIA",
             formula=r"|x-6|=2\\Rightarrow x=4\\ \\lor\\ x=8",
         )
 `
@@ -686,7 +686,7 @@ class ThumbnailScene(LessonScene):
         stage_thumbnail(
             self,
             kicker="MATURA",
-            headline="EGZAMINATOR\\nLICZY, ŻE\\nTEGO NIE ZNASZ",
+            headline="MATURA\\nNIE WYBACZA\\nTEGO BŁĘDU",
             formula=r"|x-6|=2\\Rightarrow x=4\\ \\lor\\ x=8",
         )
 `

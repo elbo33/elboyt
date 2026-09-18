@@ -11,10 +11,17 @@ import {
 } from "../core/config";
 import {loadProjectEnv} from "../core/env";
 import {copyFileEnsured, writeJson} from "../core/fs";
+import {run} from "../core/exec";
 import {logStep} from "../core/logger";
 import {addAudioTrack} from "../rendering/finalize";
 import {probeMediaDurationSeconds} from "../rendering/measure";
-import {generateElevenLabsSpeech} from "../voiceover/elevenlabs";
+import {
+  ELEVENLABS_MODEL_ID,
+  ELEVENLABS_OUTPUT_FORMAT,
+  ELEVENLABS_VOICE_ID,
+  ELEVENLABS_VOICE_SETTINGS,
+  generateElevenLabsSpeech
+} from "../voiceover/elevenlabs";
 import {readStoryboard, voiceoverTextFromStoryboard} from "../voiceover/text";
 
 type ReadyMarker = {
@@ -50,19 +57,93 @@ async function renderVoiceover(
 ): Promise<{words: number; audioSeconds: number; videoSeconds: number; wpm: number}> {
   const storyboard = await readStoryboard(storyboardPath);
   const text = voiceoverTextFromStoryboard(storyboard);
+  const rawDir = path.join(path.dirname(audioPath), "voiceover-scene-parts", "raw");
+  const timedDir = path.join(path.dirname(audioPath), "voiceover-scene-parts", "timed");
+  await fs.mkdir(rawDir, {recursive: true});
+  await fs.mkdir(timedDir, {recursive: true});
 
-  let stats;
-  if ((await exists(audioPath)) && !force) {
-    logStep(`Reusing existing ${path.relative(PROJECT_ROOT, audioPath)} (use --force to regenerate)`);
-    stats = {wordCount: text.trim().split(/\s+/).filter(Boolean).length};
-  } else {
-    logStep(`Generating ElevenLabs voiceover -> ${path.relative(PROJECT_ROOT, audioPath)}`);
-    stats = await generateElevenLabsSpeech(text, audioPath);
+  const wordCount = text.trim().split(/\s+/).filter(Boolean).length;
+  const sceneSync = [];
+  const timedParts = [];
+
+  for (let i = 0; i < storyboard.scenes.length; i++) {
+    const scene = storyboard.scenes[i];
+    const narration = scene.narration?.trim();
+    if (!narration) continue;
+
+    const nn = String(i + 1).padStart(2, "0");
+    const rawPath = path.join(rawDir, `${nn}-${scene.id}.mp3`);
+    const timedPath = path.join(timedDir, `${nn}-${scene.id}.mp3`);
+    const targetSeconds = scene.durationSeconds;
+
+    if ((await exists(rawPath)) && !force) {
+      logStep(`Reusing ${path.relative(PROJECT_ROOT, rawPath)} (use --force to regenerate)`);
+    } else {
+      logStep(`ElevenLabs scene ${nn}/${storyboard.scenes.length} -> ${scene.id}`);
+      await generateElevenLabsSpeech(narration, rawPath);
+    }
+
+    const rawSeconds = await probeMediaDurationSeconds(rawPath);
+    const tempo = rawSeconds / targetSeconds;
+    const filters = [...atempoFilters(tempo), "apad", `atrim=0:${targetSeconds.toFixed(3)}`, "asetpts=N/SR/TB"];
+    await run(
+      "ffmpeg",
+      [
+        "-y",
+        "-i",
+        rawPath,
+        "-filter:a",
+        filters.join(","),
+        "-c:a",
+        "libmp3lame",
+        "-b:a",
+        "128k",
+        timedPath
+      ],
+      PROJECT_ROOT
+    );
+    const timedSeconds = await probeMediaDurationSeconds(timedPath);
+    sceneSync.push({
+      scene: scene.id,
+      raw: path.relative(path.dirname(audioPath), rawPath),
+      timed: path.relative(path.dirname(audioPath), timedPath),
+      rawSeconds,
+      targetSeconds,
+      timedSeconds,
+      tempoCorrection: tempo
+    });
+    timedParts.push(timedPath);
   }
 
-  const audioSeconds = await probeMediaDurationSeconds(audioPath);
+  const concatList = path.join(path.dirname(audioPath), "voiceover-scenes.txt");
+  await fs.writeFile(concatList, timedParts.map((file) => `file '${file}'`).join("\n") + "\n", "utf8");
+  const rawCombinedPath = audioPath.replace(/\.mp3$/, ".scene-synced.raw.mp3");
+  await run(
+    "ffmpeg",
+    ["-y", "-f", "concat", "-safe", "0", "-i", concatList, "-c:a", "libmp3lame", "-b:a", "128k", rawCombinedPath],
+    PROJECT_ROOT
+  );
+
   const videoSeconds = await probeMediaDurationSeconds(videoPath);
-  const wpm = stats.wordCount / (audioSeconds / 60);
+  await run(
+    "ffmpeg",
+    [
+      "-y",
+      "-i",
+      rawCombinedPath,
+      "-filter:a",
+      `apad,atrim=0:${videoSeconds.toFixed(3)},asetpts=N/SR/TB`,
+      "-c:a",
+      "libmp3lame",
+      "-b:a",
+      "128k",
+      audioPath
+    ],
+    PROJECT_ROOT
+  );
+
+  const audioSeconds = await probeMediaDurationSeconds(audioPath);
+  const wpm = wordCount / (audioSeconds / 60);
 
   const silentPath = videoPath.replace(/\.mp4$/, ".silent.mp4");
   if (!(await exists(silentPath))) {
@@ -73,7 +154,54 @@ async function renderVoiceover(
   await addAudioTrack(silentPath, audioPath, voicedPath);
   await fs.rename(voicedPath, videoPath);
 
-  return {words: stats.wordCount, audioSeconds, videoSeconds, wpm};
+  await writeJson(path.join(path.dirname(audioPath), "voiceover.json"), {
+    generatedAt: new Date().toISOString(),
+    source: {
+      storyboard: path.relative(path.dirname(audioPath), storyboardPath),
+      silentVideo: path.relative(path.dirname(audioPath), silentPath),
+      voiceover: path.basename(audioPath),
+      sceneSyncedRaw: path.basename(rawCombinedPath),
+      sceneParts: path.relative(path.dirname(audioPath), timedDir)
+    },
+    elevenLabs: {
+      voiceId: ELEVENLABS_VOICE_ID,
+      modelId: ELEVENLABS_MODEL_ID,
+      outputFormat: ELEVENLABS_OUTPUT_FORMAT,
+      voiceSettings: ELEVENLABS_VOICE_SETTINGS
+    },
+    text: {
+      wordCount,
+      characterCount: text.length,
+      sceneCount: sceneSync.length
+    },
+    media: {
+      audioSeconds,
+      videoSeconds,
+      measuredWpm: wpm,
+      syncStrategy: "scene-by-scene ElevenLabs generation with per-scene atempo retime"
+    },
+    sceneSync
+  });
+
+  return {words: wordCount, audioSeconds, videoSeconds, wpm};
+}
+
+function atempoFilters(tempo: number): string[] {
+  if (!Number.isFinite(tempo) || tempo <= 0) {
+    throw new Error(`Invalid audio tempo correction: ${tempo}`);
+  }
+  const filters: string[] = [];
+  let remaining = tempo;
+  while (remaining > 2) {
+    filters.push("atempo=2");
+    remaining /= 2;
+  }
+  while (remaining < 0.5) {
+    filters.push("atempo=0.5");
+    remaining /= 0.5;
+  }
+  filters.push(`atempo=${remaining.toFixed(6)}`);
+  return filters;
 }
 
 async function voiceLongform(force: boolean): Promise<void> {

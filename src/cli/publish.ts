@@ -101,6 +101,52 @@ async function copySectionSource(section: string, destDir: string): Promise<void
   logStep(`  note: no section source matched slug "${section}" (planner code still in git)`);
 }
 
+async function copyOptionalFile(source: string, dest: string): Promise<boolean> {
+  if (!(await exists(source))) return false;
+  await copyFileEnsured(source, dest);
+  return true;
+}
+
+async function copyOptionalDir(source: string, dest: string): Promise<boolean> {
+  if (!(await exists(source))) return false;
+  await fs.rm(dest, {recursive: true, force: true});
+  await fs.cp(source, dest, {recursive: true});
+  return true;
+}
+
+async function copyLongformVoiceoverArchive(dest: string, base: string): Promise<void> {
+  const copied: string[] = [];
+
+  if (await copyOptionalFile(path.join(GENERATED_DIR, "video.silent.mp4"), path.join(dest, `${base}.silent.mp4`))) {
+    copied.push(`${base}.silent.mp4`);
+  }
+  for (const name of [
+    "voiceover.mp3",
+    "voiceover.raw.mp3",
+    "voiceover.scene-synced.raw.mp3",
+    "voiceover.json",
+    "voiceover-scenes.txt"
+  ]) {
+    if (await copyOptionalFile(path.join(GENERATED_DIR, name), path.join(dest, name))) {
+      copied.push(name);
+    }
+  }
+  for (const name of [
+    "voiceover-parts",
+    "voiceover-timed-parts",
+    "voiceover-scenes",
+    "voiceover-scene-parts"
+  ]) {
+    if (await copyOptionalDir(path.join(GENERATED_DIR, name), path.join(dest, name))) {
+      copied.push(`${name}/`);
+    }
+  }
+
+  if (copied.length > 0) {
+    logStep(`  archived voiceover: ${copied.join(", ")}`);
+  }
+}
+
 async function publishLongform(section: string, type: EpisodeType): Promise<void> {
   await requireReady(section, type, "longform");
   if (!(await exists(FINAL_VIDEO_PATH))) {
@@ -114,6 +160,7 @@ async function publishLongform(section: string, type: EpisodeType): Promise<void
   await ensureDir(dest);
   await copyFileEnsured(FINAL_VIDEO_PATH, path.join(dest, `${base}.mp4`));
   await copyFileEnsured(path.join(GENERATED_DIR, "script.md"), path.join(dest, "script.md"));
+  await copyLongformVoiceoverArchive(dest, base);
   if (await exists(THUMBNAIL_PATH)) {
     await copyFileEnsured(THUMBNAIL_PATH, path.join(dest, "thumbnail.png"));
   } else {

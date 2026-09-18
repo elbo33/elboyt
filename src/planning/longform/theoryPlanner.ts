@@ -11,17 +11,20 @@ import {slugify} from "../../core/slug";
 import type {SceneType, Storyboard, VideoScene} from "../../core/types";
 import {
   createGenericLongformStoryboard,
-  getGenericLongformSceneCode
+  getGenericLongformSceneCode,
+  getGenericLongformThumbnailPlans
 } from "../generic/episode";
 import {loadSection} from "../zaspro";
 import {THEORY_SKELETON} from "./skeletons";
 import {dzialaniaLiczbyRzeczywiste} from "./sections/dzialaniaLiczbyRzeczywiste";
+import {pierwiastkiDowolnegoStopnia} from "./sections/pierwiastkiDowolnegoStopnia";
 import {wartoscBezwzgledna} from "./sections/wartoscBezwzgledna";
 import type {AuthoredScene, ExampleAuthoring, SectionAuthoring} from "./sections/types";
 
 // Per-section THEORY authoring. One entry per section as they are written.
 const SECTIONS: Record<string, SectionAuthoring> = {
   "dzialania-liczby-rzeczywiste": dzialaniaLiczbyRzeczywiste,
+  "pierwiastki-dowolnego-stopnia": pierwiastkiDowolnegoStopnia,
   "wartosc-bezwzgledna": wartoscBezwzgledna
 };
 
@@ -222,7 +225,7 @@ function thumbnailClassName(py: string): string {
 // variants 2 and 3 are catchy matura hooks authored by the section.
 export function getThumbnailPlans(): ThumbnailPlan[] {
   const section = SECTIONS[currentSlug()];
-  if (!section?.thumbnail) return [];
+  if (!section?.thumbnail) return getGenericLongformThumbnailPlans();
   const variants = [section.thumbnail, ...(section.thumbnailVariants ?? [])].slice(0, 3);
   return variants.map((t, i) => {
     const filename = t.filename ?? `thumbnail-${i + 1}.png`;

@@ -51,6 +51,8 @@ type Args = {
   stage: Stage;
   topic: string | null;
   onlyShort: string | null;
+  sceneLimit: number | null;
+  sceneStart: number;
 };
 
 function usage(): never {
@@ -64,6 +66,8 @@ function usage(): never {
       "Options:",
       "  --topic <text>   override the episode title (defaults to the section's)",
       "  --short <key>     shorts stage only: render just this one short",
+      "  --limit-scenes <n> longform stage only: render only the first n scenes as a sample",
+      "  --scene-start <n>  longform stage only: start a sample at scene n (1-based)",
       "",
       "Nothing is published. Review generated/, then: npm run publish -- <section> <type> [stage]"
     ].join("\n")
@@ -81,6 +85,10 @@ function parseArgs(argv: string[]): Args {
   const section = positional[0];
   const type = positional[1];
   const stage = (positional[2] ?? "longform") as Stage;
+  const sceneLimitRaw = flag("--limit-scenes");
+  const sceneLimit = sceneLimitRaw ? Number.parseInt(sceneLimitRaw, 10) : null;
+  const sceneStartRaw = flag("--scene-start");
+  const sceneStart = sceneStartRaw ? Number.parseInt(sceneStartRaw, 10) : 1;
   if (!section || !type) usage();
   if (!isEpisodeType(type)) {
     console.error(`Unknown type "${type}". Expected one of: ${EPISODE_TYPES.join(", ")}`);
@@ -90,7 +98,15 @@ function parseArgs(argv: string[]): Args {
     console.error(`Unknown stage "${stage}". Expected: longform | shorts | stills`);
     process.exit(1);
   }
-  return {section, type, stage, topic: flag("--topic"), onlyShort: flag("--short")};
+  if (sceneLimit !== null && (!Number.isFinite(sceneLimit) || sceneLimit < 1)) {
+    console.error(`Invalid --limit-scenes value "${sceneLimitRaw}". Expected a positive integer.`);
+    process.exit(1);
+  }
+  if (!Number.isFinite(sceneStart) || sceneStart < 1) {
+    console.error(`Invalid --scene-start value "${sceneStartRaw}". Expected a positive integer.`);
+    process.exit(1);
+  }
+  return {section, type, stage, topic: flag("--topic"), onlyShort: flag("--short"), sceneLimit, sceneStart};
 }
 
 async function markReady(section: string, type: EpisodeType, stage: Stage): Promise<void> {
@@ -157,8 +173,23 @@ async function padSceneRenderToDuration(scene: VideoScene, targetSeconds: number
  * `resetRoot` wipes all of generated/ first (long form); the shorts loop keeps
  * generated/shorts/ as its accumulator and resets only the work sub-dirs.
  */
-async function renderPiece(planner: Planner, topic: string, resetRoot: boolean): Promise<Storyboard> {
+async function renderPiece(
+  planner: Planner,
+  topic: string,
+  resetRoot: boolean,
+  sceneLimit: number | null = null,
+  sceneStart = 1
+): Promise<Storyboard> {
   const storyboard = planner.createStoryboard(topic);
+  if (sceneLimit !== null || sceneStart > 1) {
+    const startIndex = sceneStart - 1;
+    const endIndex = sceneLimit === null ? undefined : startIndex + sceneLimit;
+    storyboard.scenes = storyboard.scenes.slice(startIndex, endIndex).map((scene, index) => ({
+      ...scene,
+      sceneIndex: index + 1
+    }));
+    storyboard.durationSeconds = storyboard.scenes.reduce((total, scene) => total + scene.durationSeconds, 0);
+  }
   const plannedMinutes = (storyboard.durationSeconds / 60).toFixed(1);
   logStep(
     `${storyboard.scenes.length} scenes, planned ${storyboard.durationSeconds}s ` +
@@ -349,18 +380,27 @@ async function runLongform(args: Args): Promise<void> {
   const planner = LONGFORM_PLANNERS[args.type];
   process.env.SECTION = args.section;
   logStep(`LONG FORM — ${args.section} / ${args.type}`);
-  const sb = await renderPiece(planner, args.topic ?? "", true);
-  const hasThumb = await renderThumbnail();
-  await markReady(args.section, args.type, "longform");
+  const sb = await renderPiece(planner, args.topic ?? "", true, args.sceneLimit, args.sceneStart);
+  const isSample = args.sceneLimit !== null || args.sceneStart > 1;
+  const hasThumb = isSample ? false : await renderThumbnail();
+  if (!isSample) {
+    await markReady(args.section, args.type, "longform");
+  }
 
   const mins = (sb.durationSeconds / 60).toFixed(1);
-  logStep(`READY (nothing published):`);
+  logStep(isSample ? `SAMPLE READY (nothing published):` : `READY (nothing published):`);
   console.log(`  generated/video.mp4        ${mins} min, ${sb.scenes.length} scenes`);
   console.log(`  generated/script.md`);
   console.log(`  generated/storyboard.json`);
-  console.log(hasThumb ? `  generated/thumbnail.png + thumbnail variants` : `  (no thumbnail — author section.thumbnail)`);
+  if (!isSample) {
+    console.log(hasThumb ? `  generated/thumbnail.png + thumbnail variants` : `  (no thumbnail — author section.thumbnail)`);
+  }
   console.log(`  generated/frames/          preview stills`);
-  console.log(`\nReview, then approve with:  npm run publish -- ${args.section} ${args.type}`);
+  console.log(
+    isSample
+      ? `\nReview this sample before rendering the full episode.`
+      : `\nReview, then approve with:  npm run publish -- ${args.section} ${args.type}`
+  );
 }
 
 async function runShorts(args: Args): Promise<void> {
